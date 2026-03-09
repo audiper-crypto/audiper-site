@@ -1,0 +1,14 @@
+# AUDÍPER - Auditores e Peritos Associados
+# https://audiper.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://audiper.com/sitemap.xml
+
+# Disallow internal/admin paths
+Disallow: /js/
+Disallow: /css/
+Disallow: /animations/
+Disallow: /.claude/

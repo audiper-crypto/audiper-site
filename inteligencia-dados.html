@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Data Intelligence | AUD&#205;PER</title>
+  <meta name="description" content="Integridade de dados e monitoramento cont&#237;nuo com rigor de auditoria independente. Concilia&#231;&#227;o automatizada, detec&#231;&#227;o de anomalias, Sales Intelligence e dashboards executivos."/>
+  <link rel="canonical" href="https://audiper.com/inteligencia-dados.html"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://audiper.com/inteligencia-dados.html"/>
+  <meta property="og:title" content="&#x26A1; Data Intelligence &#x2014; Seus dados escondem milhares em perdas. N&#243;s encontramos."/>
+  <meta property="og:description" content="&#x1F50D; Concilia&#231;&#227;o automatizada &#x2022; Detec&#231;&#227;o de anomalias &#x2022; Sales Intelligence &#x2022; Monitoramento 24/7 &#x2014; Python + SQL com profissionais habilitados e rigor de auditoria independente. Diagn&#243;stico em 10 dias."/>
+  <meta property="og:image" content="https://audiper.com/images/og-data-intelligence.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:alt" content="AUDIPER Data Intelligence - Intelig&#234;ncia de Dados com Python + SQL"/>
+  <meta property="og:locale" content="pt_BR"/>
+  <meta property="og:site_name" content="AUD&#205;PER - Auditoria e Per&#237;cia"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="&#x26A1; Data Intelligence &#x2014; Integridade de Dados | AUD&#205;PER"/>
+  <meta name="twitter:description" content="Concilia&#231;&#227;o automatizada &#x2022; Detec&#231;&#227;o de anomalias &#x2022; Sales Intelligence. 35+ anos de auditoria + Python + SQL. Profissionais habilitados."/>
+  <meta name="twitter:image" content="https://audiper.com/images/og-data-intelligence.png"/>
+  <meta name="robots" content="index, follow"/>
+  <meta name="author" content="AUD&#205;PER - Auditoria e Per&#237;cia"/>
+  <meta name="theme-color" content="#c41a1a"/>
+  <link rel="apple-touch-icon" href="images/audilogo40.png"/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <link rel="icon" type="image/png" sizes="180x180" href="images/audilogo40.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,600&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+  <link href="css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="css/swiper-bundle.min.css" rel="stylesheet"/>
+  <link href="css/custom-animation.css" rel="stylesheet"/>
+  <link href="css/main.css?v=20260307a" rel="stylesheet"/>
+  <style>
+    [class^="flaticon-"],[class*=" flaticon-"]{font-style:normal!important}
+    [class^="flaticon-"]::before,[class*=" flaticon-"]::before{font-family:"Material Symbols Outlined"!important;font-style:normal!important;font-size:2.5rem;font-variation-settings:"FILL" 0,"wght" 300,"GRAD" 0,"opsz" 40}
+    .flaticon-risk::before{content:"shield"}.flaticon-accounting::before{content:"account_balance"}.flaticon-save-money::before{content:"savings"}.flaticon-team::before{content:"groups"}.flaticon-targeting::before{content:"target"}.flaticon-it-service::before{content:"memory"}.flaticon-innovation::before{content:"lightbulb"}.flaticon-loyalty::before{content:"favorite"}
+    .navbar-brand .logo-img{max-height:48px;width:auto}
+    .navbar_four .navbar-nav{margin-left:20px;gap:0.25rem}
+    .navbar-nav .nav-item .nav-link{font-size:0.875rem;padding:1.875rem 0.25rem;white-space:nowrap}
+    /* Hero */
+    .page-hero{background:#fff;padding:160px 0 100px;position:relative;overflow:hidden;min-height:500px}
+    .page-hero .badge-label{font-family:'JetBrains Mono',monospace;font-size:0.8rem;font-weight:600;color:#c41a1a;letter-spacing:3px;text-transform:uppercase;display:inline-flex;align-items:center;gap:10px;margin-bottom:16px}
+    .page-hero .badge-label::before{content:'';width:32px;height:2px;background:#c41a1a}
+    .page-hero h1{font-family:'Figtree',sans-serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:900;color:#111;line-height:1.15;margin-bottom:16px}
+    .page-hero h1 .accent{color:#c41a1a}
+    .page-hero h1 em{font-family:'Fraunces',serif;font-style:italic;font-weight:600;color:#c41a1a}
+    .page-hero p{font-family:'Inter',sans-serif;font-size:1.05rem;color:#555;max-width:550px;line-height:1.7}
+    .page-hero .breadcrumb{margin-top:24px;padding:0;background:none!important;background-image:none!important;backdrop-filter:none;-webkit-backdrop-filter:none}
+    .page-hero .breadcrumb::before{display:none!important}
+    .page-hero .breadcrumb a{color:#888;text-decoration:none;font-size:0.9rem}
+    .page-hero .breadcrumb a:hover{color:#c41a1a}
+    .page-hero .breadcrumb span{color:#ccc;margin:0 8px}
+    .page-hero .breadcrumb .current{color:#c41a1a;font-size:0.9rem}
+    .page-lottie-player{width:150%;max-width:2200px;min-width:1200px;position:absolute;bottom:-5%;left:50%;transform:translateX(-50%);opacity:0.35}
+    @media(max-width:991px){.page-hero{min-height:auto;padding:120px 0 60px} .page-lottie-player{width:250%!important;min-width:900px!important;opacity:0.4!important} .page-hero-logo{width:140px!important;opacity:0.5!important}}
+    @media(max-width:576px){.page-lottie-player{display:none}}
+    /* Hero Stats */
+    .hero-stats{display:flex;gap:32px;flex-wrap:wrap;margin-top:32px}
+    .hero-stats .stat{text-align:left}
+    .hero-stats .stat .number{font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:700;color:#c41a1a;display:block;line-height:1}
+    .hero-stats .stat .label{font-family:'Inter',sans-serif;font-size:0.78rem;color:#888;margin-top:4px}
+    /* Service Sections */
+    .service-section{padding:100px 0}
+    .service-section:nth-child(even){background:#f8f8f8}
+    .service-card{background:#fff;border-radius:16px;padding:40px 32px;border:1px solid #eee;transition:all 0.3s ease;height:100%}
+    .service-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.08);border-color:#c41a1a20}
+    .service-card .icon-wrap{width:60px;height:60px;border-radius:12px;background:linear-gradient(135deg,#c41a1a10,#c41a1a05);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+    .service-card .icon-wrap .material-symbols-outlined{font-size:28px;color:#c41a1a}
+    .service-card h4{font-family:'Figtree',sans-serif;font-weight:700;font-size:1.2rem;color:#111;margin-bottom:12px}
+    .service-card p{font-family:'Inter',sans-serif;font-size:0.95rem;color:#666;line-height:1.7}
+    .overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:48px}
+    /* Service Detail */
+    .service-detail{padding:80px 0}
+    .service-detail:nth-child(even){background:#f8f8f8}
+    .service-detail .section-icon{width:72px;height:72px;border-radius:16px;background:linear-gradient(135deg,#c41a1a10,#c41a1a05);display:flex;align-items:center;justify-content:center;margin-bottom:24px}
+    .service-detail .section-icon .material-symbols-outlined{font-size:36px;color:#c41a1a}
+    .service-detail h2{font-family:'Figtree',sans-serif;font-weight:800;font-size:clamp(1.5rem,3vw,2rem);color:#111;margin-bottom:8px}
+    .service-detail .subtitle{font-family:'JetBrains Mono',monospace;font-size:0.8rem;font-weight:600;color:#c41a1a;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px}
+    .service-detail p{font-family:'Inter',sans-serif;font-size:1rem;color:#555;line-height:1.8;margin-bottom:16px}
+    .service-detail .deliverables{list-style:none;padding:0;margin-top:24px}
+    .service-detail .deliverables li{font-family:'Inter',sans-serif;font-size:0.95rem;color:#444;padding:10px 0;border-bottom:1px solid #eee;display:flex;align-items:flex-start;gap:12px}
+    .service-detail .deliverables li .material-symbols-outlined{font-size:20px;color:#c41a1a;flex-shrink:0;margin-top:2px}
+    .ai-stats{display:flex;gap:32px;flex-wrap:wrap;margin-top:32px}
+    .ai-stats .stat{text-align:center}
+    .ai-stats .stat .number{font-family:'JetBrains Mono',monospace;font-size:2.5rem;font-weight:700;color:#c41a1a;display:block;line-height:1}
+    .ai-stats .stat .label{font-family:'Inter',sans-serif;font-size:0.85rem;color:#888;margin-top:4px}
+    /* CTA */
+    .cta-section{background:linear-gradient(135deg,#c41a1a,#e32018);padding:80px 0;text-align:center}
+    .cta-section h2{font-family:'Figtree',sans-serif;font-weight:800;color:#fff;font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:16px}
+    .cta-section p{color:rgba(255,255,255,0.8);font-size:1.05rem;margin-bottom:32px;max-width:600px;margin-left:auto;margin-right:auto}
+    .cta-section .btn-white{display:inline-flex;align-items:center;gap:10px;background:#fff;color:#c41a1a;font-family:'Figtree',sans-serif;font-weight:700;font-size:1rem;padding:14px 32px;border-radius:8px;text-decoration:none;transition:all 0.3s}
+    .cta-section .btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.2)}
+    .accent-italic{font-family:'Fraunces',serif;font-style:italic;font-weight:600;color:#c41a1a}
+    .accent-mono{font-family:'JetBrains Mono',monospace;font-weight:700;color:#c41a1a}
+    /* FAQ */
+    .faq-item{border:1px solid #eee;border-radius:12px;margin-bottom:12px;overflow:hidden}
+    .faq-question{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;cursor:pointer;background:#fff;font-family:'Figtree',sans-serif;font-weight:600;font-size:1rem;color:#111;border:none;width:100%;text-align:left;transition:background 0.3s}
+    .faq-question:hover{background:#f8f8f8}
+    .faq-question .material-symbols-outlined{color:#c41a1a;transition:transform 0.3s}
+    .faq-question.active .material-symbols-outlined{transform:rotate(180deg)}
+    .faq-answer{padding:0 24px 20px;font-family:'Inter',sans-serif;font-size:0.95rem;color:#666;line-height:1.7;display:none}
+    .faq-question.active + .faq-answer{display:block}
+    /* Related Articles */
+    .related-articles{background:#f8f8f8;padding:80px 0}
+    .related-articles .section-badge{font-family:'JetBrains Mono',monospace;font-size:0.75rem;font-weight:600;color:#c41a1a;letter-spacing:2px;text-transform:uppercase;display:inline-block;margin-bottom:10px}
+    .related-articles .section-heading{font-family:'Figtree',sans-serif;font-weight:800;font-size:clamp(1.4rem,3vw,1.9rem);color:#111;margin-bottom:40px}
+    .related-article-card{background:#fff;border-radius:16px;overflow:hidden;border:1px solid #eee;transition:all 0.3s;height:100%;display:flex;flex-direction:column}
+    .related-article-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.08)}
+    .related-article-card .card-img{height:180px;background:linear-gradient(135deg,#c41a1a15,#1a1a2e15);display:flex;align-items:center;justify-content:center;position:relative}
+    .related-article-card .card-img .tag{position:absolute;top:14px;left:14px;font-family:'JetBrains Mono',monospace;font-size:0.68rem;font-weight:600;padding:4px 12px;border-radius:20px;background:#c41a1a;color:#fff;text-transform:uppercase;letter-spacing:1px}
+    .related-article-card .card-img .material-symbols-outlined{font-size:44px;color:#c41a1a30}
+    .related-article-card .card-body{padding:24px;flex:1;display:flex;flex-direction:column}
+    .related-article-card .card-title{font-family:'Figtree',sans-serif;font-weight:700;font-size:1.05rem;color:#111;margin-bottom:10px;line-height:1.4}
+    .related-article-card .card-text{font-family:'Inter',sans-serif;font-size:0.88rem;color:#666;line-height:1.7;margin-bottom:16px;flex:1}
+    .related-article-card .read-more{font-family:'Figtree',sans-serif;font-weight:600;color:#c41a1a;text-decoration:none;font-size:0.88rem;display:inline-flex;align-items:center;gap:6px;margin-top:auto}
+    .related-article-card .read-more:hover{gap:10px}
+    .brand-b{font-family:'JetBrains Mono',monospace;font-weight:300;font-size:0.7em;opacity:0.55}
+    .brand-s{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.85em}
+
+    /* ========== NOVOS COMPONENTES — DATA INTELLIGENCE ========== */
+
+    /* Comparison Table */
+    .comparison-table{width:100%;border-radius:12px;overflow:hidden;border:1px solid #eee;border-collapse:separate;border-spacing:0}
+    .comparison-table thead th{font-family:'JetBrains Mono',monospace;font-size:0.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 20px}
+    .comparison-table thead th.problem-col{background:#fde8e8;color:#c41a1a}
+    .comparison-table thead th.solution-col{background:#e8f5e9;color:#2e7d32}
+    .comparison-table tbody td{font-family:'Inter',sans-serif;font-size:0.9rem;color:#555;padding:14px 20px;border-bottom:1px solid #f0f0f0;vertical-align:top;line-height:1.6}
+    .comparison-table tbody tr:last-child td{border-bottom:none}
+    @media(max-width:768px){.comparison-table thead{display:none}.comparison-table tbody td{display:block;padding:10px 16px}.comparison-table tbody td:first-child{background:#fde8e830;border-bottom:none;font-weight:600;color:#c41a1a}.comparison-table tbody td:last-child{border-bottom:2px solid #eee;margin-bottom:8px}}
+
+    /* Positioning Cards */
+    .pos-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+    .pos-card{background:#fff;border-radius:16px;padding:32px 28px;border:1px solid #eee;transition:all 0.3s}
+    .pos-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.08)}
+    .pos-card.featured{border:2px solid #c41a1a;box-shadow:0 8px 30px rgba(196,26,26,0.1)}
+    .pos-card .pos-title{font-family:'JetBrains Mono',monospace;font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#888;margin-bottom:16px}
+    .pos-card.featured .pos-title{color:#c41a1a}
+    .pos-card .pos-desc{font-family:'Inter',sans-serif;font-size:0.9rem;color:#666;line-height:1.7}
+    .pos-card .pos-list{list-style:none;padding:0;margin:16px 0 0}
+    .pos-card .pos-list li{font-family:'Inter',sans-serif;font-size:0.88rem;color:#555;padding:6px 0;display:flex;align-items:flex-start;gap:8px}
+    .pos-card .pos-list li .material-symbols-outlined{font-size:18px;flex-shrink:0;margin-top:2px}
+    .pos-card .pos-list li .check{color:#66bb6a}
+    .pos-card .pos-list li .uncheck{color:#ccc}
+    @media(max-width:991px){.pos-cards{grid-template-columns:1fr}}
+
+    /* Department Tabs */
+    .dept-tabs{gap:8px;flex-wrap:wrap}
+    .dept-tabs .nav-link{font-family:'Figtree',sans-serif;font-weight:600;font-size:0.9rem;color:#555;background:#fff;border:1px solid #eee;border-radius:8px;padding:12px 22px;transition:all 0.3s;display:inline-flex;align-items:center;gap:8px}
+    .dept-tabs .nav-link:hover{border-color:#c41a1a40;color:#c41a1a}
+    .dept-tabs .nav-link.active{background:#c41a1a;color:#fff;border-color:#c41a1a}
+    .dept-tabs .nav-link .material-symbols-outlined{font-size:20px}
+
+    /* Alert Table */
+    .alert-table{margin-top:24px;border-radius:12px;overflow:hidden;border:1px solid #eee}
+    .alert-table .table{font-family:'Inter',sans-serif;font-size:0.88rem;margin:0}
+    .alert-table .table thead th{font-family:'JetBrains Mono',monospace;font-size:0.72rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#888;background:#f8f8f8;border:none;padding:10px 14px}
+    .alert-table .table tbody td{color:#555;padding:12px 14px;border-color:#f0f0f0;vertical-align:top;line-height:1.6}
+    .severity-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;flex-shrink:0}
+    .severity-dot.critical{background:#e53935}
+    .severity-dot.warning{background:#ffa726}
+    .severity-dot.ok{background:#66bb6a}
+    @media(max-width:768px){.alert-table .table thead{display:none}.alert-table .table tbody td{display:block;padding:8px 14px}.alert-table .table tbody td:first-child{font-weight:600;border-bottom:none}.alert-table .table tbody tr{border-bottom:2px solid #eee}}
+
+    /* Pricing Cards */
+    .pricing-card{background:#fff;border-radius:16px;padding:40px 32px;border:1px solid #eee;text-align:center;height:100%;display:flex;flex-direction:column;transition:all 0.3s;position:relative}
+    .pricing-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.08)}
+    .pricing-card.featured{border:2px solid #c41a1a;box-shadow:0 8px 30px rgba(196,26,26,0.12)}
+    .plan-badge{font-family:'JetBrains Mono',monospace;font-size:0.75rem;font-weight:700;color:#c41a1a;background:#c41a1a10;display:inline-block;padding:6px 16px;border-radius:20px;letter-spacing:2px;margin-bottom:16px;text-transform:uppercase}
+    .plan-subtitle{font-family:'Inter',sans-serif;font-size:0.95rem;color:#555;margin-bottom:24px}
+    .popular-tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#c41a1a;color:#fff;font-family:'JetBrains Mono',monospace;font-size:0.7rem;font-weight:600;padding:4px 16px;border-radius:20px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+    .pricing-card hr{border-color:#eee;margin:0 0 24px}
+    .pricing-card .deliverables{text-align:left;flex:1}
+    .pricing-card .deliverables li{font-size:0.9rem}
+    .pricing-card .deliverables li .unavailable{color:#ccc}
+    .plan-cta{display:inline-flex;align-items:center;gap:8px;background:#c41a1a;color:#fff;font-family:'Figtree',sans-serif;font-weight:700;font-size:0.95rem;padding:14px 28px;border-radius:8px;text-decoration:none;transition:all 0.3s;margin-top:auto}
+    .plan-cta:hover{background:#a01515;transform:translateY(-2px);color:#fff}
+    .plan-cta .fa-whatsapp{font-size:1.1rem}
+
+    /* Info Box */
+    .info-box{background:#f8f8f8;border-left:4px solid #c41a1a;border-radius:0 8px 8px 0;padding:20px 24px;margin-top:24px}
+    .info-box p{font-size:0.88rem;color:#666;line-height:1.7;margin:0}
+    .info-box h5{font-family:'Figtree',sans-serif;font-weight:700;font-size:1rem;color:#111;margin-bottom:8px}
+
+    /* Security Table */
+    .security-table{width:100%;border-radius:12px;overflow:hidden;border:1px solid #eee;border-collapse:separate;border-spacing:0}
+    .security-table thead th{font-family:'JetBrains Mono',monospace;font-size:0.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:12px 16px;background:#f8f8f8;color:#888;border:none}
+    .security-table tbody td{font-family:'Inter',sans-serif;font-size:0.9rem;color:#555;padding:14px 16px;border-bottom:1px solid #f0f0f0;vertical-align:top;line-height:1.6}
+    .security-table tbody td:first-child{font-family:'Figtree',sans-serif;font-weight:700;color:#111;white-space:nowrap}
+    .security-table tbody tr:last-child td{border-bottom:none}
+    @media(max-width:768px){.security-table thead{display:none}.security-table tbody td{display:block;padding:8px 16px}.security-table tbody td:first-child{background:#f8f8f8;border-bottom:none}}
+
+    /* Methodology Steps */
+    .method-step{display:flex;gap:24px;padding:24px 0;border-bottom:1px solid #eee}
+    .method-step:last-child{border-bottom:none}
+    .step-num{font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:700;color:#c41a1a;min-width:48px;height:48px;border-radius:12px;background:#c41a1a10;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .step-days{font-family:'JetBrains Mono',monospace;font-size:0.72rem;font-weight:600;color:#c41a1a;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+    .method-step h5{font-family:'Figtree',sans-serif;font-weight:700;font-size:1.05rem;color:#111;margin-bottom:8px}
+    .method-step p{font-family:'Inter',sans-serif;font-size:0.9rem;color:#666;line-height:1.7;margin:0}
+    .method-step ul{list-style:none;padding:0;margin:8px 0 0}
+    .method-step ul li{font-family:'Inter',sans-serif;font-size:0.88rem;color:#555;padding:4px 0;display:flex;align-items:flex-start;gap:8px}
+    .method-step ul li .material-symbols-outlined{font-size:16px;color:#c41a1a;flex-shrink:0;margin-top:3px}
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Intelig\u00eancia de Dados e Monitoramento Cont\u00ednuo",
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "AUD\u00cdPER - Auditores e Peritos Associados",
+      "url": "https://audiper.com",
+      "telephone": "+55-86-3303-0987",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rua Arlindo Nogueira, 614/Sul",
+        "addressLocality": "Teresina",
+        "addressRegion": "PI",
+        "postalCode": "64001-280",
+        "addressCountry": "BR"
+      }
+    },
+    "areaServed": {"@type": "Country", "name": "Brasil"},
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Servi\u00e7os de Data Intelligence",
+      "itemListElement": [
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Concilia\u00e7\u00e3o Financeira Automatizada"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Detec\u00e7\u00e3o de Anomalias em Compras"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "RH Compliance Analytics"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Sales Intelligence"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Dashboard Executivo Integrado"}}
+      ]
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type": "Question", "name": "O que diferencia a AUDIPER de um software de concilia\u00e7\u00e3o?", "acceptedAnswer": {"@type": "Answer", "text": "Softwares de concilia\u00e7\u00e3o automatizam o processo mec\u00e2nico, mas n\u00e3o auditam a qualidade dos dados. A AUDIPER combina automa\u00e7\u00e3o com profissionais habilitados e solu\u00e7\u00f5es Python pr\u00f3prias, garantindo que os dados sejam verificados com rigor t\u00e9cnico antes de serem analisados."}},
+      {"@type": "Question", "name": "Quanto tempo leva para ver resultados?", "acceptedAnswer": {"@type": "Answer", "text": "O diagn\u00f3stico inicial \u00e9 conclu\u00eddo em 10 dias \u00fateis. A implementa\u00e7\u00e3o completa leva 60 dias, com alertas operacionais funcionando a partir do dia 36. Muitas empresas identificam valores recuper\u00e1veis j\u00e1 no diagn\u00f3stico."}},
+      {"@type": "Question", "name": "Preciso trocar meu ERP ou sistema atual?", "acceptedAnswer": {"@type": "Answer", "text": "N\u00e3o. A AUDIPER trabalha com acesso read-only aos dados exportados do seu ERP (TOTVS, SAP, Omie, Conta Azul, Oracle, Alterdata e similares). N\u00e3o \u00e9 necess\u00e1rio alterar sistemas existentes."}},
+      {"@type": "Question", "name": "Como funciona o diagn\u00f3stico de integridade?", "acceptedAnswer": {"@type": "Answer", "text": "O diagn\u00f3stico consiste em 10 dias de an\u00e1lise com acesso read-only ao ERP e extratos banc\u00e1rios. Scripts Python/SQL analisam os dados, identificam diverg\u00eancias, duplicidades e anomalias, e geram um relat\u00f3rio com o valor de recupera\u00e7\u00e3o potencial estimado em reais."}},
+      {"@type": "Question", "name": "Os dados da minha empresa ficam seguros?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. A AUDIPER trabalha exclusivamente com acesso de leitura. Os dados s\u00e3o processados em ambiente seguro com criptografia em tr\u00e2nsito e em repouso, sem reten\u00e7\u00e3o ap\u00f3s encerramento do contrato. Assinamos NDA e termo de sigilo conforme LGPD."}},
+      {"@type": "Question", "name": "O que \u00e9 Sales Intelligence e como funciona?", "acceptedAnswer": {"@type": "Answer", "text": "Sales Intelligence \u00e9 o m\u00f3dulo que transforma dados comerciais em intelig\u00eancia estrat\u00e9gica. Identifica padr\u00f5es de sucesso em vendedores, regi\u00f5es e clientes usando an\u00e1lise de dados hist\u00f3ricos. Requer m\u00ednimo de 12 meses de dados organizados e \u00e9 ativado ap\u00f3s o saneamento da base."}}
+    ]
+  }
+  </script>
+</head>
+<body>
+<main>
+<div class="page-wrapper">
+<div class="main-wrapper">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar_four sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html"><img class="logo-img" alt="AUD&#205;PER" src="images/logo.png"/></a>
+    <a class="nave-quote d-none d-lg-flex" href="contato.html"><span>Fale Conosco</span> <i class="fa-solid fa-arrow-right"></i></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">In&#237;cio</a></li>
+        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="auditorias.html">Auditorias</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="auditorias.html#anti-fraude">Anti-Fraude</a></li>
+            <li><a class="dropdown-item" href="auditorias.html#contabil">Cont&#225;bil e Financeira</a></li>
+            <li><a class="dropdown-item" href="auditorias.html#fiscal">Fiscal e Tribut&#225;ria</a></li>
+            <li><a class="dropdown-item" href="auditorias.html#interna">Auditoria Interna</a></li>
+            <li><a class="dropdown-item" href="auditorias.html#due-diligence">Due Diligence</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle active" href="ia-negocios.html">IA &amp; Data Intelligence</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item active" href="inteligencia-dados.html">Data Intelligence</a></li>
+            <li><hr class="dropdown-divider"/></li>
+            <li><a class="dropdown-item" href="ia-negocios.html#diagnostico">Diagn&#243;stico Digital</a></li>
+            <li><a class="dropdown-item" href="ia-negocios.html#financeiro">IA Financeira</a></li>
+            <li><a class="dropdown-item" href="ia-negocios.html#compliance">IA para Compliance</a></li>
+            <li><a class="dropdown-item" href="ia-negocios.html#treinamentos">Treinamentos</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="pericias.html">Per&#237;cias</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="pericias.html#tributaria">Per&#237;cia Tribut&#225;ria</a></li>
+            <li><a class="dropdown-item" href="pericias.html#bancaria">Revis&#227;o Banc&#225;ria</a></li>
+            <li><a class="dropdown-item" href="pericias.html#trabalhista">Per&#237;cia Trabalhista</a></li>
+            <li><a class="dropdown-item" href="valuation.html">Valuation</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="reforma-tributaria.html">Reforma Tribut&#225;ria</a></li>
+        <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+        <li class="nav-item dropdown"><a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="sobre.html">Sobre</a>
+          <ul class="dropdown-menu fade-down">
+            <li><a class="dropdown-item" href="sobre.html">Sobre N&#243;s</a></li>
+            <li><a class="dropdown-item" href="setores.html">Setores Atendidos</a></li>
+            <li><a class="dropdown-item" href="casos-sucesso.html">Casos de Sucesso</a></li>
+            <li><a class="dropdown-item" href="eventos.html">Eventos &amp; Webinars</a></li>
+            <li><a class="dropdown-item" href="carreiras.html">Carreiras</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="contato.html">Contato</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div style="position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;overflow:hidden">
+    <div class="page-lottie-player"></div>
+  </div>
+  <div style="position:absolute;inset:0;z-index:2;background:linear-gradient(90deg,rgba(255,255,255,0.95) 0%,rgba(255,255,255,0.7) 40%,rgba(255,255,255,0.1) 70%,transparent 100%)"></div>
+  <div style="position:absolute;bottom:0;left:0;right:0;height:200px;z-index:2;background:linear-gradient(to bottom,transparent,#fff)"></div>
+  <div style="position:absolute;top:80px;right:3%;z-index:3;pointer-events:none">
+    <img src="images/audilogo40.png" alt="AUD&#205;PER 40 Anos" class="page-hero-logo" style="width:clamp(180px,15vw,260px);height:auto;opacity:0.6">
+  </div>
+  <div class="container" style="position:relative;z-index:5">
+    <div class="badge-label">Data Intelligence</div>
+    <h1>Intelig&#234;ncia de <span class="accent">Dados</span><br/>Data Integrity &amp; <em>Continuous Monitoring</em></h1>
+    <p>Rigor de auditoria independente aplicado ao monitoramento cont&#237;nuo dos seus dados financeiros e operacionais.</p>
+    <div class="hero-stats">
+      <div class="stat"><span class="number">35+ anos</span><span class="label">de auditoria independente</span></div>
+      <div class="stat"><span class="number">Profissionais</span><span class="label">Auditores habilitados</span></div>
+      <div class="stat"><span class="number">Python + SQL</span><span class="label">stack t&#233;cnica nativa</span></div>
+    </div>
+    <div class="breadcrumb" style="margin-top:24px">
+      <a href="index.html">In&#237;cio</a>
+      <span>/</span>
+      <a href="ia-negocios.html">IA &amp; Data Intelligence</a>
+      <span>/</span>
+      <span class="current">Data Intelligence</span>
+    </div>
+  </div>
+</section>
+
+<!-- Overview Cards -->
+<section id="overview" class="service-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <p class="accent-mono" style="font-size:0.8rem;letter-spacing:3px;margin-bottom:8px">O QUE FAZEMOS</p>
+      <h2 style="font-family:'Figtree',sans-serif;font-weight:800;font-size:clamp(1.5rem,3vw,2.2rem);color:#111">Auditamos seus dados. Depois, transformamos em intelig&#234;ncia.</h2>
+      <p style="color:#555;max-width:640px;margin:12px auto 0;font-size:1rem;line-height:1.7">Nenhuma an&#225;lise &#233; confi&#225;vel se os dados por baixo n&#227;o foram verificados. A AUDIPER examina a integridade dos dados antes de model&#225;-los.</p>
+    </div>
+    <div class="overview-grid">
+      <div class="service-card">
+        <div class="icon-wrap"><span class="material-symbols-outlined">account_balance_wallet</span></div>
+        <h4>Concilia&#231;&#227;o Automatizada</h4>
+        <p>Cruzamento di&#225;rio entre ERP, extrato banc&#225;rio e contabilidade. Diverg&#234;ncias identificadas e reportadas automaticamente.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon-wrap"><span class="material-symbols-outlined">content_copy</span></div>
+        <h4>Detec&#231;&#227;o de Duplicidades</h4>
+        <p>Scripts de detec&#231;&#227;o de pagamentos duplicados rodam diariamente com alerta ao respons&#225;vel no mesmo dia &#250;til (D+0).</p>
+      </div>
+      <div class="service-card">
+        <div class="icon-wrap"><span class="material-symbols-outlined">database</span></div>
+        <h4>Base de Dados Auditada</h4>
+        <p>Integridade verificada com metodologia de auditoria independente. Relat&#243;rios financeiros com lastro t&#233;cnico auditado.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon-wrap"><span class="material-symbols-outlined">trending_up</span></div>
+        <h4>Sales Intelligence</h4>
+        <p>Padr&#245;es reais de performance comercial identificados nos dados hist&#243;ricos da empresa. Decis&#245;es baseadas em evid&#234;ncia.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon-wrap"><span class="material-symbols-outlined">precision_manufacturing</span></div>
+        <h4>Automa&#231;&#227;o de Processos</h4>
+        <p>Tarefas manuais evit&#225;veis eliminadas. Equipe financeira liberada para an&#225;lise estrat&#233;gica em vez de concilia&#231;&#227;o manual.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon-wrap"><span class="material-symbols-outlined">shield</span></div>
+        <h4>Monitoramento Cont&#237;nuo</h4>
+        <p>Alertas de anomalia em tempo real. Detec&#231;&#227;o proativa de fraudes e desvios, n&#227;o reativa ap&#243;s o preju&#237;zo consolidado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Posicionamento Competitivo -->
+<section id="posicionamento" class="service-detail" style="background:#f8f8f8">
+  <div class="container">
+    <div class="text-center mb-4">
+      <p class="accent-mono" style="font-size:0.8rem;letter-spacing:3px;margin-bottom:8px">POSICIONAMENTO</p>
+      <h2 style="font-family:'Figtree',sans-serif;font-weight:800;font-size:clamp(1.5rem,3vw,2.2rem);color:#111">O grande diferencial: auditoria da qualidade dos dados</h2>
+      <p style="color:#555;max-width:640px;margin:12px auto 0;font-size:1rem;line-height:1.7">A AUDIPER audita e saneia os dados <strong>antes</strong> de analis&#225;-los &#8212; combinando rigor de auditoria independente com automa&#231;&#227;o inteligente.</p>
+    </div>
+    <div class="pos-cards">
+      <div class="pos-card">
+        <div class="pos-title">Software de Concilia&#231;&#227;o</div>
+        <p class="pos-desc">Automatiza o processo mec&#226;nico. N&#227;o interpreta, n&#227;o audita a qualidade dos dados.</p>
+        <ul class="pos-list">
+          <li><span class="material-symbols-outlined check">check_circle</span> Automatiza concilia&#231;&#227;o</li>
+          <li><span class="material-symbols-outlined check">check_circle</span> Entrega dados limpos</li>
+          <li><span class="material-symbols-outlined uncheck">cancel</span> Sem olhar de auditor</li>
+          <li><span class="material-symbols-outlined uncheck">cancel</span> N&#227;o interpreta estrat&#233;gicamente</li>
+          <li><span class="material-symbols-outlined uncheck">cancel</span> Sem credencial regulat&#243;ria</li>
+        </ul>
+      </div>
+      <div class="pos-card">
+        <div class="pos-title">Consultoria de BI</div>
+        <p class="pos-desc">Analisa e modela dados. Aceita os dados como vieram, sem rigor de auditoria.</p>
+        <ul class="pos-list">
+          <li><span class="material-symbols-outlined check">check_circle</span> Analisa e modela dados</li>
+          <li><span class="material-symbols-outlined check">check_circle</span> Entrega dashboards e insights</li>
+          <li><span class="material-symbols-outlined uncheck">cancel</span> Pega dados sem auditar</li>
+          <li><span class="material-symbols-outlined uncheck">cancel</span> Inacess&#237;vel para m&#233;dio porte</li>
+          <li><span class="material-symbols-outlined uncheck">cancel</span> Sem credencial de auditoria</li>
+        </ul>
+      </div>
+      <div class="pos-card featured">
+        <div class="pos-title">AUD&#205;PER Data Intelligence</div>
+        <p class="pos-desc">Audita + automatiza + analisa. Com profissionais habilitados e solu&#231;&#245;es Python pr&#243;prias.</p>
+        <ul class="pos-list">
+          <li><span class="material-symbols-outlined check">check_circle</span> Audita qualidade dos dados ANTES</li>
+          <li><span class="material-symbols-outlined check">check_circle</span> Automatiza E emite parecer t&#233;cnico</li>
+          <li><span class="material-symbols-outlined check">check_circle</span> Solu&#231;&#245;es Python pr&#243;prias</li>
+          <li><span class="material-symbols-outlined check">check_circle</span> Profissionais habilitados, pre&#231;o acess&#237;vel</li>
+          <li><span class="material-symbols-outlined check">check_circle</span> Monitoramento cont&#237;nuo rec corrente</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- O Problema -->
+<section id="problema" class="service-detail">
+  <div class="container">
+    <div class="row align-items-start">
+      <div class="col-lg-4 mb-4">
+        <div class="section-icon"><span class="material-symbols-outlined">warning</span></div>
+        <p class="subtitle">O Problema</p>
+        <h2>O que est&#225; custando dinheiro real na sua empresa agora</h2>
+        <p>A maioria das empresas opera com uma ilus&#227;o perigosa: acredita que seus sistemas financeiros est&#227;o corretos porque os n&#250;meros &#8220;fecham&#8221;.</p>
+      </div>
+      <div class="col-lg-8">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th class="problem-col" style="width:50%">&#10060; Situa&#231;&#227;o Atual</th>
+              <th class="solution-col" style="width:50%">&#10004; Com AUDIPER Data Intelligence</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ERP, extrato banc&#225;rio e contabilidade nunca foram cruzados &#8212; dados divergem sem que ningu&#233;m saiba</td>
+              <td>Concilia&#231;&#227;o automatizada di&#225;ria entre todos os sistemas &#8212; diverg&#234;ncias identificadas e reportadas</td>
+            </tr>
+            <tr>
+              <td>Pagamentos duplicados a fornecedores passam meses sem detec&#231;&#227;o &#8212; dinheiro saindo invis&#237;vel</td>
+              <td>Script de detec&#231;&#227;o de duplicidade roda diariamente e alerta o respons&#225;vel no mesmo dia &#250;til (D+0)</td>
+            </tr>
+            <tr>
+              <td>DRE e fluxo de caixa constru&#237;dos com dados n&#227;o auditados &#8212; decis&#227;o tomada sobre n&#250;mero errado</td>
+              <td>Base de dados com integridade verificada &#8212; relat&#243;rios financeiros com lastro t&#233;cnico auditado</td>
+            </tr>
+            <tr>
+              <td>&#193;rea comercial decide contrata&#231;&#227;o, expans&#227;o e mix de produtos por feeling &#8212; sem evid&#234;ncia</td>
+              <td>Sales Intelligence: padr&#245;es reais de performance identificados nos dados hist&#243;ricos da empresa</td>
+            </tr>
+            <tr>
+              <td>Fraudes e desvios detectados s&#243; na auditoria anual &#8212; depois do preju&#237;zo consolidado</td>
+              <td>Monitoramento cont&#237;nuo com alertas de anomalia &#8212; detec&#231;&#227;o proativa, n&#227;o reativa</td>
+            </tr>
+            <tr>
+              <td>eSocial com diverg&#234;ncias acumuladas &#8212; risco de passivo trabalhista invis&#237;vel por anos</td>
+              <td>Cruzamento folha &#215; banco &#215; eSocial com identifica&#231;&#227;o de inconsist&#234;ncias antes do envio</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="info-box" style="margin-top:32px">
+          <p><strong>&#9878; Delimita&#231;&#227;o de escopo:</strong> A AUDIPER atua em modalidade de leitura e an&#225;lise de dados. Todas as a&#231;&#245;es corretivas s&#227;o recomendadas &#224; equipe do cliente, que det&#233;m responsabilidade pela execu&#231;&#227;o. Os relat&#243;rios seguem metodologia de auditoria independente.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Departamentos (Tabs) -->
+<section id="departamentos" class="service-detail" style="background:#f8f8f8;padding:100px 0">
+  <div class="container">
+    <div class="text-center mb-5">
+      <p class="accent-mono" style="font-size:0.8rem;letter-spacing:3px;margin-bottom:8px">APLICA&#199;&#195;O POR DEPARTAMENTO</p>
+      <h2 style="font-family:'Figtree',sans-serif;font-weight:800;font-size:clamp(1.5rem,3vw,2.2rem);color:#111">O que muda no dia a dia de cada &#225;rea</h2>
+      <p style="color:#555;max-width:640px;margin:12px auto 0;font-size:1rem;line-height:1.7">Selecione o departamento para ver exemplos reais de alertas, m&#233;tricas e entreg&#225;veis.</p>
+    </div>
+
+    <!-- Tab Navigation -->
+    <ul class="nav nav-pills dept-tabs justify-content-center mb-5" role="tablist">
+      <li class="nav-item" role="presentation"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-financeiro" type="button" role="tab"><span class="material-symbols-outlined">account_balance_wallet</span> Financeiro</button></li>
+      <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-compras" type="button" role="tab"><span class="material-symbols-outlined">shopping_cart</span> Compras</button></li>
+      <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-rh" type="button" role="tab"><span class="material-symbols-outlined">groups</span> RH</button></li>
+      <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-comercial" type="button" role="tab"><span class="material-symbols-outlined">trending_up</span> Comercial</button></li>
+      <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-diretoria" type="button" role="tab"><span class="material-symbols-outlined">dashboard</span> Diretoria</button></li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content">
+
+      <!-- FINANCEIRO -->
+      <div class="tab-pane fade show active" id="tab-financeiro" role="tabpanel">
+        <div class="row align-items-start">
+          <div class="col-lg-7">
+            <p class="subtitle">Concilia&#231;&#227;o e Integridade</p>
+            <h3 style="font-family:'Figtree',sans-serif;font-weight:800;font-size:1.5rem;color:#111;margin-bottom:16px">Departamento Financeiro</h3>
+            <p>O financeiro &#233; o departamento com maior exposi&#231;&#227;o a erros invis&#237;veis. Pagamentos duplicados, t&#237;tulos baixados incorretamente e diverg&#234;ncias entre banco e contabilidade consomem horas e geram perdas reais.</p>
+            <div class="ai-stats" style="margin-bottom:32px">
+              <div class="stat"><span class="number">0,5&#8211;2%</span><span class="label">do volume de compras em duplicidades</span></div>
+              <div class="stat"><span class="number">30%</span><span class="label">tempo em tarefas manuais evit&#225;veis</span></div>
+              <div class="stat"><span class="number">75%</span><span class="label">dificuldade de conciliar sistemas</span></div>
+            </div>
+            <div class="alert-table">
+              <table class="table">
+                <thead><tr><th style="width:55%">Alerta Detectado</th><th>Recomenda&#231;&#227;o AUDIPER</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="severity-dot critical"></span>Fornecedor: 2 pagamentos para mesma NF no mesmo dia</td><td>Verificar segundo pagamento e acionar equipe para estorno se confirmado</td></tr>
+                  <tr><td><span class="severity-dot warning"></span>T&#237;tulo baixado como pago no ERP &#8212; sem correspond&#234;ncia no extrato</td><td>Revisar lan&#231;amento &#8212; poss&#237;vel erro de concilia&#231;&#227;o</td></tr>
+                  <tr><td><span class="severity-dot critical"></span>Diverg&#234;ncia de R$ 23.400 entre saldo financeiro e banc&#225;rio</td><td>Relat&#243;rio com os 3 lan&#231;amentos divergentes identificados</td></tr>
+                  <tr><td><span class="severity-dot warning"></span>Taxa de cart&#227;o cobrada acima do contratado em 0,3%</td><td>Contestar junto ao adquirente &#8212; recupera&#231;&#227;o estimada R$ 4.100</td></tr>
+                  <tr><td><span class="severity-dot ok"></span>Concilia&#231;&#227;o: zero diverg&#234;ncias no per&#237;odo</td><td>Relat&#243;rio de integridade emitido &#8212; base validada para DRE</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div style="background:#fff;border-radius:16px;padding:32px;border:1px solid #eee;margin-top:16px">
+              <h5 style="font-family:'Figtree',sans-serif;font-weight:700;font-size:1rem;color:#111;margin-bottom:16px">Entreg&#225;vel mensal para o gestor financeiro:</h5>
+              <ul class="deliverables" style="margin:0">
+                <li><span class="material-symbols-outlined">check_circle</span>Score de Integridade Financeira (0&#8211;100) com evolu&#231;&#227;o m&#234;s a m&#234;s</li>
+                <li><span class="material-symbols-outlined">check_circle</span>Lista de diverg&#234;ncias identificadas e status de tratamento</li>
+                <li><span class="material-symbols-outlined">check_circle</span>Valor estimado de recupera&#231;&#227;o potencial no per&#237;odo</li>
+                <li><span class="material-symbols-outlined">check_circle</span>Base validada para elabora&#231;&#227;o de DRE e demonstra&#231;&#245;es</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMPRAS -->
+      <div class="tab-pane fade" id="tab-compras" role="tabpanel">
+        <div class="row align-items-start">
+          <div class="col-lg-7">
+            <p class="subtitle">Detec&#231;&#227;o de Anomalias</p>
+            <h3 style="font-family:'Figtree',sans-serif;font-weight:800;font-size:1.5rem;color:#111;margin-bottom:16px">Compras e Suprimentos</h3>
+            <p>Compras &#233; a &#225;rea com maior exposi&#231;&#227;o a fraudes e inefici&#234;ncias ocultas. Fornecedores fantasma, pre&#231;os superfaturados e pedidos fracionados para burlar al&#231;adas s&#227;o detect&#225;veis apenas com cruzamento de dados.</p>
+            <div class="ai-stats" style="margin-bottom:32px">
+              <div class="stat"><span class="number">5&#8211;10%</span><span class="label">do volume de compras com irregularidades</span></div>
+              <div class="stat"><span class="number">R$ 568K</span><span class="label">custo m&#233;dio de fraude por empresa (IIA)</span></div>
+              <div class="stat"><span class="number">41,6%</span><span class="label">aumento em tentativas de fraude (2025)</span></div>
+            </div>
+            <div class="alert-table">
+              <table class="table">
+                <thead><tr><th style="width:55%">Alerta Detectado</th><th>Recomenda&#231;&#227;o AUDIPER</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="severity-dot critical"></span>3 NFs no mesmo m&#234;s com valores abaixo do limite de aprova&#231;&#227;o</td><td>Verificar fracionamento intencional &#8212; encaminhar para gest&#227;o</td></tr>
+                  <tr><td><span class="severity-dot critical"></span>CNPJ do fornecedor cadastrado na mesma data do primeiro pagamento</td><td>Solicitar documenta&#231;&#227;o completa antes de novos pagamentos</td></tr>
+                  <tr><td><span class="severity-dot warning"></span>Pre&#231;o m&#233;dio do insumo X cresceu 23% sem cota&#231;&#227;o adicional</td><td>Realizar nova cota&#231;&#227;o com ao menos 3 fornecedores alternativos</td></tr>
+                  <tr><td><span class="severity-dot ok"></span>Fornecedor W: melhor custo-benef&#237;cio nos &#250;ltimos 12 meses</td><td>Negociar contrato anual &#8212; economia estimada R$ 3.200/m&#234;s</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div style="background:#fff;border-radius:16px;padding:32px;border:1px solid #eee;margin-top:16px">
+              <h5 style="font-family:'Figtree',sans-serif;font-weight:700;font-size:1rem;color:#111;margin-bottom:16px">Intelig&#234;ncia estrat&#233;gica para compras:</h5>
+              <ul class="deliverables" style="margin:0">
+                <li><span class="material-symbols-outlined">check_circle</span>Mapa de concentra&#231;&#227;o de fornecedores &#8212; risco de depend&#234;ncia quantificado</li>
+                <li><span class="material-symbols-outlined">check_circle</span>Ranking de fornecedores por custo-benef&#237;cio hist&#243;rico real</li>
+                <li><span class="material-symbols-outlined">check_circle</span>Padr&#245;es suspeitos: mesmo CNPJ, endere&#231;os similares, hor&#225;rios at&#237;picos</li>
+                <li><span class="material-symbols-outlined">check_circle</span>Oportunidades de economia por renego cia&#231;&#227;o identificadas com dados</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RH -->
+      <div class="tab-pane fade" id="tab-rh" role="tabpanel">
+        <div class="row align-items-start">
+          <div class="col-lg-7">
+            <p class="subtitle">Compliance Analytics</p>
+            <h3 style="font-family:'Figtree',sans-serif;font-weight:800;font-size:1.5rem;color:#111;margin-bottom:16px">Recursos Humanos</h3>
+            <p>A folha de pagamento &#233; uma das maiores despesas da empresa e a menos auditada. Erros acumulados por 5 anos (prazo prescricional) podem resultar em passivos trabalhistas milion&#225;rios.</p>
+            <div class="ai-stats" style="margin-bottom:32px">
+              <div class="stat"><span class="number">5 anos</span><span class="label">prazo prescricional trabalhista</span></div>
+              <div class="stat"><span class="number">Complexa</span><span class="label">CLT + conven&#231;&#245;es + eSocial</span></div>
+              <div class="stat"><span class="number">Invis&#237;vel</span><span class="label">sem cruzamento de dados</span></div>
+            </div>
+            <div class="alert-table">
+              <table class="table">
+                <thead><tr><th style="width:55%">Alerta Detectado</th><th>Recomenda&#231;&#227;o AUDIPER</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="severity-dot critical"></span>CPF consta ativo na folha &#8212; rescis&#227;o registrada h&#225; 62 dias</td><td>Verificar situa&#231;&#227;o contratual com urg&#234;ncia &#8212; poss&#237;vel inconsist&#234;ncia</td></tr>
+                  <tr><td><span class="severity-dot critical"></span>3 colaboradores com dados banc&#225;rios id&#234;nticos</td><td>Auditoria cadastral dos dados banc&#225;rios da folha</td></tr>
+                  <tr><td><span class="severity-dot warning"></span>Horas extras do depto. Log&#237;stica cresceram 58% em 3 meses</td><td>Revisar registros de ponto &#8212; subdimensionamento ou pagamento irregular</td></tr>
+                  <tr><td><span class="severity-dot warning"></span>Vale-alimenta&#231;&#227;o processado para colaborador em licen&#231;a n&#227;o remunerada</td><td>Verificar elegibilidade conforme CCT e corrigir se indevido</td></tr>
+                  <tr><td><span class="severity-dot ok"></span>Cruzamento folha &#215; eSocial &#215; banco: zero inconsist&#234;ncias</td><td>Relat&#243;rio de conformidade emitido &#8212; base validada</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="info-box" style="margin-top:24px">
+              <p><strong>&#9878; Nota:</strong> O m&#243;dulo de RH identifica inconsist&#234;ncias e reporta recomenda&#231;&#245;es. A conformidade legal definitiva depende do profissional de DP/RH e do contador respons&#225;vel pela empresa.</p>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div style="background:#fff;border-radius:16px;padding:32px;border:1px solid #eee;margin-top:16px">
+              <h5 style="font-family:'Figtree',sans-serif;font-weight:700;font-size:1rem;color:#111;margin-bottom:16px">Entreg&#225;veis para RH:</h5>
+              <ul class="deliverables" style="margin:0">
+                <li><span class="material-symbols-outlined">check_circle</span>Auditoria de folha mensal com score de conformidade</li>
+                <li><span class="material-symbols-outlined">check_circle</span>Cruzamento eSocial &#215; folha &#215; banco &#8212; zero diverg&#234;ncias com o governo</li>
+                <li><span class="material-symbols-outlined">check_circle</span>An&#225;lise de produtividade por equipe: resultado por R$ investido</li>
+                <li><span class="material-symbols-outlined">check_circle</span>Perfil dos colaboradores de alta performance para reten&#231;&#227;o</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMERCIAL -->
+      <div class="tab-pane fade" id="tab-comercial" role="tabpanel">
+        <div class="row align-items-start">
+          <div class="col-lg-7">
+            <p class="subtitle">Sales Intelligence</p>
+            <h3 style="font-family:'Figtree',sans-serif;font-weight:800;font-size:1.5rem;color:#111;margin-bottom:16px">Departamento Comercial</h3>
+            <p>A &#225;rea comercial toma as decis&#245;es mais caras da empresa no escuro: quem contratar, onde expandir, quais clientes priorizar. Um erro de contrata&#231;&#227;o comercial custa entre R$ 30.000 e R$ 80.000.</p>
+            <div class="ai-stats" style="margin-bottom:32px">
+              <div class="stat"><span class="number">R$ 80K</span><span class="label">custo de contrata&#231;&#227;o equivocada</span></div>
+              <div class="stat"><span class="number">32%</span><span class="label">mais vendas com perfil alinhado</span></div>
+              <div class="stat"><span class="number">0%</span><span class="label">fazem an&#225;lise cient&#237;fica de vendas</span></div>
+            </div>
+            <div class="alert-table">
+              <table class="table">
+                <thead><tr><th style="width:45%">Pergunta Estrat&#233;gica</th><th>O que os dados mostram</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Vale exigir n&#237;vel superior?</strong></td><td>Vendedores com 3+ anos de experi&#234;ncia geraram 31% mais receita. Escolaridade foi fator secund&#225;rio.</td></tr>
+                  <tr><td><strong>Quais regi&#245;es t&#234;m potencial?</strong></td><td>Zona Norte: 43 empresas no perfil ideal, s&#243; 3 ativas. Potencial R$ 150K/m&#234;s.</td></tr>
+                  <tr><td><strong>Por que vendedor A supera B?</strong></td><td>A faz follow-up em 36h. B demora 6 dias. Diferen&#231;a &#233; operacional, n&#227;o de perfil.</td></tr>
+                  <tr><td><strong>Quais produtos impulsionam vendas cruzadas?</strong></td><td>Clientes de Produto X adicionam Produto Z em 90 dias em 74% dos casos.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="info-box" style="margin-top:24px">
+              <p><strong>&#9888; Pr&#233;-requisito:</strong> Sales Intelligence &#233; ativado ap&#243;s saneamento da base (Fase 2). Requer m&#237;nimo de 12 meses de dados comerciais organizados. Avaliado no diagn&#243;stico inicial.</p>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div style="background:#fff;border-radius:16px;padding:32px;border:1px solid #eee;margin-top:16px">
+              <h5 style="font-family:'Figtree',sans-serif;font-weight:700;font-size:1rem;color:#111;margin-bottom:16px">Entreg&#225;vel mensal para o gestor comercial:</h5>
+              <ul class="deliverables" style="margin:0">
+                <li><span class="material-symbols-outlined">check_circle</span>Mapa de calor de regi&#245;es subatendidas com potencial identificado</li>
+                <li><span class="material-symbols-outlined">check_circle</span>Ranking de clientes por potencial de crescimento</li>
+                <li><span class="material-symbols-outlined">check_circle</span>Perfil do vendedor de alta performance &#8212; refer&#234;ncia para contrata&#231;&#227;o</li>
+                <li><span class="material-symbols-outlined">check_circle</span>An&#225;lise de mix de produtos: combina&#231;&#245;es que maximizam receita</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DIRETORIA -->
+      <div class="tab-pane fade" id="tab-diretoria" role="tabpanel">
+        <div class="row align-items-start">
+          <div class="col-lg-7">
+            <p class="subtitle">Dashboard Executivo Integrado</p>
+            <h3 style="font-family:'Figtree',sans-serif;font-weight:800;font-size:1.5rem;color:#111;margin-bottom:16px">Diretoria e Alta Gest&#227;o</h3>
+            <p>A diretoria decide sobre pessoas, dinheiro, expans&#227;o e estrat&#233;gia com base em relat&#243;rios constru&#237;dos sobre dados que nunca foram auditados. O risco n&#227;o &#233; tomar a decis&#227;o errada &#8212; &#233; n&#227;o saber que os dados est&#227;o errados.</p>
+            <div class="alert-table" style="margin-top:24px">
+              <table class="table">
+                <thead><tr><th style="width:45%">Antes &#8212; sem monitoramento</th><th>Depois &#8212; com AUDIPER</th></tr></thead>
+                <tbody>
+                  <tr><td>&#8220;Ser&#225; que o financeiro est&#225; correto?&#8221;</td><td>&#8220;Score de integridade: 94/100. Diverg&#234;ncias: R$ 3.100 &#8212; recomenda&#231;&#245;es encaminhadas.&#8221;</td></tr>
+                  <tr><td>&#8220;Por que o faturamento caiu se as vendas subiram?&#8221;</td><td>&#8220;Identificamos R$ 48K em baixas incorretas que distorceram a DRE.&#8221;</td></tr>
+                  <tr><td>&#8220;Devo contratar mais vendedores ou mudar carteiras?&#8221;</td><td>&#8220;3 vendedores com rotas ineficientes. Redistribui&#231;&#227;o tem potencial maior.&#8221;</td></tr>
+                  <tr><td>&#8220;Tem risco trabalhista oculto na folha?&#8221;</td><td>&#8220;Cruzamento folha &#215; eSocial: 2 inconsist&#234;ncias identificadas. Recomenda&#231;&#245;es enviadas ao DP.&#8221;</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div style="background:#fff;border-radius:16px;padding:32px;border:1px solid #eee;margin-top:16px">
+              <h5 style="font-family:'Figtree',sans-serif;font-weight:700;font-size:1rem;color:#111;margin-bottom:16px">O que a diretoria v&#234; todo m&#234;s:</h5>
+              <ul class="deliverables" style="margin:0">
+                <li><span class="material-symbols-outlined">check_circle</span>Score de integridade financeira e total recuperado</li>
+                <li><span class="material-symbols-outlined">check_circle</span>Top 10 clientes por potencial de crescimento</li>
+                <li><span class="material-symbols-outlined">check_circle</span>Status de conformidade trabalhista e eSocial</li>
+                <li><span class="material-symbols-outlined">check_circle</span>Fornecedores em alerta e oportunidades de economia</li>
+                <li><span class="material-symbols-outlined">check_circle</span>Alertas de anomalia cadastral na folha</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /tab-content -->
+  </div>
+</section>
+
+<!-- Pacotes -->
+<section id="pacotes" class="service-detail">
+  <div class="container">
+    <div class="text-center mb-5">
+      <p class="accent-mono" style="font-size:0.8rem;letter-spacing:3px;margin-bottom:8px">PACOTES E INVESTIMENTO</p>
+      <h2 style="font-family:'Figtree',sans-serif;font-weight:800;font-size:clamp(1.5rem,3vw,2.2rem);color:#111">Escopo claro, retorno identific&#225;vel</h2>
+      <p style="color:#555;max-width:640px;margin:12px auto 0;font-size:1rem;line-height:1.7">Todos os pacotes incluem Diagn&#243;stico de Integridade inicial. Escolha o escopo ideal para a sua empresa.</p>
+    </div>
+    <div class="row g-4 justify-content-center">
+      <!-- Essencial -->
+      <div class="col-lg-4 col-md-6">
+        <div class="pricing-card">
+          <span class="plan-badge">Essencial</span>
+          <p class="plan-subtitle">Financeiro + Compras</p>
+          <hr/>
+          <ul class="deliverables">
+            <li><span class="material-symbols-outlined">check_circle</span>Diagn&#243;stico de Integridade</li>
+            <li><span class="material-symbols-outlined">check_circle</span>Concilia&#231;&#227;o Financeiro + Compras</li>
+            <li><span class="material-symbols-outlined">check_circle</span>Alertas de anomalia (e-mail/WhatsApp)</li>
+            <li><span class="material-symbols-outlined">check_circle</span>Relat&#243;rio mensal de integridade</li>
+            <li><span class="material-symbols-outlined" style="color:#ccc">remove</span><span class="unavailable" style="color:#bbb">M&#243;dulo RH Compliance Analytics</span></li>
+            <li><span class="material-symbols-outlined" style="color:#ccc">remove</span><span class="unavailable" style="color:#bbb">Sales Intelligence</span></li>
+            <li><span class="material-symbols-outlined" style="color:#ccc">remove</span><span class="unavailable" style="color:#bbb">Analista AUDIPER dedicado</span></li>
+          </ul>
+          <a href="https://wa.me/5586994010525?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20o%20pacote%20Essencial%20do%20Data%20Intelligence." target="_blank" class="plan-cta"><i class="fab fa-whatsapp"></i> Falar com nossos peritos</a>
+        </div>
+      </div>
+      <!-- Avan&#231;ado -->
+      <div class="col-lg-4 col-md-6">
+        <div class="pricing-card featured">
+          <span class="popular-tag">Mais popular</span>
+          <span class="plan-badge">Avan&#231;ado</span>
+          <p class="plan-subtitle">Todos os departamentos</p>
+          <hr/>
+          <ul class="deliverables">
+            <li><span class="material-symbols-outlined">check_circle</span>Diagn&#243;stico de Integridade</li>
+            <li><span class="material-symbols-outlined">check_circle</span>Concilia&#231;&#227;o todos os departamentos</li>
+            <li><span class="material-symbols-outlined">check_circle</span>Alertas + dashboard operacional</li>
+            <li><span class="material-symbols-outlined">check_circle</span>Relat&#243;rio mensal por departamento</li>
+            <li><span class="material-symbols-outlined">check_circle</span>M&#243;dulo RH Compliance Analytics</li>
+            <li><span class="material-symbols-outlined">check_circle</span>Sales Intelligence b&#225;sico</li>
+            <li><span class="material-symbols-outlined" style="color:#ccc">remove</span><span class="unavailable" style="color:#bbb">Analista AUDIPER dedicado</span></li>
+          </ul>
+          <a href="https://wa.me/5586994010525?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20o%20pacote%20Avan%C3%A7ado%20do%20Data%20Intelligence." target="_blank" class="plan-cta"><i class="fab fa-whatsapp"></i> Falar com nossos peritos</a>
+        </div>
+      </div>
+      <!-- Enterprise -->
+      <div class="col-lg-4 col-md-6">
+        <div class="pricing-card">
+          <span class="plan-badge">Enterprise</span>
+          <p class="plan-subtitle">Com advisory executivo</p>
+          <hr/>
+          <ul class="deliverables">
+            <li><span class="material-symbols-outlined">check_circle</span>Diagn&#243;stico de Integridade</li>
+            <li><span class="material-symbols-outlined">check_circle</span>Concilia&#231;&#227;o todos os departamentos</li>
+            <li><span class="material-symbols-outlined">check_circle</span>Alertas + dashboard executivo</li>
+            <li><span class="material-symbols-outlined">check_circle</span>Relat&#243;rio semanal + reuni&#227;o mensal</li>
+            <li><span class="material-symbols-outlined">check_circle</span>M&#243;dulo RH Compliance Analytics</li>
+            <li><span class="material-symbols-outlined">check_circle</span>Sales Intelligence preditivo</li>
+            <li><span class="material-symbols-outlined">check_circle</span>Analista AUDIPER dedicado</li>
+          </ul>
+          <a href="https://wa.me/5586994010525?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20o%20pacote%20Enterprise%20do%20Data%20Intelligence." target="_blank" class="plan-cta"><i class="fab fa-whatsapp"></i> Falar com nossos peritos</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Seguran&#231;a e Escopo -->
+<section id="seguranca" class="service-detail" style="background:#f8f8f8">
+  <div class="container">
+    <div class="row align-items-start">
+      <div class="col-lg-4 mb-4">
+        <div class="section-icon"><span class="material-symbols-outlined">lock</span></div>
+        <p class="subtitle">Seguran&#231;a &amp; Escopo</p>
+        <h2>Como funciona na pr&#225;tica</h2>
+        <p>Acesso read-only, criptografia ponta a ponta e delimita&#231;&#227;o clara de responsabilidades. Sem ambiguidade.</p>
+      </div>
+      <div class="col-lg-8">
+        <table class="security-table">
+          <thead><tr><th>Item</th><th>Como Funciona</th><th>Responsabilidade</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Acesso a dados</td>
+              <td>Leitura somente &#8212; exporta&#231;&#227;o de arquivos (CSV, OFX, SQL read-only). Nenhuma escrita ou altera&#231;&#227;o realizada.</td>
+              <td>Cliente fornece credencial de leitura. AUDIPER assina NDA conforme LGPD.</td>
+            </tr>
+            <tr>
+              <td>Ambiente</td>
+              <td>Dados processados em ambiente seguro com criptografia em tr&#226;nsito e repouso. Sem reten&#231;&#227;o ap&#243;s encerramento.</td>
+              <td>AUDIPER: seguran&#231;a t&#233;cnica. Cliente: autoriza&#231;&#227;o conforme Art. 7&#186; LGPD.</td>
+            </tr>
+            <tr>
+              <td>A&#231;&#245;es corretivas</td>
+              <td>AUDIPER emite alertas e recomenda&#231;&#245;es t&#233;cnicas. Execu&#231;&#227;o &#233; sempre do cliente.</td>
+              <td>Cliente executa. AUDIPER documenta recomenda&#231;&#227;o e prazo.</td>
+            </tr>
+            <tr>
+              <td>SLA de alertas</td>
+              <td>Cr&#237;ticos: D+0 (mesmo dia &#250;til). Aten&#231;&#227;o: D+1. Relat&#243;rio mensal: at&#233; 5&#186; dia &#250;til.</td>
+              <td>AUDIPER cumpre SLA. Cliente define quem recebe e trata.</td>
+            </tr>
+            <tr>
+              <td>Compatibilidade</td>
+              <td>TOTVS, SAP, Omie, Conta Azul, Oracle, Alterdata e similares. Bancos via OFX ou Open Finance.</td>
+              <td>Compatibilidade confirmada no diagn&#243;stico antes da contrata&#231;&#227;o.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Metodologia -->
+<section id="metodologia" class="service-detail">
+  <div class="container">
+    <div class="row align-items-start">
+      <div class="col-lg-4 mb-4">
+        <div class="section-icon"><span class="material-symbols-outlined">route</span></div>
+        <p class="subtitle">Metodologia</p>
+        <h2>Da contrata&#231;&#227;o ao dashboard em 60 dias</h2>
+        <p>Processo estruturado em 4 fases com entreg&#225;veis claros em cada etapa.</p>
+      </div>
+      <div class="col-lg-8">
+        <div class="method-step">
+          <div class="step-num">01</div>
+          <div>
+            <p class="step-days">Dias 1&#8211;10</p>
+            <h5>Diagn&#243;stico de Integridade</h5>
+            <ul>
+              <li><span class="material-symbols-outlined">arrow_right</span>Acesso read-only ao ERP e extrato banc&#225;rio do cliente</li>
+              <li><span class="material-symbols-outlined">arrow_right</span>Scripts Python/SQL analisam dados &#8212; diverg&#234;ncias, duplicidades, anomalias</li>
+              <li><span class="material-symbols-outlined">arrow_right</span>Confirma&#231;&#227;o de compatibilidade t&#233;cnica com os sistemas</li>
+              <li><span class="material-symbols-outlined">arrow_right</span>Entreg&#225;vel: Relat&#243;rio com valor de recupera&#231;&#227;o potencial em R$</li>
+            </ul>
+          </div>
+        </div>
+        <div class="method-step">
+          <div class="step-num">02</div>
+          <div>
+            <p class="step-days">Dias 11&#8211;35</p>
+            <h5>Saneamento e Automa&#231;&#227;o</h5>
+            <ul>
+              <li><span class="material-symbols-outlined">arrow_right</span>Implementa&#231;&#227;o da concilia&#231;&#227;o automatizada entre sistemas</li>
+              <li><span class="material-symbols-outlined">arrow_right</span>Configura&#231;&#227;o dos scripts de detec&#231;&#227;o de anomalias por departamento</li>
+              <li><span class="material-symbols-outlined">arrow_right</span>Base de dados saneada e auditada &#8212; ponto zero do monitoramento</li>
+              <li><span class="material-symbols-outlined">arrow_right</span>Configura&#231;&#227;o dos canais de alerta (e-mail e/ou WhatsApp)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="method-step">
+          <div class="step-num">03</div>
+          <div>
+            <p class="step-days">Dias 36&#8211;50</p>
+            <h5>Alertas e Dashboard</h5>
+            <ul>
+              <li><span class="material-symbols-outlined">arrow_right</span>Ativa&#231;&#227;o dos alertas com SLA: cr&#237;ticos D+0, aten&#231;&#227;o D+1</li>
+              <li><span class="material-symbols-outlined">arrow_right</span>Entrega do dashboard operacional configurado</li>
+              <li><span class="material-symbols-outlined">arrow_right</span>Defini&#231;&#227;o da matriz de responsabilidades</li>
+              <li><span class="material-symbols-outlined">arrow_right</span>Testes com equipe do cliente em cada departamento</li>
+            </ul>
+          </div>
+        </div>
+        <div class="method-step">
+          <div class="step-num">04</div>
+          <div>
+            <p class="step-days">Dias 51&#8211;60</p>
+            <h5>Go-Live e Primeiro Relat&#243;rio</h5>
+            <ul>
+              <li><span class="material-symbols-outlined">arrow_right</span>Treinamento das equipes (2h por departamento)</li>
+              <li><span class="material-symbols-outlined">arrow_right</span>Apresenta&#231;&#227;o do primeiro Relat&#243;rio de Integridade &#224; diretoria</li>
+              <li><span class="material-symbols-outlined">arrow_right</span>In&#237;cio da recorr&#234;ncia mensal de monitoramento cont&#237;nuo</li>
+              <li><span class="material-symbols-outlined">arrow_right</span>Revis&#227;o de escopo e ajustes finos</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background:#f8f8f8;padding:80px 0">
+  <div class="container">
+    <div class="text-center mb-5">
+      <p class="accent-mono" style="font-size:0.8rem;letter-spacing:3px;margin-bottom:8px">TIRE SUAS D&#218;VIDAS</p>
+      <h2 style="font-family:'Figtree',sans-serif;font-weight:800;font-size:clamp(1.5rem,3vw,2.2rem);color:#111">Perguntas frequentes sobre Data Intelligence</h2>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="faq-item">
+          <button class="faq-question">O que diferencia a AUDIPER de um software de concilia&#231;&#227;o? <span class="material-symbols-outlined">expand_more</span></button>
+          <div class="faq-answer">Softwares de concilia&#231;&#227;o automatizam o processo mec&#226;nico, mas n&#227;o auditam a qualidade dos dados. A AUDIPER combina automa&#231;&#227;o com profissionais habilitados e solu&#231;&#245;es Python pr&#243;prias, garantindo que os dados sejam verificados com rigor t&#233;cnico antes de serem analisados. Al&#233;m disso, emitimos alertas estrat&#233;gicos e recomenda&#231;&#245;es &#8212; n&#227;o apenas dados limpos.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Quanto tempo leva para ver resultados? <span class="material-symbols-outlined">expand_more</span></button>
+          <div class="faq-answer">O diagn&#243;stico inicial &#233; conclu&#237;do em 10 dias &#250;teis e j&#225; identifica diverg&#234;ncias e valores recuper&#225;veis. A implementa&#231;&#227;o completa leva 60 dias, com alertas operacionais funcionando a partir do dia 36. Muitas empresas identificam valores significativos j&#225; no diagn&#243;stico.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Preciso trocar meu ERP ou sistema atual? <span class="material-symbols-outlined">expand_more</span></button>
+          <div class="faq-answer">N&#227;o. A AUDIPER trabalha com acesso read-only aos dados exportados do seu ERP. Somos compat&#237;veis com TOTVS, SAP, Omie, Conta Azul, Oracle, Alterdata e similares. Extratos banc&#225;rios s&#227;o integrados via OFX ou Open Finance. N&#227;o &#233; necess&#225;rio alterar sistemas existentes.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Como funciona o diagn&#243;stico de integridade? <span class="material-symbols-outlined">expand_more</span></button>
+          <div class="faq-answer">O diagn&#243;stico consiste em 10 dias de an&#225;lise com acesso read-only ao ERP e extratos banc&#225;rios. Nossos scripts Python/SQL analisam os dados dispon&#237;veis, identificam diverg&#234;ncias, duplicidades e anomalias, e geram um relat&#243;rio detalhado com o valor de recupera&#231;&#227;o potencial estimado em reais. Tamb&#233;m confirmamos a compatibilidade t&#233;cnica com seus sistemas.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Os dados da minha empresa ficam seguros? <span class="material-symbols-outlined">expand_more</span></button>
+          <div class="faq-answer">Sim. A AUDIPER trabalha exclusivamente com acesso de leitura &#8212; nenhuma escrita ou altera&#231;&#227;o &#233; realizada nos seus sistemas. Os dados s&#227;o processados em ambiente seguro com criptografia em tr&#226;nsito e em repouso, sem reten&#231;&#227;o ap&#243;s encerramento do contrato. Assinamos NDA e termo de sigilo conforme a LGPD.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">O que &#233; Sales Intelligence e como funciona? <span class="material-symbols-outlined">expand_more</span></button>
+          <div class="faq-answer">Sales Intelligence &#233; o m&#243;dulo que transforma dados comerciais em intelig&#234;ncia estrat&#233;gica. Utilizando dados hist&#243;ricos da pr&#243;pria empresa, identificamos padr&#245;es de sucesso em vendedores, regi&#245;es e clientes. &#201; ativado ap&#243;s o saneamento da base de dados (Fase 2) e requer m&#237;nimo de 12 meses de dados comerciais organizados. Empresas com dados incipientes iniciam com an&#225;lise descritiva antes de avan&#231;ar para modelos preditivos.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Artigos Relacionados -->
+<section class="related-articles">
+  <div class="container">
+    <div class="section-badge">DO NOSSO BLOG</div>
+    <h2 class="section-heading">Artigos Relacionados</h2>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6">
+        <div class="related-article-card">
+          <div class="card-img" style="background:linear-gradient(135deg,#1a1a2e15,#4a90d920)">
+            <span class="tag">Data Intelligence</span>
+            <span class="material-symbols-outlined">psychology</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">IA Transformando a Auditoria</h3>
+            <p class="card-text">Descubra como a intelig&#234;ncia artificial est&#225; revolucionando a auditoria cont&#225;bil com an&#225;lise de dados e automa&#231;&#227;o.</p>
+            <a href="blog/ia-transformando-auditoria-contabil.html" class="read-more">Ler artigo <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="related-article-card">
+          <div class="card-img" style="background:linear-gradient(135deg,#c41a1a15,#ff634720)">
+            <span class="tag">Data Intelligence</span>
+            <span class="material-symbols-outlined">model_training</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Machine Learning na Detec&#231;&#227;o de Anomalias</h3>
+            <p class="card-text">Veja como algoritmos de machine learning identificam padr&#245;es suspeitos e anomalias em dados financeiros e cont&#225;beis.</p>
+            <a href="blog/machine-learning-deteccao-anomalias.html" class="read-more">Ler artigo <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="related-article-card">
+          <div class="card-img" style="background:linear-gradient(135deg,#05966915,#10b98120)">
+            <span class="tag">Data Intelligence</span>
+            <span class="material-symbols-outlined">smart_toy</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Automa&#231;&#227;o de Processos com RPA</h3>
+            <p class="card-text">Entenda como a automa&#231;&#227;o rob&#243;tica de processos (RPA) otimiza tarefas cont&#225;beis repetitivas e reduz erros operacionais.</p>
+            <a href="blog/automacao-processos-contabeis-rpa.html" class="read-more">Ler artigo <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2>O pr&#243;ximo passo &#233; simples.</h2>
+    <p>Contrate o Diagn&#243;stico de Integridade. 10 dias. Read-only. Voc&#234; saber&#225; exatamente quanto dinheiro est&#225; vazando &#8212; com n&#250;meros, n&#227;o com estimativas gen&#233;ricas.</p>
+    <a href="https://wa.me/5586994010525?text=Ol%C3%A1!%20Gostaria%20de%20contratar%20o%20Diagn%C3%B3stico%20de%20Integridade%20do%20Data%20Intelligence." target="_blank" class="btn-white"><i class="fab fa-whatsapp"></i> Solicitar Diagn&#243;stico de Integridade</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer-area footer-two">
+  <div class="container py-100">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="footer-area__about">
+          <div class="footer-logo"><a href="index.html"><img alt="AUD&#205;PER - 40 Anos" src="images/audilogo40.png"/></a></div><br/>
+          <p>AUD<span class="brand-b">&lt;</span><span class="brand-s">/</span><span class="brand-b">&gt;</span>PER - Auditores e Peritos Associados. Refer&#234;ncia em auditoria independente e per&#237;cia cont&#225;bil no Nordeste desde 1986.</p>
+          <ul class="social">
+            <li><a href="https://facebook.com/audiper" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="https://instagram.com/audiper" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="https://linkedin.com/company/audiper" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a></li>
+            <li><a href="https://wa.me/5586994010525" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="footer-widget">
+          <div class="footer-widget__item">
+            <h4 class="footer-widget__title">Links R&#225;pidos</h4>
+            <ul class="footer-widget__list">
+              <li><a href="index.html">In&#237;cio</a></li>
+              <li><a href="auditorias.html">Auditorias</a></li>
+              <li><a href="pericias.html">Per&#237;cias</a></li>
+              <li><a href="ia-negocios.html">IA para Neg&#243;cios</a></li>
+              <li><a href="inteligencia-dados.html">Data Intelligence</a></li>
+              <li><a href="sobre.html">Sobre N&#243;s</a></li>
+              <li><a href="reforma-tributaria.html">Reforma Tribut&#225;ria</a></li>
+              <li><a href="setores.html">Setores Atendidos</a></li>
+              <li><a href="casos-sucesso.html">Casos de Sucesso</a></li>
+              <li><a href="eventos.html">Eventos</a></li>
+              <li><a href="carreiras.html">Carreiras</a></li>
+              <li><a href="contato.html">Contato</a></li>
+              <li><a href="privacidade.html">Privacidade</a></li>
+            </ul>
+          </div>
+          <div class="footer-widget__item">
+            <h4 class="footer-widget__title">Informa&#231;&#245;es</h4>
+            <ul class="footer-widget__list">
+              <li><i class="material-symbols-outlined">location_on</i><p>Rua Arlindo Nogueira, 614/Sul<br/>CEP 64001-280, Teresina/PI</p></li>
+              <li><i class="material-symbols-outlined">phone_in_talk</i><p><a href="tel:+558633030987">(86) 3303-0987</a></p></li>
+              <li><i class="fab fa-whatsapp"></i><p><a href="https://wa.me/5586994010525">(86) 99401-0525</a></p></li>
+            </ul>
+            <br/><h5 class="footer-widget__title">E-mails</h5>
+            <ul class="footer-widget__list">
+              <li><p><a href="mailto:audiper@audiper.com">audiper@audiper.com</a></p></li>
+              <li><p><a href="mailto:pericia@audiper.com">pericia@audiper.com</a></p></li>
+            </ul>
+          </div>
+          <div class="footer-widget__item">
+            <h4 class="footer-widget__title">Hor&#225;rio</h4>
+            <ul class="footer-widget__list"><li><p>Seg - Sex: 8h &#224;s 18h</p></li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copy-right"><div class="container"><div class="row"><div class="col-lg-12"><div class="copy-right__content"><p class="copy-right__text">&copy; 2026 AUD<span class="brand-b">&lt;</span><span class="brand-s">/</span><span class="brand-b">&gt;</span>PER - Auditores e Peritos Associados. Todos os direitos reservados.</p></div></div></div></div></div>
+</footer>
+</div></div></main>
+<script src="js/jquery-3.7.1.min.js"></script>
+<script src="js/gsap.min.js"></script>
+<script src="js/ScrollTrigger.min.js"></script>
+<script src="js/SplitText.min.js"></script>
+<script src="js/boostrap.bundle.min.js"></script>
+<script src="js/scrollreveal.min.js"></script>
+<script src="js/swiper-bundle.min.js"></script>
+<script src="js/main.js"></script>
+<script>
+document.querySelectorAll('.faq-question').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    this.classList.toggle('active');
+    var answer=this.nextElementSibling;
+    answer.style.display=answer.style.display==='block'?'none':'block';
+  });
+});
+</script>
+<!-- Lottie Web -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+<script>
+(function(){
+  if(typeof lottie==='undefined')return;
+  var players=document.querySelectorAll('.page-lottie-player');
+  players.forEach(function(el){
+    lottie.loadAnimation({container:el,renderer:'svg',loop:true,autoplay:true,path:'animations/audiper-workflow.json'}).setSpeed(0.6);
+  });
+})();
+</script>
+</body>
+</html>

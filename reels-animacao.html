@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=1080, initial-scale=1.0"/>
+<title>AUD&Iacute;PER — Instagram Reels</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    background: #141416;
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    position: relative;
+  }
+
+  /* ═══ GLOBAL ANIMATION VARS ═══ */
+  :root {
+    --red: #c41a1a;
+    --dark: #141416;
+    --light: #f8f8f8;
+    --red-glow: rgba(196, 26, 26, 0.3);
+    --total-duration: 20s;
+  }
+
+  /* ═══ SLIDES CONTAINER ═══ */
+  .slides {
+    position: absolute;
+    top: 0; left: 0;
+    width: 1080px;
+    height: 1920px;
+  }
+
+  .slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 1080px;
+    height: 1920px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(1.05);
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* ═══ SLIDE 1: LOGO REVEAL (0s–4s) ═══ */
+  .slide-1 {
+    background: radial-gradient(ellipse at center, #1e1e22 0%, #141416 70%);
+    animation: slide1 4s ease forwards;
+  }
+
+  @keyframes slide1 {
+    0%   { opacity: 1; transform: scale(1); }
+    85%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.95); }
+  }
+
+  .logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .logo-symbol {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+    animation: symbolReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  }
+
+  @keyframes symbolReveal {
+    0%   { opacity: 0; transform: scale(0.3) rotate(-10deg); filter: blur(20px); }
+    100% { opacity: 1; transform: scale(1) rotate(0deg); filter: blur(0); }
+  }
+
+  .logo-text {
+    font-family: 'Figtree', sans-serif;
+    font-size: 96px;
+    font-weight: 900;
+    letter-spacing: 6px;
+    opacity: 0;
+    animation: textReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 1s forwards;
+  }
+
+  @keyframes textReveal {
+    0%   { opacity: 0; transform: translateY(30px); letter-spacing: 30px; }
+    100% { opacity: 1; transform: translateY(0); letter-spacing: 6px; }
+  }
+
+  .logo-text .bracket { color: var(--red); }
+  .logo-text .slash { color: rgba(255,255,255,0.7); }
+
+  .tagline-1 {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 32px;
+    color: rgba(255,255,255,0.5);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.8s forwards;
+  }
+
+  /* Pulse glow behind logo */
+  .glow-ring {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--red-glow) 0%, transparent 70%);
+    opacity: 0;
+    animation: glowPulse 2s ease 0.5s forwards;
+  }
+
+  @keyframes glowPulse {
+    0%   { opacity: 0; transform: scale(0.5); }
+    50%  { opacity: 0.8; transform: scale(1.2); }
+    100% { opacity: 0.4; transform: scale(1); }
+  }
+
+  /* ═══ SLIDE 2: "40 ANOS" COUNTER (4s–8s) ═══ */
+  .slide-2 {
+    background: linear-gradient(160deg, #141416 0%, #1a1a1f 50%, #141416 100%);
+    animation: slide2 4s ease 4s forwards;
+  }
+
+  @keyframes slide2 {
+    0%   { opacity: 0; transform: scale(1.1); }
+    10%  { opacity: 1; transform: scale(1); }
+    85%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.95); }
+  }
+
+  .counter-block {
+    text-align: center;
+  }
+
+  .counter-number {
+    font-family: 'Figtree', sans-serif;
+    font-size: 280px;
+    font-weight: 900;
+    color: var(--red);
+    line-height: 1;
+    opacity: 0;
+    animation: counterPop 0.8s cubic-bezier(0.16, 1, 0.3, 1) 4.4s forwards;
+  }
+
+  @keyframes counterPop {
+    0%   { opacity: 0; transform: scale(2) translateY(40px); filter: blur(10px); }
+    60%  { transform: scale(0.95) translateY(-5px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+  }
+
+  .counter-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 36px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    opacity: 0;
+    animation: fadeUp 0.6s ease 5s forwards;
+  }
+
+  .counter-sub {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 40px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 50px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 5.5s forwards;
+  }
+
+  .stats-row {
+    display: flex;
+    gap: 80px;
+    margin-top: 80px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 5.8s forwards;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Figtree', sans-serif;
+    font-weight: 900;
+    font-size: 64px;
+    color: #fff;
+  }
+
+  .stat-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 6px;
+  }
+
+  /* ═══ SLIDE 3: SERVICES (8s–12.5s) ═══ */
+  .slide-3 {
+    background: #fff;
+    color: var(--dark);
+    animation: slide3 4.5s ease 8s forwards;
+  }
+
+  @keyframes slide3 {
+    0%   { opacity: 0; transform: translateY(60px); }
+    8%   { opacity: 1; transform: translateY(0); }
+    87%  { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-30px); }
+  }
+
+  .services-header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+
+  .services-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.5s ease 8.3s forwards;
+  }
+
+  .services-title {
+    font-family: 'Figtree', sans-serif;
+    font-size: 68px;
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--dark);
+    opacity: 0;
+    animation: fadeUp 0.5s ease 8.5s forwards;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    padding: 0 60px;
+    width: 100%;
+  }
+
+  .service-card {
+    background: var(--light);
+    border-radius: 24px;
+    padding: 48px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .service-card:nth-child(1) { animation: cardReveal 0.5s ease 8.8s forwards; }
+  .service-card:nth-child(2) { animation: cardReveal 0.5s ease 9s forwards; }
+  .service-card:nth-child(3) { animation: cardReveal 0.5s ease 9.2s forwards; }
+  .service-card:nth-child(4) { animation: cardReveal 0.5s ease 9.4s forwards; }
+  .service-card:nth-child(5) { animation: cardReveal 0.5s ease 9.6s forwards; }
+  .service-card:nth-child(6) { animation: cardReveal 0.5s ease 9.8s forwards; }
+
+  @keyframes cardReveal {
+    0%   { opacity: 0; transform: translateY(30px) scale(0.95); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .service-icon {
+    font-size: 48px;
+    width: 72px;
+    height: 72px;
+    background: var(--dark);
+    color: var(--red);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .service-name {
+    font-family: 'Figtree', sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    color: var(--dark);
+  }
+
+  .service-desc {
+    font-size: 22px;
+    color: rgba(20,20,22,0.55);
+    line-height: 1.4;
+  }
+
+  /* ═══ SLIDE 4: IA + INNOVATION (12.5s–16.5s) ═══ */
+  .slide-4 {
+    background: linear-gradient(160deg, var(--dark) 0%, #0d0d0f 100%);
+    animation: slide4 4s ease 12.5s forwards;
+  }
+
+  @keyframes slide4 {
+    0%   { opacity: 0; transform: scale(1.05); }
+    10%  { opacity: 1; transform: scale(1); }
+    85%  { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  .ia-content {
+    text-align: center;
+    padding: 0 80px;
+  }
+
+  .ia-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(196,26,26,0.15);
+    border: 1px solid rgba(196,26,26,0.3);
+    border-radius: 100px;
+    padding: 16px 36px;
+    margin-bottom: 50px;
+    opacity: 0;
+    animation: fadeUp 0.5s ease 12.8s forwards;
+  }
+
+  .ia-badge-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--red);
+    animation: pulseDot 1.5s ease infinite;
+  }
+
+  @keyframes pulseDot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.5; transform: scale(1.5); }
+  }
+
+  .ia-badge span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    color: var(--red);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .ia-title {
+    font-family: 'Figtree', sans-serif;
+    font-size: 72px;
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 13.1s forwards;
+  }
+
+  .ia-title em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--red);
+    font-weight: 400;
+  }
+
+  .ia-desc {
+    font-size: 30px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.5);
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0;
+    animation: fadeUp 0.5s ease 13.5s forwards;
+  }
+
+  .ia-features {
+    display: flex;
+    gap: 40px;
+    margin-top: 70px;
+    opacity: 0;
+    animation: fadeUp 0.5s ease 13.9s forwards;
+  }
+
+  .ia-feature {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 36px 28px;
+    text-align: center;
+    flex: 1;
+  }
+
+  .ia-feature-icon {
+    font-size: 44px;
+    margin-bottom: 16px;
+  }
+
+  .ia-feature-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.4;
+  }
+
+  /* ═══ SLIDE 5: CTA FINAL (16.5s–20s) ═══ */
+  .slide-5 {
+    background: var(--dark);
+    animation: slide5 3.5s ease 16.5s forwards;
+    overflow: hidden;
+  }
+
+  @keyframes slide5 {
+    0%   { opacity: 0; }
+    10%  { opacity: 1; }
+    100% { opacity: 1; }
+  }
+
+  .cta-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    z-index: 2;
+    position: relative;
+  }
+
+  .cta-logo {
+    width: 140px;
+    height: 140px;
+    opacity: 0;
+    animation: symbolReveal 0.8s ease 16.8s forwards;
+  }
+
+  .cta-brand {
+    font-family: 'Figtree', sans-serif;
+    font-size: 100px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 17.2s forwards;
+  }
+
+  .cta-brand .bracket { color: var(--red); }
+  .cta-brand .slash { color: rgba(255,255,255,0.6); }
+
+  .cta-tagline {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 42px;
+    color: rgba(255,255,255,0.5);
+    opacity: 0;
+    animation: fadeUp 0.6s ease 17.5s forwards;
+  }
+
+  .cta-divider {
+    width: 100px;
+    height: 3px;
+    background: var(--red);
+    opacity: 0;
+    animation: expandLine 0.6s ease 17.8s forwards;
+  }
+
+  @keyframes expandLine {
+    0%   { opacity: 0; width: 0; }
+    100% { opacity: 1; width: 100px; }
+  }
+
+  .cta-url {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 36px;
+    color: var(--red);
+    letter-spacing: 0.05em;
+    opacity: 0;
+    animation: fadeUp 0.5s ease 18.1s forwards;
+  }
+
+  .cta-services {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    max-width: 800px;
+    opacity: 0;
+    animation: fadeUp 0.5s ease 18.4s forwards;
+  }
+
+  .cta-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    color: rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 100px;
+    padding: 12px 28px;
+  }
+
+  /* Background glow for CTA */
+  .cta-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,26,26,0.12) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    animation: ctaGlow 2s ease 17s forwards;
+  }
+
+  @keyframes ctaGlow {
+    0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  }
+
+  /* ═══ SHARED ANIMATIONS ═══ */
+  @keyframes fadeUp {
+    0%   { opacity: 0; transform: translateY(25px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ═══ PARTICLE EFFECT (background) ═══ */
+  .particles {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(196,26,26,0.3);
+    border-radius: 50%;
+    animation: floatParticle 8s linear infinite;
+  }
+
+  .particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; animation-duration: 7s; }
+  .particle:nth-child(2) { left: 30%; top: 60%; animation-delay: 1s; animation-duration: 9s; }
+  .particle:nth-child(3) { left: 50%; top: 40%; animation-delay: 2s; animation-duration: 6s; }
+  .particle:nth-child(4) { left: 70%; top: 80%; animation-delay: 0.5s; animation-duration: 8s; }
+  .particle:nth-child(5) { left: 85%; top: 30%; animation-delay: 3s; animation-duration: 10s; }
+  .particle:nth-child(6) { left: 20%; top: 85%; animation-delay: 1.5s; animation-duration: 7.5s; }
+  .particle:nth-child(7) { left: 60%; top: 15%; animation-delay: 2.5s; animation-duration: 6.5s; }
+  .particle:nth-child(8) { left: 90%; top: 55%; animation-delay: 0.8s; animation-duration: 9.5s; }
+
+  @keyframes floatParticle {
+    0%   { transform: translateY(0) translateX(0); opacity: 0; }
+    20%  { opacity: 0.6; }
+    80%  { opacity: 0.6; }
+    100% { transform: translateY(-200px) translateX(40px); opacity: 0; }
+  }
+
+  /* ═══ SCAN LINE EFFECT ═══ */
+  .scan-line {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent 0%, var(--red) 50%, transparent 100%);
+    opacity: 0.4;
+    z-index: 99;
+    animation: scanDown 20s linear forwards;
+  }
+
+  @keyframes scanDown {
+    0%   { top: -2px; }
+    100% { top: 1920px; }
+  }
+
+  /* ═══ PROGRESS BAR ═══ */
+  .progress-bar-reel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 6px;
+    background: var(--red);
+    z-index: 100;
+    animation: progressFill 20s linear forwards;
+  }
+
+  @keyframes progressFill {
+    0%   { width: 0%; }
+    100% { width: 100%; }
+  }
+
+  /* ═══ CONTROLS OVERLAY ═══ */
+  .controls {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 200;
+    display: flex;
+    gap: 16px;
+  }
+
+  .controls button {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    padding: 14px 28px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .controls button:hover {
+    background: rgba(255,255,255,0.2);
+  }
+
+  /* Hide controls during recording */
+  body.recording .controls { display: none; }
+</style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div class="progress-bar-reel" id="progressBar"></div>
+
+<!-- Scan line effect -->
+<div class="scan-line"></div>
+
+<!-- ═══ SLIDE 1: LOGO REVEAL ═══ -->
+<div class="slide slide-1">
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+  <div class="logo-container">
+    <div class="glow-ring"></div>
+    <svg class="logo-symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <defs>
+        <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#1e1e22"/>
+          <stop offset="100%" style="stop-color:#141416"/>
+        </linearGradient>
+        <linearGradient id="r" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#e83030"/>
+          <stop offset="100%" style="stop-color:#b81818"/>
+        </linearGradient>
+      </defs>
+      <circle cx="256" cy="256" r="256" fill="url(#bg)"/>
+      <polyline points="198,170 128,256 198,342" fill="none" stroke="url(#r)" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="240" y1="155" x2="272" y2="357" stroke="#fff" stroke-width="32" stroke-linecap="round"/>
+      <polyline points="314,170 384,256 314,342" fill="none" stroke="url(#r)" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="logo-text">
+      AUD<span class="bracket">&lt;</span><span class="slash">/</span><span class="bracket">&gt;</span>PER
+    </div>
+    <div class="tagline-1">Onde Experi&ecirc;ncia encontra Inova&ccedil;&atilde;o</div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 2: 40 ANOS + STATS ═══ -->
+<div class="slide slide-2">
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+  <div class="counter-block">
+    <div class="counter-number">40</div>
+    <div class="counter-label">Anos de Excel&ecirc;ncia</div>
+    <div class="counter-sub">1986 &mdash; 2026</div>
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Clientes</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3000+</div>
+        <div class="stat-label">Projetos</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">8</div>
+        <div class="stat-label">Estados</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 3: SERVICES ═══ -->
+<div class="slide slide-3">
+  <div class="services-header">
+    <div class="services-label">Nossos Servi&ccedil;os</div>
+    <div class="services-title">Solu&ccedil;&otilde;es<br/>Completas</div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">&#x1F6E1;</div>
+      <div class="service-name">Auditoria</div>
+      <div class="service-desc">Independente, cont&aacute;bil, fiscal e operacional</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">&#x2696;</div>
+      <div class="service-name">Per&iacute;cia</div>
+      <div class="service-desc">Judicial, extrajudicial e assist&ecirc;ncia t&eacute;cnica</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">&#x1F50D;</div>
+      <div class="service-name">Anti-Fraude</div>
+      <div class="service-desc">Investiga&ccedil;&atilde;o e preven&ccedil;&atilde;o de fraudes</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">&#x2705;</div>
+      <div class="service-name">Compliance</div>
+      <div class="service-desc">LGPD, ESG e conformidade regulat&oacute;ria</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">&#x1F4CA;</div>
+      <div class="service-name">Consultoria</div>
+      <div class="service-desc">Gest&atilde;o de riscos e controles internos</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">&#x1F916;</div>
+      <div class="service-name">IA Aplicada</div>
+      <div class="service-desc">Intelig&ecirc;ncia artificial para neg&oacute;cios</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 4: IA + INNOVATION ═══ -->
+<div class="slide slide-4">
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+  <div class="ia-content">
+    <div class="ia-badge">
+      <div class="ia-badge-dot"></div>
+      <span>Inova&ccedil;&atilde;o</span>
+    </div>
+    <div class="ia-title">
+      Auditoria<br/>potencializada<br/>por <em>IA</em>
+    </div>
+    <div class="ia-desc">
+      Combinamos 40 anos de expertise com intelig&ecirc;ncia artificial para auditorias mais r&aacute;pidas, precisas e inteligentes.
+    </div>
+    <div class="ia-features">
+      <div class="ia-feature">
+        <div class="ia-feature-icon">&#x26A1;</div>
+        <div class="ia-feature-text">An&aacute;lise<br/>Preditiva</div>
+      </div>
+      <div class="ia-feature">
+        <div class="ia-feature-icon">&#x1F50E;</div>
+        <div class="ia-feature-text">Detec&ccedil;&atilde;o<br/>de Fraudes</div>
+      </div>
+      <div class="ia-feature">
+        <div class="ia-feature-icon">&#x1F4C4;</div>
+        <div class="ia-feature-text">Visual<br/>Law</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 5: CTA FINAL ═══ -->
+<div class="slide slide-5">
+  <div class="cta-glow"></div>
+  <div class="cta-content">
+    <svg class="cta-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <defs>
+        <linearGradient id="r2" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#e83030"/>
+          <stop offset="100%" style="stop-color:#b81818"/>
+        </linearGradient>
+      </defs>
+      <circle cx="256" cy="256" r="256" fill="#1e1e22"/>
+      <polyline points="198,170 128,256 198,342" fill="none" stroke="url(#r2)" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="240" y1="155" x2="272" y2="357" stroke="#fff" stroke-width="32" stroke-linecap="round"/>
+      <polyline points="314,170 384,256 314,342" fill="none" stroke="url(#r2)" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="cta-brand">
+      AUD<span class="bracket">&lt;</span><span class="slash">/</span><span class="bracket">&gt;</span>PER
+    </div>
+    <div class="cta-tagline">Auditores &amp; Peritos Associados</div>
+    <div class="cta-divider"></div>
+    <div class="cta-url">www.audiper.com</div>
+    <div class="cta-services">
+      <span class="cta-tag">Auditoria</span>
+      <span class="cta-tag">Per&iacute;cia</span>
+      <span class="cta-tag">Compliance</span>
+      <span class="cta-tag">IA</span>
+      <span class="cta-tag">Anti-Fraude</span>
+      <span class="cta-tag">ESG</span>
+    </div>
+  </div>
+</div>
+
+<!-- Controls (hidden during recording) -->
+<div class="controls" id="controls">
+  <button onclick="replay()">&#x1F504; Replay</button>
+  <button onclick="toggleFullscreen()">&#x26F6; Fullscreen</button>
+</div>
+
+<script>
+  // Replay animation
+  function replay() {
+    document.body.style.display = 'none';
+    document.body.offsetHeight; // force reflow
+    document.body.style.display = '';
+
+    // Re-trigger all animations by cloning and replacing
+    const slides = document.querySelector('.slides') || document.body;
+    const html = document.body.innerHTML;
+    document.body.innerHTML = '';
+    document.body.offsetHeight;
+    document.body.innerHTML = html;
+  }
+
+  // Toggle fullscreen for recording
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  }
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'r' || e.key === 'R') replay();
+    if (e.key === 'f' || e.key === 'F') toggleFullscreen();
+    if (e.key === 'h' || e.key === 'H') {
+      document.body.classList.toggle('recording');
+    }
+  });
+</script>
+
+</body>
+</html>

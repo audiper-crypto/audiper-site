@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "audiper-site",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "D:/Site/audiper", "-l", "3000", "--no-clipboard"],
+      "port": 3000
+    }
+  ]
+}

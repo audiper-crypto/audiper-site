@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audiper Data Intelligence - Email Banner</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  body {
+    margin: 0;
+    padding: 40px;
+    background: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    font-family: 'Figtree', sans-serif;
+  }
+
+  h3 {
+    font-family: 'Figtree', sans-serif;
+    font-weight: 600;
+    color: #666;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0 0 12px 0;
+  }
+
+  /* === VARIANT 1: Dark compact banner === */
+  .banner-dark {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: #111114;
+    padding: 16px 28px;
+    border-radius: 12px;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .banner-dark .icon {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+  }
+  .banner-dark .text-group {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+  }
+  .banner-dark .brand {
+    font-family: 'Figtree', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: #fff;
+    letter-spacing: 0.3px;
+  }
+  .banner-dark .sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #888;
+    letter-spacing: 1.5px;
+    margin-top: 2px;
+  }
+
+  /* === VARIANT 2: Light compact banner === */
+  .banner-light {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: #ffffff;
+    padding: 16px 28px;
+    border-radius: 12px;
+    text-decoration: none;
+    border: 1px solid #e8e8e8;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .banner-light .brand {
+    font-family: 'Figtree', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: #111;
+    letter-spacing: 0.3px;
+  }
+  .banner-light .sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #999;
+    letter-spacing: 1.5px;
+    margin-top: 2px;
+  }
+
+  /* === VARIANT 3: Minimal inline (for email signature) === */
+  .banner-minimal {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    padding: 8px 0;
+  }
+  .banner-minimal .icon {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+  }
+  .banner-minimal .divider {
+    width: 1px;
+    height: 24px;
+    background: #ddd;
+  }
+  .banner-minimal .brand {
+    font-family: 'Figtree', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: #c41a1a;
+    letter-spacing: 0.2px;
+  }
+  .banner-minimal .sub {
+    font-family: 'Figtree', sans-serif;
+    font-size: 11px;
+    color: #999;
+    letter-spacing: 0.5px;
+  }
+
+  /* === VARIANT 4: Full width banner === */
+  .banner-full {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    background: linear-gradient(135deg, #111114 0%, #1a1a20 100%);
+    padding: 24px 40px;
+    border-radius: 14px;
+    text-decoration: none;
+    width: 480px;
+    border: 1px solid rgba(196, 26, 26, 0.15);
+  }
+  .banner-full .icon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+  }
+  .banner-full .text-group {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+  }
+  .banner-full .brand {
+    font-family: 'Figtree', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: #fff;
+    letter-spacing: 0.5px;
+  }
+  .banner-full .sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #c41a1a;
+    letter-spacing: 2px;
+    margin-top: 4px;
+  }
+  .banner-full .arrow {
+    font-size: 20px;
+    color: #c41a1a;
+    margin-left: auto;
+  }
+
+  /* Capture zones for screenshots */
+  .capture {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+</style>
+</head>
+<body>
+
+  <div class="capture">
+    <h3>Variante 1 — Dark (ideal para corpo de email)</h3>
+    <a href="https://audiper.com/inteligencia-dados-v2.html" class="banner-dark" id="v1">
+      <img class="icon" src="images/audiper-symbol-red.svg" alt="Audiper">
+      <div class="text-group">
+        <span class="brand">Audiper Data Intelligence</span>
+        <span class="sub">INTELIGENCIA DE DADOS</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="capture">
+    <h3>Variante 2 — Light (ideal para fundo branco)</h3>
+    <a href="https://audiper.com/inteligencia-dados-v2.html" class="banner-light" id="v2">
+      <img class="icon" src="images/audiper-symbol-red.svg" alt="Audiper" style="width:38px;height:38px;flex-shrink:0">
+      <div style="display:flex;flex-direction:column;line-height:1.3">
+        <span class="brand">Audiper Data Intelligence</span>
+        <span class="sub">INTELIGENCIA DE DADOS</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="capture">
+    <h3>Variante 3 — Minimal (ideal para assinatura de email)</h3>
+    <a href="https://audiper.com/inteligencia-dados-v2.html" class="banner-minimal" id="v3">
+      <img class="icon" src="images/audiper-symbol-red.svg" alt="Audiper">
+      <div class="divider"></div>
+      <div style="display:flex;flex-direction:column">
+        <span class="brand">Audiper Data Intelligence</span>
+        <span class="sub">audiper.com/inteligencia-dados</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="capture">
+    <h3>Variante 4 — Full Banner (ideal para email marketing)</h3>
+    <a href="https://audiper.com/inteligencia-dados-v2.html" class="banner-full" id="v4">
+      <img class="icon" src="images/audiper-symbol-red.svg" alt="Audiper">
+      <div class="text-group">
+        <span class="brand">Audiper Data Intelligence</span>
+        <span class="sub">INTELIGENCIA DE DADOS</span>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+
+  <div style="margin-top:20px;text-align:center;max-width:500px">
+    <h3>Como usar no email</h3>
+    <p style="font-size:13px;color:#666;line-height:1.6">
+      Copie o HTML abaixo e cole na assinatura do seu email ou no corpo da mensagem.
+      O link já aponta para <strong>audiper.com/inteligencia-dados-v2.html</strong>
+    </p>
+  </div>
+
+</body>
+</html>
