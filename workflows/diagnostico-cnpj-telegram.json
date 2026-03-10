@@ -1,0 +1,412 @@
+{
+  "name": "AUDIPER - Diagnostico CNPJ + Proposta (Human-in-the-Loop)",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": ["message"],
+        "additionalFields": {}
+      },
+      "id": "node-trigger",
+      "name": "1. Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.1,
+      "position": [240, 400],
+      "webhookId": "audiper-diag-trigger",
+      "credentials": {
+        "telegramApi": {
+          "id": "CONFIGURAR",
+          "name": "Telegram Bot AUDIPER"
+        }
+      },
+      "notes": "Recebe /diagnostico CNPJ do auditor em campo"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": false },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.message.text }}",
+              "rightValue": "/diagnostico",
+              "operator": { "type": "string", "operation": "startsWith" }
+            }
+          ]
+        }
+      },
+      "id": "node-filter",
+      "name": "2. Filtro /diagnostico",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [460, 400]
+    },
+    {
+      "parameters": {
+        "jsCode": "const text = $input.first().json.message.text;\nconst match = text.replace(/\\/diagnostico\\s*/i, '').trim();\nconst cnpj = match.replace(/[^\\d]/g, '');\n\nif (cnpj.length !== 14) {\n  return [{ json: { erro: true, mensagem: `❌ CNPJ invalido: ${match} (${cnpj.length} digitos).\\n\\nUso correto:\\n/diagnostico 12345678000190\\n/diagnostico 12.345.678/0001-90`, chat_id: $input.first().json.message.chat.id } }];\n}\n\nconst fmt = `${cnpj.slice(0,2)}.${cnpj.slice(2,5)}.${cnpj.slice(5,8)}/${cnpj.slice(8,12)}-${cnpj.slice(12)}`;\n\nreturn [{ json: {\n  erro: false,\n  cnpj: cnpj,\n  cnpj_formatado: fmt,\n  chat_id: $input.first().json.message.chat.id,\n  user_name: $input.first().json.message.from.first_name || 'Auditor'\n} }];"
+      },
+      "id": "node-extrair",
+      "name": "3. Extrair CNPJ",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 400]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "leftValue": "={{ $json.erro }}",
+              "rightValue": false,
+              "operator": { "type": "boolean", "operation": "equals" }
+            }
+          ]
+        }
+      },
+      "id": "node-if-valido",
+      "name": "4. CNPJ Valido?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [900, 400]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.chat_id }}",
+        "text": "={{ $json.mensagem }}",
+        "additionalFields": {}
+      },
+      "id": "node-erro",
+      "name": "Telegram - Erro CNPJ",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1120, 560],
+      "credentials": {
+        "telegramApi": { "id": "CONFIGURAR", "name": "Telegram Bot AUDIPER" }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('3. Extrair CNPJ').item.json.chat_id }}",
+        "text": "=⏳ Consultando CNPJ {{ $('3. Extrair CNPJ').item.json.cnpj_formatado }}...\nAguarde enquanto analisamos os dados.",
+        "additionalFields": {}
+      },
+      "id": "node-aguarde",
+      "name": "5. Telegram - Aguarde",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1120, 280],
+      "credentials": {
+        "telegramApi": { "id": "CONFIGURAR", "name": "Telegram Bot AUDIPER" }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://brasilapi.com.br/api/cnpj/v1/{{ $('3. Extrair CNPJ').item.json.cnpj }}",
+        "options": { "timeout": 15000 }
+      },
+      "id": "node-api1",
+      "name": "6a. BrasilAPI",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1340, 220],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "url": "=https://receitaws.com.br/v1/cnpj/{{ $('3. Extrair CNPJ').item.json.cnpj }}",
+        "options": { "timeout": 15000 }
+      },
+      "id": "node-api2",
+      "name": "6b. ReceitaWS (Fallback)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1340, 420],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Normalizar dados de qualquer API\nlet data;\ntry {\n  const b = $('6a. BrasilAPI').first().json;\n  if (b && b.razao_social && !b.message) {\n    data = {\n      cnpj: b.cnpj, razao_social: b.razao_social,\n      nome_fantasia: b.nome_fantasia || '',\n      situacao: b.descricao_situacao_cadastral || 'ATIVA',\n      data_inicio: b.data_inicio_atividade || '',\n      cnae: String(b.cnae_fiscal || ''),\n      cnae_desc: b.cnae_fiscal_descricao || '',\n      natureza: b.descricao_natureza_juridica || '',\n      porte: b.descricao_porte || 'DEMAIS',\n      capital: Number(b.capital_social) || 0,\n      simples: b.opcao_pelo_simples || false,\n      mei: b.opcao_pelo_mei || false,\n      uf: b.uf || '', municipio: b.municipio || '',\n      telefone: b.ddd_telefone_1 || '',\n      email: (b.email || '').toLowerCase(),\n      qsa: (b.qsa || []).slice(0,5).map(s => ({nome: s.nome_socio||'', qual: s.qualificacao_socio||''})),\n      fonte: 'BrasilAPI'\n    };\n  }\n} catch(e) {}\nif (!data) {\n  try {\n    const r = $('6b. ReceitaWS (Fallback)').first().json;\n    if (r && r.nome) {\n      const act = (r.atividade_principal||[{}])[0];\n      data = {\n        cnpj: (r.cnpj||'').replace(/\\D/g,''), razao_social: r.nome,\n        nome_fantasia: r.fantasia||'',\n        situacao: r.situacao||'ATIVA',\n        data_inicio: r.abertura||'',\n        cnae: (act.code||'').replace(/[-.]/g,''),\n        cnae_desc: act.text||'',\n        natureza: r.natureza_juridica||'',\n        porte: r.porte||'DEMAIS',\n        capital: parseFloat((r.capital_social||'0').replace(/\\./g,'').replace(',','.'))||0,\n        simples: r.simples?.optante||false,\n        mei: r.simei?.optante||false,\n        uf: r.uf||'', municipio: r.municipio||'',\n        telefone: r.telefone||'',\n        email: (r.email||'').toLowerCase(),\n        qsa: (r.qsa||[]).slice(0,5).map(s => ({nome: s.nome||'', qual: s.qual||''})),\n        fonte: 'ReceitaWS'\n      };\n    }\n  } catch(e) {}\n}\nif (!data) return [{json:{erro:true, mensagem:'APIs indisponiveis. Tente em 1 minuto.', chat_id: $('3. Extrair CNPJ').first().json.chat_id}}];\ndata.erro = false;\ndata.chat_id = $('3. Extrair CNPJ').first().json.chat_id;\nreturn [{json: data}];"
+      },
+      "id": "node-merge",
+      "name": "7. Normalizar Dados",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1560, 320]
+    },
+    {
+      "parameters": {
+        "jsCode": "const d = $input.first().json;\nif (d.erro) return [{json:d}];\n\nconst alertas = [];\nconst servicos = [];\nconst p = String(d.porte||'').toUpperCase();\nlet porte = 'MEDIO';\nif (p.includes('MICRO')||p.includes('ME')) porte='ME';\nelse if (p.includes('PEQUENO')||p.includes('EPP')) porte='EPP';\nelse if (p.includes('GRANDE')) porte='GRANDE';\n\nlet anos=0;\nif (d.data_inicio) {\n  try {\n    const parts = d.data_inicio.includes('/') ? d.data_inicio.split('/').reverse().join('-') : d.data_inicio;\n    anos = Math.floor((Date.now() - new Date(parts).getTime())/(365.25*24*60*60*1000));\n  } catch(e){}\n}\n\nconst cnae2 = String(d.cnae).slice(0,2);\nconst capital = Number(d.capital)||0;\nconst fmtR = v => 'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2});\n\n// === REGRAS DE DIAGNOSTICO ===\nif (d.situacao && !d.situacao.toUpperCase().includes('ATIVA')) {\n  alertas.push({e:'🔴',u:'URGENTE',t:`Situacao: ${d.situacao}. Risco de multas.`});\n  servicos.push({desc:'Consultoria Permanente',val:porte==='ME'?1750:porte==='EPP'?3000:5250,per:'mensal',fund:'NBC PP 01'});\n}\nif (d.simples && capital > 500000) {\n  alertas.push({e:'🔴',u:'ALTA',t:`Simples + capital ${fmtR(capital)}. Risco desenquadramento.`});\n  servicos.push({desc:'Planejamento Tributario',val:porte==='ME'?2250:porte==='EPP'?3750:6000,per:'pontual',fund:'CTN, RIR/2018'});\n}\nif (!isNaN(cnae2) && cnae2>=10 && cnae2<=33) {\n  alertas.push({e:'🟡',u:'MEDIA',t:`CNAE industrial (${d.cnae_desc}). ICMS/IPI complexo.`});\n  servicos.push({desc:'Revisao SPED Fiscal',val:porte==='ME'?1750:porte==='EPP'?3000:4500,per:'pontual',fund:'Conv. ICMS'});\n}\nif (cnae2==='47') {\n  alertas.push({e:'🟡',u:'MEDIA',t:'Comercio varejista. ICMS-ST, risco de creditos.'});\n  servicos.push({desc:'Revisao SPED Fiscal',val:porte==='ME'?1750:porte==='EPP'?3000:4500,per:'pontual',fund:'Conv. ICMS'});\n}\nif (porte==='GRANDE' || capital>50000000) {\n  alertas.push({e:'🔴',u:'ALTA',t:'Grande porte. Obrigatoriedade de auditoria (Lei 11.638/07).'});\n  servicos.push({desc:'Auditoria Independente',val:porte==='GRANDE'?14000:7500,per:'mensal',fund:'NBC TA 200-720'});\n}\nif (capital>1000000 && (d.natureza||'').toUpperCase().includes('LTDA')) {\n  alertas.push({e:'🟡',u:'MEDIA',t:`Capital ${fmtR(capital)} p/ LTDA. Avaliar auditoria.`});\n  if (!servicos.find(s=>s.desc.includes('Auditoria'))) servicos.push({desc:'Auditoria Independente',val:7500,per:'mensal',fund:'NBC TA 200-720'});\n}\nif (anos > 5) {\n  alertas.push({e:'🟡',u:'MEDIA',t:`${anos} anos de operacao sem revisao independente.`});\n  if (!servicos.find(s=>s.desc.includes('ECD'))) servicos.push({desc:'Revisao SPED ECD',val:porte==='ME'?1500:porte==='EPP'?2250:3750,per:'pontual',fund:'IN RFB 1774'});\n}\nif (!alertas.length) {\n  alertas.push({e:'🟢',u:'NORMAL',t:'Nenhuma irregularidade na analise preliminar.'});\n  servicos.push({desc:'Revisao SPED ECD',val:3750,per:'pontual',fund:'IN RFB 1774'});\n}\n\nconst total = servicos.reduce((s,x)=>s+x.val,0);\n\n// Socio administrador\nlet contato = 'Prezado(a) Responsavel';\nfor (const s of (d.qsa||[])) {\n  if ((s.qual||'').toLowerCase().includes('admin')) { contato=s.nome; break; }\n}\nif (contato==='Prezado(a) Responsavel' && d.qsa?.length) contato=d.qsa[0].nome;\n\nconst regime = d.mei ? 'MEI' : d.simples ? 'Simples Nacional' : 'Lucro Presumido/Real';\nconst cnpjFmt = $('3. Extrair CNPJ').first().json.cnpj_formatado;\n\n// === MENSAGEM TELEGRAM ===\nlet msg = `✅ <b>DIAGNOSTICO - ${d.razao_social}</b>\\n`;\nmsg += '━━━━━━━━━━━━━━━━━━━━━━━━\\n';\nif (d.nome_fantasia) msg += `🏷️ ${d.nome_fantasia}\\n`;\nmsg += `📋 CNPJ: ${cnpjFmt}\\n`;\nmsg += `📍 ${d.municipio}/${d.uf} | ${porte}\\n`;\nmsg += `💼 ${d.cnae_desc}\\n`;\nmsg += `📊 ${regime}\\n`;\nif (capital>0) msg += `💰 Capital: ${fmtR(capital)}\\n`;\nmsg += `👥 Socios: ${(d.qsa||[]).length}\\n`;\nmsg += `📅 Ativa ha ${anos} anos\\n`;\nmsg += '\\n⚠️ <b>PONTOS DE ATENCAO:</b>\\n';\nalertas.forEach((a,i) => msg += `${a.e} ${i+1}. ${a.t}\\n`);\nmsg += '\\n💼 <b>SERVICOS RECOMENDADOS:</b>\\n';\nservicos.forEach(s => {\n  const per = s.per==='mensal' ? '/mes' : ' (pontual)';\n  msg += `  • ${s.desc}: <b>${fmtR(s.val)}</b>${per}\\n`;\n  msg += `    <i>(${s.fund})</i>\\n`;\n});\nmsg += `\\n💰 <b>Total: ${fmtR(total)}</b>\\n`;\nmsg += `\\n👤 Contato: ${contato.split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1).toLowerCase()).join(' ')}`;\n\nreturn [{json:{\n  erro: false,\n  telegram_msg: msg,\n  dados: d,\n  alertas, servicos, total,\n  total_fmt: fmtR(total),\n  contato: contato.split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1).toLowerCase()).join(' '),\n  porte, regime,\n  email_prospect: d.email || '',\n  chat_id: d.chat_id,\n  cnpj_formatado: cnpjFmt\n}}];"
+      },
+      "id": "node-diag",
+      "name": "8. Gerar Diagnostico",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1780, 320]
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "chatId": "={{ $json.chat_id }}",
+        "message": "={{ $json.telegram_msg }}",
+        "additionalFields": {
+          "parse_mode": "HTML"
+        },
+        "responseType": "approval",
+        "approvalType": "double",
+        "buttonApprovalLabel": "📧 Enviar Proposta",
+        "buttonDisapprovalLabel": "❌ Cancelar",
+        "limitWaitTime": {
+          "values": {
+            "limitType": "afterTimeInterval",
+            "resumeAmount": 30,
+            "resumeUnit": "minutes"
+          }
+        }
+      },
+      "id": "node-hitl",
+      "name": "9. HUMAN-IN-THE-LOOP",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [2020, 320],
+      "credentials": {
+        "telegramApi": { "id": "CONFIGURAR", "name": "Telegram Bot AUDIPER" }
+      },
+      "notes": "PONTO CHAVE: Envia diagnostico e PAUSA o workflow. Auditor decide se envia proposta ou cancela. Timeout: 30 min."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "leftValue": "={{ $json.data.approved }}",
+              "rightValue": true,
+              "operator": { "type": "boolean", "operation": "equals" }
+            }
+          ]
+        }
+      },
+      "id": "node-if-approved",
+      "name": "10. Aprovado?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [2260, 320]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('8. Gerar Diagnostico').item.json.chat_id }}",
+        "text": "=❌ Proposta cancelada para {{ $('8. Gerar Diagnostico').item.json.dados.razao_social }}.\nDiagnostico salvo para referencia futura.",
+        "additionalFields": {}
+      },
+      "id": "node-cancelado",
+      "name": "Telegram - Cancelado",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [2500, 500],
+      "credentials": {
+        "telegramApi": { "id": "CONFIGURAR", "name": "Telegram Bot AUDIPER" }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Gerar HTML da proposta comercial usando template AUDIPER\nconst diag = $('8. Gerar Diagnostico').first().json;\nconst d = diag.dados;\nconst hoje = new Date();\nconst dataFmt = `${String(hoje.getDate()).padStart(2,'0')}/${String(hoje.getMonth()+1).padStart(2,'0')}/${hoje.getFullYear()}`;\nconst ref = `PROP-${hoje.getFullYear()}-${String(hoje.getMonth()+1).padStart(2,'0')}${String(hoje.getDate()).padStart(2,'0')}`;\nconst fmtR = v => 'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2});\n\n// Pontos de atencao HTML\nlet pontosHTML = '';\ndiag.alertas.forEach(a => {\n  const cor = a.u==='URGENTE'?'#dc2626':a.u==='ALTA'?'#ea580c':a.u==='MEDIA'?'#d97706':'#059669';\n  pontosHTML += `<tr><td width=\"28\" style=\"vertical-align:top;padding:4px 0;\"><span style=\"color:${cor};font-size:16px;\">${a.e}</span></td><td style=\"padding:4px 0;font-size:11px;color:#78350f;line-height:1.6;\"><strong>[${a.u}]</strong> ${a.t}</td></tr>`;\n});\n\n// Servicos detalhados HTML\nlet servicosHTML = '';\ndiag.servicos.forEach(s => {\n  servicosHTML += `<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border:1px solid #e2e8f0;border-left:4px solid #1a5276;border-radius:0 8px 8px 0;overflow:hidden;margin-bottom:14px;\"><tr style=\"background:#f8fafc;\"><td style=\"padding:14px 18px;\"><p style=\"margin:0 0 6px 0;font-size:12px;font-weight:700;color:#1a5276;\">${s.desc}</p><p style=\"margin:0 0 6px 0;font-size:11px;color:#334155;line-height:1.6;\">Servico de ${s.desc.toLowerCase()} aplicado a empresa ${d.razao_social}, conforme normas vigentes.</p><p style=\"margin:0;font-size:10px;color:#64748b;font-style:italic;\">Fundamentacao: ${s.fund}</p></td></tr></table>`;\n});\n\n// Tabela resumo\nlet tabelaHTML = '';\ndiag.servicos.forEach((s,i) => {\n  const bg = i%2===0 ? '#fff' : '#f8fafc';\n  const per = s.per==='mensal' ? 'Mensal' : 'Pontual';\n  tabelaHTML += `<tr style=\"background:${bg};\"><td style=\"padding:10px 14px;font-size:11px;border-bottom:1px solid #e2e8f0;\">${s.desc}</td><td style=\"padding:10px 14px;font-size:11px;text-align:center;border-bottom:1px solid #e2e8f0;\">${per}</td><td style=\"padding:10px 14px;font-size:11px;text-align:right;font-weight:600;color:#1a5276;border-bottom:1px solid #e2e8f0;\">${fmtR(s.val)}</td></tr>`;\n});\n\n// Email do prospect\nconst emailProspect = d.email || '';\nconst assunto = `Proposta de Servicos Profissionais - AUDIPER | ${d.razao_social}`;\n\nreturn [{json:{\n  ref_proposta: ref,\n  data_proposta: dataFmt,\n  assunto_email: assunto,\n  email_prospect: emailProspect,\n  contato: diag.contato,\n  razao_social: d.razao_social,\n  cnpj_formatado: diag.cnpj_formatado,\n  porte: diag.porte,\n  regime: diag.regime,\n  municipio: d.municipio,\n  uf: d.uf,\n  cnae: d.cnae,\n  cnae_desc: d.cnae_desc,\n  pontos_html: pontosHTML,\n  servicos_html: servicosHTML,\n  tabela_html: tabelaHTML,\n  total_fmt: diag.total_fmt,\n  chat_id: diag.chat_id\n}}];"
+      },
+      "id": "node-gerar-proposta",
+      "name": "11. Gerar Proposta HTML",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2500, 180]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "leftValue": "={{ $json.email_prospect }}",
+              "rightValue": "",
+              "operator": { "type": "string", "operation": "notEquals" }
+            }
+          ]
+        }
+      },
+      "id": "node-if-email",
+      "name": "12. Tem email?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [2720, 180]
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "chatId": "={{ $json.chat_id }}",
+        "message": "=📧 Email do prospect nao encontrado no cadastro.\n\nDigite o email para enviar a proposta:",
+        "responseType": "freeText",
+        "limitWaitTime": {
+          "values": {
+            "limitType": "afterTimeInterval",
+            "resumeAmount": 10,
+            "resumeUnit": "minutes"
+          }
+        }
+      },
+      "id": "node-pedir-email",
+      "name": "13. Pedir Email (Wait)",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [2940, 340],
+      "credentials": {
+        "telegramApi": { "id": "CONFIGURAR", "name": "Telegram Bot AUDIPER" }
+      },
+      "notes": "SEGUNDO HUMAN STOP: Pede email ao auditor e PAUSA ate receber resposta"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Pegar email da resposta do auditor ou dos dados do CNPJ\nlet email;\ntry {\n  // Veio do 'Pedir Email' (caminho sem email)\n  email = $('13. Pedir Email (Wait)').first().json.data?.text || '';\n} catch(e) {\n  // Veio direto (caminho com email)\n  email = $('11. Gerar Proposta HTML').first().json.email_prospect || '';\n}\n\n// Pegar dados da proposta\nlet proposta;\ntry { proposta = $('11. Gerar Proposta HTML').first().json; } catch(e) { proposta = $input.first().json; }\n\nemail = email.trim().toLowerCase();\nconst valido = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email);\n\nreturn [{json:{\n  ...proposta,\n  email_envio: valido ? email : '',\n  email_valido: valido\n}}];"
+      },
+      "id": "node-resolver-email",
+      "name": "14. Resolver Email",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [3160, 180]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email_envio }}",
+        "subject": "={{ $json.assunto_email }}",
+        "emailType": "html",
+        "message": "=Proposta comercial AUDIPER para {{ $json.razao_social }}",
+        "options": {
+          "ccEmail": "audiper@audiper.com",
+          "replyTo": "audiper@audiper.com"
+        }
+      },
+      "id": "node-gmail",
+      "name": "15. Enviar Email (Gmail)",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [3380, 180],
+      "credentials": {
+        "gmailOAuth2": { "id": "CONFIGURAR", "name": "Gmail AUDIPER" }
+      },
+      "notes": "Envia proposta HTML profissional com CC para audiper@audiper.com"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.chat_id }}",
+        "text": "=✅ <b>Proposta enviada com sucesso!</b>\n\n📧 Para: {{ $json.email_envio }}\n📋 Ref: {{ $json.ref_proposta }}\n🏢 {{ $json.razao_social }}\n💰 Valor: {{ $json.total_fmt }}\n\n📌 Copia salva em audiper@audiper.com",
+        "additionalFields": { "parse_mode": "HTML" }
+      },
+      "id": "node-confirmacao",
+      "name": "16. Telegram - Confirmacao",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [3600, 180],
+      "credentials": {
+        "telegramApi": { "id": "CONFIGURAR", "name": "Telegram Bot AUDIPER" }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": { "__rl": true, "mode": "url", "value": "CONFIGURAR_SHEET_URL" },
+        "sheetName": { "__rl": true, "mode": "name", "value": "Prospects" },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Data": "={{ $json.data_proposta }}",
+            "CNPJ": "={{ $json.cnpj_formatado }}",
+            "Empresa": "={{ $json.razao_social }}",
+            "Contato": "={{ $json.contato }}",
+            "Email": "={{ $json.email_envio }}",
+            "UF": "={{ $json.uf }}",
+            "Porte": "={{ $json.porte }}",
+            "Valor": "={{ $json.total_fmt }}",
+            "Ref": "={{ $json.ref_proposta }}",
+            "Status": "Proposta Enviada"
+          }
+        }
+      },
+      "id": "node-sheets",
+      "name": "17. Google Sheets - Log",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [3600, 400],
+      "credentials": {
+        "googleSheetsOAuth2Api": { "id": "CONFIGURAR", "name": "Google Sheets AUDIPER" }
+      },
+      "notes": "Registra prospect + proposta no pipeline de vendas"
+    }
+  ],
+  "connections": {
+    "1. Telegram Trigger": {
+      "main": [[{ "node": "2. Filtro /diagnostico", "type": "main", "index": 0 }]]
+    },
+    "2. Filtro /diagnostico": {
+      "main": [[{ "node": "3. Extrair CNPJ", "type": "main", "index": 0 }]]
+    },
+    "3. Extrair CNPJ": {
+      "main": [[{ "node": "4. CNPJ Valido?", "type": "main", "index": 0 }]]
+    },
+    "4. CNPJ Valido?": {
+      "main": [
+        [{ "node": "5. Telegram - Aguarde", "type": "main", "index": 0 }],
+        [{ "node": "Telegram - Erro CNPJ", "type": "main", "index": 0 }]
+      ]
+    },
+    "5. Telegram - Aguarde": {
+      "main": [[
+        { "node": "6a. BrasilAPI", "type": "main", "index": 0 },
+        { "node": "6b. ReceitaWS (Fallback)", "type": "main", "index": 0 }
+      ]]
+    },
+    "6a. BrasilAPI": {
+      "main": [[{ "node": "7. Normalizar Dados", "type": "main", "index": 0 }]]
+    },
+    "6b. ReceitaWS (Fallback)": {
+      "main": [[{ "node": "7. Normalizar Dados", "type": "main", "index": 0 }]]
+    },
+    "7. Normalizar Dados": {
+      "main": [[{ "node": "8. Gerar Diagnostico", "type": "main", "index": 0 }]]
+    },
+    "8. Gerar Diagnostico": {
+      "main": [[{ "node": "9. HUMAN-IN-THE-LOOP", "type": "main", "index": 0 }]]
+    },
+    "9. HUMAN-IN-THE-LOOP": {
+      "main": [[{ "node": "10. Aprovado?", "type": "main", "index": 0 }]]
+    },
+    "10. Aprovado?": {
+      "main": [
+        [{ "node": "11. Gerar Proposta HTML", "type": "main", "index": 0 }],
+        [{ "node": "Telegram - Cancelado", "type": "main", "index": 0 }]
+      ]
+    },
+    "11. Gerar Proposta HTML": {
+      "main": [[{ "node": "12. Tem email?", "type": "main", "index": 0 }]]
+    },
+    "12. Tem email?": {
+      "main": [
+        [{ "node": "14. Resolver Email", "type": "main", "index": 0 }],
+        [{ "node": "13. Pedir Email (Wait)", "type": "main", "index": 0 }]
+      ]
+    },
+    "13. Pedir Email (Wait)": {
+      "main": [[{ "node": "14. Resolver Email", "type": "main", "index": 0 }]]
+    },
+    "14. Resolver Email": {
+      "main": [[
+        { "node": "15. Enviar Email (Gmail)", "type": "main", "index": 0 },
+        { "node": "17. Google Sheets - Log", "type": "main", "index": 0 }
+      ]]
+    },
+    "15. Enviar Email (Gmail)": {
+      "main": [[{ "node": "16. Telegram - Confirmacao", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    { "name": "AUDIPER" },
+    { "name": "diagnostico" },
+    { "name": "telegram" },
+    { "name": "human-in-the-loop" },
+    { "name": "proposta-comercial" }
+  ]
+}

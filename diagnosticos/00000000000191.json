@@ -1,0 +1,84 @@
+{
+  "dados_empresa": {
+    "cnpj": "00000000000191",
+    "cnpj_formatado": "00.000.000/0001-91",
+    "razao_social": "BANCO DO BRASIL SA",
+    "nome_fantasia": "DIRECAO GERAL",
+    "situacao_cadastral": "ATIVA",
+    "data_situacao": "2005-11-03",
+    "data_inicio": "1966-08-01",
+    "cnae_principal": "6422100",
+    "cnae_descricao": "Bancos múltiplos, com carteira comercial",
+    "natureza_juridica": "",
+    "porte": "MEDIO",
+    "capital_social": 120000000000.0,
+    "opcao_simples": false,
+    "opcao_mei": false,
+    "uf": "DF",
+    "municipio": "BRASILIA",
+    "logradouro": "SAUN QUADRA 5 BLOCO B TORRE I, II, III",
+    "numero": "SN",
+    "bairro": "ASA NORTE",
+    "cep": "70040912",
+    "telefone": "6134939002",
+    "email": null,
+    "qsa": [
+      {
+        "nome": "ALAN CARLOS GUEDES DE OLIVEIRA",
+        "qualificacao": "Diretor"
+      },
+      {
+        "nome": "ALBERTO MARTINHAGO VIEIRA",
+        "qualificacao": "Diretor"
+      },
+      {
+        "nome": "ALEXANDRE BOCCHETTI NUNES",
+        "qualificacao": "Diretor"
+      },
+      {
+        "nome": "ANA CRISTINA ROSA GARCIA",
+        "qualificacao": "Diretor"
+      },
+      {
+        "nome": "ANELIZE LENZI RUAS DE ALMEIDA",
+        "qualificacao": "Conselheiro de Administração"
+      }
+    ],
+    "_api_fonte": "BrasilAPI"
+  },
+  "alertas": [
+    {
+      "emoji": "🔴",
+      "urgencia": "ALTA",
+      "texto": "Empresa de grande porte. Possivel obrigatoriedade de auditoria independente (Lei 11.638/07)."
+    },
+    {
+      "emoji": "🟡",
+      "urgencia": "MEDIA",
+      "texto": "59 anos de operacao. Revisao periodica reduz risco de distorcoes acumuladas."
+    }
+  ],
+  "servicos_recomendados": [
+    {
+      "id": "auditoria_independente",
+      "descricao": "Auditoria das Demonstracoes Contabeis",
+      "fundamentacao": "NBC TA 200 a 720",
+      "periodicidade": "mensal",
+      "valor": 7500.0,
+      "valor_formatado": "R$ 7.500,00"
+    },
+    {
+      "id": "revisao_sped_ecd",
+      "descricao": "Revisao e Validacao do SPED ECD",
+      "fundamentacao": "IN RFB 1774/2017",
+      "periodicidade": "pontual",
+      "valor": 3750.0,
+      "valor_formatado": "R$ 3.750,00"
+    }
+  ],
+  "valor_total": 11250.0,
+  "valor_total_formatado": "R$ 11.250,00",
+  "contato_nome": "Alan Carlos Guedes De Oliveira",
+  "anos_atividade": 59,
+  "porte": "MEDIO"
+}

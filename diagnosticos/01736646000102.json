@@ -1,0 +1,50 @@
+{
+  "dados_empresa": {
+    "cnpj": "01736646000102",
+    "cnpj_formatado": "01.736.646/0001-02",
+    "razao_social": "CONDOMINIO RIVERSIDE WALK SHOPPING",
+    "nome_fantasia": "",
+    "situacao_cadastral": "ATIVA",
+    "data_situacao": "2005-08-27",
+    "data_inicio": "1997-01-21",
+    "cnae_principal": "8112500",
+    "cnae_descricao": "Condomínios prediais",
+    "natureza_juridica": "",
+    "porte": "MEDIO",
+    "capital_social": 0.0,
+    "opcao_simples": null,
+    "opcao_mei": null,
+    "uf": "PI",
+    "municipio": "TERESINA",
+    "logradouro": "ININGA",
+    "numero": "1201",
+    "bairro": "JOQUEI CLUB",
+    "cep": "64048110",
+    "telefone": "",
+    "email": null,
+    "qsa": [],
+    "_api_fonte": "BrasilAPI"
+  },
+  "alertas": [
+    {
+      "emoji": "🟡",
+      "urgencia": "MEDIA",
+      "texto": "29 anos de operacao. Revisao periodica reduz risco de distorcoes acumuladas."
+    }
+  ],
+  "servicos_recomendados": [
+    {
+      "id": "revisao_sped_ecd",
+      "descricao": "Revisao e Validacao do SPED ECD",
+      "fundamentacao": "IN RFB 1774/2017",
+      "periodicidade": "pontual",
+      "valor": 3750.0,
+      "valor_formatado": "R$ 3.750,00"
+    }
+  ],
+  "valor_total": 3750.0,
+  "valor_total_formatado": "R$ 3.750,00",
+  "contato_nome": "Prezado(A) Responsavel",
+  "anos_atividade": 29,
+  "porte": "MEDIO"
+}

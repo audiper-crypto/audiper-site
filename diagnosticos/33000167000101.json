@@ -1,0 +1,84 @@
+{
+  "dados_empresa": {
+    "cnpj": "33000167000101",
+    "cnpj_formatado": "33.000.167/0001-01",
+    "razao_social": "PETROLEO BRASILEIRO S A PETROBRAS",
+    "nome_fantasia": "PETROBRAS - EDISE",
+    "situacao_cadastral": "ATIVA",
+    "data_situacao": "2005-11-03",
+    "data_inicio": "1966-09-28",
+    "cnae_principal": "600001",
+    "cnae_descricao": "Extração de petróleo e gás natural",
+    "natureza_juridica": "",
+    "porte": "MEDIO",
+    "capital_social": 205431960000.0,
+    "opcao_simples": null,
+    "opcao_mei": null,
+    "uf": "RJ",
+    "municipio": "RIO DE JANEIRO",
+    "logradouro": "REPUBLICA DO CHILE",
+    "numero": "65",
+    "bairro": "CENTRO",
+    "cep": "20031170",
+    "telefone": "2121660000",
+    "email": null,
+    "qsa": [
+      {
+        "nome": "ANGELICA GARCIA COBAS LAUREANO",
+        "qualificacao": "Diretor"
+      },
+      {
+        "nome": "CLARICE COPPETTI",
+        "qualificacao": "Diretor"
+      },
+      {
+        "nome": "CLAUDIO ROMEO SCHLOSSER",
+        "qualificacao": "Diretor"
+      },
+      {
+        "nome": "FERNANDO SABBI MELGAREJO",
+        "qualificacao": "Diretor"
+      },
+      {
+        "nome": "MAGDA MARIA DE REGINA CHAMBRIARD",
+        "qualificacao": "Presidente"
+      }
+    ],
+    "_api_fonte": "BrasilAPI"
+  },
+  "alertas": [
+    {
+      "emoji": "🔴",
+      "urgencia": "ALTA",
+      "texto": "Empresa de grande porte. Possivel obrigatoriedade de auditoria independente (Lei 11.638/07)."
+    },
+    {
+      "emoji": "🟡",
+      "urgencia": "MEDIA",
+      "texto": "59 anos de operacao. Revisao periodica reduz risco de distorcoes acumuladas."
+    }
+  ],
+  "servicos_recomendados": [
+    {
+      "id": "auditoria_independente",
+      "descricao": "Auditoria das Demonstracoes Contabeis",
+      "fundamentacao": "NBC TA 200 a 720",
+      "periodicidade": "mensal",
+      "valor": 7500.0,
+      "valor_formatado": "R$ 7.500,00"
+    },
+    {
+      "id": "revisao_sped_ecd",
+      "descricao": "Revisao e Validacao do SPED ECD",
+      "fundamentacao": "IN RFB 1774/2017",
+      "periodicidade": "pontual",
+      "valor": 3750.0,
+      "valor_formatado": "R$ 3.750,00"
+    }
+  ],
+  "valor_total": 11250.0,
+  "valor_total_formatado": "R$ 11.250,00",
+  "contato_nome": "Angelica Garcia Cobas Laureano",
+  "anos_atividade": 59,
+  "porte": "MEDIO"
+}

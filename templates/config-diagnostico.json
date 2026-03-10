@@ -1,0 +1,136 @@
+{
+  "versao": "1.0",
+  "atualizado_em": "2026-03-10",
+  "empresa": {
+    "nome": "AUDIPER - Auditores Independentes S/S",
+    "email": "audiper@audiper.com",
+    "telefone": "(86) 3303-0987",
+    "whatsapp": "(86) 99401-0525",
+    "auditor": {
+      "nome": "Vitor Eduardo dos Santos Ribeiro",
+      "cargo": "Auditor Senior",
+      "crc": "CRC/PI 7929",
+      "foto_url": "https://drive.google.com/uc?export=view&id=1_NQC6v6-A1KLk_hhkQfwMye4EwVMLR2h"
+    },
+    "logo_url": "https://drive.google.com/uc?export=view&id=14XzX5sJoL65QHXJD9XqyHGb3u-qfIQwQ"
+  },
+  "tabela_precos": {
+    "auditoria_independente": {
+      "descricao": "Auditoria das Demonstracoes Contabeis",
+      "fundamentacao": "NBC TA 200 a 720",
+      "faixas": {
+        "ME": { "min": 2000, "max": 4000, "periodicidade": "mensal" },
+        "EPP": { "min": 3000, "max": 6000, "periodicidade": "mensal" },
+        "MEDIO": { "min": 5000, "max": 10000, "periodicidade": "mensal" },
+        "GRANDE": { "min": 8000, "max": 20000, "periodicidade": "mensal" }
+      }
+    },
+    "revisao_sped_ecd": {
+      "descricao": "Revisao e Validacao do SPED ECD",
+      "fundamentacao": "IN RFB 1774/2017",
+      "faixas": {
+        "ME": { "min": 1000, "max": 2000, "periodicidade": "pontual" },
+        "EPP": { "min": 1500, "max": 3000, "periodicidade": "pontual" },
+        "MEDIO": { "min": 2500, "max": 5000, "periodicidade": "pontual" },
+        "GRANDE": { "min": 4000, "max": 8000, "periodicidade": "pontual" }
+      }
+    },
+    "revisao_sped_fiscal": {
+      "descricao": "Revisao SPED Fiscal (ICMS/IPI)",
+      "fundamentacao": "Convs. ICMS / Guia Pratico EFD",
+      "faixas": {
+        "ME": { "min": 1000, "max": 2500, "periodicidade": "pontual" },
+        "EPP": { "min": 2000, "max": 4000, "periodicidade": "pontual" },
+        "MEDIO": { "min": 3000, "max": 6000, "periodicidade": "pontual" },
+        "GRANDE": { "min": 5000, "max": 10000, "periodicidade": "pontual" }
+      }
+    },
+    "planejamento_tributario": {
+      "descricao": "Planejamento e Revisao Tributaria",
+      "fundamentacao": "CTN, RIR/2018",
+      "faixas": {
+        "ME": { "min": 1500, "max": 3000, "periodicidade": "pontual" },
+        "EPP": { "min": 2500, "max": 5000, "periodicidade": "pontual" },
+        "MEDIO": { "min": 4000, "max": 8000, "periodicidade": "pontual" },
+        "GRANDE": { "min": 6000, "max": 15000, "periodicidade": "pontual" }
+      }
+    },
+    "consultoria_permanente": {
+      "descricao": "Consultoria Contabil e Fiscal Permanente",
+      "fundamentacao": "NBC PP 01",
+      "faixas": {
+        "ME": { "min": 1000, "max": 2500, "periodicidade": "mensal" },
+        "EPP": { "min": 2000, "max": 4000, "periodicidade": "mensal" },
+        "MEDIO": { "min": 3500, "max": 7000, "periodicidade": "mensal" },
+        "GRANDE": { "min": 5000, "max": 12000, "periodicidade": "mensal" }
+      }
+    },
+    "due_diligence": {
+      "descricao": "Due Diligence Contabil e Financeira",
+      "fundamentacao": "NBC TA 620 / ISAE 3000",
+      "faixas": {
+        "ME": { "min": 3000, "max": 6000, "periodicidade": "pontual" },
+        "EPP": { "min": 5000, "max": 10000, "periodicidade": "pontual" },
+        "MEDIO": { "min": 8000, "max": 20000, "periodicidade": "pontual" },
+        "GRANDE": { "min": 15000, "max": 40000, "periodicidade": "pontual" }
+      }
+    }
+  },
+  "regras_diagnostico": {
+    "obrigatoriedade_auditoria": [
+      "S/A de capital aberto (Lei 6.404/76, art. 177)",
+      "Sociedades de grande porte (Lei 11.638/07 - ativo > R$240M ou receita > R$300M)",
+      "Entidades reguladas (CVM, BACEN, SUSEP, ANS)",
+      "Fundos de investimento",
+      "Cooperativas de credito (conforme resolucao BACEN)"
+    ],
+    "indicadores_risco_por_cnae": {
+      "47": "Comercio varejista - ICMS ST, risco de creditos indevidos",
+      "10-33": "Industria - ICMS, IPI, creditos de PIS/COFINS complexos",
+      "41-43": "Construcao civil - retencoes ISS, INSS, regimes especiais",
+      "62-63": "TI/Servicos digitais - ISS sobre SaaS, transfer pricing",
+      "64-66": "Financeiro - regulacao BACEN, auditoria obrigatoria",
+      "69": "Contabilidade/Auditoria - NBC PP, CFC",
+      "85": "Educacao - imunidade/isencao, CEBAS",
+      "86-88": "Saude - regulacao ANS, SUS, retencoes"
+    },
+    "alertas_por_situacao": {
+      "simples_faturamento_alto": {
+        "condicao": "optante_simples AND capital > 500000",
+        "alerta": "Possivel desenquadramento do Simples Nacional por sublimite estadual ou excesso de receita",
+        "servico_recomendado": "planejamento_tributario",
+        "urgencia": "alta"
+      },
+      "lucro_real_sem_auditoria": {
+        "condicao": "regime = lucro_real AND NOT tem_auditoria",
+        "alerta": "Empresa no Lucro Real pode ter obrigatoriedade de auditoria dependendo do porte",
+        "servico_recomendado": "auditoria_independente",
+        "urgencia": "alta"
+      },
+      "empresa_antiga_sem_revisao": {
+        "condicao": "anos_atividade > 5 AND NOT tem_auditoria",
+        "alerta": "Mais de 5 anos de operacao sem revisao independente aumenta risco de distorcoes acumuladas",
+        "servico_recomendado": "revisao_sped_ecd",
+        "urgencia": "media"
+      },
+      "cnae_industrial": {
+        "condicao": "cnae BETWEEN 10 AND 33",
+        "alerta": "CNAE industrial com ICMS/IPI complexo, risco de creditos e obrigacoes acessorias",
+        "servico_recomendado": "revisao_sped_fiscal",
+        "urgencia": "alta"
+      },
+      "situacao_irregular": {
+        "condicao": "situacao_cadastral != ATIVA",
+        "alerta": "Situacao cadastral irregular na Receita Federal - risco de multas e impedimentos",
+        "servico_recomendado": "consultoria_permanente",
+        "urgencia": "urgente"
+      },
+      "capital_alto_ltda": {
+        "condicao": "capital > 1000000 AND natureza = LTDA",
+        "alerta": "Capital social elevado para LTDA - avaliar transformacao em S/A ou obrigatoriedade de auditoria",
+        "servico_recomendado": "auditoria_independente",
+        "urgencia": "media"
+      }
+    }
+  }
+}
