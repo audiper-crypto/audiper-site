@@ -1,0 +1,185 @@
+{
+  "name": "AUDIPER - Gmail Digest Matinal (Telegram)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 8,
+              "triggerAtMinute": 0
+            }
+          ]
+        }
+      },
+      "id": "node-schedule",
+      "name": "1. Todo dia 8h",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 400],
+      "notes": "Dispara todo dia as 8:00 AM (horario do servidor)"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "returnAll": false,
+        "limit": 30,
+        "filters": {
+          "q": "is:unread -category:promotions -category:social",
+          "labelIds": ["INBOX"]
+        },
+        "options": {
+          "format": "metadata"
+        }
+      },
+      "id": "node-gmail-fetch",
+      "name": "2. Buscar Emails Nao Lidos",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [480, 400],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "CONFIGURAR",
+          "name": "Gmail AUDIPER"
+        }
+      },
+      "notes": "Busca ate 30 emails nao lidos (exclui promocoes e social)"
+    },
+    {
+      "parameters": {
+        "jsCode": "const emails = $input.all();\n\nif (!emails || emails.length === 0) {\n  return [{ json: {\n    tem_emails: false,\n    total: 0,\n    resumo_bruto: 'Nenhum email nao lido na caixa de entrada.',\n    data: new Date().toLocaleDateString('pt-BR', { timeZone: 'America/Araguaina' })\n  }}];\n}\n\nconst lista = emails.map((e, i) => {\n  const headers = e.json.payload?.headers || [];\n  const getHeader = (name) => {\n    const h = headers.find(h => h.name.toLowerCase() === name.toLowerCase());\n    return h ? h.value : '(sem info)';\n  };\n  \n  const from = getHeader('From');\n  const subject = getHeader('Subject');\n  const date = getHeader('Date');\n  \n  // Extrair nome do remetente\n  const nomeMatch = from.match(/^([^<]+)/);\n  const nome = nomeMatch ? nomeMatch[1].trim().replace(/\"/g, '') : from;\n  \n  return `${i+1}. De: ${nome}\\n   Assunto: ${subject}\\n   Data: ${date}`;\n}).join('\\n\\n');\n\nconst data = new Date().toLocaleDateString('pt-BR', { timeZone: 'America/Araguaina' });\n\nreturn [{ json: {\n  tem_emails: true,\n  total: emails.length,\n  resumo_bruto: lista,\n  data: data\n}}];"
+      },
+      "id": "node-formatar",
+      "name": "3. Formatar Lista de Emails",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [720, 400],
+      "notes": "Extrai remetente, assunto e data de cada email"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": false },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.tem_emails }}",
+              "rightValue": true,
+              "operator": { "type": "boolean", "operation": "equals" }
+            }
+          ]
+        }
+      },
+      "id": "node-check",
+      "name": "4. Tem emails?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [960, 400],
+      "notes": "Verifica se ha emails para processar"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Voce e o assistente da AUDIPER, empresa de auditoria e pericia contabil.\n\nHoje e {{ $json.data }}. Ha {{ $json.total }} emails nao lidos.\n\nAqui esta a lista:\n\n{{ $json.resumo_bruto }}\n\nCrie um RESUMO MATINAL para Telegram com:\n1. Uma saudacao breve (Bom dia)\n2. Total de emails nao lidos\n3. Categorize os emails em:\n   - URGENTE/IMPORTANTE (clientes, tribunais, orgaos publicos, prazos)\n   - OPERACIONAL (fornecedores, ferramentas, servicos)\n   - INFORMATIVO (newsletters, atualizacoes, marketing)\n4. Para cada email, uma linha com emoji + remetente + assunto resumido\n5. Se houver algo que pareca urgente, destaque no inicio\n\nFormato: use emojis, seja conciso, maximo 15 linhas.\nIdioma: Portugues BR.",
+        "options": {
+          "maxTokens": 800,
+          "temperature": 0.3
+        }
+      },
+      "id": "node-ai",
+      "name": "5. IA Resume e Categoriza",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.4,
+      "position": [1200, 300],
+      "credentials": {
+        "openAiApi": {
+          "id": "CONFIGURAR",
+          "name": "OpenAI ou Gemini"
+        }
+      },
+      "notes": "Usa IA para categorizar e resumir emails. Pode trocar por Gemini, Claude, etc."
+    },
+    {
+      "parameters": {
+        "chatId": "62036868",
+        "text": "={{ $json.text }}",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "node-telegram-digest",
+      "name": "6. Enviar Digest Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1440, 300],
+      "credentials": {
+        "telegramApi": {
+          "id": "CONFIGURAR",
+          "name": "Telegram Bot AUDIPER"
+        }
+      },
+      "notes": "Envia resumo matinal para o Telegram do Ricardo (ID: 62036868)"
+    },
+    {
+      "parameters": {
+        "chatId": "62036868",
+        "text": "=\u2615 *Bom dia!* ({{ $json.data }})\n\n\u2705 Caixa de entrada limpa! Nenhum email nao lido.\n\nTenha um otimo dia!",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "node-telegram-vazio",
+      "name": "6b. Aviso Caixa Limpa",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1200, 520],
+      "credentials": {
+        "telegramApi": {
+          "id": "CONFIGURAR",
+          "name": "Telegram Bot AUDIPER"
+        }
+      },
+      "notes": "Envia mensagem quando nao ha emails nao lidos"
+    }
+  ],
+  "connections": {
+    "1. Todo dia 8h": {
+      "main": [
+        [{ "node": "2. Buscar Emails Nao Lidos", "type": "main", "index": 0 }]
+      ]
+    },
+    "2. Buscar Emails Nao Lidos": {
+      "main": [
+        [{ "node": "3. Formatar Lista de Emails", "type": "main", "index": 0 }]
+      ]
+    },
+    "3. Formatar Lista de Emails": {
+      "main": [
+        [{ "node": "4. Tem emails?", "type": "main", "index": 0 }]
+      ]
+    },
+    "4. Tem emails?": {
+      "main": [
+        [{ "node": "5. IA Resume e Categoriza", "type": "main", "index": 0 }],
+        [{ "node": "6b. Aviso Caixa Limpa", "type": "main", "index": 0 }]
+      ]
+    },
+    "5. IA Resume e Categoriza": {
+      "main": [
+        [{ "node": "6. Enviar Digest Telegram", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Araguaina"
+  },
+  "tags": [
+    { "name": "gmail" },
+    { "name": "telegram" },
+    { "name": "daily" },
+    { "name": "ai" }
+  ],
+  "meta": {
+    "instanceId": "audiper-local"
+  }
+}

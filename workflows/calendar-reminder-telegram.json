@@ -1,0 +1,110 @@
+{
+  "name": "AUDIPER - Calendar Reminder (Telegram 15min antes)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 5
+            }
+          ]
+        }
+      },
+      "id": "node-schedule",
+      "name": "1. A cada 5 minutos",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 400],
+      "notes": "Verifica calendario a cada 5 minutos"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "returnAll": false,
+        "limit": 5,
+        "options": {
+          "timeMin": "={{ $now.toISO() }}",
+          "timeMax": "={{ $now.plus({ minutes: 20 }).toISO() }}",
+          "singleEvents": true,
+          "orderBy": "startTime"
+        }
+      },
+      "id": "node-calendar",
+      "name": "2. Buscar Eventos Proximos",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 3,
+      "position": [480, 400],
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "CONFIGURAR",
+          "name": "Google Calendar AUDIPER"
+        }
+      },
+      "notes": "Busca eventos nos proximos 20 minutos"
+    },
+    {
+      "parameters": {
+        "jsCode": "const eventos = $input.all();\n\nif (!eventos || eventos.length === 0) {\n  return [];\n}\n\nconst agora = new Date();\nconst resultados = [];\n\nfor (const evento of eventos) {\n  const e = evento.json;\n  const inicio = new Date(e.start?.dateTime || e.start?.date);\n  const diffMin = Math.round((inicio - agora) / 60000);\n  \n  // So alertar entre 10 e 20 minutos antes\n  if (diffMin >= 10 && diffMin <= 20) {\n    const hora = inicio.toLocaleTimeString('pt-BR', {\n      hour: '2-digit',\n      minute: '2-digit',\n      timeZone: 'America/Araguaina'\n    });\n    \n    const titulo = e.summary || '(Sem titulo)';\n    const local = e.location || '';\n    const link = e.hangoutLink || e.htmlLink || '';\n    \n    // Participantes\n    const attendees = (e.attendees || []).map(a => a.displayName || a.email).slice(0, 5);\n    const participantes = attendees.length > 0 ? attendees.join(', ') : 'Somente voce';\n    \n    let mensagem = `\\u23f0 *LEMBRETE em ${diffMin} min*\\n\\n`;\n    mensagem += `\\ud83d\\udcc5 *${titulo}*\\n`;\n    mensagem += `\\ud83d\\udd52 ${hora}\\n`;\n    if (local) mensagem += `\\ud83d\\udccd ${local}\\n`;\n    mensagem += `\\ud83d\\udc65 ${participantes}\\n`;\n    if (link) mensagem += `\\n\\ud83d\\udd17 [Entrar na reuniao](${link})`;\n    \n    resultados.push({ json: {\n      mensagem: mensagem,\n      evento_id: e.id,\n      titulo: titulo,\n      minutos_restantes: diffMin\n    }});\n  }\n}\n\nreturn resultados;"
+      },
+      "id": "node-filtrar",
+      "name": "3. Filtrar e Formatar",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [720, 400],
+      "notes": "Filtra eventos entre 10-20min e formata mensagem bonita"
+    },
+    {
+      "parameters": {
+        "chatId": "62036868",
+        "text": "={{ $json.mensagem }}",
+        "additionalFields": {
+          "parse_mode": "Markdown",
+          "disable_web_page_preview": true
+        }
+      },
+      "id": "node-telegram",
+      "name": "4. Enviar Lembrete Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [960, 400],
+      "credentials": {
+        "telegramApi": {
+          "id": "CONFIGURAR",
+          "name": "Telegram Bot AUDIPER"
+        }
+      },
+      "notes": "Envia lembrete para o Telegram do Ricardo (ID: 62036868)"
+    }
+  ],
+  "connections": {
+    "1. A cada 5 minutos": {
+      "main": [
+        [{ "node": "2. Buscar Eventos Proximos", "type": "main", "index": 0 }]
+      ]
+    },
+    "2. Buscar Eventos Proximos": {
+      "main": [
+        [{ "node": "3. Filtrar e Formatar", "type": "main", "index": 0 }]
+      ]
+    },
+    "3. Filtrar e Formatar": {
+      "main": [
+        [{ "node": "4. Enviar Lembrete Telegram", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Araguaina"
+  },
+  "tags": [
+    { "name": "calendar" },
+    { "name": "telegram" },
+    { "name": "reminder" }
+  ],
+  "meta": {
+    "instanceId": "audiper-local"
+  }
+}
