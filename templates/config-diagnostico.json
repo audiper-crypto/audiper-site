@@ -74,6 +74,36 @@
         "MEDIO": { "min": 8000, "max": 20000, "periodicidade": "pontual" },
         "GRANDE": { "min": 15000, "max": 40000, "periodicidade": "pontual" }
       }
+    },
+    "regularizacao_fiscal": {
+      "descricao": "Regularizacao e Parcelamento Fiscal",
+      "fundamentacao": "Lei 10.522/2002, IN PGFN",
+      "faixas": {
+        "ME": { "min": 1500, "max": 3000, "periodicidade": "pontual" },
+        "EPP": { "min": 2500, "max": 5000, "periodicidade": "pontual" },
+        "MEDIO": { "min": 4000, "max": 8000, "periodicidade": "pontual" },
+        "GRANDE": { "min": 6000, "max": 15000, "periodicidade": "pontual" }
+      }
+    },
+    "consultoria_juridico_contabil": {
+      "descricao": "Consultoria Juridico-Contabil (Contencioso)",
+      "fundamentacao": "NBC TA 501, CPC 25",
+      "faixas": {
+        "ME": { "min": 2000, "max": 4000, "periodicidade": "pontual" },
+        "EPP": { "min": 3000, "max": 6000, "periodicidade": "pontual" },
+        "MEDIO": { "min": 5000, "max": 10000, "periodicidade": "pontual" },
+        "GRANDE": { "min": 8000, "max": 20000, "periodicidade": "pontual" }
+      }
+    },
+    "compliance_licitacoes": {
+      "descricao": "Compliance e Desbloqueio de Licitacoes",
+      "fundamentacao": "Lei 14.133/2021, Lei 12.846/2013",
+      "faixas": {
+        "ME": { "min": 3000, "max": 6000, "periodicidade": "pontual" },
+        "EPP": { "min": 5000, "max": 10000, "periodicidade": "pontual" },
+        "MEDIO": { "min": 8000, "max": 15000, "periodicidade": "pontual" },
+        "GRANDE": { "min": 12000, "max": 25000, "periodicidade": "pontual" }
+      }
     }
   },
   "regras_diagnostico": {
@@ -130,6 +160,24 @@
         "alerta": "Capital social elevado para LTDA - avaliar transformacao em S/A ou obrigatoriedade de auditoria",
         "servico_recomendado": "auditoria_independente",
         "urgencia": "media"
+      },
+      "processos_judiciais": {
+        "condicao": "total_processos > 0",
+        "alerta": "Processos judiciais encontrados - avaliar contingencias e provisoes",
+        "servico_recomendado": "consultoria_juridico_contabil",
+        "urgencia": "media"
+      },
+      "divida_ativa_pgfn": {
+        "condicao": "total_dividas > 0",
+        "alerta": "Debitos inscritos em Divida Ativa da Uniao - risco de bloqueio de certidoes",
+        "servico_recomendado": "regularizacao_fiscal",
+        "urgencia": "alta"
+      },
+      "sancoes_com_licitacao": {
+        "condicao": "sancoes_ceis OR sancoes_cnep",
+        "alerta": "Empresa com sancoes ativas - impedida de participar de licitacoes",
+        "servico_recomendado": "compliance_licitacoes",
+        "urgencia": "urgente"
       }
     }
   }
