@@ -48,7 +48,7 @@ APIS = [
     },
 ]
 
-DATAJUD_API_KEY = "cDZHYzlZa0JadVREZDJCendQbXY6dHRjUHRkMkJIbkhFSzBLNndFSWIzQQ=="
+DATAJUD_API_KEY = "cDZHYzlZa0JadVREZDJCendQbXY6SkJlTzNjLV9TRENyQk1RdnFKZGRQdw=="
 
 
 def limpar_cnpj(cnpj_raw: str) -> str:
