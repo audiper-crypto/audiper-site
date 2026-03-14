@@ -286,12 +286,66 @@
         </div>
     </div>
 
+    <div id="access-denied" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:#7F1D1D; color:white; z-index:9999; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:16px; font-family:'Inter',sans-serif;">
+        <i class="fas fa-lock" style="font-size:48px; opacity:0.5;"></i>
+        <div style="font-family:'Outfit',sans-serif; font-size:20px; font-weight:700;">Acesso Expirado</div>
+        <div style="font-size:14px; opacity:0.8; text-align:center; max-width:280px;" id="denied-msg">Sua sessao expirou. Solicite novo acesso enviando /start ao bot.</div>
+    </div>
+
     <script>
+        // === TOKEN VALIDATION ===
+        function parseToken(tokenStr) {
+            try {
+                var parts = tokenStr.split('.');
+                if (parts.length !== 2) return null;
+                // Restore base64 padding
+                var b64 = parts[0].replace(/-/g, '+').replace(/_/g, '/');
+                while (b64.length % 4) b64 += '=';
+                var payload = JSON.parse(atob(b64));
+                return payload;
+            } catch(e) {
+                return null;
+            }
+        }
+
+        var params = new URLSearchParams(window.location.search);
+        var token = params.get('token');
+        var tokenPayload = null;
+        var accessGranted = false;
+
+        if (!token) {
+            // Sem token — bloquear
+            document.getElementById('access-denied').style.display = 'flex';
+            document.getElementById('denied-msg').textContent = 'Acesso nao autorizado. Use o bot @AudiperPortalBot para obter acesso.';
+        } else {
+            tokenPayload = parseToken(token);
+            if (!tokenPayload || !tokenPayload.exp) {
+                document.getElementById('access-denied').style.display = 'flex';
+                document.getElementById('denied-msg').textContent = 'Token invalido. Solicite novo acesso via /start.';
+            } else if (tokenPayload.exp * 1000 < Date.now()) {
+                document.getElementById('access-denied').style.display = 'flex';
+            } else {
+                accessGranted = true;
+                document.getElementById('access-denied').style.display = 'none';
+            }
+        }
+
         // Init Telegram WebApp
         const tg = window.Telegram.WebApp;
         tg.ready();
         tg.expand();
         tg.setHeaderColor('#7F1D1D');
+
+        // Show user info from token
+        if (tokenPayload && accessGranted) {
+            var clientName = tokenPayload.name || 'Usuario';
+            // Update client info with token data
+            var issuedDate = new Date(tokenPayload.iat * 1000);
+            var expiresDate = new Date(tokenPayload.exp * 1000);
+            document.querySelector('.client-info-value:last-child') &&
+                (document.getElementById('session-timer').textContent =
+                    'Ate ' + expiresDate.getHours() + ':' + (expiresDate.getMinutes() < 10 ? '0' : '') + expiresDate.getMinutes());
+        }
 
         // MainButton: Encerrar Sessao
         tg.MainButton.setParams({
@@ -306,26 +360,39 @@
                 }
             });
         });
-        tg.MainButton.show();
+        if (accessGranted) tg.MainButton.show();
 
         // Disable right-click and drag
         document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
         document.addEventListener('dragstart', function(e) { e.preventDefault(); });
 
-        // Open document in viewer
+        // Open document in viewer — pass token along
         function openDoc(docId, docTitle) {
-            window.location.href = 'viewer.html?doc=' + docId + '&title=' + encodeURIComponent(docTitle);
+            window.location.href = 'viewer.html?doc=' + docId + '&title=' + encodeURIComponent(docTitle) + '&token=' + encodeURIComponent(token);
         }
 
-        // Session timer
-        var sessionStart = Date.now();
-        setInterval(function() {
-            var elapsed = Math.floor((Date.now() - sessionStart) / 1000);
-            var min = Math.floor(elapsed / 60);
-            var sec = elapsed % 60;
-            document.getElementById('session-timer').textContent =
-                'Ativa - ' + min + ':' + (sec < 10 ? '0' : '') + sec;
-        }, 1000);
+        // Session countdown — shows remaining time until expiration
+        if (accessGranted && tokenPayload) {
+            var expiresAt = tokenPayload.exp * 1000;
+            setInterval(function() {
+                var remaining = Math.floor((expiresAt - Date.now()) / 1000);
+                if (remaining <= 0) {
+                    // Sessao expirou
+                    document.getElementById('access-denied').style.display = 'flex';
+                    tg.MainButton.hide();
+                    return;
+                }
+                var min = Math.floor(remaining / 60);
+                var sec = remaining % 60;
+                document.getElementById('session-timer').textContent =
+                    'Expira em ' + min + ':' + (sec < 10 ? '0' : '') + sec;
+
+                // Alerta visual quando falta pouco tempo
+                if (remaining <= 120) {
+                    document.getElementById('session-timer').style.color = '#FCA5A5';
+                }
+            }, 1000);
+        }
     </script>
 </body>
 </html>

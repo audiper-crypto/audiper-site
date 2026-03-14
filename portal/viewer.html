@@ -154,17 +154,52 @@
         <button class="zoom-btn" onclick="zoomFit()" style="margin-top:4px"><i class="fas fa-expand"></i></button>
     </div>
 
+    <div id="access-denied" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:#7F1D1D; color:white; z-index:9999; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:16px; font-family:'Inter',sans-serif;">
+        <i class="fas fa-lock" style="font-size:48px; opacity:0.5;"></i>
+        <div style="font-family:'Outfit',sans-serif; font-size:20px; font-weight:700;">Acesso Expirado</div>
+        <div style="font-size:14px; opacity:0.8; text-align:center; max-width:280px;">Sua sessao expirou. Solicite novo acesso enviando /start ao bot.</div>
+    </div>
+
     <script>
+        // === TOKEN VALIDATION ===
+        function parseToken(tokenStr) {
+            try {
+                var parts = tokenStr.split('.');
+                if (parts.length !== 2) return null;
+                var b64 = parts[0].replace(/-/g, '+').replace(/_/g, '/');
+                while (b64.length % 4) b64 += '=';
+                return JSON.parse(atob(b64));
+            } catch(e) { return null; }
+        }
+
+        var params = new URLSearchParams(window.location.search);
+        var token = params.get('token');
+        var tokenPayload = token ? parseToken(token) : null;
+        var accessGranted = tokenPayload && tokenPayload.exp && (tokenPayload.exp * 1000 > Date.now());
+
+        if (!accessGranted) {
+            document.getElementById('access-denied').style.display = 'flex';
+        }
+
+        // Check expiration every 10 seconds
+        if (accessGranted) {
+            setInterval(function() {
+                if (tokenPayload.exp * 1000 < Date.now()) {
+                    document.getElementById('access-denied').style.display = 'flex';
+                }
+            }, 10000);
+        }
+
         // Init Telegram WebApp
         var tg = window.Telegram.WebApp;
         tg.ready();
         tg.expand();
         tg.setHeaderColor('#7F1D1D');
 
-        // BackButton
+        // BackButton — pass token back to index
         tg.BackButton.show();
         tg.BackButton.onClick(function() {
-            window.location.href = 'index.html';
+            window.location.href = 'index.html?token=' + encodeURIComponent(token || '');
         });
 
         // Hide MainButton in viewer
