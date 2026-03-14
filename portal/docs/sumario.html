@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sumário do Dossiê — AUDIPER®</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        audiper: { red: '#B91C1C', darkred: '#7F1D1D', gold: '#c9a962', wine: '#722F37' },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                        serif: ['Merriweather', 'Georgia', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: #E5E7EB; font-family: 'Inter', sans-serif; color: #334155; font-size: 11pt; line-height: 1.4; }
+        h1, h2, h3 { font-family: 'Outfit', sans-serif; }
+        .a4-page { width: 210mm; height: 297mm; min-height: 297mm; max-height: 297mm; margin: 10px auto; background: white; box-shadow: 0 4px 20px rgba(0,0,0,0.15); position: relative; overflow: hidden; page-break-after: always; }
+        .page-wrapper { width: 100%; height: 297mm; min-height: 297mm; max-height: 297mm; display: flex; flex-direction: column; overflow: hidden; }
+        .page-header { flex-shrink: 0; }
+        .page-content { flex: 1; padding: 16px 22px; font-size: 11pt; overflow: hidden; }
+        .page-footer { flex-shrink: 0; margin-top: auto; }
+
+        @media print {
+            @page { size: A4 portrait; margin: 0; }
+            html, body { width: 210mm; height: 297mm; margin: 0; padding: 0; background: white; font-size: 11pt; }
+            .a4-page { width: 210mm; height: 297mm; margin: 0; box-shadow: none; page-break-after: always; overflow: hidden; }
+            .a4-page:last-child { page-break-after: auto; }
+        }
+
+        .letterhead-header { background: linear-gradient(180deg, #FFFFFF 0%, #F9FAFB 100%); border-bottom: 1px solid #E5E7EB; padding: 8px 18px; position: relative; }
+        .letterhead-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #7F1D1D 0%, #B91C1C 50%, #DC2626 100%); }
+        .letterhead-footer { background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%); color: white; padding: 8px 18px 6px; position: relative; }
+        .letterhead-footer::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #7F1D1D 0%, #B91C1C 50%, #DC2626 100%); }
+        .page-number-premium { display: inline-flex; align-items: center; gap: 3px; background: linear-gradient(135deg, #B91C1C 0%, #7F1D1D 100%); padding: 3px 10px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.3); }
+        .page-number-premium .current { font-weight: bold; color: white; font-size: 9px; }
+        .page-number-premium .separator { color: rgba(255,255,255,0.6); font-size: 7px; }
+        .page-number-premium .total { color: rgba(255,255,255,0.8); font-size: 8px; }
+
+        .secao-titulo { font-size: 13pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; padding-bottom: 5px; border-bottom: 3px solid #B91C1C; }
+        .social-icon { width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 50%; color: white; font-size: 10px; }
+
+        .toc-item {
+            display: flex; align-items: baseline; gap: 4px;
+            padding: 4px 0; border-bottom: 1px dotted #E2E8F0;
+        }
+        .toc-item:hover { background: #F8FAFC; }
+        .toc-ref { font-size: 9pt; font-weight: 700; min-width: 40px; }
+        .toc-nome { font-size: 10pt; flex: 1; }
+        .toc-norma { font-size: 8pt; color: #64748B; min-width: 80px; text-align: right; }
+        .toc-pagina { font-size: 9pt; font-weight: 600; min-width: 30px; text-align: right; font-family: 'Courier New', monospace; }
+        .toc-status { font-size: 7pt; font-weight: 600; padding: 1px 6px; border-radius: 10px; min-width: 20px; text-align: center; }
+
+        .fase-header {
+            display: flex; align-items: center; gap: 8px;
+            padding: 6px 10px; margin: 10px 0 4px 0;
+            background: linear-gradient(135deg, #7F1D1D 0%, #B91C1C 100%);
+            border-radius: 6px; color: white;
+        }
+        .fase-header .fase-letra { font-size: 12pt; font-weight: 800; font-family: 'Outfit', sans-serif; }
+        .fase-header .fase-nome { font-size: 9pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        .fase-header .fase-count { font-size: 8pt; opacity: 0.7; margin-left: auto; }
+    </style>
+</head>
+
+<body>
+
+    <div class="a4-page">
+        <div class="page-wrapper">
+
+            <header class="page-header letterhead-header">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden bg-white border border-gray-200">
+                            <img src="https://www.audiper.com.br/novo-logo-audiper.png" alt="AUDIPER" style="width: 32px; height: 32px; object-fit: contain;">
+                        </div>
+                        <div>
+                            <h1 class="text-base font-bold font-display text-gray-800">AUDIPER<span class="text-red-600">®</span></h1>
+                            <p class="text-xs text-gray-500 uppercase">Sumário do Dossiê de Auditoria</p>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-xs text-gray-400 uppercase">Cliente</p>
+                        <p class="text-sm font-bold text-gray-700">[NOME DO CLIENTE]</p>
+                    </div>
+                    <div class="text-right text-xs text-gray-400">
+                        <p>Exercício: [EXERCICIO]</p>
+                        <p>[DATA]</p>
+                    </div>
+                </div>
+            </header>
+
+            <div class="page-content">
+
+                <h2 class="secao-titulo text-audiper-red">
+                    <i class="fas fa-list-ol mr-2"></i>Índice dos Papéis de Trabalho
+                </h2>
+
+                <div class="mb-3 flex items-center justify-between text-[8px] text-gray-400 uppercase px-1">
+                    <span>Ref.</span>
+                    <span>Descrição</span>
+                    <span>Norma</span>
+                    <span>Status</span>
+                    <span>Pág.</span>
+                </div>
+
+                <!-- ═══ FASE A — ACEITAÇÃO ═══ -->
+                <div class="fase-header">
+                    <span class="fase-letra">A</span>
+                    <span class="fase-nome">Aceitação e Contratação</span>
+                    <span class="fase-count">3 PTAs</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-ref text-audiper-red">A-01</span>
+                    <span class="toc-nome">Carta Proposta</span>
+                    <span class="toc-norma">NBC TA 210</span>
+                    <span class="toc-status bg-green-100 text-green-700">✓</span>
+                    <span class="toc-pagina">[PG]</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-ref text-audiper-red">A-02</span>
+                    <span class="toc-nome">Declaração de Independência</span>
+                    <span class="toc-norma">NBC TA 200</span>
+                    <span class="toc-status bg-green-100 text-green-700">✓</span>
+                    <span class="toc-pagina">[PG]</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-ref text-audiper-red">A-03</span>
+                    <span class="toc-nome">Termos do Trabalho</span>
+                    <span class="toc-norma">NBC TA 210</span>
+                    <span class="toc-status bg-green-100 text-green-700">✓</span>
+                    <span class="toc-pagina">[PG]</span>
+                </div>
+
+                <!-- ═══ FASE B — PLANEJAMENTO ═══ -->
+                <div class="fase-header">
+                    <span class="fase-letra">B</span>
+                    <span class="fase-nome">Planejamento</span>
+                    <span class="fase-count">5 PTAs</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-ref text-audiper-red">A-04</span>
+                    <span class="toc-nome">Equipe de Auditoria</span>
+                    <span class="toc-norma">NBC TA 300</span>
+                    <span class="toc-status bg-green-100 text-green-700">✓</span>
+                    <span class="toc-pagina">[PG]</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-ref text-audiper-red">A-05</span>
+                    <span class="toc-nome">Cronograma</span>
+                    <span class="toc-norma">NBC TA 300</span>
+                    <span class="toc-status bg-green-100 text-green-700">✓</span>
+                    <span class="toc-pagina">[PG]</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-ref text-audiper-red">B-01</span>
+                    <span class="toc-nome">Conhecimento da Entidade</span>
+                    <span class="toc-norma">NBC TA 315</span>
+                    <span class="toc-status bg-green-100 text-green-700">✓</span>
+                    <span class="toc-pagina">[PG]</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-ref text-audiper-red">B-02</span>
+                    <span class="toc-nome">Avaliação de Riscos</span>
+                    <span class="toc-norma">NBC TA 315/330</span>
+                    <span class="toc-status bg-green-100 text-green-700">✓</span>
+                    <span class="toc-pagina">[PG]</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-ref text-audiper-red">B-03</span>
+                    <span class="toc-nome">Materialidade</span>
+                    <span class="toc-norma">NBC TA 320</span>
+                    <span class="toc-status bg-green-100 text-green-700">✓</span>
+                    <span class="toc-pagina">[PG]</span>
+                </div>
+
+                <!-- ═══ FASE C/D/E — EXECUÇÃO ═══ -->
+                <div class="fase-header">
+                    <span class="fase-letra">C/D/E</span>
+                    <span class="fase-nome">Execução</span>
+                    <span class="fase-count">10 PTAs</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-ref text-audiper-red">C-01</span>
+                    <span class="toc-nome">Resposta aos Riscos</span>
+                    <span class="toc-norma">NBC TA 330</span>
+                    <span class="toc-status bg-green-100 text-green-700">✓</span>
+                    <span class="toc-pagina">[PG]</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-ref text-audiper-red">D-01</span>
+                    <span class="toc-nome">Teste Substantivo — Contas a Receber</span>
+                    <span class="toc-norma">NBC TA 500</span>
+                    <span class="toc-status bg-green-100 text-green-700">✓</span>
+                    <span class="toc-pagina">[PG]</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-ref text-audiper-red">D-02</span>
+                    <span class="toc-nome">Teste Substantivo — Estoques</span>
+                    <span class="toc-norma">NBC TA 500</span>
+                    <span class="toc-status bg-gray-100 text-gray-500">N/A</span>
+                    <span class="toc-pagina">[PG]</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-ref text-audiper-red">D-03</span>
+                    <span class="toc-nome">Teste Substantivo — Imobilizado</span>
+                    <span class="toc-norma">NBC TA 500</span>
+                    <span class="toc-status bg-green-100 text-green-700">✓</span>
+                    <span class="toc-pagina">[PG]</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-ref text-audiper-red">D-04</span>
+                    <span class="toc-nome">Teste Substantivo — Fornecedores</span>
+                    <span class="toc-norma">NBC TA 500</span>
+                    <span class="toc-status bg-green-100 text-green-700">✓</span>
+                    <span class="toc-pagina">[PG]</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-ref text-audiper-red">D-05</span>
+                    <span class="toc-nome">Teste Substantivo — Receitas</span>
+                    <span class="toc-norma">NBC TA 500</span>
+                    <span class="toc-status bg-green-100 text-green-700">✓</span>
+                    <span class="toc-pagina">[PG]</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-ref text-audiper-red">D-06</span>
+                    <span class="toc-nome">Teste Substantivo — Despesas</span>
+                    <span class="toc-norma">NBC TA 500</span>
+                    <span class="toc-status bg-green-100 text-green-700">✓</span>
+                    <span class="toc-pagina">[PG]</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-ref text-audiper-red">E-01</span>
+                    <span class="toc-nome">Revisão Analítica</span>
+                    <span class="toc-norma">NBC TA 520</span>
+                    <span class="toc-status bg-green-100 text-green-700">✓</span>
+                    <span class="toc-pagina">[PG]</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-ref text-audiper-red">E-02</span>
+                    <span class="toc-nome">Circularização</span>
+                    <span class="toc-norma">NBC TA 505</span>
+                    <span class="toc-status bg-green-100 text-green-700">✓</span>
+                    <span class="toc-pagina">[PG]</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-ref text-audiper-red">E-03</span>
+                    <span class="toc-nome">Amostragem</span>
+                    <span class="toc-norma">NBC TA 530</span>
+                    <span class="toc-status bg-green-100 text-green-700">✓</span>
+                    <span class="toc-pagina">[PG]</span>
+                </div>
+
+                <!-- ═══ FASE F — CONCLUSÃO ═══ -->
+                <div class="fase-header">
+                    <span class="fase-letra">F</span>
+                    <span class="fase-nome">Conclusão</span>
+                    <span class="fase-count">3 PTAs</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-ref text-audiper-red">F-01</span>
+                    <span class="toc-nome">Eventos Subsequentes</span>
+                    <span class="toc-norma">NBC TA 560</span>
+                    <span class="toc-status bg-green-100 text-green-700">✓</span>
+                    <span class="toc-pagina">[PG]</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-ref text-audiper-red">F-02</span>
+                    <span class="toc-nome">Continuidade Operacional</span>
+                    <span class="toc-norma">NBC TA 570</span>
+                    <span class="toc-status bg-green-100 text-green-700">✓</span>
+                    <span class="toc-pagina">[PG]</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-ref text-audiper-red">F-03</span>
+                    <span class="toc-nome">Representações Formais</span>
+                    <span class="toc-norma">NBC TA 580</span>
+                    <span class="toc-status bg-green-100 text-green-700">✓</span>
+                    <span class="toc-pagina">[PG]</span>
+                </div>
+
+                <!-- ═══ FASE G — RELATÓRIOS ═══ -->
+                <div class="fase-header">
+                    <span class="fase-letra">G</span>
+                    <span class="fase-nome">Relatórios</span>
+                    <span class="fase-count">3 PTAs</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-ref text-audiper-red">G-01</span>
+                    <span class="toc-nome">Relatório do Auditor Independente</span>
+                    <span class="toc-norma">NBC TA 700</span>
+                    <span class="toc-status bg-green-100 text-green-700">✓</span>
+                    <span class="toc-pagina">[PG]</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-ref text-audiper-red">G-02</span>
+                    <span class="toc-nome">Carta à Administração</span>
+                    <span class="toc-norma">NBC TA 260</span>
+                    <span class="toc-status bg-green-100 text-green-700">✓</span>
+                    <span class="toc-pagina">[PG]</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-ref text-audiper-red">G-03</span>
+                    <span class="toc-nome">Parágrafos de Ênfase e Ressalva</span>
+                    <span class="toc-norma">NBC TA 706</span>
+                    <span class="toc-status bg-gray-100 text-gray-500">N/A</span>
+                    <span class="toc-pagina">[PG]</span>
+                </div>
+
+            </div>
+
+            <footer class="page-footer letterhead-footer">
+                <div class="flex items-center justify-between text-[7px]">
+                    <div class="flex items-center gap-2">
+                        <img src="https://www.audiper.com.br/novo-logo-audiper.png" alt="AUDIPER" style="width: 24px; height: 24px; object-fit: contain; border-radius: 50%; background: white; padding: 2px;">
+                        <div class="text-gray-300">
+                            <p class="font-semibold text-white text-[8px]">AUDIPER®</p>
+                            <p>R. Arlindo Nogueira, 614 — Teresina/PI</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[7px] font-semibold" style="background: rgba(255,255,255,0.1); color: #c9a962;">
+                            <i class="fas fa-lock text-[6px]"></i> Confidencial
+                        </span>
+                        <span class="text-gray-500 mx-1">|</span>
+                        <span class="text-blue-400 font-semibold">www.audiper.com.br</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="page-number-premium">
+                            <span class="current">2</span>
+                            <span class="separator">de</span>
+                            <span class="total">[TOTAL_PG]</span>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+    </div>
+
+</body>
+</html>
