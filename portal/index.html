@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="referrer" content="no-referrer">
     <title>AUDIPER Portal Seguro</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -281,6 +282,14 @@
             <i class="fas fa-shield-halved"></i>
             Documento confidencial — Acesso monitorado e registrado
         </div>
+        <div style="background: rgba(15,23,42,0.04); border: 1px solid rgba(0,0,0,0.08); border-radius: 8px; padding: 12px 16px; margin: 12px 16px 0; text-align: left;">
+            <p style="font-size: 10px; color: #64748B; line-height: 1.5; margin: 0;">
+                <strong style="color: #7F1D1D;">AVISO DE CONFIDENCIALIDADE:</strong>
+                Esta comunicacao e seu conteudo sao confidenciais e destinados exclusivamente ao destinatario identificado, para fins de auditoria independente nos termos das NBC TAs do CFC.
+                Todo usuario que acessar este portal tera sua identidade, horario de acesso e atividade registrados em nosso sistema de seguranca.
+                A reproducao, distribuicao ou divulgacao nao autorizada deste material e estritamente proibida.
+            </p>
+        </div>
         <div class="footer-brand">
             AUDIPER Auditoria Independente S/S — CRC/PI 000023/O
         </div>
@@ -330,37 +339,38 @@
             }
         }
 
-        // Init Telegram WebApp
-        const tg = window.Telegram.WebApp;
-        tg.ready();
-        tg.expand();
-        tg.setHeaderColor('#7F1D1D');
+        // Detect environment: Telegram or Browser
+        var isTelegram = !!(window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData);
+        var tg = isTelegram ? window.Telegram.WebApp : null;
+
+        if (tg) {
+            tg.ready();
+            tg.expand();
+            tg.setHeaderColor('#7F1D1D');
+        }
 
         // Show user info from token
         if (tokenPayload && accessGranted) {
             var clientName = tokenPayload.name || 'Usuario';
-            // Update client info with token data
-            var issuedDate = new Date(tokenPayload.iat * 1000);
             var expiresDate = new Date(tokenPayload.exp * 1000);
-            document.querySelector('.client-info-value:last-child') &&
-                (document.getElementById('session-timer').textContent =
-                    'Ate ' + expiresDate.getHours() + ':' + (expiresDate.getMinutes() < 10 ? '0' : '') + expiresDate.getMinutes());
+            document.getElementById('session-timer').textContent =
+                'Ate ' + expiresDate.getHours() + ':' + (expiresDate.getMinutes() < 10 ? '0' : '') + expiresDate.getMinutes();
         }
 
-        // MainButton: Encerrar Sessao
-        tg.MainButton.setParams({
-            text: 'Encerrar Sessao',
-            color: '#7F1D1D',
-            text_color: '#FFFFFF'
-        });
-        tg.MainButton.onClick(function() {
-            tg.showConfirm('Deseja encerrar a sessao? O acesso sera revogado.', function(confirmed) {
-                if (confirmed) {
-                    tg.close();
-                }
+        // MainButton: Encerrar Sessao (only in Telegram)
+        if (tg && accessGranted) {
+            tg.MainButton.setParams({
+                text: 'Encerrar Sessao',
+                color: '#7F1D1D',
+                text_color: '#FFFFFF'
             });
-        });
-        if (accessGranted) tg.MainButton.show();
+            tg.MainButton.onClick(function() {
+                tg.showConfirm('Deseja encerrar a sessao? O acesso sera revogado.', function(confirmed) {
+                    if (confirmed) { tg.close(); }
+                });
+            });
+            tg.MainButton.show();
+        }
 
         // Disable right-click and drag
         document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
@@ -379,7 +389,7 @@
                 if (remaining <= 0) {
                     // Sessao expirou
                     document.getElementById('access-denied').style.display = 'flex';
-                    tg.MainButton.hide();
+                    if (tg) tg.MainButton.hide();
                     return;
                 }
                 var min = Math.floor(remaining / 60);

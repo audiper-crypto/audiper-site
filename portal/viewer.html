@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+    <meta name="referrer" content="no-referrer">
     <title>AUDIPER - Viewer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
@@ -136,6 +137,7 @@
 </head>
 <body>
     <div class="viewer-header">
+        <a id="back-btn" href="#" onclick="history.back(); return false;" style="display:none; color:white; text-decoration:none; font-size:18px;"><i class="fas fa-arrow-left"></i></a>
         <i class="fas fa-file-alt"></i>
         <span class="viewer-title" id="doc-title">Documento</span>
         <span class="viewer-badge">CONFIDENCIAL</span>
@@ -190,20 +192,27 @@
             }, 10000);
         }
 
-        // Init Telegram WebApp
-        var tg = window.Telegram.WebApp;
-        tg.ready();
-        tg.expand();
-        tg.setHeaderColor('#7F1D1D');
+        // Detect environment
+        var isTelegram = !!(window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData);
+        var tg = isTelegram ? window.Telegram.WebApp : null;
 
-        // BackButton — pass token back to index
-        tg.BackButton.show();
-        tg.BackButton.onClick(function() {
-            window.location.href = 'index.html?token=' + encodeURIComponent(token || '');
-        });
-
-        // Hide MainButton in viewer
-        tg.MainButton.hide();
+        if (tg) {
+            tg.ready();
+            tg.expand();
+            tg.setHeaderColor('#7F1D1D');
+            tg.BackButton.show();
+            tg.BackButton.onClick(function() {
+                window.location.href = 'index.html?token=' + encodeURIComponent(token || '');
+            });
+            tg.MainButton.hide();
+        } else {
+            // No browser: show back button
+            var backBtn = document.getElementById('back-btn');
+            if (backBtn) {
+                backBtn.style.display = 'inline';
+                backBtn.href = 'index.html?token=' + encodeURIComponent(token || '');
+            }
+        }
 
         // Parse URL params
         var params = new URLSearchParams(window.location.search);
