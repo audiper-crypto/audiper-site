@@ -354,6 +354,108 @@
 }
 
 /* ==========================================================================
+   4b. Panel Hero Avatar (.ag-panel-hero)
+   ========================================================================== */
+
+.ag-panel-hero {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-bottom: 40px;
+  padding: 32px;
+  background: linear-gradient(135deg, rgba(255, 51, 51, 0.06), rgba(212, 168, 67, 0.04), transparent);
+  border: 1px solid rgba(255, 51, 51, 0.15);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ag-panel-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--ag-red), var(--ag-gold), transparent);
+}
+
+.ag-panel-hero::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255, 51, 51, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.ag-panel-hero__avatar {
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.ag-panel-hero__avatar img {
+  max-height: 400px;
+  width: auto;
+  border-radius: 12px;
+  box-shadow:
+    0 0 20px rgba(255, 51, 51, 0.3),
+    0 0 40px rgba(255, 51, 51, 0.15),
+    0 0 80px rgba(255, 51, 51, 0.08);
+  border: 2px solid rgba(255, 51, 51, 0.25);
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+  display: block;
+}
+
+.ag-panel-hero:hover .ag-panel-hero__avatar img {
+  box-shadow:
+    0 0 30px rgba(255, 51, 51, 0.5),
+    0 0 60px rgba(255, 51, 51, 0.25),
+    0 0 100px rgba(255, 51, 51, 0.12);
+  transform: scale(1.02);
+}
+
+.ag-panel-hero__info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.ag-panel-hero__name {
+  font-family: var(--ag-font-display);
+  font-weight: 900;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--ag-white);
+  letter-spacing: 6px;
+  line-height: 1;
+  text-shadow: 0 0 40px rgba(255, 51, 51, 0.3);
+}
+
+.ag-panel-hero__title {
+  font-family: var(--ag-font-body);
+  font-weight: 600;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: var(--ag-red);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 0 20px var(--ag-red-glow);
+}
+
+.ag-panel-hero__phase {
+  font-family: var(--ag-font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--ag-gray);
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+/* ==========================================================================
    5. Agent Cards (.ag-card)
    ========================================================================== */
 
@@ -731,6 +833,25 @@
     gap: 12px;
   }
 
+  .ag-panel-hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 24px;
+    gap: 24px;
+  }
+
+  .ag-panel-hero__info {
+    align-items: center;
+  }
+
+  .ag-panel-hero__avatar img {
+    max-height: 300px;
+  }
+
+  .ag-panel-hero__name {
+    letter-spacing: 4px;
+  }
+
   .ag-cards {
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 16px;
@@ -759,6 +880,30 @@
 
 /* --- 576px: Single column cards, smaller numbers --- */
 @media (max-width: 576px) {
+  .ag-panel-hero {
+    padding: 16px;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .ag-panel-hero__avatar img {
+    max-height: 220px;
+  }
+
+  .ag-panel-hero__name {
+    font-size: 2rem;
+    letter-spacing: 3px;
+  }
+
+  .ag-panel-hero__title {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+  }
+
+  .ag-panel-hero__phase {
+    font-size: 0.7rem;
+  }
+
   .ag-hero {
     padding: 100px 0 48px;
   }
