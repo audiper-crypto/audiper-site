@@ -458,6 +458,27 @@
   letter-spacing: 0.5px;
 }
 
+.ag-badge-tag {
+  font-family: var(--ag-font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--ag-red);
+  background: rgba(255, 51, 51, 0.08);
+  border: 1px solid rgba(255, 51, 51, 0.25);
+  padding: 2px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 4px;
+  margin-right: 4px;
+}
+
+.ag-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 10px;
+}
+
 .ag-card-br {
   border-color: rgba(212, 168, 67, 0.25);
 }
