@@ -118,22 +118,25 @@
    ========================================================================== */
 
 .ag-stats {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 48px;
-  flex-wrap: wrap;
   padding: 40px 0;
   border-top: 1px solid var(--ag-border);
   border-bottom: 1px solid var(--ag-border);
   background: var(--ag-bg);
 }
 
-.ag-stats .stat {
+.ag-stats-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.ag-stat {
   text-align: center;
 }
 
-.ag-stats .stat .number {
+.ag-stat .number {
   font-family: var(--ag-font-mono);
   font-size: 2.5rem;
   font-weight: 700;
@@ -142,7 +145,7 @@
   line-height: 1;
 }
 
-.ag-stats .stat .label {
+.ag-stat .label {
   font-family: var(--ag-font-body);
   font-size: 0.85rem;
   color: var(--ag-gray);
@@ -160,18 +163,7 @@
   position: relative;
 }
 
-.ag-pipeline-section .section-label {
-  font-family: var(--ag-font-mono);
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--ag-red);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  display: inline-block;
-  margin-bottom: 10px;
-}
-
-.ag-pipeline-section .section-heading {
+.ag-pipeline-title {
   font-family: var(--ag-font-display);
   font-weight: 800;
   font-size: clamp(1.4rem, 3vw, 1.9rem);
@@ -210,20 +202,37 @@
   animation: ag-flow 2s ease-in-out infinite;
 }
 
-/* Phase hexagons */
+/* Phase wrapper — column layout for hex + label + count */
 .ag-phase {
-  width: 100px;
-  height: 100px;
   position: relative;
   cursor: pointer;
   flex-shrink: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  gap: 8px;
   transition: transform 0.3s ease;
 }
 
-.ag-phase::before {
+.ag-phase:hover {
+  transform: scale(1.1);
+}
+
+.ag-phase.active {
+  transform: scale(1.15);
+}
+
+/* Phase hexagon visual element */
+.ag-phase-hex {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ag-phase-hex::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -233,7 +242,7 @@
   transition: all 0.3s ease;
 }
 
-.ag-phase::after {
+.ag-phase-hex::after {
   content: '';
   position: absolute;
   inset: -2px;
@@ -244,51 +253,24 @@
   transition: opacity 0.3s ease;
 }
 
-.ag-phase:hover {
-  transform: scale(1.1);
-}
-
-.ag-phase:hover::after {
+.ag-phase:hover .ag-phase-hex::after {
   opacity: 0.6;
 }
 
-.ag-phase.active::after {
+.ag-phase.active .ag-phase-hex::after {
   opacity: 1;
   box-shadow: 0 0 30px var(--ag-red-glow);
 }
 
-.ag-phase.active {
-  transform: scale(1.15);
-}
-
-.ag-phase__content {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  pointer-events: none;
-}
-
-.ag-phase__content .material-symbols-outlined {
+.ag-phase-hex .material-symbols-outlined {
   font-size: 28px;
   color: var(--ag-white);
-  display: block;
+  position: relative;
+  z-index: 1;
 }
 
-.ag-phase__content .phase-num {
-  font-family: var(--ag-font-mono);
-  font-size: 0.6rem;
-  font-weight: 700;
-  color: var(--ag-red);
-  letter-spacing: 1px;
-  margin-top: 4px;
-  display: block;
-}
-
-.ag-phase__label {
-  position: absolute;
-  bottom: -28px;
-  left: 50%;
-  transform: translateX(-50%);
+/* Phase label below hexagon */
+.ag-phase-label {
   font-family: var(--ag-font-mono);
   font-size: 0.65rem;
   font-weight: 600;
@@ -296,6 +278,17 @@
   white-space: nowrap;
   letter-spacing: 0.5px;
   text-transform: uppercase;
+}
+
+/* Phase agent count below label */
+.ag-phase-count {
+  font-family: var(--ag-font-mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  color: var(--ag-red);
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+  opacity: 0.7;
 }
 
 /* ==========================================================================
@@ -313,7 +306,7 @@
   animation: ag-slideDown 0.4s ease-out;
 }
 
-.ag-panel__header {
+.ag-panel-header {
   display: flex;
   align-items: center;
   gap: 20px;
@@ -322,7 +315,7 @@
   border-bottom: 1px solid var(--ag-border);
 }
 
-.ag-panel__header .panel-icon {
+.ag-panel-icon {
   width: 56px;
   height: 56px;
   border-radius: 12px;
@@ -333,12 +326,12 @@
   flex-shrink: 0;
 }
 
-.ag-panel__header .panel-icon .material-symbols-outlined {
+.ag-panel-icon .material-symbols-outlined {
   font-size: 28px;
   color: var(--ag-red);
 }
 
-.ag-panel__header .panel-info h3 {
+.ag-panel-title {
   font-family: var(--ag-font-display);
   font-weight: 800;
   font-size: 1.4rem;
@@ -346,7 +339,7 @@
   margin-bottom: 4px;
 }
 
-.ag-panel__header .panel-info p {
+.ag-panel-desc {
   font-family: var(--ag-font-body);
   font-size: 0.9rem;
   color: var(--ag-gray);
@@ -354,7 +347,7 @@
   line-height: 1.5;
 }
 
-.ag-panel__grid {
+.ag-cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
@@ -396,7 +389,7 @@
   opacity: 1;
 }
 
-.ag-card__icon {
+.ag-card-icon {
   width: 40px;
   height: 40px;
   border-radius: 8px;
@@ -407,7 +400,7 @@
   margin-bottom: 16px;
 }
 
-.ag-card__icon .material-symbols-outlined {
+.ag-card-icon .material-symbols-outlined {
   font-size: 20px;
   color: var(--ag-red);
 }
@@ -478,11 +471,11 @@
   background: linear-gradient(90deg, var(--ag-gold), transparent);
 }
 
-.ag-card-br .ag-card__icon {
+.ag-card-br .ag-card-icon {
   background: linear-gradient(135deg, rgba(212, 168, 67, 0.1), rgba(212, 168, 67, 0.05));
 }
 
-.ag-card-br .ag-card__icon .material-symbols-outlined {
+.ag-card-br .ag-card-icon .material-symbols-outlined {
   color: var(--ag-gold);
 }
 
@@ -647,29 +640,24 @@
 
 /* --- 1200px: Smaller hexes and connectors --- */
 @media (max-width: 1200px) {
-  .ag-phase {
+  .ag-phase-hex {
     width: 80px;
     height: 80px;
   }
 
-  .ag-phase__content .material-symbols-outlined {
+  .ag-phase-hex .material-symbols-outlined {
     font-size: 22px;
   }
 
-  .ag-phase__content .phase-num {
-    font-size: 0.55rem;
-  }
-
-  .ag-phase__label {
+  .ag-phase-label {
     font-size: 0.58rem;
-    bottom: -24px;
   }
 
   .ag-connector {
     width: 40px;
   }
 
-  .ag-stats .stat .number {
+  .ag-stat .number {
     font-size: 2rem;
   }
 }
@@ -697,18 +685,11 @@
     animation: ag-flow-v 2s ease-in-out infinite;
   }
 
-  .ag-phase__label {
-    bottom: auto;
-    left: calc(100% + 16px);
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .ag-stats {
+  .ag-stats-row {
     gap: 32px;
   }
 
-  .ag-panel__grid {
+  .ag-cards {
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   }
 }
@@ -723,13 +704,13 @@
     padding: 40px 0;
   }
 
-  .ag-panel__header {
+  .ag-panel-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
   }
 
-  .ag-panel__grid {
+  .ag-cards {
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 16px;
   }
@@ -738,12 +719,15 @@
     padding: 20px;
   }
 
-  .ag-stats {
+  .ag-stats-row {
     gap: 24px;
+  }
+
+  .ag-stats {
     padding: 32px 0;
   }
 
-  .ag-stats .stat .number {
+  .ag-stat .number {
     font-size: 1.8rem;
   }
 
@@ -762,30 +746,30 @@
     font-size: 1.8rem;
   }
 
-  .ag-panel__grid {
+  .ag-cards {
     grid-template-columns: 1fr;
   }
 
-  .ag-stats {
+  .ag-stats-row {
     flex-direction: column;
     gap: 20px;
     align-items: center;
   }
 
-  .ag-stats .stat .number {
+  .ag-stat .number {
     font-size: 1.5rem;
   }
 
-  .ag-stats .stat .label {
+  .ag-stat .label {
     font-size: 0.75rem;
   }
 
-  .ag-phase {
+  .ag-phase-hex {
     width: 72px;
     height: 72px;
   }
 
-  .ag-phase__content .material-symbols-outlined {
+  .ag-phase-hex .material-symbols-outlined {
     font-size: 20px;
   }
 
