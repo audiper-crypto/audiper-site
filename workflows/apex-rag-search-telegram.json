@@ -1,0 +1,158 @@
+{
+  "name": "AUDIPER - RAG NBC TA Search via Telegram",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": ["message"],
+        "additionalFields": {}
+      },
+      "id": "node-trigger",
+      "name": "1. Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.1,
+      "position": [240, 400],
+      "webhookId": "audiper-rag-trigger",
+      "credentials": {
+        "telegramApi": {
+          "id": "6z5EAatuLTBRXuDK",
+          "name": "Telegram Bot AUDIPER"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": false },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.message.text }}",
+              "rightValue": "/nbc",
+              "operator": { "type": "string", "operation": "startsWith" }
+            }
+          ]
+        }
+      },
+      "id": "node-filter",
+      "name": "2. Filtro /nbc",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [460, 400]
+    },
+    {
+      "parameters": {
+        "jsCode": "const text = $input.first().json.message.text;\nconst query = text.replace(/\\/nbc\\s*/i, '').trim();\nconst chatId = $input.first().json.message.chat.id;\n\nif (!query) {\n  return [{ json: {\n    vazio: true,\n    chat_id: chatId,\n    mensagem: '<b>Busca NBC TA</b>\\n\\nUso: /nbc [sua pergunta]\\n\\nExemplos:\\n/nbc materialidade\\n/nbc circularizacao\\n/nbc continuidade operacional'\n  } }];\n}\n\nreturn [{ json: { vazio: false, query: query, chat_id: chatId } }];"
+      },
+      "id": "node-extrair",
+      "name": "3. Extrair Query",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 400]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "leftValue": "={{ $json.vazio }}",
+              "rightValue": false,
+              "operator": { "type": "boolean", "operation": "equals" }
+            }
+          ]
+        }
+      },
+      "id": "node-if",
+      "name": "4. Tem Query?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [900, 400]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.chat_id }}",
+        "text": "={{ $json.mensagem }}",
+        "additionalFields": { "parse_mode": "HTML" }
+      },
+      "id": "node-help",
+      "name": "Telegram - Help",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1120, 560],
+      "credentials": {
+        "telegramApi": {
+          "id": "6z5EAatuLTBRXuDK",
+          "name": "Telegram Bot AUDIPER"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:8001/agno/rag/search",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ query: $('3. Extrair Query').item.json.query, top_k: 3 }) }}",
+        "options": { "timeout": 30000 }
+      },
+      "id": "node-rag",
+      "name": "5. RAG Search API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\nconst chatId = $('3. Extrair Query').item.json.chat_id;\nconst query = $('3. Extrair Query').item.json.query;\nlet results = response.results || 'Nenhum resultado.';\n\nif (results.length > 3800) {\n  results = results.substring(0, 3750) + '\\n[truncado]';\n}\n\nresults = results\n  .replace(/&/g, '&amp;')\n  .replace(/</g, '&lt;')\n  .replace(/>/g, '&gt;');\n\nconst header = `<b>Busca NBC TA:</b> <i>${query}</i>\\n\\n`;\n\nreturn [{ json: { chat_id: chatId, text: header + '<pre>' + results + '</pre>' } }];"
+      },
+      "id": "node-format",
+      "name": "6. Formatar",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1340, 300]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.chat_id }}",
+        "text": "={{ $json.text }}",
+        "additionalFields": { "parse_mode": "HTML" }
+      },
+      "id": "node-resposta",
+      "name": "7. Telegram - Resposta",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1560, 300],
+      "credentials": {
+        "telegramApi": {
+          "id": "6z5EAatuLTBRXuDK",
+          "name": "Telegram Bot AUDIPER"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "1. Telegram Trigger": {
+      "main": [[{ "node": "2. Filtro /nbc", "type": "main", "index": 0 }]]
+    },
+    "2. Filtro /nbc": {
+      "main": [[{ "node": "3. Extrair Query", "type": "main", "index": 0 }]]
+    },
+    "3. Extrair Query": {
+      "main": [[{ "node": "4. Tem Query?", "type": "main", "index": 0 }]]
+    },
+    "4. Tem Query?": {
+      "main": [
+        [{ "node": "5. RAG Search API", "type": "main", "index": 0 }],
+        [{ "node": "Telegram - Help", "type": "main", "index": 0 }]
+      ]
+    },
+    "5. RAG Search API": {
+      "main": [[{ "node": "6. Formatar", "type": "main", "index": 0 }]]
+    },
+    "6. Formatar": {
+      "main": [[{ "node": "7. Telegram - Resposta", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": { "executionOrder": "v1" },
+  "tags": [],
+  "triggerCount": 1,
+  "pinData": {}
+}

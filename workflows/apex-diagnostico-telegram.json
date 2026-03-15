@@ -1,0 +1,181 @@
+{
+  "name": "AUDIPER - Diagnostico CNPJ via APEX",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": ["message"],
+        "additionalFields": {}
+      },
+      "id": "node-trigger",
+      "name": "1. Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.1,
+      "position": [240, 400],
+      "webhookId": "audiper-diag-apex-trigger",
+      "credentials": {
+        "telegramApi": {
+          "id": "6z5EAatuLTBRXuDK",
+          "name": "Telegram Bot AUDIPER"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": false },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.message.text }}",
+              "rightValue": "/diagnostico",
+              "operator": { "type": "string", "operation": "startsWith" }
+            }
+          ]
+        }
+      },
+      "id": "node-filter",
+      "name": "2. Filtro /diagnostico",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [460, 400]
+    },
+    {
+      "parameters": {
+        "jsCode": "const text = $input.first().json.message.text;\nconst match = text.replace(/\\/diagnostico\\s*/i, '').trim();\n\n// Separar CNPJ e nome empresa (formato: /diagnostico CNPJ Nome Empresa)\nconst parts = match.split(/\\s+/);\nconst cnpjRaw = parts[0] || '';\nconst cnpj = cnpjRaw.replace(/[^\\d]/g, '');\nconst empresa = parts.slice(1).join(' ') || 'Empresa nao informada';\nconst chatId = $input.first().json.message.chat.id;\n\nif (cnpj.length !== 14) {\n  return [{ json: {\n    erro: true,\n    chat_id: chatId,\n    mensagem: '<b>CNPJ invalido:</b> ' + (cnpjRaw || '(vazio)') + '\\n\\n<b>Uso:</b>\\n/diagnostico 12345678000190 Nome da Empresa'\n  } }];\n}\n\nconst fmt = cnpj.slice(0,2)+'.'+cnpj.slice(2,5)+'.'+cnpj.slice(5,8)+'/'+cnpj.slice(8,12)+'-'+cnpj.slice(12);\n\nreturn [{ json: {\n  erro: false,\n  cnpj: fmt,\n  empresa: empresa,\n  chat_id: chatId\n} }];"
+      },
+      "id": "node-extrair",
+      "name": "3. Extrair CNPJ",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 400]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "leftValue": "={{ $json.erro }}",
+              "rightValue": false,
+              "operator": { "type": "boolean", "operation": "equals" }
+            }
+          ]
+        }
+      },
+      "id": "node-if",
+      "name": "4. CNPJ Valido?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [900, 400]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.chat_id }}",
+        "text": "={{ $json.mensagem }}",
+        "additionalFields": { "parse_mode": "HTML" }
+      },
+      "id": "node-erro-cnpj",
+      "name": "Telegram - Erro CNPJ",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1120, 560],
+      "credentials": {
+        "telegramApi": {
+          "id": "6z5EAatuLTBRXuDK",
+          "name": "Telegram Bot AUDIPER"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('3. Extrair CNPJ').item.json.chat_id }}",
+        "text": "<b>AUDIZ - Diagnostico NBC TA</b>\n\nAnalisando CNPJ {{ $('3. Extrair CNPJ').item.json.cnpj }}...\n<i>Aguarde, verificando aceitacao e independencia.</i>",
+        "additionalFields": { "parse_mode": "HTML" }
+      },
+      "id": "node-typing",
+      "name": "5. Telegram - Processando",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1120, 300],
+      "credentials": {
+        "telegramApi": {
+          "id": "6z5EAatuLTBRXuDK",
+          "name": "Telegram Bot AUDIPER"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:8001/agno/audit/diagnose",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ cnpj: $('3. Extrair CNPJ').item.json.cnpj, empresa: $('3. Extrair CNPJ').item.json.empresa, exercicio: '2025' }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "node-diagnose",
+      "name": "6. AUDIZ Diagnose API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1340, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\nconst chatId = $('3. Extrair CNPJ').item.json.chat_id;\nconst cnpj = $('3. Extrair CNPJ').item.json.cnpj;\nlet content = response.content || 'Sem resposta do AUDIZ.';\n\nif (content.length > 3800) {\n  content = content.substring(0, 3750) + '\\n\\n<i>[resposta truncada]</i>';\n}\n\ncontent = content\n  .replace(/&/g, '&amp;')\n  .replace(/</g, '&lt;')\n  .replace(/>/g, '&gt;')\n  .replace(/\\*\\*(.+?)\\*\\*/g, '<b>$1</b>')\n  .replace(/\\*(.+?)\\*/g, '<i>$1</i>')\n  .replace(/###\\s*(.+)/g, '<b>$1</b>')\n  .replace(/```([\\s\\S]*?)```/g, '<pre>$1</pre>');\n\nconst header = `<b>[AUDIZ] Diagnostico NBC TA</b>\\nCNPJ: ${cnpj}\\n\\n`;\n\nreturn [{ json: { chat_id: chatId, text: header + content } }];"
+      },
+      "id": "node-format",
+      "name": "7. Formatar Resposta",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1560, 300]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.chat_id }}",
+        "text": "={{ $json.text }}",
+        "additionalFields": { "parse_mode": "HTML" }
+      },
+      "id": "node-resposta",
+      "name": "8. Telegram - Resposta",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1780, 300],
+      "credentials": {
+        "telegramApi": {
+          "id": "6z5EAatuLTBRXuDK",
+          "name": "Telegram Bot AUDIPER"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "1. Telegram Trigger": {
+      "main": [[{ "node": "2. Filtro /diagnostico", "type": "main", "index": 0 }]]
+    },
+    "2. Filtro /diagnostico": {
+      "main": [[{ "node": "3. Extrair CNPJ", "type": "main", "index": 0 }]]
+    },
+    "3. Extrair CNPJ": {
+      "main": [[{ "node": "4. CNPJ Valido?", "type": "main", "index": 0 }]]
+    },
+    "4. CNPJ Valido?": {
+      "main": [
+        [{ "node": "5. Telegram - Processando", "type": "main", "index": 0 }],
+        [{ "node": "Telegram - Erro CNPJ", "type": "main", "index": 0 }]
+      ]
+    },
+    "5. Telegram - Processando": {
+      "main": [[{ "node": "6. AUDIZ Diagnose API", "type": "main", "index": 0 }]]
+    },
+    "6. AUDIZ Diagnose API": {
+      "main": [[{ "node": "7. Formatar Resposta", "type": "main", "index": 0 }]]
+    },
+    "7. Formatar Resposta": {
+      "main": [[{ "node": "8. Telegram - Resposta", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": { "executionOrder": "v1" },
+  "tags": [],
+  "triggerCount": 1,
+  "pinData": {}
+}

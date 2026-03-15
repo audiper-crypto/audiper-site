@@ -1,0 +1,225 @@
+{
+  "name": "AUDIPER - APEX Chat via Telegram",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": ["message"],
+        "additionalFields": {}
+      },
+      "id": "node-trigger",
+      "name": "1. Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.1,
+      "position": [240, 400],
+      "webhookId": "audiper-apex-trigger",
+      "credentials": {
+        "telegramApi": {
+          "id": "6z5EAatuLTBRXuDK",
+          "name": "Telegram Bot AUDIPER"
+        }
+      },
+      "notes": "Recebe qualquer mensagem do Telegram"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": false },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.message.text }}",
+              "rightValue": "/apex",
+              "operator": { "type": "string", "operation": "startsWith" }
+            }
+          ]
+        }
+      },
+      "id": "node-filter",
+      "name": "2. Filtro /apex",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [460, 400]
+    },
+    {
+      "parameters": {
+        "jsCode": "const text = $input.first().json.message.text;\nconst query = text.replace(/\\/apex\\s*/i, '').trim();\nconst chatId = $input.first().json.message.chat.id;\nconst userName = $input.first().json.message.from.first_name || 'Auditor';\n\nif (!query) {\n  return [{ json: {\n    vazio: true,\n    chat_id: chatId,\n    mensagem: '<b>APEX - Comando Central AUDIPER</b>\\n\\nUso: /apex [sua pergunta]\\n\\nExemplos:\\n/apex como calcular materialidade?\\n/apex procedimentos NBC TA 315\\n/apex diagnostico CNPJ 12345678000190'\n  } }];\n}\n\nreturn [{ json: {\n  vazio: false,\n  query: query,\n  chat_id: chatId,\n  user_name: userName\n} }];"
+      },
+      "id": "node-extrair",
+      "name": "3. Extrair Query",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 400]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "leftValue": "={{ $json.vazio }}",
+              "rightValue": false,
+              "operator": { "type": "boolean", "operation": "equals" }
+            }
+          ]
+        }
+      },
+      "id": "node-if-query",
+      "name": "4. Tem Query?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [900, 400]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.chat_id }}",
+        "text": "={{ $json.mensagem }}",
+        "additionalFields": {
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "node-help",
+      "name": "Telegram - Help",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1120, 560],
+      "credentials": {
+        "telegramApi": {
+          "id": "6z5EAatuLTBRXuDK",
+          "name": "Telegram Bot AUDIPER"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('3. Extrair Query').item.json.chat_id }}",
+        "text": "<b>APEX processando...</b>\n\n<i>{{ $('3. Extrair Query').item.json.query }}</i>",
+        "additionalFields": {
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "node-typing",
+      "name": "5. Telegram - Processando",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1120, 300],
+      "credentials": {
+        "telegramApi": {
+          "id": "6z5EAatuLTBRXuDK",
+          "name": "Telegram Bot AUDIPER"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:8001/agno/chat/",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ message: $('3. Extrair Query').item.json.query }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "node-apex",
+      "name": "6. APEX API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1340, 300],
+      "notes": "Chama FastAPI APEX em localhost:8001"
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\nconst chatId = $('3. Extrair Query').item.json.chat_id;\nlet content = response.content || response.detail || 'Sem resposta do APEX.';\n\n// Limitar a 4000 chars (limite Telegram)\nif (content.length > 4000) {\n  content = content.substring(0, 3950) + '\\n\\n<i>[resposta truncada]</i>';\n}\n\n// Escapar HTML basico\ncontent = content\n  .replace(/&/g, '&amp;')\n  .replace(/</g, '&lt;')\n  .replace(/>/g, '&gt;');\n\n// Restaurar tags de formatacao\ncontent = content\n  .replace(/\\*\\*(.+?)\\*\\*/g, '<b>$1</b>')\n  .replace(/\\*(.+?)\\*/g, '<i>$1</i>')\n  .replace(/###\\s*(.+)/g, '<b>$1</b>')\n  .replace(/```([\\s\\S]*?)```/g, '<pre>$1</pre>');\n\nconst pilar = response.pilar || 'APEX';\nconst header = `<b>[${pilar}]</b>\\n\\n`;\n\nreturn [{ json: {\n  chat_id: chatId,\n  text: header + content\n} }];"
+      },
+      "id": "node-format",
+      "name": "7. Formatar Resposta",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1560, 300]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.chat_id }}",
+        "text": "={{ $json.text }}",
+        "additionalFields": {
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "node-resposta",
+      "name": "8. Telegram - Resposta",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1780, 300],
+      "credentials": {
+        "telegramApi": {
+          "id": "6z5EAatuLTBRXuDK",
+          "name": "Telegram Bot AUDIPER"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('3. Extrair Query').item.json.chat_id }}",
+        "text": "<b>Erro APEX:</b> {{ $json.message || $json.detail || 'Servico indisponivel. Verifique se a API esta rodando em localhost:8001.' }}",
+        "additionalFields": {
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "node-erro",
+      "name": "Telegram - Erro",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1560, 500],
+      "credentials": {
+        "telegramApi": {
+          "id": "6z5EAatuLTBRXuDK",
+          "name": "Telegram Bot AUDIPER"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "1. Telegram Trigger": {
+      "main": [
+        [{ "node": "2. Filtro /apex", "type": "main", "index": 0 }]
+      ]
+    },
+    "2. Filtro /apex": {
+      "main": [
+        [{ "node": "3. Extrair Query", "type": "main", "index": 0 }]
+      ]
+    },
+    "3. Extrair Query": {
+      "main": [
+        [{ "node": "4. Tem Query?", "type": "main", "index": 0 }]
+      ]
+    },
+    "4. Tem Query?": {
+      "main": [
+        [{ "node": "5. Telegram - Processando", "type": "main", "index": 0 }],
+        [{ "node": "Telegram - Help", "type": "main", "index": 0 }]
+      ]
+    },
+    "5. Telegram - Processando": {
+      "main": [
+        [{ "node": "6. APEX API", "type": "main", "index": 0 }]
+      ]
+    },
+    "6. APEX API": {
+      "main": [
+        [{ "node": "7. Formatar Resposta", "type": "main", "index": 0 }]
+      ]
+    },
+    "7. Formatar Resposta": {
+      "main": [
+        [{ "node": "8. Telegram - Resposta", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "errorWorkflow": ""
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "pinData": {}
+}
