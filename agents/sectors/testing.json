@@ -1,0 +1,161 @@
+{
+  "sector": "testing",
+  "sector_name": "Testes",
+  "description": "QA, testes automatizados, validação de software e garantia de qualidade",
+  "agents": [
+    {
+      "id": "qa-engineer",
+      "name": "QA Engineer",
+      "role": "Engenharia de qualidade, planos de teste e gestão de defeitos",
+      "skills": ["Test Planning", "Manual Testing", "Bug Tracking", "Test Cases", "QA Methodology"],
+      "workflows": [
+        {
+          "trigger": "criar_plano_teste",
+          "steps": ["analisar_requisitos", "definir_escopo_teste", "criar_casos_teste", "priorizar", "documentar"],
+          "output": "Plano de teste completo com casos de teste"
+        },
+        {
+          "trigger": "executar_ciclo_qa",
+          "steps": ["executar_testes", "registrar_bugs", "reteste", "aprovar_release"],
+          "output": "Relatório de ciclo QA com status de qualidade"
+        }
+      ],
+      "capabilities": ["test-planning", "qa-management", "defect-tracking", "release-approval"],
+      "memory_tags": ["qa", "teste", "qualidade", "bug", "plano-teste"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 91
+    },
+    {
+      "id": "automation-tester",
+      "name": "Automation Tester",
+      "role": "Automação de testes com Playwright, Pytest e CI/CD integration",
+      "skills": ["Playwright", "Pytest", "Python", "Selenium", "CI/CD", "Page Object Model"],
+      "workflows": [
+        {
+          "trigger": "automatizar_testes_e2e",
+          "steps": ["identificar_fluxos_criticos", "implementar_page_objects", "escrever_testes", "integrar_ci"],
+          "output": "Suite de testes E2E integrada ao CI/CD"
+        },
+        {
+          "trigger": "criar_testes_api",
+          "steps": ["mapear_endpoints", "criar_casos_teste_api", "implementar_assertions", "integrar_pipeline"],
+          "output": "Testes de API automatizados no pipeline"
+        }
+      ],
+      "capabilities": ["test-automation", "e2e-testing", "api-testing", "ci-integration"],
+      "memory_tags": ["automacao-teste", "playwright", "pytest", "e2e", "ci-cd"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 90
+    },
+    {
+      "id": "performance-tester",
+      "name": "Performance Tester",
+      "role": "Testes de carga, stress e performance de APIs e interfaces",
+      "skills": ["Locust", "k6", "JMeter", "Load Testing", "Stress Testing", "Performance Profiling"],
+      "workflows": [
+        {
+          "trigger": "teste_carga",
+          "steps": ["definir_cenario_carga", "implementar_script", "executar_teste", "analisar_resultados", "recomendar"],
+          "output": "Relatório de performance com gargalos identificados"
+        }
+      ],
+      "capabilities": ["load-testing", "stress-testing", "performance-profiling"],
+      "memory_tags": ["performance", "carga", "stress", "locust", "k6"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 87
+    },
+    {
+      "id": "security-tester",
+      "name": "Security Tester",
+      "role": "Testes de segurança, DAST, SAST e pentest de aplicações web",
+      "skills": ["OWASP ZAP", "Burp Suite", "DAST", "SAST", "Pentest", "SQL Injection", "XSS"],
+      "workflows": [
+        {
+          "trigger": "pentest_aplicacao",
+          "steps": ["reconhecimento", "varredura_vulnerabilidades", "exploracao", "documentar_achados", "gerar_relatorio"],
+          "output": "Relatório de pentest com CVSS scoring"
+        }
+      ],
+      "capabilities": ["penetration-testing", "security-scanning", "vulnerability-assessment"],
+      "memory_tags": ["pentest", "seguranca", "vulnerabilidade", "owasp", "dast"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 89
+    },
+    {
+      "id": "test-data-engineer",
+      "name": "Test Data Engineer",
+      "role": "Criação e gestão de massa de dados para testes",
+      "skills": ["Test Data Management", "Faker", "Python", "Fixtures", "Data Generation", "Database Seeds"],
+      "workflows": [
+        {
+          "trigger": "criar_massa_teste",
+          "steps": ["analisar_casos_uso", "criar_geradores", "popular_ambiente_teste", "documentar_dados"],
+          "output": "Massa de dados de teste gerada e documentada"
+        }
+      ],
+      "capabilities": ["test-data-management", "data-generation", "fixture-creation"],
+      "memory_tags": ["dados-teste", "faker", "fixtures", "massa-dados"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 85
+    },
+    {
+      "id": "unit-test-specialist",
+      "name": "Unit Test Specialist",
+      "role": "Testes unitários, TDD e cobertura de código",
+      "skills": ["Pytest", "unittest", "Jest", "TDD", "Code Coverage", "Mocking", "Assertions"],
+      "workflows": [
+        {
+          "trigger": "aumentar_cobertura",
+          "steps": ["medir_cobertura_atual", "identificar_codigo_sem_teste", "escrever_testes_unitarios", "medir_melhoria"],
+          "output": "Cobertura de código aumentada com novos testes"
+        }
+      ],
+      "capabilities": ["unit-testing", "tdd", "code-coverage", "mocking"],
+      "memory_tags": ["teste-unitario", "tdd", "cobertura", "pytest", "jest"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 88
+    },
+    {
+      "id": "integration-tester",
+      "name": "Integration Tester",
+      "role": "Testes de integração entre sistemas, APIs e serviços externos",
+      "skills": ["Integration Testing", "Contract Testing", "Pact", "API Testing", "Service Testing"],
+      "workflows": [
+        {
+          "trigger": "testar_integracao",
+          "steps": ["mapear_dependencias", "criar_testes_contrato", "executar_em_staging", "validar_comportamento"],
+          "output": "Suite de testes de integração aprovada"
+        }
+      ],
+      "capabilities": ["integration-testing", "contract-testing", "service-validation"],
+      "memory_tags": ["integracao", "contrato-teste", "api", "dependencia"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 87
+    },
+    {
+      "id": "accessibility-tester",
+      "name": "Accessibility Tester",
+      "role": "Testes de acessibilidade WCAG, leitores de tela e usabilidade",
+      "skills": ["WCAG 2.1", "axe", "NVDA", "Screen Reader Testing", "Accessibility Audit", "Keyboard Navigation"],
+      "workflows": [
+        {
+          "trigger": "testar_acessibilidade",
+          "steps": ["executar_axe_scan", "testar_com_leitor_tela", "verificar_navegacao_teclado", "documentar_issues"],
+          "output": "Relatório de acessibilidade com severidade de cada issue"
+        }
+      ],
+      "capabilities": ["accessibility-testing", "wcag-validation", "screen-reader-testing"],
+      "memory_tags": ["acessibilidade", "wcag", "axe", "leitor-tela", "teclado"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 86
+    }
+  ]
+}

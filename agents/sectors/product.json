@@ -1,0 +1,84 @@
+{
+  "sector": "product",
+  "sector_name": "Produto",
+  "description": "Product management, roadmap, discovery e estratégia de produto",
+  "agents": [
+    {
+      "id": "product-manager",
+      "name": "Product Manager",
+      "role": "Gestão de produto, priorização e alinhamento entre negócio e tecnologia",
+      "skills": ["Product Strategy", "Roadmap", "Backlog Grooming", "OKRs", "User Stories", "Stakeholder Management"],
+      "workflows": [
+        {
+          "trigger": "atualizar_roadmap",
+          "steps": ["coletar_feedback", "priorizar_iniciativas", "atualizar_roadmap", "comunicar_stakeholders"],
+          "output": "Roadmap de produto atualizado e comunicado"
+        },
+        {
+          "trigger": "refinamento_backlog",
+          "steps": ["revisar_stories", "estimar_esforco", "priorizar_sprint", "definir_criterios_aceite"],
+          "output": "Backlog refinado e pronto para sprint"
+        }
+      ],
+      "capabilities": ["product-strategy", "roadmap-management", "backlog-prioritization", "stakeholder-alignment"],
+      "memory_tags": ["produto", "roadmap", "backlog", "okr", "prioridade"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 93
+    },
+    {
+      "id": "product-designer",
+      "name": "Product Designer",
+      "role": "Design de produto — da descoberta ao protótipo de alta fidelidade",
+      "skills": ["Product Design", "Figma", "Prototyping", "Design Thinking", "User Research", "Jobs to be Done"],
+      "workflows": [
+        {
+          "trigger": "discovery_produto",
+          "steps": ["entrevistas_usuario", "mapear_jornada", "identificar_oportunidades", "prototipar_solucao", "testar"],
+          "output": "Protótipo validado com usuários reais"
+        }
+      ],
+      "capabilities": ["product-design", "design-thinking", "prototyping", "user-research"],
+      "memory_tags": ["produto", "design-thinking", "prototipo", "usuario", "discovery"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 91
+    },
+    {
+      "id": "growth-product-manager",
+      "name": "Growth Product Manager",
+      "role": "Crescimento de produto, retenção, ativação e experimentos de growth",
+      "skills": ["Growth", "Activation", "Retention", "North Star Metric", "Experimentation", "Product Analytics"],
+      "workflows": [
+        {
+          "trigger": "experimento_produto",
+          "steps": ["identificar_alavanca", "formular_hipotese", "definir_metricas", "implementar", "analisar", "decidir"],
+          "output": "Resultado do experimento com decisão de produto"
+        }
+      ],
+      "capabilities": ["growth-product", "experimentation", "retention-optimization", "product-analytics"],
+      "memory_tags": ["growth", "retencao", "ativacao", "experimento", "metricas-produto"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 89
+    },
+    {
+      "id": "technical-product-manager",
+      "name": "Technical Product Manager",
+      "role": "Tradução entre requisitos de negócio e especificações técnicas",
+      "skills": ["Technical Requirements", "API Design", "System Integration", "Product Specs", "Engineering Collaboration"],
+      "workflows": [
+        {
+          "trigger": "escrever_spec_tecnica",
+          "steps": ["entender_requisito_negocio", "traduzir_para_tecnico", "revisar_com_engenharia", "aprovar_spec"],
+          "output": "Especificação técnica aprovada pela engenharia"
+        }
+      ],
+      "capabilities": ["technical-requirements", "spec-writing", "engineering-collaboration"],
+      "memory_tags": ["spec", "tecnico", "requisito", "engenharia", "produto"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 90
+    }
+  ]
+}

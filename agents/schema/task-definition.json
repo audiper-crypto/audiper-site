@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "Task Definition",
+  "description": "Schema de definição de tarefa para agentes Audiper",
+  "type": "object",
+  "required": ["id", "title", "agent_id", "sector", "priority", "created_at"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "UUID da tarefa"
+    },
+    "title": {
+      "type": "string",
+      "description": "Título curto da tarefa"
+    },
+    "description": {
+      "type": "string",
+      "description": "Descrição detalhada da tarefa e contexto"
+    },
+    "agent_id": {
+      "type": "string",
+      "description": "ID do agente responsável pela execução"
+    },
+    "sector": {
+      "type": "string",
+      "description": "Setor responsável"
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low"],
+      "description": "Prioridade de execução"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pending", "in_progress", "completed", "failed", "cancelled"],
+      "description": "Status atual da tarefa"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp de criação"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp de início da execução"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp de conclusão"
+    },
+    "deadline": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Prazo limite para conclusão"
+    },
+    "input": {
+      "type": "object",
+      "description": "Dados de entrada para a tarefa (schema livre)"
+    },
+    "expected_output": {
+      "type": "string",
+      "description": "Descrição do entregável esperado"
+    },
+    "actual_output": {
+      "type": "string",
+      "description": "Entregável real produzido"
+    },
+    "dependencies": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "IDs de tarefas que devem ser concluídas antes desta"
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Tags para categorização e busca"
+    },
+    "workflow_trigger": {
+      "type": "string",
+      "description": "Nome do workflow ativado para esta tarefa"
+    },
+    "session_id": {
+      "type": "string",
+      "description": "ID da sessão que criou a tarefa"
+    }
+  }
+}

@@ -56,6 +56,11 @@
       "emoji": "🟡",
       "urgencia": "MEDIA",
       "texto": "59 anos de operacao. Revisao periodica reduz risco de distorcoes acumuladas."
+    },
+    {
+      "emoji": "🟡",
+      "urgencia": "MEDIA",
+      "texto": "Estrutura societaria complexa: 43 socios. Requer atencao especial na escrituracao."
     }
   ],
   "servicos_recomendados": [
@@ -80,5 +85,27 @@
   "valor_total_formatado": "R$ 11.250,00",
   "contato_nome": "Alan Carlos Guedes De Oliveira",
   "anos_atividade": 59,
-  "porte": "MEDIO"
+  "porte": "MEDIO",
+  "certidoes_resumo": "⚠️ API TCU indisponivel no momento",
+  "processos_judiciais": {
+    "total_encontrados": 0,
+    "processos": [],
+    "_api_fonte": "DataJud (CNJ)"
+  },
+  "divida_ativa": {
+    "total_registros": 0,
+    "tem_divida": false,
+    "registros": [],
+    "_api_fonte": "PGFN (indisponivel)"
+  },
+  "dados_cnpja": {
+    "simples_optante": false,
+    "simples_desde": "",
+    "mei_optante": false,
+    "mei_desde": "",
+    "inscricoes_estaduais": [],
+    "suframa": [],
+    "_api_fonte": "CNPJa Open"
+  },
+  "perfil_tributario": "Lucro Real (obrigatorio)"
 }

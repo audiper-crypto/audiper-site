@@ -1,0 +1,97 @@
+{
+  "dados_empresa": {
+    "cnpj": "07526557000100",
+    "cnpj_formatado": "07.526.557/0001-00",
+    "razao_social": "AMBEV S.A.",
+    "nome_fantasia": "",
+    "situacao_cadastral": "ATIVA",
+    "data_situacao": "2005-07-19",
+    "data_inicio": "2005-07-19",
+    "cnae_principal": "1113502",
+    "cnae_descricao": "Fabricação de cervejas e chopes",
+    "natureza_juridica": "",
+    "porte": "MEDIO",
+    "capital_social": 58275086000.0,
+    "opcao_simples": null,
+    "opcao_mei": null,
+    "uf": "SP",
+    "municipio": "SAO PAULO",
+    "logradouro": "DR RENATO PAES DE BARROS",
+    "numero": "1017",
+    "bairro": "ITAIM BIBI",
+    "cep": "04530001",
+    "telefone": "1933135680",
+    "email": null,
+    "qsa": [
+      {
+        "nome": "CARLA SMITH DE VASCONCELLOS CRIPPA PRADO",
+        "qualificacao": "Diretor"
+      },
+      {
+        "nome": "CARLOS EDUARDO KLUTZENSCHELL LISBOA",
+        "qualificacao": "Diretor"
+      },
+      {
+        "nome": "DANIEL WAKSWASER CORDEIRO",
+        "qualificacao": "Diretor"
+      },
+      {
+        "nome": "DANIELA GAVRANIC CACHICH",
+        "qualificacao": "Diretor"
+      },
+      {
+        "nome": "EDUARDO BRAGA CAVALCANTI DE LACERDA",
+        "qualificacao": "Diretor"
+      }
+    ],
+    "_api_fonte": "BrasilAPI"
+  },
+  "alertas": [
+    {
+      "emoji": "🟡",
+      "urgencia": "MEDIA",
+      "texto": "CNAE industrial (Fabricação de cervejas e chopes). ICMS/IPI complexo, risco de creditos indevidos."
+    },
+    {
+      "emoji": "🔴",
+      "urgencia": "ALTA",
+      "texto": "Empresa de grande porte. Possivel obrigatoriedade de auditoria independente (Lei 11.638/07)."
+    },
+    {
+      "emoji": "🟡",
+      "urgencia": "MEDIA",
+      "texto": "20 anos de operacao. Revisao periodica reduz risco de distorcoes acumuladas."
+    }
+  ],
+  "servicos_recomendados": [
+    {
+      "id": "revisao_sped_fiscal",
+      "descricao": "Revisao SPED Fiscal (ICMS/IPI)",
+      "fundamentacao": "Convs. ICMS / Guia Pratico EFD",
+      "periodicidade": "pontual",
+      "valor": 4500.0,
+      "valor_formatado": "R$ 4.500,00"
+    },
+    {
+      "id": "auditoria_independente",
+      "descricao": "Auditoria das Demonstracoes Contabeis",
+      "fundamentacao": "NBC TA 200 a 720",
+      "periodicidade": "mensal",
+      "valor": 7500.0,
+      "valor_formatado": "R$ 7.500,00"
+    },
+    {
+      "id": "revisao_sped_ecd",
+      "descricao": "Revisao e Validacao do SPED ECD",
+      "fundamentacao": "IN RFB 1774/2017",
+      "periodicidade": "pontual",
+      "valor": 3750.0,
+      "valor_formatado": "R$ 3.750,00"
+    }
+  ],
+  "valor_total": 15750.0,
+  "valor_total_formatado": "R$ 15.750,00",
+  "contato_nome": "Carla Smith De Vasconcellos Crippa Prado",
+  "anos_atividade": 20,
+  "porte": "MEDIO"
+}

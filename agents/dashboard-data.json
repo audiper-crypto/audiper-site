@@ -1,0 +1,107 @@
+{
+  "generated_at": "2026-03-15T00:00:00Z",
+  "period": "today",
+  "stats": {
+    "total_agents": 146,
+    "active_today": 0,
+    "tasks_completed": 0,
+    "tasks_in_progress": 0,
+    "tasks_pending": 0,
+    "tasks_failed": 0,
+    "total_learnings": 0,
+    "memory_updates": 0,
+    "average_quality_score": 0,
+    "average_performance_score": 0
+  },
+  "recent_activity": [],
+  "sector_performance": {
+    "engineering": {
+      "tasks_today": 0,
+      "success_rate": 0,
+      "avg_quality": 0,
+      "top_agent": null
+    },
+    "marketing": {
+      "tasks_today": 0,
+      "success_rate": 0,
+      "avg_quality": 0,
+      "top_agent": null
+    },
+    "design": {
+      "tasks_today": 0,
+      "success_rate": 0,
+      "avg_quality": 0,
+      "top_agent": null
+    },
+    "sales": {
+      "tasks_today": 0,
+      "success_rate": 0,
+      "avg_quality": 0,
+      "top_agent": null
+    },
+    "auditoria": {
+      "tasks_today": 0,
+      "success_rate": 0,
+      "avg_quality": 0,
+      "top_agent": null
+    },
+    "specialized": {
+      "tasks_today": 0,
+      "success_rate": 0,
+      "avg_quality": 0,
+      "top_agent": null
+    },
+    "testing": {
+      "tasks_today": 0,
+      "success_rate": 0,
+      "avg_quality": 0,
+      "top_agent": null
+    },
+    "product": {
+      "tasks_today": 0,
+      "success_rate": 0,
+      "avg_quality": 0,
+      "top_agent": null
+    },
+    "projectmgmt": {
+      "tasks_today": 0,
+      "success_rate": 0,
+      "avg_quality": 0,
+      "top_agent": null
+    },
+    "support": {
+      "tasks_today": 0,
+      "success_rate": 0,
+      "avg_quality": 0,
+      "top_agent": null
+    },
+    "strategy": {
+      "tasks_today": 0,
+      "success_rate": 0,
+      "avg_quality": 0,
+      "top_agent": null
+    },
+    "orchestration": {
+      "tasks_today": 0,
+      "success_rate": 0,
+      "avg_quality": 0,
+      "top_agent": null
+    }
+  },
+  "top_agents": [],
+  "daily_learnings": [],
+  "system_health": {
+    "n8n": "unknown",
+    "telegram_bot": "unknown",
+    "discord_bot": "unknown",
+    "obsidian": "unknown",
+    "claude_code": "active"
+  },
+  "scheduled_tasks": {
+    "morning_brief": "08:00",
+    "morning_research": "09:00",
+    "afternoon_research": "13:00",
+    "evening_research": "17:00",
+    "daily_reflect": "20:00"
+  }
+}

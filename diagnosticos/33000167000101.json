@@ -80,5 +80,27 @@
   "valor_total_formatado": "R$ 11.250,00",
   "contato_nome": "Angelica Garcia Cobas Laureano",
   "anos_atividade": 59,
-  "porte": "MEDIO"
+  "porte": "MEDIO",
+  "certidoes_resumo": "⚠️ API TCU indisponivel no momento",
+  "processos_judiciais": {
+    "total_encontrados": 0,
+    "processos": [],
+    "_api_fonte": "DataJud (CNJ)"
+  },
+  "divida_ativa": {
+    "total_registros": 0,
+    "tem_divida": false,
+    "registros": [],
+    "_api_fonte": "PGFN (indisponivel)"
+  },
+  "dados_cnpja": {
+    "simples_optante": false,
+    "simples_desde": "",
+    "mei_optante": false,
+    "mei_desde": "",
+    "inscricoes_estaduais": [],
+    "suframa": [],
+    "_api_fonte": "CNPJa Open"
+  },
+  "perfil_tributario": "Lucro Real (obrigatorio)"
 }

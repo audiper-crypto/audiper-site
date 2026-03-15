@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "Log Entry",
+  "description": "Schema de entrada de log de execução de agente",
+  "type": "object",
+  "required": ["id", "agent_id", "sector", "timestamp", "task", "status"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "UUID da entrada de log"
+    },
+    "agent_id": {
+      "type": "string",
+      "description": "ID do agente que executou a tarefa"
+    },
+    "sector": {
+      "type": "string",
+      "description": "Setor do agente"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Momento de início da execução (ISO 8601)"
+    },
+    "task": {
+      "type": "string",
+      "description": "Descrição da tarefa realizada"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["completed", "in_progress", "failed", "skipped"],
+      "description": "Status final da tarefa"
+    },
+    "duration_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Duração da execução em milissegundos"
+    },
+    "input_summary": {
+      "type": "string",
+      "description": "Resumo dos dados de entrada"
+    },
+    "output_summary": {
+      "type": "string",
+      "description": "Resumo dos dados de saída / entregáveis"
+    },
+    "learnings": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Aprendizados extraídos desta execução"
+    },
+    "memory_updates": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Atualizações feitas na memória do agente"
+    },
+    "skill_updates": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Skills atualizadas ou criadas"
+    },
+    "quality_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 10,
+      "description": "Score de qualidade do output (0-10)"
+    },
+    "session_id": {
+      "type": "string",
+      "description": "ID da sessão Claude Code ou n8n que gerou este log"
+    }
+  }
+}

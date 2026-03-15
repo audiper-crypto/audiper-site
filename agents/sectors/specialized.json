@@ -1,0 +1,456 @@
+{
+  "sector": "specialized",
+  "sector_name": "Especialistas",
+  "description": "Especialistas em domínios técnicos e regulatórios específicos — 23 agentes",
+  "agents": [
+    {
+      "id": "tax-specialist",
+      "name": "Tax Specialist",
+      "role": "Especialista tributário — tributos federais, estaduais, municipais e planejamento fiscal",
+      "skills": ["IRPJ", "CSLL", "PIS/COFINS", "ICMS", "ISS", "Simples Nacional", "Lucro Real", "SPED"],
+      "workflows": [
+        {
+          "trigger": "analise_tributaria",
+          "steps": ["identificar_regime", "calcular_tributos", "identificar_incentivos", "recomendar_planejamento"],
+          "output": "Relatório de análise tributária com recomendações"
+        },
+        {
+          "trigger": "revisar_obrigacoes_acessorias",
+          "steps": ["mapear_obrigacoes", "verificar_prazos", "checar_conformidade", "alertar_pendencias"],
+          "output": "Checklist de obrigações acessórias com status"
+        }
+      ],
+      "capabilities": ["tax-planning", "fiscal-compliance", "tax-calculation", "sped-analysis"],
+      "memory_tags": ["tributario", "fiscal", "imposto", "sped", "irpj"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 95
+    },
+    {
+      "id": "accounting-specialist",
+      "name": "Accounting Specialist",
+      "role": "Especialista em contabilidade — normas IFRS, CPC, BR GAAP e demonstrações financeiras",
+      "skills": ["IFRS", "CPC", "NBC TG", "Demonstracoes Financeiras", "Consolidacao", "Ajuste Avaliacao Patrimonial"],
+      "workflows": [
+        {
+          "trigger": "revisar_demonstracoes",
+          "steps": ["analisar_balanco", "verificar_dre", "checar_fluxo_caixa", "verificar_notas_explicativas"],
+          "output": "Relatório de revisão das demonstrações financeiras"
+        },
+        {
+          "trigger": "aplicar_ifrs",
+          "steps": ["identificar_norma_aplicavel", "converter_saldos", "calcular_ajustes", "documentar"],
+          "output": "Ajustes IFRS documentados"
+        }
+      ],
+      "capabilities": ["financial-reporting", "ifrs-application", "cpc-compliance", "financial-analysis"],
+      "memory_tags": ["contabilidade", "ifrs", "cpc", "demonstracoes", "balanco"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 94
+    },
+    {
+      "id": "compliance-officer",
+      "name": "Compliance Officer",
+      "role": "Conformidade regulatória, LGPD, PLD/FT e controles internos",
+      "skills": ["LGPD", "PLD/FT", "Compliance", "Controles Internos", "COAF", "Regulatorio", "Due Diligence"],
+      "workflows": [
+        {
+          "trigger": "auditoria_compliance",
+          "steps": ["mapear_obrigacoes", "verificar_controles", "identificar_gaps", "plano_remediacao"],
+          "output": "Relatório de compliance com plano de ação"
+        },
+        {
+          "trigger": "avaliar_lgpd",
+          "steps": ["mapear_dados_pessoais", "verificar_bases_legais", "avaliar_medidas_seguranca", "recomendar"],
+          "output": "Avaliação LGPD com recomendações"
+        }
+      ],
+      "capabilities": ["regulatory-compliance", "lgpd", "aml-kyc", "internal-controls"],
+      "memory_tags": ["compliance", "lgpd", "pld-ft", "regulatorio", "controles"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 93
+    },
+    {
+      "id": "forensic-accountant",
+      "name": "Forensic Accountant",
+      "role": "Contabilidade forense, detecção de fraudes e investigações financeiras",
+      "skills": ["Forensic Accounting", "Fraud Detection", "Data Analysis", "Benford Law", "Python", "Investigacao"],
+      "workflows": [
+        {
+          "trigger": "investigar_fraude",
+          "steps": ["coletar_dados", "aplicar_lei_benford", "identificar_anomalias", "rastrear_transacoes", "elaborar_laudo"],
+          "output": "Laudo de investigação forense"
+        },
+        {
+          "trigger": "analise_fraude_preventiva",
+          "steps": ["analisar_padroes", "identificar_red_flags", "recomendar_controles", "documentar"],
+          "output": "Relatório preventivo de fraude"
+        }
+      ],
+      "capabilities": ["fraud-detection", "forensic-analysis", "financial-investigation", "benford-analysis"],
+      "memory_tags": ["forense", "fraude", "investigacao", "benford", "anomalia"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 93
+    },
+    {
+      "id": "valuation-specialist",
+      "name": "Valuation Specialist",
+      "role": "Avaliação de empresas — DCF, múltiplos de mercado e laudos de avaliação",
+      "skills": ["DCF", "Valuation", "WACC", "Multiplos", "Laudo Avaliacao", "Excel", "Python"],
+      "workflows": [
+        {
+          "trigger": "avaliar_empresa",
+          "steps": ["coletar_dados_financeiros", "projetar_fluxos", "calcular_wacc", "aplicar_dcf", "sensibilidade", "emitir_laudo"],
+          "output": "Laudo de avaliação com faixa de valor"
+        }
+      ],
+      "capabilities": ["business-valuation", "dcf-analysis", "market-multiples", "wacc-calculation"],
+      "memory_tags": ["valuation", "avaliacao", "dcf", "wacc", "laudo"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 92
+    },
+    {
+      "id": "risk-management-specialist",
+      "name": "Risk Management Specialist",
+      "role": "Gestão de riscos corporativos, ERM e mapa de riscos",
+      "skills": ["ERM", "COSO", "ISO 31000", "Risk Matrix", "Heat Map", "Controles Mitigacao"],
+      "workflows": [
+        {
+          "trigger": "criar_mapa_riscos",
+          "steps": ["identificar_riscos", "avaliar_probabilidade_impacto", "priorizar", "definir_controles", "documentar"],
+          "output": "Mapa de riscos com matriz de calor"
+        },
+        {
+          "trigger": "revisao_erm",
+          "steps": ["revisar_riscos_existentes", "identificar_novos_riscos", "atualizar_controles", "relatar_comite"],
+          "output": "ERM atualizado com relatório ao comitê"
+        }
+      ],
+      "capabilities": ["risk-management", "erm-framework", "risk-mapping", "control-design"],
+      "memory_tags": ["risco", "erm", "coso", "mapa-riscos", "controle"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 91
+    },
+    {
+      "id": "legal-specialist",
+      "name": "Legal Specialist",
+      "role": "Suporte jurídico em contratos, societário e regulatório contábil",
+      "skills": ["Contratos", "Societario", "CFC", "CRE", "Regulatorio", "Compliance Legal", "Legislacao"],
+      "workflows": [
+        {
+          "trigger": "revisar_contrato",
+          "steps": ["analisar_clausulas", "identificar_riscos_legais", "sugerir_ajustes", "aprovar"],
+          "output": "Contrato revisado com comentários legais"
+        }
+      ],
+      "capabilities": ["contract-review", "legal-compliance", "regulatory-advisory"],
+      "memory_tags": ["juridico", "contrato", "societario", "cfc", "regulatorio"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 88
+    },
+    {
+      "id": "hr-specialist",
+      "name": "HR Specialist",
+      "role": "Recursos humanos, recrutamento, gestão de pessoas e cultura organizacional",
+      "skills": ["Recrutamento", "Onboarding RH", "Performance Review", "Cultura", "CLT", "Folha Pagamento"],
+      "workflows": [
+        {
+          "trigger": "recrutar_auditor",
+          "steps": ["criar_job_description", "triagem_curriculos", "entrevistas", "testes_tecnicos", "oferta"],
+          "output": "Candidato selecionado com oferta enviada"
+        }
+      ],
+      "capabilities": ["recruitment", "hr-management", "performance-management", "culture"],
+      "memory_tags": ["rh", "recrutamento", "pessoas", "cultura", "clt"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 86
+    },
+    {
+      "id": "financial-analyst",
+      "name": "Financial Analyst",
+      "role": "Análise financeira, modelagem, indicadores e dashboards financeiros",
+      "skills": ["Financial Modeling", "KPIs Financeiros", "DRE", "Fluxo de Caixa", "Python", "Excel", "Pandas"],
+      "workflows": [
+        {
+          "trigger": "analise_financeira",
+          "steps": ["coletar_dados", "calcular_indicadores", "comparar_benchmark", "gerar_relatorio", "apresentar"],
+          "output": "Relatório de análise financeira com recomendações"
+        },
+        {
+          "trigger": "projecao_financeira",
+          "steps": ["definir_premissas", "modelar_cenarios", "calcular_projecoes", "sensibilidade"],
+          "output": "Modelo financeiro com projeções e cenários"
+        }
+      ],
+      "capabilities": ["financial-modeling", "kpi-analysis", "forecasting", "scenario-analysis"],
+      "memory_tags": ["financeiro", "modelo", "kpi", "projecao", "indicadores"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 92
+    },
+    {
+      "id": "esg-specialist",
+      "name": "ESG Specialist",
+      "role": "Relatórios ESG, sustentabilidade, GRI e TCFD",
+      "skills": ["ESG", "GRI Standards", "TCFD", "Sustentabilidade", "Carbon Footprint", "SDGs", "Relatorio Integrado"],
+      "workflows": [
+        {
+          "trigger": "relatorio_esg",
+          "steps": ["coletar_indicadores_esg", "calcular_emissoes", "mapear_materialidade", "redigir_relatorio", "publicar"],
+          "output": "Relatório ESG publicado conforme GRI"
+        }
+      ],
+      "capabilities": ["esg-reporting", "gri-compliance", "sustainability-analysis", "tcfd"],
+      "memory_tags": ["esg", "sustentabilidade", "gri", "tcfd", "relatorio"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 88
+    },
+    {
+      "id": "internal-audit-specialist",
+      "name": "Internal Audit Specialist",
+      "role": "Auditoria interna, avaliação de controles e recomendações de melhoria",
+      "skills": ["Auditoria Interna", "IIA Standards", "COSO", "SOX", "Risk-Based Audit", "Controles Internos"],
+      "workflows": [
+        {
+          "trigger": "planejar_auditoria_interna",
+          "steps": ["avaliar_riscos", "definir_escopo", "elaborar_plano_anual", "alocar_recursos"],
+          "output": "Plano anual de auditoria interna"
+        },
+        {
+          "trigger": "executar_auditoria_interna",
+          "steps": ["testar_controles", "identificar_deficiencias", "comunicar_gestao", "acompanhar_remediacoes"],
+          "output": "Relatório de auditoria interna com recomendações"
+        }
+      ],
+      "capabilities": ["internal-audit", "control-assessment", "iia-standards", "risk-based-auditing"],
+      "memory_tags": ["auditoria-interna", "controles", "iia", "coso", "sox"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 92
+    },
+    {
+      "id": "data-scientist",
+      "name": "Data Scientist",
+      "role": "Ciência de dados, modelos preditivos e análise avançada para auditoria",
+      "skills": ["Python", "Machine Learning", "Scikit-learn", "Pandas", "Statistical Analysis", "Anomaly Detection"],
+      "workflows": [
+        {
+          "trigger": "detectar_anomalias",
+          "steps": ["preparar_dados", "treinar_modelo", "identificar_outliers", "investigar_anomalias", "reportar"],
+          "output": "Lista de anomalias com probabilidade de fraude"
+        }
+      ],
+      "capabilities": ["data-science", "machine-learning", "anomaly-detection", "predictive-modeling"],
+      "memory_tags": ["dados", "ml", "anomalia", "predicao", "ciencia-dados"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 91
+    },
+    {
+      "id": "bi-developer",
+      "name": "BI Developer",
+      "role": "Desenvolvimento de dashboards BI, ETL e relatórios gerenciais",
+      "skills": ["Power BI", "Looker Studio", "Python", "SQL", "ETL", "Data Warehouse", "KPIs"],
+      "workflows": [
+        {
+          "trigger": "criar_dashboard",
+          "steps": ["mapear_metricas", "conectar_fontes", "modelar_dados", "criar_visualizacoes", "publicar"],
+          "output": "Dashboard publicado e atualizado automaticamente"
+        }
+      ],
+      "capabilities": ["bi-development", "dashboard-creation", "data-visualization", "etl"],
+      "memory_tags": ["bi", "dashboard", "power-bi", "visualizacao", "relatorio"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 89
+    },
+    {
+      "id": "process-analyst",
+      "name": "Process Analyst",
+      "role": "Mapeamento e otimização de processos de negócio (BPM/BPMN)",
+      "skills": ["BPMN", "Mapeamento Processos", "AS-IS/TO-BE", "Lean", "Kaizen", "Automação Processos"],
+      "workflows": [
+        {
+          "trigger": "mapear_processo",
+          "steps": ["entrevistar_partes", "documentar_as_is", "identificar_ineficiencias", "propor_to_be", "validar"],
+          "output": "Diagrama BPMN com análise de melhoria"
+        }
+      ],
+      "capabilities": ["process-mapping", "bpmn", "process-optimization", "lean-methodology"],
+      "memory_tags": ["processo", "bpmn", "mapeamento", "lean", "otimizacao"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 88
+    },
+    {
+      "id": "nlp-specialist",
+      "name": "NLP Specialist",
+      "role": "Processamento de linguagem natural para análise de documentos e contratos",
+      "skills": ["NLP", "Python", "spaCy", "Transformers", "Document Analysis", "Entity Extraction", "Sentiment"],
+      "workflows": [
+        {
+          "trigger": "analisar_contrato_nlp",
+          "steps": ["extrair_texto", "identificar_clausulas", "extrair_entidades", "classificar_riscos", "sumarizar"],
+          "output": "Resumo de contrato com cláusulas de risco identificadas"
+        }
+      ],
+      "capabilities": ["nlp", "document-analysis", "entity-extraction", "contract-analysis"],
+      "memory_tags": ["nlp", "linguagem-natural", "contrato", "documento", "extracao"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 89
+    },
+    {
+      "id": "cloud-architect",
+      "name": "Cloud Architect",
+      "role": "Arquitetura cloud, GCP, AWS e estratégias de migração",
+      "skills": ["GCP", "AWS", "Cloud Architecture", "Cloud Migration", "Cost Optimization", "IaC", "Terraform"],
+      "workflows": [
+        {
+          "trigger": "projetar_arquitetura_cloud",
+          "steps": ["avaliar_requisitos", "selecionar_servicos", "desenhar_arquitetura", "calcular_custo", "documentar"],
+          "output": "Diagrama de arquitetura cloud com estimativa de custo"
+        }
+      ],
+      "capabilities": ["cloud-architecture", "gcp", "aws", "cost-optimization", "migration"],
+      "memory_tags": ["cloud", "gcp", "aws", "arquitetura", "migracao"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 90
+    },
+    {
+      "id": "api-integration-specialist",
+      "name": "API Integration Specialist",
+      "role": "Integração de sistemas via APIs REST, webhooks e n8n",
+      "skills": ["REST API", "Webhooks", "n8n", "OAuth", "API Gateway", "Python", "Postman"],
+      "workflows": [
+        {
+          "trigger": "integrar_sistemas",
+          "steps": ["analisar_apis", "autenticar", "mapear_campos", "implementar_integracao", "testar"],
+          "output": "Integração funcionando com documentação"
+        }
+      ],
+      "capabilities": ["api-integration", "webhook-design", "system-integration", "n8n-workflows"],
+      "memory_tags": ["api", "integracao", "webhook", "n8n", "rest"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 91
+    },
+    {
+      "id": "automation-specialist",
+      "name": "Automation Specialist",
+      "role": "Automação de processos repetitivos com n8n, Python e scripts",
+      "skills": ["n8n", "Python", "RPA", "Shell Script", "Windows Task Scheduler", "Automação"],
+      "workflows": [
+        {
+          "trigger": "automatizar_processo",
+          "steps": ["mapear_processo_manual", "identificar_etapas_automatizaveis", "implementar_automacao", "testar", "documentar"],
+          "output": "Processo automatizado com monitoramento"
+        }
+      ],
+      "capabilities": ["process-automation", "rpa", "n8n-automation", "scripting"],
+      "memory_tags": ["automacao", "n8n", "rpa", "script", "processo"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 93
+    },
+    {
+      "id": "knowledge-manager",
+      "name": "Knowledge Manager",
+      "role": "Gestão do conhecimento organizacional, Obsidian vault e base de conhecimento",
+      "skills": ["Obsidian", "Knowledge Management", "Wiki", "Taxonomia", "Markdown", "PKM"],
+      "workflows": [
+        {
+          "trigger": "organizar_base_conhecimento",
+          "steps": ["catalogar_conteudos", "definir_taxonomia", "criar_wikilinks", "atualizar_vault"],
+          "output": "Base de conhecimento atualizada e organizada"
+        }
+      ],
+      "capabilities": ["knowledge-management", "obsidian", "taxonomy", "documentation"],
+      "memory_tags": ["conhecimento", "obsidian", "wiki", "taxonomia", "pkm"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 88
+    },
+    {
+      "id": "trainer-educator",
+      "name": "Trainer & Educator",
+      "role": "Treinamentos, capacitações e material didático para equipe e clientes",
+      "skills": ["Training Design", "eLearning", "Instructional Design", "Apresentacao", "Facilitação", "LMS"],
+      "workflows": [
+        {
+          "trigger": "criar_treinamento",
+          "steps": ["definir_objetivos", "criar_conteudo", "desenvolver_material", "conduzir_treinamento", "avaliar"],
+          "output": "Treinamento realizado com avaliação de aprendizado"
+        }
+      ],
+      "capabilities": ["training-design", "facilitation", "instructional-design"],
+      "memory_tags": ["treinamento", "educacao", "capacitacao", "didatico"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 86
+    },
+    {
+      "id": "regulatory-monitor",
+      "name": "Regulatory Monitor",
+      "role": "Monitoramento de atualizações regulatórias CFC, CRE, CVM, BACEN e normas NBC",
+      "skills": ["NBC", "CFC", "CVM", "BACEN", "Monitoramento Regulatorio", "Alertas", "Diario Oficial"],
+      "workflows": [
+        {
+          "trigger": "monitorar_atualizacoes",
+          "steps": ["varrer_diario_oficial", "filtrar_normas_relevantes", "analisar_impacto", "comunicar_equipe"],
+          "output": "Boletim regulatório com análise de impacto"
+        }
+      ],
+      "capabilities": ["regulatory-monitoring", "compliance-updates", "impact-analysis"],
+      "memory_tags": ["regulatorio", "nbc", "cfc", "cvm", "monitoramento"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 90
+    },
+    {
+      "id": "cybersecurity-advisor",
+      "name": "Cybersecurity Advisor",
+      "role": "Consultoria em segurança cibernética, ISO 27001 e NIST",
+      "skills": ["ISO 27001", "NIST CSF", "Cybersecurity", "ISMS", "Risk Assessment", "Security Controls"],
+      "workflows": [
+        {
+          "trigger": "assessment_seguranca",
+          "steps": ["avaliar_controles", "identificar_gaps", "priorizar_remediacoes", "criar_roadmap_seguranca"],
+          "output": "Roadmap de segurança com quick wins priorizados"
+        }
+      ],
+      "capabilities": ["cybersecurity-advisory", "iso-27001", "nist-framework", "security-assessment"],
+      "memory_tags": ["ciberseguranca", "iso-27001", "nist", "seguranca", "isms"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 90
+    },
+    {
+      "id": "financial-educator",
+      "name": "Financial Educator",
+      "role": "Educação financeira, conteúdo didático e simplificação de conceitos técnicos",
+      "skills": ["Financial Literacy", "Conteudo Educativo", "Simplificacao", "Infograficos", "Videos Explicativos"],
+      "workflows": [
+        {
+          "trigger": "criar_conteudo_educativo",
+          "steps": ["escolher_tema_complexo", "simplificar_linguagem", "criar_exemplos", "produzir_material"],
+          "output": "Material educativo acessível sobre finanças/auditoria"
+        }
+      ],
+      "capabilities": ["financial-education", "content-simplification", "educational-materials"],
+      "memory_tags": ["educacao-financeira", "didatico", "simplificacao", "literacia"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 85
+    }
+  ]
+}

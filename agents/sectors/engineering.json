@@ -1,0 +1,462 @@
+{
+  "sector": "engineering",
+  "sector_name": "Engenharia",
+  "description": "Arquitetura, desenvolvimento, DevOps e infraestrutura do ecossistema Audiper",
+  "agents": [
+    {
+      "id": "backend-architect",
+      "name": "Backend Architect",
+      "role": "Arquitetura de sistemas escaláveis, APIs REST e modelagem de banco de dados",
+      "skills": ["FastAPI", "SQLAlchemy", "PostgreSQL", "SQLite", "Python", "REST", "Docker", "Pydantic"],
+      "workflows": [
+        {
+          "trigger": "nova_funcionalidade_backend",
+          "steps": ["analisar_requisitos", "projetar_schema", "implementar_endpoints", "escrever_testes", "documentar"],
+          "output": "PR com código revisado + documentação da API"
+        },
+        {
+          "trigger": "otimizacao_performance",
+          "steps": ["identificar_gargalos", "analisar_queries", "refatorar_indices", "validar_melhoria"],
+          "output": "Relatório de otimização + migrations aplicadas"
+        }
+      ],
+      "capabilities": ["system-design", "api-design", "database-modeling", "code-review", "performance-tuning"],
+      "memory_tags": ["arquitetura", "fastapi", "audiz", "backend", "api"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 95
+    },
+    {
+      "id": "frontend-developer",
+      "name": "Frontend Developer",
+      "role": "Desenvolvimento de interfaces HTML/CSS/JS puro para o site institucional Audiper",
+      "skills": ["HTML5", "CSS3", "JavaScript", "Bootstrap", "jQuery", "GSAP", "Swiper"],
+      "workflows": [
+        {
+          "trigger": "nova_pagina_site",
+          "steps": ["analisar_wireframe", "implementar_html", "estilizar_css", "adicionar_interatividade", "testar_responsividade"],
+          "output": "Página HTML completa e responsiva"
+        },
+        {
+          "trigger": "correcao_visual",
+          "steps": ["identificar_problema", "ajustar_css", "validar_em_breakpoints", "commitar"],
+          "output": "Fix commitado no branch master"
+        }
+      ],
+      "capabilities": ["html-development", "css-styling", "js-interactivity", "responsive-design", "cross-browser"],
+      "memory_tags": ["site", "html", "audiper", "frontend", "bootstrap"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 92
+    },
+    {
+      "id": "ai-engineer",
+      "name": "AI Engineer",
+      "role": "Integração de modelos de IA (Claude, Gemini), pipelines de agentes e automações inteligentes",
+      "skills": ["Claude API", "Gemini API", "Python", "LangChain", "Prompt Engineering", "claude-agent-sdk", "n8n"],
+      "workflows": [
+        {
+          "trigger": "novo_agente_ia",
+          "steps": ["definir_persona", "projetar_prompts", "implementar_tools", "testar_respostas", "documentar_agent"],
+          "output": "Agente funcional com arquivo de definição"
+        },
+        {
+          "trigger": "integracao_api_ia",
+          "steps": ["autenticar_api", "implementar_wrapper", "tratar_erros", "configurar_fallback", "testar"],
+          "output": "Módulo de integração testado"
+        }
+      ],
+      "capabilities": ["agent-design", "prompt-engineering", "api-integration", "rag-pipeline", "fallback-chain"],
+      "memory_tags": ["ia", "claude", "gemini", "agentes", "llm"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 97
+    },
+    {
+      "id": "software-architect",
+      "name": "Software Architect",
+      "role": "Decisões arquiteturais de alto nível, padrões de projeto e governança técnica",
+      "skills": ["System Design", "DDD", "Clean Architecture", "Microservices", "Event-Driven", "Python", "Diagrams"],
+      "workflows": [
+        {
+          "trigger": "decisao_arquitetural",
+          "steps": ["levantar_requisitos", "avaliar_opcoes", "criar_adr", "revisar_com_equipe", "documentar"],
+          "output": "Architecture Decision Record (ADR)"
+        },
+        {
+          "trigger": "revisao_arquitetura",
+          "steps": ["mapear_componentes", "identificar_acoplamentos", "propor_melhorias", "priorizar"],
+          "output": "Relatório de saúde arquitetural"
+        }
+      ],
+      "capabilities": ["architectural-decisions", "technical-governance", "pattern-selection", "risk-assessment"],
+      "memory_tags": ["arquitetura", "design-patterns", "governa", "sistema"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 94
+    },
+    {
+      "id": "devops-automator",
+      "name": "DevOps Automator",
+      "role": "Automação de deploy, CI/CD, scripts de infraestrutura e gestão de ambientes",
+      "skills": ["Git", "GitHub Actions", "Docker", "Bash", "Python", "n8n", "Windows BAT"],
+      "workflows": [
+        {
+          "trigger": "configurar_cicd",
+          "steps": ["analisar_pipeline", "criar_workflow_actions", "configurar_secrets", "testar_pipeline", "documentar"],
+          "output": "Pipeline CI/CD funcionando"
+        },
+        {
+          "trigger": "deploy_producao",
+          "steps": ["verificar_branch", "rodar_testes", "build_artefatos", "deploy", "validar_saude"],
+          "output": "Deploy executado com rollback plan"
+        }
+      ],
+      "capabilities": ["ci-cd", "infrastructure-automation", "scripting", "deployment", "monitoring"],
+      "memory_tags": ["devops", "git", "deploy", "automacao", "ci-cd"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 90
+    },
+    {
+      "id": "database-optimizer",
+      "name": "Database Optimizer",
+      "role": "Otimização de queries, índices, modelagem de dados e migrações",
+      "skills": ["SQLite", "PostgreSQL", "SQLAlchemy", "Alembic", "Query Optimization", "Indexing", "Python"],
+      "workflows": [
+        {
+          "trigger": "query_lenta",
+          "steps": ["analisar_explain", "identificar_indices_faltantes", "criar_indices", "validar_ganho"],
+          "output": "Migration com índices otimizados"
+        },
+        {
+          "trigger": "nova_migration",
+          "steps": ["projetar_schema", "criar_migration_alembic", "testar_upgrade_downgrade", "documentar"],
+          "output": "Migration versionada e testada"
+        }
+      ],
+      "capabilities": ["query-optimization", "schema-design", "migration-management", "performance-analysis"],
+      "memory_tags": ["banco-de-dados", "sqlite", "postgresql", "performance", "migration"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 91
+    },
+    {
+      "id": "security-engineer",
+      "name": "Security Engineer",
+      "role": "Segurança de aplicações, autenticação, criptografia e análise de vulnerabilidades",
+      "skills": ["OWASP", "HMAC-SHA256", "JWT", "SSL/TLS", "Python", "Security Audit", "Penetration Testing"],
+      "workflows": [
+        {
+          "trigger": "auditoria_seguranca",
+          "steps": ["scanear_dependencias", "revisar_autenticacao", "checar_endpoints", "gerar_relatorio"],
+          "output": "Relatório de vulnerabilidades com remediações"
+        },
+        {
+          "trigger": "implementar_autenticacao",
+          "steps": ["definir_mecanismo", "implementar_tokens", "configurar_expiracao", "testar_bypass"],
+          "output": "Sistema de autenticação seguro"
+        }
+      ],
+      "capabilities": ["security-audit", "authentication-design", "encryption", "vulnerability-assessment"],
+      "memory_tags": ["seguranca", "hmac", "jwt", "autenticacao", "owasp"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 93
+    },
+    {
+      "id": "technical-writer",
+      "name": "Technical Writer",
+      "role": "Documentação técnica, APIs, guias de uso e manuais de sistema",
+      "skills": ["Markdown", "OpenAPI", "Docstrings", "README", "Diagrams", "Mermaid"],
+      "workflows": [
+        {
+          "trigger": "documentar_api",
+          "steps": ["extrair_endpoints", "descrever_parametros", "criar_exemplos", "gerar_openapi_yaml"],
+          "output": "Documentação OpenAPI completa"
+        },
+        {
+          "trigger": "criar_guia_usuario",
+          "steps": ["mapear_fluxos", "escrever_passo_a_passo", "adicionar_screenshots", "revisar"],
+          "output": "Guia de usuário em Markdown"
+        }
+      ],
+      "capabilities": ["api-documentation", "user-guides", "technical-writing", "openapi"],
+      "memory_tags": ["documentacao", "readme", "openapi", "markdown"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 88
+    },
+    {
+      "id": "data-engineer",
+      "name": "Data Engineer",
+      "role": "Pipelines de dados, ETL, processamento de SPED/ECD e análise de arquivos fiscais",
+      "skills": ["Python", "Pandas", "SPED ECD", "ETL", "SQLAlchemy", "CSV", "Excel", "JSON"],
+      "workflows": [
+        {
+          "trigger": "processar_sped_ecd",
+          "steps": ["ler_arquivo_sped", "parsear_registros", "validar_estrutura", "persistir_db", "gerar_relatorio"],
+          "output": "Dados SPED processados e armazenados"
+        },
+        {
+          "trigger": "criar_pipeline_etl",
+          "steps": ["mapear_fontes", "transformar_dados", "validar_qualidade", "carregar_destino"],
+          "output": "Pipeline ETL documentado e testado"
+        }
+      ],
+      "capabilities": ["etl-pipeline", "sped-processing", "data-validation", "reporting"],
+      "memory_tags": ["dados", "sped", "ecd", "etl", "python"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 92
+    },
+    {
+      "id": "rapid-prototyper",
+      "name": "Rapid Prototyper",
+      "role": "Prototipação rápida de funcionalidades, MVPs e proof-of-concepts",
+      "skills": ["Python", "Streamlit", "HTML/CSS/JS", "FastAPI", "n8n", "Jupyter"],
+      "workflows": [
+        {
+          "trigger": "criar_mvp",
+          "steps": ["definir_escopo_minimo", "implementar_core", "criar_ui_basica", "validar_com_usuario"],
+          "output": "MVP funcional em horas"
+        },
+        {
+          "trigger": "poc_nova_tecnologia",
+          "steps": ["configurar_ambiente", "implementar_caso_uso", "medir_resultados", "documentar_achados"],
+          "output": "POC com relatório de viabilidade"
+        }
+      ],
+      "capabilities": ["rapid-prototyping", "mvp-development", "poc", "streamlit", "iteration"],
+      "memory_tags": ["prototipo", "mvp", "streamlit", "poc"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 94
+    },
+    {
+      "id": "code-reviewer",
+      "name": "Code Reviewer",
+      "role": "Revisão de código, qualidade, padrões de estilo e prevenção de bugs",
+      "skills": ["Python", "JavaScript", "Code Analysis", "SOLID", "Clean Code", "PEP8", "ESLint"],
+      "workflows": [
+        {
+          "trigger": "revisar_pr",
+          "steps": ["analisar_diff", "checar_logica", "validar_padroes", "verificar_testes", "comentar_pr"],
+          "output": "Revisão comentada com aprovação ou solicitações"
+        },
+        {
+          "trigger": "auditoria_codebase",
+          "steps": ["escanear_codigo", "identificar_code_smells", "priorizar_refatoracoes", "criar_issues"],
+          "output": "Relatório de qualidade com backlog de melhorias"
+        }
+      ],
+      "capabilities": ["code-review", "static-analysis", "refactoring", "standards-enforcement"],
+      "memory_tags": ["code-review", "qualidade", "padroes", "refatoracao"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 93
+    },
+    {
+      "id": "mobile-app-builder",
+      "name": "Mobile App Builder",
+      "role": "Desenvolvimento de mini-apps e interfaces mobile-first",
+      "skills": ["HTML5", "CSS3", "JavaScript", "PWA", "Telegram Mini Apps", "Responsive Design", "Touch UI"],
+      "workflows": [
+        {
+          "trigger": "criar_telegram_miniapp",
+          "steps": ["configurar_webappurl", "implementar_html", "integrar_telegram_sdk", "testar_no_bot"],
+          "output": "Mini App funcionando no Telegram"
+        },
+        {
+          "trigger": "criar_pwa",
+          "steps": ["criar_manifest", "implementar_service_worker", "otimizar_mobile", "testar_offline"],
+          "output": "PWA instalável e funcional"
+        }
+      ],
+      "capabilities": ["mobile-development", "pwa", "telegram-miniapp", "responsive-ui"],
+      "memory_tags": ["mobile", "telegram", "pwa", "miniapp"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 87
+    },
+    {
+      "id": "git-workflow-master",
+      "name": "Git Workflow Master",
+      "role": "Gestão de branches, merge strategies, conventional commits e histórico limpo",
+      "skills": ["Git", "GitHub", "Git Flow", "Conventional Commits", "Semantic Versioning", "Changelog"],
+      "workflows": [
+        {
+          "trigger": "configurar_repositorio",
+          "steps": ["criar_repo", "configurar_branch_protection", "definir_commit_convention", "criar_gitignore"],
+          "output": "Repositório configurado com políticas"
+        },
+        {
+          "trigger": "release",
+          "steps": ["criar_branch_release", "atualizar_changelog", "criar_tag", "merge_master", "publicar"],
+          "output": "Release publicada com notas de versão"
+        }
+      ],
+      "capabilities": ["git-management", "branching-strategy", "release-management", "commit-hygiene"],
+      "memory_tags": ["git", "github", "branch", "release", "commit"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 90
+    },
+    {
+      "id": "sre",
+      "name": "SRE",
+      "role": "Confiabilidade, SLOs, monitoramento, alertas e análise de incidentes",
+      "skills": ["Monitoring", "Logging", "SLO/SLA", "Alerting", "Python", "Health Checks", "Uptime"],
+      "workflows": [
+        {
+          "trigger": "configurar_monitoramento",
+          "steps": ["definir_slos", "implementar_health_checks", "configurar_alertas", "criar_runbook"],
+          "output": "Sistema de monitoramento ativo"
+        },
+        {
+          "trigger": "pos_incidente",
+          "steps": ["coletar_timeline", "identificar_causa_raiz", "escrever_postmortem", "criar_action_items"],
+          "output": "Postmortem com plano de ação"
+        }
+      ],
+      "capabilities": ["reliability-engineering", "monitoring", "incident-analysis", "slo-management"],
+      "memory_tags": ["sre", "monitoramento", "confiabilidade", "incidente"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 89
+    },
+    {
+      "id": "incident-response-commander",
+      "name": "Incident Response Commander",
+      "role": "Coordenação de resposta a incidentes críticos, comunicação e resolução",
+      "skills": ["Incident Management", "Communication", "Triage", "Python", "Telegram", "Runbooks"],
+      "workflows": [
+        {
+          "trigger": "incidente_critico",
+          "steps": ["declarar_incidente", "montar_war_room", "atribuir_papeis", "comunicar_stakeholders", "resolver", "fechar"],
+          "output": "Incidente resolvido com comunicação documentada"
+        },
+        {
+          "trigger": "criar_runbook",
+          "steps": ["mapear_cenario", "documentar_passos", "validar_com_sre", "publicar"],
+          "output": "Runbook operacional"
+        }
+      ],
+      "capabilities": ["incident-coordination", "crisis-communication", "triage", "runbook-creation"],
+      "memory_tags": ["incidente", "resposta", "crise", "runbook"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 91
+    },
+    {
+      "id": "embedded-firmware-engineer",
+      "name": "Embedded Firmware Engineer",
+      "role": "Desenvolvimento de firmware, sistemas embarcados e IoT",
+      "skills": ["C", "C++", "Arduino", "ESP32", "MQTT", "Python", "Serial Communication", "Hardware Protocols"],
+      "workflows": [
+        {
+          "trigger": "desenvolver_firmware",
+          "steps": ["especificar_hardware", "implementar_firmware", "testar_serial", "otimizar_memoria", "documentar"],
+          "output": "Firmware compilado e documentado"
+        },
+        {
+          "trigger": "integracao_iot",
+          "steps": ["configurar_mqtt", "implementar_publisher", "configurar_subscriber", "testar_end_to_end"],
+          "output": "Dispositivo IoT integrado"
+        }
+      ],
+      "capabilities": ["firmware-development", "embedded-systems", "iot-integration", "hardware-protocols"],
+      "memory_tags": ["firmware", "embarcado", "iot", "esp32", "arduino"],
+      "status": "development",
+      "task_count": 0,
+      "performance_score": 85
+    },
+    {
+      "id": "solidity-smart-contract-engineer",
+      "name": "Solidity Smart Contract Engineer",
+      "role": "Desenvolvimento e auditoria de smart contracts em blockchain",
+      "skills": ["Solidity", "Ethereum", "Hardhat", "OpenZeppelin", "Web3.js", "ERC-20", "DeFi"],
+      "workflows": [
+        {
+          "trigger": "criar_smart_contract",
+          "steps": ["especificar_logica", "implementar_solidity", "escrever_testes", "auditar_seguranca", "deploy"],
+          "output": "Smart contract auditado e deployado"
+        },
+        {
+          "trigger": "auditar_contrato",
+          "steps": ["analisar_codigo", "checar_reentrancy", "verificar_overflow", "gerar_relatorio"],
+          "output": "Relatório de auditoria de smart contract"
+        }
+      ],
+      "capabilities": ["smart-contract-development", "blockchain", "defi", "security-audit"],
+      "memory_tags": ["blockchain", "solidity", "ethereum", "smart-contract"],
+      "status": "development",
+      "task_count": 0,
+      "performance_score": 82
+    },
+    {
+      "id": "threat-detection-engineer",
+      "name": "Threat Detection Engineer",
+      "role": "Detecção de ameaças, análise de logs de segurança e resposta a incidentes de segurança",
+      "skills": ["SIEM", "Log Analysis", "Python", "Regex", "Threat Intelligence", "MITRE ATT&CK", "Forensics"],
+      "workflows": [
+        {
+          "trigger": "investigar_ameaca",
+          "steps": ["coletar_logs", "correlacionar_eventos", "classificar_ameaca", "conter", "remediar", "reportar"],
+          "output": "Relatório de threat intelligence com remediação"
+        },
+        {
+          "trigger": "configurar_deteccao",
+          "steps": ["definir_regras_siem", "testar_alertas", "calibrar_threshold", "documentar"],
+          "output": "Regras de detecção ativas"
+        }
+      ],
+      "capabilities": ["threat-detection", "log-analysis", "incident-response", "forensics"],
+      "memory_tags": ["seguranca", "ameaca", "logs", "siem", "forense"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 88
+    },
+    {
+      "id": "wechat-mini-program-developer",
+      "name": "WeChat Mini Program Developer",
+      "role": "Desenvolvimento de mini programas WeChat para mercado chinês",
+      "skills": ["WeChat SDK", "WXML", "WXSS", "JavaScript", "WeChat API", "Mini Program"],
+      "workflows": [
+        {
+          "trigger": "criar_mini_program",
+          "steps": ["configurar_appid", "implementar_pages", "integrar_wechat_api", "testar_simulador", "publicar"],
+          "output": "Mini Program publicado na WeChat"
+        }
+      ],
+      "capabilities": ["wechat-development", "mini-program", "chinese-market"],
+      "memory_tags": ["wechat", "mini-program", "china", "mobile"],
+      "status": "development",
+      "task_count": 0,
+      "performance_score": 80
+    },
+    {
+      "id": "feishu-integration-developer",
+      "name": "Feishu Integration Developer",
+      "role": "Integrações com plataforma Feishu/Lark para colaboração corporativa",
+      "skills": ["Feishu API", "Lark SDK", "Python", "Webhooks", "OAuth", "Bot Development"],
+      "workflows": [
+        {
+          "trigger": "criar_bot_feishu",
+          "steps": ["criar_app_feishu", "implementar_webhook", "programar_respostas", "configurar_permissoes", "testar"],
+          "output": "Bot Feishu funcional"
+        },
+        {
+          "trigger": "integrar_feishu_n8n",
+          "steps": ["configurar_trigger_n8n", "mapear_campos", "implementar_acoes", "testar_fluxo"],
+          "output": "Workflow n8n integrado ao Feishu"
+        }
+      ],
+      "capabilities": ["feishu-integration", "lark-development", "corporate-tools", "webhook"],
+      "memory_tags": ["feishu", "lark", "integracao", "corporativo"],
+      "status": "development",
+      "task_count": 0,
+      "performance_score": 80
+    }
+  ]
+}
