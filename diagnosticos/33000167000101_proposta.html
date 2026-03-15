@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Proposta Comercial - PETROLEO BRASILEIRO S A PETROBRAS | AUDIPER</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        audiper: { red: '#B91C1C', darkred: '#7F1D1D', gold: '#c9a962', wine: '#722F37' },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                        serif: ['Merriweather', 'Georgia', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            color-adjust: exact !important;
+            margin: 0; padding: 0; box-sizing: border-box;
+        }
+        body { background-color: #E5E7EB; font-family: 'Inter', sans-serif; color: #334155; }
+        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
+        .a4-page {
+            width: 210mm; height: 297mm; min-height: 297mm; max-height: 297mm;
+            margin: 10px auto; background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            position: relative; overflow: hidden;
+            page-break-after: always;
+        }
+        .page-wrapper {
+            width: 100%; height: 297mm;
+            display: flex; flex-direction: column;
+            overflow: hidden;
+        }
+        @media print {
+            @page { size: A4 portrait; margin: 0; }
+            html, body { width: 210mm; height: 297mm; margin: 0; padding: 0; background: white; }
+            .a4-page { margin: 0; box-shadow: none; }
+        }
+        .gradient-bar {
+            height: 6px;
+            background: linear-gradient(90deg, #7F1D1D 0%, #B91C1C 35%, #DC2626 65%, #7F1D1D 100%);
+        }
+        .divider-red {
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, #B91C1C 30%, #B91C1C 70%, transparent 100%);
+        }
+        .divider-gold {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, #c9a962 30%, #c9a962 70%, transparent 100%);
+        }
+        .page-header {
+            flex-shrink: 0;
+            padding: 8px 22px;
+            border-bottom: 2px solid #B91C1C;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .page-footer {
+            flex-shrink: 0;
+            margin-top: auto;
+            padding: 6px 22px;
+            border-top: 1px solid #E5E7EB;
+            font-size: 7pt; color: #9CA3AF;
+            display: flex; justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== PAGINA 1: CAPA ==================== -->
+<div class="a4-page">
+    <div class="page-wrapper">
+        <div class="gradient-bar"></div>
+        <div class="flex-1 flex flex-col items-center justify-between px-16 py-12">
+
+            <!-- Logo + Nome -->
+            <div class="text-center pt-8">
+                <div class="w-24 h-24 mx-auto rounded-full flex items-center justify-center overflow-hidden bg-white border-2 border-gray-200 shadow-lg mb-6">
+                    <img src="https://www.audiper.com.br/novo-logo-audiper.png" alt="AUDIPER" style="width: 72px; height: 72px; object-fit: contain;">
+                </div>
+                <h1 class="text-3xl font-bold font-display text-gray-800 tracking-wide">AUDIPER<span class="text-audiper-red">&reg;</span></h1>
+                <p class="text-sm text-gray-500 uppercase tracking-[0.2em] mt-1">Auditores Independentes</p>
+                <p class="text-xs text-gray-400 mt-1">CRC/PI 000023/O</p>
+            </div>
+
+            <div class="w-full my-4"><div class="divider-red"></div></div>
+
+            <!-- Badge Proposta -->
+            <div class="text-center">
+                <div class="inline-flex items-center gap-2 px-6 py-2 rounded-full mb-4" style="background: linear-gradient(135deg, #7F1D1D 0%, #B91C1C 100%);">
+                    <i class="fas fa-file-contract text-white text-sm"></i>
+                    <span class="text-white text-xs font-semibold uppercase tracking-wider">Proposta Comercial</span>
+                </div>
+                <h2 class="text-2xl font-bold font-display text-gray-800 leading-tight">
+                    SERVICOS DE<br>
+                    <span class="text-audiper-red">AUDITORIA E CONSULTORIA</span>
+                </h2>
+            </div>
+
+            <div class="w-3/4 my-4"><div class="divider-gold"></div></div>
+
+            <!-- Dados do Cliente -->
+            <div class="w-full max-w-sm">
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                        <span class="text-[9px] text-gray-400 uppercase font-semibold tracking-wide">Cliente</span>
+                        <span class="text-sm font-bold text-gray-800">PETROLEO BRASILEIRO S A PETROBRAS</span>
+                    </div>
+                    <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                        <span class="text-[9px] text-gray-400 uppercase font-semibold tracking-wide">CNPJ</span>
+                        <span class="text-sm font-semibold text-gray-600 font-mono">33.000.167/0001-01</span>
+                    </div>
+                    <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                        <span class="text-[9px] text-gray-400 uppercase font-semibold tracking-wide">Localidade</span>
+                        <span class="text-sm font-semibold text-gray-600">RIO DE JANEIRO/RJ</span>
+                    </div>
+                    <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                        <span class="text-[9px] text-gray-400 uppercase font-semibold tracking-wide">Porte</span>
+                        <span class="text-sm font-semibold text-gray-600">MEDIO</span>
+                    </div>
+                    <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                        <span class="text-[9px] text-gray-400 uppercase font-semibold tracking-wide">Data</span>
+                        <span class="text-sm font-semibold text-gray-600">13/03/2026</span>
+                    </div>
+                    <div class="flex justify-between items-center py-2">
+                        <span class="text-[9px] text-gray-400 uppercase font-semibold tracking-wide">Validade</span>
+                        <span class="text-sm font-bold text-audiper-red">12/04/2026</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Local e Data -->
+            <div class="text-center pb-4">
+                <div class="divider-gold w-32 mx-auto mb-4"></div>
+                <p class="text-sm text-gray-600 font-serif">Teresina &mdash; Piaui</p>
+                <p class="text-sm text-gray-500 font-serif">March De 2026</p>
+            </div>
+        </div>
+        <div class="gradient-bar"></div>
+    </div>
+</div>
+
+<!-- ==================== PAGINA 2: DIAGNOSTICO ==================== -->
+<div class="a4-page">
+    <div class="page-wrapper">
+        <!-- Header -->
+        <div class="page-header">
+            <div class="flex items-center gap-3">
+                <img src="https://www.audiper.com.br/novo-logo-audiper.png" alt="" style="width:28px;height:28px;">
+                <span class="font-display font-bold text-gray-700 text-sm">AUDIPER</span>
+                <span class="text-gray-400 text-xs">|</span>
+                <span class="text-gray-500 text-xs">Proposta Comercial</span>
+            </div>
+            <span class="text-xs text-gray-400">2/3</span>
+        </div>
+
+        <!-- Content -->
+        <div class="flex-1 px-6 py-4 overflow-hidden" style="font-size: 9pt;">
+
+            <!-- Dados da Empresa -->
+            <h3 class="text-sm font-bold font-display text-audiper-red mb-2 flex items-center gap-2">
+                <i class="fas fa-building text-xs"></i> DADOS DA EMPRESA
+            </h3>
+            <div class="grid grid-cols-2 gap-x-6 gap-y-1 mb-3 text-[9pt]">
+                <div><span class="text-gray-400 text-[8pt]">Razao Social:</span> <strong>PETROLEO BRASILEIRO S A PETROBRAS</strong></div>
+                <div><span class="text-gray-400 text-[8pt]">Nome Fantasia:</span> PETROBRAS - EDISE</div>
+                <div><span class="text-gray-400 text-[8pt]">CNPJ:</span> <strong class="font-mono">33.000.167/0001-01</strong></div>
+                <div><span class="text-gray-400 text-[8pt]">CNAE:</span> Extração de petróleo e gás natural</div>
+                <div><span class="text-gray-400 text-[8pt]">Regime:</span> Lucro Presumido/Real</div>
+                <div><span class="text-gray-400 text-[8pt]">Capital:</span> R$ 205.431.960.000,00</div>
+                <div><span class="text-gray-400 text-[8pt]">Atividade:</span> 59 anos</div>
+                <div><span class="text-gray-400 text-[8pt]">Socios:</span> 5</div>
+            </div>
+
+            <div class="divider-gold mb-3"></div>
+
+            <!-- Certidoes TCU -->
+            <h3 class="text-sm font-bold font-display text-audiper-red mb-2 flex items-center gap-2">
+                <i class="fas fa-shield-halved text-xs"></i> CERTIDOES (TCU / CNJ / CEIS / CNEP)
+            </h3>
+            <div class="grid grid-cols-2 gap-2 mb-3">
+                <div class="col-span-2 rounded px-3 py-2 bg-yellow-50 border-l-3 border-yellow-500 text-[8pt]">
+                    <i class="fas fa-exclamation-triangle text-yellow-600 text-xs"></i> API TCU indisponivel no momento da consulta
+                </div>
+            </div>
+
+            <div class="divider-gold mb-3"></div>
+
+            <!-- Pontos de Atencao -->
+            <h3 class="text-sm font-bold font-display text-audiper-red mb-2 flex items-center gap-2">
+                <i class="fas fa-exclamation-triangle text-xs"></i> PONTOS DE ATENCAO
+            </h3>
+            <div class="space-y-1 mb-3">
+                <div class="rounded px-3 py-1.5 flex items-start gap-2" style="background:#FFF7ED; border-left: 3px solid #EA580C;">
+                    <span class="text-[7pt] font-bold px-1.5 py-0.5 rounded text-white mt-0.5" style="background:#EA580C;">ALTA</span>
+                    <span class="text-[8pt]" style="color:#9A3412;">Empresa de grande porte. Possivel obrigatoriedade de auditoria independente (Lei 11.638/07).</span>
+                </div>
+                <div class="rounded px-3 py-1.5 flex items-start gap-2" style="background:#FFFBEB; border-left: 3px solid #D97706;">
+                    <span class="text-[7pt] font-bold px-1.5 py-0.5 rounded text-white mt-0.5" style="background:#D97706;">MEDIA</span>
+                    <span class="text-[8pt]" style="color:#92400E;">59 anos de operacao. Revisao periodica reduz risco de distorcoes acumuladas.</span>
+                </div>
+            </div>
+
+            <div class="divider-gold mb-3"></div>
+
+            <!-- Servicos Recomendados -->
+            <h3 class="text-sm font-bold font-display text-audiper-red mb-2 flex items-center gap-2">
+                <i class="fas fa-clipboard-list text-xs"></i> SERVICOS RECOMENDADOS
+            </h3>
+            <table class="w-full text-[8pt] border-collapse mb-2">
+                <thead>
+                    <tr class="text-left" style="background: #7F1D1D; color: white;">
+                        <th class="px-2 py-1.5 rounded-tl">Servico</th>
+                        <th class="px-2 py-1.5">Fundamentacao</th>
+                        <th class="px-2 py-1.5 text-center">Periodicidade</th>
+                        <th class="px-2 py-1.5 text-right rounded-tr">Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background:#FFF;">
+                        <td class="px-2 py-1.5 font-semibold">Auditoria das Demonstracoes Contabeis</td>
+                        <td class="px-2 py-1.5 text-gray-500">NBC TA 200 a 720</td>
+                        <td class="px-2 py-1.5 text-center">Mensal</td>
+                        <td class="px-2 py-1.5 text-right font-bold">R$ 7.500,00</td>
+                    </tr>
+                    <tr style="background:#F9FAFB;">
+                        <td class="px-2 py-1.5 font-semibold">Revisao e Validacao do SPED ECD</td>
+                        <td class="px-2 py-1.5 text-gray-500">IN RFB 1774/2017</td>
+                        <td class="px-2 py-1.5 text-center">Pontual</td>
+                        <td class="px-2 py-1.5 text-right font-bold">R$ 3.750,00</td>
+                    </tr>
+                    <tr style="background: linear-gradient(135deg, #7F1D1D 0%, #B91C1C 100%); color: white;">
+                        <td class="px-2 py-2 font-bold rounded-bl" colspan="3">TOTAL ESTIMADO</td>
+                        <td class="px-2 py-2 text-right font-bold text-lg rounded-br">R$ 11.250,00</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="text-[7pt] text-gray-400 italic">* Valores estimados. Proposta final sujeita a analise detalhada do escopo.</p>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="page-footer">
+            <span>AUDIPER - Auditores Independentes S/S | CRC/PI 000023/O</span>
+            <span>Proposta Comercial | 13/03/2026</span>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== PAGINA 3: SOBRE A AUDIPER ==================== -->
+<div class="a4-page">
+    <div class="page-wrapper">
+        <!-- Header -->
+        <div class="page-header">
+            <div class="flex items-center gap-3">
+                <img src="https://www.audiper.com.br/novo-logo-audiper.png" alt="" style="width:28px;height:28px;">
+                <span class="font-display font-bold text-gray-700 text-sm">AUDIPER</span>
+                <span class="text-gray-400 text-xs">|</span>
+                <span class="text-gray-500 text-xs">Proposta Comercial</span>
+            </div>
+            <span class="text-xs text-gray-400">3/3</span>
+        </div>
+
+        <!-- Content -->
+        <div class="flex-1 px-6 py-4 overflow-hidden" style="font-size: 9pt;">
+
+            <!-- Quem Somos -->
+            <h3 class="text-sm font-bold font-display text-audiper-red mb-2 flex items-center gap-2">
+                <i class="fas fa-landmark text-xs"></i> QUEM SOMOS
+            </h3>
+            <p class="text-[9pt] text-gray-600 mb-3 leading-relaxed">
+                Fundada em <strong>1986</strong> em Teresina/PI, a <strong>AUDIPER - Auditores Independentes</strong> atua ha mais de
+                <strong>40 anos</strong> oferecendo servicos de auditoria, pericia contabil e consultoria com excelencia tecnica,
+                etica e inovacao. Somos referencia no Nordeste brasileiro, com atuacao nos estados do Piaui e Maranhao.
+            </p>
+
+            <!-- Numeros -->
+            <div class="grid grid-cols-5 gap-2 mb-4">
+                <div class="text-center rounded-lg py-2 px-1" style="background: #FEF2F2;">
+                    <div class="text-lg font-bold text-audiper-red font-display">40+</div>
+                    <div class="text-[7pt] text-gray-500">Anos</div>
+                </div>
+                <div class="text-center rounded-lg py-2 px-1" style="background: #FEF2F2;">
+                    <div class="text-lg font-bold text-audiper-red font-display">500+</div>
+                    <div class="text-[7pt] text-gray-500">Clientes</div>
+                </div>
+                <div class="text-center rounded-lg py-2 px-1" style="background: #FEF2F2;">
+                    <div class="text-lg font-bold text-audiper-red font-display">2</div>
+                    <div class="text-[7pt] text-gray-500">Estados</div>
+                </div>
+                <div class="text-center rounded-lg py-2 px-1" style="background: #FEF2F2;">
+                    <div class="text-lg font-bold text-audiper-red font-display">15+</div>
+                    <div class="text-[7pt] text-gray-500">Profissionais</div>
+                </div>
+                <div class="text-center rounded-lg py-2 px-1" style="background: #FEF2F2;">
+                    <div class="text-lg font-bold text-audiper-red font-display">1000+</div>
+                    <div class="text-[7pt] text-gray-500">Laudos</div>
+                </div>
+            </div>
+
+            <div class="divider-gold mb-3"></div>
+
+            <!-- Certificacoes -->
+            <h3 class="text-sm font-bold font-display text-audiper-red mb-2 flex items-center gap-2">
+                <i class="fas fa-certificate text-xs"></i> CERTIFICACOES
+            </h3>
+            <div class="flex gap-3 mb-4">
+                <div class="flex items-center gap-2 rounded-full px-4 py-1.5" style="background: #7F1D1D;">
+                    <i class="fas fa-check-circle text-white text-xs"></i>
+                    <span class="text-white text-[8pt] font-semibold">CRC</span>
+                </div>
+                <div class="flex items-center gap-2 rounded-full px-4 py-1.5" style="background: #7F1D1D;">
+                    <i class="fas fa-check-circle text-white text-xs"></i>
+                    <span class="text-white text-[8pt] font-semibold">CVM</span>
+                </div>
+                <div class="flex items-center gap-2 rounded-full px-4 py-1.5" style="background: #7F1D1D;">
+                    <i class="fas fa-check-circle text-white text-xs"></i>
+                    <span class="text-white text-[8pt] font-semibold">IBRACON</span>
+                </div>
+                <div class="flex items-center gap-2 rounded-full px-4 py-1.5" style="background: #7F1D1D;">
+                    <i class="fas fa-check-circle text-white text-xs"></i>
+                    <span class="text-white text-[8pt] font-semibold">CNAI</span>
+                </div>
+            </div>
+
+            <div class="divider-gold mb-3"></div>
+
+            <!-- Servicos -->
+            <h3 class="text-sm font-bold font-display text-audiper-red mb-2 flex items-center gap-2">
+                <i class="fas fa-briefcase text-xs"></i> NOSSOS SERVICOS
+            </h3>
+            <div class="grid grid-cols-2 gap-3 mb-4">
+                <div class="rounded-lg p-3 border border-gray-100" style="background: #FAFAFA;">
+                    <h4 class="font-display font-bold text-[9pt] text-gray-800 mb-1"><i class="fas fa-search-dollar text-audiper-red text-xs mr-1"></i> Auditorias</h4>
+                    <p class="text-[8pt] text-gray-500">Anti-Fraude, Contabil e Financeira, Fiscal e Tributaria, Interna, Due Diligence</p>
+                </div>
+                <div class="rounded-lg p-3 border border-gray-100" style="background: #FAFAFA;">
+                    <h4 class="font-display font-bold text-[9pt] text-gray-800 mb-1"><i class="fas fa-balance-scale text-audiper-red text-xs mr-1"></i> Pericias</h4>
+                    <p class="text-[8pt] text-gray-500">Tributaria, Revisao Bancaria, Trabalhista, Valuation, Contabil Judicial</p>
+                </div>
+                <div class="rounded-lg p-3 border border-gray-100" style="background: #FAFAFA;">
+                    <h4 class="font-display font-bold text-[9pt] text-gray-800 mb-1"><i class="fas fa-robot text-audiper-red text-xs mr-1"></i> IA & Data</h4>
+                    <p class="text-[8pt] text-gray-500">Diagnostico Digital, IA Financeira, IA para Compliance, Treinamentos</p>
+                </div>
+                <div class="rounded-lg p-3 border border-gray-100" style="background: #FAFAFA;">
+                    <h4 class="font-display font-bold text-[9pt] text-gray-800 mb-1"><i class="fas fa-handshake text-audiper-red text-xs mr-1"></i> Consultoria</h4>
+                    <p class="text-[8pt] text-gray-500">Planejamento Tributario, Permanente, Compliance/LGPD, Operacional</p>
+                </div>
+            </div>
+
+            <div class="divider-gold mb-3"></div>
+
+            <!-- Diferenciais -->
+            <h3 class="text-sm font-bold font-display text-audiper-red mb-2 flex items-center gap-2">
+                <i class="fas fa-star text-xs"></i> DIFERENCIAIS
+            </h3>
+            <div class="grid grid-cols-2 gap-2 mb-4">
+                <div class="flex items-start gap-2">
+                    <i class="fas fa-microchip text-audiper-gold text-xs mt-1"></i>
+                    <div>
+                        <strong class="text-[8pt]">Tecnologia e IA</strong>
+                        <p class="text-[7pt] text-gray-400">Inteligencia artificial integrada aos processos de auditoria</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-2">
+                    <i class="fas fa-award text-audiper-gold text-xs mt-1"></i>
+                    <div>
+                        <strong class="text-[8pt]">40+ Anos</strong>
+                        <p class="text-[7pt] text-gray-400">Experiencia consolidada em auditoria e pericia</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-2">
+                    <i class="fas fa-users text-audiper-gold text-xs mt-1"></i>
+                    <div>
+                        <strong class="text-[8pt]">Equipe Multidisciplinar</strong>
+                        <p class="text-[7pt] text-gray-400">Contadores, auditores, peritos, economistas, advogados</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-2">
+                    <i class="fas fa-book text-audiper-gold text-xs mt-1"></i>
+                    <div>
+                        <strong class="text-[8pt]">Metodologia NBC TA</strong>
+                        <p class="text-[7pt] text-gray-400">Normas internacionais de auditoria emitidas pelo CFC</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider-gold mb-3"></div>
+
+            <!-- Contato -->
+            <div class="rounded-lg p-4" style="background: linear-gradient(135deg, #7F1D1D 0%, #B91C1C 100%);">
+                <h3 class="text-sm font-bold font-display text-white mb-2 flex items-center gap-2">
+                    <i class="fas fa-envelope text-xs"></i> ENTRE EM CONTATO
+                </h3>
+                <div class="grid grid-cols-2 gap-2 text-[8pt] text-red-100">
+                    <div><i class="fas fa-map-marker-alt mr-1"></i> Rua Arlindo Nogueira, 614/Sul - Teresina/PI</div>
+                    <div><i class="fas fa-phone mr-1"></i> (86) 3303-0987</div>
+                    <div><i class="fab fa-whatsapp mr-1"></i> (86) 99401-0525</div>
+                    <div><i class="fas fa-envelope mr-1"></i> audiper@audiper.com</div>
+                    <div class="col-span-2"><i class="fas fa-globe mr-1"></i> www.audiper.com.br</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="page-footer">
+            <span>AUDIPER - Auditores Independentes S/S | CRC/PI 000023/O | Desde 1986</span>
+            <span>Proposta Comercial | 13/03/2026</span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

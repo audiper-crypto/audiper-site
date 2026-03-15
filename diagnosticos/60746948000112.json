@@ -1,0 +1,100 @@
+{
+  "dados_empresa": {
+    "cnpj": "60746948000112",
+    "cnpj_formatado": "60.746.948/0001-12",
+    "razao_social": "BANCO BRADESCO S.A.",
+    "nome_fantasia": "BRADESCO EST UNIF",
+    "situacao_cadastral": "ATIVA",
+    "data_situacao": "2005-11-03",
+    "data_inicio": "1943-03-02",
+    "cnae_principal": "6422100",
+    "cnae_descricao": "Bancos múltiplos, com carteira comercial",
+    "natureza_juridica": "",
+    "porte": "MEDIO",
+    "capital_social": 87100000000.0,
+    "opcao_simples": null,
+    "opcao_mei": null,
+    "uf": "SP",
+    "municipio": "OSASCO",
+    "logradouro": "CIDADE DE DEUS",
+    "numero": "S/N",
+    "bairro": "VILA YARA",
+    "cep": "06029900",
+    "telefone": "1136845122",
+    "email": null,
+    "qsa": [
+      {
+        "nome": "AFFONSO CORREA TACIRO JUNIOR",
+        "qualificacao": "Diretor"
+      },
+      {
+        "nome": "AFRANIO CARLOS CAMARGO DANTZGER",
+        "qualificacao": "Diretor"
+      },
+      {
+        "nome": "ALESSANDRO ZAMPIERI",
+        "qualificacao": "Diretor"
+      },
+      {
+        "nome": "ALEXANDRE CESAR PINHEIRO QUERCIA",
+        "qualificacao": "Diretor"
+      },
+      {
+        "nome": "ALEXANDRE DA SILVA GLUHER",
+        "qualificacao": "Conselheiro de Administração"
+      }
+    ],
+    "_api_fonte": "BrasilAPI"
+  },
+  "alertas": [
+    {
+      "emoji": "🔴",
+      "urgencia": "ALTA",
+      "texto": "Empresa de grande porte. Possivel obrigatoriedade de auditoria independente (Lei 11.638/07)."
+    },
+    {
+      "emoji": "🟡",
+      "urgencia": "MEDIA",
+      "texto": "83 anos de operacao. Revisao periodica reduz risco de distorcoes acumuladas."
+    },
+    {
+      "emoji": "🟢",
+      "urgencia": "NORMAL",
+      "texto": "Certidoes TCU/CNJ/CEIS/CNEP: NADA CONSTA em todas as bases consultadas."
+    },
+    {
+      "emoji": "🔴",
+      "urgencia": "ALTA",
+      "texto": "Sociedade Anonima - auditoria independente obrigatoria (CVM/Lei 6.404)."
+    },
+    {
+      "emoji": "🟡",
+      "urgencia": "MEDIA",
+      "texto": "Estrutura societaria complexa: 110 socios. Requer atencao especial na escrituracao."
+    }
+  ],
+  "servicos_recomendados": [
+    {
+      "id": "auditoria_independente",
+      "descricao": "Auditoria das Demonstracoes Contabeis",
+      "fundamentacao": "NBC TA 200 a 720",
+      "periodicidade": "mensal",
+      "valor": 7500.0,
+      "valor_formatado": "R$ 7.500,00"
+    },
+    {
+      "id": "revisao_sped_ecd",
+      "descricao": "Revisao e Validacao do SPED ECD",
+      "fundamentacao": "IN RFB 1774/2017",
+      "periodicidade": "pontual",
+      "valor": 3750.0,
+      "valor_formatado": "R$ 3.750,00"
+    }
+  ],
+  "valor_total": 11250.0,
+  "valor_total_formatado": "R$ 11.250,00",
+  "contato_nome": "Affonso Correa Taciro Junior",
+  "anos_atividade": 83,
+  "porte": "MEDIO",
+  "certidoes_resumo": "✅ TCU: NADA CONSTA\n✅ CNJ: NADA CONSTA\n✅ Portal da Transparência: NADA CONSTA\n✅ Portal da Transparência: NADA CONSTA"
+}

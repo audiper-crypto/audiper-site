@@ -1,0 +1,176 @@
+{
+  "sector": "design",
+  "sector_name": "Design",
+  "description": "UX/UI, identidade visual, design gráfico e comunicação visual",
+  "agents": [
+    {
+      "id": "ux-designer",
+      "name": "UX Designer",
+      "role": "Pesquisa de usuário, wireframes, fluxos e arquitetura de informação",
+      "skills": ["Figma", "User Research", "Wireframing", "User Journey", "Usability Testing", "Information Architecture"],
+      "workflows": [
+        {
+          "trigger": "criar_wireframe",
+          "steps": ["levantar_requisitos", "criar_fluxo_usuario", "prototipar_wireframe", "validar_com_usuario"],
+          "output": "Wireframes validados no Figma"
+        },
+        {
+          "trigger": "pesquisa_ux",
+          "steps": ["definir_perguntas", "recrutarparticipantes", "conduzir_entrevistas", "analisar", "apresentar"],
+          "output": "Relatório de pesquisa UX com insights"
+        }
+      ],
+      "capabilities": ["ux-research", "wireframing", "user-testing", "information-architecture"],
+      "memory_tags": ["ux", "wireframe", "usuario", "pesquisa", "figma"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 91
+    },
+    {
+      "id": "ui-designer",
+      "name": "UI Designer",
+      "role": "Design de interfaces visuais, design systems e componentes",
+      "skills": ["Figma", "CSS", "Design Tokens", "Component Design", "Visual Design", "Paleta", "Tipografia"],
+      "workflows": [
+        {
+          "trigger": "criar_tela",
+          "steps": ["receber_wireframe", "aplicar_identidade_visual", "criar_componentes", "documentar_especificacoes"],
+          "output": "Tela finalizada com especificações para desenvolvimento"
+        },
+        {
+          "trigger": "criar_design_system",
+          "steps": ["catalogar_componentes", "definir_tokens", "documentar_variantes", "publicar"],
+          "output": "Design system documentado"
+        }
+      ],
+      "capabilities": ["ui-design", "design-system", "component-design", "visual-design"],
+      "memory_tags": ["ui", "design-system", "componentes", "figma", "visual"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 90
+    },
+    {
+      "id": "graphic-designer",
+      "name": "Graphic Designer",
+      "role": "Criação de materiais gráficos para marketing, apresentações e comunicação",
+      "skills": ["Canva", "Figma", "Adobe", "Branding", "Layout", "Tipografia", "Cores"],
+      "workflows": [
+        {
+          "trigger": "criar_material_marketing",
+          "steps": ["receber_briefing", "criar_conceito", "produzir_artes", "revisar", "entregar"],
+          "output": "Materiais gráficos finalizados"
+        },
+        {
+          "trigger": "criar_apresentacao",
+          "steps": ["estruturar_slides", "aplicar_identidade", "inserir_conteudo", "revisar"],
+          "output": "Apresentação profissional"
+        }
+      ],
+      "capabilities": ["graphic-design", "marketing-materials", "presentation-design", "branding"],
+      "memory_tags": ["grafico", "design", "marketing", "apresentacao", "canva"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 88
+    },
+    {
+      "id": "motion-designer",
+      "name": "Motion Designer",
+      "role": "Animações, motion graphics e vídeos institucionais",
+      "skills": ["After Effects", "CSS Animations", "GSAP", "Lottie", "SVG Animation", "Video Editing"],
+      "workflows": [
+        {
+          "trigger": "criar_animacao",
+          "steps": ["definir_conceito", "criar_storyboard", "animar", "exportar", "integrar"],
+          "output": "Animação exportada e integrada"
+        }
+      ],
+      "capabilities": ["motion-graphics", "css-animations", "gsap", "lottie"],
+      "memory_tags": ["animacao", "motion", "gsap", "lottie", "video"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 85
+    },
+    {
+      "id": "brand-designer",
+      "name": "Brand Designer",
+      "role": "Criação e evolução da identidade visual Audiper — logo, paleta, tipografia",
+      "skills": ["Logo Design", "Brand Identity", "Figma", "SVG", "Brand Guidelines", "Visual Identity"],
+      "workflows": [
+        {
+          "trigger": "criar_identidade_visual",
+          "steps": ["pesquisar_referencias", "criar_conceitos", "desenvolver_logo", "definir_paleta_tipografia", "criar_manual"],
+          "output": "Manual de identidade visual completo"
+        },
+        {
+          "trigger": "atualizar_logo",
+          "steps": ["entender_motivo_atualizacao", "criar_variacoes", "testar_aplicacoes", "aprovar", "exportar_formatos"],
+          "output": "Logo atualizado em todos os formatos (SVG, PNG, favicon)"
+        }
+      ],
+      "capabilities": ["logo-design", "brand-identity", "visual-system", "brand-guidelines"],
+      "memory_tags": ["logo", "marca", "identidade-visual", "paleta", "tipografia"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 92
+    },
+    {
+      "id": "web-designer",
+      "name": "Web Designer",
+      "role": "Design de páginas web, layout responsivo e estética do site Audiper",
+      "skills": ["HTML5", "CSS3", "Responsive Design", "Figma to HTML", "Grid", "Flexbox", "Paleta Audiper"],
+      "workflows": [
+        {
+          "trigger": "redesign_pagina",
+          "steps": ["analisar_pagina_atual", "criar_proposta_visual", "implementar_html_css", "testar_responsivo"],
+          "output": "Página redesenhada e responsiva"
+        },
+        {
+          "trigger": "criar_secao_hero",
+          "steps": ["definir_mensagem_principal", "criar_layout_hero", "animacao_entrada", "testar"],
+          "output": "Seção hero implementada"
+        }
+      ],
+      "capabilities": ["web-design", "responsive-layout", "css-styling", "design-to-code"],
+      "memory_tags": ["web-design", "layout", "responsivo", "hero", "css"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 90
+    },
+    {
+      "id": "illustration-designer",
+      "name": "Illustration Designer",
+      "role": "Criação de ilustrações, ícones e elementos visuais customizados",
+      "skills": ["SVG", "Icon Design", "Illustration", "Figma", "Custom Icons", "Vector Art"],
+      "workflows": [
+        {
+          "trigger": "criar_icone",
+          "steps": ["entender_contexto", "criar_conceito", "desenhar_svg", "otimizar", "entregar"],
+          "output": "Ícone SVG otimizado"
+        }
+      ],
+      "capabilities": ["icon-design", "illustration", "svg-creation", "custom-graphics"],
+      "memory_tags": ["icone", "ilustracao", "svg", "vetor", "grafico"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 86
+    },
+    {
+      "id": "accessibility-designer",
+      "name": "Accessibility Designer",
+      "role": "Garantia de acessibilidade WCAG nas interfaces digitais",
+      "skills": ["WCAG 2.1", "Aria Labels", "Contrast Ratio", "Screen Reader", "Accessibility Audit"],
+      "workflows": [
+        {
+          "trigger": "auditoria_acessibilidade",
+          "steps": ["executar_scanner", "testar_leitor_tela", "verificar_contraste", "gerar_relatorio", "corrigir"],
+          "output": "Relatório de acessibilidade com correções aplicadas"
+        }
+      ],
+      "capabilities": ["accessibility-audit", "wcag-compliance", "inclusive-design"],
+      "memory_tags": ["acessibilidade", "wcag", "inclusao", "contraste", "aria"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 87
+    }
+  ]
+}

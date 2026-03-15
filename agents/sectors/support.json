@@ -1,0 +1,135 @@
+{
+  "sector": "support",
+  "sector_name": "Suporte",
+  "description": "Suporte ao cliente, atendimento, FAQ e resolução de problemas",
+  "agents": [
+    {
+      "id": "customer-support-agent",
+      "name": "Customer Support Agent",
+      "role": "Atendimento ao cliente via Telegram, email e chat para dúvidas gerais",
+      "skills": ["Atendimento", "Telegram Bot", "Email", "FAQ", "Resolução de Problemas", "CRM"],
+      "workflows": [
+        {
+          "trigger": "solicitacao_cliente",
+          "steps": ["categorizar_solicitacao", "buscar_resposta_base", "responder_cliente", "registrar_ocorrencia"],
+          "output": "Solicitação respondida e registrada no CRM"
+        },
+        {
+          "trigger": "escalate_problema",
+          "steps": ["identificar_complexidade", "selecionar_especialista", "passar_contexto", "acompanhar_resolucao"],
+          "output": "Problema escalado com contexto completo"
+        }
+      ],
+      "capabilities": ["customer-support", "ticket-management", "faq-response", "escalation"],
+      "memory_tags": ["suporte", "atendimento", "cliente", "telegram", "ticket"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 90
+    },
+    {
+      "id": "technical-support",
+      "name": "Technical Support",
+      "role": "Suporte técnico para sistemas Audiz, SPED, site e integrações",
+      "skills": ["Troubleshooting", "Python Debug", "SQL", "FastAPI", "Logs", "Diagnostico"],
+      "workflows": [
+        {
+          "trigger": "bug_reportado",
+          "steps": ["reproduzir_bug", "analisar_logs", "identificar_causa", "corrigir_ou_escalar", "testar_fix"],
+          "output": "Bug corrigido ou ticket criado com diagnóstico"
+        },
+        {
+          "trigger": "erro_sped",
+          "steps": ["analisar_arquivo_sped", "identificar_registro_invalido", "orientar_correcao", "validar"],
+          "output": "Orientação de correção do arquivo SPED"
+        }
+      ],
+      "capabilities": ["technical-troubleshooting", "log-analysis", "bug-diagnosis", "sped-support"],
+      "memory_tags": ["suporte-tecnico", "bug", "diagnostico", "sped", "logs"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 89
+    },
+    {
+      "id": "knowledge-base-curator",
+      "name": "Knowledge Base Curator",
+      "role": "Curadoria da base de conhecimento, FAQs e artigos de suporte",
+      "skills": ["Knowledge Base", "FAQ", "Content Curation", "Markdown", "Search Optimization"],
+      "workflows": [
+        {
+          "trigger": "criar_artigo_faq",
+          "steps": ["identificar_duvida_frequente", "redigir_artigo", "adicionar_exemplos", "publicar_base"],
+          "output": "Artigo publicado na base de conhecimento"
+        },
+        {
+          "trigger": "atualizar_faq",
+          "steps": ["identificar_conteudo_desatualizado", "revisar", "atualizar", "notificar_equipe"],
+          "output": "FAQ atualizado e comunicado"
+        }
+      ],
+      "capabilities": ["knowledge-management", "faq-creation", "content-curation"],
+      "memory_tags": ["base-conhecimento", "faq", "artigo", "curadoria"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 87
+    },
+    {
+      "id": "chatbot-trainer",
+      "name": "Chatbot Trainer",
+      "role": "Treinamento e melhoria contínua do chatbot Audina e bot Telegram",
+      "skills": ["Chatbot Training", "Intents", "Entities", "Prompt Engineering", "Tidio", "Telegram Bot API"],
+      "workflows": [
+        {
+          "trigger": "melhorar_chatbot",
+          "steps": ["analisar_conversas", "identificar_falhas", "melhorar_prompts", "testar_respostas", "deployer"],
+          "output": "Chatbot atualizado com melhor cobertura"
+        }
+      ],
+      "capabilities": ["chatbot-training", "intent-management", "conversation-analysis", "prompt-engineering"],
+      "memory_tags": ["chatbot", "audina", "telegram", "treinamento", "intents"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 88
+    },
+    {
+      "id": "feedback-analyst",
+      "name": "Feedback Analyst",
+      "role": "Análise de feedbacks de clientes, NPS e voz do cliente",
+      "skills": ["NPS", "CSAT", "Sentiment Analysis", "Survey Design", "Python", "Feedback Management"],
+      "workflows": [
+        {
+          "trigger": "analisar_feedback",
+          "steps": ["coletar_feedbacks", "categorizar", "analisar_sentimento", "identificar_temas", "recomendar_acoes"],
+          "output": "Relatório de voz do cliente com insights acionáveis"
+        }
+      ],
+      "capabilities": ["feedback-analysis", "nps-management", "sentiment-analysis", "voice-of-customer"],
+      "memory_tags": ["feedback", "nps", "sentimento", "cliente", "voz"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 86
+    },
+    {
+      "id": "onboarding-specialist",
+      "name": "Onboarding Specialist",
+      "role": "Onboarding de novos clientes nos sistemas Audiz e portais Audiper",
+      "skills": ["Client Onboarding", "Training", "Documentation", "Audiz", "Portal", "SPED"],
+      "workflows": [
+        {
+          "trigger": "onboarding_audiz",
+          "steps": ["criar_conta_cliente", "configurar_ambiente", "treinar_sistema", "validar_primeiros_passos"],
+          "output": "Cliente operacional no Audiz"
+        },
+        {
+          "trigger": "onboarding_portal",
+          "steps": ["explicar_acesso", "configurar_seguranca", "demonstrar_funcionalidades", "acompanhar_primeiros_usos"],
+          "output": "Cliente usando o portal com autonomia"
+        }
+      ],
+      "capabilities": ["client-onboarding", "system-training", "documentation-delivery"],
+      "memory_tags": ["onboarding", "audiz", "portal", "treinamento", "cliente"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 91
+    }
+  ]
+}

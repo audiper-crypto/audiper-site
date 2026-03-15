@@ -1,0 +1,121 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-15T00:00:00Z",
+  "total_agents": 146,
+  "total_sectors": 12,
+  "sectors": {
+    "engineering": {
+      "count": 20,
+      "status": "active",
+      "file": "sectors/engineering.json",
+      "description": "Arquitetura, desenvolvimento, DevOps e infraestrutura"
+    },
+    "marketing": {
+      "count": 22,
+      "status": "active",
+      "file": "sectors/marketing.json",
+      "description": "Marketing digital, conteúdo, SEO e campanhas"
+    },
+    "design": {
+      "count": 8,
+      "status": "active",
+      "file": "sectors/design.json",
+      "description": "UX/UI, identidade visual e design de comunicação"
+    },
+    "sales": {
+      "count": 8,
+      "status": "active",
+      "file": "sectors/sales.json",
+      "description": "Vendas, prospecção, CRM e propostas comerciais"
+    },
+    "auditoria": {
+      "count": 16,
+      "status": "active",
+      "file": "sectors/auditoria.json",
+      "description": "Auditoria independente NBC TA, PTA e SGQ"
+    },
+    "specialized": {
+      "count": 23,
+      "status": "active",
+      "file": "sectors/specialized.json",
+      "description": "Especialistas em domínios técnicos e regulatórios"
+    },
+    "testing": {
+      "count": 8,
+      "status": "active",
+      "file": "sectors/testing.json",
+      "description": "QA, testes automatizados, CI/CD e validação"
+    },
+    "product": {
+      "count": 4,
+      "status": "active",
+      "file": "sectors/product.json",
+      "description": "Product management, roadmap e discovery"
+    },
+    "projectmgmt": {
+      "count": 6,
+      "status": "active",
+      "file": "sectors/projectmgmt.json",
+      "description": "Gerenciamento de projetos, prazos e entregas"
+    },
+    "support": {
+      "count": 6,
+      "status": "active",
+      "file": "sectors/support.json",
+      "description": "Suporte ao cliente, FAQ e atendimento"
+    },
+    "strategy": {
+      "count": 12,
+      "status": "active",
+      "file": "sectors/strategy.json",
+      "description": "Estratégia de negócios, análise e planejamento"
+    },
+    "orchestration": {
+      "count": 8,
+      "status": "active",
+      "file": "sectors/orchestration.json",
+      "description": "Orquestração de agentes, workflows e integração"
+    }
+  },
+  "infrastructure": {
+    "claude_code": {
+      "model": "claude-3.7-sonnet",
+      "status": "active",
+      "path": "~/.claude/",
+      "agents_dir": "~/.claude/agents/"
+    },
+    "n8n": {
+      "version": "2.11.2",
+      "path": "D:/Site/n8n/",
+      "status": "active",
+      "db": "C:/Users/IBYTE/.n8n/database.sqlite"
+    },
+    "telegram_bot": {
+      "name": "@AudiperPortalBot",
+      "status": "active",
+      "path": "D:/Site/audiper-portal-bot/"
+    },
+    "discord_bot": {
+      "name": "Audina#0456",
+      "status": "active",
+      "path": "D:/Site/audiper-discord/"
+    },
+    "obsidian": {
+      "notes": 72,
+      "path": "D:/Site/obsidian-vault/",
+      "status": "active",
+      "plugins": 13
+    },
+    "gemini": {
+      "model": "gemini-2.5-flash",
+      "status": "active",
+      "project": "gen-lang-client-0213700073"
+    }
+  },
+  "schema": {
+    "agent_definition": "schema/agent-definition.json",
+    "log_entry": "schema/log-entry.json",
+    "task_definition": "schema/task-definition.json"
+  },
+  "logs_dir": "logs/"
+}

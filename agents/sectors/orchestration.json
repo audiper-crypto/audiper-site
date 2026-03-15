@@ -1,0 +1,191 @@
+{
+  "sector": "orchestration",
+  "sector_name": "Orquestração",
+  "description": "Orquestração de agentes, workflows multi-agente, integração e memória global",
+  "agents": [
+    {
+      "id": "master-orchestrator",
+      "name": "Master Orchestrator",
+      "role": "Orquestrador central que coordena agentes entre setores e gerencia fluxos complexos",
+      "skills": ["Claude Agent SDK", "Multi-Agent", "Task Routing", "Context Management", "n8n", "Tool Use"],
+      "workflows": [
+        {
+          "trigger": "tarefa_multi_agente",
+          "steps": ["analisar_tarefa", "decompose_subtarefas", "selecionar_agentes", "distribuir_trabalho", "consolidar_resultados"],
+          "output": "Resultado consolidado de múltiplos agentes especializados"
+        },
+        {
+          "trigger": "monitorar_ecossistema",
+          "steps": ["verificar_status_agentes", "identificar_gargalos", "rebalancear_carga", "alertar_anomalias"],
+          "output": "Dashboard de saúde do ecossistema atualizado"
+        }
+      ],
+      "capabilities": ["multi-agent-orchestration", "task-decomposition", "load-balancing", "context-management"],
+      "memory_tags": ["orquestracao", "multi-agente", "coordenacao", "fluxo", "central"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 97
+    },
+    {
+      "id": "workflow-designer",
+      "name": "Workflow Designer",
+      "role": "Design e implementação de workflows n8n, automações e pipelines de agentes",
+      "skills": ["n8n", "Workflow Design", "Automation", "Integrations", "Triggers", "Error Handling"],
+      "workflows": [
+        {
+          "trigger": "criar_workflow_n8n",
+          "steps": ["mapear_fluxo", "implementar_nodes", "configurar_triggers", "tratar_erros", "testar", "documentar"],
+          "output": "Workflow n8n ativo e documentado"
+        },
+        {
+          "trigger": "otimizar_workflow",
+          "steps": ["analisar_execucoes", "identificar_falhas", "melhorar_nodes", "adicionar_retry", "re-testar"],
+          "output": "Workflow otimizado com melhor confiabilidade"
+        }
+      ],
+      "capabilities": ["n8n-design", "workflow-automation", "integration-design", "error-handling"],
+      "memory_tags": ["workflow", "n8n", "automacao", "design", "integracao"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 94
+    },
+    {
+      "id": "memory-manager",
+      "name": "Memory Manager",
+      "role": "Gestão da memória global do ecossistema — Obsidian, MEMORY.md e vector store",
+      "skills": ["Obsidian", "Memory Management", "Vector Store", "Knowledge Graph", "MEMORY.md", "Semantic Search"],
+      "workflows": [
+        {
+          "trigger": "atualizar_memoria",
+          "steps": ["coletar_aprendizados", "classificar_por_topico", "atualizar_memory_md", "indexar_obsidian"],
+          "output": "Memória global atualizada e indexada"
+        },
+        {
+          "trigger": "consolidar_aprendizados",
+          "steps": ["agregar_logs_diarios", "extrair_insights", "atualizar_notas_obsidian", "gerar_resumo"],
+          "output": "Resumo diário de aprendizados consolidado"
+        }
+      ],
+      "capabilities": ["memory-management", "knowledge-consolidation", "obsidian-integration", "learning-extraction"],
+      "memory_tags": ["memoria", "obsidian", "aprendizado", "conhecimento", "vector"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 95
+    },
+    {
+      "id": "context-router",
+      "name": "Context Router",
+      "role": "Roteamento inteligente de contexto e mensagens entre agentes e canais",
+      "skills": ["Context Routing", "Intent Classification", "Channel Management", "Telegram", "Discord", "n8n"],
+      "workflows": [
+        {
+          "trigger": "mensagem_recebida",
+          "steps": ["classificar_intent", "identificar_agente_adequado", "rotear_mensagem", "confirmar_recebimento"],
+          "output": "Mensagem roteada ao agente correto"
+        },
+        {
+          "trigger": "configurar_roteamento",
+          "steps": ["definir_regras", "configurar_n8n", "testar_cenarios", "documentar"],
+          "output": "Regras de roteamento configuradas"
+        }
+      ],
+      "capabilities": ["intent-classification", "message-routing", "channel-management", "context-passing"],
+      "memory_tags": ["roteamento", "contexto", "intencao", "canal", "mensagem"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 93
+    },
+    {
+      "id": "agent-monitor",
+      "name": "Agent Monitor",
+      "role": "Monitoramento de performance, erros e saúde de todos os agentes do ecossistema",
+      "skills": ["Monitoring", "Log Analysis", "Alerting", "Performance Metrics", "Python", "Dashboard"],
+      "workflows": [
+        {
+          "trigger": "monitorar_agentes",
+          "steps": ["coletar_metricas", "calcular_performance_scores", "identificar_agentes_degradados", "alertar"],
+          "output": "Relatório de saúde dos agentes com alertas"
+        },
+        {
+          "trigger": "analise_logs_diaria",
+          "steps": ["agregar_logs", "calcular_taxas_sucesso", "identificar_padroes_erro", "recomendar_acoes"],
+          "output": "Análise diária de logs com insights"
+        }
+      ],
+      "capabilities": ["agent-monitoring", "log-aggregation", "performance-tracking", "alerting"],
+      "memory_tags": ["monitoramento", "agente", "performance", "logs", "saude"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 92
+    },
+    {
+      "id": "integration-broker",
+      "name": "Integration Broker",
+      "role": "Broker de integração entre sistemas externos — Telegram, Discord, Gmail, Calendar, GCP",
+      "skills": ["API Gateway", "Telegram API", "Discord API", "Gmail API", "Google Calendar", "OAuth"],
+      "workflows": [
+        {
+          "trigger": "nova_integracao",
+          "steps": ["autenticar_servico", "configurar_webhooks", "mapear_eventos", "implementar_handlers", "testar"],
+          "output": "Integração configurada e funcionando"
+        },
+        {
+          "trigger": "tratar_erro_integracao",
+          "steps": ["identificar_falha", "verificar_credenciais", "retry_com_backoff", "alertar_se_persistir"],
+          "output": "Erro tratado ou alerta disparado"
+        }
+      ],
+      "capabilities": ["service-integration", "api-brokering", "event-handling", "credential-management"],
+      "memory_tags": ["integracao", "broker", "telegram", "discord", "gmail"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 94
+    },
+    {
+      "id": "scheduler",
+      "name": "Scheduler",
+      "role": "Agendamento de tarefas, cron jobs e execução automática de rotinas",
+      "skills": ["Task Scheduling", "Cron", "n8n Schedule", "Windows Task Scheduler", "Python APScheduler"],
+      "workflows": [
+        {
+          "trigger": "criar_tarefa_agendada",
+          "steps": ["definir_cron_expression", "configurar_tarefa", "testar_execucao", "monitorar_proximas"],
+          "output": "Tarefa agendada e monitorada"
+        },
+        {
+          "trigger": "morning_brief",
+          "steps": ["coletar_agenda_dia", "verificar_tarefas_pendentes", "gerar_resumo", "enviar_telegram"],
+          "output": "Brief matinal enviado via Telegram"
+        }
+      ],
+      "capabilities": ["task-scheduling", "cron-management", "automated-routines", "morning-brief"],
+      "memory_tags": ["agendamento", "cron", "rotina", "automatico", "scheduler"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 93
+    },
+    {
+      "id": "deployment-coordinator",
+      "name": "Deployment Coordinator",
+      "role": "Coordenação de deploys, rollouts e sincronização entre ambientes",
+      "skills": ["Deployment", "Git Push", "FTP", "Staging", "Production", "Rollback", "Zero Downtime"],
+      "workflows": [
+        {
+          "trigger": "coordenar_deploy",
+          "steps": ["verificar_pre_requisitos", "notificar_stakeholders", "executar_deploy", "validar_pos_deploy", "confirmar"],
+          "output": "Deploy executado com validação de saúde"
+        },
+        {
+          "trigger": "rollback",
+          "steps": ["identificar_versao_estavel", "executar_rollback", "verificar_saude", "comunicar_equipe"],
+          "output": "Rollback executado com sistema estável"
+        }
+      ],
+      "capabilities": ["deployment-coordination", "rollback-management", "environment-sync", "release-validation"],
+      "memory_tags": ["deploy", "rollback", "ambiente", "producao", "coordenacao"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 91
+    }
+  ]
+}

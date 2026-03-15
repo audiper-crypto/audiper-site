@@ -1,0 +1,125 @@
+{
+  "sector": "projectmgmt",
+  "sector_name": "Gestão de Projetos",
+  "description": "Gerenciamento de projetos, cronogramas, entregas e coordenação de times",
+  "agents": [
+    {
+      "id": "project-manager",
+      "name": "Project Manager",
+      "role": "Gestão de projetos, cronograma, riscos e comunicação com stakeholders",
+      "skills": ["PMBOK", "Agile", "Scrum", "Cronograma", "Risk Management", "Stakeholder Communication"],
+      "workflows": [
+        {
+          "trigger": "iniciar_projeto",
+          "steps": ["criar_project_charter", "identificar_stakeholders", "definir_escopo", "montar_cronograma", "kick_off"],
+          "output": "Projeto iniciado com charter e cronograma aprovados"
+        },
+        {
+          "trigger": "relatorio_status",
+          "steps": ["coletar_status_tarefas", "calcular_progress", "identificar_desvios", "elaborar_relatorio"],
+          "output": "Status report semanal do projeto"
+        }
+      ],
+      "capabilities": ["project-planning", "risk-management", "status-reporting", "stakeholder-management"],
+      "memory_tags": ["projeto", "cronograma", "pmbok", "stakeholder", "risco"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 92
+    },
+    {
+      "id": "scrum-master",
+      "name": "Scrum Master",
+      "role": "Facilitação de cerimônias Scrum, remoção de impedimentos e coaching ágil",
+      "skills": ["Scrum", "Sprint Planning", "Daily", "Retrospective", "Agile Coaching", "Impediment Removal"],
+      "workflows": [
+        {
+          "trigger": "sprint_planning",
+          "steps": ["apresentar_backlog_priorizado", "estimar_stories", "definir_meta_sprint", "criar_sprint_backlog"],
+          "output": "Sprint planejado com meta e backlog definidos"
+        },
+        {
+          "trigger": "retrospectiva",
+          "steps": ["coletar_feedback", "identificar_melhorias", "definir_acoes", "acompanhar_implementacao"],
+          "output": "Ações de melhoria definidas e acompanhadas"
+        }
+      ],
+      "capabilities": ["scrum-facilitation", "agile-coaching", "impediment-removal", "team-improvement"],
+      "memory_tags": ["scrum", "agile", "sprint", "retrospectiva", "facilitacao"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 90
+    },
+    {
+      "id": "resource-planner",
+      "name": "Resource Planner",
+      "role": "Planejamento de recursos, alocação de equipe e gestão de capacidade",
+      "skills": ["Resource Planning", "Capacity Management", "Allocation", "Forecasting", "Staffing"],
+      "workflows": [
+        {
+          "trigger": "planejar_alocacao",
+          "steps": ["mapear_demanda", "verificar_disponibilidade", "alocar_recursos", "identificar_gaps", "resolver"],
+          "output": "Plano de alocação de recursos aprovado"
+        }
+      ],
+      "capabilities": ["resource-planning", "capacity-management", "team-allocation"],
+      "memory_tags": ["recursos", "alocacao", "capacidade", "equipe", "planejamento"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 87
+    },
+    {
+      "id": "pmo-analyst",
+      "name": "PMO Analyst",
+      "role": "Escritório de projetos, padrões, governança e portfólio",
+      "skills": ["PMO", "Portfolio Management", "Governance", "Standards", "KPIs Projetos", "Metodologia"],
+      "workflows": [
+        {
+          "trigger": "revisao_portfolio",
+          "steps": ["inventariar_projetos", "avaliar_saude", "priorizar_portfolio", "reportar_diretoria"],
+          "output": "Relatório de portfólio com priorização"
+        }
+      ],
+      "capabilities": ["pmo", "portfolio-management", "project-governance", "methodology"],
+      "memory_tags": ["pmo", "portfolio", "governanca", "metodologia", "padroes"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 88
+    },
+    {
+      "id": "change-manager",
+      "name": "Change Manager",
+      "role": "Gestão de mudanças, comunicação e adoção de novas soluções",
+      "skills": ["Change Management", "ADKAR", "Communication Plan", "Training", "Resistance Management"],
+      "workflows": [
+        {
+          "trigger": "gerenciar_mudanca",
+          "steps": ["avaliar_impacto", "criar_plano_comunicacao", "treinar_afetados", "monitorar_adocao", "ajustar"],
+          "output": "Mudança implementada com alta taxa de adoção"
+        }
+      ],
+      "capabilities": ["change-management", "adkar-framework", "communication-planning", "adoption-tracking"],
+      "memory_tags": ["mudanca", "adkar", "comunicacao", "adocao", "treinamento"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 86
+    },
+    {
+      "id": "delivery-manager",
+      "name": "Delivery Manager",
+      "role": "Gestão de entregas, SLAs, commitments e cadência de releases",
+      "skills": ["Delivery Management", "SLA", "Release Cadence", "Dependencies", "Commitment Management"],
+      "workflows": [
+        {
+          "trigger": "planejar_release",
+          "steps": ["consolidar_features", "verificar_dependencias", "criar_cronograma_release", "coordenar_times"],
+          "output": "Release planejada e comunicada a todos os times"
+        }
+      ],
+      "capabilities": ["delivery-management", "release-planning", "sla-management"],
+      "memory_tags": ["entrega", "release", "sla", "dependencia", "cadencia"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 89
+    }
+  ]
+}

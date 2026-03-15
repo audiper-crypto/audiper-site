@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="referrer" content="no-referrer">
+    <title>AUDIPER Portal Seguro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--tg-theme-bg-color, #F8FAFC);
+            color: var(--tg-theme-text-color, #0F172A);
+            min-height: 100vh;
+            color-scheme: var(--tg-color-scheme);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #7F1D1D 0%, #B91C1C 50%, #DC2626 100%);
+            padding: 20px 16px 16px;
+            color: white;
+            position: relative;
+        }
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #c9a962, #e8d5a0, #c9a962);
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .header-logo {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            color: #B91C1C;
+            flex-shrink: 0;
+        }
+        .header-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+        .header-subtitle {
+            font-size: 12px;
+            opacity: 0.85;
+            font-weight: 400;
+        }
+
+        .client-info {
+            background: rgba(255,255,255,0.12);
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 13px;
+            backdrop-filter: blur(4px);
+        }
+        .client-info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2px 0;
+        }
+        .client-info-label {
+            opacity: 0.7;
+            font-size: 11px;
+        }
+        .client-info-value {
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .content {
+            padding: 16px;
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #64748B;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 12px;
+            padding-left: 4px;
+        }
+
+        .doc-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .doc-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: var(--tg-theme-secondary-bg-color, #FFFFFF);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 12px;
+            padding: 14px 16px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        .doc-card:active {
+            transform: scale(0.98);
+            background: rgba(185, 28, 28, 0.04);
+        }
+
+        .doc-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .doc-icon.red { background: #FEE2E2; color: #B91C1C; }
+        .doc-icon.blue { background: #DBEAFE; color: #1E40AF; }
+        .doc-icon.green { background: #DCFCE7; color: #166534; }
+        .doc-icon.amber { background: #FEF3C7; color: #92400E; }
+
+        .doc-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .doc-name {
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 1.3;
+        }
+        .doc-desc {
+            font-size: 12px;
+            color: #64748B;
+            margin-top: 2px;
+        }
+        .doc-arrow {
+            color: #94A3B8;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .footer {
+            margin-top: 24px;
+            padding: 16px;
+            text-align: center;
+        }
+        .footer-security {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(185, 28, 28, 0.06);
+            border: 1px solid rgba(185, 28, 28, 0.12);
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-size: 11px;
+            color: #7F1D1D;
+        }
+        .footer-security i {
+            font-size: 14px;
+        }
+
+        .footer-brand {
+            margin-top: 12px;
+            font-size: 10px;
+            color: #94A3B8;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-top">
+            <div class="header-logo">A</div>
+            <div>
+                <div class="header-title">AUDIPER Portal Seguro</div>
+                <div class="header-subtitle">Entrega de Documentos de Auditoria</div>
+            </div>
+        </div>
+        <div class="client-info">
+            <div class="client-info-row">
+                <span class="client-info-label">Cliente</span>
+                <span class="client-info-value">Empresa Modelo S.A.</span>
+            </div>
+            <div class="client-info-row">
+                <span class="client-info-label">Exercicio</span>
+                <span class="client-info-value">2025</span>
+            </div>
+            <div class="client-info-row">
+                <span class="client-info-label">Sessao</span>
+                <span class="client-info-value" id="session-timer">Ativa</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="section-title">
+            <i class="fas fa-folder-open"></i> Documentos do Dossie
+        </div>
+        <div class="doc-list">
+            <a class="doc-card" onclick="openDoc('capa', 'Capa do Dossie')">
+                <div class="doc-icon red">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="doc-info">
+                    <div class="doc-name">Capa do Dossie</div>
+                    <div class="doc-desc">Identificacao do trabalho de auditoria</div>
+                </div>
+                <div class="doc-arrow"><i class="fas fa-chevron-right"></i></div>
+            </a>
+
+            <a class="doc-card" onclick="openDoc('sumario', 'Sumario do Dossie')">
+                <div class="doc-icon blue">
+                    <i class="fas fa-list-ul"></i>
+                </div>
+                <div class="doc-info">
+                    <div class="doc-name">Sumario do Dossie</div>
+                    <div class="doc-desc">Indice remissivo dos papeis de trabalho</div>
+                </div>
+                <div class="doc-arrow"><i class="fas fa-chevron-right"></i></div>
+            </a>
+
+            <a class="doc-card" onclick="openDoc('relatorio', 'Relatorio do Auditor')">
+                <div class="doc-icon green">
+                    <i class="fas fa-file-signature"></i>
+                </div>
+                <div class="doc-info">
+                    <div class="doc-name">Relatorio do Auditor Independente</div>
+                    <div class="doc-desc">NBC TA 700 — Opiniao sobre as demonstracoes</div>
+                </div>
+                <div class="doc-arrow"><i class="fas fa-chevron-right"></i></div>
+            </a>
+
+            <a class="doc-card" onclick="openDoc('carta', 'Carta a Administracao')">
+                <div class="doc-icon amber">
+                    <i class="fas fa-envelope-open-text"></i>
+                </div>
+                <div class="doc-info">
+                    <div class="doc-name">Carta a Administracao</div>
+                    <div class="doc-desc">NBC TA 260 — Comunicacao com os responsaveis</div>
+                </div>
+                <div class="doc-arrow"><i class="fas fa-chevron-right"></i></div>
+            </a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-security">
+            <i class="fas fa-shield-halved"></i>
+            Documento confidencial — Acesso monitorado e registrado
+        </div>
+        <div style="background: rgba(15,23,42,0.04); border: 1px solid rgba(0,0,0,0.08); border-radius: 8px; padding: 12px 16px; margin: 12px 16px 0; text-align: left;">
+            <p style="font-size: 10px; color: #64748B; line-height: 1.5; margin: 0;">
+                <strong style="color: #7F1D1D;">AVISO DE CONFIDENCIALIDADE:</strong>
+                Esta comunicacao e seu conteudo sao confidenciais e destinados exclusivamente ao destinatario identificado, para fins de auditoria independente nos termos das NBC TAs do CFC.
+                Todo usuario que acessar este portal tera sua identidade, horario de acesso e atividade registrados em nosso sistema de seguranca.
+                A reproducao, distribuicao ou divulgacao nao autorizada deste material e estritamente proibida.
+            </p>
+        </div>
+        <div class="footer-brand">
+            AUDIPER Auditoria Independente S/S — CRC/PI 000023/O
+        </div>
+    </div>
+
+    <div id="access-denied" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:#7F1D1D; color:white; z-index:9999; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:16px; font-family:'Inter',sans-serif;">
+        <i class="fas fa-lock" style="font-size:48px; opacity:0.5;"></i>
+        <div style="font-family:'Outfit',sans-serif; font-size:20px; font-weight:700;">Acesso Expirado</div>
+        <div style="font-size:14px; opacity:0.8; text-align:center; max-width:280px;" id="denied-msg">Sua sessao expirou. Solicite novo acesso enviando /start ao bot.</div>
+    </div>
+
+    <script>
+        // === TOKEN VALIDATION ===
+        function parseToken(tokenStr) {
+            try {
+                var parts = tokenStr.split('.');
+                if (parts.length !== 2) return null;
+                // Restore base64 padding
+                var b64 = parts[0].replace(/-/g, '+').replace(/_/g, '/');
+                while (b64.length % 4) b64 += '=';
+                var payload = JSON.parse(atob(b64));
+                return payload;
+            } catch(e) {
+                return null;
+            }
+        }
+
+        var params = new URLSearchParams(window.location.search);
+        var token = params.get('token');
+        var tokenPayload = null;
+        var accessGranted = false;
+
+        if (!token) {
+            // Sem token — bloquear
+            document.getElementById('access-denied').style.display = 'flex';
+            document.getElementById('denied-msg').textContent = 'Acesso nao autorizado. Use o bot @AudiperPortalBot para obter acesso.';
+        } else {
+            tokenPayload = parseToken(token);
+            if (!tokenPayload || !tokenPayload.exp) {
+                document.getElementById('access-denied').style.display = 'flex';
+                document.getElementById('denied-msg').textContent = 'Token invalido. Solicite novo acesso via /start.';
+            } else if (tokenPayload.exp * 1000 < Date.now()) {
+                document.getElementById('access-denied').style.display = 'flex';
+            } else {
+                accessGranted = true;
+                document.getElementById('access-denied').style.display = 'none';
+            }
+        }
+
+        // Detect environment: Telegram or Browser
+        var isTelegram = !!(window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData);
+        var tg = isTelegram ? window.Telegram.WebApp : null;
+
+        if (tg) {
+            tg.ready();
+            tg.expand();
+            tg.setHeaderColor('#7F1D1D');
+        }
+
+        // Show user info from token
+        if (tokenPayload && accessGranted) {
+            var clientName = tokenPayload.name || 'Usuario';
+            var expiresDate = new Date(tokenPayload.exp * 1000);
+            document.getElementById('session-timer').textContent =
+                'Ate ' + expiresDate.getHours() + ':' + (expiresDate.getMinutes() < 10 ? '0' : '') + expiresDate.getMinutes();
+        }
+
+        // MainButton: Encerrar Sessao (only in Telegram)
+        if (tg && accessGranted) {
+            tg.MainButton.setParams({
+                text: 'Encerrar Sessao',
+                color: '#7F1D1D',
+                text_color: '#FFFFFF'
+            });
+            tg.MainButton.onClick(function() {
+                tg.showConfirm('Deseja encerrar a sessao? O acesso sera revogado.', function(confirmed) {
+                    if (confirmed) { tg.close(); }
+                });
+            });
+            tg.MainButton.show();
+        }
+
+        // Disable right-click and drag
+        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+        document.addEventListener('dragstart', function(e) { e.preventDefault(); });
+
+        // Open document in viewer — pass token along
+        function openDoc(docId, docTitle) {
+            window.location.href = 'viewer.html?doc=' + docId + '&title=' + encodeURIComponent(docTitle) + '&token=' + encodeURIComponent(token);
+        }
+
+        // Session countdown — shows remaining time until expiration
+        if (accessGranted && tokenPayload) {
+            var expiresAt = tokenPayload.exp * 1000;
+            setInterval(function() {
+                var remaining = Math.floor((expiresAt - Date.now()) / 1000);
+                if (remaining <= 0) {
+                    // Sessao expirou
+                    document.getElementById('access-denied').style.display = 'flex';
+                    if (tg) tg.MainButton.hide();
+                    return;
+                }
+                var min = Math.floor(remaining / 60);
+                var sec = remaining % 60;
+                document.getElementById('session-timer').textContent =
+                    'Expira em ' + min + ':' + (sec < 10 ? '0' : '') + sec;
+
+                // Alerta visual quando falta pouco tempo
+                if (remaining <= 120) {
+                    document.getElementById('session-timer').style.color = '#FCA5A5';
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

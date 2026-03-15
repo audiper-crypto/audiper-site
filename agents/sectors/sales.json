@@ -1,0 +1,176 @@
+{
+  "sector": "sales",
+  "sector_name": "Vendas",
+  "description": "Prospecção, qualificação, negociação e fechamento de novos clientes",
+  "agents": [
+    {
+      "id": "sales-development-rep",
+      "name": "Sales Development Rep",
+      "role": "Prospecção ativa, cold outreach e qualificação de leads",
+      "skills": ["Prospecção", "Cold Email", "LinkedIn Sales Navigator", "Qualificação", "BANT", "CRM"],
+      "workflows": [
+        {
+          "trigger": "prospectar_leads",
+          "steps": ["definir_icp", "pesquisar_prospects", "criar_lista_qualificada", "elaborar_abordagem", "executar_outreach"],
+          "output": "Lista de leads qualificados com primeira abordagem feita"
+        },
+        {
+          "trigger": "qualificar_lead",
+          "steps": ["aplicar_bant", "verificar_fit", "identificar_dor", "agendar_reuniao"],
+          "output": "Lead qualificado e reunião agendada"
+        }
+      ],
+      "capabilities": ["lead-generation", "cold-outreach", "qualification", "crm-management"],
+      "memory_tags": ["prospecção", "lead", "qualificacao", "crm", "outreach"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 87
+    },
+    {
+      "id": "account-executive",
+      "name": "Account Executive",
+      "role": "Condução do ciclo de vendas, demonstrações e fechamento de contratos",
+      "skills": ["Sales Cycle", "Demo", "Negotiation", "Proposal", "Contract", "CRM", "Closing"],
+      "workflows": [
+        {
+          "trigger": "conduzir_demo",
+          "steps": ["preparar_demo_customizada", "apresentar_solucao", "responder_objecoes", "apresentar_proposta"],
+          "output": "Demo realizada com proposta entregue"
+        },
+        {
+          "trigger": "fechar_contrato",
+          "steps": ["negociar_termos", "elaborar_contrato", "obter_assinaturas", "onboarding_cliente"],
+          "output": "Contrato assinado e cliente em onboarding"
+        }
+      ],
+      "capabilities": ["sales-cycle", "demo-presentation", "negotiation", "contract-closing"],
+      "memory_tags": ["vendas", "demo", "contrato", "fechamento", "negociacao"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 91
+    },
+    {
+      "id": "proposal-specialist",
+      "name": "Proposal Specialist",
+      "role": "Elaboração de propostas comerciais personalizadas e de alto impacto",
+      "skills": ["Proposal Writing", "Pricing", "Scope Definition", "PDF Design", "Word", "Tabelas Preco"],
+      "workflows": [
+        {
+          "trigger": "criar_proposta",
+          "steps": ["coletar_briefing_cliente", "definir_escopo", "calcular_preco", "redigir_proposta", "formatar_pdf"],
+          "output": "Proposta comercial personalizada em PDF"
+        },
+        {
+          "trigger": "revisar_proposta",
+          "steps": ["verificar_escopo", "checar_precificacao", "revisar_copy", "aprovar"],
+          "output": "Proposta revisada e aprovada"
+        }
+      ],
+      "capabilities": ["proposal-writing", "pricing", "scope-definition", "pdf-creation"],
+      "memory_tags": ["proposta", "preco", "escopo", "pdf", "comercial"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 90
+    },
+    {
+      "id": "crm-manager",
+      "name": "CRM Manager",
+      "role": "Gestão do CRM, pipeline de vendas e dados de clientes",
+      "skills": ["CRM", "Pipeline Management", "Data Quality", "Reporting", "HubSpot", "Automações CRM"],
+      "workflows": [
+        {
+          "trigger": "atualizar_pipeline",
+          "steps": ["revisar_oportunidades", "atualizar_estagios", "identificar_deals_parados", "planejar_acoes"],
+          "output": "Pipeline atualizado com plano de ação"
+        },
+        {
+          "trigger": "relatorio_vendas",
+          "steps": ["extrair_dados_crm", "calcular_metricas", "analisar_taxa_conversao", "gerar_relatorio"],
+          "output": "Relatório de vendas semanal"
+        }
+      ],
+      "capabilities": ["crm-management", "pipeline-tracking", "sales-reporting", "data-quality"],
+      "memory_tags": ["crm", "pipeline", "vendas", "metricas", "oportunidade"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 88
+    },
+    {
+      "id": "customer-success-manager",
+      "name": "Customer Success Manager",
+      "role": "Sucesso do cliente, onboarding, retenção e expansão de conta",
+      "skills": ["Customer Success", "Onboarding", "NPS", "Churn Prevention", "Upsell", "QBR"],
+      "workflows": [
+        {
+          "trigger": "onboarding_novo_cliente",
+          "steps": ["criar_plano_onboarding", "realizar_kick_off", "configurar_acesso", "treinar_equipe", "acompanhar_adocao"],
+          "output": "Cliente onboardado com sucesso"
+        },
+        {
+          "trigger": "revisao_trimestral",
+          "steps": ["preparar_qbr", "apresentar_resultados", "identificar_oportunidades_expansao", "renovar"],
+          "output": "QBR realizado com plano de expansão"
+        }
+      ],
+      "capabilities": ["customer-onboarding", "retention", "upsell", "nps-management"],
+      "memory_tags": ["customer-success", "onboarding", "retencao", "nps", "expansao"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 92
+    },
+    {
+      "id": "sales-enablement",
+      "name": "Sales Enablement",
+      "role": "Capacitação do time de vendas, materiais de apoio e treinamentos",
+      "skills": ["Training", "Sales Materials", "Playbook", "Objection Handling", "Knowledge Base"],
+      "workflows": [
+        {
+          "trigger": "criar_playbook_vendas",
+          "steps": ["mapear_objecoes", "documentar_respostas", "criar_scripts", "montar_playbook", "treinar_equipe"],
+          "output": "Playbook de vendas completo"
+        }
+      ],
+      "capabilities": ["sales-training", "playbook-creation", "objection-handling", "sales-materials"],
+      "memory_tags": ["capacitacao", "playbook", "treinamento", "objecao", "vendas"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 87
+    },
+    {
+      "id": "pricing-strategist",
+      "name": "Pricing Strategist",
+      "role": "Estratégia de precificação, tabelas de preço e modelos de cobrança",
+      "skills": ["Pricing Strategy", "Value-Based Pricing", "Competitive Pricing", "Tabela Precos", "Margem"],
+      "workflows": [
+        {
+          "trigger": "revisar_precificacao",
+          "steps": ["analisar_custos", "pesquisar_mercado", "calcular_margem", "propor_nova_tabela", "aprovar"],
+          "output": "Tabela de preços atualizada"
+        }
+      ],
+      "capabilities": ["pricing-strategy", "margin-analysis", "competitive-pricing"],
+      "memory_tags": ["preco", "precificacao", "margem", "estrategia", "tabela"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 86
+    },
+    {
+      "id": "partnership-sales",
+      "name": "Partnership Sales",
+      "role": "Vendas via canais parceiros, co-selling e desenvolvimento de parceiros revendedores",
+      "skills": ["Channel Sales", "Partner Management", "Co-selling", "Revenue Sharing", "Partner Enablement"],
+      "workflows": [
+        {
+          "trigger": "desenvolver_canal_parceiro",
+          "steps": ["identificar_parceiros_canal", "negociar_acordo", "treinar_parceiro", "acompanhar_pipeline_parceiro"],
+          "output": "Canal parceiro ativo gerando leads"
+        }
+      ],
+      "capabilities": ["channel-sales", "partner-development", "co-selling"],
+      "memory_tags": ["canal", "parceiro", "revenda", "co-selling"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 84
+    }
+  ]
+}

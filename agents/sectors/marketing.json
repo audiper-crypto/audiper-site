@@ -1,0 +1,448 @@
+{
+  "sector": "marketing",
+  "sector_name": "Marketing",
+  "description": "Marketing digital, conteúdo, SEO, campanhas e redes sociais",
+  "agents": [
+    {
+      "id": "content-strategist",
+      "name": "Content Strategist",
+      "role": "Estratégia de conteúdo, calendário editorial e posicionamento de marca",
+      "skills": ["Content Strategy", "SEO", "Brand Voice", "Editorial Calendar", "Copywriting"],
+      "workflows": [
+        {
+          "trigger": "criar_calendario_editorial",
+          "steps": ["mapear_temas", "definir_frequencia", "distribuir_canais", "aprovar_calendario"],
+          "output": "Calendário editorial mensal aprovado"
+        },
+        {
+          "trigger": "definir_estrategia_conteudo",
+          "steps": ["analisar_publico", "definir_pilares", "mapear_jornada", "criar_plano"],
+          "output": "Plano de conteúdo trimestral"
+        }
+      ],
+      "capabilities": ["content-planning", "editorial-calendar", "brand-voice", "audience-analysis"],
+      "memory_tags": ["conteudo", "estrategia", "editorial", "marca"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 92
+    },
+    {
+      "id": "seo-specialist",
+      "name": "SEO Specialist",
+      "role": "Otimização para mecanismos de busca, palavras-chave e técnicas on/off-page",
+      "skills": ["SEO", "Keywords Research", "Google Search Console", "Schema.org", "HTML Meta Tags", "Link Building"],
+      "workflows": [
+        {
+          "trigger": "auditoria_seo",
+          "steps": ["rastrear_site", "analisar_keywords", "checar_meta_tags", "verificar_velocidade", "gerar_relatorio"],
+          "output": "Relatório de SEO com recomendações priorizadas"
+        },
+        {
+          "trigger": "otimizar_pagina",
+          "steps": ["pesquisar_keywords", "otimizar_title_description", "estruturar_headings", "adicionar_schema"],
+          "output": "Página otimizada para SEO"
+        }
+      ],
+      "capabilities": ["seo-audit", "keyword-research", "on-page-seo", "technical-seo"],
+      "memory_tags": ["seo", "keywords", "google", "busca", "otimizacao"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 90
+    },
+    {
+      "id": "social-media-manager",
+      "name": "Social Media Manager",
+      "role": "Gestão de redes sociais, publicações e engajamento",
+      "skills": ["LinkedIn", "Instagram", "Twitter/X", "Facebook", "Canva", "Social Analytics"],
+      "workflows": [
+        {
+          "trigger": "criar_post_linkedin",
+          "steps": ["selecionar_tema", "redigir_texto", "criar_imagem", "agendar_publicacao"],
+          "output": "Post publicado no LinkedIn"
+        },
+        {
+          "trigger": "relatorio_redes_sociais",
+          "steps": ["coletar_metricas", "analisar_engajamento", "comparar_periodo", "gerar_insights"],
+          "output": "Relatório mensal de redes sociais"
+        }
+      ],
+      "capabilities": ["social-media", "content-publishing", "community-management", "analytics"],
+      "memory_tags": ["redes-sociais", "linkedin", "instagram", "engajamento"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 88
+    },
+    {
+      "id": "email-marketing-specialist",
+      "name": "Email Marketing Specialist",
+      "role": "Campanhas de email marketing, newsletters e automações de email",
+      "skills": ["Gmail API", "HTML Email", "Segmentação", "A/B Testing", "Automação", "n8n"],
+      "workflows": [
+        {
+          "trigger": "criar_newsletter",
+          "steps": ["selecionar_conteudos", "redigir_email", "criar_template_html", "testar_envio", "disparar"],
+          "output": "Newsletter disparada com tracking ativo"
+        },
+        {
+          "trigger": "campanha_email",
+          "steps": ["definir_objetivo", "segmentar_lista", "criar_sequencia", "configurar_automacao", "monitorar"],
+          "output": "Campanha de email ativa com métricas"
+        }
+      ],
+      "capabilities": ["email-campaigns", "newsletter", "email-automation", "list-segmentation"],
+      "memory_tags": ["email", "newsletter", "campanha", "gmail", "automacao"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 89
+    },
+    {
+      "id": "copywriter",
+      "name": "Copywriter",
+      "role": "Redação persuasiva para páginas, anúncios, propostas e materiais de vendas",
+      "skills": ["Copywriting", "AIDA", "Storytelling", "Landing Pages", "Ad Copy", "Revisao"],
+      "workflows": [
+        {
+          "trigger": "escrever_landing_page",
+          "steps": ["entender_produto", "definir_proposta_valor", "estruturar_pagina", "redigir_copy", "revisar"],
+          "output": "Landing page com copy persuasivo"
+        },
+        {
+          "trigger": "criar_proposta_comercial",
+          "steps": ["coletar_briefing", "estruturar_proposta", "redigir_beneficios", "incluir_cta", "formatar"],
+          "output": "Proposta comercial formatada"
+        }
+      ],
+      "capabilities": ["persuasive-writing", "landing-pages", "ad-copy", "proposal-writing"],
+      "memory_tags": ["copy", "redacao", "persuasao", "proposta", "landing-page"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 91
+    },
+    {
+      "id": "ads-manager",
+      "name": "Ads Manager",
+      "role": "Gestão de campanhas pagas no Google Ads e Meta Ads",
+      "skills": ["Google Ads", "Meta Ads", "Performance Max", "Lookalike Audiences", "ROAS", "Budget Optimization"],
+      "workflows": [
+        {
+          "trigger": "criar_campanha_ads",
+          "steps": ["definir_objetivo", "configurar_publico", "criar_criativos", "definir_lances", "ativar"],
+          "output": "Campanha ativa com configuração documentada"
+        },
+        {
+          "trigger": "otimizar_campanha",
+          "steps": ["analisar_metricas", "pausar_anuncios_ruins", "escalar_vencedores", "ajustar_lances"],
+          "output": "Campanha otimizada com melhora de ROAS"
+        }
+      ],
+      "capabilities": ["paid-advertising", "google-ads", "meta-ads", "campaign-optimization"],
+      "memory_tags": ["anuncios", "google-ads", "meta-ads", "pago", "roas"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 87
+    },
+    {
+      "id": "brand-manager",
+      "name": "Brand Manager",
+      "role": "Gestão e consistência da identidade de marca Audiper",
+      "skills": ["Brand Identity", "Brand Guidelines", "Visual Consistency", "Positioning", "Mensagem de Marca"],
+      "workflows": [
+        {
+          "trigger": "revisar_identidade_marca",
+          "steps": ["auditar_materiais", "verificar_consistencia_visual", "checar_tom_voz", "gerar_relatorio"],
+          "output": "Relatório de consistência de marca"
+        },
+        {
+          "trigger": "criar_brand_guide",
+          "steps": ["documentar_paleta", "definir_tipografia", "estabelecer_tom_voz", "criar_guia_pdf"],
+          "output": "Brand guide completo em PDF"
+        }
+      ],
+      "capabilities": ["brand-management", "visual-identity", "brand-consistency", "positioning"],
+      "memory_tags": ["marca", "identidade", "branding", "audiper", "consistencia"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 90
+    },
+    {
+      "id": "analytics-specialist",
+      "name": "Analytics Specialist",
+      "role": "Análise de dados de marketing, dashboards e métricas de performance",
+      "skills": ["Google Analytics", "Data Studio", "Python", "Pandas", "KPIs", "Funil de Conversao"],
+      "workflows": [
+        {
+          "trigger": "relatorio_marketing",
+          "steps": ["coletar_dados_ga", "calcular_kpis", "montar_dashboard", "interpretar_resultados", "recomendar"],
+          "output": "Relatório mensal de marketing com insights"
+        },
+        {
+          "trigger": "analise_funil",
+          "steps": ["mapear_etapas", "medir_conversoes", "identificar_vazamentos", "propor_otimizacoes"],
+          "output": "Análise de funil com plano de otimização"
+        }
+      ],
+      "capabilities": ["marketing-analytics", "dashboard-creation", "funnel-analysis", "kpi-tracking"],
+      "memory_tags": ["analytics", "metricas", "dashboard", "kpi", "conversao"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 91
+    },
+    {
+      "id": "video-content-creator",
+      "name": "Video Content Creator",
+      "role": "Criação de roteiros e estratégia para conteúdo em vídeo",
+      "skills": ["Roteiro", "YouTube", "Shorts", "Reels", "Storytelling", "Video SEO"],
+      "workflows": [
+        {
+          "trigger": "criar_roteiro_video",
+          "steps": ["definir_tema", "pesquisar_keywords", "estruturar_roteiro", "revisar", "entregar"],
+          "output": "Roteiro finalizado pronto para gravação"
+        }
+      ],
+      "capabilities": ["video-scripting", "youtube-strategy", "short-form-content"],
+      "memory_tags": ["video", "youtube", "roteiro", "reels", "shorts"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 85
+    },
+    {
+      "id": "influencer-relations",
+      "name": "Influencer Relations",
+      "role": "Relacionamento com influenciadores e parceiros de conteúdo na área contábil/fiscal",
+      "skills": ["Influencer Marketing", "Partnership", "Briefing", "Contract", "ROI Measurement"],
+      "workflows": [
+        {
+          "trigger": "prospectar_influenciador",
+          "steps": ["mapear_perfis", "avaliar_fit", "elaborar_proposta", "negociar", "fechar_parceria"],
+          "output": "Contrato de parceria com influenciador"
+        }
+      ],
+      "capabilities": ["influencer-marketing", "partnership-management", "influencer-briefing"],
+      "memory_tags": ["influencer", "parceria", "contabil", "fiscal"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 82
+    },
+    {
+      "id": "community-manager",
+      "name": "Community Manager",
+      "role": "Gestão de comunidades online, Discord, Telegram e fóruns profissionais",
+      "skills": ["Community Management", "Discord", "Telegram", "Moderation", "Engagement", "Events"],
+      "workflows": [
+        {
+          "trigger": "moderar_comunidade",
+          "steps": ["monitorar_mensagens", "responder_duvidas", "aplicar_regras", "gerar_relatorio"],
+          "output": "Relatório de saúde da comunidade"
+        },
+        {
+          "trigger": "criar_evento_comunidade",
+          "steps": ["definir_tema", "criar_evento", "promover", "executar", "fazer_followup"],
+          "output": "Evento realizado com resumo"
+        }
+      ],
+      "capabilities": ["community-management", "discord-moderation", "telegram-management", "event-hosting"],
+      "memory_tags": ["comunidade", "discord", "telegram", "moderacao", "engajamento"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 86
+    },
+    {
+      "id": "pr-specialist",
+      "name": "PR Specialist",
+      "role": "Relações públicas, assessoria de imprensa e gestão de reputação",
+      "skills": ["Press Release", "Media Relations", "Crisis Communication", "Reputation Management"],
+      "workflows": [
+        {
+          "trigger": "criar_press_release",
+          "steps": ["definir_noticia", "redigir_release", "distribuir_midia", "monitorar_publicacoes"],
+          "output": "Press release distribuído com lista de publicações"
+        }
+      ],
+      "capabilities": ["press-relations", "reputation-management", "crisis-communication"],
+      "memory_tags": ["rp", "imprensa", "reputacao", "press-release"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 84
+    },
+    {
+      "id": "growth-hacker",
+      "name": "Growth Hacker",
+      "role": "Experimentos de crescimento rápido, CRO e estratégias de aquisição escalável",
+      "skills": ["Growth Hacking", "A/B Testing", "CRO", "Virality", "Funnel Optimization", "Metrics"],
+      "workflows": [
+        {
+          "trigger": "experimento_crescimento",
+          "steps": ["formular_hipotese", "definir_metricas", "implementar_teste", "medir_resultados", "escalar_ou_abandonar"],
+          "output": "Resultado do experimento com decisão de escalar/abandonar"
+        }
+      ],
+      "capabilities": ["growth-experiments", "cro", "ab-testing", "funnel-optimization"],
+      "memory_tags": ["crescimento", "growth", "experimento", "cro", "aquisicao"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 88
+    },
+    {
+      "id": "event-marketer",
+      "name": "Event Marketer",
+      "role": "Planejamento e execução de eventos e webinars para a Audiper",
+      "skills": ["Event Planning", "Webinar", "Zoom", "Google Meet", "Event Marketing", "Lead Generation"],
+      "workflows": [
+        {
+          "trigger": "organizar_webinar",
+          "steps": ["definir_tema_palestrantes", "criar_pagina_inscricao", "promover", "executar", "enviar_gravacao"],
+          "output": "Webinar realizado com gravação e lista de leads"
+        }
+      ],
+      "capabilities": ["event-planning", "webinar-hosting", "lead-generation"],
+      "memory_tags": ["evento", "webinar", "lead", "inscricao"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 85
+    },
+    {
+      "id": "market-researcher",
+      "name": "Market Researcher",
+      "role": "Pesquisa de mercado, análise de concorrência e inteligência competitiva",
+      "skills": ["Market Research", "Competitive Analysis", "Surveys", "SWOT", "TAM/SAM/SOM"],
+      "workflows": [
+        {
+          "trigger": "analise_concorrencia",
+          "steps": ["mapear_concorrentes", "analisar_posicionamento", "comparar_precos", "identificar_diferenciais"],
+          "output": "Relatório de inteligência competitiva"
+        }
+      ],
+      "capabilities": ["market-research", "competitive-analysis", "market-sizing"],
+      "memory_tags": ["mercado", "pesquisa", "concorrencia", "inteligencia"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 87
+    },
+    {
+      "id": "blog-writer",
+      "name": "Blog Writer",
+      "role": "Produção de artigos para blog sobre auditoria, contabilidade e tributos",
+      "skills": ["Redacao", "SEO", "Auditoria", "Contabilidade", "Markdown", "WordPress"],
+      "workflows": [
+        {
+          "trigger": "escrever_artigo",
+          "steps": ["pesquisar_tema", "criar_outline", "redigir_artigo", "otimizar_seo", "publicar"],
+          "output": "Artigo publicado no blog"
+        }
+      ],
+      "capabilities": ["blog-writing", "seo-content", "technical-writing", "audit-content"],
+      "memory_tags": ["blog", "artigo", "auditoria", "seo", "redacao"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 90
+    },
+    {
+      "id": "lead-nurturing-specialist",
+      "name": "Lead Nurturing Specialist",
+      "role": "Nutrição de leads, automações de funil e sequências de engajamento",
+      "skills": ["Lead Nurturing", "Email Sequences", "CRM", "Automation", "n8n", "Segmentação"],
+      "workflows": [
+        {
+          "trigger": "criar_sequencia_nutricao",
+          "steps": ["segmentar_leads", "mapear_jornada", "criar_emails_sequencia", "configurar_automacao"],
+          "output": "Sequência de nutrição ativa no n8n"
+        }
+      ],
+      "capabilities": ["lead-nurturing", "email-sequences", "crm-automation"],
+      "memory_tags": ["lead", "nutricao", "funil", "automacao", "crm"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 87
+    },
+    {
+      "id": "podcast-producer",
+      "name": "Podcast Producer",
+      "role": "Produção de conteúdo em podcast sobre temas de auditoria e consultoria",
+      "skills": ["Podcast", "Roteiro", "Edicao Audio", "RSS", "Spotify", "Distribution"],
+      "workflows": [
+        {
+          "trigger": "produzir_episodio",
+          "steps": ["definir_tema_convidado", "criar_roteiro", "gravar", "editar", "publicar_distribuir"],
+          "output": "Episódio publicado nas plataformas"
+        }
+      ],
+      "capabilities": ["podcast-production", "audio-content", "distribution"],
+      "memory_tags": ["podcast", "audio", "episodio", "spotify"],
+      "status": "development",
+      "task_count": 0,
+      "performance_score": 80
+    },
+    {
+      "id": "partnership-manager",
+      "name": "Partnership Manager",
+      "role": "Gestão de parcerias estratégicas com escritórios contábeis e entidades do setor",
+      "skills": ["Partnership Development", "B2B Relations", "CFC", "CRE", "Networking", "Proposta Parceria"],
+      "workflows": [
+        {
+          "trigger": "prospectar_parceiro",
+          "steps": ["identificar_parceiros_potenciais", "qualificar", "fazer_abordagem", "propor_parceria", "formalizar"],
+          "output": "Acordo de parceria firmado"
+        }
+      ],
+      "capabilities": ["partnership-development", "b2b-relations", "strategic-alliances"],
+      "memory_tags": ["parceria", "b2b", "cfc", "cre", "networking"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 85
+    },
+    {
+      "id": "conversion-optimizer",
+      "name": "Conversion Optimizer",
+      "role": "Otimização de conversão, heatmaps e testes de UX no site",
+      "skills": ["CRO", "Heatmaps", "A/B Testing", "UX Research", "Analytics", "Conversion Funnel"],
+      "workflows": [
+        {
+          "trigger": "otimizar_conversao",
+          "steps": ["analisar_heatmaps", "identificar_atrito", "criar_hipotese", "implementar_teste", "medir"],
+          "output": "Melhoria de conversão implementada com resultado medido"
+        }
+      ],
+      "capabilities": ["conversion-optimization", "ux-testing", "heatmap-analysis"],
+      "memory_tags": ["conversao", "cro", "teste", "ux", "heatmap"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 87
+    },
+    {
+      "id": "whatsapp-marketing",
+      "name": "WhatsApp Marketing",
+      "role": "Estratégia e automações de marketing via WhatsApp Business",
+      "skills": ["WhatsApp Business", "WhatsApp API", "Automacao", "n8n", "Broadcast", "Segmentacao"],
+      "workflows": [
+        {
+          "trigger": "campanha_whatsapp",
+          "steps": ["segmentar_lista", "criar_mensagem", "configurar_n8n", "disparar", "monitorar_respostas"],
+          "output": "Campanha WhatsApp executada com relatório"
+        }
+      ],
+      "capabilities": ["whatsapp-marketing", "broadcast-messaging", "chat-automation"],
+      "memory_tags": ["whatsapp", "mensagem", "campanha", "automacao"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 86
+    },
+    {
+      "id": "referral-program-manager",
+      "name": "Referral Program Manager",
+      "role": "Gestão de programa de indicações e marketing boca a boca",
+      "skills": ["Referral Marketing", "Programa Indicacoes", "CRM", "Incentivos", "Rastreamento"],
+      "workflows": [
+        {
+          "trigger": "criar_programa_indicacao",
+          "steps": ["definir_incentivos", "criar_landing_page", "configurar_rastreamento", "comunicar_clientes"],
+          "output": "Programa de indicação ativo"
+        }
+      ],
+      "capabilities": ["referral-programs", "word-of-mouth", "incentive-management"],
+      "memory_tags": ["indicacao", "referral", "programa", "clientes"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 83
+    }
+  ]
+}

@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AUDIPER — Mission Control</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Nunito+Sans:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --wine:       #7B2D3E;
+  --wine-deep:  #4E1A27;
+  --wine-mid:   #9B3A4E;
+  --wine-light: #C4788A;
+  --wine-pale:  #EDD5DA;
+  --wine-ultra: #F9F0F2;
+  --gold:       #C8962A;
+  --gold-light: #E6B84A;
+  --gold-pale:  #FBF3E2;
+  --cream:      #FAF7F4;
+  --white:      #FFFFFF;
+  --ink:        #2A1218;
+  --ink-mid:    #5C3540;
+  --ink-dim:    #9A7078;
+  --border:     rgba(123,45,62,0.12);
+  --border-mid: rgba(123,45,62,0.22);
+  --green:      #16a34a;
+  --green-pale: #f0fdf4;
+  --blue:       #1d4ed8;
+  --blue-pale:  #eff6ff;
+  --shadow-sm:  0 2px 8px rgba(78,26,39,0.08);
+  --shadow-md:  0 6px 24px rgba(78,26,39,0.12);
+  --shadow-lg:  0 16px 48px rgba(78,26,39,0.18);
+  --r:          'Nunito', system-ui, sans-serif;
+  --s:          'Nunito Sans', system-ui, sans-serif;
+  --m:          'JetBrains Mono', monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--ink);font-family:var(--s);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse at 15% 15%,rgba(123,45,62,.04) 0%,transparent 55%),
+             radial-gradient(ellipse at 85% 85%,rgba(200,150,42,.04) 0%,transparent 55%);}
+
+/* ── LAYOUT ── */
+#app{position:relative;z-index:1;display:grid;
+  grid-template-rows:64px 72px 42px 1fr auto;
+  grid-template-columns:1fr 296px;
+  grid-template-areas:"hd hd""st st""tb tb""mn sb""ft ft";
+  min-height:100vh;}
+
+/* ── HEADER ── */
+#header{grid-area:hd;background:var(--wine-deep);padding:0 28px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:200;box-shadow:0 2px 16px rgba(78,26,39,.35);}
+.hdr-l{display:flex;align-items:center;gap:14px;}
+.logo{width:38px;height:38px;flex-shrink:0;}
+.logo svg{width:38px;height:38px;}
+.brand h1{font-family:var(--r);font-size:20px;font-weight:700;color:#fff;letter-spacing:.2em;line-height:1;}
+.brand p{font-family:var(--m);font-size:8.5px;color:var(--gold-light);letter-spacing:.3em;text-transform:uppercase;margin-top:2px;}
+.pills{display:flex;gap:8px;}
+.pill{display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  font-family:var(--m);font-size:9.5px;color:rgba(255,255,255,.7);letter-spacing:.08em;}
+.pd{width:6px;height:6px;border-radius:50%;animation:blink 2s ease-in-out infinite;}
+.pd-g{background:#4ade80;box-shadow:0 0 6px #4ade80;}
+.pd-o{background:var(--gold-light);box-shadow:0 0 6px var(--gold-light);}
+.pd-w{background:var(--wine-light);box-shadow:0 0 6px var(--wine-light);}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+.hdr-r{text-align:right;}
+#clock{font-family:var(--r);font-size:24px;font-weight:600;color:var(--gold-light);letter-spacing:.06em;line-height:1;}
+#ds{font-family:var(--m);font-size:9px;color:rgba(255,255,255,.4);letter-spacing:.18em;margin-top:2px;}
+
+/* ── STATS ── */
+#stats{grid-area:st;display:grid;grid-template-columns:repeat(6,1fr);
+  background:var(--white);border-bottom:2px solid var(--wine-pale);box-shadow:var(--shadow-sm);}
+.si{padding:14px 20px;border-right:1px solid var(--border);position:relative;cursor:default;}
+.si:last-child{border-right:none;}
+.si::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--wine);transform:scaleX(0);transform-origin:left;transition:transform .35s;}
+.si:hover::after{transform:scaleX(1);}
+.sl{font-family:var(--m);font-size:8px;letter-spacing:.25em;color:var(--ink-dim);text-transform:uppercase;margin-bottom:4px;}
+.sv{font-family:var(--r);font-size:30px;font-weight:700;color:var(--wine);line-height:1;}
+.ss{font-family:var(--s);font-size:10px;color:var(--ink-dim);margin-top:2px;}
+
+/* ── TABS ── */
+#tabs{grid-area:tb;background:var(--white);border-bottom:1px solid var(--border);
+  display:flex;align-items:flex-end;padding:0 28px;gap:0;}
+.tab{padding:10px 18px;font-family:var(--r);font-size:13px;font-weight:600;
+  letter-spacing:.12em;color:var(--ink-dim);cursor:pointer;border-bottom:2px solid transparent;
+  transition:all .2s;text-transform:uppercase;white-space:nowrap;}
+.tab:hover{color:var(--wine);}
+.tab.active{color:var(--wine);border-bottom-color:var(--wine);}
+
+/* ── MAIN ── */
+#main{grid-area:mn;overflow-y:auto;padding:22px 20px 22px 28px;}
+.tab-pane{display:none;}
+.tab-pane.active{display:block;}
+
+/* ── SECTOR GRID ── */
+.sec-hd{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.sec-hd-l{flex:1;height:1px;background:var(--border-mid);}
+.sec-hd-t{font-family:var(--r);font-size:13px;font-weight:600;letter-spacing:.2em;
+  color:var(--wine);text-transform:uppercase;white-space:nowrap;}
+.sector-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px;}
+.sc{background:var(--white);border:1.5px solid var(--border);border-radius:12px;
+  padding:16px 14px 12px;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;}
+.sc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--c,var(--wine));}
+.sc:hover{border-color:var(--c,var(--wine));box-shadow:var(--shadow-md);transform:translateY(-2px);}
+.sc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;}
+.fig-wrap{width:58px;height:58px;background:var(--wine-ultra);border:1.5px solid var(--wine-pale);
+  border-radius:12px;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:background .3s;overflow:hidden;}
+.sc:hover .fig-wrap{background:var(--wine-pale);}
+.fig-wrap svg{width:50px;height:50px;}
+.role-badge{font-family:var(--m);font-size:8px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--wine);text-align:center;margin-top:4px;opacity:.8;}
+.sc-nums{text-align:right;}
+.sc-count{font-family:var(--r);font-size:32px;font-weight:700;line-height:1;}
+.sc-unit{font-family:var(--m);font-size:8px;color:var(--ink-dim);letter-spacing:.2em;text-transform:uppercase;}
+.sc-name{font-family:var(--r);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px;}
+.sc-desc{font-family:var(--s);font-size:10px;color:var(--ink-dim);line-height:1.4;margin-bottom:8px;}
+.dots-row{display:flex;flex-wrap:wrap;gap:4px;}
+.dot{width:6px;height:6px;border-radius:50%;opacity:.25;animation:dp var(--d,4s) ease-in-out infinite;}
+.dot.on{opacity:.8;}
+.sc:hover .dot{opacity:.5;} .sc:hover .dot.on{opacity:1;}
+@keyframes dp{0%,85%,100%{opacity:inherit}42%{opacity:1}}
+
+/* ── SYS MINI ── */
+.sys-mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.smc{background:var(--white);border:1.5px solid var(--border);border-radius:8px;
+  padding:12px 14px;border-left:3px solid var(--c,var(--wine));transition:box-shadow .2s;}
+.smc:hover{box-shadow:var(--shadow-sm);}
+.smc-name{font-family:var(--s);font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px;}
+.smc-st{font-family:var(--m);font-size:9px;color:var(--green);}
+.smc-sub{font-family:var(--m);font-size:9px;color:var(--ink-dim);margin-top:1px;}
+
+/* ── TASKS TAB (KANBAN) ── */
+.kanban{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:4px;}
+.kboard{background:var(--white);border:1.5px solid var(--border);border-radius:10px;overflow:hidden;}
+.kboard-hd{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.kboard-title{font-family:var(--r);font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;}
+.kboard-count{font-family:var(--m);font-size:10px;padding:2px 8px;border-radius:12px;}
+.k-done .kboard-title{color:var(--green);}
+.k-done .kboard-count{background:var(--green-pale);color:var(--green);border:1px solid #bbf7d0;}
+.k-prog .kboard-title{color:var(--wine);}
+.k-prog .kboard-count{background:var(--wine-ultra);color:var(--wine);border:1px solid var(--wine-pale);}
+.k-pend .kboard-title{color:var(--gold);}
+.k-pend .kboard-count{background:var(--gold-pale);color:#92400e;border:1px solid #fde68a;}
+.kboard-body{padding:10px;display:flex;flex-direction:column;gap:8px;min-height:300px;}
+.ktask{background:var(--cream);border:1px solid var(--border);border-radius:8px;
+  padding:10px 12px;cursor:pointer;transition:all .2s;position:relative;}
+.ktask:hover{border-color:var(--wine);box-shadow:var(--shadow-sm);}
+.ktask-agent{font-family:var(--m);font-size:9px;color:var(--wine);font-weight:500;margin-bottom:3px;letter-spacing:.08em;}
+.ktask-name{font-family:var(--s);font-size:12px;font-weight:600;color:var(--ink);margin-bottom:3px;}
+.ktask-desc{font-family:var(--s);font-size:10px;color:var(--ink-dim);line-height:1.4;}
+.ktask-tag{display:inline-block;margin-top:6px;font-family:var(--m);font-size:8px;padding:2px 7px;
+  border-radius:10px;background:var(--wine-ultra);color:var(--wine);border:1px solid var(--wine-pale);}
+.ktask-time{font-family:var(--m);font-size:9px;color:var(--ink-dim);margin-top:5px;}
+
+/* ── FONTE ARREDONDADA ajustes ── */
+.brand h1,.stat-val,.sc-count,.sc-name,.kboard-title,.sb-t,.sec-hd-t,.tab,.mt{font-family:var(--r);font-weight:800;}
+
+/* ── ORG CHART TAB ── */
+.org-wrap{overflow:auto;padding:10px 0 20px;}
+
+/* RAIZ */
+.org-root-wrap{display:flex;flex-direction:column;align-items:center;}
+.org-root{background:var(--wine-deep);color:#fff;border-radius:14px;
+  padding:14px 32px;text-align:center;min-width:220px;
+  box-shadow:var(--shadow-lg);}
+.org-root-name{font-family:var(--r);font-size:18px;font-weight:800;letter-spacing:.1em;}
+.org-root-sub{font-family:var(--m);font-size:8px;color:rgba(255,255,255,.55);letter-spacing:.18em;margin-top:3px;}
+.org-root-stats{display:flex;gap:16px;justify-content:center;margin-top:8px;}
+.org-root-stat{text-align:center;}
+.org-root-stat-val{font-family:var(--r);font-size:20px;font-weight:800;color:var(--gold-light);line-height:1;}
+.org-root-stat-lbl{font-family:var(--m);font-size:7.5px;color:rgba(255,255,255,.45);letter-spacing:.15em;}
+
+/* NÍVEL 1 — Camadas funcionais */
+.org-v{width:2px;height:20px;background:var(--border-mid);margin:0 auto;}
+.org-l1-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%;margin-bottom:0;}
+.org-l1-card{background:var(--wine);border-radius:10px;padding:10px 12px;color:#fff;
+  display:flex;flex-direction:column;align-items:center;gap:4px;cursor:default;}
+.org-l1-name{font-family:var(--r);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;}
+.org-l1-sub{font-family:var(--m);font-size:8px;color:rgba(255,255,255,.55);letter-spacing:.1em;text-align:center;}
+
+/* LINHA HORIZONTAL entre L1 e L2 */
+.org-h-line{height:2px;background:linear-gradient(90deg,transparent,var(--border-mid),transparent);margin:0 40px;}
+
+/* NÍVEL 2 — Setores */
+.org-l2-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.org-l2-node{background:var(--white);border:1.5px solid var(--border);border-radius:10px;
+  padding:10px 8px;text-align:center;cursor:pointer;transition:all .25s;
+  position:relative;overflow:hidden;}
+.org-l2-node::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--c,var(--wine));}
+.org-l2-node:hover{border-color:var(--c,var(--wine));box-shadow:var(--shadow-md);transform:translateY(-2px);}
+.org-l2-fig{width:44px;height:44px;margin:0 auto 6px;background:var(--wine-ultra);
+  border-radius:10px;border:1px solid var(--wine-pale);
+  display:flex;align-items:center;justify-content:center;}
+.org-l2-fig svg{width:36px;height:36px;}
+.org-l2-name{font-family:var(--r);font-size:11px;font-weight:700;color:var(--ink);
+  text-transform:uppercase;letter-spacing:.06em;}
+.org-l2-count{font-family:var(--m);font-size:9px;margin-top:1px;}
+.org-sub{display:flex;flex-wrap:wrap;justify-content:center;gap:3px;margin-top:6px;padding:0 2px;}
+.org-chip{font-family:var(--m);font-size:7px;padding:2px 5px;border-radius:6px;
+  background:var(--wine-ultra);color:var(--ink-mid);border:1px solid var(--wine-pale);
+  white-space:nowrap;cursor:pointer;transition:all .15s;}
+.org-chip:hover{background:var(--wine-pale);color:var(--wine);}
+
+.org-section-title{font-family:var(--r);font-size:11px;font-weight:700;letter-spacing:.18em;
+  color:var(--wine);text-transform:uppercase;margin:14px 0 8px;
+  display:flex;align-items:center;gap:10px;}
+.org-section-title::before,.org-section-title::after{content:'';flex:1;height:1px;background:var(--border-mid);}
+
+/* NÍVEL 3 — Sistemas integrados */
+.org-l3-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+.org-l3-pill{background:var(--cream);border:1px solid var(--border);border-radius:20px;
+  padding:5px 12px;font-family:var(--m);font-size:9px;color:var(--ink-mid);
+  display:flex;align-items:center;gap:6px;}
+.org-l3-dot{width:6px;height:6px;border-radius:50%;background:var(--green);
+  box-shadow:0 0 5px var(--green);animation:blink 2.5s ease-in-out infinite;}
+
+/* ── SIDEBAR ── */
+#sidebar{grid-area:sb;border-left:1.5px solid var(--border);background:var(--white);
+  display:flex;flex-direction:column;overflow:hidden;position:sticky;top:0;max-height:calc(100vh - 178px);}
+.sb-s{padding:14px 14px 12px;border-bottom:1px solid var(--border);}
+.sb-t{font-family:var(--r);font-size:11px;font-weight:600;letter-spacing:.2em;color:var(--wine);
+  text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.sb-t::after{content:'';flex:1;height:1px;background:var(--border);}
+.li{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);}
+.li:last-child{border-bottom:none;}
+.li-ico{width:28px;height:28px;border-radius:8px;background:var(--wine-ultra);
+  border:1px solid var(--wine-pale);display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;color:var(--wine);}
+.li-ico svg{width:13px;height:13px;}
+.li-name{font-family:var(--s);font-size:11px;font-weight:600;color:var(--ink);}
+.li-sub{font-family:var(--m);font-size:8px;color:var(--ink-dim);}
+.live-badge{margin-left:auto;padding:2px 7px;border-radius:12px;
+  font-family:var(--m);font-size:8px;background:var(--green-pale);
+  color:var(--green);border:1px solid #bbf7d0;white-space:nowrap;}
+.feed-scroll{max-height:180px;overflow-y:auto;}
+.fi{display:flex;gap:7px;padding:6px 0;border-bottom:1px solid var(--border);}
+.fi:last-child{border-bottom:none;}
+.fd{width:5px;height:5px;border-radius:50%;margin-top:5px;flex-shrink:0;background:var(--wine);}
+.fa{font-family:var(--m);font-size:9.5px;font-weight:500;color:var(--wine);}
+.fac{font-family:var(--s);font-size:10px;color:var(--ink-dim);}
+.ft{font-family:var(--m);font-size:9px;color:var(--ink-dim);margin-left:auto;flex-shrink:0;}
+.tr{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);}
+.tr:last-child{border-bottom:none;}
+.tt{font-family:var(--r);font-size:13px;font-weight:600;color:var(--wine);min-width:40px;}
+.tn{font-family:var(--s);font-size:11px;color:var(--ink);flex:1;}
+.tb{font-family:var(--m);font-size:8px;padding:2px 7px;border-radius:10px;white-space:nowrap;}
+.done{background:var(--green-pale);color:var(--green);border:1px solid #bbf7d0;}
+.pend{background:var(--gold-pale);color:#92400e;border:1px solid #fde68a;}
+.actv{background:var(--wine-ultra);color:var(--wine);border:1px solid var(--wine-pale);animation:blink 1.4s ease-in-out infinite;}
+
+/* ── FOOTER ── */
+#footer{grid-area:ft;background:var(--wine-deep);padding:9px 28px;
+  display:flex;align-items:center;justify-content:space-between;}
+.fl{font-family:var(--r);font-size:12px;color:rgba(255,255,255,.5);letter-spacing:.1em;}
+.fl span{color:var(--gold-light);}
+.fr{font-family:var(--m);font-size:9px;color:rgba(255,255,255,.3);letter-spacing:.15em;}
+
+/* ── MODAL ── */
+#mo{position:fixed;inset:0;z-index:500;background:rgba(78,26,39,.55);
+  backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px;}
+#mo.open{display:flex;animation:fi .2s ease;}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+#modal{background:var(--white);border:1.5px solid var(--border-mid);border-radius:14px;
+  width:100%;max-width:680px;max-height:82vh;display:flex;flex-direction:column;
+  box-shadow:var(--shadow-lg);overflow:hidden;animation:su .25s ease;}
+@keyframes su{from{transform:translateY(16px);opacity:0}to{transform:translateY(0);opacity:1}}
+.mhd{padding:18px 22px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:12px;background:var(--wine-ultra);}
+.mfig{width:48px;height:48px;border-radius:10px;background:var(--white);
+  border:1.5px solid var(--wine-pale);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.mfig svg{width:36px;height:36px;}
+.mt{font-family:var(--r);font-size:17px;font-weight:700;letter-spacing:.1em;color:var(--wine);}
+.ms{font-family:var(--m);font-size:9px;color:var(--ink-dim);letter-spacing:.15em;margin-top:2px;}
+.mx{margin-left:auto;width:30px;height:30px;border-radius:8px;
+  border:1px solid var(--border);background:var(--white);
+  color:var(--ink-dim);cursor:pointer;font-size:14px;
+  display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.mx:hover{border-color:var(--wine);color:var(--wine);}
+.mbody{padding:18px 22px;overflow-y:auto;flex:1;scrollbar-width:thin;scrollbar-color:var(--wine-pale) transparent;}
+.ag{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+.ac{background:var(--cream);border:1px solid var(--border);border-radius:8px;
+  padding:9px 11px;display:flex;align-items:center;gap:9px;transition:all .2s;}
+.ac:hover{border-color:var(--wine);background:var(--wine-ultra);transform:translateX(2px);}
+.av{width:30px;height:30px;border-radius:7px;background:var(--wine-ultra);
+  border:1px solid var(--wine-pale);display:flex;align-items:center;justify-content:center;
+  font-family:var(--r);font-size:10px;font-weight:700;color:var(--wine);flex-shrink:0;}
+.an{font-family:var(--s);font-size:11px;font-weight:600;color:var(--ink);}
+.ar2{font-family:var(--m);font-size:8.5px;color:var(--ink-dim);}
+.ap{width:6px;height:6px;border-radius:50%;background:#4ade80;margin-left:auto;flex-shrink:0;animation:blink 3s ease-in-out infinite;}
+
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--wine-pale);border-radius:2px;}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- HEADER -->
+<header id="header">
+  <div class="hdr-l">
+    <div class="logo">
+      <svg viewBox="0 0 38 38" fill="none">
+        <polygon points="19,2 35,11 35,27 19,36 3,27 3,11" fill="rgba(255,255,255,.06)" stroke="var(--gold-light)" stroke-width="1.2"/>
+        <polygon points="19,7 30,13 30,25 19,31 8,25 8,13" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.18)" stroke-width=".8"/>
+        <text x="19" y="23.5" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="9.5" font-weight="700" fill="var(--gold-light)" letter-spacing=".05em">AUD</text>
+      </svg>
+    </div>
+    <div class="brand">
+      <h1>AUDIPER</h1>
+      <p>Mission Control &nbsp;·&nbsp; Central de Operações &nbsp;·&nbsp; 40 Anos</p>
+    </div>
+  </div>
+  <div class="pills">
+    <div class="pill"><span class="pd pd-g"></span>Sistemas Online</div>
+    <div class="pill"><span class="pd pd-o"></span>146 Agentes</div>
+    <div class="pill"><span class="pd pd-w"></span>Gemini 2.5 Flash</div>
+  </div>
+  <div class="hdr-r">
+    <div id="clock">--:--:--</div>
+    <div id="ds">carregando...</div>
+  </div>
+</header>
+
+<!-- STATS -->
+<div id="stats">
+  <div class="si"><div class="sl">Total Agentes</div><div class="sv">146</div><div class="ss">12 categorias</div></div>
+  <div class="si"><div class="sl">Workflows n8n</div><div class="sv">12+</div><div class="ss">automatizados</div></div>
+  <div class="si"><div class="sl">Skills Claude</div><div class="sv">65</div><div class="ss">.claude/skills/</div></div>
+  <div class="si"><div class="sl">Tasks Agendadas</div><div class="sv">5</div><div class="ss">self-learning</div></div>
+  <div class="si"><div class="sl">Vault Obsidian</div><div class="sv">72</div><div class="ss">notas + RAG</div></div>
+  <div class="si"><div class="sl">Site Audiper</div><div class="sv">86</div><div class="ss">páginas HTML</div></div>
+</div>
+
+<!-- TABS -->
+<div id="tabs">
+  <div class="tab active" onclick="showTab('setores')">Setores</div>
+  <div class="tab" onclick="showTab('tarefas')">Tarefas</div>
+  <div class="tab" onclick="showTab('organograma')">Organograma</div>
+</div>
+
+<!-- MAIN -->
+<main id="main">
+
+  <!-- SETORES TAB -->
+  <div class="tab-pane active" id="pane-setores">
+    <div class="sec-hd"><div class="sec-hd-l"></div><div class="sec-hd-t">Setores Operacionais</div><div class="sec-hd-l"></div></div>
+    <div class="sector-grid" id="sector-grid"></div>
+    <div class="sec-hd" style="margin-top:4px"><div class="sec-hd-l"></div><div class="sec-hd-t">Infraestrutura & Stack</div><div class="sec-hd-l"></div></div>
+    <div class="sys-mini-grid" id="sys-mini-grid"></div>
+  </div>
+
+  <!-- TAREFAS TAB -->
+  <div class="tab-pane" id="pane-tarefas">
+    <div class="sec-hd"><div class="sec-hd-l"></div><div class="sec-hd-t">Gestão de Tarefas</div><div class="sec-hd-l"></div></div>
+    <div class="kanban" id="kanban"></div>
+  </div>
+
+  <!-- ORGANOGRAMA TAB -->
+  <div class="tab-pane" id="pane-organograma">
+    <div class="sec-hd"><div class="sec-hd-l"></div><div class="sec-hd-t">Hierarquia de Agentes</div><div class="sec-hd-l"></div></div>
+    <div class="org-wrap" id="org-wrap"></div>
+  </div>
+
+</main>
+
+<!-- SIDEBAR -->
+<aside id="sidebar">
+  <div class="sb-s"><div class="sb-t">Live Systems</div><div id="live-sys"></div></div>
+  <div class="sb-s" style="flex:1;overflow:hidden;display:flex;flex-direction:column">
+    <div class="sb-t">Atividade</div>
+    <div class="feed-scroll" id="feed"></div>
+  </div>
+  <div class="sb-s"><div class="sb-t">Tasks do Dia</div><div id="tasks"></div></div>
+</aside>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="fl"><span>AUDIPER</span> — Auditores Independentes S/S · Araguaína/TO · GCP gen-lang-0213700073</div>
+  <div class="fr">MC v3.0 · D:/Site/audiper/ · 2026.03.15</div>
+</footer>
+</div>
+
+<!-- MODAL -->
+<div id="mo">
+  <div id="modal">
+    <div class="mhd">
+      <div class="mfig" id="mfig"></div>
+      <div><div class="mt" id="mt"></div><div class="ms" id="ms"></div></div>
+      <button class="mx" onclick="closeModal()">✕</button>
+    </div>
+    <div class="mbody"><div class="ag" id="mag"></div></div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════
+   FIGURES — Ícones SVG inline por setor (sem dependência externa)
+   Gradiente vinho→ouro, ícone branco representando o papel
+════════════════════════════════════════════════════*/
+const ROLE_LABELS = {
+  engineering:   'Engenharia',
+  marketing:     'Marketing',
+  design:        'Design',
+  sales:         'Vendas',
+  auditoria:     'Auditoria',
+  specialized:   'Especializado',
+  testing:       'QA & Testes',
+  product:       'Produto',
+  projectmgmt:   'Projetos',
+  support:       'Suporte',
+  strategy:      'Estratégia',
+  orchestration: 'Orquestração',
+};
+
+/* Ícones Tabler-style (stroke, 24x24 viewBox) por setor */
+const SECTOR_ICONS = {
+  engineering:   `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.622 10.395l-1.097-2.65L20 6l-2-2-1.735 1.483-2.707-1.113L12.935 2h-1.954l-.632 2.401-2.645 1.115L6 4 4 6l1.453 1.789-1.08 2.657L2 11v2l2.401.655 1.115 2.645L4 18l2 2 1.791-1.46 2.606 1.072L11 22h2l.604-2.401 2.651-1.117 1.745 1.518 2-2-1.484-1.712 1.09-2.641L22 13v-2z"/></svg>`,
+  marketing:     `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`,
+  design:        `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>`,
+  sales:         `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>`,
+  auditoria:     `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>`,
+  specialized:   `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M4.22 4.22l2.12 2.12m11.32 11.32l2.12 2.12M2 12h3m14 0h3M4.22 19.78l2.12-2.12M18.66 5.34l2.12-2.12"/></svg>`,
+  testing:       `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>`,
+  product:       `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 017 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 01-1 1H9a1 1 0 01-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 017-7z"/></svg>`,
+  projectmgmt:   `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M17 17h.01M14 17h.01M17 14h.01M17 20h.01"/></svg>`,
+  support:       `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3v5zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3v5z"/></svg>`,
+  strategy:      `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`,
+  orchestration: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><line x1="12" y1="7" x2="12" y2="11"/><line x1="12" y1="11" x2="5" y2="17"/><line x1="12" y1="11" x2="19" y2="17"/></svg>`,
+};
+
+/* Gradientes distintos por categoria para diferenciar visualmente */
+const SECTOR_GRAD = {
+  engineering:   'linear-gradient(135deg,#3D1520 0%,#7B2D3E 55%,#9B3A4E 100%)',
+  marketing:     'linear-gradient(135deg,#9B3A4E 0%,#C8962A 100%)',
+  design:        'linear-gradient(135deg,#7B2D3E 0%,#C8962A 80%,#E8B84B 100%)',
+  sales:         'linear-gradient(135deg,#5C1F2E 0%,#9B3A4E 100%)',
+  auditoria:     'linear-gradient(135deg,#2D1020 0%,#7B2D3E 60%,#6B2535 100%)',
+  specialized:   'linear-gradient(135deg,#4E1A27 0%,#7B2D3E 50%,#A8972A 100%)',
+  testing:       'linear-gradient(135deg,#7B2D3E 0%,#3D1520 100%)',
+  product:       'linear-gradient(135deg,#C8962A 0%,#9B3A4E 60%,#7B2D3E 100%)',
+  projectmgmt:   'linear-gradient(135deg,#5C1F2E 0%,#8B3545 50%,#C8962A 100%)',
+  support:       'linear-gradient(135deg,#9B3A4E 0%,#7B2D3E 100%)',
+  strategy:      'linear-gradient(135deg,#2D1020 0%,#6B2535 40%,#C8962A 100%)',
+  orchestration: 'linear-gradient(135deg,#1A0A12 0%,#7B2D3E 50%,#9B3A4E 100%)',
+};
+
+/* Retorna div com gradiente + ícone SVG por setor — 100% offline */
+function getFig(id) {
+  const icon = SECTOR_ICONS[id] || SECTOR_ICONS.specialized;
+  const grad = SECTOR_GRAD[id]  || SECTOR_GRAD.specialized;
+  return `<div style="width:100%;height:100%;border-radius:inherit;background:${grad};display:flex;align-items:center;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 -1px 0 rgba(0,0,0,.2);"><div style="width:52%;height:52%;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))">${icon}</div></div>`;
+}
+
+/* ═══════════════════════════════════════════════════
+   DATA
+════════════════════════════════════════════════════*/
+const SECTORS = [
+  { id:'engineering',    name:'Engenharia',    desc:'Backend · Frontend · DevOps · AI · Segurança',    color:'#7B2D3E', count:20,
+    agents:[{n:'Backend Architect',r:'FastAPI · SQLAlchemy',id:'BA'},{n:'Frontend Developer',r:'HTML · CSS · JS',id:'FE'},{n:'AI Engineer',r:'Claude · Gemini',id:'AI'},{n:'Software Architect',r:'System Design · DDD',id:'SA'},{n:'DevOps Automator',r:'CI/CD · Docker',id:'DO'},{n:'Database Optimizer',r:'SQLite · PostgreSQL',id:'DB'},{n:'Security Engineer',r:'AppSec · Threats',id:'SE'},{n:'Technical Writer',r:'Docs · APIs',id:'TW'},{n:'Data Engineer',r:'SPED · ETL · Pipelines',id:'DE'},{n:'Rapid Prototyper',r:'MVPs · PoCs',id:'RP'},{n:'Code Reviewer',r:'Quality · Standards',id:'CR'},{n:'Mobile App Builder',r:'iOS · Android · RN',id:'MB'},{n:'Git Workflow Master',r:'Branching · Commits',id:'GW'},{n:'SRE',r:'SLOs · Observability',id:'SR'},{n:'Incident Response',r:'On-call · Post-mortems',id:'IR'},{n:'Embedded Firmware',r:'ESP32 · ARM · RTOS',id:'EF'},{n:'Solidity Engineer',r:'EVM · DeFi',id:'SO'},{n:'Threat Detection',r:'SIEM · MITRE',id:'TD'},{n:'WeChat Developer',r:'Mini Programs',id:'WX'},{n:'Feishu Developer',r:'Lark · Enterprise',id:'FS'}]},
+  { id:'marketing',      name:'Marketing',     desc:'Conteúdo · SEO · Redes Sociais · Growth',         color:'#9B3A4E', count:22,
+    agents:[{n:'Content Creator',r:'Blog · Artigos',id:'CC'},{n:'SEO Specialist',r:'audiper.com',id:'SS'},{n:'LinkedIn Creator',r:'B2B · Thought leadership',id:'LI'},{n:'Growth Hacker',r:'Acquisition · Funnels',id:'GH'},{n:'Social Media Strat.',r:'Cross-platform',id:'SM'},{n:'Instagram Curator',r:'Visual · Stories',id:'IG'},{n:'TikTok Strategist',r:'Short video · Viral',id:'TT'},{n:'Twitter Engager',r:'Real-time · Threads',id:'TW'},{n:'Carousel Engine',r:'LinkedIn · Instagram',id:'CE'},{n:'Book Co-Author',r:'Thought leadership',id:'BC'},{n:'Podcast Strategist',r:'Áudio · Distribuição',id:'PS'},{n:'Short Video Coach',r:'CapCut · Premiere',id:'SV'},{n:'App Store Optimizer',r:'ASO · Conversão',id:'AS'},{n:'Douyin Strategist',r:'Short-video CN',id:'DY'},{n:'Weibo Strategist',r:'China social',id:'WB'},{n:'Xiaohongshu Spec.',r:'Lifestyle · RED',id:'XH'},{n:'Kuaishou Strategist',r:'Lower-tier cities',id:'KS'},{n:'Bilibili Strategist',r:'Video community',id:'BL'},{n:'Private Domain Op.',r:'WeCom · SCRM',id:'PD'},{n:'Zhihu Strategist',r:'Knowledge · Q&A',id:'ZH'},{n:'Baidu SEO',r:'China search',id:'BS'},{n:'China E-Commerce',r:'Taobao · Tmall',id:'CE2'}]},
+  { id:'design',         name:'Design',        desc:'Brand · UI/UX · Visual · Identidade Audiper',     color:'#9B3A4E', count:8,
+    agents:[{n:'Brand Guardian',r:'Identidade visual',id:'BG'},{n:'Image Prompt Eng.',r:'Geração imagens AI',id:'IP'},{n:'UI Designer',r:'Interface Audiz',id:'UI'},{n:'UX Architect',r:'IA · CSS systems',id:'UX'},{n:'UX Researcher',r:'Usability · Insights',id:'UR'},{n:'Visual Storyteller',r:'Narrativas visuais',id:'VS'},{n:'Inclusive Visuals',r:'Representação',id:'IV'},{n:'Whimsy Injector',r:'Personalidade',id:'WI'}]},
+  { id:'sales',          name:'Vendas',        desc:'Propostas · Pipeline · Negociação · CRM',          color:'#9B3A4E', count:8,
+    agents:[{n:'Proposal Strategist',r:'Win themes · RFP',id:'PR'},{n:'Outbound Strategist',r:'ICP · Prospecting',id:'OS'},{n:'Discovery Coach',r:'Question design',id:'DC'},{n:'Deal Strategist',r:'MEDDPICC · Win plan',id:'DS'},{n:'Pipeline Analyst',r:'CRM · Forecast',id:'PA'},{n:'Account Strategist',r:'Land & Expand',id:'AC'},{n:'Sales Coach',r:'Rep development',id:'SC'},{n:'Sales Engineer',r:'POC · Demo · Tech',id:'SE2'}]},
+  { id:'auditoria',      name:'Auditoria',     desc:'NBC TA · PTA · Audiz · SPED ECD · CFC',           color:'#7B2D3E', count:16,
+    agents:[{n:'Audiz Transversal',r:'Regras base PTAs',id:'AT'},{n:'Fase A – Aceitação',r:'A-01·A-02·A-03',id:'FA'},{n:'Fase B – Planejamento',r:'B-01·B-02·B-03',id:'FB'},{n:'Fase C/D – Execução',r:'C-01·D-01→D-06',id:'FC'},{n:'Fase E – Evidências',r:'E-01·E-02·E-03',id:'FE'},{n:'Fase F – Conclusão',r:'F-01·F-02·F-03',id:'FF'},{n:'Fase G – Relatórios',r:'G-01·G-02·G-03',id:'FG'},{n:'Achados NBC TA 265',r:'Deficiências CI',id:'AN'},{n:'Documentação 230',r:'Versionamento',id:'AD'},{n:'Engine Validação',r:'Cruzamento dados',id:'EV'},{n:'Gates EQCR',r:'Hard gates',id:'GE'},{n:'Export Dossiê CRE',r:'PDF CFC',id:'ED'},{n:'SGQ NBC PA 01',r:'Gestão da firma',id:'SG'},{n:'Chat Assistente',r:'Audina conversacional',id:'CA'},{n:'Copiloto Auditoria',r:'Motor comportamental',id:'CP'},{n:'Audiz Check',r:'QC entrega',id:'AC2'}]},
+  { id:'specialized',    name:'Especializados', desc:'MCP · Governança · Blockchain · Identidade',      color:'#7B2D3E', count:23,
+    agents:[{n:'Agents Orchestrator',r:'Pipeline autônomo',id:'AO'},{n:'MCP Builder',r:'MCPs customizados',id:'MC'},{n:'Document Generator',r:'PDF·DOCX·XLSX',id:'DG'},{n:'Compliance Auditor',r:'SOC2·ISO27001',id:'CA3'},{n:'Agentic Identity',r:'Auth · Trust',id:'AI2'},{n:'Identity Graph',r:'Entity resolution',id:'IG'},{n:'Automation Gov.',r:'n8n · Risk',id:'AG'},{n:'Accounts Payable',r:'Pagamentos',id:'AP'},{n:'Data Consolidation',r:'Sales data',id:'DC2'},{n:'Report Distribution',r:'Auto-distribuição',id:'RD'},{n:'Sales Data Extract.',r:'Excel · MTD/YTD',id:'SD'},{n:'Cultural Intelligence',r:'Inclusão',id:'CI'},{n:'Developer Advocate',r:'DX · Community',id:'DA'},{n:'Model QA',r:'ML audit',id:'MQ'},{n:'LSP/Index Engineer',r:'Code intelligence',id:'LS'},{n:'Blockchain Auditor',r:'Smart contracts',id:'BA2'},{n:'AI Data Remediation',r:'Self-healing',id:'AR'},{n:'Autonomous Opt.',r:'API perf · Cost',id:'AA'},{n:'Healthcare Mktg',r:'Compliance saúde',id:'HM'},{n:'Gov. Presales',r:'Licitações · ToG',id:'GD'},{n:'Recruitment',r:'Talent · HR',id:'RS'},{n:'Supply Chain',r:'Procurement',id:'SC2'},{n:'ZK Steward',r:'Zettelkasten',id:'ZK'}]},
+  { id:'testing',        name:'Testes & QA',  desc:'Evidências · Performance · Acessibilidade',        color:'#7B2D3E', count:8,
+    agents:[{n:'Reality Checker',r:'Defaults: NEEDS WORK',id:'RC'},{n:'API Tester',r:'Validation',id:'AT2'},{n:'Performance Bench.',r:'Benchmarks',id:'PB'},{n:'Evidence Collector',r:'Screenshot proof',id:'EC'},{n:'Accessibility',r:'WCAG',id:'AA2'},{n:'Workflow Optimizer',r:'Process',id:'WO'},{n:'Test Analyzer',r:'Metrics',id:'TR'},{n:'Tool Evaluator',r:'Tech assessment',id:'TE'}]},
+  { id:'product',        name:'Produto',      desc:'Sprint · Tendências · Feedback · Comportamento',   color:'#9B3A4E', count:4,
+    agents:[{n:'Sprint Prioritizer',r:'Agile · Velocity',id:'SP'},{n:'Trend Researcher',r:'Market intel',id:'TR2'},{n:'Feedback Synthesizer',r:'User insights',id:'FS'},{n:'Behavioral Nudge',r:'UX psychology',id:'BN'}]},
+  { id:'projectmgmt',    name:'Projetos',     desc:'Coordenação · OKRs · Delivery · Processos',        color:'#7B2D3E', count:6,
+    agents:[{n:'Senior Project Mgr',r:'Specs → tasks',id:'PM'},{n:'Project Shepherd',r:'Cross-functional',id:'PS'},{n:'Studio Producer',r:'Portfolio',id:'SP2'},{n:'Studio Operations',r:'Day-to-day',id:'SO'},{n:'Experiment Tracker',r:'A/B · Hypothesis',id:'ET'},{n:'Jira Steward',r:'Git-linked workflow',id:'JS'}]},
+  { id:'support',        name:'Suporte',      desc:'Análise · Infraestrutura · Legal · Finance',       color:'#9B3A4E', count:6,
+    agents:[{n:'Analytics Reporter',r:'KPIs · Dashboards',id:'AR'},{n:'Executive Summary',r:'McKinsey SCQA',id:'ES'},{n:'Finance Tracker',r:'Budget · Cash flow',id:'FT'},{n:'Infrastructure',r:'Reliability · Ops',id:'IM'},{n:'Legal Compliance',r:'LGPD · Contratos',id:'LC'},{n:'Support Responder',r:'Customer service',id:'SR'}]},
+  { id:'strategy',       name:'Estratégia',   desc:'Nexus · Playbooks · C-Suite · 7 Fases',            color:'#7B2D3E', count:12,
+    agents:[{n:'Nexus Strategy',r:'Multi-agent',id:'NS'},{n:'CEO Advisor',r:'Leadership',id:'CEO'},{n:'CFO Advisor',r:'Financial modeling',id:'CFO'},{n:'CISO Advisor',r:'Security strategy',id:'CISO'},{n:'COO Advisor',r:'Operations scale',id:'COO'},{n:'Phase 0: Discovery',r:'Descoberta',id:'P0'},{n:'Phase 1: Strategy',r:'Estratégia',id:'P1'},{n:'Phase 2: Foundation',r:'Fundação',id:'P2'},{n:'Phase 3: Build',r:'Construção',id:'P3'},{n:'Phase 4: Hardening',r:'Hardening',id:'P4'},{n:'Phase 5: Launch',r:'Lançamento',id:'P5'},{n:'Phase 6: Operate',r:'Operação',id:'P6'}]},
+  { id:'orchestration',  name:'Orquestração', desc:'Superpowers · Skills · Hooks · Worktrees',         color:'#9B3A4E', count:8,
+    agents:[{n:'Writing Plans',r:'Specs → plans',id:'WP'},{n:'Executing Plans',r:'Session checkpoints',id:'EP'},{n:'Parallel Agents',r:'Independent dispatch',id:'PAG'},{n:'Git Worktrees',r:'Isolated branches',id:'GWT'},{n:'Code Review',r:'Request + Receive',id:'CREV'},{n:'TDD',r:'Test-driven',id:'TDD'},{n:'Systematic Debug',r:'Bug → root cause',id:'SDB'},{n:'Verification',r:'Pre-completion',id:'VER'}]},
+];
+
+const LIVE_SYSTEMS = [
+  {n:'Claude Code',       s:'claude-3.7-sonnet',      ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="5"/><path d="M5 7h4M7 5v4"/></svg>`},
+  {n:'n8n v2.11.2',       s:'D:/Site/n8n/',           ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 7h3l1.5-3 2 6 1.5-3h3"/></svg>`},
+  {n:'Telegram Bot',      s:'@AudiperPortalBot',      ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2L2 6.5l3 .5M12 2l-2.5 9-3-3M12 2L5 8.5"/></svg>`},
+  {n:'Discord Bot',       s:'Audina#0456 · Deno',     ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 8h6M4 10h6M10 2c0-.4-.4-.7-.8-.7H4.8c-.4 0-.8.3-.8.7v8l2-1.5h3.5c.4 0 .5-.3.5-.7V2z"/></svg>`},
+  {n:'Audiz · FastAPI',   s:'F:/AUDIX/audiz/',        ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 1l4 2v4C11 9.5 7 12 7 12S3 9.5 3 7V3L7 1z"/></svg>`},
+  {n:'Gemini 2.5 Flash',  s:'GCP gen-lang-0213700073',ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><polygon points="7,1 8.8,5 13,5.5 10,8.5 10.8,13 7,10.8 3.2,13 4,8.5 1,5.5 5.2,5"/></svg>`},
+  {n:'Obsidian Vault',    s:'72 notas · memsearch',   ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 12A1.2 1.2 0 014.2 11H11"/><path d="M4.2 2H11v10H4.2A1.2 1.2 0 013 10.8V3.2A1.2 1.2 0 014.2 2z"/></svg>`},
+  {n:'Portal Audiper',    s:'audiper.com.br · 86 pgs',ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="5"/><path d="M2 7h10M7 2a7 7 0 000 10M7 2a7 7 0 010 10"/></svg>`},
+];
+
+const FEED_DATA = [
+  {a:'morning-brief',    t:'Briefing enviado via Telegram',   time:'08:00'},
+  {a:'Backend Architect',t:'Revisou arquitetura Audiz',       time:'09:15'},
+  {a:'Agents Orchestr.', t:'Pipeline memsearch iniciado',     time:'09:22'},
+  {a:'DevOps Automator', t:'Docker instalado em D:/Docker/',  time:'10:30'},
+  {a:'AI Engineer',      t:'Pesquisou AirLLM + Flash Attn',   time:'10:45'},
+  {a:'MCP Builder',      t:'Avaliou mem0 + basic-memory',     time:'11:00'},
+  {a:'Frontend Dev.',    t:'Mission Control HTML criado',     time:'11:30'},
+  {a:'Brand Guardian',   t:'Paleta vinho aplicada no MC',     time:'11:35'},
+];
+
+const TASKS_DAY = [
+  {time:'08:00',name:'Morning Brief',   status:'done'},
+  {time:'09:00',name:'Morning Research',status:'done'},
+  {time:'13:00',name:'Afternoon Tech',  status:'pend'},
+  {time:'17:00',name:'Evening Business',status:'pend'},
+  {time:'20:00',name:'Daily Reflect',   status:'pend'},
+];
+
+const SYS_MINI = [
+  {n:'Python 3.12',    s:'audiper-mvp · SPED ECD',   c:'#7B2D3E'},
+  {n:'Streamlit',      s:'D:/Site/audiper-mvp/',      c:'#9B3A4E'},
+  {n:'Node.js',        s:'claude-code-telegram',      c:'#7B2D3E'},
+  {n:'Deno v2.7.5',    s:'D:/deno/deno.exe',          c:'#9B3A4E'},
+  {n:'SQLite',         s:'n8n · Audiz databases',     c:'#7B2D3E'},
+  {n:'Docker Desktop', s:'D:/Docker/ — instalando',   c:'#9B3A4E'},
+];
+
+/* tarefas kanban */
+const KANBAN_DATA = {
+  done: [
+    {ag:'DevOps Automator',  n:'Instalação Docker',        d:'Docker Desktop em D:\\Docker\\ com junctions e daemon.json configurados', tag:'infraestrutura', time:'10:30'},
+    {ag:'AI Engineer',       n:'Pesquisa AirLLM',          d:'Análise AirLLM + Flash Attention: não recomendado no hardware atual', tag:'pesquisa', time:'10:45'},
+    {ag:'MCP Builder',       n:'Pesquisa MCPs Memória',    d:'mem0 + basic-memory + memsearch comparativo completo', tag:'memoria', time:'11:00'},
+    {ag:'morning-brief',     n:'Briefing Matinal',         d:'Resumo do dia + prioridades enviado via Telegram às 08:00', tag:'rotina', time:'08:00'},
+    {ag:'Frontend Dev.',     n:'Mission Control v3',       d:'HTML completo com figuras, kanban, organograma e tema vinho', tag:'site', time:'11:35'},
+  ],
+  prog: [
+    {ag:'Agents Orchestr.',  n:'Config memsearch onnx',    d:'Instalação bge-m3 local com ONNX Runtime após Docker funcionar', tag:'memoria', time:'em andamento'},
+    {ag:'Research Agent',    n:'Processo Premium Lógica',  d:'Pesquisando melhores práticas para fluxo premium da auditoria', tag:'estrategia', time:'em andamento'},
+    {ag:'OpenClaw Research', n:'OpenClaw + NanoClaw',      d:'Identificando ferramentas builderz-labs ecosystem para agentes', tag:'pesquisa', time:'em andamento'},
+  ],
+  pend: [
+    {ag:'DevOps Automator',  n:'Testar docker hello-world',d:'Verificar funcionamento após primeiro boot do Docker Desktop', tag:'infraestrutura', time:'pendente'},
+    {ag:'DevOps Automator',  n:'Subir Milvus',             d:'docker run milvusdb/milvus — vector DB para memsearch', tag:'infraestrutura', time:'pendente'},
+    {ag:'MCP Builder',       n:'Instalar basic-memory',    d:'uvx basic-memory mcp — memória persistente Claude Code', tag:'memoria', time:'pendente'},
+    {ag:'Backend Architect', n:'Langfuse self-hosted',     d:'Docker Compose Langfuse para tracing dos 146 agentes', tag:'observabilidade', time:'pendente'},
+    {ag:'Project Shepherd',  n:'Mission Control backend',  d:'builderz-labs/mission-control após Docker funcionar', tag:'infra', time:'pendente'},
+    {ag:'AI Engineer',       n:'Groq / Cerebras fallback', d:'Configurar chain: Gemini → Groq → Cerebras → DeepSeek', tag:'ia', time:'pendente'},
+  ]
+};
+
+/* ═══════════════════════════════════════════════════
+   RENDER FUNCTIONS
+════════════════════════════════════════════════════*/
+function renderSectors() {
+  const g = document.getElementById('sector-grid');
+  SECTORS.forEach(s => {
+    const dots = Array.from({length: Math.min(s.count, 20)}, (_,i) => {
+      const d = (Math.random()*5+1).toFixed(1);
+      const on = Math.random() > .42 ? 'on' : '';
+      return `<div class="dot ${on}" style="--d:${d}s;background:${s.color}"></div>`;
+    }).join('');
+    const card = document.createElement('div');
+    card.className = 'sc';
+    card.style.cssText = `--c:${s.color}`;
+    card.onclick = () => openModal(s);
+    card.innerHTML = `
+      <div class="sc-top">
+        <div>
+          <div class="fig-wrap">${getFig(s.id)}</div>
+          <div class="role-badge">${ROLE_LABELS[s.id] || s.name}</div>
+        </div>
+        <div class="sc-nums">
+          <div class="sc-count" style="color:${s.color}" data-sector="${s.id}">${s.count}</div>
+          <div class="sc-unit">agentes</div>
+        </div>
+      </div>
+      <div class="sc-name" style="color:${s.color}">${s.name}</div>
+      <div class="sc-desc">${s.desc}</div>
+      <div class="dots-row">${dots}</div>
+    `;
+    g.appendChild(card);
+  });
+}
+
+function renderSysMini() {
+  const g = document.getElementById('sys-mini-grid');
+  SYS_MINI.forEach(s => {
+    g.innerHTML += `<div class="smc" style="--c:${s.c}">
+      <div class="smc-name">${s.n}</div>
+      <div class="smc-st">● Operacional</div>
+      <div class="smc-sub">${s.s}</div>
+    </div>`;
+  });
+}
+
+function renderLive() {
+  document.getElementById('live-sys').innerHTML = LIVE_SYSTEMS.map(s => `
+    <div class="li">
+      <div class="li-ico">${s.ico}</div>
+      <div><div class="li-name">${s.n}</div><div class="li-sub">${s.s}</div></div>
+      <span class="live-badge">Online</span>
+    </div>`).join('');
+}
+
+function renderFeed() {
+  document.getElementById('feed').innerHTML = FEED_DATA.map(f => `
+    <div class="fi">
+      <div class="fd"></div>
+      <div><div class="fa">${f.a}</div><div class="fac">${f.t}</div></div>
+      <div class="ft">${f.time}</div>
+    </div>`).join('');
+}
+
+function renderTasks() {
+  const now = new Date(), nm = now.getHours()*60+now.getMinutes();
+  document.getElementById('tasks').innerHTML = TASKS_DAY.map(t => {
+    const [h,m] = t.time.split(':').map(Number);
+    let cls = t.status==='done' ? 'done' : 'pend';
+    let txt = t.status==='done' ? 'Concluída' : 'Pendente';
+    if(Math.abs(h*60+m - nm) <= 15 && t.status!=='done'){cls='actv';txt='Ativa';}
+    return `<div class="tr"><div class="tt">${t.time}</div><div class="tn">${t.name}</div><span class="tb ${cls}">${txt}</span></div>`;
+  }).join('');
+}
+
+/* ── KANBAN ── */
+function renderKanban() {
+  const boards = [
+    {key:'done', cls:'k-done', title:'Concluídas', emoji:'✓'},
+    {key:'prog', cls:'k-prog', title:'Em Progresso', emoji:'⊙'},
+    {key:'pend', cls:'k-pend', title:'Pendentes', emoji:'○'},
+  ];
+  document.getElementById('kanban').innerHTML = boards.map(b => {
+    const tasks = KANBAN_DATA[b.key];
+    const cards = tasks.map(t => `
+      <div class="ktask">
+        <div class="ktask-agent">${t.ag}</div>
+        <div class="ktask-name">${t.n}</div>
+        <div class="ktask-desc">${t.d}</div>
+        <span class="ktask-tag">${t.tag}</span>
+        <div class="ktask-time">${t.time}</div>
+      </div>`).join('');
+    return `<div class="kboard ${b.cls}">
+      <div class="kboard-hd">
+        <div class="kboard-title">${b.emoji} ${b.title}</div>
+        <span class="kboard-count">${tasks.length}</span>
+      </div>
+      <div class="kboard-body">${cards}</div>
+    </div>`;
+  }).join('');
+}
+
+/* ── ORGANOGRAMA ── */
+function renderOrg() {
+  const camadas = [
+    { name:'Orquestração & Estratégia', sub:'Coordena todos os agentes e playbooks', agents:['Agents Orchestrator','Writing Plans','Parallel Agents','Nexus Strategy','CEO/CFO/COO/CISO Advisors'] },
+    { name:'Negócio Core', sub:'Auditoria + Vendas + Marketing', agents:['Audiz PTAs A→G','NBC TA · SPED ECD','Proposal Strategist','SEO · LinkedIn · Growth'] },
+    { name:'Suporte & Ops', sub:'Tecnologia, testes e qualidade', agents:['Backend · DevOps · QA','Reality Checker','Infrastructure','Finance Tracker'] },
+  ];
+
+  const hierarquia = [
+    { id:'orchestration', name:'Orquestração', color:'#7B2D3E', sub:['Agents Orch.','Writing Plans','Parallel','Git Worktrees','Verification','TDD'] },
+    { id:'strategy',      name:'Estratégia',   color:'#7B2D3E', sub:['Nexus Strategy','CEO Advisor','CFO Advisor','CISO','COO','Phase 0→6'] },
+    { id:'auditoria',     name:'Auditoria',    color:'#4E1A27', sub:['Transversal','Fase A','Fase B','Fase C/D','Fase E/F/G','EQCR','Audiz Check'] },
+    { id:'engineering',   name:'Engenharia',   color:'#7B2D3E', sub:['Backend Arch.','Frontend','AI Engineer','DevOps','Security','Data Eng.'] },
+    { id:'marketing',     name:'Marketing',    color:'#9B3A4E', sub:['Content Creator','SEO','LinkedIn','Growth Hacker','TikTok','Carousel'] },
+    { id:'design',        name:'Design',       color:'#9B3A4E', sub:['Brand Guardian','UI Designer','UX Arch.','Image Prompt','Whimsy'] },
+    { id:'sales',         name:'Vendas',       color:'#9B3A4E', sub:['Proposal Strat.','Outbound','Discovery','Deal Strat.','Pipeline'] },
+    { id:'specialized',   name:'Especializados', color:'#7B2D3E', sub:['MCP Builder','Doc Generator','Compliance','Blockchain','ZK Steward'] },
+    { id:'testing',       name:'QA & Testes',  color:'#7B2D3E', sub:['Reality Checker','API Tester','Evidence','Accessibility','Perf.'] },
+    { id:'support',       name:'Suporte',      color:'#9B3A4E', sub:['Analytics','Finance','Legal','Infrastructure','Executive Summ.'] },
+    { id:'product',       name:'Produto',      color:'#9B3A4E', sub:['Sprint Prior.','Trend Research','Feedback','Behavioral Nudge'] },
+    { id:'projectmgmt',   name:'Projetos',     color:'#7B2D3E', sub:['Sr. Proj. Mgr','Project Shepherd','Studio Ops','Experiment'] },
+  ];
+
+  const sistemas = ['Claude Code · claude-3.7','n8n v2.11.2','Telegram @AudiperPortalBot','Discord Audina#0456','Audiz FastAPI','Gemini 2.5 Flash','Obsidian Vault 72 notas','Portal audiper.com.br'];
+
+  const l1HTML = camadas.map(c => `
+    <div class="org-l1-card">
+      <div class="org-l1-name">${c.name}</div>
+      <div class="org-l1-sub">${c.sub}</div>
+    </div>`).join('');
+
+  const l2HTML = hierarquia.map(h => {
+    const count = SECTORS.find(s=>s.id===h.id)?.count || '?';
+    return `<div class="org-l2-node" style="--c:${h.color}" onclick="openModal(SECTORS.find(s=>s.id==='${h.id}'))">
+      <div class="org-l2-fig" style="border:2px solid ${h.color}">${getFig(h.id)}</div>
+      <div class="org-l2-name">${h.name}</div>
+      <div class="org-l2-count" style="color:${h.color}">${count} agentes</div>
+      <div class="org-sub">${h.sub.map(a=>`<span class="org-chip">${a}</span>`).join('')}</div>
+    </div>`;
+  }).join('');
+
+  const l3HTML = sistemas.map(s => `
+    <div class="org-l3-pill"><div class="org-l3-dot"></div>${s}</div>`).join('');
+
+  document.getElementById('org-wrap').innerHTML = `
+    <div class="org-root-wrap">
+      <div class="org-root">
+        <div class="org-root-name">AUDIPER — Auditores Independentes S/S</div>
+        <div class="org-root-sub">Central de Operações Autônoma · 40 Anos de Excelência</div>
+        <div class="org-root-stats">
+          <div class="org-root-stat"><div class="org-root-stat-val">146</div><div class="org-root-stat-lbl">AGENTES</div></div>
+          <div class="org-root-stat"><div class="org-root-stat-val">12</div><div class="org-root-stat-lbl">SETORES</div></div>
+          <div class="org-root-stat"><div class="org-root-stat-val">65</div><div class="org-root-stat-lbl">SKILLS</div></div>
+          <div class="org-root-stat"><div class="org-root-stat-val">8</div><div class="org-root-stat-lbl">SISTEMAS</div></div>
+        </div>
+      </div>
+
+      <div class="org-v"></div>
+      <div class="org-section-title">Camadas Funcionais</div>
+      <div class="org-l1-row">${l1HTML}</div>
+
+      <div class="org-v"></div>
+      <div class="org-h-line"></div>
+      <div class="org-v"></div>
+      <div class="org-section-title">Setores Operacionais</div>
+      <div class="org-l2-grid">${l2HTML}</div>
+
+      <div class="org-v"></div>
+      <div class="org-section-title">Sistemas Integrados</div>
+      <div class="org-l3-row">${l3HTML}</div>
+    </div>`;
+}
+
+/* ── MODAL ── */
+function openModal(s) {
+  if (!s) return;
+  document.getElementById('mfig').innerHTML = getFig(s.id);
+  document.getElementById('mt').textContent = s.name.toUpperCase();
+  document.getElementById('ms').textContent = `${s.count} agentes · ${s.desc}`;
+  document.getElementById('mag').innerHTML = s.agents.map(a => `
+    <div class="ac">
+      <div class="av" style="color:${s.color};border-color:${s.color}">${a.id}</div>
+      <div><div class="an">${a.n}</div><div class="ar2">${a.r}</div></div>
+      <div class="ap"></div>
+    </div>`).join('');
+  document.getElementById('mo').classList.add('open');
+}
+function closeModal(){ document.getElementById('mo').classList.remove('open'); }
+document.getElementById('mo').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal(); });
+
+/* ── TABS ── */
+function showTab(id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  document.getElementById('pane-'+id).classList.add('active');
+}
+
+/* ── CLOCK ── */
+function tick(){
+  const n=new Date(), p=x=>String(x).padStart(2,'0');
+  document.getElementById('clock').textContent=`${p(n.getHours())}:${p(n.getMinutes())}:${p(n.getSeconds())}`;
+  const dias=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+  const meses=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+  document.getElementById('ds').textContent=`${dias[n.getDay()]} ${p(n.getDate())} ${meses[n.getMonth()]} ${n.getFullYear()} · Araguaína/TO`;
+}
+setInterval(tick,1000); tick();
+setInterval(renderTasks,60000);
+
+/* ── LIVE DASHBOARD DATA ── */
+/* Busca agents/dashboard-data.json gerado por daily_aggregate.py e log_agent_task.py.
+   Se não encontrar (ex: abrir o HTML direto do disco), usa os dados estáticos. */
+async function fetchDashboard() {
+  try {
+    const res = await fetch('agents/dashboard-data.json?t=' + Date.now());
+    if (!res.ok) throw new Error('not found');
+    const data = await res.json();
+
+    /* Atividade recente */
+    if (Array.isArray(data.recent_activity) && data.recent_activity.length > 0) {
+      const liveActivity = data.recent_activity.map(a => ({
+        a: a.agent,
+        t: a.task,
+        time: a.time ? a.time.slice(11,16) : '--:--'
+      }));
+      /* Substitui feed com dados reais */
+      document.getElementById('feed').innerHTML = liveActivity.map(f => `
+        <div class="fi">
+          <div class="fd" style="background:var(--green)"></div>
+          <div><div class="fa">${f.a}</div><div class="fac">${f.t}</div></div>
+          <div class="ft">${f.time}</div>
+        </div>`).join('');
+    }
+
+    /* Stats da barra superior */
+    if (data.stats) {
+      const s = data.stats;
+      const statsMap = {
+        0: { label:'Total Agentes',   val: s.total_agents     || 146,  sub:'12 categorias' },
+        1: { label:'Tasks Hoje',      val: s.tasks_completed  || 0,    sub:`${s.active_today||0} agentes ativos` },
+        2: { label:'Skills Claude',   val: 65,                         sub:'.claude/skills/' },
+        3: { label:'Aprendizados',    val: s.total_learnings  || 0,    sub:'registrados hoje' },
+        4: { label:'Vault Obsidian',  val: 72,                         sub:'notas + RAG' },
+        5: { label:'Site Audiper',    val: 86,                         sub:'páginas HTML' },
+      };
+      const items = document.querySelectorAll('.si');
+      items.forEach((el, i) => {
+        if (!statsMap[i]) return;
+        const sv = el.querySelector('.sv'), sl = el.querySelector('.sl'), ss = el.querySelector('.ss');
+        if (sv) sv.textContent = statsMap[i].val;
+        if (sl) sl.textContent = statsMap[i].label;
+        if (ss) ss.textContent = statsMap[i].sub;
+      });
+    }
+
+    /* Performance por setor — atualiza badge de count nos cards (se existirem) */
+    if (data.sector_performance) {
+      Object.entries(data.sector_performance).forEach(([sec, perf]) => {
+        const countEl = document.querySelector(`.sc-count[data-sector="${sec}"]`);
+        if (countEl && perf.tasks > 0) {
+          countEl.setAttribute('title', `${perf.tasks} tarefas · qualidade avg ${perf.avg_quality}/10`);
+        }
+      });
+    }
+
+    /* Indicador "LIVE" no header */
+    const liveIndicator = document.querySelector('.pill:first-child');
+    if (liveIndicator && data.generated_at) {
+      const ts = new Date(data.generated_at);
+      const hm = `${String(ts.getHours()).padStart(2,'0')}:${String(ts.getMinutes()).padStart(2,'0')}`;
+      liveIndicator.innerHTML = `<span class="pd pd-g"></span>Live · atualizado ${hm}`;
+    }
+
+  } catch(e) {
+    /* Silencioso — mantém dados estáticos */
+  }
+}
+
+/* Atualiza a cada 60s (útil quando servido via http-server) */
+fetchDashboard();
+setInterval(fetchDashboard, 60000);
+
+/* ── INIT ── */
+renderSectors(); renderSysMini(); renderLive(); renderFeed(); renderTasks();
+renderKanban(); renderOrg();
+</script>
+</body>
+</html>

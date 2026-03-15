@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Bash|Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python D:/Site/.claude/hooks/post_task_log.py"
+          }
+        ]
+      }
+    ]
+  }
+}

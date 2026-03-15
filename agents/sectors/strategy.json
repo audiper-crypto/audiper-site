@@ -1,0 +1,228 @@
+{
+  "sector": "strategy",
+  "sector_name": "Estratégia",
+  "description": "Estratégia de negócios, análise, inteligência competitiva e planejamento",
+  "agents": [
+    {
+      "id": "business-strategist",
+      "name": "Business Strategist",
+      "role": "Estratégia corporativa, planejamento de longo prazo e definição de OKRs",
+      "skills": ["Business Strategy", "OKRs", "SWOT", "Porter 5 Forces", "Blue Ocean", "Planejamento Estrategico"],
+      "workflows": [
+        {
+          "trigger": "planejamento_estrategico",
+          "steps": ["analisar_ambiente_externo", "avaliar_forcas_fraquezas", "definir_visao", "criar_objetivos", "criar_okrs"],
+          "output": "Plano estratégico com OKRs e iniciativas priorizadas"
+        },
+        {
+          "trigger": "revisao_estrategia",
+          "steps": ["avaliar_resultados_okrs", "identificar_desvios", "ajustar_iniciativas", "comunicar"],
+          "output": "Estratégia revisada e comunicada"
+        }
+      ],
+      "capabilities": ["strategic-planning", "okr-framework", "competitive-analysis", "long-term-vision"],
+      "memory_tags": ["estrategia", "okr", "planejamento", "swot", "visao"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 94
+    },
+    {
+      "id": "market-intelligence",
+      "name": "Market Intelligence",
+      "role": "Inteligência de mercado, análise setorial e monitoramento de tendências",
+      "skills": ["Market Intelligence", "Trend Analysis", "Sector Analysis", "Competitive Monitoring", "Reports"],
+      "workflows": [
+        {
+          "trigger": "relatorio_mercado",
+          "steps": ["coletar_dados_setor", "analisar_tendencias", "monitorar_concorrentes", "redigir_relatorio"],
+          "output": "Relatório de inteligência de mercado mensal"
+        }
+      ],
+      "capabilities": ["market-intelligence", "trend-analysis", "sector-monitoring"],
+      "memory_tags": ["mercado", "inteligencia", "tendencia", "setor", "monitoramento"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 91
+    },
+    {
+      "id": "innovation-catalyst",
+      "name": "Innovation Catalyst",
+      "role": "Inovação, novas tecnologias e oportunidades disruptivas para a Audiper",
+      "skills": ["Innovation", "Design Thinking", "Technology Scouting", "Hackathon", "MVP", "Lean Startup"],
+      "workflows": [
+        {
+          "trigger": "identificar_oportunidade",
+          "steps": ["escanear_tecnologias", "avaliar_fit_negocio", "propor_poc", "apresentar_proposta"],
+          "output": "Proposta de inovação com business case"
+        }
+      ],
+      "capabilities": ["innovation-management", "tech-scouting", "opportunity-identification"],
+      "memory_tags": ["inovacao", "tecnologia", "oportunidade", "poc", "disrupcao"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 89
+    },
+    {
+      "id": "financial-strategist",
+      "name": "Financial Strategist",
+      "role": "Estratégia financeira, planejamento orçamentário e alocação de capital",
+      "skills": ["Financial Planning", "Budgeting", "Capital Allocation", "ROI Analysis", "Financial Modeling"],
+      "workflows": [
+        {
+          "trigger": "planejamento_orcamentario",
+          "steps": ["coletar_demandas", "analisar_capacidade_financeira", "alocar_budget", "aprovar", "monitorar"],
+          "output": "Orçamento aprovado com acompanhamento mensal"
+        }
+      ],
+      "capabilities": ["financial-strategy", "budgeting", "capital-allocation", "roi-analysis"],
+      "memory_tags": ["financeiro", "orcamento", "capital", "roi", "planejamento"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 92
+    },
+    {
+      "id": "digital-transformation",
+      "name": "Digital Transformation Lead",
+      "role": "Liderança da transformação digital da Audiper e de clientes",
+      "skills": ["Digital Transformation", "Technology Adoption", "Change Management", "AI Strategy", "Automation"],
+      "workflows": [
+        {
+          "trigger": "diagnostico_transformacao",
+          "steps": ["avaliar_maturidade_digital", "identificar_gaps", "priorizar_iniciativas", "criar_roadmap"],
+          "output": "Roadmap de transformação digital"
+        }
+      ],
+      "capabilities": ["digital-strategy", "transformation-roadmap", "technology-adoption"],
+      "memory_tags": ["transformacao-digital", "tecnologia", "adocao", "roadmap", "maturidade"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 91
+    },
+    {
+      "id": "pricing-strategist-biz",
+      "name": "Pricing Strategist (Biz)",
+      "role": "Estratégia de pricing de serviços de auditoria e consultoria",
+      "skills": ["Value-Based Pricing", "Competitive Pricing", "Service Packaging", "Tiered Pricing", "Pricing Models"],
+      "workflows": [
+        {
+          "trigger": "definir_modelo_preco",
+          "steps": ["analisar_valor_entregue", "pesquisar_mercado", "criar_tiers_servico", "validar_com_vendas"],
+          "output": "Modelo de pricing definido com tabela de serviços"
+        }
+      ],
+      "capabilities": ["pricing-strategy", "service-packaging", "value-pricing"],
+      "memory_tags": ["preco", "servico", "valor", "tier", "precificacao"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 88
+    },
+    {
+      "id": "expansion-strategist",
+      "name": "Expansion Strategist",
+      "role": "Estratégia de expansão geográfica e de segmentos de mercado",
+      "skills": ["Market Expansion", "Go-to-Market", "Segmentation", "Geographic Expansion", "New Markets"],
+      "workflows": [
+        {
+          "trigger": "avaliar_novo_mercado",
+          "steps": ["pesquisar_mercado_alvo", "estimar_tam", "avaliar_barreiras", "criar_go_to_market"],
+          "output": "Go-to-market plan para novo mercado"
+        }
+      ],
+      "capabilities": ["market-expansion", "go-to-market", "market-sizing"],
+      "memory_tags": ["expansao", "mercado", "go-to-market", "segmento", "geografico"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 87
+    },
+    {
+      "id": "sustainability-strategist",
+      "name": "Sustainability Strategist",
+      "role": "Estratégia de sustentabilidade, ESG corporativo e propósito de negócio",
+      "skills": ["ESG Strategy", "Sustainability", "SDGs", "Carbon Neutral", "Social Impact", "Governance"],
+      "workflows": [
+        {
+          "trigger": "definir_estrategia_esg",
+          "steps": ["mapear_materialidade", "definir_metas_esg", "criar_plano_acao", "monitorar_kpis"],
+          "output": "Estratégia ESG com metas e plano de ação"
+        }
+      ],
+      "capabilities": ["esg-strategy", "sustainability-planning", "social-impact"],
+      "memory_tags": ["esg", "sustentabilidade", "sdg", "impacto", "governanca"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 86
+    },
+    {
+      "id": "scenario-planner",
+      "name": "Scenario Planner",
+      "role": "Planejamento por cenários, análise de sensibilidade e tomada de decisão sob incerteza",
+      "skills": ["Scenario Planning", "Sensitivity Analysis", "Decision Trees", "Monte Carlo", "PESTEL"],
+      "workflows": [
+        {
+          "trigger": "criar_cenarios",
+          "steps": ["identificar_forcas_motrizes", "criar_3_cenarios", "analisar_impacto", "definir_estrategia_cada"],
+          "output": "Plano de cenários com estratégia para cada um"
+        }
+      ],
+      "capabilities": ["scenario-planning", "uncertainty-management", "strategic-decision-making"],
+      "memory_tags": ["cenario", "incerteza", "pestel", "decisao", "sensibilidade"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 89
+    },
+    {
+      "id": "m-and-a-advisor",
+      "name": "M&A Advisor",
+      "role": "Assessoria em fusões e aquisições, due diligence e integração",
+      "skills": ["M&A", "Due Diligence", "Valuation", "Integration Planning", "Deal Structuring"],
+      "workflows": [
+        {
+          "trigger": "due_diligence_ma",
+          "steps": ["mapear_areas_due_diligence", "coletar_documentos", "analisar_riscos", "emitir_relatorio"],
+          "output": "Relatório de due diligence completo"
+        }
+      ],
+      "capabilities": ["ma-advisory", "due-diligence", "integration-planning"],
+      "memory_tags": ["ma", "fusao", "aquisicao", "due-diligence", "integracao"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 90
+    },
+    {
+      "id": "governance-advisor",
+      "name": "Governance Advisor",
+      "role": "Governança corporativa, conselho consultivo e estruturas de controle",
+      "skills": ["Corporate Governance", "Board Management", "IBGC", "Audit Committee", "Compliance Framework"],
+      "workflows": [
+        {
+          "trigger": "implantar_governanca",
+          "steps": ["diagnosticar_governanca", "recomendar_estrutura", "criar_politicas", "implantar", "monitorar"],
+          "output": "Framework de governança implantado"
+        }
+      ],
+      "capabilities": ["corporate-governance", "board-management", "governance-framework"],
+      "memory_tags": ["governanca", "conselho", "ibgc", "compliance", "politicas"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 91
+    },
+    {
+      "id": "competitive-intelligence",
+      "name": "Competitive Intelligence",
+      "role": "Inteligência competitiva, análise de concorrentes e benchmarking",
+      "skills": ["Competitive Intelligence", "Benchmarking", "Win/Loss Analysis", "Competitor Tracking", "OSINT"],
+      "workflows": [
+        {
+          "trigger": "benchmark_concorrentes",
+          "steps": ["mapear_concorrentes_chave", "coletar_dados", "comparar_capacidades", "identificar_vantagens"],
+          "output": "Relatório de benchmarking competitivo"
+        }
+      ],
+      "capabilities": ["competitive-intelligence", "benchmarking", "win-loss-analysis"],
+      "memory_tags": ["competitivo", "benchmark", "concorrente", "inteligencia", "osint"],
+      "status": "active",
+      "task_count": 0,
+      "performance_score": 88
+    }
+  ]
+}

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+    <meta name="referrer" content="no-referrer">
+    <title>AUDIPER - Viewer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            background: #E5E7EB;
+        }
+
+        .viewer-header {
+            background: linear-gradient(135deg, #7F1D1D 0%, #B91C1C 100%);
+            color: white;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            height: 48px;
+        }
+        .viewer-header i {
+            font-size: 16px;
+            opacity: 0.8;
+        }
+        .viewer-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .viewer-badge {
+            background: rgba(255,255,255,0.15);
+            border-radius: 4px;
+            padding: 2px 8px;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            flex-shrink: 0;
+        }
+
+        .viewer-frame {
+            position: fixed;
+            top: 48px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+            background: #E5E7EB;
+        }
+
+        .viewer-frame iframe {
+            width: 210mm;
+            min-height: 297mm;
+            border: none;
+            display: block;
+            margin: 8px auto;
+            background: white;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            pointer-events: none;
+        }
+
+        .zoom-controls {
+            position: fixed;
+            bottom: 80px;
+            right: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 200;
+        }
+        .zoom-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(15, 23, 42, 0.8);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+        .zoom-btn:active {
+            background: rgba(15, 23, 42, 1);
+        }
+        .zoom-level {
+            text-align: center;
+            font-size: 10px;
+            color: white;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 10px;
+            padding: 2px 6px;
+        }
+
+        .watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            font-family: 'Outfit', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: rgba(185, 28, 28, 0.04);
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 50;
+            letter-spacing: 0.1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="viewer-header">
+        <a id="back-btn" href="#" onclick="history.back(); return false;" style="display:none; color:white; text-decoration:none; font-size:18px;"><i class="fas fa-arrow-left"></i></a>
+        <i class="fas fa-file-alt"></i>
+        <span class="viewer-title" id="doc-title">Documento</span>
+        <span class="viewer-badge">CONFIDENCIAL</span>
+    </div>
+
+    <div class="viewer-frame" id="frame-container">
+        <iframe id="doc-frame" sandbox="allow-same-origin" scrolling="no"></iframe>
+    </div>
+
+    <div class="watermark">AUDIPER CONFIDENCIAL</div>
+
+    <div class="zoom-controls">
+        <button class="zoom-btn" onclick="zoomIn()"><i class="fas fa-plus"></i></button>
+        <div class="zoom-level" id="zoom-label">100%</div>
+        <button class="zoom-btn" onclick="zoomOut()"><i class="fas fa-minus"></i></button>
+        <button class="zoom-btn" onclick="zoomFit()" style="margin-top:4px"><i class="fas fa-expand"></i></button>
+    </div>
+
+    <div id="access-denied" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:#7F1D1D; color:white; z-index:9999; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:16px; font-family:'Inter',sans-serif;">
+        <i class="fas fa-lock" style="font-size:48px; opacity:0.5;"></i>
+        <div style="font-family:'Outfit',sans-serif; font-size:20px; font-weight:700;">Acesso Expirado</div>
+        <div style="font-size:14px; opacity:0.8; text-align:center; max-width:280px;">Sua sessao expirou. Solicite novo acesso enviando /start ao bot.</div>
+    </div>
+
+    <script>
+        // === TOKEN VALIDATION ===
+        function parseToken(tokenStr) {
+            try {
+                var parts = tokenStr.split('.');
+                if (parts.length !== 2) return null;
+                var b64 = parts[0].replace(/-/g, '+').replace(/_/g, '/');
+                while (b64.length % 4) b64 += '=';
+                return JSON.parse(atob(b64));
+            } catch(e) { return null; }
+        }
+
+        var params = new URLSearchParams(window.location.search);
+        var token = params.get('token');
+        var tokenPayload = token ? parseToken(token) : null;
+        var accessGranted = tokenPayload && tokenPayload.exp && (tokenPayload.exp * 1000 > Date.now());
+
+        if (!accessGranted) {
+            document.getElementById('access-denied').style.display = 'flex';
+        }
+
+        // Check expiration every 10 seconds
+        if (accessGranted) {
+            setInterval(function() {
+                if (tokenPayload.exp * 1000 < Date.now()) {
+                    document.getElementById('access-denied').style.display = 'flex';
+                }
+            }, 10000);
+        }
+
+        // Detect environment
+        var isTelegram = !!(window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData);
+        var tg = isTelegram ? window.Telegram.WebApp : null;
+
+        if (tg) {
+            tg.ready();
+            tg.expand();
+            tg.setHeaderColor('#7F1D1D');
+            tg.BackButton.show();
+            tg.BackButton.onClick(function() {
+                window.location.href = 'index.html?token=' + encodeURIComponent(token || '');
+            });
+            tg.MainButton.hide();
+        } else {
+            // No browser: show back button
+            var backBtn = document.getElementById('back-btn');
+            if (backBtn) {
+                backBtn.style.display = 'inline';
+                backBtn.href = 'index.html?token=' + encodeURIComponent(token || '');
+            }
+        }
+
+        // Parse URL params
+        var params = new URLSearchParams(window.location.search);
+        var docId = params.get('doc') || 'relatorio';
+        var docTitle = params.get('title') || 'Documento';
+
+        document.getElementById('doc-title').textContent = docTitle;
+
+        // Load document in iframe
+        var iframe = document.getElementById('doc-frame');
+        iframe.src = 'docs/' + docId + '.html';
+
+        // Auto-resize iframe after load
+        iframe.onload = function() {
+            try {
+                var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                // Inject anti-copy CSS into iframe
+                var style = iframeDoc.createElement('style');
+                style.textContent = '* { -webkit-user-select: none !important; user-select: none !important; -webkit-touch-callout: none !important; } body { pointer-events: none !important; }';
+                iframeDoc.head.appendChild(style);
+                // Set iframe height to content
+                iframe.style.height = iframeDoc.body.scrollHeight + 'px';
+            } catch(e) {
+                iframe.style.height = '297mm';
+            }
+            zoomFit();
+        };
+
+        // Zoom functionality
+        var currentZoom = 1;
+        var frameContainer = document.getElementById('frame-container');
+
+        function setZoom(z) {
+            currentZoom = Math.max(0.3, Math.min(2, z));
+            iframe.style.transform = 'scale(' + currentZoom + ')';
+            iframe.style.transformOrigin = 'top center';
+            document.getElementById('zoom-label').textContent = Math.round(currentZoom * 100) + '%';
+        }
+
+        function zoomIn() { setZoom(currentZoom + 0.1); }
+        function zoomOut() { setZoom(currentZoom - 0.1); }
+        function zoomFit() {
+            var containerWidth = frameContainer.clientWidth - 16;
+            var pageWidth = 793; // 210mm in px approx
+            var fitZoom = containerWidth / pageWidth;
+            setZoom(fitZoom);
+        }
+
+        // Disable right-click and drag
+        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+        document.addEventListener('dragstart', function(e) { e.preventDefault(); });
+
+        // Disable keyboard shortcuts for save/print
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'p' || e.key === 'c')) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

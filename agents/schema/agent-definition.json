@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "Agent Definition",
+  "description": "Schema de definição de agente do ecossistema Audiper",
+  "type": "object",
+  "required": ["id", "name", "sector", "role", "skills", "workflows", "capabilities"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Identificador único do agente (kebab-case)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Nome de exibição do agente"
+    },
+    "sector": {
+      "type": "string",
+      "description": "Setor ao qual o agente pertence",
+      "enum": ["engineering", "marketing", "design", "sales", "auditoria", "specialized", "testing", "product", "projectmgmt", "support", "strategy", "orchestration"]
+    },
+    "role": {
+      "type": "string",
+      "description": "Descrição curta do papel do agente"
+    },
+    "skills": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Lista de tecnologias, frameworks e habilidades"
+    },
+    "workflows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["trigger", "steps", "output"],
+        "properties": {
+          "trigger": {
+            "type": "string",
+            "description": "Evento que ativa o workflow"
+          },
+          "steps": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Passos do workflow em ordem"
+          },
+          "output": {
+            "type": "string",
+            "description": "Entregável do workflow"
+          }
+        }
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Capacidades e competências do agente"
+    },
+    "memory_tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Tags para indexação na memória semântica"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "inactive", "development"],
+      "description": "Estado operacional do agente"
+    },
+    "last_task": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp da última tarefa executada"
+    },
+    "task_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total de tarefas executadas pelo agente"
+    },
+    "performance_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Score de performance (0-100)"
+    }
+  }
+}

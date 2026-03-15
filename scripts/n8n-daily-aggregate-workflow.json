@@ -1,0 +1,110 @@
+{
+  "name": "Daily Agents Aggregate + Auto-Melhoria",
+  "nodes": [
+    {
+      "name": "Schedule Trigger 20h",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [240, 300],
+      "parameters": {
+        "rule": {
+          "interval": [{ "field": "hours", "minutesInterval": 1440 }]
+        },
+        "triggerAtHour": 20,
+        "triggerAtMinute": 0
+      }
+    },
+    {
+      "name": "1. Agregar logs do dia",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [460, 300],
+      "parameters": {
+        "command": "cd /d D:\\Site\\audiper && python scripts/daily_aggregate.py"
+      }
+    },
+    {
+      "name": "2. Arquivar tarefas de sucesso",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [680, 300],
+      "parameters": {
+        "command": "cd /d D:\\Site\\audiper && python scripts/archive_success.py --all"
+      }
+    },
+    {
+      "name": "3. Construir base de conhecimento",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [900, 300],
+      "parameters": {
+        "command": "cd /d D:\\Site\\audiper && python scripts/build_knowledge.py --days 30"
+      }
+    },
+    {
+      "name": "4. Injetar memoria nos agentes",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [1120, 300],
+      "parameters": {
+        "command": "cd /d D:\\Site\\audiper && python scripts/inject_memory.py --days 7 --local --export"
+      }
+    },
+    {
+      "name": "5. Otimizar memoria (analise 7 dias)",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [1340, 300],
+      "parameters": {
+        "command": "cd /d D:\\Site\\audiper && python scripts/optimize_memory.py 7"
+      }
+    },
+    {
+      "name": "6. Gerar briefing amanha",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [1560, 300],
+      "parameters": {
+        "command": "cd /d D:\\Site\\audiper && python scripts/generate_briefing.py --telegram"
+      }
+    },
+    {
+      "name": "Enviar Relatorio Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1780, 300],
+      "parameters": {
+        "chatId": "62036868",
+        "text": "=<b>Daily Report — Sistema Agentes Audiper</b>\n\n<b>{{ $now.toFormat('dd/MM/yyyy HH:mm') }}</b>\n\n<b>Arquivamento:</b> {{ $node['2. Arquivar tarefas de sucesso'].json.stdout.split('\\n').filter(l => l.startsWith('[ARCHIVE]') || l.startsWith('[DONE]')).join('\\n') || 'Nenhuma tarefa arquivada hoje' }}\n\n<b>Conhecimento:</b> {{ $node['3. Construir base de conhecimento'].json.stdout.split('\\n').filter(l => l.startsWith('[KNOWLEDGE]')).join('\\n') || 'Sem novidades' }}\n\n{{ $node['6. Gerar briefing amanha'].json.stdout || 'Briefing indisponivel' }}",
+        "additionalFields": {
+          "parse_mode": "HTML"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Schedule Trigger 20h": {
+      "main": [[{ "node": "1. Agregar logs do dia", "type": "main", "index": 0 }]]
+    },
+    "1. Agregar logs do dia": {
+      "main": [[{ "node": "2. Arquivar tarefas de sucesso", "type": "main", "index": 0 }]]
+    },
+    "2. Arquivar tarefas de sucesso": {
+      "main": [[{ "node": "3. Construir base de conhecimento", "type": "main", "index": 0 }]]
+    },
+    "3. Construir base de conhecimento": {
+      "main": [[{ "node": "4. Injetar memoria nos agentes", "type": "main", "index": 0 }]]
+    },
+    "4. Injetar memoria nos agentes": {
+      "main": [[{ "node": "5. Otimizar memoria (analise 7 dias)", "type": "main", "index": 0 }]]
+    },
+    "5. Otimizar memoria (analise 7 dias)": {
+      "main": [[{ "node": "6. Gerar briefing amanha", "type": "main", "index": 0 }]]
+    },
+    "6. Gerar briefing amanha": {
+      "main": [[{ "node": "Enviar Relatorio Telegram", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" }
+}
