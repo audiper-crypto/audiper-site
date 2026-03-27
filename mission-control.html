@@ -66,9 +66,31 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .pd-o{background:var(--gold-light);box-shadow:0 0 6px var(--gold-light);}
 .pd-w{background:var(--wine-light);box-shadow:0 0 6px var(--wine-light);}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
-.hdr-r{text-align:right;}
+.hdr-r{text-align:right;display:flex;align-items:center;gap:14px;}
+.hdr-r-info{text-align:right;}
 #clock{font-family:var(--r);font-size:24px;font-weight:600;color:var(--gold-light);letter-spacing:.06em;line-height:1;}
 #ds{font-family:var(--m);font-size:9px;color:rgba(255,255,255,.4);letter-spacing:.18em;margin-top:2px;}
+/* Refresh button */
+#btn-refresh{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;cursor:pointer;
+  background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);
+  font-family:var(--m);font-size:9px;color:rgba(255,255,255,.75);letter-spacing:.1em;
+  transition:all .2s;white-space:nowrap;}
+#btn-refresh:hover{background:rgba(255,255,255,.18);color:#fff;border-color:rgba(255,255,255,.35);}
+#btn-refresh.spinning svg{animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+#refresh-label{font-size:8px;color:rgba(255,255,255,.4);font-family:var(--m);letter-spacing:.08em;
+  margin-top:2px;text-align:center;}
+/* Auto-refresh toggle */
+#auto-refresh-wrap{display:flex;flex-direction:column;align-items:center;gap:2px;}
+.ar-toggle{display:flex;align-items:center;gap:5px;cursor:pointer;font-family:var(--m);
+  font-size:8.5px;color:rgba(255,255,255,.5);letter-spacing:.08em;}
+.ar-toggle input{appearance:none;width:26px;height:13px;border-radius:7px;
+  background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);
+  cursor:pointer;position:relative;transition:background .2s;}
+.ar-toggle input:checked{background:var(--green);}
+.ar-toggle input::after{content:'';position:absolute;top:2px;left:2px;width:9px;height:9px;
+  border-radius:50%;background:#fff;transition:left .2s;}
+.ar-toggle input:checked::after{left:13px;}
 
 /* ── STATS ── */
 #stats{grid-area:st;display:grid;grid-template-columns:repeat(6,1fr);
@@ -322,8 +344,24 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
     <div class="pill"><span class="pd pd-w"></span>Gemini 2.5 Flash</div>
   </div>
   <div class="hdr-r">
-    <div id="clock">--:--:--</div>
-    <div id="ds">carregando...</div>
+    <div id="auto-refresh-wrap">
+      <label class="ar-toggle">
+        <input type="checkbox" id="ar-check" onchange="toggleAutoRefresh(this.checked)">
+        AUTO
+      </label>
+      <div id="refresh-label">desligado</div>
+    </div>
+    <button id="btn-refresh" onclick="manualRefresh()" title="Atualizar dados agora">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M23 4v6h-6"/><path d="M1 20v-6h6"/>
+        <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
+      </svg>
+      ATUALIZAR
+    </button>
+    <div class="hdr-r-info">
+      <div id="clock">--:--:--</div>
+      <div id="ds">carregando...</div>
+    </div>
   </div>
 </header>
 
@@ -342,6 +380,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   <div class="tab active" onclick="showTab('setores')">Setores</div>
   <div class="tab" onclick="showTab('tarefas')">Tarefas</div>
   <div class="tab" onclick="showTab('organograma')">Organograma</div>
+  <div class="tab" onclick="showTab('escritorio'); initEscritorio()">Escritório</div>
 </div>
 
 <!-- MAIN -->
@@ -365,6 +404,29 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   <div class="tab-pane" id="pane-organograma">
     <div class="sec-hd"><div class="sec-hd-l"></div><div class="sec-hd-t">Hierarquia de Agentes</div><div class="sec-hd-l"></div></div>
     <div class="org-wrap" id="org-wrap"></div>
+  </div>
+
+  <!-- ESCRITÓRIO TAB -->
+  <div class="tab-pane" id="pane-escritorio" style="height:calc(100vh - 222px);padding:0;position:relative;overflow:hidden;">
+    <!-- Controles -->
+    <div id="esc-controls" style="position:absolute;top:12px;left:16px;z-index:10;display:flex;gap:8px;align-items:center;">
+      <button onclick="toggleDemo()" id="btn-demo" style="font-family:var(--m);font-size:9px;padding:6px 14px;border-radius:6px;background:var(--wine);color:#fff;border:none;cursor:pointer;letter-spacing:.1em;">DEMO</button>
+      <button onclick="resetZoom()" style="font-family:var(--m);font-size:9px;padding:6px 12px;border-radius:6px;background:var(--white);color:var(--wine);border:1.5px solid var(--border);cursor:pointer;">RESET</button>
+      <span id="esc-info" style="font-family:var(--m);font-size:9px;color:var(--ink-dim);letter-spacing:.08em;">146 agentes · 12 setores · arraste para explorar</span>
+    </div>
+    <!-- Legenda -->
+    <div id="esc-legend" style="position:absolute;bottom:12px;left:16px;z-index:10;display:flex;flex-wrap:wrap;gap:6px;max-width:400px;">
+    </div>
+    <!-- SVG grafo -->
+    <svg id="esc-svg" style="width:100%;height:100%;background:var(--cream)"></svg>
+    <!-- Tooltip -->
+    <div id="esc-tooltip" style="position:absolute;display:none;pointer-events:none;
+      background:var(--white);border:1.5px solid var(--border);border-radius:10px;
+      padding:10px 14px;box-shadow:var(--shadow-md);max-width:220px;z-index:20;">
+      <div id="tt-name" style="font-family:var(--r);font-size:13px;font-weight:700;color:var(--wine);margin-bottom:2px;"></div>
+      <div id="tt-role" style="font-family:var(--m);font-size:9px;color:var(--ink-dim);letter-spacing:.08em;margin-bottom:6px;"></div>
+      <div id="tt-task" style="font-family:var(--s);font-size:11px;color:var(--ink);line-height:1.4;"></div>
+    </div>
   </div>
 
 </main>
@@ -488,25 +550,27 @@ const SECTORS = [
 ];
 
 const LIVE_SYSTEMS = [
-  {n:'Claude Code',       s:'claude-3.7-sonnet',      ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="5"/><path d="M5 7h4M7 5v4"/></svg>`},
-  {n:'n8n v2.11.2',       s:'D:/Site/n8n/',           ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 7h3l1.5-3 2 6 1.5-3h3"/></svg>`},
-  {n:'Telegram Bot',      s:'@AudiperPortalBot',      ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2L2 6.5l3 .5M12 2l-2.5 9-3-3M12 2L5 8.5"/></svg>`},
-  {n:'Discord Bot',       s:'Audina#0456 · Deno',     ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 8h6M4 10h6M10 2c0-.4-.4-.7-.8-.7H4.8c-.4 0-.8.3-.8.7v8l2-1.5h3.5c.4 0 .5-.3.5-.7V2z"/></svg>`},
-  {n:'Audiz · FastAPI',   s:'F:/AUDIX/audiz/',        ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 1l4 2v4C11 9.5 7 12 7 12S3 9.5 3 7V3L7 1z"/></svg>`},
-  {n:'Gemini 2.5 Flash',  s:'GCP gen-lang-0213700073',ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><polygon points="7,1 8.8,5 13,5.5 10,8.5 10.8,13 7,10.8 3.2,13 4,8.5 1,5.5 5.2,5"/></svg>`},
-  {n:'Obsidian Vault',    s:'72 notas · memsearch',   ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 12A1.2 1.2 0 014.2 11H11"/><path d="M4.2 2H11v10H4.2A1.2 1.2 0 013 10.8V3.2A1.2 1.2 0 014.2 2z"/></svg>`},
-  {n:'Portal Audiper',    s:'audiper.com.br · 86 pgs',ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="5"/><path d="M2 7h10M7 2a7 7 0 000 10M7 2a7 7 0 010 10"/></svg>`},
+  {n:'Claude Code',       s:'claude-sonnet-4-6',      ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="5"/><path d="M5 7h4M7 5v4"/></svg>`},
+  {n:'n8n v2.11.2',       s:'D:/Site/n8n/ · localhost:5678',ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 7h3l1.5-3 2 6 1.5-3h3"/></svg>`},
+  {n:'Telegram Bot',      s:'@AudiperPortalBot · voz ativa',ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2L2 6.5l3 .5M12 2l-2.5 9-3-3M12 2L5 8.5"/></svg>`},
+  {n:'Kokoro TTS',        s:'pf_dora · PT-BR · ONNX',  ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9 1v12M5 3v8M1 5v4M13 4v6"/></svg>`},
+  {n:'Voxtral STT',       s:'voxtral-mini-latest · Mistral',ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="5" r="3"/><path d="M1 11c0-2.2 2.7-4 6-4s6 1.8 6 4"/></svg>`},
+  {n:'Infisical',         s:'localhost:8888 · Docker',  ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 1l4 2v4C11 9.5 7 12 7 12S3 9.5 3 7V3L7 1z"/></svg>`},
+  {n:'Audiz · FastAPI',   s:'F:/AUDIX/audiz/',          ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="10" height="10" rx="2"/><path d="M5 7h4M7 5v4"/></svg>`},
+  {n:'Gemini 2.5 Flash',  s:'GCP gen-lang-0213700073', ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><polygon points="7,1 8.8,5 13,5.5 10,8.5 10.8,13 7,10.8 3.2,13 4,8.5 1,5.5 5.2,5"/></svg>`},
+  {n:'LightRAG',          s:'131 docs · localhost:9621',ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="2"/><path d="M7 1v2M7 11v2M1 7h2M11 7h2"/></svg>`},
+  {n:'Portal Audiper',    s:'audiper.com.br · 83 pgs',  ico:`<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="5"/><path d="M2 7h10M7 2a7 7 0 000 10M7 2a7 7 0 010 10"/></svg>`},
 ];
 
 const FEED_DATA = [
-  {a:'morning-brief',    t:'Briefing enviado via Telegram',   time:'08:00'},
-  {a:'Backend Architect',t:'Revisou arquitetura Audiz',       time:'09:15'},
-  {a:'Agents Orchestr.', t:'Pipeline memsearch iniciado',     time:'09:22'},
-  {a:'DevOps Automator', t:'Docker instalado em D:/Docker/',  time:'10:30'},
-  {a:'AI Engineer',      t:'Pesquisou AirLLM + Flash Attn',   time:'10:45'},
-  {a:'MCP Builder',      t:'Avaliou mem0 + basic-memory',     time:'11:00'},
-  {a:'Frontend Dev.',    t:'Mission Control HTML criado',     time:'11:30'},
-  {a:'Brand Guardian',   t:'Paleta vinho aplicada no MC',     time:'11:35'},
+  {a:'AI Engineer',      t:'Fish Speech venv CUDA 12.6 configurado',   time:'10:30'},
+  {a:'Content Creator',  t:'70 artigos blog + sitemap 83 URLs pushed', time:'11:00'},
+  {a:'AI Engineer',      t:'Kokoro TTS PT-BR: pf_dora funcional',      time:'12:00'},
+  {a:'MCP Builder',      t:'Voxtral STT instalado no Telegram Bot',    time:'13:30'},
+  {a:'Telegram Bot',     t:'kokoro_notify.py: audio enviado com sucesso',time:'14:00'},
+  {a:'Research Agent',   t:'Tavily: 1.000 req/mês grátis, MCP disponível',time:'14:30'},
+  {a:'DevOps Automator', t:'Infisical rodando em Docker localhost:8888',time:'15:00'},
+  {a:'Security Engineer',t:'Arquitetura NeMo Guardrails + OpenShell Docker definida',time:'16:00'},
 ];
 
 const TASKS_DAY = [
@@ -518,35 +582,41 @@ const TASKS_DAY = [
 ];
 
 const SYS_MINI = [
-  {n:'Python 3.12',    s:'audiper-mvp · SPED ECD',   c:'#7B2D3E'},
-  {n:'Streamlit',      s:'D:/Site/audiper-mvp/',      c:'#9B3A4E'},
-  {n:'Node.js',        s:'claude-code-telegram',      c:'#7B2D3E'},
-  {n:'Deno v2.7.5',    s:'D:/deno/deno.exe',          c:'#9B3A4E'},
-  {n:'SQLite',         s:'n8n · Audiz databases',     c:'#7B2D3E'},
-  {n:'Docker Desktop', s:'D:/Docker/ — instalando',   c:'#9B3A4E'},
+  {n:'Python 3.12',      s:'audiper-mvp · SPED ECD · Kokoro',  c:'#7B2D3E'},
+  {n:'Node.js 22.16',    s:'claude-code-telegram · voz ativa', c:'#9B3A4E'},
+  {n:'Docker Desktop',   s:'D:/Docker/ · infisical ativo',     c:'#7B2D3E'},
+  {n:'Kokoro TTS ONNX',  s:'D:/Site/n8n/ · pf_dora PT-BR',    c:'#9B3A4E'},
+  {n:'Mistral Voxtral',  s:'STT · voxtral-mini-latest',        c:'#7B2D3E'},
+  {n:'Fish Speech env',  s:'D:/Site/fish-speech-env/ · CUDA',  c:'#9B3A4E'},
+  {n:'Infisical',        s:'localhost:8888 · Secrets Mgr',     c:'#7B2D3E'},
+  {n:'LightRAG API',     s:'131 docs indexados',               c:'#9B3A4E'},
+  {n:'SQLite',           s:'n8n · Audiz · agno databases',     c:'#7B2D3E'},
 ];
 
-/* tarefas kanban */
+/* tarefas kanban — atualizado 2026-03-27 */
 const KANBAN_DATA = {
   done: [
-    {ag:'DevOps Automator',  n:'Instalação Docker',        d:'Docker Desktop em D:\\Docker\\ com junctions e daemon.json configurados', tag:'infraestrutura', time:'10:30'},
-    {ag:'AI Engineer',       n:'Pesquisa AirLLM',          d:'Análise AirLLM + Flash Attention: não recomendado no hardware atual', tag:'pesquisa', time:'10:45'},
-    {ag:'MCP Builder',       n:'Pesquisa MCPs Memória',    d:'mem0 + basic-memory + memsearch comparativo completo', tag:'memoria', time:'11:00'},
-    {ag:'morning-brief',     n:'Briefing Matinal',         d:'Resumo do dia + prioridades enviado via Telegram às 08:00', tag:'rotina', time:'08:00'},
-    {ag:'Frontend Dev.',     n:'Mission Control v3',       d:'HTML completo com figuras, kanban, organograma e tema vinho', tag:'site', time:'11:35'},
+    {ag:'Content Creator',   n:'Blog + SEO deployed',      d:'70 artigos blog + sitemap 83 URLs pushed para audiper-crypto/audiper-site', tag:'site', time:'11:00'},
+    {ag:'AI Engineer',       n:'Kokoro TTS PT-BR',         d:'kokoro-onnx + misaki[pt] + pf_dora: audio 6.2s testado e funcional', tag:'voz', time:'12:00'},
+    {ag:'Telegram Bot',      n:'Voxtral STT ativo',        d:'mistralai 2.1.3 instalado + MISTRAL_API_KEY no .env + ENABLE_VOICE_MESSAGES=true', tag:'voz', time:'13:30'},
+    {ag:'AI Engineer',       n:'kokoro_notify.py',         d:'Script de notificação de voz AUDIZ: 6 templates + envio Telegram + CLI args', tag:'voz', time:'14:00'},
+    {ag:'AI Engineer',       n:'Fish Speech venv CUDA',    d:'torch-2.6.0+cu126 + CUDA True (GTX 1070 Ti) em D:/Site/fish-speech-env/', tag:'voz', time:'10:30'},
+    {ag:'DevOps Automator',  n:'Infisical Docker ativo',   d:'Secrets Manager rodando em localhost:8888 — visível no Docker Desktop', tag:'infra', time:'15:00'},
+    {ag:'Research Agent',    n:'Tavily pesquisado',        d:'1.000 req/mês grátis, MCP server disponível, ideal para pesquisa NBC TA', tag:'pesquisa', time:'14:30'},
+    {ag:'Security Engineer', n:'Arquitetura NeMo Docker',  d:'Design: NeMo Guardrails + OpenShell + Infisical para agentes AUDIZ em container', tag:'seguranca', time:'16:00'},
   ],
   prog: [
-    {ag:'Agents Orchestr.',  n:'Config memsearch onnx',    d:'Instalação bge-m3 local com ONNX Runtime após Docker funcionar', tag:'memoria', time:'em andamento'},
-    {ag:'Research Agent',    n:'Processo Premium Lógica',  d:'Pesquisando melhores práticas para fluxo premium da auditoria', tag:'estrategia', time:'em andamento'},
-    {ag:'OpenClaw Research', n:'OpenClaw + NanoClaw',      d:'Identificando ferramentas builderz-labs ecosystem para agentes', tag:'pesquisa', time:'em andamento'},
+    {ag:'Telegram Bot',      n:'Reiniciar bot c/ voz',     d:'Executar start_bot.bat para ativar transcrição de áudio com Voxtral STT', tag:'voz', time:'aguardando restart'},
+    {ag:'AI Engineer',       n:'Tavily integração',        d:'Registrar API key → instalar tavily-python → reescrever pesquisa-noturna.py', tag:'pesquisa', time:'em andamento'},
+    {ag:'Mission Control',   n:'Auto-refresh Kanban',      d:'Botão de atualização + loop periódico para sincronizar dados em tempo real', tag:'dashboard', time:'em andamento'},
   ],
   pend: [
-    {ag:'DevOps Automator',  n:'Testar docker hello-world',d:'Verificar funcionamento após primeiro boot do Docker Desktop', tag:'infraestrutura', time:'pendente'},
-    {ag:'DevOps Automator',  n:'Subir Milvus',             d:'docker run milvusdb/milvus — vector DB para memsearch', tag:'infraestrutura', time:'pendente'},
-    {ag:'MCP Builder',       n:'Instalar basic-memory',    d:'uvx basic-memory mcp — memória persistente Claude Code', tag:'memoria', time:'pendente'},
-    {ag:'Backend Architect', n:'Langfuse self-hosted',     d:'Docker Compose Langfuse para tracing dos 146 agentes', tag:'observabilidade', time:'pendente'},
-    {ag:'Project Shepherd',  n:'Mission Control backend',  d:'builderz-labs/mission-control após Docker funcionar', tag:'infra', time:'pendente'},
+    {ag:'DevOps Automator',  n:'Docker NeMo Guardrails',   d:'Dockerfile + docker-compose para agente CNPJ com NeMo policies YAML', tag:'seguranca', time:'pendente'},
+    {ag:'AI Engineer',       n:'Fish Speech Docker',       d:'docker run fishaudio/fish-speech para voice cloning PT-BR quando necessário', tag:'voz', time:'pendente'},
+    {ag:'MCP Builder',       n:'Tavily MCP server',        d:'Configurar MCP Tavily no Claude Code para pesquisa normativa on-demand', tag:'pesquisa', time:'pendente'},
+    {ag:'DevOps Automator',  n:'Langfuse self-hosted',     d:'Docker Compose Langfuse para tracing dos agentes AUDIZ', tag:'observabilidade', time:'pendente'},
     {ag:'AI Engineer',       n:'Groq / Cerebras fallback', d:'Configurar chain: Gemini → Groq → Cerebras → DeepSeek', tag:'ia', time:'pendente'},
+    {ag:'Backend Architect', n:'kokoro_notify → Audiz',    d:'Integrar kokoro_notify.py nos agentes Audiz para alertas automáticos por voz', tag:'voz', time:'pendente'},
   ]
 };
 
@@ -829,13 +899,363 @@ async function fetchDashboard() {
   }
 }
 
-/* Atualiza a cada 60s (útil quando servido via http-server) */
+/* ── REFRESH SYSTEM ── */
+let autoRefreshTimer = null;
+const AUTO_REFRESH_INTERVAL = 10 * 60 * 1000; /* 10 minutos */
+
+function manualRefresh() {
+  const btn = document.getElementById('btn-refresh');
+  btn.classList.add('spinning');
+  btn.disabled = true;
+  fetchDashboard().finally(() => {
+    /* Re-renderiza dados estáticos atualizados */
+    document.getElementById('live-sys').innerHTML = '';
+    renderFeed(); renderLive(); renderKanban(); renderTasks();
+    btn.classList.remove('spinning');
+    btn.disabled = false;
+    /* Atualiza label com horário */
+    const n = new Date();
+    const hm = `${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}`;
+    document.getElementById('refresh-label').textContent = `últ. ${hm}`;
+  });
+}
+
+function toggleAutoRefresh(on) {
+  const lbl = document.getElementById('refresh-label');
+  if (on) {
+    autoRefreshTimer = setInterval(manualRefresh, AUTO_REFRESH_INTERVAL);
+    lbl.textContent = 'a cada 10 min';
+  } else {
+    clearInterval(autoRefreshTimer);
+    autoRefreshTimer = null;
+    lbl.textContent = 'desligado';
+  }
+}
+
+/* Atualiza 1x ao carregar (útil quando servido via http-server) */
 fetchDashboard();
-setInterval(fetchDashboard, 60000);
 
 /* ── INIT ── */
 renderSectors(); renderSysMini(); renderLive(); renderFeed(); renderTasks();
 renderKanban(); renderOrg();
+
+/* ═══════════════════════════════════════════════════
+   ESCRITÓRIO — Grafo D3.js + Pixel Agents
+════════════════════════════════════════════════════*/
+
+/* Cores por setor */
+const SEC_COLORS = {
+  engineering:'#7B2D3E', marketing:'#9B3A4E', design:'#C8962A',
+  sales:'#5C1F2E',       auditoria:'#4E1A27', specialized:'#8B3545',
+  testing:'#7B2D3E',     product:'#C8962A',   projectmgmt:'#6B2535',
+  support:'#9B3A4E',     strategy:'#3D1520',  orchestration:'#9B3A4E',
+};
+
+/* Tarefas sample para speech bubbles */
+const SAMPLE_TASKS = [
+  'Analisando NBC TA 315...','Cruzando saldos ECD...','Gerando relatório PDF...',
+  'Verificando CNPJ...','Revisando achados...','Executando teste B-03...',
+  'Indexando documentos...','Enviando notificação Telegram...','Sincronizando vault...',
+  'Calculando materialidade...','Emitindo COM-08...','Validando assinaturas...',
+  'Processando SPED ECD...','Pesquisando Portaria SPA/MF...','Checando prazos...',
+  'Gerando WP F-01...','Analisando risco alto...','Circularizando terceiros...',
+  'Compilando achados...','Aprovando EQCR...','Treinando modelo local...',
+  'Monitorando n8n...','Atualizando dashboard...',
+];
+
+/* Pixel art renderer — desenha personagem 8x8 em canvas, retorna dataURL */
+function makePixelSprite(color, role) {
+  const c = document.createElement('canvas');
+  c.width = 16; c.height = 22;
+  const ctx = c.getContext('2d');
+  const h = color; /* cor principal */
+  const s = '#FAF7F4'; /* pele */
+  const d = '#1A0A12'; /* escuro */
+
+  /* Mapa de pixels — corpo simples (cols 0-15, rows 0-21) */
+  /* Cabeça */
+  const head = [
+    [0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0],
+    [0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0],
+    [0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0],
+    [0,0,1,1,0,0,1,1,1,0,0,1,1,0,0,0],
+    [0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0],
+    [0,0,0,1,1,0,1,1,0,1,1,1,0,0,0,0],
+  ];
+  /* Corpo */
+  const body = [
+    [0,0,0,2,2,2,2,2,2,2,2,2,0,0,0,0],
+    [0,0,2,2,2,2,2,2,2,2,2,2,2,0,0,0],
+    [0,0,2,2,2,2,2,2,2,2,2,2,2,0,0,0],
+    [0,0,2,2,2,2,2,2,2,2,2,2,2,0,0,0],
+    [0,0,2,2,2,2,2,2,2,2,2,2,2,0,0,0],
+    [0,0,2,2,2,2,2,2,2,2,2,2,2,0,0,0],
+    [0,0,0,2,2,2,2,2,2,2,2,2,0,0,0,0],
+    [0,0,0,2,2,0,0,0,0,0,2,2,0,0,0,0],
+    [0,0,0,2,2,0,0,0,0,0,2,2,0,0,0,0],
+    [0,0,0,2,2,0,0,0,0,0,2,2,0,0,0,0],
+    [0,0,0,2,2,0,0,0,0,0,2,2,0,0,0,0],
+    [0,0,0,2,0,0,0,0,0,0,0,2,0,0,0,0],
+  ];
+  const palette = { 0:null, 1:s, 2:h, 3:d };
+  const rows = [...head, ...body];
+  rows.forEach((row, y) => {
+    row.forEach((v, x) => {
+      if (!v) return;
+      ctx.fillStyle = palette[v] || h;
+      ctx.fillRect(x, y, 1, 1);
+    });
+  });
+  return c.toDataURL();
+}
+
+/* Cache de sprites por cor */
+const spriteCache = {};
+function getSprite(color) {
+  if (!spriteCache[color]) spriteCache[color] = makePixelSprite(color);
+  return spriteCache[color];
+}
+
+/* Constrói nós e arestas a partir de SECTORS */
+function buildGraphData() {
+  const nodes = [], links = [];
+  /* Nó central */
+  nodes.push({ id:'AUDIPER', label:'AUDIPER®', sector:'strategy', color:'#4E1A27', r:22, hub:true, task:'Firma auditoria independente · 40 anos' });
+
+  SECTORS.forEach(sec => {
+    /* Nó de setor (hub) */
+    const hubId = 'hub_'+sec.id;
+    nodes.push({ id:hubId, label:sec.name, sector:sec.id, color:SEC_COLORS[sec.id]||'#7B2D3E', r:14, hub:true, task:sec.desc });
+    links.push({ source:'AUDIPER', target:hubId, strength:0.6 });
+
+    /* Agentes do setor (amostra — máx 5 por setor para não sobrecarregar) */
+    const sample = sec.agents.slice(0, Math.min(5, sec.agents.length));
+    sample.forEach(ag => {
+      const agId = sec.id+'_'+ag.id;
+      const task = SAMPLE_TASKS[Math.floor(Math.random()*SAMPLE_TASKS.length)];
+      nodes.push({ id:agId, label:ag.n, role:ag.r, sector:sec.id, color:SEC_COLORS[sec.id]||'#7B2D3E', r:7, hub:false, task });
+      links.push({ source:hubId, target:agId, strength:0.4 });
+    });
+  });
+
+  /* Conexões cruzadas (colaboração entre setores-chave) */
+  const cross = [
+    ['hub_auditoria','hub_specialized'],['hub_auditoria','hub_testing'],
+    ['hub_engineering','hub_auditoria'],['hub_orchestration','hub_auditoria'],
+    ['hub_orchestration','hub_engineering'],['hub_strategy','hub_auditoria'],
+    ['hub_marketing','hub_design'],['hub_sales','hub_strategy'],
+  ];
+  cross.forEach(([s,t]) => links.push({ source:s, target:t, strength:0.15, cross:true }));
+
+  return { nodes, links };
+}
+
+let escInitialized = false, demoInterval = null, demoRunning = false;
+let svgSel, simulation, zoomBeh;
+
+function initEscritorio() {
+  if (escInitialized) return;
+  escInitialized = true;
+
+  /* Carrega D3 dinamicamente */
+  const script = document.createElement('script');
+  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js';
+  script.onload = buildEscritorio;
+  document.head.appendChild(script);
+}
+
+function buildEscritorio() {
+  const { nodes, links } = buildGraphData();
+  const container = document.getElementById('pane-escritorio');
+  const W = container.clientWidth, H = container.clientHeight;
+  const svg = d3.select('#esc-svg').attr('viewBox', `0 0 ${W} ${H}`);
+  svg.selectAll('*').remove();
+
+  /* Zoom */
+  zoomBeh = d3.zoom().scaleExtent([0.3,3]).on('zoom', e => g.attr('transform', e.transform));
+  svg.call(zoomBeh);
+
+  const g = svg.append('g');
+
+  /* Gradiente radial de fundo */
+  const defs = svg.append('defs');
+  const rg = defs.append('radialGradient').attr('id','esc-bg-grad').attr('cx','50%').attr('cy','50%').attr('r','60%');
+  rg.append('stop').attr('offset','0%').attr('stop-color','rgba(123,45,62,0.04)');
+  rg.append('stop').attr('offset','100%').attr('stop-color','rgba(200,150,42,0.02)');
+  svg.insert('rect','g').attr('width',W).attr('height',H).attr('fill','url(#esc-bg-grad)');
+
+  /* Pattern de grid pontilhado */
+  const pat = defs.append('pattern').attr('id','dot-grid').attr('width',24).attr('height',24).attr('patternUnits','userSpaceOnUse');
+  pat.append('circle').attr('cx',12).attr('cy',12).attr('r',1).attr('fill','rgba(123,45,62,0.12)');
+  svg.insert('rect','g').attr('width',W).attr('height',H).attr('fill','url(#dot-grid)');
+
+  /* Simulação force */
+  simulation = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(links).id(d=>d.id).distance(d => d.cross ? 160 : d.source.hub&&d.target.hub ? 90 : 55).strength(d=>d.strength))
+    .force('charge', d3.forceManyBody().strength(d => d.hub ? -350 : -80))
+    .force('center', d3.forceCenter(W/2, H/2))
+    .force('collision', d3.forceCollide().radius(d => d.r+10))
+    .alphaDecay(0.02);
+
+  /* Arestas */
+  const link = g.append('g').selectAll('line').data(links).enter().append('line')
+    .attr('stroke', d => d.cross ? 'rgba(200,150,42,0.25)' : 'rgba(123,45,62,0.18)')
+    .attr('stroke-width', d => d.cross ? 1 : d.source.hub&&d.target.hub ? 1.5 : 0.8)
+    .attr('stroke-dasharray', d => d.cross ? '4,4' : null);
+
+  /* Partículas de dados nas arestas (animadas) */
+  const particles = g.append('g').selectAll('circle.particle').data(links.filter(l=>!l.cross)).enter()
+    .append('circle').attr('class','particle').attr('r',2)
+    .attr('fill',d => SEC_COLORS[d.target.sector]||'#C8962A').attr('opacity',0.7);
+
+  /* Nós — grupo */
+  const node = g.append('g').selectAll('g.node').data(nodes).enter().append('g')
+    .attr('class','node').style('cursor','pointer')
+    .call(d3.drag()
+      .on('start', (e,d) => { if(!e.active) simulation.alphaTarget(0.3).restart(); d.fx=d.x; d.fy=d.y; })
+      .on('drag',  (e,d) => { d.fx=e.x; d.fy=e.y; })
+      .on('end',   (e,d) => { if(!e.active) simulation.alphaTarget(0); d.fx=null; d.fy=null; })
+    );
+
+  /* Círculo de fundo (glow) para hubs */
+  node.filter(d=>d.hub).append('circle')
+    .attr('r', d=>d.r+6).attr('fill',d=>d.color).attr('opacity',0.12);
+
+  /* Círculo principal */
+  node.append('circle')
+    .attr('r', d=>d.r)
+    .attr('fill', d => d.hub ? d.color : '#FAF7F4')
+    .attr('stroke', d=>d.color)
+    .attr('stroke-width', d => d.hub ? 0 : 2)
+    .attr('filter', d => d.hub ? 'drop-shadow(0 2px 6px rgba(78,26,39,0.4))' : null);
+
+  /* Pixel sprite para agentes (não-hubs) */
+  node.filter(d=>!d.hub).each(function(d) {
+    const img = defs.append('pattern')
+      .attr('id','spr_'+d.id.replace(/[^a-z0-9]/gi,'_'))
+      .attr('width',1).attr('height',1)
+      .attr('patternContentUnits','objectBoundingBox');
+    img.append('image')
+      .attr('href', getSprite(d.color))
+      .attr('width',1).attr('height',1)
+      .attr('preserveAspectRatio','xMidYMid meet');
+    d3.select(this).append('circle')
+      .attr('r',6).attr('fill','url(#spr_'+d.id.replace(/[^a-z0-9]/gi,'_')+')')
+      .attr('stroke',d.color).attr('stroke-width',1.5);
+  });
+
+  /* Label para hubs */
+  node.filter(d=>d.hub).append('text')
+    .text(d => d.id==='AUDIPER' ? '®' : d.label.substring(0,6))
+    .attr('text-anchor','middle').attr('dy','0.35em')
+    .attr('font-family','Nunito,sans-serif').attr('font-weight','800')
+    .attr('font-size', d => d.id==='AUDIPER' ? 9 : 7)
+    .attr('fill','#fff').attr('pointer-events','none');
+
+  /* Speech bubble — aparece ao hover/demo */
+  const bubble = node.append('g').attr('class','bubble').attr('opacity',0)
+    .attr('transform','translate(0,-20)');
+  bubble.append('rect').attr('x',-50).attr('y',-22).attr('width',100).attr('height',18)
+    .attr('rx',5).attr('fill','var(--white)').attr('stroke','var(--border)').attr('stroke-width',1)
+    .attr('filter','drop-shadow(0 1px 4px rgba(78,26,39,0.15))');
+  bubble.append('polygon').attr('points','0,0 -4,-4 4,-4').attr('fill','var(--white)');
+  bubble.append('text').attr('class','bubble-txt').attr('y',-11).attr('text-anchor','middle')
+    .attr('font-family','Nunito Sans,sans-serif').attr('font-size',7).attr('fill','var(--ink)')
+    .text(d => d.task ? d.task.substring(0,18)+'…' : '');
+
+  /* Tooltip hover */
+  node.on('mouseenter', function(e, d) {
+    const tt = document.getElementById('esc-tooltip');
+    document.getElementById('tt-name').textContent = d.label;
+    document.getElementById('tt-role').textContent = (d.role||d.sector||'').toUpperCase();
+    document.getElementById('tt-task').textContent = d.task||'';
+    tt.style.display = 'block';
+    d3.select(this).select('.bubble').transition().duration(200).attr('opacity',1);
+  }).on('mousemove', function(e) {
+    const rect = document.getElementById('pane-escritorio').getBoundingClientRect();
+    const tt = document.getElementById('esc-tooltip');
+    let x = e.clientX - rect.left + 14, y = e.clientY - rect.top - 10;
+    if (x + 230 > rect.width) x = e.clientX - rect.left - 234;
+    tt.style.left = x+'px'; tt.style.top = y+'px';
+  }).on('mouseleave', function(e, d) {
+    document.getElementById('esc-tooltip').style.display = 'none';
+    if (!demoRunning) d3.select(this).select('.bubble').transition().duration(300).attr('opacity',0);
+  });
+
+  /* Animação tick */
+  let t = 0;
+  simulation.on('tick', () => {
+    t++;
+    link.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y)
+        .attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
+    node.attr('transform', d=>`translate(${d.x},${d.y})`);
+
+    /* Partículas percorrem as arestas */
+    particles.attr('cx', function(d,i) {
+      const progress = ((t*0.008 + i*0.13) % 1);
+      return d.source.x + (d.target.x - d.source.x) * progress;
+    }).attr('cy', function(d,i) {
+      const progress = ((t*0.008 + i*0.13) % 1);
+      return d.source.y + (d.target.y - d.source.y) * progress;
+    });
+
+    /* Animação de pulo nos agentes ativos */
+    node.filter(d=>d.active).attr('transform', d=>`translate(${d.x},${d.y - Math.abs(Math.sin(t*0.08))*4})`);
+  });
+
+  /* Legenda */
+  const leg = document.getElementById('esc-legend');
+  leg.innerHTML = Object.entries(SEC_COLORS).slice(0,6).map(([k,v]) =>
+    `<div style="display:flex;align-items:center;gap:4px;background:var(--white);border:1px solid var(--border);
+      border-radius:12px;padding:3px 8px;font-family:var(--m);font-size:8px;color:var(--ink-dim);">
+      <span style="width:7px;height:7px;border-radius:50%;background:${v};display:inline-block;flex-shrink:0;"></span>
+      ${ROLE_LABELS[k]||k}
+    </div>`).join('');
+
+  /* Guarda referências globais para demo e reset */
+  window._escSvg = svg; window._escSim = simulation; window._escNodes = nodes;
+  window._escNodeSel = node;
+}
+
+/* Modo demo: ativa speech bubbles aleatoriamente */
+function toggleDemo() {
+  demoRunning = !demoRunning;
+  const btn = document.getElementById('btn-demo');
+  btn.style.background = demoRunning ? 'var(--green)' : 'var(--wine)';
+  btn.textContent = demoRunning ? 'PARAR' : 'DEMO';
+
+  if (demoRunning) {
+    const nodes = window._escNodes || [];
+    const leafs = nodes.filter(n=>!n.hub);
+    let idx = 0;
+    demoInterval = setInterval(() => {
+      const n = leafs[idx % leafs.length]; idx++;
+      /* Marca ativo */
+      nodes.forEach(nd=>nd.active=false);
+      n.active = true;
+      /* Atualiza task com sample */
+      n.task = SAMPLE_TASKS[Math.floor(Math.random()*SAMPLE_TASKS.length)];
+      /* Mostra bubble */
+      if (window._escNodeSel) {
+        window._escNodeSel.select('.bubble').attr('opacity',0);
+        window._escNodeSel.filter(d=>d.id===n.id)
+          .select('.bubble').attr('opacity',1)
+          .select('.bubble-txt').text(n.task.substring(0,18)+'…');
+        /* Info bar */
+        document.getElementById('esc-info').textContent = `${n.label} — ${n.task}`;
+      }
+    }, 1200);
+  } else {
+    clearInterval(demoInterval);
+    if (window._escNodeSel) window._escNodeSel.select('.bubble').attr('opacity',0);
+    document.getElementById('esc-info').textContent = '146 agentes · 12 setores · arraste para explorar';
+  }
+}
+
+function resetZoom() {
+  if (window._escSvg && zoomBeh)
+    window._escSvg.transition().duration(500).call(zoomBeh.transform, d3.zoomIdentity);
+}
 </script>
 </body>
 </html>
