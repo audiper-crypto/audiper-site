@@ -377,17 +377,17 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 
 <!-- TABS -->
 <div id="tabs">
-  <div class="tab active" onclick="showTab('setores')">Setores</div>
+  <div class="tab" onclick="showTab('setores')">Setores</div>
   <div class="tab" onclick="showTab('tarefas')">Tarefas</div>
   <div class="tab" onclick="showTab('organograma')">Organograma</div>
-  <div class="tab" onclick="showTab('escritorio'); initEscritorio()">Escritório</div>
+  <div class="tab active" onclick="showTab('escritorio'); initEscritorio()">Escritório</div>
 </div>
 
 <!-- MAIN -->
 <main id="main">
 
   <!-- SETORES TAB -->
-  <div class="tab-pane active" id="pane-setores">
+  <div class="tab-pane" id="pane-setores">
     <div class="sec-hd"><div class="sec-hd-l"></div><div class="sec-hd-t">Setores Operacionais</div><div class="sec-hd-l"></div></div>
     <div class="sector-grid" id="sector-grid"></div>
     <div class="sec-hd" style="margin-top:4px"><div class="sec-hd-l"></div><div class="sec-hd-t">Infraestrutura & Stack</div><div class="sec-hd-l"></div></div>
@@ -407,7 +407,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   </div>
 
   <!-- ESCRITÓRIO TAB -->
-  <div class="tab-pane" id="pane-escritorio" style="height:calc(100vh - 222px);padding:0;position:relative;overflow:hidden;">
+  <div class="tab-pane active" id="pane-escritorio" style="height:calc(100vh - 222px);padding:0;position:relative;overflow:hidden;">
     <!-- Controles -->
     <div id="esc-controls" style="position:absolute;top:12px;left:16px;z-index:10;display:flex;gap:8px;align-items:center;">
       <button onclick="toggleDemo()" id="btn-demo" style="font-family:var(--m);font-size:9px;padding:6px 14px;border-radius:6px;background:var(--wine);color:#fff;border:none;cursor:pointer;letter-spacing:.1em;">DEMO</button>
@@ -419,13 +419,27 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
     </div>
     <!-- SVG grafo -->
     <svg id="esc-svg" style="width:100%;height:100%;background:var(--cream)"></svg>
-    <!-- Tooltip -->
+    <!-- Tooltip hover -->
     <div id="esc-tooltip" style="position:absolute;display:none;pointer-events:none;
       background:var(--white);border:1.5px solid var(--border);border-radius:10px;
       padding:10px 14px;box-shadow:var(--shadow-md);max-width:220px;z-index:20;">
       <div id="tt-name" style="font-family:var(--r);font-size:13px;font-weight:700;color:var(--wine);margin-bottom:2px;"></div>
       <div id="tt-role" style="font-family:var(--m);font-size:9px;color:var(--ink-dim);letter-spacing:.08em;margin-bottom:6px;"></div>
       <div id="tt-task" style="font-family:var(--s);font-size:11px;color:var(--ink);line-height:1.4;"></div>
+    </div>
+    <!-- Painel lateral de detalhe (click em nó) -->
+    <div id="esc-panel" style="position:absolute;top:0;right:0;bottom:0;width:280px;
+      background:var(--white);border-left:1.5px solid var(--border);
+      transform:translateX(100%);transition:transform .3s;z-index:15;overflow-y:auto;display:flex;flex-direction:column;">
+      <div style="padding:16px 16px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;">
+        <div id="pan-dot" style="width:10px;height:10px;border-radius:50%;background:var(--wine);flex-shrink:0;"></div>
+        <div style="flex:1;">
+          <div id="pan-name" style="font-family:var(--r);font-size:14px;font-weight:700;color:var(--wine);"></div>
+          <div id="pan-role" style="font-family:var(--m);font-size:8.5px;color:var(--ink-dim);letter-spacing:.1em;margin-top:1px;"></div>
+        </div>
+        <button onclick="closePanel()" style="background:none;border:none;cursor:pointer;font-size:16px;color:var(--ink-dim);padding:0 4px;">✕</button>
+      </div>
+      <div id="pan-body" style="padding:14px 16px;flex:1;font-family:var(--s);font-size:12px;color:var(--ink);line-height:1.6;"></div>
     </div>
   </div>
 
@@ -938,6 +952,8 @@ fetchDashboard();
 /* ── INIT ── */
 renderSectors(); renderSysMini(); renderLive(); renderFeed(); renderTasks();
 renderKanban(); renderOrg();
+/* Escritório é a aba padrão — inicializa automaticamente */
+setTimeout(initEscritorio, 100);
 
 /* ═══════════════════════════════════════════════════
    ESCRITÓRIO — Grafo D3.js + Pixel Agents
@@ -1016,38 +1032,94 @@ function getSprite(color) {
   return spriteCache[color];
 }
 
-/* Constrói nós e arestas a partir de SECTORS */
+/* Auditorias ativas — dados reais */
+const AUDITORIAS = [
+  { id:'oig',       label:'OIG Gaming',       fase:'Execução Avançada', docs:41,  color:'#C8962A', status:'exec',    detail:'Lei 14.790/2023 · iGaming · 41 docs · COM-08 entregue' },
+  { id:'unimed',    label:'Unimed Floriano',   fase:'Execução',          docs:33,  color:'#16a34a', status:'exec',    detail:'ANS · NBC TA 315/330 · 33 docs · Bloco H em andamento' },
+  { id:'japan',     label:'Japan Veículos',    fase:'Execução',          docs:20,  color:'#1d4ed8', status:'exec',    detail:'CPC 16/27 · DuckDB · 6 testes substantivos completos' },
+  { id:'viaparis',  label:'Via Paris',         fase:'Entregue (G)',      docs:17,  color:'#7B2D3E', status:'done',    detail:'Fase G concluída · 13 achados confirmados · COM-09 emitida' },
+  { id:'shanghai',  label:'Via Shanghai',      fase:'Entregue (G)',      docs:16,  color:'#7B2D3E', status:'done',    detail:'Fase G concluída · EQCR aprovado · Relatório emitido' },
+  { id:'fapec',     label:'FAPEC',             fase:'Planejamento',      docs:23,  color:'#9B3A4E', status:'plan',    detail:'Terceiro setor · ITG 2002 · Fase B em planejamento' },
+  { id:'danilo',    label:'Fund. Danilo',      fase:'Fase Inicial',      docs:9,   color:'#9B3A4E', status:'plan',    detail:'Fundação · Fase A em andamento · 9 docs iniciais' },
+  { id:'megalink',  label:'Megalink Telecom',  fase:'Início (A)',         docs:0,   color:'#5C1F2E', status:'plan',    detail:'R$ 35k · ANATEL · Fase A iniciando · FUST/FUNTTEL' },
+  { id:'caritas',   label:'Cáritas Teresina',  fase:'Proposta',          docs:2,   color:'#6B2535', status:'prop',    detail:'OSCIP · Lei 9.790/1999 · Proposta enviada · Aguardando aceite' },
+];
+
+const STATUS_COLORS = { exec:'#16a34a', done:'#7B2D3E', plan:'#C8962A', prop:'#9B3A4E' };
+
+/* Constrói nós e arestas a partir de SECTORS + AUDITORIAS */
 function buildGraphData() {
   const nodes = [], links = [];
-  /* Nó central */
-  nodes.push({ id:'AUDIPER', label:'AUDIPER®', sector:'strategy', color:'#4E1A27', r:22, hub:true, task:'Firma auditoria independente · 40 anos' });
 
+  /* Nó central AUDIPER */
+  nodes.push({ id:'AUDIPER', label:'AUDIPER®', sector:'strategy', color:'#4E1A27', r:24, hub:true,
+    task:'Firma auditoria independente · 40 anos',
+    detail:'<b>AUDIPER® Auditores Independentes</b><br>40 anos de atuação · NBC TAs · 9 clientes ativos · 146 agentes IA' });
+
+  /* Hub de Clientes */
+  nodes.push({ id:'hub_clientes', label:'Clientes', sector:'auditoria', color:'#C8962A', r:16, hub:true,
+    task:'9 auditorias · 3 em execução',
+    detail:'<b>Portfólio Ativo</b><br>3 em execução · 2 entregues · 3 planejamento · 1 proposta' });
+  links.push({ source:'AUDIPER', target:'hub_clientes', strength:0.7 });
+
+  /* Nós de auditoria */
+  AUDITORIAS.forEach(a => {
+    nodes.push({ id:'cli_'+a.id, label:a.label, sector:'auditoria', color:STATUS_COLORS[a.status]||'#7B2D3E',
+      r:11, hub:false, client:true, fase:a.fase, docs:a.docs, status:a.status, task:a.fase+' · '+a.docs+' docs',
+      detail:`<b>${a.label}</b><br><span style="font-size:10px;color:var(--ink-dim)">${a.fase} · ${a.docs} docs</span><br><br>${a.detail}` });
+    links.push({ source:'hub_clientes', target:'cli_'+a.id, strength:0.5 });
+  });
+
+  /* Hubs de setor + agentes */
   SECTORS.forEach(sec => {
-    /* Nó de setor (hub) */
     const hubId = 'hub_'+sec.id;
-    nodes.push({ id:hubId, label:sec.name, sector:sec.id, color:SEC_COLORS[sec.id]||'#7B2D3E', r:14, hub:true, task:sec.desc });
-    links.push({ source:'AUDIPER', target:hubId, strength:0.6 });
+    nodes.push({ id:hubId, label:sec.name, sector:sec.id, color:SEC_COLORS[sec.id]||'#7B2D3E', r:14, hub:true,
+      task:sec.desc, detail:`<b>${sec.name}</b><br>${sec.agents.length} agentes<br><br>${sec.desc}` });
+    links.push({ source:'AUDIPER', target:hubId, strength:0.55 });
 
-    /* Agentes do setor (amostra — máx 5 por setor para não sobrecarregar) */
-    const sample = sec.agents.slice(0, Math.min(5, sec.agents.length));
+    const sample = sec.agents.slice(0, Math.min(4, sec.agents.length));
     sample.forEach(ag => {
       const agId = sec.id+'_'+ag.id;
       const task = SAMPLE_TASKS[Math.floor(Math.random()*SAMPLE_TASKS.length)];
-      nodes.push({ id:agId, label:ag.n, role:ag.r, sector:sec.id, color:SEC_COLORS[sec.id]||'#7B2D3E', r:7, hub:false, task });
+      nodes.push({ id:agId, label:ag.n, role:ag.r, sector:sec.id, color:SEC_COLORS[sec.id]||'#7B2D3E', r:7, hub:false,
+        task, detail:`<b>${ag.n}</b><br><span style="font-size:10px;color:var(--ink-dim)">${ag.r}</span><br><br>${task}` });
       links.push({ source:hubId, target:agId, strength:0.4 });
     });
   });
 
-  /* Conexões cruzadas (colaboração entre setores-chave) */
+  /* Conexões cruzadas setores */
   const cross = [
     ['hub_auditoria','hub_specialized'],['hub_auditoria','hub_testing'],
     ['hub_engineering','hub_auditoria'],['hub_orchestration','hub_auditoria'],
     ['hub_orchestration','hub_engineering'],['hub_strategy','hub_auditoria'],
     ['hub_marketing','hub_design'],['hub_sales','hub_strategy'],
+    ['hub_clientes','hub_auditoria'],['hub_clientes','hub_specialized'],
   ];
-  cross.forEach(([s,t]) => links.push({ source:s, target:t, strength:0.15, cross:true }));
+  cross.forEach(([s,t]) => links.push({ source:s, target:t, strength:0.12, cross:true }));
 
   return { nodes, links };
+}
+
+/* Painel lateral */
+function openPanel(d) {
+  const panel = document.getElementById('esc-panel');
+  document.getElementById('pan-name').textContent = d.label || d.id;
+  document.getElementById('pan-role').textContent = (d.role||d.sector||d.fase||'').toUpperCase();
+  document.getElementById('pan-dot').style.background = d.color||'var(--wine)';
+  let body = d.detail || d.task || '';
+  if (d.client) {
+    const smap = {exec:'Em Execução',done:'Entregue',plan:'Planejamento',prop:'Proposta'};
+    const scol = {exec:'var(--green)',done:'var(--wine)',plan:'var(--gold)',prop:'#9B3A4E'};
+    body += `<br><br><span style="display:inline-block;padding:3px 10px;border-radius:12px;
+      background:${scol[d.status]||'var(--wine)'};color:#fff;font-size:10px;font-family:var(--m)">
+      ${smap[d.status]||d.status}</span>
+      <br><br><b>${d.docs}</b> documentos indexados`;
+  }
+  document.getElementById('pan-body').innerHTML = body;
+  panel.style.transform = 'translateX(0)';
+}
+function closePanel() {
+  document.getElementById('esc-panel').style.transform = 'translateX(100%)';
 }
 
 let escInitialized = false, demoInterval = null, demoRunning = false;
@@ -1163,14 +1235,20 @@ function buildEscritorio() {
     .attr('font-family','Nunito Sans,sans-serif').attr('font-size',7).attr('fill','var(--ink)')
     .text(d => d.task ? d.task.substring(0,18)+'…' : '');
 
-  /* Tooltip hover */
-  node.on('mouseenter', function(e, d) {
+  /* Tooltip hover + click painel */
+  node.on('click', function(e, d) {
+    e.stopPropagation();
+    openPanel(d);
+    /* Destaca nó clicado */
+    node.selectAll('circle:first-of-type').attr('stroke-width', nd => nd.id===d.id ? 3 : (nd.hub ? 0 : 2));
+  }).on('mouseenter', function(e, d) {
     const tt = document.getElementById('esc-tooltip');
     document.getElementById('tt-name').textContent = d.label;
-    document.getElementById('tt-role').textContent = (d.role||d.sector||'').toUpperCase();
+    document.getElementById('tt-role').textContent = (d.role||d.sector||d.fase||'').toUpperCase();
     document.getElementById('tt-task').textContent = d.task||'';
     tt.style.display = 'block';
     d3.select(this).select('.bubble').transition().duration(200).attr('opacity',1);
+    d3.select(this).select('circle').transition().duration(150).attr('r', d.r * 1.25);
   }).on('mousemove', function(e) {
     const rect = document.getElementById('pane-escritorio').getBoundingClientRect();
     const tt = document.getElementById('esc-tooltip');
@@ -1180,7 +1258,10 @@ function buildEscritorio() {
   }).on('mouseleave', function(e, d) {
     document.getElementById('esc-tooltip').style.display = 'none';
     if (!demoRunning) d3.select(this).select('.bubble').transition().duration(300).attr('opacity',0);
+    d3.select(this).select('circle').transition().duration(150).attr('r', d.r);
   });
+  /* Fechar painel ao clicar no fundo */
+  d3.select('#esc-svg').on('click', closePanel);
 
   /* Animação tick */
   let t = 0;
