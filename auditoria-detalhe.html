@@ -127,6 +127,14 @@
         <div id="docs-container"></div>
       </div>
 
+      <!-- Governanca do Cliente -->
+      <div class="card" id="governanca-card">
+        <div class="card-title">Governanca e Contatos</div>
+        <div id="governanca-container" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="font-size:12px;color:var(--muted);">Carregando...</div>
+        </div>
+      </div>
+
       <!-- Achados -->
       <div class="card" id="achados-card" style="display:none;">
         <div class="card-title">Achados de Auditoria</div>
@@ -227,6 +235,7 @@ function renderPainel(d) {
   renderTimelineFases(d.fases, aud.fase_atual, aud.status);
   renderPtasGrid(d.fases);
   renderEmails(d.documentos);
+  renderGovernanca(cli);
 
   // KPIs
   document.getElementById('kpis').innerHTML = [
@@ -349,6 +358,64 @@ function renderPainel(d) {
       <span class="timeline-time">${date} ${time}</span>
     </div>`;
   }).join('') || '<div style="color:var(--muted);font-size:12px;">Nenhuma atividade registrada</div>';
+}
+
+function renderGovernanca(cli) {
+  const el = document.getElementById('governanca-container');
+  if (!el || !cli) return;
+  const qsa = cli.qsa || {};
+  const socios = qsa.socios || [];
+  const contador = qsa.contador || {};
+  const obs = qsa.observacoes || '';
+
+  const cardStyle = 'padding:12px;border:1px solid var(--border);border-radius:8px;background:#FAFAFA;';
+  const labelStyle = 'font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;';
+  const nameStyle = 'font-size:13px;font-weight:600;color:var(--text);';
+  const subStyle = 'font-size:11px;color:var(--muted);margin-top:2px;';
+
+  let html = '';
+
+  // Socios
+  html += `<div style="${cardStyle}">
+    <div style="${labelStyle}">Quadro Societario (QSA)</div>
+    ${socios.length > 0 ? socios.map(s => `
+      <div style="display:flex;align-items:center;gap:8px;padding:6px 0;${socios.indexOf(s) < socios.length-1 ? 'border-bottom:1px solid var(--border);':''}">
+        <div style="width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;">${(s.nome||'?').charAt(0)}</div>
+        <div>
+          <div style="${nameStyle}">${s.nome || 'A identificar'}</div>
+          <div style="${subStyle}">${s.qualificacao || 'Socio'}${s.capital_pct ? ' — '+s.capital_pct+'%' : ''}</div>
+        </div>
+      </div>
+    `).join('') : '<div style="'+subStyle+'">Nao informado</div>'}
+  </div>`;
+
+  // Contador
+  html += `<div style="${cardStyle}">
+    <div style="${labelStyle}">Equipe Contabil</div>
+    <div style="display:flex;align-items:center;gap:8px;padding:6px 0;">
+      <div style="width:30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;">${(contador.nome||'?').charAt(0)}</div>
+      <div>
+        <div style="${nameStyle}">${contador.nome || 'A identificar'}</div>
+        <div style="${subStyle}">Contador${contador.crc ? ' — CRC '+contador.crc : ''}</div>
+      </div>
+    </div>
+    <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">
+      <div style="${labelStyle}">Contatos do Cliente</div>
+      ${cli.email ? '<div style="'+subStyle+'">'+cli.email+'</div>' : ''}
+      ${cli.telefone ? '<div style="'+subStyle+'">'+cli.telefone+'</div>' : ''}
+      ${!cli.email && !cli.telefone ? '<div style="'+subStyle+'">Nao informado</div>' : ''}
+    </div>
+  </div>`;
+
+  // Observacoes (se houver)
+  if (obs) {
+    html += `<div style="${cardStyle} grid-column:1/-1;">
+      <div style="${labelStyle}">Observacoes</div>
+      <div style="font-size:12px;color:var(--text);line-height:1.5;">${obs}</div>
+    </div>`;
+  }
+
+  el.innerHTML = html;
 }
 
 function renderEmails(docs) {
