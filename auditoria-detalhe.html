@@ -97,6 +97,19 @@
     <div id="timeline-fases" style="display:flex;align-items:center;gap:0;overflow-x:auto;padding:4px 0;"></div>
   </div>
 
+  <!-- Central de Dados do Cliente -->
+  <div class="card" style="padding:16px 20px;margin-bottom:16px;" id="central-cliente">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+      <span class="card-title" style="margin:0;">Central do Cliente</span>
+      <span style="font-size:11px;color:var(--muted);" id="central-total-emails">0 emails</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;" id="central-contatos"></div>
+    <div style="margin-top:12px;border-top:1px solid var(--border);padding-top:10px;">
+      <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">Ultimos Emails</div>
+      <div id="central-emails" style="display:flex;flex-direction:column;gap:6px;max-height:200px;overflow-y:auto;"></div>
+    </div>
+  </div>
+
   <div class="grid">
     <div class="left-col">
       <!-- CHAT AUDINA — central, principal -->
@@ -236,6 +249,7 @@ function renderPainel(d) {
   renderPtasGrid(d.fases);
   renderEmails(d.documentos);
   renderGovernanca(cli);
+  renderCentralCliente(cli, d.auditoria);
 
   // KPIs
   document.getElementById('kpis').innerHTML = [
@@ -358,6 +372,57 @@ function renderPainel(d) {
       <span class="timeline-time">${date} ${time}</span>
     </div>`;
   }).join('') || '<div style="color:var(--muted);font-size:12px;">Nenhuma atividade registrada</div>';
+}
+
+function renderCentralCliente(cli, aud) {
+  if (!cli) return;
+  const qsa = cli.qsa || {};
+  const contatos = qsa.contatos_auditoria || [];
+  const socios = qsa.socios || [];
+  const contador = qsa.contador || {};
+
+  // Contatos em cards
+  const allContatos = [];
+  socios.forEach(s => allContatos.push({nome: s.nome, cargo: s.qualificacao || 'Socio', email: s.email || '', cor: 'var(--red)'}));
+  if (contador.nome) allContatos.push({nome: contador.nome, cargo: 'Contador', email: contador.email || '', cor: 'var(--blue)'});
+  contatos.forEach(c => allContatos.push({nome: c.nome, cargo: c.cargo || '', email: c.email || '', cor: 'var(--green)'}));
+
+  const el = document.getElementById('central-contatos');
+  if (el) {
+    el.innerHTML = allContatos.map(c => `
+      <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:#FAFAFA;">
+        <div style="width:32px;height:32px;border-radius:50%;background:${c.cor};color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;">${(c.nome||'?').charAt(0)}</div>
+        <div style="min-width:0;flex:1;">
+          <div style="font-size:12px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${c.nome}</div>
+          <div style="font-size:10px;color:var(--muted);">${c.cargo}</div>
+          ${c.email ? '<div style="font-size:10px;color:var(--blue);overflow:hidden;text-overflow:ellipsis;">'+c.email+'</div>' : ''}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Buscar emails do Gmail via API (async, preenche depois)
+  fetchClientEmails(cli.razao_social || '', aud.codigo || '');
+}
+
+async function fetchClientEmails(clientName, codigo) {
+  const token = localStorage.getItem('audiper_token') || '';
+  const headers = { 'Authorization': 'Bearer ' + token, 'X-Tenant-ID': TENANT };
+
+  // Buscar emails recentes da API (audit_logs com acao email_recebido)
+  // Como fallback, mostrar os dados que ja temos no painel
+  const el = document.getElementById('central-emails');
+  if (!el) return;
+
+  // Placeholder ate termos endpoint de emails
+  const shortName = clientName.split(' ')[0];
+  el.innerHTML = `
+    <div style="font-size:11px;color:var(--muted);padding:8px;text-align:center;">
+      Emails serao carregados automaticamente pelo n8n email-scanner.<br>
+      Label Gmail: <strong>${shortName}</strong>
+    </div>
+  `;
+  document.getElementById('central-total-emails').textContent = 'Gmail label: ' + shortName;
 }
 
 function renderGovernanca(cli) {
