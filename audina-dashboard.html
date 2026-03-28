@@ -1329,8 +1329,12 @@ function refreshData() {
 }
 
 function openAuditoria(id) {
-  const a = AUDITORIAS.find(x => x.id === id);
-  if (a) showToast(`${a.icon} ${a.label} — ${a.fase} · ${a.docs} docs`);
+  if (id && id.length > 10) {
+    location.href = `auditoria-detalhe.html?id=${id}`;
+  } else {
+    const a = AUDITORIAS.find(x => x.id === id);
+    if (a) showToast(`${a.icon} ${a.label} — ${a.fase} · ${a.docs} docs`);
+  }
 }
 
 const AUDINA_REPLIES = [

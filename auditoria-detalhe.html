@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel da Auditoria — AUDIPER</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0F0F12; --card: #18181F; --border: #2A2A35; --text: #E8E8ED;
+    --muted: #8B8B99; --red: #C8262D; --green: #059669; --blue: #2563EB;
+    --purple: #7C3AED; --amber: #D97706; --radius: 10px;
+  }
+  body { font-family: 'Inter','Segoe UI',sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .top-bar { display: flex; align-items: center; gap: 16px; padding: 14px 24px; background: var(--card); border-bottom: 1px solid var(--border); }
+  .top-bar .back { font-size: 20px; cursor: pointer; color: var(--muted); }
+  .top-bar .back:hover { color: var(--text); }
+  .top-bar .title { font-size: 18px; font-weight: 600; }
+  .top-bar .badge { font-size: 11px; padding: 3px 10px; border-radius: 12px; font-weight: 600; }
+  .top-bar .meta { margin-left: auto; font-size: 12px; color: var(--muted); }
+
+  .container { max-width: 1280px; margin: 0 auto; padding: 20px 24px; }
+
+  /* KPI strip */
+  .kpi-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .kpi { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
+  .kpi-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .kpi-val { font-size: 24px; font-weight: 700; margin-top: 4px; }
+  .kpi-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* Grid layout */
+  .grid { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin-bottom: 14px; }
+  .card-title { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); margin-bottom: 12px; }
+
+  /* Fases/PTAs */
+  .fase-group { margin-bottom: 14px; }
+  .fase-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer; }
+  .fase-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .fase-name { font-size: 13px; font-weight: 600; }
+  .fase-count { font-size: 11px; color: var(--muted); margin-left: auto; }
+  .fase-bar { height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 6px; }
+  .fase-bar-fill { height: 100%; border-radius: 2px; transition: width 0.3s; }
+  .pta-list { display: none; flex-direction: column; gap: 4px; margin-left: 18px; }
+  .pta-list.open { display: flex; }
+  .pta-item { display: flex; align-items: center; gap: 8px; padding: 5px 8px; border-radius: 4px; font-size: 12px; }
+  .pta-item:hover { background: var(--border); }
+  .pta-ref { font-weight: 600; width: 35px; }
+  .pta-status { margin-left: auto; font-size: 10px; padding: 2px 6px; border-radius: 4px; }
+
+  /* Docs */
+  .doc-group { margin-bottom: 10px; }
+  .doc-group-title { font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 6px; cursor: pointer; }
+  .doc-list { display: none; flex-direction: column; gap: 3px; margin-left: 12px; }
+  .doc-list.open { display: flex; }
+  .doc-item { display: flex; align-items: center; gap: 6px; font-size: 11px; padding: 4px 6px; border-radius: 4px; }
+  .doc-item:hover { background: var(--border); }
+  .doc-ext { font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 3px; text-transform: uppercase; }
+
+  /* Timeline */
+  .timeline-item { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 12px; }
+  .timeline-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+  .timeline-time { color: var(--muted); font-size: 11px; margin-left: auto; white-space: nowrap; }
+
+  /* Achados */
+  .achado { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 6px; }
+  .achado-sev { width: 6px; height: 30px; border-radius: 3px; flex-shrink: 0; }
+  .achado-titulo { font-size: 13px; font-weight: 500; }
+  .achado-norma { font-size: 11px; color: var(--muted); }
+
+  .loading { text-align: center; padding: 60px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <span class="back" onclick="location.href='audina-dashboard.html'">&#8592;</span>
+  <span class="title" id="top-title">Carregando...</span>
+  <span class="badge" id="top-badge" style="display:none;"></span>
+  <span class="meta" id="top-meta"></span>
+</div>
+
+<div class="container">
+  <div class="kpi-strip" id="kpis"></div>
+
+  <div class="grid">
+    <div class="left-col">
+      <!-- Fases e PTAs -->
+      <div class="card">
+        <div class="card-title">Fases e Papeis de Trabalho (PTAs)</div>
+        <div id="fases-container"></div>
+      </div>
+
+      <!-- Documentos do Dossie -->
+      <div class="card">
+        <div class="card-title">Dossie — Documentos (<span id="docs-count">0</span>)</div>
+        <div id="docs-container"></div>
+      </div>
+
+      <!-- Achados -->
+      <div class="card" id="achados-card" style="display:none;">
+        <div class="card-title">Achados de Auditoria</div>
+        <div id="achados-container"></div>
+      </div>
+    </div>
+
+    <div class="right-col">
+      <!-- Cliente -->
+      <div class="card">
+        <div class="card-title">Cliente</div>
+        <div id="cliente-info"></div>
+      </div>
+
+      <!-- Pendencias -->
+      <div class="card" id="pend-card" style="display:none;">
+        <div class="card-title">Pendencias</div>
+        <div id="pendencias-container"></div>
+      </div>
+
+      <!-- Timeline -->
+      <div class="card">
+        <div class="card-title">Atividade Recente</div>
+        <div id="timeline-container"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const API = 'http://localhost:8005';
+const TENANT = 'tenant_07652071000165';
+const STATUS_COLORS = {
+  nao_iniciado: '#6B7280', pendente: '#D97706', em_andamento: '#2563EB',
+  concluido: '#059669', aprovado: '#059669', rejeitado: '#DC2626',
+};
+const EXT_COLORS = {
+  '.pdf': '#DC2626', '.html': '#2563EB', '.xlsx': '#059669', '.docx': '#7C3AED',
+  '.txt': '#6B7280', '.py': '#D97706', '.json': '#0891B2', '.md': '#6B7280',
+};
+
+async function loadPainel() {
+  const params = new URLSearchParams(location.search);
+  const audId = params.get('id');
+  if (!audId) { document.querySelector('.container').innerHTML = '<div class="loading">ID da auditoria nao fornecido. Use ?id=UUID</div>'; return; }
+
+  const token = localStorage.getItem('audiper_token') || '';
+  const headers = { 'Authorization': `Bearer ${token}`, 'X-Tenant-ID': TENANT };
+
+  try {
+    const res = await fetch(`${API}/api/auditorias/${audId}/painel`, { headers });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    renderPainel(data);
+  } catch (err) {
+    document.querySelector('.container').innerHTML = `<div class="loading">Erro: ${err.message}<br>Verifique se o backend esta rodando e se o token e valido.</div>`;
+  }
+}
+
+function renderPainel(d) {
+  const aud = d.auditoria;
+  const cli = d.cliente || {};
+  const k = d.kpis;
+
+  // Top bar
+  document.getElementById('top-title').textContent = `${cli.nome_fantasia || cli.razao_social || 'N/A'} — ${aud.codigo}`;
+  const badge = document.getElementById('top-badge');
+  badge.style.display = 'inline';
+  badge.textContent = aud.fase_atual ? aud.fase_atual.toUpperCase() : 'N/A';
+  badge.style.background = aud.status === 'concluida' ? 'var(--green)' : 'var(--red)';
+  badge.style.color = '#fff';
+  document.getElementById('top-meta').textContent = `Exercicio ${aud.exercicio} | ${k.docs_filesystem} docs`;
+
+  // KPIs
+  document.getElementById('kpis').innerHTML = [
+    { label: 'PTAs', val: `${k.ptas_concluidos}/${k.ptas_total}`, sub: `${k.percentual}% concluido` },
+    { label: 'Achados', val: k.achados_total, sub: `${k.achados_abertos} abertos` },
+    { label: 'Documentos', val: k.docs_filesystem, sub: 'no dossie' },
+    { label: 'Pendencias', val: k.pendencias_abertas, sub: 'abertas' },
+  ].map(kpi => `
+    <div class="kpi">
+      <div class="kpi-label">${kpi.label}</div>
+      <div class="kpi-val">${kpi.val}</div>
+      <div class="kpi-sub">${kpi.sub}</div>
+    </div>
+  `).join('');
+
+  // Cliente
+  document.getElementById('cliente-info').innerHTML = `
+    <div style="font-size:14px;font-weight:600;margin-bottom:8px;">${cli.razao_social || 'N/A'}</div>
+    ${cli.nome_fantasia ? `<div style="font-size:12px;color:var(--muted);margin-bottom:6px;">${cli.nome_fantasia}</div>` : ''}
+    <div style="font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:4px;">
+      ${cli.cnpj ? `<span>CNPJ: ${cli.cnpj}</span>` : ''}
+      ${cli.cnae_descricao ? `<span>CNAE: ${cli.cnae_descricao}</span>` : ''}
+      ${cli.porte ? `<span>Porte: ${cli.porte}</span>` : ''}
+      ${cli.municipio ? `<span>${cli.municipio}/${cli.uf}</span>` : ''}
+      ${cli.capital_social ? `<span>Capital: R$ ${Number(cli.capital_social).toLocaleString('pt-BR')}</span>` : ''}
+    </div>
+    ${d.pasta_local ? `<div style="margin-top:10px;font-size:11px;color:var(--muted);border-top:1px solid var(--border);padding-top:8px;">Pasta: ${d.pasta_local}</div>` : ''}
+  `;
+
+  // Fases e PTAs
+  const fasesEl = document.getElementById('fases-container');
+  fasesEl.innerHTML = d.fases.map((f, i) => {
+    const pct = f.total ? Math.round(f.concluidos / f.total * 100) : 0;
+    return `
+    <div class="fase-group">
+      <div class="fase-header" onclick="toggleFase(${i})">
+        <div class="fase-dot" style="background:${f.cor};"></div>
+        <span class="fase-name">${f.nome}</span>
+        <span class="fase-count">${f.concluidos}/${f.total}</span>
+      </div>
+      <div class="fase-bar"><div class="fase-bar-fill" style="width:${pct}%;background:${f.cor};"></div></div>
+      <div class="pta-list" id="fase-${i}">
+        ${f.ptas.map(p => `
+          <div class="pta-item">
+            <span class="pta-ref">${p.ref}</span>
+            <span>${p.nome}</span>
+            <span class="pta-status" style="background:${STATUS_COLORS[p.status]||'#6B7280'}20;color:${STATUS_COLORS[p.status]||'#6B7280'};">${(p.status||'').replace('_',' ')}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>`;
+  }).join('');
+
+  // Documentos agrupados por categoria
+  const docs = d.documentos || [];
+  document.getElementById('docs-count').textContent = docs.length;
+  const groups = {};
+  docs.forEach(doc => {
+    const cat = doc.categoria || 'raiz';
+    if (!groups[cat]) groups[cat] = [];
+    groups[cat].push(doc);
+  });
+  const docsEl = document.getElementById('docs-container');
+  docsEl.innerHTML = Object.entries(groups).map(([cat, files], i) => `
+    <div class="doc-group">
+      <div class="doc-group-title" onclick="toggleDocs(${i})">${cat} (${files.length})</div>
+      <div class="doc-list" id="docs-${i}">
+        ${files.slice(0, 30).map(f => `
+          <div class="doc-item">
+            <span class="doc-ext" style="background:${EXT_COLORS[f.extensao]||'#6B7280'}20;color:${EXT_COLORS[f.extensao]||'#6B7280'};">${(f.extensao||'').replace('.','')||'?'}</span>
+            <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${f.caminho}">${f.nome}</span>
+            <span style="color:var(--muted);font-size:10px;">${f.tamanho_kb}KB</span>
+          </div>
+        `).join('')}
+        ${files.length > 30 ? `<div style="font-size:11px;color:var(--muted);padding:4px 6px;">+${files.length - 30} mais...</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+
+  // Achados
+  if (d.achados && d.achados.length > 0) {
+    document.getElementById('achados-card').style.display = 'block';
+    const sevColors = { critica: '#DC2626', alta: '#F59E0B', media: '#2563EB', baixa: '#6B7280' };
+    document.getElementById('achados-container').innerHTML = d.achados.map(a => `
+      <div class="achado">
+        <div class="achado-sev" style="background:${sevColors[(a.severidade||'').toLowerCase()]||'#6B7280'};"></div>
+        <div>
+          <div class="achado-titulo">${a.titulo}</div>
+          <div class="achado-norma">${a.norma || ''} ${a.status ? '— ' + a.status : ''}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Pendencias
+  if (d.pendencias && d.pendencias.length > 0) {
+    document.getElementById('pend-card').style.display = 'block';
+    const prioColors = { critica: '#DC2626', alta: '#F59E0B', media: '#2563EB', baixa: '#6B7280' };
+    document.getElementById('pendencias-container').innerHTML = d.pendencias.map(p => `
+      <div style="padding:8px 10px;border-left:3px solid ${prioColors[p.prioridade]||'#6B7280'};background:${prioColors[p.prioridade]||'#6B7280'}08;border-radius:4px;margin-bottom:6px;">
+        <div style="font-size:13px;font-weight:500;">${p.titulo}</div>
+        <div style="font-size:11px;color:var(--muted);">${p.categoria || ''}</div>
+      </div>
+    `).join('');
+  }
+
+  // Timeline
+  const acao_map = { INSERT: 'Criou', UPDATE: 'Atualizou', DELETE: 'Removeu', email_recebido: 'Email', briefing_enviado: 'Briefing' };
+  document.getElementById('timeline-container').innerHTML = (d.atividade || []).map(a => {
+    const ts = a.timestamp ? new Date(a.timestamp) : null;
+    const time = ts ? ts.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) : '';
+    const date = ts ? ts.toLocaleDateString('pt-BR', {day:'2-digit',month:'2-digit'}) : '';
+    return `
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:var(--blue);"></div>
+      <div style="flex:1;">
+        <span style="font-weight:500;">${acao_map[a.acao]||a.acao}</span>
+        <span style="color:var(--muted);"> ${a.entidade || ''}</span>
+      </div>
+      <span class="timeline-time">${date} ${time}</span>
+    </div>`;
+  }).join('') || '<div style="color:var(--muted);font-size:12px;">Nenhuma atividade registrada</div>';
+}
+
+function toggleFase(i) {
+  document.getElementById('fase-' + i).classList.toggle('open');
+}
+function toggleDocs(i) {
+  document.getElementById('docs-' + i).classList.toggle('open');
+}
+
+window.addEventListener('DOMContentLoaded', loadPainel);
+</script>
+</body>
+</html>
