@@ -97,12 +97,6 @@
     <div id="timeline-fases" style="display:flex;align-items:center;gap:0;overflow-x:auto;padding:4px 0;"></div>
   </div>
 
-  <!-- Grid de PTAs em quadros por fase -->
-  <div class="card" style="padding:16px 20px;margin-bottom:16px;">
-    <div class="card-title">Papeis de Trabalho — 42 PTAs</div>
-    <div id="ptas-grid" style="display:flex;flex-direction:column;gap:14px;"></div>
-  </div>
-
   <div class="grid">
     <div class="left-col">
       <!-- CHAT AUDINA — central, principal -->
@@ -166,6 +160,22 @@
       </div>
     </div>
   </div>
+
+  <!-- Emails do cliente (full width) -->
+  <div class="card" id="emails-card" style="padding:16px 20px;display:none;">
+    <div class="card-title">Comunicacoes e Emails</div>
+    <div id="emails-container" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:8px;"></div>
+  </div>
+
+  <!-- Grid de PTAs em quadros por fase (full width, abaixo de tudo) -->
+  <div class="card" style="padding:16px 20px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+      <span class="card-title" style="margin:0;">Papeis de Trabalho — 42 PTAs</span>
+      <button onclick="document.getElementById('ptas-grid').style.display=document.getElementById('ptas-grid').style.display==='none'?'flex':'none'" style="padding:4px 10px;border:1px solid var(--border);border-radius:6px;background:var(--card);font-size:11px;cursor:pointer;color:var(--muted);">Expandir / Recolher</button>
+    </div>
+    <div id="ptas-grid" style="display:flex;flex-direction:column;gap:14px;"></div>
+  </div>
+
 </div>
 
 <script>
@@ -216,6 +226,7 @@ function renderPainel(d) {
   // Timeline de fases
   renderTimelineFases(d.fases, aud.fase_atual, aud.status);
   renderPtasGrid(d.fases);
+  renderEmails(d.documentos);
 
   // KPIs
   document.getElementById('kpis').innerHTML = [
@@ -338,6 +349,34 @@ function renderPainel(d) {
       <span class="timeline-time">${date} ${time}</span>
     </div>`;
   }).join('') || '<div style="color:var(--muted);font-size:12px;">Nenhuma atividade registrada</div>';
+}
+
+function renderEmails(docs) {
+  if (!docs) return;
+  // Filtrar comunicacoes (HTMLs de COM, emails, cartas)
+  const comDocs = docs.filter(d =>
+    d.categoria.toLowerCase().includes('comunicac') ||
+    d.nome.toLowerCase().includes('com-') ||
+    d.nome.toLowerCase().includes('com_') ||
+    d.nome.toLowerCase().includes('email') ||
+    d.nome.toLowerCase().includes('carta') ||
+    d.nome.toLowerCase().includes('declarac')
+  );
+  if (!comDocs.length) return;
+
+  document.getElementById('emails-card').style.display = 'block';
+  const TYPE_ICON = {
+    '.html': '📧', '.pdf': '📄', '.docx': '📝', '.txt': '📋'
+  };
+  document.getElementById('emails-container').innerHTML = comDocs.map(d => `
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:#fff;">
+      <span style="font-size:18px;">${TYPE_ICON[d.extensao]||'📎'}</span>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:12px;font-weight:600;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${d.nome}">${d.nome}</div>
+        <div style="font-size:10px;color:var(--muted);">${d.categoria} — ${d.tamanho_kb}KB — ${d.modificado ? new Date(d.modificado).toLocaleDateString('pt-BR') : ''}</div>
+      </div>
+    </div>
+  `).join('');
 }
 
 function renderPtasGrid(fases) {
