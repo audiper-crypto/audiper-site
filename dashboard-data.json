@@ -1,15 +1,15 @@
 {
-  "gerado_em": "2026-03-28T12:10:45.959773",
+  "gerado_em": "2026-03-28T13:27:05.625588",
   "kpis": {
     "auditorias_ativas": 9,
-    "em_execucao": 3,
-    "entregues": 3,
+    "em_execucao": 2,
+    "entregues": 4,
     "planejamento": 3,
     "achados_confirmados": 0,
-    "documentos_indexados": 4012,
-    "relatorios_emitidos": 3,
+    "documentos_indexados": 4390,
+    "relatorios_emitidos": 4,
     "ptas_total": 378,
-    "ptas_concluidos": 0,
+    "ptas_concluidos": 168,
     "ptas_em_andamento": 0,
     "clientes_cadastrados": 9
   },
@@ -24,7 +24,7 @@
       "icon": "🎲",
       "color": "#64748B",
       "achados": 0,
-      "docs": 1452,
+      "docs": 1494,
       "ptas_total": 42,
       "ptas_ok": 0,
       "exercicio": "2025",
@@ -45,7 +45,7 @@
       "icon": "📁",
       "color": "#64748B",
       "achados": 0,
-      "docs": 490,
+      "docs": 532,
       "ptas_total": 42,
       "ptas_ok": 0,
       "exercicio": "2025",
@@ -54,27 +54,6 @@
       "link_auditoria": "/auditorias/45895168-b5a2-4134-b6b4-3d054a6e8330",
       "link_achados": "/auditorias/45895168-b5a2-4134-b6b4-3d054a6e8330/achados",
       "link_ptas": "/auditorias/45895168-b5a2-4134-b6b4-3d054a6e8330/ptas",
-      "contexto": null
-    },
-    {
-      "id": "04863c06-b5f5-45f8-9925-50ed3b66953e",
-      "label": "Japan Veículos",
-      "codigo": "JAPANV-2025",
-      "folder": "JAPANVEICULOS",
-      "fase": "Execucao",
-      "status": "exec",
-      "icon": "📁",
-      "color": "#64748B",
-      "achados": 0,
-      "docs": 460,
-      "ptas_total": 42,
-      "ptas_ok": 0,
-      "exercicio": "2025",
-      "cnpj": "03.998.690/0001-08",
-      "link_cliente": "/clientes/33c5465f-ad5b-4628-971e-1a6224a84c5c",
-      "link_auditoria": "/auditorias/04863c06-b5f5-45f8-9925-50ed3b66953e",
-      "link_achados": "/auditorias/04863c06-b5f5-45f8-9925-50ed3b66953e/achados",
-      "link_ptas": "/auditorias/04863c06-b5f5-45f8-9925-50ed3b66953e/ptas",
       "contexto": null
     },
     {
@@ -87,9 +66,9 @@
       "icon": "📁",
       "color": "#64748B",
       "achados": 0,
-      "docs": 870,
+      "docs": 912,
       "ptas_total": 42,
-      "ptas_ok": 0,
+      "ptas_ok": 42,
       "exercicio": "2024",
       "cnpj": "07.634.740/0001-63",
       "link_cliente": "/clientes/d622c621-16fc-4930-84c9-4eac4512fc82",
@@ -108,9 +87,9 @@
       "icon": "📁",
       "color": "#64748B",
       "achados": 0,
-      "docs": 315,
+      "docs": 357,
       "ptas_total": 42,
-      "ptas_ok": 0,
+      "ptas_ok": 42,
       "exercicio": "2024",
       "cnpj": "62.697.793/0001-05",
       "link_cliente": "/clientes/e1f6995e-e8be-4a98-a558-76bfb1f52365",
@@ -129,9 +108,9 @@
       "icon": "📁",
       "color": "#64748B",
       "achados": 0,
-      "docs": 299,
+      "docs": 341,
       "ptas_total": 42,
-      "ptas_ok": 0,
+      "ptas_ok": 42,
       "exercicio": "2024",
       "cnpj": "13.746.922/0001-94",
       "link_cliente": "/clientes/d3a86c4e-4ef7-46e9-8205-973247659819",
@@ -150,7 +129,7 @@
       "icon": "📁",
       "color": "#64748B",
       "achados": 0,
-      "docs": 30,
+      "docs": 72,
       "ptas_total": 42,
       "ptas_ok": 0,
       "exercicio": "2025",
@@ -171,7 +150,7 @@
       "icon": "📁",
       "color": "#64748B",
       "achados": 0,
-      "docs": 93,
+      "docs": 135,
       "ptas_total": 42,
       "ptas_ok": 0,
       "exercicio": "2025",
@@ -192,7 +171,7 @@
       "icon": "📁",
       "color": "#64748B",
       "achados": 0,
-      "docs": 3,
+      "docs": 45,
       "ptas_total": 42,
       "ptas_ok": 0,
       "exercicio": "2025",
@@ -202,6 +181,27 @@
       "link_achados": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6/achados",
       "link_ptas": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6/ptas",
       "contexto": null
+    },
+    {
+      "id": "04863c06-b5f5-45f8-9925-50ed3b66953e",
+      "label": "Japan Veículos",
+      "codigo": "JAPANV-2025",
+      "folder": "JAPANVEICULOS",
+      "fase": "Entregue (G)",
+      "status": "done",
+      "icon": "📁",
+      "color": "#64748B",
+      "achados": 0,
+      "docs": 502,
+      "ptas_total": 42,
+      "ptas_ok": 42,
+      "exercicio": "2025",
+      "cnpj": "03.998.690/0001-08",
+      "link_cliente": "/clientes/33c5465f-ad5b-4628-971e-1a6224a84c5c",
+      "link_auditoria": "/auditorias/04863c06-b5f5-45f8-9925-50ed3b66953e",
+      "link_achados": "/auditorias/04863c06-b5f5-45f8-9925-50ed3b66953e/achados",
+      "link_ptas": "/auditorias/04863c06-b5f5-45f8-9925-50ed3b66953e/ptas",
+      "contexto": null
     }
   ],
   "conclusoes": [
@@ -210,7 +210,7 @@
       "codigo": "VIAPAR-2024",
       "exercicio": "2024",
       "achados": 0,
-      "ptas_ok": 0,
+      "ptas_ok": 42,
       "ptas_total": 42,
       "link_auditoria": "/auditorias/d03c2e8a-ef38-4fcf-bee9-ea7a74af9c19",
       "link_cliente": "/clientes/d622c621-16fc-4930-84c9-4eac4512fc82"
@@ -220,7 +220,7 @@
       "codigo": "VIASHA-2024",
       "exercicio": "2024",
       "achados": 0,
-      "ptas_ok": 0,
+      "ptas_ok": 42,
       "ptas_total": 42,
       "link_auditoria": "/auditorias/51175caf-e097-4255-a26d-b10e6e27e525",
       "link_cliente": "/clientes/e1f6995e-e8be-4a98-a558-76bfb1f52365"
@@ -230,148 +230,158 @@
       "codigo": "RESOLV-2024",
       "exercicio": "2024",
       "achados": 0,
-      "ptas_ok": 0,
+      "ptas_ok": 42,
       "ptas_total": 42,
       "link_auditoria": "/auditorias/0ac38b45-7ef9-4fbb-808e-64d6d98bbc29",
       "link_cliente": "/clientes/d3a86c4e-4ef7-46e9-8205-973247659819"
+    },
+    {
+      "cliente": "Japan Veículos",
+      "codigo": "JAPANV-2025",
+      "exercicio": "2025",
+      "achados": 0,
+      "ptas_ok": 42,
+      "ptas_total": 42,
+      "link_auditoria": "/auditorias/04863c06-b5f5-45f8-9925-50ed3b66953e",
+      "link_cliente": "/clientes/33c5465f-ad5b-4628-971e-1a6224a84c5c"
     }
   ],
   "achados_recentes": [],
   "activity": [
     {
       "name": "Sistema",
-      "action": "Criou",
-      "target": "ptas",
-      "time": "11:55",
+      "action": "Atualizou",
+      "target": "clientes",
+      "time": "13:26",
       "color": "#1d4ed8",
-      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
+      "link_auditoria": null
     },
     {
       "name": "Sistema",
-      "action": "Criou",
-      "target": "ptas",
-      "time": "11:55",
+      "action": "Atualizou",
+      "target": "clientes",
+      "time": "13:26",
       "color": "#1d4ed8",
-      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
+      "link_auditoria": null
     },
     {
       "name": "Sistema",
-      "action": "Criou",
-      "target": "ptas",
-      "time": "11:55",
+      "action": "Atualizou",
+      "target": "clientes",
+      "time": "13:26",
       "color": "#1d4ed8",
-      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
+      "link_auditoria": null
     },
     {
       "name": "Sistema",
-      "action": "Criou",
-      "target": "ptas",
-      "time": "11:55",
+      "action": "Atualizou",
+      "target": "clientes",
+      "time": "13:26",
       "color": "#1d4ed8",
-      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
+      "link_auditoria": null
     },
     {
       "name": "Sistema",
-      "action": "Criou",
-      "target": "ptas",
-      "time": "11:55",
+      "action": "Atualizou",
+      "target": "clientes",
+      "time": "13:05",
       "color": "#1d4ed8",
-      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
+      "link_auditoria": null
     },
     {
       "name": "Sistema",
-      "action": "Criou",
-      "target": "ptas",
-      "time": "11:55",
+      "action": "Atualizou",
+      "target": "clientes",
+      "time": "13:05",
       "color": "#1d4ed8",
-      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
+      "link_auditoria": null
     },
     {
       "name": "Sistema",
-      "action": "Criou",
-      "target": "ptas",
-      "time": "11:55",
+      "action": "Atualizou",
+      "target": "clientes",
+      "time": "13:05",
       "color": "#1d4ed8",
-      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
+      "link_auditoria": null
     },
     {
       "name": "Sistema",
-      "action": "Criou",
+      "action": "Atualizou",
       "target": "ptas",
-      "time": "11:55",
+      "time": "12:40",
       "color": "#1d4ed8",
-      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
+      "link_auditoria": "/auditorias/0ac38b45-7ef9-4fbb-808e-64d6d98bbc29"
     },
     {
       "name": "Sistema",
-      "action": "Criou",
+      "action": "Atualizou",
       "target": "ptas",
-      "time": "11:55",
+      "time": "12:40",
       "color": "#1d4ed8",
-      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
+      "link_auditoria": "/auditorias/0ac38b45-7ef9-4fbb-808e-64d6d98bbc29"
     },
     {
       "name": "Sistema",
-      "action": "Criou",
+      "action": "Atualizou",
       "target": "ptas",
-      "time": "11:55",
+      "time": "12:40",
       "color": "#1d4ed8",
-      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
+      "link_auditoria": "/auditorias/0ac38b45-7ef9-4fbb-808e-64d6d98bbc29"
     },
     {
       "name": "Sistema",
-      "action": "Criou",
+      "action": "Atualizou",
       "target": "ptas",
-      "time": "11:55",
+      "time": "12:40",
       "color": "#1d4ed8",
-      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
+      "link_auditoria": "/auditorias/0ac38b45-7ef9-4fbb-808e-64d6d98bbc29"
     },
     {
       "name": "Sistema",
-      "action": "Criou",
+      "action": "Atualizou",
       "target": "ptas",
-      "time": "11:55",
+      "time": "12:40",
       "color": "#1d4ed8",
-      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
+      "link_auditoria": "/auditorias/0ac38b45-7ef9-4fbb-808e-64d6d98bbc29"
     },
     {
       "name": "Sistema",
-      "action": "Criou",
+      "action": "Atualizou",
       "target": "ptas",
-      "time": "11:55",
+      "time": "12:40",
       "color": "#1d4ed8",
-      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
+      "link_auditoria": "/auditorias/0ac38b45-7ef9-4fbb-808e-64d6d98bbc29"
     },
     {
       "name": "Sistema",
-      "action": "Criou",
+      "action": "Atualizou",
       "target": "ptas",
-      "time": "11:55",
+      "time": "12:40",
       "color": "#1d4ed8",
-      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
+      "link_auditoria": "/auditorias/0ac38b45-7ef9-4fbb-808e-64d6d98bbc29"
     },
     {
       "name": "Sistema",
-      "action": "Criou",
+      "action": "Atualizou",
       "target": "ptas",
-      "time": "11:55",
+      "time": "12:40",
       "color": "#1d4ed8",
-      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
+      "link_auditoria": "/auditorias/0ac38b45-7ef9-4fbb-808e-64d6d98bbc29"
     }
   ],
   "tarefas": [],
   "emails": [],
   "briefing": {
     "data": "28/03/2026",
-    "resumo": "9 auditorias ativas. 3 em execucao, 3 entregues.",
+    "resumo": "9 auditorias ativas. 2 em execucao, 4 entregues.",
     "destaques": [
       {
         "tipo": "prazo",
-        "texto": "3 auditorias em execucao"
+        "texto": "2 auditorias em execucao"
       },
       {
         "tipo": "email",
-        "texto": "3 auditorias concluidas — verificar pagamentos"
+        "texto": "4 auditorias concluidas — verificar pagamentos"
       }
     ]
   },
@@ -445,5 +455,5 @@
       "source": "gcal"
     }
   ],
-  "gcal_updated": "2026-03-28T12:10:48.097236"
+  "gcal_updated": "2026-03-28T13:27:07.430589"
 }
