@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audina — Central de Auditoria</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red:    #C8262D;
+    --red2:   #9B1C22;
+    --accent: #E8B84B;
+    --dark:   #1A1A2E;
+    --sidebar-bg: #FAFAFA;
+    --sidebar-border: #EBEBEB;
+    --bg:     #F4F5F7;
+    --card:   #FFFFFF;
+    --text:   #1E1E2F;
+    --sub:    #6B7280;
+    --border: #E5E7EB;
+    --green:  #10B981;
+    --blue:   #3B82F6;
+    --orange: #F59E0B;
+    --purple: #8B5CF6;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* ─── SIDEBAR ─── */
+  .sidebar {
+    width: 220px;
+    min-width: 220px;
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--sidebar-border);
+    display: flex;
+    flex-direction: column;
+    padding: 24px 0;
+    z-index: 10;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 20px 24px;
+    border-bottom: 1px solid var(--sidebar-border);
+    text-decoration: none;
+  }
+  .logo-icon {
+    width: 34px;
+    height: 34px;
+    background: var(--red);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 900;
+    color: white;
+    letter-spacing: -1px;
+  }
+  .logo-text { font-size: 15px; font-weight: 700; color: var(--text); }
+  .logo-sub  { font-size: 10px; color: var(--sub); font-weight: 500; }
+
+  .nav {
+    padding: 16px 0;
+    flex: 1;
+  }
+  .nav-section {
+    padding: 0 12px 4px;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--sub);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    margin-top: 16px;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--sub);
+    cursor: pointer;
+    border-radius: 0;
+    transition: all .15s;
+    position: relative;
+    text-decoration: none;
+  }
+  .nav-item:hover { background: #F0F0F5; color: var(--text); }
+  .nav-item.active {
+    background: #FEF2F2;
+    color: var(--red);
+    font-weight: 600;
+  }
+  .nav-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 4px; bottom: 4px;
+    width: 3px;
+    background: var(--red);
+    border-radius: 0 2px 2px 0;
+  }
+  .nav-item .icon { font-size: 15px; width: 18px; text-align: center; }
+  .nav-badge {
+    margin-left: auto;
+    background: var(--red);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 10px;
+    min-width: 18px;
+    text-align: center;
+  }
+  .nav-badge.green { background: var(--green); }
+  .nav-badge.orange { background: var(--orange); }
+
+  .sidebar-upgrade {
+    margin: 0 12px 16px;
+    background: linear-gradient(135deg, var(--red) 0%, var(--red2) 100%);
+    border-radius: 12px;
+    padding: 14px;
+    color: white;
+  }
+  .sidebar-upgrade h4 { font-size: 12px; font-weight: 700; margin-bottom: 4px; }
+  .sidebar-upgrade p  { font-size: 11px; opacity: .8; margin-bottom: 10px; line-height: 1.4; }
+  .btn-upgrade {
+    background: white;
+    color: var(--red);
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .sidebar-bottom {
+    padding: 12px 0 0;
+    border-top: 1px solid var(--sidebar-border);
+  }
+
+  /* ─── MAIN ─── */
+  .main {
+    flex: 1;
+    overflow-y: auto;
+    padding: 28px 28px 28px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .main-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .main-header h1 { font-size: 22px; font-weight: 700; }
+  .main-header p  { font-size: 13px; color: var(--sub); margin-top: 2px; }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .date-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--sub);
+    cursor: pointer;
+  }
+  .btn-refresh {
+    background: var(--red);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background .15s;
+  }
+  .btn-refresh:hover { background: var(--red2); }
+
+  /* ─── KPIS ─── */
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .kpi-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    cursor: pointer;
+    transition: box-shadow .15s;
+  }
+  .kpi-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.07); }
+  .kpi-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .kpi-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+  }
+  .kpi-icon.red    { background: #FEE2E2; }
+  .kpi-icon.green  { background: #D1FAE5; }
+  .kpi-icon.blue   { background: #DBEAFE; }
+  .kpi-icon.orange { background: #FEF3C7; }
+  .kpi-delta {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 6px;
+  }
+  .kpi-delta.up   { background: #D1FAE5; color: #065F46; }
+  .kpi-delta.down { background: #FEE2E2; color: #991B1B; }
+  .kpi-delta.neu  { background: #F3F4F6; color: var(--sub); }
+  .kpi-val  { font-size: 24px; font-weight: 800; }
+  .kpi-label{ font-size: 12px; color: var(--sub); margin-top: 2px; }
+
+  /* ─── CHART SECTION ─── */
+  .section-row {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 14px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .card-title { font-size: 14px; font-weight: 700; }
+  .period-picker {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 5px 10px;
+    font-size: 12px;
+    color: var(--sub);
+    cursor: pointer;
+  }
+
+  /* Chart */
+  #perf-chart { width: 100%; height: 140px; }
+
+  /* ─── FASES DONUT ─── */
+  .donut-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .donut-canvas { width: 120px; height: 120px; }
+  .donut-legend { width: 100%; display: flex; flex-direction: column; gap: 6px; }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+  }
+  .legend-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .legend-label { color: var(--sub); flex: 1; }
+  .legend-val   { font-weight: 600; }
+
+  /* ─── AUDITORIAS LIST ─── */
+  .aud-list { display: flex; flex-direction: column; gap: 0; }
+  .aud-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background .1s;
+    border-radius: 6px;
+    padding: 10px 8px;
+    margin: 0 -8px;
+  }
+  .aud-row:hover { background: var(--bg); }
+  .aud-row:last-child { border-bottom: none; }
+  .aud-color {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .aud-info { flex: 1; min-width: 0; }
+  .aud-name  { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .aud-fase  { font-size: 11px; color: var(--sub); margin-top: 1px; }
+  .aud-status-pill {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .pill-exec   { background: #DBEAFE; color: #1D4ED8; }
+  .pill-done   { background: #D1FAE5; color: #065F46; }
+  .pill-plan   { background: #FEF3C7; color: #92400E; }
+  .pill-prop   { background: #F3E8FF; color: #6B21A8; }
+  .aud-docs { font-size: 11px; color: var(--sub); text-align: right; }
+  .aud-docs span { font-weight: 600; color: var(--text); }
+
+  /* ─── RIGHT PANEL ─── */
+  .right-panel {
+    width: 300px;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    overflow-y: auto;
+    padding-bottom: 28px;
+    padding-top: 28px;
+    padding-right: 20px;
+  }
+
+  /* AI Card */
+  .audina-card {
+    background: linear-gradient(135deg, #1A1A2E 0%, #2D1B3D 100%);
+    border-radius: 16px;
+    padding: 18px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .audina-card::after {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 100px; height: 100px;
+    background: rgba(200,38,45,.3);
+    border-radius: 50%;
+  }
+  .audina-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .audina-avatar {
+    width: 42px; height: 42px;
+    background: var(--red);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    border: 2px solid rgba(255,255,255,.2);
+    position: relative;
+    z-index: 1;
+  }
+  .audina-avatar::after {
+    content: '';
+    position: absolute;
+    bottom: 1px; right: 1px;
+    width: 10px; height: 10px;
+    background: var(--green);
+    border-radius: 50%;
+    border: 2px solid white;
+  }
+  .audina-name { font-size: 14px; font-weight: 700; }
+  .audina-role { font-size: 11px; opacity: .7; }
+
+  .audina-message {
+    background: rgba(255,255,255,.08);
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    border-left: 3px solid var(--red);
+  }
+
+  .audina-input-row {
+    display: flex;
+    gap: 8px;
+  }
+  .audina-input {
+    flex: 1;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 12px;
+    color: white;
+    outline: none;
+  }
+  .audina-input::placeholder { color: rgba(255,255,255,.4); }
+  .audina-input:focus { border-color: rgba(200,38,45,.6); }
+  .btn-audina-send {
+    background: var(--red);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .15s;
+    flex-shrink: 0;
+  }
+  .btn-audina-send:hover { background: var(--red2); }
+
+  /* Achados card */
+  .achados-list { display: flex; flex-direction: column; gap: 8px; }
+  .achado-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px;
+    background: var(--bg);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background .1s;
+  }
+  .achado-item:hover { background: #EDEDF0; }
+  .achado-icon {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .achado-text { font-size: 12px; font-weight: 500; line-height: 1.4; }
+  .achado-meta { font-size: 11px; color: var(--sub); margin-top: 2px; }
+
+  /* Activity */
+  .act-list { display: flex; flex-direction: column; gap: 0; }
+  .act-item {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .act-item:last-child { border-bottom: none; }
+  .act-avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+  }
+  .act-content { flex: 1; min-width: 0; }
+  .act-name  { font-size: 12px; font-weight: 600; }
+  .act-desc  { font-size: 11px; color: var(--sub); margin-top: 1px; line-height: 1.4; }
+  .act-time  { font-size: 10px; color: var(--sub); margin-left: auto; white-space: nowrap; padding-top: 2px; }
+
+  /* ─── TABS ─── */
+  .main-tabs {
+    display: flex;
+    gap: 4px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4px;
+  }
+  .tab-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--sub);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: all .15s;
+    margin-bottom: -1px;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--red); border-bottom-color: var(--red); font-weight: 600; }
+  .tab-pane { display: none; }
+  .tab-pane.active { display: flex; flex-direction: column; gap: 20px; }
+
+  /* ─── CALENDAR ─── */
+  .cal-header {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .cal-nav { display: flex; align-items: center; gap: 8px; }
+  .cal-nav button {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 6px; width: 28px; height: 28px; cursor: pointer;
+    font-size: 13px; display: flex; align-items: center; justify-content: center;
+    transition: background .15s;
+  }
+  .cal-nav button:hover { background: var(--bg); }
+  .cal-month-label { font-size: 15px; font-weight: 700; min-width: 160px; text-align: center; }
+  .cal-view-btns { display: flex; gap: 4px; }
+  .cal-vbtn {
+    padding: 5px 12px; font-size: 12px; font-weight: 500;
+    border: 1px solid var(--border); border-radius: 6px; background: var(--card);
+    cursor: pointer; color: var(--sub); transition: all .15s;
+  }
+  .cal-vbtn.active { background: var(--red); color: white; border-color: var(--red); }
+
+  .cal-grid-month {
+    display: grid; grid-template-columns: repeat(7, 1fr);
+    gap: 1px; background: var(--border); border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden;
+  }
+  .cal-day-header {
+    background: var(--bg); text-align: center; padding: 8px 4px;
+    font-size: 11px; font-weight: 600; color: var(--sub); text-transform: uppercase;
+  }
+  .cal-day {
+    background: var(--card); min-height: 80px; padding: 6px;
+    cursor: pointer; transition: background .1s; position: relative;
+  }
+  .cal-day:hover { background: #F8F8FB; }
+  .cal-day.other-month { background: #FAFAFA; }
+  .cal-day.other-month .cal-day-num { color: #C9C9D0; }
+  .cal-day.today { background: #FFF5F5; }
+  .cal-day.today .cal-day-num {
+    background: var(--red); color: white; border-radius: 50%;
+    width: 22px; height: 22px; display: inline-flex; align-items: center;
+    justify-content: center; font-weight: 700;
+  }
+  .cal-day-num { font-size: 12px; font-weight: 500; margin-bottom: 4px; display: inline-block; }
+  .cal-event {
+    font-size: 10px; padding: 2px 5px; border-radius: 3px; margin-bottom: 2px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    font-weight: 500; cursor: pointer;
+  }
+  .ev-prazo   { background: #FEE2E2; color: #991B1B; }
+  .ev-reuniao { background: #DBEAFE; color: #1D4ED8; }
+  .ev-entrega { background: #D1FAE5; color: #065F46; }
+  .ev-pta     { background: #F3E8FF; color: #6B21A8; }
+
+  .cal-week-grid {
+    display: grid; grid-template-columns: 50px repeat(7, 1fr);
+    gap: 1px; background: var(--border); border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden;
+  }
+  .cal-time-col { background: var(--bg); }
+  .cal-time-slot { height: 40px; padding: 2px 6px; font-size: 10px; color: var(--sub); border-bottom: 1px solid var(--border); }
+  .cal-week-col { background: var(--card); position: relative; }
+  .cal-week-header { background: var(--bg); text-align: center; padding: 8px 4px; font-size: 11px; font-weight: 600; color: var(--sub); }
+  .cal-week-header.today-col { color: var(--red); }
+  .cal-week-slot { height: 40px; border-bottom: 1px solid var(--border); position: relative; }
+
+  .cal-sidebar {
+    display: flex; flex-direction: column; gap: 12px;
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- ═══ SIDEBAR ═══ -->
+<aside class="sidebar">
+  <a class="logo" href="index.html">
+    <div class="logo-icon">A</div>
+    <div>
+      <div class="logo-text">AUDIPER</div>
+      <div class="logo-sub">Auditoria Independente</div>
+    </div>
+  </a>
+
+  <nav class="nav">
+    <div class="nav-section" style="margin-top:8px;">Principal</div>
+    <a class="nav-item active" href="#" onclick="switchTab('dashboard')">
+      <span class="icon">◻</span> Dashboard
+    </a>
+    <a class="nav-item" href="#" onclick="switchTab('escritorio')">
+      <span class="icon">🏢</span> Escritório
+    </a>
+    <a class="nav-item" href="mission-control.html">
+      <span class="icon">🎛</span> Mission Control
+    </a>
+
+    <div class="nav-section">Auditoria</div>
+    <a class="nav-item" href="#">
+      <span class="icon">📋</span> Auditorias
+      <span class="nav-badge">9</span>
+    </a>
+    <a class="nav-item" href="#">
+      <span class="icon">⚠</span> Achados
+      <span class="nav-badge orange">47</span>
+    </a>
+    <a class="nav-item" href="#">
+      <span class="icon">📁</span> Documentos
+      <span class="nav-badge green">181</span>
+    </a>
+    <a class="nav-item" href="#">
+      <span class="icon">👥</span> Clientes
+    </a>
+
+    <div class="nav-section">Ferramentas</div>
+    <a class="nav-item" href="#">
+      <span class="icon">🔎</span> CNPJ / Due Dil.
+    </a>
+    <a class="nav-item" href="#">
+      <span class="icon">📊</span> Relatórios
+    </a>
+    <a class="nav-item" href="#">
+      <span class="icon">⚙</span> Configurações
+    </a>
+  </nav>
+
+  <div class="sidebar-upgrade">
+    <h4>AUDINA AI Pro</h4>
+    <p>Análise automática de achados e geração de relatórios NBC TA.</p>
+    <button class="btn-upgrade">Ativar Módulo</button>
+  </div>
+
+  <div class="sidebar-bottom">
+    <a class="nav-item" href="#">
+      <span class="icon">❓</span> Ajuda
+    </a>
+    <a class="nav-item" href="index.html">
+      <span class="icon">↩</span> Voltar ao Site
+    </a>
+  </div>
+</aside>
+
+<!-- ═══ MAIN CONTENT ═══ -->
+<main class="main" id="main-content">
+
+  <!-- Header -->
+  <div class="main-header">
+    <div>
+      <h1 id="greeting-text">Bom dia, Ricardo</h1>
+      <p id="greeting-sub">Você tem 3 auditorias em execução e 2 achados a confirmar hoje.</p>
+    </div>
+    <div class="header-right">
+      <div class="date-pill" id="current-date">📅 27 Mar, 2026</div>
+      <button class="btn-refresh" onclick="refreshData()">↻ Atualizar</button>
+    </div>
+  </div>
+
+  <!-- Tab navigation -->
+  <div class="main-tabs">
+    <button class="tab-btn active" onclick="switchMainTab('dashboard', this)">Dashboard</button>
+    <button class="tab-btn" onclick="switchMainTab('calendar', this)">Calendário</button>
+    <button class="tab-btn" onclick="switchMainTab('tarefas', this)">Tarefas</button>
+  </div>
+
+  <!-- ─── PANE: DASHBOARD ─── -->
+  <div class="tab-pane active" id="pane-dashboard">
+
+  <!-- BRIEFING CENTRAL — primeira coisa que o auditor vê -->
+  <div class="card" id="briefing-card" style="padding:16px 20px;margin-bottom:16px;border-left:4px solid var(--red);display:none;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="font-size:18px;">📌</span>
+        <span style="font-weight:600;font-size:15px;color:var(--text);">Atualizacoes do Dia</span>
+      </div>
+      <span id="briefing-data" style="font-size:12px;color:var(--muted);"></span>
+    </div>
+    <p id="briefing-resumo" style="margin:0 0 12px;font-size:13px;line-height:1.5;color:var(--muted);"></p>
+    <div id="briefing-destaques" style="display:flex;flex-direction:column;gap:6px;"></div>
+    <div id="briefing-emails" style="margin-top:12px;display:none;">
+      <div style="font-size:12px;font-weight:600;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;">Comunicacoes</div>
+      <div id="emails-list" style="display:flex;flex-direction:column;gap:6px;"></div>
+    </div>
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpis">
+    <div class="kpi-card">
+      <div class="kpi-row">
+        <div class="kpi-icon red">📋</div>
+        <span class="kpi-delta up">▲ +1</span>
+      </div>
+      <div class="kpi-val">9</div>
+      <div class="kpi-label">Auditorias Ativas</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-row">
+        <div class="kpi-icon orange">⚠</div>
+        <span class="kpi-delta up">▲ +5</span>
+      </div>
+      <div class="kpi-val">47</div>
+      <div class="kpi-label">Achados Confirmados</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-row">
+        <div class="kpi-icon blue">📁</div>
+        <span class="kpi-delta up">▲ +12</span>
+      </div>
+      <div class="kpi-val">181</div>
+      <div class="kpi-label">Documentos Indexados</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-row">
+        <div class="kpi-icon green">✓</div>
+        <span class="kpi-delta neu">— =</span>
+      </div>
+      <div class="kpi-val">3</div>
+      <div class="kpi-label">Relatórios Emitidos</div>
+    </div>
+  </div>
+
+  <!-- Chart + Donut -->
+  <div class="section-row">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Progresso por Auditoria (docs)</span>
+        <div class="period-picker">Mar 2026 ▾</div>
+      </div>
+      <canvas id="perf-chart"></canvas>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Distribuição por Fase</span>
+      </div>
+      <div class="donut-wrap">
+        <canvas class="donut-canvas" id="donut-chart"></canvas>
+        <div class="donut-legend" id="donut-legend"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Auditorias List -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Auditorias em Andamento</span>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <span style="font-size:12px;color:var(--sub);">Concluídas <b>3</b>/9</span>
+        <div class="period-picker">Semana ▾</div>
+      </div>
+    </div>
+    <div class="aud-list" id="aud-list"></div>
+  </div>
+
+  </div><!-- /pane-dashboard -->
+
+  <!-- ─── PANE: CALENDAR ─── -->
+  <div class="tab-pane" id="pane-calendar">
+    <div class="card" style="padding:20px;">
+      <div class="cal-header">
+        <div class="cal-nav">
+          <button onclick="calNav(-1)">‹</button>
+          <span class="cal-month-label" id="cal-month-label"></span>
+          <button onclick="calNav(1)">›</button>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <button class="cal-vbtn" onclick="calToday()">Hoje</button>
+          <div class="cal-view-btns">
+            <button class="cal-vbtn active" id="vbtn-month" onclick="setCalView('month',this)">Mês</button>
+            <button class="cal-vbtn" id="vbtn-week" onclick="setCalView('week',this)">Semana</button>
+            <button class="cal-vbtn" id="vbtn-day" onclick="setCalView('day',this)">Dia</button>
+          </div>
+        </div>
+      </div>
+      <div id="cal-body" style="margin-top:16px;"></div>
+    </div>
+
+    <!-- Upcoming deadlines sidebar -->
+    <div class="card" style="padding:16px;">
+      <div class="card-header">
+        <span class="card-title">Próximos Prazos</span>
+      </div>
+      <div id="upcoming-list" style="display:flex;flex-direction:column;gap:8px;margin-top:4px;"></div>
+    </div>
+  </div><!-- /pane-calendar -->
+
+  <!-- briefing movido para dentro do pane-dashboard -->
+
+  <!-- ─── PANE: TAREFAS ─── -->
+  <div class="tab-pane" id="pane-tarefas">
+    <div class="card" style="padding:20px;">
+      <div class="card-header">
+        <span class="card-title">Tarefas Pendentes</span>
+      </div>
+      <div id="tarefas-list" style="display:flex;flex-direction:column;gap:10px;margin-top:12px;"></div>
+    </div>
+  </div><!-- /pane-tarefas -->
+
+</main>
+
+<!-- ═══ RIGHT PANEL ═══ -->
+<aside class="right-panel">
+
+  <!-- Audina AI -->
+  <div class="audina-card">
+    <div class="audina-header">
+      <div class="audina-avatar">🤖</div>
+      <div>
+        <div class="audina-name">Audina</div>
+        <div class="audina-role">IA de Auditoria — Online</div>
+      </div>
+    </div>
+    <div class="audina-message" id="audina-msg">
+      Bom dia! Identifiquei 2 achados pendentes de confirmação na Via Paris e 1 divergência de saldo na Unimed Floriano. Deseja que eu prepare o rascunho do COM?
+    </div>
+    <div class="audina-input-row">
+      <input class="audina-input" id="audina-input" type="text" placeholder="Pergunte à Audina…" onkeydown="if(event.key==='Enter')sendAudina()">
+      <button class="btn-audina-send" onclick="sendAudina()">➤</button>
+    </div>
+  </div>
+
+  <!-- Achados Recentes -->
+  <div class="card" style="padding:16px;">
+    <div class="card-header">
+      <span class="card-title">Achados Recentes</span>
+      <span style="font-size:11px;color:var(--red);cursor:pointer;font-weight:600;">Ver todos</span>
+    </div>
+    <div class="achados-list">
+      <div class="achado-item">
+        <div class="achado-icon" style="background:#FEE2E2;">🔴</div>
+        <div>
+          <div class="achado-text">Provisão insuficiente — CPC 25</div>
+          <div class="achado-meta">OIG Gaming · ALTO · Confirmado</div>
+        </div>
+      </div>
+      <div class="achado-item">
+        <div class="achado-icon" style="background:#FEF3C7;">🟡</div>
+        <div>
+          <div class="achado-text">Capital social abaixo do mínimo</div>
+          <div class="achado-meta">OIG Gaming · MÉDIO · Confirmado</div>
+        </div>
+      </div>
+      <div class="achado-item">
+        <div class="achado-icon" style="background:#DBEAFE;">🔵</div>
+        <div>
+          <div class="achado-text">Divergência em saldo de convênios</div>
+          <div class="achado-meta">Unimed Floriano · MÉDIO · Análise</div>
+        </div>
+      </div>
+      <div class="achado-item">
+        <div class="achado-icon" style="background:#D1FAE5;">🟢</div>
+        <div>
+          <div class="achado-text">Imobilizado sem depreciação — CPC 27</div>
+          <div class="achado-meta">Japan Veículos · BAIXO · Confirmado</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Activity -->
+  <div class="card" style="padding:16px;">
+    <div class="card-header">
+      <span class="card-title">Atividade Recente</span>
+    </div>
+    <div class="act-list" id="act-list"></div>
+  </div>
+
+</aside>
+
+<script>
+// ─── DATA ───────────────────────────────────────────────
+const AUDITORIAS = [
+  { id:'oig',      label:'OIG Gaming',      fase:'Execução Avançada', docs:41, status:'exec', icon:'🎲', color:'#C8962A' },
+  { id:'unimed',   label:'Unimed Floriano', fase:'Execução',          docs:33, status:'exec', icon:'🏥', color:'#16a34a' },
+  { id:'japan',    label:'Japan Veículos',  fase:'Execução',          docs:20, status:'exec', icon:'🚗', color:'#1d4ed8' },
+  { id:'viaparis', label:'Via Paris',       fase:'Entregue (G)',      docs:17, status:'done', icon:'👗', color:'#7B2D3E' },
+  { id:'shanghai', label:'Via Shanghai',    fase:'Entregue (G)',      docs:16, status:'done', icon:'🏮', color:'#7B2D3E' },
+  { id:'resolve',  label:'Resolve',         fase:'Entregue (G)',      docs:14, status:'done', icon:'📐', color:'#7B2D3E' },
+  { id:'fapec',    label:'FAPEC',           fase:'Planejamento',      docs:23, status:'plan', icon:'🎓', color:'#9B3A4E' },
+  { id:'megalink', label:'Megalink Telecom',fase:'Início (A)',        docs:0,  status:'plan', icon:'📡', color:'#5C1F2E' },
+  { id:'caritas',  label:'Cáritas Teresina',fase:'Proposta',          docs:2,  status:'prop', icon:'🤝', color:'#6B2535' },
+];
+
+const ACTIVITY = [
+  { name:'Vitor Eduardo', action:'Adicionou 3 documentos', target:'OIG Gaming',      time:'10:42', color:'#C8262D' },
+  { name:'Audina AI',     action:'Gerou rascunho do COM',  target:'Via Paris',        time:'10:15', color:'#8B5CF6' },
+  { name:'Ricardo',       action:'Confirmou achado',       target:'Japan Veículos',   time:'09:51', color:'#1d4ed8' },
+  { name:'Vitor Eduardo', action:'Concluiu WP Fase F',     target:'Resolve',          time:'09:20', color:'#C8262D' },
+  { name:'Ricardo',       action:'Enviou relatório G-01',  target:'Via Shanghai',     time:'Ontem', color:'#1d4ed8' },
+];
+
+const PILL_MAP = {
+  exec: ['pill-exec','Em Execução'],
+  done: ['pill-done','Entregue'],
+  plan: ['pill-plan','Planejamento'],
+  prop: ['pill-prop','Proposta'],
+};
+
+// ─── INIT ───────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  setGreeting();
+  setDate();
+  loadDashboardData();
+});
+
+async function loadDashboardData() {
+  try {
+    const res = await fetch('/dashboard-data.json');
+    const text = await res.text();
+    const data = JSON.parse(text);
+    applyData(data);
+    return;
+  } catch (e) {
+    console.warn('[Audina] JSON fetch falhou, usando fallback:', e.message);
+  }
+  // Fallback: dados hardcoded
+  renderAudList();
+  renderActivity();
+  drawPerfChart();
+  drawDonut();
+}
+
+function applyData(data) {
+  // Google Calendar events
+  if (data.gcal_events && data.gcal_events.length > 0) {
+    // Substituir eventos hardcoded pelos reais do Google Calendar
+    CAL_EVENTS.length = 0;
+    data.gcal_events.forEach(e => CAL_EVENTS.push(e));
+    console.log('[Audina] ' + CAL_EVENTS.length + ' eventos do Google Calendar carregados');
+  }
+
+  // KPIs
+  const k = data.kpis;
+  const kpiVals = document.querySelectorAll('.kpi-val');
+  if (kpiVals[0]) kpiVals[0].textContent = k.auditorias_ativas;
+  if (kpiVals[1]) kpiVals[1].textContent = k.achados_confirmados;
+  if (kpiVals[2]) kpiVals[2].textContent = k.documentos_indexados.toLocaleString('pt-BR');
+  if (kpiVals[3]) kpiVals[3].textContent = k.relatorios_emitidos;
+
+  // Auditorias
+  if (data.auditorias) {
+    window._AUDITORIAS_DATA = data.auditorias;
+    renderAudListFrom(data.auditorias);
+    drawPerfChartFrom(data.auditorias);
+    drawDonutFrom(data.auditorias);
+  }
+
+  // Activity
+  if (data.activity) {
+    renderActivityFrom(data.activity);
+  }
+
+  // Briefing central (primeira seção do dashboard)
+  if (data.briefing) {
+    const card = document.getElementById('briefing-card');
+    const b = data.briefing;
+    if (card) {
+      card.style.display = 'block';
+      const bData = document.getElementById('briefing-data');
+      const bResumo = document.getElementById('briefing-resumo');
+      const bDest = document.getElementById('briefing-destaques');
+      if (bData) bData.textContent = b.data || '';
+      if (bResumo) bResumo.textContent = b.resumo || '';
+      if (bDest && b.destaques) {
+        const icons = {prazo:'⏰', email:'📧', tarefa:'📋', info:'ℹ️'};
+        const colors = {prazo:'#DC2626', email:'#2563EB', tarefa:'#059669', info:'#6B7280'};
+        bDest.innerHTML = b.destaques.map(d => `
+          <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:${colors[d.tipo]||'#6B7280'}10;border-left:3px solid ${colors[d.tipo]||'#6B7280'};border-radius:4px;">
+            <span style="font-size:15px;">${icons[d.tipo]||'•'}</span>
+            <span style="font-size:13px;color:var(--text);">${d.texto}</span>
+          </div>
+        `).join('');
+      }
+    }
+  }
+
+  // Emails dentro do briefing
+  if (data.emails && data.emails.length > 0) {
+    const wrapper = document.getElementById('briefing-emails');
+    const el = document.getElementById('emails-list');
+    if (wrapper) wrapper.style.display = 'block';
+    if (el) {
+      el.innerHTML = data.emails.map(e => `
+        <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:6px;background:${e.lido?'transparent':'var(--red)06'};border:1px solid ${e.lido?'var(--border)':'var(--red)30'};">
+          <span style="font-size:14px;">${e.lido?'📨':'📩'}</span>
+          <div style="flex:1;min-width:0;">
+            <span style="font-size:12px;font-weight:600;color:var(--text);">${e.de}</span>
+            <span style="font-size:11px;color:var(--muted);margin-left:6px;">${e.assunto}</span>
+          </div>
+          <span style="font-size:11px;color:var(--muted);">${e.data}</span>
+        </div>
+      `).join('');
+    }
+  }
+
+  // Tarefas
+  if (data.tarefas) {
+    const el = document.getElementById('tarefas-list');
+    if (el) {
+      const prioColors = {urgente:'#DC2626', alta:'#F59E0B', media:'#2563EB', baixa:'#6B7280'};
+      const prioLabels = {urgente:'URGENTE', alta:'ALTA', media:'MÉDIA', baixa:'BAIXA'};
+      el.innerHTML = data.tarefas.map(t => `
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;border-left:3px solid ${prioColors[t.prioridade]||'#6B7280'};">
+          <div style="flex:1;">
+            <div style="font-size:14px;font-weight:500;color:var(--text);">${t.titulo}</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px;">Prazo: ${t.prazo}</div>
+          </div>
+          <span style="font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;background:${prioColors[t.prioridade]||'#6B7280'}15;color:${prioColors[t.prioridade]||'#6B7280'};">${prioLabels[t.prioridade]||t.prioridade}</span>
+        </div>
+      `).join('');
+    }
+  }
+
+  // Timestamp
+  if (data.gerado_em) {
+    const d = new Date(data.gerado_em);
+    const t = d.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'});
+    document.getElementById('current-date').title = 'Dados de ' + t;
+  }
+}
+
+function renderAudListFrom(auditorias) {
+  const el = document.getElementById('aud-list');
+  el.innerHTML = auditorias.map(a => {
+    const [pillClass, pillLabel] = PILL_MAP[a.status] || ['pill-plan','—'];
+    return `
+    <div class="aud-row" onclick="openAuditoria('${a.id}')">
+      <div class="aud-color" style="background:${a.color}20;">${a.icon}</div>
+      <div class="aud-info">
+        <div class="aud-name">${a.label}</div>
+        <div class="aud-fase">${a.fase}</div>
+      </div>
+      <span class="aud-status-pill ${pillClass}">${pillLabel}</span>
+      <div class="aud-docs"><span>${a.docs.toLocaleString('pt-BR')}</span><br>docs</div>
+    </div>`;
+  }).join('');
+}
+
+function renderActivityFrom(activity) {
+  const el = document.getElementById('act-list');
+  el.innerHTML = activity.map(a => `
+    <div class="act-item">
+      <div class="act-avatar" style="background:${a.color};">${a.name.charAt(0)}</div>
+      <div class="act-content">
+        <div class="act-name">${a.name}</div>
+        <div class="act-desc">${a.action} · <b>${a.target}</b></div>
+      </div>
+      <div class="act-time">${a.time}</div>
+    </div>`).join('');
+}
+
+function drawPerfChartFrom(auditorias) {
+  const canvas = document.getElementById('perf-chart');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.parentElement.clientWidth - 40;
+  const H = 140;
+  canvas.width = W; canvas.height = H;
+  const data = auditorias.map(a => a.docs);
+  const labels = auditorias.map(a => a.label.split(' ')[0]);
+  const max = Math.max(...data, 10) * 1.1;
+  const barW = Math.floor((W - 20) / data.length) - 6;
+  ctx.clearRect(0,0,W,H);
+  ctx.strokeStyle = '#F3F4F6'; ctx.lineWidth = 1;
+  for (let i=0; i<=4; i++) {
+    const y = H - 24 - ((H-40)*i/4);
+    ctx.beginPath(); ctx.moveTo(10,y); ctx.lineTo(W-10,y); ctx.stroke();
+    ctx.fillStyle='#9CA3AF'; ctx.font='10px Inter,sans-serif';
+    ctx.fillText(Math.round(max*i/4),0,y+4);
+  }
+  auditorias.forEach((a,i) => {
+    const v = a.docs;
+    const x = 16 + i*(barW+6);
+    const barH = ((H-40)*v/max);
+    const y = H-24-barH;
+    const grad = ctx.createLinearGradient(0,y,0,H-24);
+    const c = a.status==='done'?['#10B981','#D1FAE5']:a.status==='exec'?['#C8262D','#FEE2E2']:['#F59E0B','#FEF3C7'];
+    grad.addColorStop(0,c[0]); grad.addColorStop(1,c[1]);
+    ctx.fillStyle=grad;
+    ctx.beginPath(); ctx.roundRect(x,y,barW,barH,[3,3,0,0]); ctx.fill();
+    ctx.fillStyle='#6B7280'; ctx.font='9px Inter,sans-serif'; ctx.textAlign='center';
+    ctx.fillText(labels[i],x+barW/2,H-8);
+    if(v>0){ctx.fillStyle='#374151';ctx.font='bold 9px Inter,sans-serif';ctx.fillText(v.toLocaleString('pt-BR'),x+barW/2,y-3);}
+  });
+}
+
+function drawDonutFrom(auditorias) {
+  const canvas = document.getElementById('donut-chart');
+  const ctx = canvas.getContext('2d');
+  canvas.width=120; canvas.height=120;
+  const cx=60,cy=60,r=46,ri=28;
+  const counts = {exec:0,done:0,plan:0,prop:0};
+  auditorias.forEach(a=>counts[a.status]=(counts[a.status]||0)+1);
+  const segments = [
+    {label:'Execução',count:counts.exec,color:'#C8262D'},
+    {label:'Entregue',count:counts.done,color:'#10B981'},
+    {label:'Planejamento',count:counts.plan,color:'#F59E0B'},
+    {label:'Proposta',count:counts.prop||0,color:'#8B5CF6'},
+  ].filter(s=>s.count>0);
+  const total = segments.reduce((s,x)=>s+x.count,0);
+  let angle=-Math.PI/2;
+  segments.forEach(seg=>{
+    const sweep=(seg.count/total)*Math.PI*2;
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,r,angle,angle+sweep); ctx.closePath();
+    ctx.fillStyle=seg.color; ctx.fill(); angle+=sweep;
+  });
+  ctx.beginPath(); ctx.arc(cx,cy,ri,0,Math.PI*2); ctx.fillStyle='white'; ctx.fill();
+  ctx.fillStyle='#1E1E2F'; ctx.font='bold 16px Inter,sans-serif'; ctx.textAlign='center';
+  ctx.fillText(total,cx,cy+5); ctx.font='9px Inter,sans-serif'; ctx.fillStyle='#6B7280'; ctx.fillText('total',cx,cy+16);
+  const leg=document.getElementById('donut-legend');
+  leg.innerHTML=segments.map(s=>`<div class="legend-item"><div class="legend-dot" style="background:${s.color};"></div><span class="legend-label">${s.label}</span><span class="legend-val">${s.count}</span></div>`).join('');
+}
+
+function setGreeting() {
+  const h = new Date().getHours();
+  const g = h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite';
+  document.getElementById('greeting-text').textContent = `${g}, Ricardo`;
+}
+
+function setDate() {
+  const d = new Date();
+  const opts = { day:'numeric', month:'short', year:'numeric' };
+  document.getElementById('current-date').textContent = '📅 ' + d.toLocaleDateString('pt-BR', opts);
+}
+
+function renderAudList() {
+  const el = document.getElementById('aud-list');
+  el.innerHTML = AUDITORIAS.map(a => {
+    const [pillClass, pillLabel] = PILL_MAP[a.status];
+    return `
+    <div class="aud-row" onclick="openAuditoria('${a.id}')">
+      <div class="aud-color" style="background:${a.color}20;">${a.icon}</div>
+      <div class="aud-info">
+        <div class="aud-name">${a.label}</div>
+        <div class="aud-fase">${a.fase}</div>
+      </div>
+      <span class="aud-status-pill ${pillClass}">${pillLabel}</span>
+      <div class="aud-docs"><span>${a.docs}</span><br>docs</div>
+    </div>`;
+  }).join('');
+}
+
+function renderActivity() {
+  const el = document.getElementById('act-list');
+  el.innerHTML = ACTIVITY.map(a => `
+    <div class="act-item">
+      <div class="act-avatar" style="background:${a.color};">${a.name.charAt(0)}</div>
+      <div class="act-content">
+        <div class="act-name">${a.name}</div>
+        <div class="act-desc">${a.action} · <b>${a.target}</b></div>
+      </div>
+      <div class="act-time">${a.time}</div>
+    </div>`).join('');
+}
+
+// ─── CHARTS ─────────────────────────────────────────────
+function drawPerfChart() {
+  const canvas = document.getElementById('perf-chart');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.parentElement.clientWidth - 40;
+  const H = 140;
+  canvas.width = W; canvas.height = H;
+
+  // Data: docs by auditoria
+  const data = AUDITORIAS.map(a => a.docs);
+  const labels = AUDITORIAS.map(a => a.label.split(' ')[0]);
+  const max = Math.max(...data) + 5;
+  const barW = Math.floor((W - 20) / data.length) - 6;
+
+  ctx.clearRect(0,0,W,H);
+
+  // Grid lines
+  ctx.strokeStyle = '#F3F4F6';
+  ctx.lineWidth = 1;
+  for (let i=0; i<=4; i++) {
+    const y = H - 24 - ((H-40) * i / 4);
+    ctx.beginPath(); ctx.moveTo(10,y); ctx.lineTo(W-10,y); ctx.stroke();
+    ctx.fillStyle = '#9CA3AF';
+    ctx.font = '10px Inter, sans-serif';
+    ctx.fillText(Math.round(max * i / 4), 0, y+4);
+  }
+
+  // Bars
+  data.forEach((v, i) => {
+    const x = 16 + i * (barW + 6);
+    const barH = ((H-40) * v / max);
+    const y = H - 24 - barH;
+
+    const grad = ctx.createLinearGradient(0, y, 0, H-24);
+    const a = AUDITORIAS[i];
+    grad.addColorStop(0, a.status === 'done' ? '#10B981' : a.status === 'exec' ? '#C8262D' : '#F59E0B');
+    grad.addColorStop(1, a.status === 'done' ? '#D1FAE5' : a.status === 'exec' ? '#FEE2E2' : '#FEF3C7');
+
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.roundRect(x, y, barW, barH, [3,3,0,0]);
+    ctx.fill();
+
+    // Label
+    ctx.fillStyle = '#6B7280';
+    ctx.font = '9px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(labels[i], x + barW/2, H-8);
+
+    // Value on top
+    if (v > 0) {
+      ctx.fillStyle = '#374151';
+      ctx.font = 'bold 9px Inter, sans-serif';
+      ctx.fillText(v, x + barW/2, y - 3);
+    }
+  });
+}
+
+function drawDonut() {
+  const canvas = document.getElementById('donut-chart');
+  const ctx = canvas.getContext('2d');
+  canvas.width = 120; canvas.height = 120;
+  const W = 120, H = 120, cx = W/2, cy = H/2, r = 46, ri = 28;
+
+  const segments = [
+    { label:'Execução', count:3, color:'#C8262D' },
+    { label:'Entregue', count:3, color:'#10B981' },
+    { label:'Planejamento', count:2, color:'#F59E0B' },
+    { label:'Proposta', count:1, color:'#8B5CF6' },
+  ];
+  const total = segments.reduce((s,x) => s + x.count, 0);
+  let angle = -Math.PI / 2;
+
+  segments.forEach(seg => {
+    const sweep = (seg.count / total) * Math.PI * 2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, r, angle, angle + sweep);
+    ctx.closePath();
+    ctx.fillStyle = seg.color;
+    ctx.fill();
+    angle += sweep;
+  });
+
+  // Hole
+  ctx.beginPath();
+  ctx.arc(cx, cy, ri, 0, Math.PI * 2);
+  ctx.fillStyle = 'white';
+  ctx.fill();
+
+  // Center text
+  ctx.fillStyle = '#1E1E2F';
+  ctx.font = 'bold 16px Inter, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('9', cx, cy + 5);
+  ctx.font = '9px Inter, sans-serif';
+  ctx.fillStyle = '#6B7280';
+  ctx.fillText('total', cx, cy + 16);
+
+  // Legend
+  const leg = document.getElementById('donut-legend');
+  leg.innerHTML = segments.map(s => `
+    <div class="legend-item">
+      <div class="legend-dot" style="background:${s.color};"></div>
+      <span class="legend-label">${s.label}</span>
+      <span class="legend-val">${s.count}</span>
+    </div>`).join('');
+}
+
+// ─── ACTIONS ────────────────────────────────────────────
+function refreshData() {
+  const btn = document.querySelector('.btn-refresh');
+  btn.textContent = '⟳ Atualizando…';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = '↻ Atualizar';
+    btn.disabled = false;
+    showToast('Dados atualizados com sucesso');
+  }, 1200);
+}
+
+function openAuditoria(id) {
+  const a = AUDITORIAS.find(x => x.id === id);
+  if (a) showToast(`${a.icon} ${a.label} — ${a.fase} · ${a.docs} docs`);
+}
+
+const AUDINA_REPLIES = [
+  'Analisando os documentos... Identifico 3 possíveis pontos de atenção na área de provisões.',
+  'Com base nos WPs disponíveis, o risco nesta auditoria está classificado como MÉDIO.',
+  'Posso gerar o rascunho do COM agora? Basta confirmar os achados pendentes primeiro.',
+  'Encontrei 2 divergências no razão analítico. Deseja que eu prepare a planilha de cruzamento?',
+  'A NBC TA 315 exige que reavaliemos os riscos após esta nova informação. Devo incluir no planejamento?',
+];
+let replyIdx = 0;
+function sendAudina() {
+  const inp = document.getElementById('audina-input');
+  if (!inp.value.trim()) return;
+  inp.value = '';
+  const msg = document.getElementById('audina-msg');
+  msg.style.opacity = '0.5';
+  setTimeout(() => {
+    msg.textContent = AUDINA_REPLIES[replyIdx % AUDINA_REPLIES.length];
+    msg.style.opacity = '1';
+    replyIdx++;
+  }, 700);
+}
+
+function showToast(msg) {
+  let t = document.getElementById('toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'toast';
+    t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1E1E2F;color:white;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:opacity .2s;pointer-events:none;';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.opacity = '1';
+  clearTimeout(t._tmr);
+  t._tmr = setTimeout(() => t.style.opacity = '0', 2500);
+}
+
+function switchTab(tab) {
+  if (tab === 'escritorio') window.location.href = 'mission-control.html#escritorio';
+}
+
+// Resize chart on window resize
+window.addEventListener('resize', () => {
+  drawPerfChart();
+});
+
+// ─── MAIN TAB SWITCHER ───────────────────────────────────
+function switchMainTab(name, btn) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('pane-' + name).classList.add('active');
+  btn.classList.add('active');
+  if (name === 'calendar') buildCalendar();
+}
+
+// ─── CALENDAR ────────────────────────────────────────────
+const CAL_EVENTS = [
+  // Prazos de auditoria
+  { date:'2026-03-27', type:'prazo',   label:'Prazo DEFIS',            detail:'Prazo final entrega DEFIS 2025' },
+  { date:'2026-03-31', type:'prazo',   label:'Unimed — Encerramento',  detail:'Encerramento da fase de execução' },
+  { date:'2026-04-05', type:'reuniao', label:'OIG — Reunião de achados',detail:'Apresentação dos 13 achados à administração' },
+  { date:'2026-04-10', type:'entrega', label:'OIG — COM-10',           detail:'Entrega da Comunicação de Achados' },
+  { date:'2026-04-15', type:'prazo',   label:'Japan — Relatório G-01', detail:'Entrega do relatório final' },
+  { date:'2026-04-20', type:'reuniao', label:'Megalink — Kick-off',    detail:'Reunião de início de auditoria' },
+  { date:'2026-04-25', type:'pta',     label:'Unimed — PTAs F',        detail:'Sign-off PTAs de conclusão' },
+  { date:'2026-05-05', type:'entrega', label:'Unimed — COM-10',        detail:'Entrega comunicação final' },
+  { date:'2026-05-15', type:'prazo',   label:'FAPEC — Planejamento',   detail:'Conclusão do planejamento' },
+  { date:'2026-05-20', type:'reuniao', label:'Caritas — Proposta',     detail:'Reunião de apresentação de proposta' },
+];
+
+let calState = {
+  year: new Date().getFullYear(),
+  month: new Date().getMonth(), // 0-indexed
+  view: 'month',
+};
+
+const MONTHS_PT = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+const DAYS_PT   = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+
+function buildCalendar() {
+  updateCalMonthLabel();
+  renderCalView();
+  renderUpcoming();
+}
+
+function updateCalMonthLabel() {
+  const lbl = document.getElementById('cal-month-label');
+  if (!lbl) return;
+  lbl.textContent = MONTHS_PT[calState.month] + ' ' + calState.year;
+}
+
+function calNav(dir) {
+  if (calState.view === 'month') {
+    calState.month += dir;
+    if (calState.month > 11) { calState.month = 0; calState.year++; }
+    if (calState.month < 0)  { calState.month = 11; calState.year--; }
+  } else if (calState.view === 'week' || calState.view === 'day') {
+    calState._weekOffset = (calState._weekOffset || 0) + dir;
+  }
+  buildCalendar();
+}
+
+function calToday() {
+  const now = new Date();
+  calState.year = now.getFullYear();
+  calState.month = now.getMonth();
+  calState._weekOffset = 0;
+  buildCalendar();
+}
+
+function setCalView(v, btn) {
+  calState.view = v;
+  calState._weekOffset = 0;
+  document.querySelectorAll('.cal-vbtn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  buildCalendar();
+}
+
+function renderCalView() {
+  const body = document.getElementById('cal-body');
+  if (!body) return;
+  if (calState.view === 'month') renderMonthView(body);
+  else if (calState.view === 'week') renderWeekView(body);
+  else renderDayView(body);
+}
+
+function eventsFor(dateStr) {
+  return CAL_EVENTS.filter(e => e.date === dateStr);
+}
+
+function toDateStr(y, m, d) {
+  return y + '-' + String(m+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+}
+
+function renderMonthView(body) {
+  const y = calState.year, m = calState.month;
+  const firstDay = new Date(y, m, 1).getDay(); // 0=Sun
+  const daysInMonth = new Date(y, m+1, 0).getDate();
+  const daysInPrev = new Date(y, m, 0).getDate();
+  const today = new Date();
+  const todayStr = toDateStr(today.getFullYear(), today.getMonth(), today.getDate());
+
+  let html = '<div class="cal-grid-month">';
+  DAYS_PT.forEach(d => { html += `<div class="cal-day-header">${d}</div>`; });
+
+  let cell = 0;
+  // Prev month padding
+  for (let i = firstDay - 1; i >= 0; i--) {
+    const ds = toDateStr(y, m-1, daysInPrev - i);
+    html += `<div class="cal-day other-month"><span class="cal-day-num">${daysInPrev - i}</span>${renderEvents(ds)}</div>`;
+    cell++;
+  }
+  // Current month
+  for (let d = 1; d <= daysInMonth; d++) {
+    const ds = toDateStr(y, m, d);
+    const isToday = ds === todayStr;
+    html += `<div class="cal-day${isToday?' today':''}">
+      <span class="cal-day-num">${d}</span>
+      ${renderEvents(ds)}
+    </div>`;
+    cell++;
+  }
+  // Next month padding
+  let next = 1;
+  while (cell % 7 !== 0) {
+    const ds = toDateStr(y, m+1, next);
+    html += `<div class="cal-day other-month"><span class="cal-day-num">${next}</span>${renderEvents(ds)}</div>`;
+    next++; cell++;
+  }
+  html += '</div>';
+  body.innerHTML = html;
+}
+
+function renderEvents(dateStr) {
+  return eventsFor(dateStr).map(e =>
+    `<div class="cal-event ev-${e.type}" title="${e.detail}">${e.label}</div>`
+  ).join('');
+}
+
+function renderWeekView(body) {
+  const offset = calState._weekOffset || 0;
+  const today = new Date();
+  // Start of current week (Sunday)
+  const startOfWeek = new Date(today);
+  startOfWeek.setDate(today.getDate() - today.getDay() + offset * 7);
+
+  const weekDays = [];
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(startOfWeek);
+    d.setDate(startOfWeek.getDate() + i);
+    weekDays.push(d);
+  }
+
+  // Update label
+  const lbl = document.getElementById('cal-month-label');
+  if (lbl) {
+    const s = weekDays[0], e = weekDays[6];
+    lbl.textContent = `${s.getDate()} ${MONTHS_PT[s.getMonth()].slice(0,3)} – ${e.getDate()} ${MONTHS_PT[e.getMonth()].slice(0,3)} ${e.getFullYear()}`;
+  }
+
+  const todayStr = toDateStr(today.getFullYear(), today.getMonth(), today.getDate());
+  const hours = Array.from({length:13}, (_,i) => i + 8); // 8h–20h
+
+  let html = '<div class="cal-week-grid">';
+  // Header row
+  html += '<div class="cal-week-col cal-time-col"><div class="cal-week-header"></div>';
+  hours.forEach(h => { html += `<div class="cal-time-slot">${h}:00</div>`; });
+  html += '</div>';
+
+  weekDays.forEach(d => {
+    const ds = toDateStr(d.getFullYear(), d.getMonth(), d.getDate());
+    const isToday = ds === todayStr;
+    html += `<div class="cal-week-col">
+      <div class="cal-week-header${isToday?' today-col':''}">${DAYS_PT[d.getDay()]} ${d.getDate()}</div>`;
+    hours.forEach(() => { html += `<div class="cal-week-slot"></div>`; });
+    // overlay events
+    eventsFor(ds).forEach((e,i) => {
+      html += `<div class="cal-event ev-${e.type}" style="position:absolute;top:${46 + i*20}px;left:2px;right:2px;z-index:1;" title="${e.detail}">${e.label}</div>`;
+    });
+    html += '</div>';
+  });
+  html += '</div>';
+  body.innerHTML = html;
+}
+
+function renderDayView(body) {
+  const offset = calState._weekOffset || 0;
+  const today = new Date();
+  today.setDate(today.getDate() + offset);
+  const ds = toDateStr(today.getFullYear(), today.getMonth(), today.getDate());
+
+  const lbl = document.getElementById('cal-month-label');
+  if (lbl) lbl.textContent = `${today.getDate()} de ${MONTHS_PT[today.getMonth()]} de ${today.getFullYear()}`;
+
+  const hours = Array.from({length:13}, (_,i) => i + 8);
+  const events = eventsFor(ds);
+
+  let html = '<div style="display:grid;grid-template-columns:60px 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden;">';
+  hours.forEach(h => {
+    html += `<div style="background:var(--bg);padding:4px 8px;font-size:11px;color:var(--sub);border-bottom:1px solid var(--border);height:44px;">${h}:00</div>`;
+    const slotEvents = events.filter(() => false); // placeholder
+    html += `<div style="background:var(--card);border-bottom:1px solid var(--border);height:44px;position:relative;">${slotEvents.map(e=>`<div class="cal-event ev-${e.type}">${e.label}</div>`).join('')}</div>`;
+  });
+  html += '</div>';
+
+  if (events.length > 0) {
+    html += '<div style="margin-top:12px;display:flex;flex-direction:column;gap:6px;">';
+    events.forEach(e => {
+      html += `<div class="cal-event ev-${e.type}" style="padding:8px 12px;border-radius:6px;">
+        <b>${e.label}</b><br><span style="font-size:10px;opacity:.8;">${e.detail}</span>
+      </div>`;
+    });
+    html += '</div>';
+  }
+  body.innerHTML = html;
+}
+
+function renderUpcoming() {
+  const el = document.getElementById('upcoming-list');
+  if (!el) return;
+  const today = new Date();
+  const todayStr = toDateStr(today.getFullYear(), today.getMonth(), today.getDate());
+  const upcoming = CAL_EVENTS
+    .filter(e => e.date >= todayStr)
+    .sort((a,b) => a.date.localeCompare(b.date))
+    .slice(0, 6);
+
+  el.innerHTML = upcoming.map(e => {
+    const d = new Date(e.date + 'T00:00:00');
+    const label = d.toLocaleDateString('pt-BR', {day:'numeric',month:'short'});
+    return `<div style="display:flex;align-items:flex-start;gap:10px;">
+      <div style="min-width:44px;text-align:center;background:var(--bg);border-radius:6px;padding:4px;font-size:10px;font-weight:600;color:var(--sub);">${label}</div>
+      <div class="cal-event ev-${e.type}" style="flex:1;padding:5px 8px;border-radius:5px;">
+        <b style="font-size:11px;">${e.label}</b><br>
+        <span style="font-size:10px;opacity:.75;">${e.detail}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+</script>
+</body>
+</html>

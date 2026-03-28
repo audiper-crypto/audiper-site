@@ -241,5 +241,120 @@
       "cliente": "Caritas Diocesana de Teresina",
       "exercicio": "2025"
     }
+  ],
+  "gcal_events": [
+    {
+      "date": "2026-04-01",
+      "type": "entrega",
+      "label": "🧾 AUDIPER | Emissão e Envio de NFs aos Clientes",
+      "detail": "📋 TAREFA MENSAL — EMISSÃO E ENVIO DE NOTAS FISCAIS\n\nClientes habituais:\n• Unimed Regional de Picos →",
+      "source": "gcal"
+    },
+    {
+      "date": "2026-04-30",
+      "type": "entrega",
+      "label": "Envio das Informações a CVM - Relatório Atividades",
+      "detail": "Envio das Informações a CVM ultimo dia. Fazer pelo site",
+      "source": "gcal"
+    },
+    {
+      "date": "2026-05-01",
+      "type": "entrega",
+      "label": "🧾 AUDIPER | Emissão e Envio de NFs aos Clientes",
+      "detail": "📋 TAREFA MENSAL — EMISSÃO E ENVIO DE NOTAS FISCAIS\n\nClientes habituais:\n• Unimed Regional de Picos →",
+      "source": "gcal"
+    },
+    {
+      "date": "2026-05-01",
+      "type": "entrega",
+      "label": "CVM Declaração Eletrônica de Conformidade",
+      "detail": "Declaração Eletrônica de Conformidade: Os auditores devem confirmar os dados constantes do Cadastro",
+      "source": "gcal"
+    },
+    {
+      "date": "2026-05-29",
+      "type": "entrega",
+      "label": "Envio Atualização Cadastro CVM Até 30 de Maio",
+      "detail": "Envio Atualização Cadastro CVM Até 30 de Maio",
+      "source": "gcal"
+    },
+    {
+      "date": "2026-06-01",
+      "type": "entrega",
+      "label": "🧾 AUDIPER | Emissão e Envio de NFs aos Clientes",
+      "detail": "📋 TAREFA MENSAL — EMISSÃO E ENVIO DE NOTAS FISCAIS\n\nClientes habituais:\n• Unimed Regional de Picos →",
+      "source": "gcal"
+    }
+  ],
+  "gcal_updated": "2026-03-28T12:00:00.413577",
+  "briefing": {
+    "data": "28/03/2026",
+    "resumo": "Bom dia! 3 auditorias em execucao, 3 entregues. DEFIS Saude Suplementar vence em 31/03.",
+    "destaques": [
+      {
+        "tipo": "prazo",
+        "texto": "DEFIS Saude Suplementar — prazo 31/03/2026 (3 dias)"
+      },
+      {
+        "tipo": "email",
+        "texto": "2 achados pendentes confirmacao (Via Paris + Unimed)"
+      },
+      {
+        "tipo": "tarefa",
+        "texto": "Megalink — solicitar documentacao exercicio 2025 em abril"
+      }
+    ]
+  },
+  "tarefas": [
+    {
+      "titulo": "DEFIS Saude Suplementar",
+      "prioridade": "urgente",
+      "prazo": "31/03/2026",
+      "status": "pendente"
+    },
+    {
+      "titulo": "Megalink — solicitar docs",
+      "prioridade": "alta",
+      "prazo": "Abr sem 1",
+      "status": "pendente"
+    },
+    {
+      "titulo": "VP/JV/VS — cobrar 2a parcela NFs",
+      "prioridade": "alta",
+      "prazo": "10/04/2026",
+      "status": "pendente"
+    },
+    {
+      "titulo": "OIG — relatório ganhadores V2",
+      "prioridade": "media",
+      "prazo": "Abr/2026",
+      "status": "pendente"
+    },
+    {
+      "titulo": "AudiChain Nivel 1 (QR Code + batch)",
+      "prioridade": "media",
+      "prazo": "Folga",
+      "status": "pendente"
+    }
+  ],
+  "emails": [
+    {
+      "de": "Japan Veiculos",
+      "assunto": "RE: Documentacao exercicio 2025",
+      "data": "27/03",
+      "lido": true
+    },
+    {
+      "de": "Megalink Telecom",
+      "assunto": "NF-1974 — confirmacao recebimento",
+      "data": "26/03",
+      "lido": true
+    },
+    {
+      "de": "CFC",
+      "assunto": "Anuidade 2026 — lembrete prazo 31/03",
+      "data": "25/03",
+      "lido": false
+    }
   ]
 }
