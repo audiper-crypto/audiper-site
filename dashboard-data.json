@@ -1,0 +1,245 @@
+{
+  "gerado_em": "2026-03-28T11:55:15.072373",
+  "kpis": {
+    "auditorias_ativas": 9,
+    "em_execucao": 3,
+    "entregues": 3,
+    "planejamento": 3,
+    "achados_confirmados": 60,
+    "documentos_indexados": 4012,
+    "relatorios_emitidos": 3,
+    "ptas_total": 378,
+    "ptas_concluidos": 0,
+    "ptas_em_andamento": 0,
+    "clientes_cadastrados": 9
+  },
+  "auditorias": [
+    {
+      "id": "oig",
+      "label": "OIG Gaming",
+      "folder": "OIG 2026",
+      "fase": "Execução Avançada",
+      "status": "exec",
+      "icon": "🎲",
+      "color": "#C8962A",
+      "achados": 13,
+      "docs": 1452
+    },
+    {
+      "id": "unimed",
+      "label": "Unimed Floriano",
+      "folder": "UNIMED FLORIANO",
+      "fase": "Execução",
+      "status": "exec",
+      "icon": "🏥",
+      "color": "#16a34a",
+      "achados": 11,
+      "docs": 490
+    },
+    {
+      "id": "japan",
+      "label": "Japan Veículos",
+      "folder": "JAPANVEICULOS",
+      "fase": "Execução",
+      "status": "exec",
+      "icon": "🚗",
+      "color": "#1d4ed8",
+      "achados": 9,
+      "docs": 460
+    },
+    {
+      "id": "viaparis",
+      "label": "Via Paris",
+      "folder": "VIAPARIS",
+      "fase": "Entregue (G)",
+      "status": "done",
+      "icon": "👗",
+      "color": "#7B2D3E",
+      "achados": 13,
+      "docs": 870
+    },
+    {
+      "id": "shanghai",
+      "label": "Via Shanghai",
+      "folder": "VIASHANGHAI",
+      "fase": "Entregue (G)",
+      "status": "done",
+      "icon": "🏮",
+      "color": "#7B2D3E",
+      "achados": 8,
+      "docs": 315
+    },
+    {
+      "id": "resolve",
+      "label": "Resolve",
+      "folder": "RESOLVE",
+      "fase": "Entregue (G)",
+      "status": "done",
+      "icon": "📐",
+      "color": "#7B2D3E",
+      "achados": 6,
+      "docs": 299
+    },
+    {
+      "id": "fapec",
+      "label": "FAPEC",
+      "folder": "FAPEC",
+      "fase": "Planejamento",
+      "status": "plan",
+      "icon": "🎓",
+      "color": "#9B3A4E",
+      "achados": 0,
+      "docs": 30
+    },
+    {
+      "id": "megalink",
+      "label": "Megalink Telecom",
+      "folder": "MEGALINK",
+      "fase": "Início (A)",
+      "status": "plan",
+      "icon": "📡",
+      "color": "#5C1F2E",
+      "achados": 0,
+      "docs": 93
+    },
+    {
+      "id": "caritas",
+      "label": "Cáritas Teresina",
+      "folder": "CARITAS TERESINA",
+      "fase": "Proposta",
+      "status": "prop",
+      "icon": "🤝",
+      "color": "#6B2535",
+      "achados": 0,
+      "docs": 3
+    }
+  ],
+  "achados_recentes": [
+    {
+      "titulo": "Provisão insuficiente — CPC 25",
+      "cliente": "OIG Gaming",
+      "risco": "ALTO",
+      "status": "Confirmado",
+      "nivel": "alto"
+    },
+    {
+      "titulo": "Capital social abaixo do mínimo regulatório",
+      "cliente": "OIG Gaming",
+      "risco": "MÉDIO",
+      "status": "Confirmado",
+      "nivel": "medio"
+    },
+    {
+      "titulo": "Divergência em saldo de convênios médicos",
+      "cliente": "Unimed Floriano",
+      "risco": "MÉDIO",
+      "status": "Análise",
+      "nivel": "medio"
+    },
+    {
+      "titulo": "Imobilizado sem depreciação — CPC 27",
+      "cliente": "Japan Veículos",
+      "risco": "BAIXO",
+      "status": "Confirmado",
+      "nivel": "baixo"
+    }
+  ],
+  "activity": [
+    {
+      "name": "Vitor Eduardo",
+      "action": "Adicionou 3 documentos",
+      "target": "OIG Gaming",
+      "time": "10:42",
+      "color": "#C8262D"
+    },
+    {
+      "name": "Audina AI",
+      "action": "Gerou rascunho do COM",
+      "target": "Via Paris",
+      "time": "10:15",
+      "color": "#8B5CF6"
+    },
+    {
+      "name": "Ricardo",
+      "action": "Confirmou achado",
+      "target": "Japan Veículos",
+      "time": "09:51",
+      "color": "#1d4ed8"
+    },
+    {
+      "name": "Vitor Eduardo",
+      "action": "Concluiu WP Fase F",
+      "target": "Resolve",
+      "time": "09:20",
+      "color": "#C8262D"
+    },
+    {
+      "name": "Ricardo",
+      "action": "Enviou relatório G-01",
+      "target": "Via Shanghai",
+      "time": "Ontem",
+      "color": "#1d4ed8"
+    }
+  ],
+  "equipe": [
+    {
+      "nome": "Profa. Maria de Nazaré dos Santos Ribeiro",
+      "email": "nazare@audiper.com.br"
+    },
+    {
+      "nome": "Prof. Ricardo Augusto dos Santos Ribeiro",
+      "email": "ricardo@audiper.com.br"
+    },
+    {
+      "nome": "Vitor Eduardo dos Santos Ribeiro",
+      "email": "vitor@audiper.com.br"
+    }
+  ],
+  "auditorias_db": [
+    {
+      "status": "em_andamento",
+      "cliente": "OIG Gaming Brazil Ltda",
+      "exercicio": "2025"
+    },
+    {
+      "status": "em_andamento",
+      "cliente": "Unimed Floriano Cooperativa de Trabalho Médico",
+      "exercicio": "2025"
+    },
+    {
+      "status": "em_andamento",
+      "cliente": "Japan Veiculos Ltda",
+      "exercicio": "2025"
+    },
+    {
+      "status": "concluida",
+      "cliente": "Via Paris Comercio de Roupas Ltda",
+      "exercicio": "2024"
+    },
+    {
+      "status": "concluida",
+      "cliente": "Via Shanghai Automoveis Ltda",
+      "exercicio": "2024"
+    },
+    {
+      "status": "concluida",
+      "cliente": "Resolve Administradora de Beneficios Ltda",
+      "exercicio": "2024"
+    },
+    {
+      "status": "em_andamento",
+      "cliente": "Fundacao de Apoio a Pesquisa e ao Ensino de Campo Grande",
+      "exercicio": "2025"
+    },
+    {
+      "status": "em_andamento",
+      "cliente": "Mega Teleinformatica Ltda",
+      "exercicio": "2025"
+    },
+    {
+      "status": "em_andamento",
+      "cliente": "Caritas Diocesana de Teresina",
+      "exercicio": "2025"
+    }
+  ]
+}
