@@ -88,6 +88,15 @@
 <div class="container">
   <div class="kpi-strip" id="kpis"></div>
 
+  <!-- Timeline de fases da auditoria -->
+  <div class="card" style="padding:16px 20px;margin-bottom:16px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+      <span class="card-title" style="margin:0;">Fluxo da Auditoria</span>
+      <span id="fase-atual-label" style="font-size:11px;color:var(--muted);"></span>
+    </div>
+    <div id="timeline-fases" style="display:flex;align-items:center;gap:0;overflow-x:auto;padding:4px 0;"></div>
+  </div>
+
   <div class="grid">
     <div class="left-col">
       <!-- CHAT AUDINA — central, principal -->
@@ -197,6 +206,9 @@ function renderPainel(d) {
   badge.style.color = '#fff';
   document.getElementById('top-meta').textContent = `Exercicio ${aud.exercicio} | ${k.docs_filesystem} docs`;
   document.getElementById('chat-context-label').textContent = `Contexto isolado: ${cli.nome_fantasia||cli.razao_social||'N/A'} — ${k.docs_filesystem} docs, ${k.ptas_total} PTAs`;
+
+  // Timeline de fases
+  renderTimelineFases(d.fases, aud.fase_atual, aud.status);
 
   // KPIs
   document.getElementById('kpis').innerHTML = [
@@ -319,6 +331,66 @@ function renderPainel(d) {
       <span class="timeline-time">${date} ${time}</span>
     </div>`;
   }).join('') || '<div style="color:var(--muted);font-size:12px;">Nenhuma atividade registrada</div>';
+}
+
+function renderTimelineFases(fases, faseAtual, statusAud) {
+  const FASE_ORDER = ['planejamento','execucao','evidencias','conclusao','relatorio'];
+  const FASE_ICONS = ['📋','🔍','📎','✅','📄'];
+  const el = document.getElementById('timeline-fases');
+  if (!el || !fases) return;
+
+  // Determinar qual fase esta ativa
+  const faseMap = {};
+  fases.forEach(f => { faseMap[f.id] = f; });
+  const currentIdx = FASE_ORDER.indexOf(faseAtual || 'planejamento');
+
+  let html = '';
+  FASE_ORDER.forEach((fid, i) => {
+    const f = faseMap[fid] || { nome: fid, cor: '#6B7280', concluidos: 0, total: 0 };
+    const pct = f.total ? Math.round(f.concluidos / f.total * 100) : 0;
+    const isCurrent = (i === currentIdx && statusAud !== 'concluida');
+    const isDone = (i < currentIdx || statusAud === 'concluida');
+    const isFuture = (i > currentIdx && statusAud !== 'concluida');
+
+    // Cor do circulo
+    let circleStyle = '';
+    if (isDone) circleStyle = 'background:var(--green);color:#fff;border-color:var(--green);';
+    else if (isCurrent) circleStyle = `background:${f.cor};color:#fff;border-color:${f.cor};box-shadow:0 0 0 4px ${f.cor}30;`;
+    else circleStyle = 'background:var(--bg);color:var(--muted);border-color:var(--border);';
+
+    // Linha conectora (nao no ultimo)
+    const line = i < FASE_ORDER.length - 1
+      ? `<div style="flex:1;height:3px;min-width:30px;background:${isDone?'var(--green)':'var(--border)'};margin:0 -2px;"></div>`
+      : '';
+
+    html += `
+      <div style="display:flex;flex-direction:column;align-items:center;min-width:80px;position:relative;">
+        <div style="width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+          border:2px solid;font-size:16px;transition:all 0.3s;${circleStyle}">
+          ${isDone ? '✓' : FASE_ICONS[i]}
+        </div>
+        <div style="font-size:11px;font-weight:${isCurrent?'700':'500'};margin-top:6px;color:${isFuture?'var(--muted)':'var(--text)'};">
+          ${f.nome}
+        </div>
+        <div style="font-size:10px;color:${isCurrent?f.cor:'var(--muted)'};margin-top:2px;">
+          ${f.concluidos}/${f.total} PTAs${pct>0?' ('+pct+'%)':''}
+        </div>
+      </div>
+      ${line}`;
+  });
+
+  el.innerHTML = html;
+
+  // Label da fase atual
+  const label = document.getElementById('fase-atual-label');
+  if (label) {
+    if (statusAud === 'concluida') {
+      label.innerHTML = '<span style="color:var(--green);font-weight:600;">Auditoria Concluida</span>';
+    } else {
+      const curr = faseMap[FASE_ORDER[currentIdx]];
+      label.textContent = `Fase atual: ${curr ? curr.nome : faseAtual}`;
+    }
+  }
 }
 
 function toggleFase(i) {
