@@ -1,11 +1,11 @@
 {
-  "gerado_em": "2026-03-28T11:55:15.072373",
+  "gerado_em": "2026-03-28T12:10:45.959773",
   "kpis": {
     "auditorias_ativas": 9,
     "em_execucao": 3,
     "entregues": 3,
     "planejamento": 3,
-    "achados_confirmados": 60,
+    "achados_confirmados": 0,
     "documentos_indexados": 4012,
     "relatorios_emitidos": 3,
     "ptas_total": 378,
@@ -15,233 +15,392 @@
   },
   "auditorias": [
     {
-      "id": "oig",
+      "id": "a80c658a-2b98-4345-a450-bccf3116b882",
       "label": "OIG Gaming",
+      "codigo": "OIGGAM-2025",
       "folder": "OIG 2026",
-      "fase": "Execução Avançada",
+      "fase": "Execucao",
       "status": "exec",
       "icon": "🎲",
-      "color": "#C8962A",
-      "achados": 13,
-      "docs": 1452
+      "color": "#64748B",
+      "achados": 0,
+      "docs": 1452,
+      "ptas_total": 42,
+      "ptas_ok": 0,
+      "exercicio": "2025",
+      "cnpj": "55.459.453/0001-72",
+      "link_cliente": "/clientes/c3639834-36eb-4c8c-8e9a-17d23c09d291",
+      "link_auditoria": "/auditorias/a80c658a-2b98-4345-a450-bccf3116b882",
+      "link_achados": "/auditorias/a80c658a-2b98-4345-a450-bccf3116b882/achados",
+      "link_ptas": "/auditorias/a80c658a-2b98-4345-a450-bccf3116b882/ptas",
+      "contexto": null
     },
     {
-      "id": "unimed",
+      "id": "45895168-b5a2-4134-b6b4-3d054a6e8330",
       "label": "Unimed Floriano",
+      "codigo": "UNIMED-2025",
       "folder": "UNIMED FLORIANO",
-      "fase": "Execução",
+      "fase": "Execucao",
       "status": "exec",
-      "icon": "🏥",
-      "color": "#16a34a",
-      "achados": 11,
-      "docs": 490
+      "icon": "📁",
+      "color": "#64748B",
+      "achados": 0,
+      "docs": 490,
+      "ptas_total": 42,
+      "ptas_ok": 0,
+      "exercicio": "2025",
+      "cnpj": "41.511.429/0001-20",
+      "link_cliente": "/clientes/dff517f5-4f44-496d-a2e3-94a99fc7b72c",
+      "link_auditoria": "/auditorias/45895168-b5a2-4134-b6b4-3d054a6e8330",
+      "link_achados": "/auditorias/45895168-b5a2-4134-b6b4-3d054a6e8330/achados",
+      "link_ptas": "/auditorias/45895168-b5a2-4134-b6b4-3d054a6e8330/ptas",
+      "contexto": null
     },
     {
-      "id": "japan",
+      "id": "04863c06-b5f5-45f8-9925-50ed3b66953e",
       "label": "Japan Veículos",
+      "codigo": "JAPANV-2025",
       "folder": "JAPANVEICULOS",
-      "fase": "Execução",
+      "fase": "Execucao",
       "status": "exec",
-      "icon": "🚗",
-      "color": "#1d4ed8",
-      "achados": 9,
-      "docs": 460
+      "icon": "📁",
+      "color": "#64748B",
+      "achados": 0,
+      "docs": 460,
+      "ptas_total": 42,
+      "ptas_ok": 0,
+      "exercicio": "2025",
+      "cnpj": "03.998.690/0001-08",
+      "link_cliente": "/clientes/33c5465f-ad5b-4628-971e-1a6224a84c5c",
+      "link_auditoria": "/auditorias/04863c06-b5f5-45f8-9925-50ed3b66953e",
+      "link_achados": "/auditorias/04863c06-b5f5-45f8-9925-50ed3b66953e/achados",
+      "link_ptas": "/auditorias/04863c06-b5f5-45f8-9925-50ed3b66953e/ptas",
+      "contexto": null
     },
     {
-      "id": "viaparis",
+      "id": "d03c2e8a-ef38-4fcf-bee9-ea7a74af9c19",
       "label": "Via Paris",
+      "codigo": "VIAPAR-2024",
       "folder": "VIAPARIS",
       "fase": "Entregue (G)",
       "status": "done",
-      "icon": "👗",
-      "color": "#7B2D3E",
-      "achados": 13,
-      "docs": 870
+      "icon": "📁",
+      "color": "#64748B",
+      "achados": 0,
+      "docs": 870,
+      "ptas_total": 42,
+      "ptas_ok": 0,
+      "exercicio": "2024",
+      "cnpj": "07.634.740/0001-63",
+      "link_cliente": "/clientes/d622c621-16fc-4930-84c9-4eac4512fc82",
+      "link_auditoria": "/auditorias/d03c2e8a-ef38-4fcf-bee9-ea7a74af9c19",
+      "link_achados": "/auditorias/d03c2e8a-ef38-4fcf-bee9-ea7a74af9c19/achados",
+      "link_ptas": "/auditorias/d03c2e8a-ef38-4fcf-bee9-ea7a74af9c19/ptas",
+      "contexto": null
     },
     {
-      "id": "shanghai",
+      "id": "51175caf-e097-4255-a26d-b10e6e27e525",
       "label": "Via Shanghai",
+      "codigo": "VIASHA-2024",
       "folder": "VIASHANGHAI",
       "fase": "Entregue (G)",
       "status": "done",
-      "icon": "🏮",
-      "color": "#7B2D3E",
-      "achados": 8,
-      "docs": 315
+      "icon": "📁",
+      "color": "#64748B",
+      "achados": 0,
+      "docs": 315,
+      "ptas_total": 42,
+      "ptas_ok": 0,
+      "exercicio": "2024",
+      "cnpj": "62.697.793/0001-05",
+      "link_cliente": "/clientes/e1f6995e-e8be-4a98-a558-76bfb1f52365",
+      "link_auditoria": "/auditorias/51175caf-e097-4255-a26d-b10e6e27e525",
+      "link_achados": "/auditorias/51175caf-e097-4255-a26d-b10e6e27e525/achados",
+      "link_ptas": "/auditorias/51175caf-e097-4255-a26d-b10e6e27e525/ptas",
+      "contexto": null
     },
     {
-      "id": "resolve",
+      "id": "0ac38b45-7ef9-4fbb-808e-64d6d98bbc29",
       "label": "Resolve",
+      "codigo": "RESOLV-2024",
       "folder": "RESOLVE",
       "fase": "Entregue (G)",
       "status": "done",
-      "icon": "📐",
-      "color": "#7B2D3E",
-      "achados": 6,
-      "docs": 299
+      "icon": "📁",
+      "color": "#64748B",
+      "achados": 0,
+      "docs": 299,
+      "ptas_total": 42,
+      "ptas_ok": 0,
+      "exercicio": "2024",
+      "cnpj": "13.746.922/0001-94",
+      "link_cliente": "/clientes/d3a86c4e-4ef7-46e9-8205-973247659819",
+      "link_auditoria": "/auditorias/0ac38b45-7ef9-4fbb-808e-64d6d98bbc29",
+      "link_achados": "/auditorias/0ac38b45-7ef9-4fbb-808e-64d6d98bbc29/achados",
+      "link_ptas": "/auditorias/0ac38b45-7ef9-4fbb-808e-64d6d98bbc29/ptas",
+      "contexto": null
     },
     {
-      "id": "fapec",
+      "id": "a3d1ad34-5e8b-4c79-8bf6-76dbc33ca100",
       "label": "FAPEC",
+      "codigo": "FAPEC-2025",
       "folder": "FAPEC",
       "fase": "Planejamento",
       "status": "plan",
-      "icon": "🎓",
-      "color": "#9B3A4E",
+      "icon": "📁",
+      "color": "#64748B",
       "achados": 0,
-      "docs": 30
+      "docs": 30,
+      "ptas_total": 42,
+      "ptas_ok": 0,
+      "exercicio": "2025",
+      "cnpj": "15.513.690/0001-50",
+      "link_cliente": "/clientes/95bbee00-1de1-4472-b5bd-1ed6422a89d6",
+      "link_auditoria": "/auditorias/a3d1ad34-5e8b-4c79-8bf6-76dbc33ca100",
+      "link_achados": "/auditorias/a3d1ad34-5e8b-4c79-8bf6-76dbc33ca100/achados",
+      "link_ptas": "/auditorias/a3d1ad34-5e8b-4c79-8bf6-76dbc33ca100/ptas",
+      "contexto": null
     },
     {
-      "id": "megalink",
+      "id": "6e97f560-d3a1-473f-9b87-879d064e8d5f",
       "label": "Megalink Telecom",
+      "codigo": "MEGALI-2025",
       "folder": "MEGALINK",
-      "fase": "Início (A)",
-      "status": "plan",
-      "icon": "📡",
-      "color": "#5C1F2E",
-      "achados": 0,
-      "docs": 93
-    },
-    {
-      "id": "caritas",
-      "label": "Cáritas Teresina",
-      "folder": "CARITAS TERESINA",
-      "fase": "Proposta",
+      "fase": "Inicio (A)",
       "status": "prop",
-      "icon": "🤝",
-      "color": "#6B2535",
+      "icon": "📁",
+      "color": "#64748B",
       "achados": 0,
-      "docs": 3
+      "docs": 93,
+      "ptas_total": 42,
+      "ptas_ok": 0,
+      "exercicio": "2025",
+      "cnpj": "11.408.142/0001-09",
+      "link_cliente": "/clientes/4c4a2211-5a0e-43da-8766-eccdc4f6eeae",
+      "link_auditoria": "/auditorias/6e97f560-d3a1-473f-9b87-879d064e8d5f",
+      "link_achados": "/auditorias/6e97f560-d3a1-473f-9b87-879d064e8d5f/achados",
+      "link_ptas": "/auditorias/6e97f560-d3a1-473f-9b87-879d064e8d5f/ptas",
+      "contexto": null
+    },
+    {
+      "id": "fda34bd5-a706-4ef2-a8ad-a752310f75a6",
+      "label": "Cáritas Teresina",
+      "codigo": "CÁRITA-2025",
+      "folder": "CARITAS TERESINA",
+      "fase": "Inicio (A)",
+      "status": "prop",
+      "icon": "📁",
+      "color": "#64748B",
+      "achados": 0,
+      "docs": 3,
+      "ptas_total": 42,
+      "ptas_ok": 0,
+      "exercicio": "2025",
+      "cnpj": "06.865.166/0001-57",
+      "link_cliente": "/clientes/2a4c4c11-59af-489e-943a-d3f50cd038c5",
+      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6",
+      "link_achados": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6/achados",
+      "link_ptas": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6/ptas",
+      "contexto": null
     }
   ],
-  "achados_recentes": [
+  "conclusoes": [
     {
-      "titulo": "Provisão insuficiente — CPC 25",
-      "cliente": "OIG Gaming",
-      "risco": "ALTO",
-      "status": "Confirmado",
-      "nivel": "alto"
+      "cliente": "Via Paris",
+      "codigo": "VIAPAR-2024",
+      "exercicio": "2024",
+      "achados": 0,
+      "ptas_ok": 0,
+      "ptas_total": 42,
+      "link_auditoria": "/auditorias/d03c2e8a-ef38-4fcf-bee9-ea7a74af9c19",
+      "link_cliente": "/clientes/d622c621-16fc-4930-84c9-4eac4512fc82"
     },
     {
-      "titulo": "Capital social abaixo do mínimo regulatório",
-      "cliente": "OIG Gaming",
-      "risco": "MÉDIO",
-      "status": "Confirmado",
-      "nivel": "medio"
+      "cliente": "Via Shanghai",
+      "codigo": "VIASHA-2024",
+      "exercicio": "2024",
+      "achados": 0,
+      "ptas_ok": 0,
+      "ptas_total": 42,
+      "link_auditoria": "/auditorias/51175caf-e097-4255-a26d-b10e6e27e525",
+      "link_cliente": "/clientes/e1f6995e-e8be-4a98-a558-76bfb1f52365"
     },
     {
-      "titulo": "Divergência em saldo de convênios médicos",
-      "cliente": "Unimed Floriano",
-      "risco": "MÉDIO",
-      "status": "Análise",
-      "nivel": "medio"
-    },
-    {
-      "titulo": "Imobilizado sem depreciação — CPC 27",
-      "cliente": "Japan Veículos",
-      "risco": "BAIXO",
-      "status": "Confirmado",
-      "nivel": "baixo"
+      "cliente": "Resolve",
+      "codigo": "RESOLV-2024",
+      "exercicio": "2024",
+      "achados": 0,
+      "ptas_ok": 0,
+      "ptas_total": 42,
+      "link_auditoria": "/auditorias/0ac38b45-7ef9-4fbb-808e-64d6d98bbc29",
+      "link_cliente": "/clientes/d3a86c4e-4ef7-46e9-8205-973247659819"
     }
   ],
+  "achados_recentes": [],
   "activity": [
     {
-      "name": "Vitor Eduardo",
-      "action": "Adicionou 3 documentos",
-      "target": "OIG Gaming",
-      "time": "10:42",
-      "color": "#C8262D"
+      "name": "Sistema",
+      "action": "Criou",
+      "target": "ptas",
+      "time": "11:55",
+      "color": "#1d4ed8",
+      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
     },
     {
-      "name": "Audina AI",
-      "action": "Gerou rascunho do COM",
-      "target": "Via Paris",
-      "time": "10:15",
-      "color": "#8B5CF6"
+      "name": "Sistema",
+      "action": "Criou",
+      "target": "ptas",
+      "time": "11:55",
+      "color": "#1d4ed8",
+      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
     },
     {
-      "name": "Ricardo",
-      "action": "Confirmou achado",
-      "target": "Japan Veículos",
-      "time": "09:51",
-      "color": "#1d4ed8"
+      "name": "Sistema",
+      "action": "Criou",
+      "target": "ptas",
+      "time": "11:55",
+      "color": "#1d4ed8",
+      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
     },
     {
-      "name": "Vitor Eduardo",
-      "action": "Concluiu WP Fase F",
-      "target": "Resolve",
-      "time": "09:20",
-      "color": "#C8262D"
+      "name": "Sistema",
+      "action": "Criou",
+      "target": "ptas",
+      "time": "11:55",
+      "color": "#1d4ed8",
+      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
     },
     {
-      "name": "Ricardo",
-      "action": "Enviou relatório G-01",
-      "target": "Via Shanghai",
-      "time": "Ontem",
-      "color": "#1d4ed8"
+      "name": "Sistema",
+      "action": "Criou",
+      "target": "ptas",
+      "time": "11:55",
+      "color": "#1d4ed8",
+      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
+    },
+    {
+      "name": "Sistema",
+      "action": "Criou",
+      "target": "ptas",
+      "time": "11:55",
+      "color": "#1d4ed8",
+      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
+    },
+    {
+      "name": "Sistema",
+      "action": "Criou",
+      "target": "ptas",
+      "time": "11:55",
+      "color": "#1d4ed8",
+      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
+    },
+    {
+      "name": "Sistema",
+      "action": "Criou",
+      "target": "ptas",
+      "time": "11:55",
+      "color": "#1d4ed8",
+      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
+    },
+    {
+      "name": "Sistema",
+      "action": "Criou",
+      "target": "ptas",
+      "time": "11:55",
+      "color": "#1d4ed8",
+      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
+    },
+    {
+      "name": "Sistema",
+      "action": "Criou",
+      "target": "ptas",
+      "time": "11:55",
+      "color": "#1d4ed8",
+      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
+    },
+    {
+      "name": "Sistema",
+      "action": "Criou",
+      "target": "ptas",
+      "time": "11:55",
+      "color": "#1d4ed8",
+      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
+    },
+    {
+      "name": "Sistema",
+      "action": "Criou",
+      "target": "ptas",
+      "time": "11:55",
+      "color": "#1d4ed8",
+      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
+    },
+    {
+      "name": "Sistema",
+      "action": "Criou",
+      "target": "ptas",
+      "time": "11:55",
+      "color": "#1d4ed8",
+      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
+    },
+    {
+      "name": "Sistema",
+      "action": "Criou",
+      "target": "ptas",
+      "time": "11:55",
+      "color": "#1d4ed8",
+      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
+    },
+    {
+      "name": "Sistema",
+      "action": "Criou",
+      "target": "ptas",
+      "time": "11:55",
+      "color": "#1d4ed8",
+      "link_auditoria": "/auditorias/fda34bd5-a706-4ef2-a8ad-a752310f75a6"
     }
   ],
+  "tarefas": [],
+  "emails": [],
+  "briefing": {
+    "data": "28/03/2026",
+    "resumo": "9 auditorias ativas. 3 em execucao, 3 entregues.",
+    "destaques": [
+      {
+        "tipo": "prazo",
+        "texto": "3 auditorias em execucao"
+      },
+      {
+        "tipo": "email",
+        "texto": "3 auditorias concluidas — verificar pagamentos"
+      }
+    ]
+  },
   "equipe": [
     {
       "nome": "Profa. Maria de Nazaré dos Santos Ribeiro",
-      "email": "nazare@audiper.com.br"
+      "email": "nazare@audiper.com.br",
+      "cargo": "socio"
     },
     {
       "nome": "Prof. Ricardo Augusto dos Santos Ribeiro",
-      "email": "ricardo@audiper.com.br"
+      "email": "ricardo@audiper.com.br",
+      "cargo": "gerente"
     },
     {
       "nome": "Vitor Eduardo dos Santos Ribeiro",
-      "email": "vitor@audiper.com.br"
+      "email": "vitor@audiper.com.br",
+      "cargo": "gerente"
     }
   ],
-  "auditorias_db": [
-    {
-      "status": "em_andamento",
-      "cliente": "OIG Gaming Brazil Ltda",
-      "exercicio": "2025"
-    },
-    {
-      "status": "em_andamento",
-      "cliente": "Unimed Floriano Cooperativa de Trabalho Médico",
-      "exercicio": "2025"
-    },
-    {
-      "status": "em_andamento",
-      "cliente": "Japan Veiculos Ltda",
-      "exercicio": "2025"
-    },
-    {
-      "status": "concluida",
-      "cliente": "Via Paris Comercio de Roupas Ltda",
-      "exercicio": "2024"
-    },
-    {
-      "status": "concluida",
-      "cliente": "Via Shanghai Automoveis Ltda",
-      "exercicio": "2024"
-    },
-    {
-      "status": "concluida",
-      "cliente": "Resolve Administradora de Beneficios Ltda",
-      "exercicio": "2024"
-    },
-    {
-      "status": "em_andamento",
-      "cliente": "Fundacao de Apoio a Pesquisa e ao Ensino de Campo Grande",
-      "exercicio": "2025"
-    },
-    {
-      "status": "em_andamento",
-      "cliente": "Mega Teleinformatica Ltda",
-      "exercicio": "2025"
-    },
-    {
-      "status": "em_andamento",
-      "cliente": "Caritas Diocesana de Teresina",
-      "exercicio": "2025"
-    }
-  ],
+  "links": {
+    "calendario": "/calendario",
+    "clientes": "/clientes",
+    "auditorias": "/auditorias",
+    "achados": "/achados",
+    "tarefas": "/tarefas",
+    "qualidade": "/api/dashboard/qualidade",
+    "mission_control": "/mission-control.html"
+  },
   "gcal_events": [
     {
       "date": "2026-04-01",
@@ -286,75 +445,5 @@
       "source": "gcal"
     }
   ],
-  "gcal_updated": "2026-03-28T12:00:00.413577",
-  "briefing": {
-    "data": "28/03/2026",
-    "resumo": "Bom dia! 3 auditorias em execucao, 3 entregues. DEFIS Saude Suplementar vence em 31/03.",
-    "destaques": [
-      {
-        "tipo": "prazo",
-        "texto": "DEFIS Saude Suplementar — prazo 31/03/2026 (3 dias)"
-      },
-      {
-        "tipo": "email",
-        "texto": "2 achados pendentes confirmacao (Via Paris + Unimed)"
-      },
-      {
-        "tipo": "tarefa",
-        "texto": "Megalink — solicitar documentacao exercicio 2025 em abril"
-      }
-    ]
-  },
-  "tarefas": [
-    {
-      "titulo": "DEFIS Saude Suplementar",
-      "prioridade": "urgente",
-      "prazo": "31/03/2026",
-      "status": "pendente"
-    },
-    {
-      "titulo": "Megalink — solicitar docs",
-      "prioridade": "alta",
-      "prazo": "Abr sem 1",
-      "status": "pendente"
-    },
-    {
-      "titulo": "VP/JV/VS — cobrar 2a parcela NFs",
-      "prioridade": "alta",
-      "prazo": "10/04/2026",
-      "status": "pendente"
-    },
-    {
-      "titulo": "OIG — relatório ganhadores V2",
-      "prioridade": "media",
-      "prazo": "Abr/2026",
-      "status": "pendente"
-    },
-    {
-      "titulo": "AudiChain Nivel 1 (QR Code + batch)",
-      "prioridade": "media",
-      "prazo": "Folga",
-      "status": "pendente"
-    }
-  ],
-  "emails": [
-    {
-      "de": "Japan Veiculos",
-      "assunto": "RE: Documentacao exercicio 2025",
-      "data": "27/03",
-      "lido": true
-    },
-    {
-      "de": "Megalink Telecom",
-      "assunto": "NF-1974 — confirmacao recebimento",
-      "data": "26/03",
-      "lido": true
-    },
-    {
-      "de": "CFC",
-      "assunto": "Anuidade 2026 — lembrete prazo 31/03",
-      "data": "25/03",
-      "lido": false
-    }
-  ]
+  "gcal_updated": "2026-03-28T12:10:48.097236"
 }
