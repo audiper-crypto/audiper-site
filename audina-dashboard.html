@@ -651,10 +651,22 @@
     </a>
   </nav>
 
-  <div class="sidebar-upgrade">
-    <h4>AUDINA AI Pro</h4>
-    <p>Análise automática de achados e geração de relatórios NBC TA.</p>
-    <button class="btn-upgrade">Ativar Módulo</button>
+  <!-- Audina AI Chat (movido do painel direito) -->
+  <div class="audina-card" style="margin:12px 10px;">
+    <div class="audina-header">
+      <div class="audina-avatar">🤖</div>
+      <div>
+        <div class="audina-name">Audina</div>
+        <div class="audina-role">IA de Auditoria</div>
+      </div>
+    </div>
+    <div class="audina-message" id="audina-msg-sidebar">
+      Identifiquei 2 achados pendentes de confirmacao. Deseja que eu prepare o rascunho do COM?
+    </div>
+    <div class="audina-input-row">
+      <input class="audina-input" type="text" placeholder="Pergunte..." onkeydown="if(event.key==='Enter')sendAudina()">
+      <button class="btn-audina-send" onclick="sendAudina()">&#10148;</button>
+    </div>
   </div>
 
   <div class="sidebar-bottom">
@@ -825,24 +837,6 @@
 
 <!-- ═══ RIGHT PANEL ═══ -->
 <aside class="right-panel">
-
-  <!-- Audina AI -->
-  <div class="audina-card">
-    <div class="audina-header">
-      <div class="audina-avatar">🤖</div>
-      <div>
-        <div class="audina-name">Audina</div>
-        <div class="audina-role">IA de Auditoria — Online</div>
-      </div>
-    </div>
-    <div class="audina-message" id="audina-msg">
-      Bom dia! Identifiquei 2 achados pendentes de confirmação na Via Paris e 1 divergência de saldo na Unimed Floriano. Deseja que eu prepare o rascunho do COM?
-    </div>
-    <div class="audina-input-row">
-      <input class="audina-input" id="audina-input" type="text" placeholder="Pergunte à Audina…" onkeydown="if(event.key==='Enter')sendAudina()">
-      <button class="btn-audina-send" onclick="sendAudina()">➤</button>
-    </div>
-  </div>
 
   <!-- Achados Recentes -->
   <div class="card" style="padding:16px;">
