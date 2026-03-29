@@ -1133,12 +1133,12 @@ html.dark .hm-high { background: #450a0a; color: #fca5a5; }
 
 /* Agent cards */
 .org-card-agent {
-  width: 140px; background: var(--card); border-radius: var(--radius);
-  box-shadow: var(--shadow-sm); padding: 16px 12px; text-align: center;
+  width: 190px; background: var(--card); border-radius: var(--radius);
+  box-shadow: var(--shadow-sm); padding: 18px 14px; text-align: center;
   transition: transform 0.2s, box-shadow 0.2s; position: relative; cursor: pointer;
 }
 .org-card-agent:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-.org-card-agent .org-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; margin: 0 auto 8px; display: block; border: 2px solid var(--gray-200); }
+.org-card-agent .org-avatar { width: 144px; height: 144px; border-radius: 50%; object-fit: cover; margin: 0 auto 12px; display: block; border: 3px solid var(--gray-200); background: #f0f0f5; }
 .org-card-agent .org-icon {
   width: 44px; height: 44px; border-radius: 50%; display: flex;
   align-items: center; justify-content: center; margin: 0 auto 8px;
@@ -1699,7 +1699,7 @@ html.dark .org-badge-agent { background: #334155; color: #CBD5E1; }
           </div>
 
           <div class="org-card-agent" data-agent="clara" onclick="toggleAgentCard(this)" style="border-top-color:#EC4899;">
-            <img class="org-avatar" src="images/team/clara.png" alt="Clara" style="border-color:#EC4899;">
+            <img class="org-avatar" src="images/team/clara.png" alt="Clara" style="border-color:#EC4899;object-fit:contain;">
             <div class="org-name">Clara</div>
             <div class="org-role">Redatora</div>
             <div class="org-badge-agent">AGENTE IA</div>
