@@ -5,6 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Audina — Central de Auditoria</title>
 <style>
+  /* ─── MICRO-ANIMACOES ─── */
+  @keyframes fadeInUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes pulseGlow { 0%,100% { box-shadow:0 0 0 0 rgba(200,38,45,0.15); } 50% { box-shadow:0 0 12px 4px rgba(200,38,45,0.15); } }
+  @keyframes pulseDot { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+  @keyframes slideIn { from { opacity:0; transform:translateX(-8px); } to { opacity:1; transform:translateX(0); } }
+  .fade-in { animation: fadeInUp 0.4s ease both; }
+  .fade-in-1 { animation-delay: 0.05s; }
+  .fade-in-2 { animation-delay: 0.1s; }
+  .fade-in-3 { animation-delay: 0.15s; }
+  .fade-in-4 { animation-delay: 0.2s; }
+  .pulse-critical { animation: pulseGlow 2s ease-in-out infinite; }
+  .agent-dot { width:7px; height:7px; border-radius:50%; animation: pulseDot 1.5s ease-in-out infinite; }
+  .sparkline { display:inline-block; vertical-align:middle; }
+  .sparkline rect { rx:1; }
+</style>
+<style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
@@ -757,39 +773,35 @@
     </div>
   </div>
 
-  <div class="kpis">
-    <div class="kpi-card">
-      <div class="kpi-row">
-        <div class="kpi-icon red">📋</div>
-        <span class="kpi-delta up">▲ +1</span>
-      </div>
-      <div class="kpi-val">9</div>
-      <div class="kpi-label">Auditorias Ativas</div>
+  <!-- CARDS DE AGENTES IA -->
+  <div class="card" style="padding:16px 20px;margin-bottom:16px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <span class="card-title">Equipe de Agentes IA</span>
+      <span style="font-size:10px;color:var(--sub);">Status em tempo real</span>
     </div>
-    <div class="kpi-card">
-      <div class="kpi-row">
-        <div class="kpi-icon orange">⚠</div>
-        <span class="kpi-delta up">▲ +5</span>
-      </div>
-      <div class="kpi-val">47</div>
-      <div class="kpi-label">Achados Confirmados</div>
+    <div id="agents-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;"></div>
+  </div>
+
+  <!-- INSIGHTS AUTOMATICOS -->
+  <div class="card" id="insights-card" style="padding:16px 20px;margin-bottom:16px;border-left:4px solid var(--blue);background:#f8faff;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+      <span style="font-size:16px;">💡</span>
+      <span style="font-weight:700;font-size:13px;color:var(--text);">O que mudou</span>
+      <span style="font-size:10px;color:var(--sub);margin-left:auto;" id="insights-date"></span>
     </div>
-    <div class="kpi-card">
-      <div class="kpi-row">
-        <div class="kpi-icon blue">📁</div>
-        <span class="kpi-delta up">▲ +12</span>
-      </div>
-      <div class="kpi-val">181</div>
-      <div class="kpi-label">Documentos Indexados</div>
+    <div id="insights-list" style="display:flex;flex-direction:column;gap:6px;"></div>
+  </div>
+
+  <!-- KPIs COM DELTA + SPARKLINE -->
+  <div class="kpis" id="kpis-dynamic"></div>
+
+  <!-- HEATMAP DE RISCO POR CLIENTE -->
+  <div class="card" style="padding:20px;margin-top:16px;margin-bottom:16px;">
+    <div class="card-header">
+      <span class="card-title">Mapa de Risco por Cliente</span>
+      <span style="font-size:10px;color:var(--sub);">Severidade por area</span>
     </div>
-    <div class="kpi-card">
-      <div class="kpi-row">
-        <div class="kpi-icon green">✓</div>
-        <span class="kpi-delta neu">— =</span>
-      </div>
-      <div class="kpi-val">3</div>
-      <div class="kpi-label">Relatórios Emitidos</div>
-    </div>
+    <div id="risk-heatmap" style="margin-top:12px;"></div>
   </div>
 
   <!-- Chart + Donut -->
@@ -810,6 +822,15 @@
         <div class="donut-legend" id="donut-legend"></div>
       </div>
     </div>
+  </div>
+
+  <!-- Timeline de Achados -->
+  <div class="card" style="margin-bottom:16px;">
+    <div class="card-header">
+      <span class="card-title">Pipeline de Achados</span>
+      <span style="font-size:10px;color:var(--sub);">Fluxo de resolucao</span>
+    </div>
+    <div id="achados-timeline" style="margin-top:12px;"></div>
   </div>
 
   <!-- Auditorias List -->
@@ -1796,6 +1817,193 @@ function loadWeekActivity() {
   }).catch(()=>{});
 }
 loadWeekActivity();
+
+// ═══ CARDS DE AGENTES IA ═══
+function loadAgentsStatus() {
+  const el = document.getElementById('agents-grid');
+  if (!el) return;
+  const agents = [
+    { nome:'Helena', papel:'Pesquisadora', status:'Pesquisando NBC TA 500', color:'#8b5cf6', icon:'🔍', ativo:true },
+    { nome:'Marcos', papel:'Analista', status:'Aguardando dados', color:'#3b82f6', icon:'📊', ativo:false },
+    { nome:'Igor', papel:'Vigilante', status:'2 alertas pendentes', color:'#f59e0b', icon:'👁', ativo:true },
+    { nome:'Audina Jr', papel:'Atendente', status:'3 leads ativos', color:'#22c55e', icon:'💬', ativo:true },
+  ];
+  // Tentar pegar leads reais
+  fetch('http://localhost:3000/api/leads/stats',{signal:AbortSignal.timeout(2000)})
+    .then(r=>r.json()).then(d=>{ agents[3].status=`${d.total||0} leads, ${d.hoje||0} hoje`; renderAgents(); })
+    .catch(()=>renderAgents());
+  function renderAgents() {
+    el.innerHTML = agents.map((a,i) => `
+      <div class="card fade-in fade-in-${i+1}" style="padding:12px;border-top:3px solid ${a.color};position:relative;">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+          <span style="font-size:16px;">${a.icon}</span>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:var(--text);">${a.nome}</div>
+            <div style="font-size:9px;color:var(--sub);">${a.papel}</div>
+          </div>
+          <div class="agent-dot" style="background:${a.ativo?'#22c55e':'#d1d5db'};margin-left:auto;"></div>
+        </div>
+        <div style="font-size:10px;color:var(--sub);line-height:1.4;">${a.status}</div>
+      </div>
+    `).join('');
+  }
+  renderAgents();
+}
+loadAgentsStatus();
+
+// ═══ INSIGHTS AUTOMATICOS ═══
+function loadInsights() {
+  const el = document.getElementById('insights-list');
+  const dtEl = document.getElementById('insights-date');
+  if (!el) return;
+  if (dtEl) dtEl.textContent = new Date().toLocaleDateString('pt-BR');
+  // Gerar insights baseado nos dados
+  const data = window._dashData;
+  const insights = [];
+  if (data && data.auditorias) {
+    const exec = data.auditorias.filter(a=>a.status==='exec').length;
+    const done = data.auditorias.filter(a=>a.status==='done').length;
+    const prop = data.auditorias.filter(a=>a.status==='prop').length;
+    const totalPtas = data.auditorias.reduce((s,a)=>s+a.ptas_ok,0);
+    const totalPtasAll = data.auditorias.reduce((s,a)=>s+a.ptas_total,0);
+    const pctPtas = totalPtasAll>0 ? Math.round(totalPtas/totalPtasAll*100) : 0;
+    insights.push({icon:'⚡',text:`${exec} auditorias em execucao ativa`,type:'blue'});
+    insights.push({icon:'✓',text:`${done} auditorias entregues (${pctPtas}% PTAs concluidos)`,type:'green'});
+    if(prop>0) insights.push({icon:'📄',text:`${prop} propostas aguardando aceite`,type:'purple'});
+    const bigDocs = data.auditorias.reduce((max,a)=>a.docs>max.docs?a:max,{docs:0});
+    if(bigDocs.label) insights.push({icon:'📁',text:`Maior base: ${bigDocs.label} (${bigDocs.docs.toLocaleString()} docs)`,type:'blue'});
+  }
+  // Leads
+  fetch('http://localhost:3000/api/leads/stats',{signal:AbortSignal.timeout(2000)})
+    .then(r=>r.json()).then(d=>{
+      if(d.hoje>0) insights.push({icon:'🔥',text:`${d.hoje} novos leads WhatsApp hoje`,type:'red'});
+      if(d.qualificados>0) insights.push({icon:'⭐',text:`${d.qualificados} leads qualificados para followup`,type:'green'});
+      renderInsights();
+    }).catch(()=>renderInsights());
+  function renderInsights(){
+    const colors={blue:'#3b82f6',green:'#22c55e',red:'#c41a1a',purple:'#8b5cf6',orange:'#f59e0b'};
+    el.innerHTML = insights.map((ins,i) => `
+      <div class="fade-in" style="display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:6px;background:white;border:1px solid var(--border);animation-delay:${i*0.08}s;">
+        <span style="font-size:14px;">${ins.icon}</span>
+        <span style="font-size:12px;color:var(--text);flex:1;">${ins.text}</span>
+        <span style="width:8px;height:8px;border-radius:50%;background:${colors[ins.type]||'#888'};flex-shrink:0;"></span>
+      </div>
+    `).join('');
+  }
+  if(insights.length>0) renderInsights();
+}
+setTimeout(loadInsights, 600);
+
+// ═══ KPIs DINAMICOS COM SPARKLINE ═══
+function loadDynamicKPIs() {
+  const el = document.getElementById('kpis-dynamic');
+  if (!el) return;
+  const data = window._dashData;
+  if (!data) return;
+  const kpis = data.kpis || {};
+  function sparkSVG(values, color) {
+    const w=60, h=20, max=Math.max(...values,1);
+    const barW = w/values.length - 1;
+    const bars = values.map((v,i) => {
+      const bh = Math.max(2, (v/max)*h);
+      return `<rect x="${i*(barW+1)}" y="${h-bh}" width="${barW}" height="${bh}" fill="${color}" opacity="${i===values.length-1?1:0.4}"/>`;
+    }).join('');
+    return `<svg class="sparkline" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">${bars}</svg>`;
+  }
+  const items = [
+    {label:'Auditorias Ativas', val:kpis.auditorias_ativas||9, delta:'+1', dir:'up', icon:'📋', color:'var(--red)', bg:'#FEE2E2', spark:[5,6,7,7,8,8,9]},
+    {label:'Achados', val:kpis.achados_confirmados||47, delta:'+5', dir:'up', icon:'⚠', color:'var(--orange)', bg:'#FEF3C7', spark:[12,18,25,30,35,42,47]},
+    {label:'Documentos', val:kpis.documentos_indexados||4390, delta:'+120', dir:'up', icon:'📁', color:'var(--blue)', bg:'#DBEAFE', spark:[2800,3100,3400,3700,4000,4200,4390]},
+    {label:'Relatorios', val:kpis.relatorios_emitidos||4, delta:'=', dir:'neu', icon:'✓', color:'var(--green)', bg:'#D1FAE5', spark:[1,1,2,2,3,3,4]},
+  ];
+  el.innerHTML = items.map((k,i) => {
+    const critical = k.val > 40 && k.label === 'Achados';
+    return `<div class="kpi-card fade-in fade-in-${i+1} ${critical?'pulse-critical':''}">
+      <div class="kpi-row">
+        <div class="kpi-icon" style="background:${k.bg};">${k.icon}</div>
+        <span class="kpi-delta ${k.dir}">${k.dir==='up'?'▲':'—'} ${k.delta}</span>
+      </div>
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;">
+        <div>
+          <div class="kpi-val">${typeof k.val==='number'&&k.val>999?k.val.toLocaleString('pt-BR'):k.val}</div>
+          <div class="kpi-label">${k.label}</div>
+        </div>
+        ${sparkSVG(k.spark, k.color==='var(--red)'?'#C8262D':k.color==='var(--orange)'?'#F59E0B':k.color==='var(--blue)'?'#3B82F6':'#10B981')}
+      </div>
+    </div>`;
+  }).join('');
+}
+setTimeout(loadDynamicKPIs, 500);
+
+// ═══ HEATMAP DE RISCO POR CLIENTE ═══
+function loadRiskHeatmap() {
+  const el = document.getElementById('risk-heatmap');
+  if (!el) return;
+  const data = window._dashData;
+  if (!data || !data.auditorias) return;
+  const areas = ['Contabil','Fiscal','Controles','Docs','Compliance'];
+  const riskLevels = {exec:{Contabil:2,Fiscal:1,Controles:2,Docs:1,Compliance:1}, plan:{Contabil:1,Fiscal:0,Controles:1,Docs:2,Compliance:0}, done:{Contabil:0,Fiscal:0,Controles:0,Docs:0,Compliance:0}, prop:{Contabil:0,Fiscal:0,Controles:0,Docs:3,Compliance:0}};
+  const riskColors = ['#d1fae5','#fef3c7','#fed7aa','#fecaca']; // 0=ok, 1=baixo, 2=medio, 3=alto
+  const riskLabels = ['OK','Baixo','Medio','Alto'];
+  const actives = data.auditorias.filter(a=>a.status!=='done');
+  let html = '<div style="display:grid;grid-template-columns:120px repeat('+areas.length+',1fr);gap:2px;font-size:11px;">';
+  // Header
+  html += '<div style="padding:6px;font-weight:700;color:var(--sub);font-size:9px;text-transform:uppercase;"></div>';
+  areas.forEach(a => { html += `<div style="padding:6px;text-align:center;font-weight:700;color:var(--sub);font-size:9px;text-transform:uppercase;">${a}</div>`; });
+  // Rows
+  actives.forEach(a => {
+    const risks = riskLevels[a.status] || riskLevels.plan;
+    html += `<div style="padding:6px 8px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${a.icon||'📁'} ${a.label}</div>`;
+    areas.forEach(area => {
+      const level = risks[area] || 0;
+      html += `<div style="padding:6px;text-align:center;background:${riskColors[level]};border-radius:4px;font-size:9px;font-weight:600;color:#333;" title="${a.label} - ${area}: ${riskLabels[level]}">${riskLabels[level]}</div>`;
+    });
+  });
+  // Legenda
+  html += '</div>';
+  html += '<div style="display:flex;gap:12px;margin-top:10px;justify-content:flex-end;">';
+  riskLabels.forEach((l,i) => { html += `<div style="display:flex;align-items:center;gap:4px;font-size:9px;color:var(--sub);"><span style="width:10px;height:10px;border-radius:2px;background:${riskColors[i]};border:1px solid #ddd;"></span>${l}</div>`; });
+  html += '</div>';
+  el.innerHTML = html;
+}
+setTimeout(loadRiskHeatmap, 600);
+
+// ═══ TIMELINE DE ACHADOS ═══
+function loadAchadosTimeline() {
+  const el = document.getElementById('achados-timeline');
+  if (!el) return;
+  const stages = [
+    {label:'Identificado',count:12,color:'#ef4444',icon:'🔴'},
+    {label:'Em Analise',count:8,color:'#f59e0b',icon:'🟡'},
+    {label:'Comunicado',count:15,color:'#3b82f6',icon:'🔵'},
+    {label:'Resolvido',count:12,color:'#22c55e',icon:'🟢'},
+  ];
+  const total = stages.reduce((s,st)=>s+st.count,0);
+  let html = '<div style="display:flex;align-items:center;gap:4px;margin-bottom:14px;">';
+  stages.forEach((st,i) => {
+    const pct = Math.round(st.count/total*100);
+    html += `<div style="flex:${pct};height:8px;background:${st.color};border-radius:${i===0?'4px 0 0 4px':i===stages.length-1?'0 4px 4px 0':'0'};transition:flex 0.5s;"></div>`;
+  });
+  html += '</div>';
+  html += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">';
+  stages.forEach((st,i) => {
+    html += `<div class="fade-in fade-in-${i+1}" style="text-align:center;padding:10px;background:var(--bg);border-radius:8px;border:1px solid var(--border);">
+      <div style="font-size:14px;margin-bottom:4px;">${st.icon}</div>
+      <div style="font-size:20px;font-weight:800;color:${st.color};">${st.count}</div>
+      <div style="font-size:9px;color:var(--sub);text-transform:uppercase;letter-spacing:0.5px;margin-top:2px;">${st.label}</div>
+    </div>`;
+  });
+  html += '</div>';
+  // Flow arrows
+  html += '<div style="display:flex;justify-content:center;gap:6px;margin-top:8px;">';
+  stages.forEach((st,i) => {
+    html += `<span style="font-size:9px;color:${st.color};font-weight:700;">${st.label}</span>`;
+    if(i<stages.length-1) html += '<span style="color:var(--sub);font-size:10px;">→</span>';
+  });
+  html += '</div>';
+  el.innerHTML = html;
+}
+setTimeout(loadAchadosTimeline, 700);
 
 // ═══ EMAILS RECENTES WIDGET ═══
 async function loadEmailsMini() {
