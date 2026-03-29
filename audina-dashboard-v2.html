@@ -1597,15 +1597,6 @@ html.dark .org-badge-agent { background: #334155; color: #CBD5E1; }
           </div>
         </div>
 
-        <!-- CRM PIPELINE -->
-        <div class="card" style="margin-top:16px;">
-          <div class="card-header">
-            <div class="card-title">Pipeline Comercial</div>
-            <div class="card-subtitle">Gestao de leads e oportunidades</div>
-          </div>
-          <div id="crm-pipeline" style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:12px;"></div>
-        </div>
-
         <!-- PIPELINE -->
         <div class="card">
           <div class="card-header"><div class="card-title">Pipeline de Achados</div></div>
@@ -2647,7 +2638,7 @@ function renderAuditCards(auditorias) {
 }
 
 /* ========== AUTO-REFRESH ========== */
-setInterval(async()=>{try{const r=await fetch('http://localhost:3000/api/leads');if(r.ok){LEADS=await r.json();renderLeads();}}catch{}},30000);
+setInterval(async()=>{try{const r=await fetch('http://localhost:3000/api/leads');if(r.ok){LEADS=await r.json();renderLeads();renderCrmPipeline();}}catch{}},30000);
 setInterval(async()=>{const d=await fetchJSON('/data/emails-recentes.json');if(d?.emails){EMAILS=d.emails;renderEmails();}},60000);
 // Auto-refresh KPIs da API REST a cada 30s
 setInterval(async()=>{
