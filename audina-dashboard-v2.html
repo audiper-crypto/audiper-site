@@ -656,6 +656,20 @@ html.dark .hm-high { background: #450a0a; color: #fca5a5; }
 .heatmap-legend span { display: flex; align-items: center; gap: 4px; }
 .heatmap-legend .hl-dot { width: 10px; height: 10px; border-radius: 3px; }
 
+/* ========== CRM PIPELINE ========== */
+.crm-col { background: var(--gray-100); border-radius: 12px; padding: 12px; min-height: 150px; }
+.crm-col-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 2px solid var(--gray-200); }
+.crm-col-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+.crm-col-count { font-size: 10px; font-weight: 600; color: #fff; border-radius: 10px; padding: 1px 7px; min-width: 20px; text-align: center; }
+.crm-lead { background: var(--card); padding: 10px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); margin-bottom: 8px; font-size: 11px; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.crm-lead:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,0.1); }
+.crm-lead:last-child { margin-bottom: 0; }
+.crm-lead-name { font-weight: 600; color: var(--dark); margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.crm-lead-info { color: var(--gray-500); font-size: 10px; margin-bottom: 4px; }
+.crm-lead-footer { display: flex; align-items: center; justify-content: space-between; }
+.crm-lead-date { color: var(--gray-400); font-size: 9px; }
+.crm-lead-badge { font-size: 9px; font-weight: 600; padding: 1px 6px; border-radius: 6px; }
+
 /* ========== PIPELINE ========== */
 .pipeline-bar { display: flex; height: 28px; border-radius: 8px; overflow: hidden; margin-bottom: 16px; }
 .pipeline-seg { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; color: #fff; transition: flex 0.4s ease; }
@@ -1184,6 +1198,62 @@ html.dark .org-badge-agent { background: #334155; color: #CBD5E1; }
   .org-connector-split.split-3::after { left: calc(50% - 128px); width: 256px; }
   .org-connector-split.split-4::after { left: calc(50% - 192px); width: 384px; }
 }
+
+/* ═══ MOBILE RESPONSIVE ═══ */
+.sidebar.mobile-show { display: flex !important; position: fixed; z-index: 100; top: 0; left: 0; height: 100vh; box-shadow: 4px 0 20px rgba(0,0,0,0.1); }
+
+@media (max-width: 1100px) {
+  .sidebar { display: none; }
+  .main-area { margin-left: 0; }
+  .content-right { display: none; }
+  .dual-grid { grid-template-columns: 1fr; }
+  .kpis-grid { grid-template-columns: repeat(2, 1fr); }
+  .mc-kpis { grid-template-columns: repeat(3, 1fr); }
+  .mc-body { grid-template-columns: 1fr; }
+  .mc-bottom { grid-template-columns: 1fr; }
+  .mc-metrics { grid-template-columns: repeat(2, 1fr); }
+  .charts-grid { grid-template-columns: 1fr; }
+  .audit-detail-grid { grid-template-columns: repeat(2, 1fr); }
+  #mobile-menu-btn { display: block !important; }
+}
+
+@media (max-width: 768px) {
+  .content-main { padding: 12px; }
+  .header { flex-direction: column; gap: 8px; height: auto; padding: 12px 16px; }
+  .tabs-bar { overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
+  .tab-btn { font-size: 11px; padding: 10px 12px; }
+  .kpis-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .north-star { flex-direction: column; text-align: center; }
+  .audit-table { display: block; overflow-x: auto; }
+  .audit-table table { min-width: 600px; }
+  .week-grid { grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .week-day .wd-number { font-size: 16px; }
+  .agents-grid { grid-template-columns: repeat(2, 1fr); }
+  .heatmap-table { display: block; overflow-x: auto; }
+  .pipeline-cards { grid-template-columns: 1fr 1fr; }
+  .mc-kpis { grid-template-columns: repeat(2, 1fr); }
+  .mc-audit-grid { grid-template-columns: repeat(2, 1fr); }
+  .audit-detail-grid { grid-template-columns: 1fr; }
+  .charts-grid { grid-template-columns: 1fr; }
+  .quick-actions { flex-wrap: wrap; }
+  .org-level { flex-wrap: wrap; justify-content: center; }
+  .org-card-human { width: 160px; }
+  .org-card-agent { width: 140px; }
+  .org-card-agent .org-avatar { width: 100px; height: 100px; }
+  #pane-mission { margin: -12px; padding: 12px; }
+}
+
+@media (max-width: 480px) {
+  .kpis-grid { grid-template-columns: 1fr; }
+  .agents-grid { grid-template-columns: 1fr; }
+  .mc-audit-grid { grid-template-columns: 1fr; }
+  .mc-kpis { grid-template-columns: 1fr; }
+  .mc-metrics { grid-template-columns: 1fr; }
+  .pipeline-cards { grid-template-columns: 1fr; }
+  .tab-btn { font-size: 10px; padding: 8px 10px; }
+  .audit-detail-grid { grid-template-columns: 1fr; }
+  .header { padding: 10px 12px; }
+}
 </style>
 <script src="http://localhost:3000/socket.io/socket.io.js"></script>
 </head>
@@ -1210,9 +1280,12 @@ html.dark .org-badge-agent { background: #334155; color: #CBD5E1; }
   <div class="sidebar-user">
     <div class="sidebar-avatar" style="background:none;overflow:hidden;"><img src="images/team/vitor.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"><span class="online-dot"></span></div>
     <div class="sidebar-user-info">
-      <div class="sidebar-user-name">Vitor Eduardo</div>
-      <div class="sidebar-user-role">Gerente de Auditoria</div>
+      <div class="sidebar-user-name" id="sidebar-user-name">Vitor Eduardo</div>
+      <div class="sidebar-user-role" id="sidebar-user-role">Gerente de Auditoria</div>
     </div>
+    <button onclick="doLogout()" title="Sair" style="padding:6px;border-radius:6px;color:var(--gray-500);transition:color 0.2s;" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--gray-500)'">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+    </button>
   </div>
 
   <div class="sidebar-section">
@@ -1313,6 +1386,9 @@ html.dark .org-badge-agent { background: #334155; color: #CBD5E1; }
 
   <!-- HEADER -->
   <header class="header">
+    <button id="mobile-menu-btn" onclick="document.querySelector('.sidebar').classList.toggle('mobile-show')" style="display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--dark);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
     <div class="header-left">
       <h1 id="greeting">Boa tarde, Vitor</h1>
       <p id="header-subtitle">Carregando dados...</p>
@@ -1519,6 +1595,15 @@ html.dark .org-badge-agent { background: #334155; color: #CBD5E1; }
             <span><div class="hl-dot" style="background:#fecaca;"></div> Alto</span>
             <span><div class="hl-dot" style="background:#f1f5f9;"></div> N/A</span>
           </div>
+        </div>
+
+        <!-- CRM PIPELINE -->
+        <div class="card" style="margin-top:16px;">
+          <div class="card-header">
+            <div class="card-title">Pipeline Comercial</div>
+            <div class="card-subtitle">Gestao de leads e oportunidades</div>
+          </div>
+          <div id="crm-pipeline" style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:12px;"></div>
         </div>
 
         <!-- PIPELINE -->
@@ -2109,6 +2194,7 @@ function renderAll() {
   renderLeads();
   renderEmails();
   renderHeatmap(d.auditorias);
+  renderCrmPipeline();
   renderPipeline();
   renderCharts(d.auditorias);
   renderAuditTable(d.auditorias);
@@ -2279,6 +2365,47 @@ function renderPipeline() {
   const stages = [{label:'Identificado',count:18,color:'var(--red)'},{label:'Em Analise',count:12,color:'var(--warning)'},{label:'Comunicado',count:10,color:'var(--info)'},{label:'Resolvido',count:7,color:'var(--success)'}];
   document.getElementById('pipeline-bar').innerHTML = stages.map(s=>`<div class="pipeline-seg" style="flex:${s.count};background:${s.color};">${s.count}</div>`).join('');
   document.getElementById('pipeline-cards').innerHTML = stages.map(s=>`<div class="pipeline-card"><div class="pc-count" style="color:${s.color};">${s.count}</div><div class="pc-label">${s.label}</div></div>`).join('');
+}
+
+/* ========== CRM PIPELINE ========== */
+function renderCrmPipeline() {
+  const stages = [
+    { key: 'novo',   label: 'Novo Lead',    color: '#6b7280' },
+    { key: 'contato', label: 'Contato',     color: '#3b82f6' },
+    { key: 'proposta', label: 'Proposta',   color: '#f59e0b' },
+    { key: 'negociacao', label: 'Negociacao', color: '#8b5cf6' },
+    { key: 'cliente', label: 'Cliente',      color: '#22c55e' }
+  ];
+  const novos = LEADS.filter(l => !l.status || l.status === 'novo');
+  const contatos = LEADS.filter(l => l.status === 'contato' || l.status === 'respondido');
+  const propostas = LEADS.filter(l => l.status === 'proposta' || l.status === 'qualificado');
+  const negociacao = [
+    { name: 'Megalink Telecom', interest: 'Auditoria 2025', date: '2026-03-15', badge: 'R$ 35k' },
+    { name: 'Promoprev Unimed', interest: 'PROMOPREV', date: '2026-03-20', badge: 'R$ 18k' }
+  ];
+  const clientes = (DATA?.auditorias || []).map(a => ({
+    name: a.label, interest: a.fase, date: a.exercicio,
+    badge: a.status === 'exec' ? 'Ativo' : a.status === 'done' ? 'Entregue' : a.status === 'plan' ? 'Planejando' : 'Proposta'
+  }));
+  function crmCard(item) {
+    const name = item.name || item.phone || 'Desconhecido';
+    const info = item.interest || (item.message_count ? item.message_count + ' msgs' : '');
+    const date = item.date || item.last_seen || '';
+    const badge = item.badge || '';
+    const bc = badge === 'Ativo' ? '#dcfce7;color:#16a34a' : badge === 'Entregue' ? '#dbeafe;color:#2563eb' : badge === 'Planejando' ? '#fef9c3;color:#a16207' : badge.startsWith('R$') ? '#f5f3ff;color:#7c3aed' : badge === 'Respondido' ? '#dbeafe;color:#2563eb' : badge === 'Qualificado' ? '#fef9c3;color:#a16207' : '#f3f4f6;color:#4b5563';
+    return `<div class="crm-lead"><div class="crm-lead-name">${name}</div>${info?`<div class="crm-lead-info">${info}</div>`:''}<div class="crm-lead-footer"><span class="crm-lead-date">${date}</span>${badge?`<span class="crm-lead-badge" style="background:${bc};">${badge}</span>`:''}</div></div>`;
+  }
+  const buckets = {
+    novo: novos.map(l => ({ name: l.name||l.phone, interest: l.interest||'', date: l.last_seen||'', badge: '' })),
+    contato: contatos.map(l => ({ name: l.name||l.phone, interest: l.interest||'', date: l.last_seen||'', badge: 'Respondido' })),
+    proposta: propostas.map(l => ({ name: l.name||l.phone, interest: l.interest||'', date: l.last_seen||'', badge: 'Qualificado' })),
+    negociacao: negociacao,
+    cliente: clientes
+  };
+  document.getElementById('crm-pipeline').innerHTML = stages.map(s => {
+    const items = buckets[s.key] || [];
+    return `<div class="crm-col"><div class="crm-col-header"><span class="crm-col-title" style="color:${s.color};">${s.label}</span><span class="crm-col-count" style="background:${s.color};">${items.length}</span></div>${items.length ? items.map(crmCard).join('') : '<div style="color:var(--gray-400);font-size:10px;text-align:center;padding:20px 0;">Nenhum item</div>'}</div>`;
+  }).join('');
 }
 
 /* ========== CHARTS ========== */
@@ -3168,6 +3295,94 @@ switchTab = function(tab) {
 
 /* ========== INIT ========== */
 refreshAll();
+</script>
+
+<!-- Login Overlay -->
+<div id="login-overlay" style="position:fixed;inset:0;background:white;z-index:10000;display:flex;align-items:center;justify-content:center;">
+  <div style="width:360px;text-align:center;">
+    <img src="images/logos/audiper-logo-principal.png" style="width:80px;border-radius:50%;margin-bottom:20px;">
+    <h2 style="font-size:20px;font-weight:700;color:#272527;margin-bottom:4px;">AUDIPER</h2>
+    <p style="font-size:12px;color:#6b7280;margin-bottom:24px;">Central de Auditoria</p>
+    <form onsubmit="return doLogin(event)">
+      <input id="login-email" type="email" placeholder="Email" required style="width:100%;padding:10px 14px;border:1px solid #e5e7eb;border-radius:8px;font-size:13px;margin-bottom:10px;outline:none;">
+      <input id="login-pass" type="password" placeholder="Senha" required style="width:100%;padding:10px 14px;border:1px solid #e5e7eb;border-radius:8px;font-size:13px;margin-bottom:16px;outline:none;">
+      <button type="submit" style="width:100%;padding:10px;background:#E72C22;color:white;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;">Entrar</button>
+    </form>
+    <p id="login-error" style="color:#E72C22;font-size:11px;margin-top:10px;display:none;">Email ou senha incorretos</p>
+  </div>
+</div>
+
+<script>
+// ========== AUTH ==========
+const USERS = {
+  'vitor@audiper.com': {pass:'audiper2026', name:'Vitor Eduardo', role:'Gerente'},
+  'ricardo@audiper.com': {pass:'audiper2026', name:'Prof. Ricardo', role:'Auditor Senior'},
+  'admin@audiper.com': {pass:'audiper2026', name:'Administrador', role:'Admin'},
+};
+
+function checkAuth() {
+  const session = localStorage.getItem('audiper-session');
+  if (session) {
+    try {
+      const s = JSON.parse(session);
+      if (s.email && s.expires > Date.now()) {
+        document.getElementById('login-overlay').style.display = 'none';
+        if (s.name) {
+          const nameEl = document.getElementById('sidebar-user-name');
+          const roleEl = document.getElementById('sidebar-user-role');
+          const greetEl = document.getElementById('greeting');
+          if (nameEl) nameEl.textContent = s.name;
+          if (roleEl) roleEl.textContent = s.role;
+          if (greetEl) {
+            const h = new Date().getHours();
+            const greet = h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite';
+            greetEl.textContent = greet + ', ' + s.name.split(' ')[0];
+          }
+        }
+        return true;
+      }
+    } catch(e) {}
+  }
+  document.getElementById('login-overlay').style.display = 'flex';
+  return false;
+}
+
+function doLogin(e) {
+  e.preventDefault();
+  const email = document.getElementById('login-email').value.toLowerCase();
+  const pass = document.getElementById('login-pass').value;
+  const user = USERS[email];
+  if (user && user.pass === pass) {
+    localStorage.setItem('audiper-session', JSON.stringify({
+      email, name: user.name, role: user.role,
+      expires: Date.now() + 24*60*60*1000
+    }));
+    document.getElementById('login-overlay').style.display = 'none';
+    document.getElementById('login-error').style.display = 'none';
+    if (user.name) {
+      const nameEl = document.getElementById('sidebar-user-name');
+      const roleEl = document.getElementById('sidebar-user-role');
+      const greetEl = document.getElementById('greeting');
+      if (nameEl) nameEl.textContent = user.name;
+      if (roleEl) roleEl.textContent = user.role;
+      if (greetEl) {
+        const h = new Date().getHours();
+        const greet = h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite';
+        greetEl.textContent = greet + ', ' + user.name.split(' ')[0];
+      }
+    }
+    return false;
+  }
+  document.getElementById('login-error').style.display = 'block';
+  return false;
+}
+
+function doLogout() {
+  localStorage.removeItem('audiper-session');
+  location.reload();
+}
+
+checkAuth();
 </script>
 </body>
 </html>
