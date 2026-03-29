@@ -2340,7 +2340,7 @@ function renderAuditTable(auditorias) {
   document.getElementById('audit-tbody').innerHTML = auditorias.map(a => {
     const pct=a.ptas_total>0?Math.round(a.ptas_ok/a.ptas_total*100):0;
     const [cls,lbl]=sm[a.status]||['sb-prop','Inicio'];
-    return `<tr><td><div class="at-name"><div class="at-icon" style="background:${a.color}20;font-size:16px;">${a.icon}</div>${a.label}</div></td>
+    return `<tr style="cursor:pointer;" onclick="window.open('auditoria-detalhe-v2.html?id=${a.id}','_blank')"><td><div class="at-name"><div class="at-icon" style="background:${a.color}20;font-size:16px;">${a.icon}</div>${a.label}</div></td>
     <td>${a.fase}</td><td>${a.exercicio}</td>
     <td><div class="at-progress-wrap"><div class="at-progress-bar" style="width:${pct}%;background:${sc[a.status]||'var(--gray-300)'};"></div></div><div class="at-progress-text">${a.ptas_ok}/${a.ptas_total} (${pct}%)</div></td>
     <td>${a.docs.toLocaleString('pt-BR')}</td><td><span class="status-badge ${cls}">${lbl}</span></td></tr>`;
@@ -2461,7 +2461,7 @@ function renderAuditCards(auditorias) {
   const sl={exec:'Em Execucao',done:'Entregue',plan:'Planejamento',prop:'Proposta'};
   document.getElementById('audit-detail-grid').innerHTML=auditorias.map(a=>{
     const pct=a.ptas_total>0?Math.round(a.ptas_ok/a.ptas_total*100):0, c=sc[a.status]||'var(--gray-400)';
-    return `<div class="audit-detail-card"><div class="adc-header"><div class="adc-icon" style="background:${c}15;font-size:20px;">${a.icon}</div><div><div class="adc-name">${a.label}</div><div class="adc-code">${a.codigo}</div></div></div>
+    return `<div class="audit-detail-card" style="cursor:pointer;" onclick="window.open('auditoria-detalhe-v2.html?id=${a.id}','_blank')"><div class="adc-header"><div class="adc-icon" style="background:${c}15;font-size:20px;">${a.icon}</div><div><div class="adc-name">${a.label}</div><div class="adc-code">${a.codigo}</div></div></div>
     <div class="adc-row"><span class="label">Fase</span><span class="value">${a.fase}</span></div>
     <div class="adc-row"><span class="label">Exercicio</span><span class="value">${a.exercicio}</span></div>
     <div class="adc-row"><span class="label">CNPJ</span><span class="value">${a.cnpj}</span></div>
@@ -2611,7 +2611,7 @@ function mcRenderAudits() {
   document.getElementById('mc-audit-grid').innerHTML = DATA.auditorias.map(a => {
     const pct = a.ptas_total > 0 ? Math.round(a.ptas_ok / a.ptas_total * 100) : 0;
     const c = sc[a.status] || '#64748b';
-    return `<div class="mc-audit-item">
+    return `<div class="mc-audit-item" style="cursor:pointer;" onclick="window.open('auditoria-detalhe-v2.html?id=${a.id}','_blank')">
       <div class="mc-audit-name">${a.label}</div>
       <div class="mc-audit-code">${a.codigo} | ${a.exercicio}</div>
       <div class="mc-audit-meta">
