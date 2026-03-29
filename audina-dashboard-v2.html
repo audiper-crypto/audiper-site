@@ -1068,6 +1068,121 @@ html.dark .hm-high { background: #450a0a; color: #fca5a5; }
   color: #E72C22;
 }
 .mc-metric-label { font-size: 11px; color: #64748b; margin-top: 2px; }
+
+/* ========== EQUIPE / ORGANOGRAMA ========== */
+#pane-equipe { padding: 24px 0; }
+.org-section-title {
+  text-align: center; font-size: 10px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 1.5px; color: var(--gray-400); margin-bottom: 16px; position: relative;
+}
+.org-section-title::before, .org-section-title::after {
+  content: ''; position: absolute; top: 50%; height: 1px; width: 80px; background: var(--gray-200);
+}
+.org-section-title::before { right: calc(50% + 60px); }
+.org-section-title::after { left: calc(50% + 60px); }
+
+.org-level { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; position: relative; }
+.org-level-1 { margin-bottom: 12px; }
+.org-level-2 { margin-bottom: 12px; }
+.org-level-3 { margin-bottom: 0; }
+
+/* Connector lines */
+.org-connector {
+  display: flex; justify-content: center; align-items: stretch; height: 32px; position: relative;
+}
+.org-connector::before {
+  content: ''; display: block; width: 2px; height: 100%; background: var(--gray-200); margin: 0 auto;
+}
+.org-connector-split {
+  display: flex; justify-content: center; height: 28px; position: relative;
+}
+.org-connector-split::before {
+  content: ''; position: absolute; top: 0; left: 50%; width: 2px; height: 14px; background: var(--gray-200);
+}
+.org-connector-split::after {
+  content: ''; position: absolute; top: 14px; height: 2px; background: var(--gray-200);
+}
+.org-connector-split.split-2::after { left: calc(50% - 116px); width: 232px; }
+.org-connector-split.split-3::after { left: calc(50% - 172px); width: 344px; }
+.org-connector-split.split-4::after { left: calc(50% - 258px); width: 516px; }
+.org-connector-branch {
+  display: flex; justify-content: center; height: 14px; position: relative;
+}
+
+/* Human cards */
+.org-card-human {
+  width: 190px; background: var(--card); border-radius: var(--radius);
+  box-shadow: var(--shadow); border-bottom: 3px solid var(--red);
+  padding: 20px 16px; text-align: center; transition: transform 0.2s, box-shadow 0.2s;
+  position: relative; cursor: default;
+}
+.org-card-human:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+.org-card-human .org-photo {
+  width: 80px; height: 80px; border-radius: 50%; object-fit: cover;
+  border: 3px solid var(--red-100); margin: 0 auto 10px;
+  background: var(--gray-100);
+}
+.org-card-human .org-name { font-size: 13px; font-weight: 700; color: var(--dark); line-height: 1.3; }
+.org-card-human .org-role { font-size: 11px; color: var(--gray-500); margin-top: 4px; }
+.org-card-human .org-creds { font-size: 10px; color: var(--gray-400); margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
+.org-badge-human {
+  display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.8px;
+  background: var(--red); color: #fff; padding: 2px 8px; border-radius: 4px; margin-top: 8px;
+}
+.org-card-human .org-exp { font-size: 10px; color: var(--gray-400); margin-top: 6px; font-style: italic; }
+
+/* Agent cards */
+.org-card-agent {
+  width: 140px; background: var(--card); border-radius: var(--radius);
+  box-shadow: var(--shadow-sm); padding: 16px 12px; text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s; position: relative; cursor: pointer;
+}
+.org-card-agent:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+.org-card-agent .org-icon {
+  width: 44px; height: 44px; border-radius: 50%; display: flex;
+  align-items: center; justify-content: center; margin: 0 auto 8px;
+}
+.org-card-agent .org-icon svg { width: 22px; height: 22px; }
+.org-card-agent .org-name { font-size: 12px; font-weight: 700; color: var(--dark); }
+.org-card-agent .org-role { font-size: 10px; color: var(--gray-500); margin-top: 2px; }
+.org-badge-agent {
+  display: inline-block; font-size: 8px; font-weight: 700; letter-spacing: 0.6px;
+  background: #1E293B; color: #94A3B8; padding: 2px 6px; border-radius: 3px; margin-top: 6px;
+}
+html.dark .org-badge-agent { background: #334155; color: #CBD5E1; }
+.org-status-dot {
+  width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 4px; vertical-align: middle;
+}
+.org-status-dot.active { background: var(--success); animation: org-pulse 2s infinite; }
+.org-status-dot.idle { background: var(--gray-300); }
+@keyframes org-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+.org-card-agent .org-status { font-size: 9px; color: var(--gray-400); margin-top: 6px; }
+.org-card-agent .org-last-activity { font-size: 9px; color: var(--gray-400); margin-top: 4px; display: none; }
+
+/* Expand on click */
+.org-card-agent.expanded .org-last-activity { display: block; }
+.org-card-agent .org-detail-panel {
+  display: none; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--gray-200);
+  text-align: left; font-size: 10px; color: var(--gray-500); line-height: 1.5;
+}
+.org-card-agent.expanded .org-detail-panel { display: block; }
+.org-card-agent.expanded { width: 200px; }
+
+/* Vertical drop lines for each branch child */
+.org-drops { display: flex; justify-content: center; gap: 32px; }
+.org-drop { width: 140px; display: flex; justify-content: center; }
+.org-drop::before { content: ''; display: block; width: 2px; height: 14px; background: var(--gray-200); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .org-level { gap: 16px; }
+  .org-card-human { width: 160px; padding: 16px 12px; }
+  .org-card-human .org-photo { width: 60px; height: 60px; }
+  .org-card-agent { width: 120px; padding: 12px 8px; }
+  .org-connector-split.split-2::after { left: calc(50% - 84px); width: 168px; }
+  .org-connector-split.split-3::after { left: calc(50% - 128px); width: 256px; }
+  .org-connector-split.split-4::after { left: calc(50% - 192px); width: 384px; }
+}
 </style>
 <script src="http://localhost:3000/socket.io/socket.io.js"></script>
 </head>
@@ -1119,6 +1234,10 @@ html.dark .hm-high { background: #450a0a; color: #fca5a5; }
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
       Auditorias
       <span class="badge" id="badge-auditorias">0</span>
+    </a>
+    <a class="sidebar-item" href="#" data-tab="equipe">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Equipe
     </a>
   </div>
 
@@ -1254,6 +1373,7 @@ html.dark .hm-high { background: #450a0a; color: #fca5a5; }
     <button class="tab-btn" data-tab="tarefas">Tarefas</button>
     <button class="tab-btn" data-tab="auditorias-tab">Auditorias</button>
     <button class="tab-btn" data-tab="mission">Mission Control</button>
+    <button class="tab-btn" data-tab="equipe">Equipe</button>
   </div>
 
   <!-- CONTENT -->
@@ -1523,6 +1643,178 @@ html.dark .hm-high { background: #450a0a; color: #fca5a5; }
 
       </div>
 
+      <!-- ===== TAB: EQUIPE ===== -->
+      <div class="tab-pane" id="pane-equipe">
+
+        <!-- NIVEL 1 — Socios / Auditores Seniors -->
+        <div class="org-section-title">Socios &amp; Auditores Seniors</div>
+        <div class="org-level org-level-1">
+
+          <div class="org-card-human">
+            <img class="org-photo" src="images/team/ricardo.png" alt="Prof. Ricardo Augusto" onerror="this.style.background='var(--red-100)';this.alt='RA';">
+            <div class="org-name">Prof. Ricardo Augusto dos Santos Ribeiro</div>
+            <div class="org-role">Responsavel Tecnico / Socio-Fundador</div>
+            <div class="org-creds">CRC/PI 5.374/O &middot; CNAI 3.736</div>
+            <div class="org-badge-human">AUDITOR SENIOR</div>
+            <div class="org-exp">40+ anos de experiencia</div>
+          </div>
+
+          <div class="org-card-human">
+            <img class="org-photo" src="images/team/vitor.jpg" alt="Vitor Eduardo" onerror="this.style.background='var(--info-light)';this.alt='VE';">
+            <div class="org-name">Vitor Eduardo dos Santos Ribeiro</div>
+            <div class="org-role">Gerente de Auditoria</div>
+            <div class="org-creds">CRC/PI 7.929 &middot; CNAI 4.711 &middot; ISO 27001 Lead Auditor</div>
+            <div class="org-badge-human">AUDITOR SENIOR</div>
+            <div class="org-exp">Data Analytics &amp; IA</div>
+          </div>
+
+        </div>
+
+        <!-- Conector nivel 1 -> 2 -->
+        <div class="org-connector"></div>
+        <div class="org-connector-split split-3"></div>
+        <div class="org-drops" style="margin-bottom:0;">
+          <div class="org-drop"></div>
+          <div class="org-drop"></div>
+          <div class="org-drop"></div>
+        </div>
+
+        <!-- NIVEL 2 — Agentes Principais -->
+        <div class="org-section-title">Agentes Principais</div>
+        <div class="org-level org-level-2">
+
+          <div class="org-card-agent" data-agent="audina" onclick="toggleAgentCard(this)">
+            <div class="org-icon" style="background:#FEE2E2;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E72C22" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2a7 7 0 0 1 7 7c0 3-2 5.5-4 7.5L12 22l-3-5.5C7 14.5 5 12 5 9a7 7 0 0 1 7-7z" opacity="0.3" fill="#E72C22"/><path d="M4.93 4.93l1.41 1.41M17.66 6.34l1.41-1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M17.66 17.66l1.41 1.41"/></svg>
+            </div>
+            <div class="org-name">Audina</div>
+            <div class="org-role">Coordenadora</div>
+            <div class="org-badge-agent">AGENTE IA</div>
+            <div class="org-status"><span class="org-status-dot active"></span>Ativo</div>
+            <div class="org-last-activity" id="agent-audina-activity">--</div>
+            <div class="org-detail-panel">
+              <strong>Funcao:</strong> Coordena agentes, distribui tarefas, consolida resultados<br>
+              <strong>Ferramentas:</strong> Todas as APIs internas<br>
+              <strong>Horario:</strong> 24/7
+            </div>
+          </div>
+
+          <div class="org-card-agent" data-agent="clara" onclick="toggleAgentCard(this)">
+            <div class="org-icon" style="background:#FCE7F3;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#EC4899" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+            </div>
+            <div class="org-name">Clara</div>
+            <div class="org-role">Redatora</div>
+            <div class="org-badge-agent">AGENTE IA</div>
+            <div class="org-status"><span class="org-status-dot active"></span>Ativo</div>
+            <div class="org-last-activity" id="agent-clara-activity">--</div>
+            <div class="org-detail-panel">
+              <strong>Funcao:</strong> Redacao de comunicacoes, relatorios, propostas<br>
+              <strong>Ferramentas:</strong> Templates HTML, Visual Law<br>
+              <strong>Horario:</strong> Sob demanda
+            </div>
+          </div>
+
+          <div class="org-card-agent" data-agent="qc" onclick="toggleAgentCard(this)">
+            <div class="org-icon" style="background:#DCFCE7;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+            </div>
+            <div class="org-name">QC</div>
+            <div class="org-role">Revisora de Qualidade</div>
+            <div class="org-badge-agent">AGENTE IA</div>
+            <div class="org-status"><span class="org-status-dot active"></span>Ativo</div>
+            <div class="org-last-activity" id="agent-qc-activity">--</div>
+            <div class="org-detail-panel">
+              <strong>Funcao:</strong> Revisao de qualidade, validacao NBC TA, checklists<br>
+              <strong>Ferramentas:</strong> Engine de validacao, LightRAG<br>
+              <strong>Horario:</strong> Pos-entrega
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Conector nivel 2 -> 3 (sai da Audina) -->
+        <div class="org-connector"></div>
+        <div class="org-connector-split split-4"></div>
+        <div class="org-drops" style="margin-bottom:0;">
+          <div class="org-drop"></div>
+          <div class="org-drop"></div>
+          <div class="org-drop"></div>
+          <div class="org-drop"></div>
+        </div>
+
+        <!-- NIVEL 3 — Agentes Operacionais -->
+        <div class="org-section-title">Agentes Operacionais</div>
+        <div class="org-level org-level-3">
+
+          <div class="org-card-agent" data-agent="helena" onclick="toggleAgentCard(this)">
+            <div class="org-icon" style="background:#EDE9FE;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            </div>
+            <div class="org-name">Helena</div>
+            <div class="org-role">Pesquisadora</div>
+            <div class="org-badge-agent">AGENTE IA</div>
+            <div class="org-status"><span class="org-status-dot idle"></span>Idle</div>
+            <div class="org-last-activity" id="agent-helena-activity">--</div>
+            <div class="org-detail-panel">
+              <strong>Funcao:</strong> Pesquisa normativa, jurisprudencia, benchmarks<br>
+              <strong>Ferramentas:</strong> Web search, NotebookLM, LightRAG<br>
+              <strong>Horario:</strong> Noturno (agendado)
+            </div>
+          </div>
+
+          <div class="org-card-agent" data-agent="marcos" onclick="toggleAgentCard(this)">
+            <div class="org-icon" style="background:#DBEAFE;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+            </div>
+            <div class="org-name">Marcos</div>
+            <div class="org-role">Analista de Dados</div>
+            <div class="org-badge-agent">AGENTE IA</div>
+            <div class="org-status"><span class="org-status-dot idle"></span>Idle</div>
+            <div class="org-last-activity" id="agent-marcos-activity">--</div>
+            <div class="org-detail-panel">
+              <strong>Funcao:</strong> Analise de balancetes, SPED, cruzamentos contabeis<br>
+              <strong>Ferramentas:</strong> Python, pdfplumber, Pandas<br>
+              <strong>Horario:</strong> Sob demanda
+            </div>
+          </div>
+
+          <div class="org-card-agent" data-agent="igor" onclick="toggleAgentCard(this)">
+            <div class="org-icon" style="background:#FEF3C7;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <div class="org-name">Igor</div>
+            <div class="org-role">Vigilante</div>
+            <div class="org-badge-agent">AGENTE IA</div>
+            <div class="org-status"><span class="org-status-dot active"></span>Ativo</div>
+            <div class="org-last-activity" id="agent-igor-activity">--</div>
+            <div class="org-detail-panel">
+              <strong>Funcao:</strong> Monitoramento de prazos, emails, alertas<br>
+              <strong>Ferramentas:</strong> Gmail, Calendar, Telegram<br>
+              <strong>Horario:</strong> 24/7
+            </div>
+          </div>
+
+          <div class="org-card-agent" data-agent="audina-jr" onclick="toggleAgentCard(this)">
+            <div class="org-icon" style="background:#DCFCE7;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div class="org-name">Audina Jr</div>
+            <div class="org-role">Atendente WhatsApp</div>
+            <div class="org-badge-agent">AGENTE IA</div>
+            <div class="org-status"><span class="org-status-dot active"></span>Ativo</div>
+            <div class="org-last-activity" id="agent-audina-jr-activity">--</div>
+            <div class="org-detail-panel">
+              <strong>Funcao:</strong> Atendimento ao cliente via WhatsApp Business<br>
+              <strong>Ferramentas:</strong> Kapso API, Templates WhatsApp<br>
+              <strong>Horario:</strong> 24/7
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
 
     <!-- ===== RIGHT PANEL ===== -->
@@ -1661,6 +1953,7 @@ function renderCmdResults(q) {
    { l: 'Ir para Tarefas', d: 'G T', act: () => switchTab('tarefas') },
    { l: 'Ir para Auditorias', d: 'G A', act: () => switchTab('auditorias-tab') },
    { l: 'Ir para Mission Control', d: 'G M', act: () => switchTab('mission') },
+   { l: 'Ir para Equipe', d: 'G E', act: () => switchTab('equipe') },
    { l: 'Alternar Dark Mode', d: '', act: () => toggleDark() }
   ].forEach(a => {
     items.push({ type: 'Acoes', label: a.l, detail: a.d, icon: 'action', search: a.l.toLowerCase(), action: a.act });
@@ -1740,6 +2033,7 @@ document.addEventListener('keydown', e => {
     else if (k === 't') { switchTab('tarefas'); e.preventDefault(); }
     else if (k === 'c') { switchTab('calendario'); e.preventDefault(); }
     else if (k === 'm') { switchTab('mission'); e.preventDefault(); }
+    else if (k === 'e') { switchTab('equipe'); e.preventDefault(); }
     lastKey = '';
   }
 });
@@ -2595,6 +2889,44 @@ function initVoice() {
 }
 setTimeout(initVoice, 1500);
 if ('speechSynthesis' in window) { speechSynthesis.onvoiceschanged = () => {}; speechSynthesis.getVoices(); }
+
+/* ========== EQUIPE — AGENT CARDS ========== */
+function toggleAgentCard(el) {
+  const wasExpanded = el.classList.contains('expanded');
+  document.querySelectorAll('.org-card-agent.expanded').forEach(c => c.classList.remove('expanded'));
+  if (!wasExpanded) el.classList.add('expanded');
+}
+
+async function fetchAgentStatus() {
+  try {
+    const r = await fetch('http://localhost:3001/api/agentes', { signal: AbortSignal.timeout(3000) });
+    if (!r.ok) throw 0;
+    const agents = await r.json();
+    (Array.isArray(agents) ? agents : []).forEach(a => {
+      const name = (a.nome || a.name || '').toLowerCase().replace(/\s+/g, '-');
+      const dot = document.querySelector(`.org-card-agent[data-agent="${name}"] .org-status-dot`);
+      const actEl = document.getElementById(`agent-${name}-activity`);
+      if (dot) {
+        const isActive = a.status === 'ativo' || a.status === 'active' || a.ativo;
+        dot.classList.toggle('active', isActive);
+        dot.classList.toggle('idle', !isActive);
+        dot.nextSibling && (dot.nextSibling.textContent = isActive ? 'Ativo' : 'Idle');
+      }
+      if (actEl && (a.ultima_atividade || a.last_activity)) {
+        actEl.textContent = a.ultima_atividade || a.last_activity;
+      }
+    });
+  } catch {
+    // API offline — manter dados estaticos
+  }
+}
+
+// Refresh agent status when equipe tab is shown
+const origSwitchTabEquipe = switchTab;
+switchTab = function(tab) {
+  origSwitchTabEquipe(tab);
+  if (tab === 'equipe') fetchAgentStatus();
+};
 
 /* ========== INIT ========== */
 refreshAll();
