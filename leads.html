@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AUDIPER — Gestao de Leads WhatsApp</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',sans-serif; background:#f5f5f5; color:#1a1a1a; min-height:100vh; }
+
+  /* Sidebar */
+  .sidebar { position:fixed; left:0; top:0; bottom:0; width:220px; background:#fff; border-right:1px solid #e5e5e5; padding:20px 0; overflow-y:auto; z-index:10; }
+  .sidebar-logo { display:flex; align-items:center; gap:10px; padding:0 20px 20px; border-bottom:1px solid #f0f0f0; }
+  .sidebar-logo-icon { width:32px; height:32px; background:#c41a1a; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:bold; font-size:16px; }
+  .sidebar-logo-text { font-size:14px; font-weight:800; color:#1a1a1a; }
+  .sidebar-logo-sub { font-size:10px; color:#999; }
+  .sidebar-section { padding:16px 20px 6px; font-size:10px; font-weight:700; color:#999; text-transform:uppercase; letter-spacing:1px; }
+  .sidebar-link { display:flex; align-items:center; gap:10px; padding:8px 20px; font-size:13px; color:#666; text-decoration:none; transition:all 0.15s; border-left:3px solid transparent; }
+  .sidebar-link:hover { background:#fafafa; color:#1a1a1a; }
+  .sidebar-link.active { color:#c41a1a; border-left-color:#c41a1a; font-weight:600; background:#fef2f2; }
+  .sidebar-badge { margin-left:auto; background:#c41a1a; color:#fff; font-size:10px; font-weight:700; padding:2px 6px; border-radius:10px; }
+
+  /* Main */
+  .main { margin-left:220px; padding:24px 28px; }
+
+  /* Header */
+  .header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
+  .header-left h1 { font-size:20px; font-weight:700; color:#1a1a1a; }
+  .header-left p { font-size:13px; color:#888; margin-top:2px; }
+  .header-right { display:flex; align-items:center; gap:10px; }
+  .header-status { display:flex; align-items:center; gap:6px; font-size:11px; padding:6px 12px; border-radius:6px; border:1px solid #e5e5e5; background:#fff; }
+  .status-dot { width:8px; height:8px; border-radius:50%; }
+  .btn { padding:8px 16px; border-radius:6px; border:1px solid #e5e5e5; background:#fff; color:#1a1a1a; font-size:12px; font-weight:600; cursor:pointer; transition:all 0.15s; text-decoration:none; display:inline-flex; align-items:center; gap:4px; }
+  .btn:hover { border-color:#c41a1a; color:#c41a1a; }
+  .btn-red { background:#c41a1a; color:#fff; border-color:#c41a1a; }
+  .btn-red:hover { background:#a81515; }
+
+  /* KPIs */
+  .kpis { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin-bottom:20px; }
+  .kpi { background:#fff; border:1px solid #e5e5e5; border-radius:10px; padding:16px; }
+  .kpi-icon { width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:16px; margin-bottom:8px; }
+  .kpi-icon.red { background:#fef2f2; color:#c41a1a; }
+  .kpi-icon.blue { background:#eff6ff; color:#3b82f6; }
+  .kpi-icon.green { background:#f0fdf4; color:#22c55e; }
+  .kpi-icon.yellow { background:#fffbeb; color:#f59e0b; }
+  .kpi-icon.purple { background:#faf5ff; color:#8b5cf6; }
+  .kpi-value { font-size:24px; font-weight:800; color:#1a1a1a; }
+  .kpi-label { font-size:11px; color:#888; margin-top:2px; }
+  .kpi-change { font-size:10px; font-weight:600; margin-left:6px; }
+  .kpi-change.up { color:#22c55e; }
+
+  /* Cards */
+  .card { background:#fff; border:1px solid #e5e5e5; border-radius:10px; padding:16px; margin-bottom:16px; }
+  .card-title { font-size:14px; font-weight:700; color:#1a1a1a; margin-bottom:12px; }
+
+  /* Interesse grid */
+  .interesse-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(120px,1fr)); gap:8px; }
+  .interesse-item { text-align:center; padding:12px 8px; background:#fafafa; border-radius:8px; border:1px solid #f0f0f0; }
+  .interesse-value { font-size:20px; font-weight:800; color:#c41a1a; }
+  .interesse-label { font-size:10px; color:#888; text-transform:uppercase; letter-spacing:0.5px; margin-top:2px; }
+
+  /* Table */
+  .table { width:100%; border-collapse:collapse; }
+  .table th { background:#fafafa; padding:10px 12px; text-align:left; font-size:11px; color:#888; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid #e5e5e5; font-weight:600; }
+  .table td { padding:10px 12px; font-size:13px; border-bottom:1px solid #f0f0f0; }
+  .table tr:hover { background:#fafafa; }
+  .table-name { font-weight:600; color:#1a1a1a; }
+  .table-tel { font-family:'JetBrains Mono',monospace; font-size:11px; color:#666; }
+  .table-date { font-size:11px; color:#999; }
+
+  /* Badges */
+  .badge { display:inline-block; padding:2px 8px; border-radius:4px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; }
+  .badge-novo { background:#eff6ff; color:#3b82f6; }
+  .badge-qualificado { background:#f0fdf4; color:#22c55e; }
+  .badge-proposta { background:#fef2f2; color:#c41a1a; }
+  .badge-pericia { background:#fffbeb; color:#f59e0b; }
+  .badge-auditoria { background:#faf5ff; color:#8b5cf6; }
+  .badge-ia { background:#f0fdf4; color:#059669; }
+  .badge-lgpd { background:#eff6ff; color:#0284c7; }
+
+  /* Messages panel */
+  .msgs-panel { background:#fff; border:1px solid #e5e5e5; border-radius:10px; padding:16px; margin-top:12px; display:none; }
+  .msgs-panel.open { display:block; }
+  .msg-item { padding:6px 0; border-bottom:1px solid #f5f5f5; font-size:12px; display:flex; gap:8px; align-items:flex-start; }
+  .msg-dir { font-size:10px; font-weight:700; width:16px; text-align:center; }
+  .msg-in { color:#3b82f6; }
+  .msg-out { color:#22c55e; }
+  .msg-time { color:#ccc; font-size:10px; min-width:40px; }
+  .msg-text { flex:1; color:#444; }
+
+  .empty { text-align:center; padding:40px; color:#ccc; font-size:13px; }
+  .refresh-info { text-align:center; padding:12px; color:#ccc; font-size:11px; }
+
+  @media (max-width:900px) {
+    .sidebar { display:none; }
+    .main { margin-left:0; padding:16px; }
+    .kpis { grid-template-columns:repeat(2,1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-icon">A</div>
+    <div>
+      <div class="sidebar-logo-text">AUDIPER</div>
+      <div class="sidebar-logo-sub">Auditoria Independente</div>
+    </div>
+  </div>
+  <div class="sidebar-section">Principal</div>
+  <a href="audina-dashboard.html" class="sidebar-link">Dashboard</a>
+  <a href="leads.html" class="sidebar-link active">Leads WhatsApp <span class="sidebar-badge" id="sidebar-total">0</span></a>
+  <div class="sidebar-section">Auditoria</div>
+  <a href="audina-dashboard.html" class="sidebar-link">Auditorias <span class="sidebar-badge">9</span></a>
+  <a href="audina-dashboard.html" class="sidebar-link">Achados <span class="sidebar-badge" style="background:#f59e0b;">47</span></a>
+  <a href="audina-dashboard.html" class="sidebar-link">Documentos <span class="sidebar-badge" style="background:#22c55e;">181</span></a>
+  <div class="sidebar-section">Ferramentas</div>
+  <a href="#" class="sidebar-link" onclick="exportCSV()">Exportar CSV</a>
+</nav>
+
+<!-- Main -->
+<div class="main">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <h1>Leads WhatsApp</h1>
+      <p>Gestao de contatos e conversas do chatbot Audina</p>
+    </div>
+    <div class="header-right">
+      <div class="header-status">
+        <div class="status-dot" id="status-dot" style="background:#ccc;"></div>
+        <span id="status-text">Verificando...</span>
+      </div>
+      <button class="btn" onclick="loadData()">Atualizar</button>
+      <button class="btn btn-red" onclick="exportCSV()">Exportar CSV</button>
+    </div>
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpis" id="kpis"></div>
+
+  <!-- Interesse por servico -->
+  <div class="card">
+    <div class="card-title">Interesse por Servico</div>
+    <div class="interesse-grid" id="interesses"></div>
+  </div>
+
+  <!-- Leads table -->
+  <div class="card">
+    <div class="card-title">Leads Recentes</div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Telefone</th>
+          <th>Interesse</th>
+          <th>Status</th>
+          <th>Msgs</th>
+          <th>Primeira</th>
+          <th>Ultima</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="leads-body"></tbody>
+    </table>
+  </div>
+
+  <!-- Messages panel -->
+  <div class="msgs-panel" id="msgs-panel">
+    <div class="card-title" id="msgs-title">Historico</div>
+    <div id="msgs-list"></div>
+  </div>
+
+  <div class="refresh-info" id="refresh-bar">Carregando...</div>
+</div>
+
+<script>
+const API = 'http://localhost:3000/api';
+const intLabels = { proposta:'Proposta', pericia:'Pericia', auditoria:'Auditoria', consultoria_ia:'IA/Automacao', lgpd:'LGPD' };
+const intBadges = { proposta:'badge-proposta', pericia:'badge-pericia', auditoria:'badge-auditoria', consultoria_ia:'badge-ia', lgpd:'badge-lgpd' };
+
+async function loadData() {
+  try {
+    const [statsRes, leadsRes] = await Promise.all([
+      fetch(`${API}/leads/stats`),
+      fetch(`${API}/leads`)
+    ]);
+    const stats = await statsRes.json();
+    const data = await leadsRes.json();
+
+    document.getElementById('sidebar-total').textContent = stats.total;
+
+    document.getElementById('kpis').innerHTML = `
+      <div class="kpi"><div class="kpi-icon red">👥</div><div class="kpi-value">${stats.total}</div><div class="kpi-label">Total Leads</div></div>
+      <div class="kpi"><div class="kpi-icon blue">🆕</div><div class="kpi-value">${stats.novos}</div><div class="kpi-label">Novos</div></div>
+      <div class="kpi"><div class="kpi-icon green">✓</div><div class="kpi-value">${stats.qualificados}</div><div class="kpi-label">Qualificados</div></div>
+      <div class="kpi"><div class="kpi-icon yellow">📅</div><div class="kpi-value">${stats.hoje}</div><div class="kpi-label">Hoje</div></div>
+      <div class="kpi"><div class="kpi-icon purple">💬</div><div class="kpi-value">${stats.mensagens}</div><div class="kpi-label">Mensagens</div></div>
+    `;
+
+    const intHTML = (stats.porInteresse || []).map(i => `
+      <div class="interesse-item">
+        <div class="interesse-value">${i.c}</div>
+        <div class="interesse-label">${intLabels[i.interesse] || i.interesse}</div>
+      </div>
+    `).join('');
+    document.getElementById('interesses').innerHTML = intHTML || '<div class="interesse-item"><div class="interesse-value">0</div><div class="interesse-label">Nenhum ainda</div></div>';
+
+    const rows = (data.leads || []).map(l => {
+      const tel = (l.telefone || '').replace('@lid','').replace('@c.us','');
+      const nome = l.nome || '-';
+      const badgeClass = l.interesse ? (intBadges[l.interesse] || 'badge-novo') : '';
+      const interesse = l.interesse ? `<span class="badge ${badgeClass}">${intLabels[l.interesse] || l.interesse}</span>` : '-';
+      const status = l.status === 'qualificado' ? '<span class="badge badge-qualificado">qualificado</span>' : '<span class="badge badge-novo">novo</span>';
+      const primeira = (l.primeira_interacao || '').substring(0,16);
+      const ultima = (l.ultima_interacao || '').substring(0,16);
+      return `<tr>
+        <td class="table-name">${nome}</td>
+        <td class="table-tel">${tel.substring(0,15)}</td>
+        <td>${interesse}</td>
+        <td>${status}</td>
+        <td>${l.total_mensagens || 0}</td>
+        <td class="table-date">${primeira}</td>
+        <td class="table-date">${ultima}</td>
+        <td><button class="btn" onclick="loadMsgs('${l.telefone}','${nome}')">Ver</button></td>
+      </tr>`;
+    }).join('');
+    document.getElementById('leads-body').innerHTML = rows || '<tr><td colspan="8" class="empty">Nenhum lead ainda</td></tr>';
+    document.getElementById('refresh-bar').textContent = 'Atualizado: ' + new Date().toLocaleTimeString('pt-BR');
+  } catch (e) {
+    document.getElementById('refresh-bar').textContent = 'Bot offline. Inicie em localhost:3000';
+  }
+}
+
+async function loadMsgs(telefone, nome) {
+  try {
+    const res = await fetch(`${API}/leads/${encodeURIComponent(telefone)}/mensagens`);
+    const data = await res.json();
+    const panel = document.getElementById('msgs-panel');
+    document.getElementById('msgs-title').textContent = 'Conversa com ' + nome;
+    document.getElementById('msgs-list').innerHTML = (data.mensagens || []).reverse().map(m => `
+      <div class="msg-item">
+        <span class="msg-time">${(m.timestamp||'').substring(11,16)}</span>
+        <span class="msg-dir ${m.direcao === 'in' ? 'msg-in' : 'msg-out'}">${m.direcao === 'in' ? '←' : '→'}</span>
+        <span class="msg-text">${(m.conteudo || '').substring(0,300)}</span>
+      </div>
+    `).join('');
+    panel.classList.add('open');
+    panel.scrollIntoView({ behavior:'smooth' });
+  } catch (e) { console.error(e); }
+}
+
+async function checkStatus() {
+  const dot = document.getElementById('status-dot');
+  const txt = document.getElementById('status-text');
+  try {
+    const res = await fetch(`${API}/config`, { signal: AbortSignal.timeout(3000) });
+    const data = await res.json();
+    dot.style.background = '#22c55e';
+    txt.textContent = 'Bot online';
+    txt.style.color = '#22c55e';
+  } catch (e) {
+    dot.style.background = '#c41a1a';
+    txt.textContent = 'Bot offline';
+    txt.style.color = '#c41a1a';
+  }
+}
+
+function exportCSV() {
+  fetch(`${API}/leads`).then(r => r.json()).then(data => {
+    const rows = [['Nome','Telefone','Interesse','Status','Mensagens','Primeira','Ultima']];
+    (data.leads || []).forEach(l => {
+      rows.push([l.nome||'',l.telefone||'',l.interesse||'',l.status||'',l.total_mensagens||0,l.primeira_interacao||'',l.ultima_interacao||'']);
+    });
+    const csv = rows.map(r => r.join(';')).join('\n');
+    const blob = new Blob(['\ufeff'+csv], {type:'text/csv;charset=utf-8'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `leads-audiper-${new Date().toISOString().substring(0,10)}.csv`;
+    a.click();
+  });
+}
+
+loadData();
+checkStatus();
+setInterval(loadData, 30000);
+setInterval(checkStatus, 15000);
+</script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+{
+  "sessoes": [
+    {
+      "id": 2,
+      "data": "2026-03-29",
+      "resumo": "Bot WhatsApp + Dashboard Leads + Numero novo",
+      "conquistas": "Bot WhatsApp 18 fluxos, leads.db, multimodal, dashboard leads, numero 98125-1918, heartbeat jobs, Claude Sonnet 4",
+      "horas": 10.0,
+      "criado_em": "2026-03-29 20:30:00"
+    },
+    {
+      "id": 1,
+      "data": "2026-03-28",
+      "resumo": "OpenClaw + Design System + Hero 3D",
+      "conquistas": "OpenClaw configurado, 13 skills, 10 logos, assinatura email, hero 3D",
+      "horas": 8.0,
+      "criado_em": "2026-03-28 22:00:00"
+    }
+  ],
+  "pendencias": [
+    {
+      "id": 1,
+      "descricao": "Corrigir NSSM n8n (N8N_USER_FOLDER)",
+      "prioridade": "ALTA",
+      "area": "n8n",
+      "status": "pendente",
+      "criado_em": "2026-03-29 20:30:00"
+    },
+    {
+      "id": 2,
+      "descricao": "Criar workflow n8n Dashboard Emails",
+      "prioridade": "ALTA",
+      "area": "n8n",
+      "status": "pendente",
+      "criado_em": "2026-03-29 20:30:00"
+    },
+    {
+      "id": 3,
+      "descricao": "Conectar widget emails no dashboard",
+      "prioridade": "ALTA",
+      "area": "dashboard",
+      "status": "pendente",
+      "criado_em": "2026-03-29 20:30:00"
+    },
+    {
+      "id": 8,
+      "descricao": "Dashboard mission control Audiz",
+      "prioridade": "ALTA",
+      "area": "dashboard",
+      "status": "pendente",
+      "criado_em": "2026-03-29 20:30:00"
+    },
+    {
+      "id": 10,
+      "descricao": "Git push commits do site",
+      "prioridade": "ALTA",
+      "area": "site",
+      "status": "pendente",
+      "criado_em": "2026-03-29 20:30:00"
+    },
+    {
+      "id": 12,
+      "descricao": "Calendario visual de sessoes no dashboard",
+      "prioridade": "ALTA",
+      "area": "dashboard",
+      "status": "pendente",
+      "criado_em": "2026-03-29 20:30:00"
+    },
+    {
+      "id": 13,
+      "descricao": "Aba Tarefas: lado esquerdo = conquistas da sessao anterior (card calendario), lado direito = pendencias. Mesma estrutura para aba Auditorias (pendencias por cliente)",
+      "prioridade": "ALTA",
+      "area": "dashboard",
+      "status": "pendente",
+      "criado_em": "2026-03-29 20:30:00"
+    },
+    {
+      "id": 4,
+      "descricao": "Redesign painel bot WhatsApp AUDIPER",
+      "prioridade": "MEDIA",
+      "area": "whatsapp",
+      "status": "pendente",
+      "criado_em": "2026-03-29 20:30:00"
+    },
+    {
+      "id": 5,
+      "descricao": "Memoria de conversa bot (multi-turn)",
+      "prioridade": "MEDIA",
+      "area": "whatsapp",
+      "status": "pendente",
+      "criado_em": "2026-03-29 20:30:00"
+    },
+    {
+      "id": 6,
+      "descricao": "RAG com dados AUDIPER no bot",
+      "prioridade": "MEDIA",
+      "area": "whatsapp",
+      "status": "pendente",
+      "criado_em": "2026-03-29 20:30:00"
+    },
+    {
+      "id": 7,
+      "descricao": "Webhook n8n para leads qualificados",
+      "prioridade": "MEDIA",
+      "area": "whatsapp",
+      "status": "pendente",
+      "criado_em": "2026-03-29 20:30:00"
+    },
+    {
+      "id": 9,
+      "descricao": "Hero 3D logo transparente + integrar",
+      "prioridade": "MEDIA",
+      "area": "design",
+      "status": "pendente",
+      "criado_em": "2026-03-29 20:30:00"
+    },
+    {
+      "id": 11,
+      "descricao": "NSSM para OpenClaw como servico",
+      "prioridade": "BAIXA",
+      "area": "infra",
+      "status": "pendente",
+      "criado_em": "2026-03-29 20:30:00"
+    }
+  ],
+  "aprendizados": [
+    {
+      "id": 7,
+      "categoria": "compliance",
+      "descricao": "Meta 2026 proibe chatbots genericos - suporte/vendas OK",
+      "aplicado": 0,
+      "criado_em": "2026-03-29 15:00:00"
+    },
+    {
+      "id": 8,
+      "categoria": "design",
+      "descricao": "mix-blend-mode:lighten nao funciona em PNGs com fundo preto",
+      "aplicado": 0,
+      "criado_em": "2026-03-29 12:00:00"
+    },
+    {
+      "id": 1,
+      "categoria": "infra",
+      "descricao": "OpenClaw cai com contexto 200K - limpar sessoes periodicamente",
+      "aplicado": 0,
+      "criado_em": "2026-03-28 18:00:00"
+    },
+    {
+      "id": 2,
+      "categoria": "infra",
+      "descricao": "NSSM precisa AppEnvironmentExtra com N8N_USER_FOLDER",
+      "aplicado": 0,
+      "criado_em": "2026-03-28 18:00:00"
+    },
+    {
+      "id": 3,
+      "categoria": "infra",
+      "descricao": "bootstrapMaxChars=15000 reduz contexto do OpenClaw",
+      "aplicado": 0,
+      "criado_em": "2026-03-28 18:00:00"
+    },
+    {
+      "id": 10,
+      "categoria": "leads",
+      "descricao": "Qualificacao automatica por palavras-chave funciona bem",
+      "aplicado": 0,
+      "criado_em": "2026-03-29 15:00:00"
+    },
+    {
+      "id": 9,
+      "categoria": "n8n",
+      "descricao": "Servico NSSM le banco vazio se N8N_USER_FOLDER nao configurado",
+      "aplicado": 0,
+      "criado_em": "2026-03-29 12:00:00"
+    },
+    {
+      "id": 4,
+      "categoria": "whatsapp",
+      "descricao": "Fluxos com match parcial geram respostas erradas - usar match exato",
+      "aplicado": 0,
+      "criado_em": "2026-03-29 15:00:00"
+    },
+    {
+      "id": 5,
+      "categoria": "whatsapp",
+      "descricao": "CORS precisa reiniciar bot para aplicar",
+      "aplicado": 0,
+      "criado_em": "2026-03-29 15:00:00"
+    },
+    {
+      "id": 6,
+      "categoria": "whatsapp",
+      "descricao": "WhatsApp Business so configura catalogo pelo celular",
+      "aplicado": 0,
+      "criado_em": "2026-03-29 15:00:00"
+    }
+  ],
+  "evolucao": [
+    {
+      "data": "2026-03-29",
+      "metrica": "arquivos_atualizados",
+      "valor": 93.0,
+      "criado_em": "2026-03-29 20:30:00"
+    },
+    {
+      "data": "2026-03-29",
+      "metrica": "fluxos_whatsapp",
+      "valor": 18.0,
+      "criado_em": "2026-03-29 20:30:00"
+    },
+    {
+      "data": "2026-03-29",
+      "metrica": "leads_captados",
+      "valor": 6.0,
+      "criado_em": "2026-03-29 20:30:00"
+    },
+    {
+      "data": "2026-03-29",
+      "metrica": "mensagens_bot",
+      "valor": 34.0,
+      "criado_em": "2026-03-29 20:30:00"
+    },
+    {
+      "data": "2026-03-29",
+      "metrica": "paginas_site",
+      "valor": 86.0,
+      "criado_em": "2026-03-29 20:30:00"
+    },
+    {
+      "data": "2026-03-29",
+      "metrica": "skills_openclaw",
+      "valor": 13.0,
+      "criado_em": "2026-03-29 20:30:00"
+    },
+    {
+      "data": "2026-03-29",
+      "metrica": "workflows_n8n",
+      "valor": 15.0,
+      "criado_em": "2026-03-29 20:30:00"
+    }
+  ]
+}

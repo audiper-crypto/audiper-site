@@ -685,7 +685,7 @@
   <!-- Header -->
   <div class="main-header">
     <div>
-      <h1 id="greeting-text">Bom dia, Ricardo</h1>
+      <h1 id="greeting-text">Bom dia, Vitor</h1>
       <p id="greeting-sub">Você tem 3 auditorias em execução e 2 achados a confirmar hoje.</p>
     </div>
     <div class="header-right">
@@ -699,6 +699,7 @@
     <button class="tab-btn active" onclick="switchMainTab('dashboard', this)">Dashboard</button>
     <button class="tab-btn" onclick="switchMainTab('calendar', this)">Calendário</button>
     <button class="tab-btn" onclick="switchMainTab('tarefas', this)">Tarefas</button>
+    <button class="tab-btn" onclick="switchMainTab('auditorias', this)">Auditorias</button>
   </div>
 
   <!-- ─── PANE: DASHBOARD ─── -->
@@ -721,7 +722,41 @@
     </div>
   </div>
 
+  <!-- CALENDARIO VISUAL DE SESSOES -->
+  <div class="card" style="padding:16px 20px;margin-bottom:16px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <span class="card-title">Atividade da Semana</span>
+      <span style="font-size:10px;color:var(--sub);">Sessoes de trabalho</span>
+    </div>
+    <div id="week-activity" style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;"></div>
+  </div>
+
   <!-- KPIs -->
+  <!-- Leads WhatsApp + Emails lado a lado (TOPO) -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+    <div class="card" style="padding:16px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <span class="card-title" style="margin:0;">Leads WhatsApp</span>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span id="leads-status-dot" style="width:6px;height:6px;border-radius:50%;background:#ccc;display:inline-block;"></span>
+          <a href="leads.html" style="font-size:11px;color:#c41a1a;text-decoration:none;font-weight:600;">Ver todos</a>
+        </div>
+      </div>
+      <div id="leads-mini" style="display:flex;flex-direction:column;gap:6px;">
+        <div style="text-align:center;padding:16px;color:#ccc;font-size:12px;">Carregando...</div>
+      </div>
+    </div>
+    <div class="card" style="padding:16px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <span class="card-title" style="margin:0;">Emails Recentes</span>
+        <a href="https://mail.google.com" target="_blank" style="font-size:11px;color:#c41a1a;text-decoration:none;font-weight:600;">Abrir Gmail</a>
+      </div>
+      <div id="emails-mini" style="display:flex;flex-direction:column;gap:6px;">
+        <div style="text-align:center;padding:16px;color:#ccc;font-size:12px;">Conectar Gmail para ver emails</div>
+      </div>
+    </div>
+  </div>
+
   <div class="kpis">
     <div class="kpi-card">
       <div class="kpi-row">
@@ -825,13 +860,86 @@
 
   <!-- ─── PANE: TAREFAS ─── -->
   <div class="tab-pane" id="pane-tarefas">
-    <div class="card" style="padding:20px;">
-      <div class="card-header">
-        <span class="card-title">Tarefas Pendentes</span>
+
+    <!-- TOPO: Conquistas (esq) + Pendencias (dir) -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+
+      <!-- CONQUISTAS DA SESSAO -->
+      <div class="card" style="padding:20px;">
+        <div class="card-header">
+          <span class="card-title">Conquistas por Sessao</span>
+          <span id="sessoes-count" style="font-size:11px;color:var(--sub);"></span>
+        </div>
+        <div id="sessoes-conquistas" style="display:flex;flex-direction:column;gap:14px;margin-top:12px;"></div>
       </div>
-      <div id="tarefas-list" style="display:flex;flex-direction:column;gap:10px;margin-top:12px;"></div>
+
+      <!-- PENDENCIAS -->
+      <div class="card" style="padding:20px;">
+        <div class="card-header">
+          <span class="card-title">Pendencias</span>
+          <span id="pend-count" style="font-size:11px;color:var(--sub);"></span>
+        </div>
+        <div id="pendencias-list" style="display:flex;flex-direction:column;gap:8px;margin-top:12px;"></div>
+      </div>
+
     </div>
+
+    <!-- MEIO: Aprendizados (esq) + Evolucao (dir) -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+
+      <!-- Aprendizados -->
+      <div class="card" style="padding:20px;">
+        <div class="card-header">
+          <span class="card-title">Aprendizados</span>
+          <span id="aprend-count" style="font-size:11px;color:var(--sub);"></span>
+        </div>
+        <div id="aprendizados-list" style="display:flex;flex-direction:column;gap:8px;margin-top:12px;"></div>
+      </div>
+
+      <!-- Evolucao -->
+      <div class="card" style="padding:20px;">
+        <div class="card-header"><span class="card-title">Evolucao do Projeto</span></div>
+        <div id="evolucao-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px;"></div>
+      </div>
+
+    </div>
+
   </div><!-- /pane-tarefas -->
+
+  <!-- ─── PANE: AUDITORIAS ─── -->
+  <div class="tab-pane" id="pane-auditorias">
+
+    <!-- KPIs de auditoria -->
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:16px;">
+      <div class="kpi-card" id="aud-kpi-total"><div class="kpi-row"><div class="kpi-icon red">📋</div></div><div class="kpi-val" id="ak-total">0</div><div class="kpi-label">Total</div></div>
+      <div class="kpi-card" id="aud-kpi-exec"><div class="kpi-row"><div class="kpi-icon blue">⚡</div></div><div class="kpi-val" id="ak-exec">0</div><div class="kpi-label">Em Execucao</div></div>
+      <div class="kpi-card" id="aud-kpi-plan"><div class="kpi-row"><div class="kpi-icon orange">📝</div></div><div class="kpi-val" id="ak-plan">0</div><div class="kpi-label">Planejamento</div></div>
+      <div class="kpi-card" id="aud-kpi-done"><div class="kpi-row"><div class="kpi-icon green">✓</div></div><div class="kpi-val" id="ak-done">0</div><div class="kpi-label">Entregues</div></div>
+      <div class="kpi-card" id="aud-kpi-prop"><div class="kpi-row"><div class="kpi-icon" style="background:#EDE9FE;">📄</div></div><div class="kpi-val" id="ak-prop">0</div><div class="kpi-label">Propostas</div></div>
+    </div>
+
+    <!-- GRID: Status por cliente (esq) + Pendencias por cliente (dir) -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+
+      <!-- Status por cliente -->
+      <div class="card" style="padding:20px;">
+        <div class="card-header">
+          <span class="card-title">Status por Cliente</span>
+        </div>
+        <div id="aud-status-list" style="display:flex;flex-direction:column;gap:10px;margin-top:12px;"></div>
+      </div>
+
+      <!-- Pendencias por cliente -->
+      <div class="card" style="padding:20px;">
+        <div class="card-header">
+          <span class="card-title">Pendencias por Cliente</span>
+        </div>
+        <div id="aud-pendencias-list" style="display:flex;flex-direction:column;gap:10px;margin-top:12px;"></div>
+      </div>
+
+    </div>
+
+  </div><!-- /pane-auditorias -->
 
 </main>
 
@@ -940,6 +1048,7 @@ async function loadDashboardData() {
 }
 
 function applyData(data) {
+  window._dashData = data;
   // Google Calendar events
   if (data.gcal_events && data.gcal_events.length > 0) {
     // Substituir eventos hardcoded pelos reais do Google Calendar
@@ -1382,6 +1491,7 @@ function switchMainTab(name, btn) {
   document.getElementById('pane-' + name).classList.add('active');
   btn.classList.add('active');
   if (name === 'calendar') buildCalendar();
+  if (name === 'auditorias') loadAuditorias();
 }
 
 // ─── CALENDAR ────────────────────────────────────────────
@@ -1608,6 +1718,306 @@ function renderUpcoming() {
     </div>`;
   }).join('');
 }
+
+// ═══ LEADS WHATSAPP WIDGET ═══
+async function loadLeadsMini() {
+  const el = document.getElementById('leads-mini');
+  const dot = document.getElementById('leads-status-dot');
+  try {
+    const res = await fetch('http://localhost:3000/api/leads', { signal: AbortSignal.timeout(3000) });
+    const data = await res.json();
+    dot.style.background = '#22c55e';
+    const leads = (data.leads || []).slice(0, 5);
+    if (leads.length === 0) {
+      el.innerHTML = '<div style="text-align:center;padding:16px;color:#ccc;font-size:12px;">Nenhum lead ainda</div>';
+      return;
+    }
+    const intLabels = { proposta:'Proposta', pericia:'Pericia', auditoria:'Auditoria', consultoria_ia:'IA', lgpd:'LGPD' };
+    const intColors = { proposta:'#c41a1a', pericia:'#f59e0b', auditoria:'#8b5cf6', consultoria_ia:'#059669', lgpd:'#0284c7' };
+    el.innerHTML = leads.map(l => {
+      const nome = l.nome || 'Sem nome';
+      const inicial = nome.charAt(0).toUpperCase();
+      const interesse = l.interesse ? `<span style="font-size:9px;padding:1px 5px;border-radius:3px;background:${intColors[l.interesse]||'#666'}15;color:${intColors[l.interesse]||'#666'};font-weight:600;">${intLabels[l.interesse]||l.interesse}</span>` : '';
+      const status = l.status === 'qualificado' ? '<span style="font-size:9px;padding:1px 5px;border-radius:3px;background:#f0fdf4;color:#22c55e;font-weight:600;">QUALIFICADO</span>' : '';
+      const hora = (l.ultima_interacao || '').substring(11, 16);
+      return `<div style="display:flex;align-items:center;gap:10px;padding:8px;border-radius:6px;border:1px solid #f0f0f0;">
+        <div style="width:32px;height:32px;border-radius:50%;background:#fef2f2;color:#c41a1a;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;">${inicial}</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:12px;font-weight:600;color:#1a1a1a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${nome}</div>
+          <div style="font-size:10px;color:#999;">${l.total_mensagens} msgs ${interesse} ${status}</div>
+        </div>
+        <div style="font-size:10px;color:#ccc;">${hora}</div>
+      </div>`;
+    }).join('');
+  } catch (e) {
+    dot.style.background = '#c41a1a';
+    el.innerHTML = '<div style="text-align:center;padding:16px;color:#ccc;font-size:12px;">Bot WhatsApp offline</div>';
+  }
+}
+loadLeadsMini();
+setInterval(loadLeadsMini, 30000);
+
+// ═══ CALENDARIO SEMANAL DE ATIVIDADE ═══
+function loadWeekActivity() {
+  const el = document.getElementById('week-activity');
+  if (!el) return;
+  const today = new Date();
+  const dayOfWeek = today.getDay(); // 0=Dom
+  const startOfWeek = new Date(today);
+  startOfWeek.setDate(today.getDate() - dayOfWeek);
+  const DIAS = ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'];
+  // Sessoes conhecidas (do ops-data)
+  const sessaoDias = {'2026-03-28':true, '2026-03-29':true};
+  let html = '';
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(startOfWeek);
+    d.setDate(startOfWeek.getDate() + i);
+    const ds = d.toISOString().substring(0,10);
+    const isToday = ds === today.toISOString().substring(0,10);
+    const hasSessao = sessaoDias[ds];
+    const bg = isToday ? '#fef2f2' : hasSessao ? '#f0fdf4' : 'var(--bg)';
+    const border = isToday ? '2px solid var(--red)' : hasSessao ? '2px solid #22c55e' : '1px solid var(--border)';
+    const numColor = isToday ? 'var(--red)' : hasSessao ? '#059669' : 'var(--sub)';
+    html += `<div style="text-align:center;padding:10px 4px;background:${bg};border:${border};border-radius:10px;">
+      <div style="font-size:9px;color:var(--sub);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">${DIAS[i]}</div>
+      <div style="font-size:18px;font-weight:800;color:${numColor};">${d.getDate()}</div>
+      ${hasSessao ? '<div style="width:6px;height:6px;border-radius:50%;background:#22c55e;margin:4px auto 0;"></div>' : ''}
+      ${isToday ? '<div style="font-size:8px;color:var(--red);margin-top:2px;font-weight:600;">HOJE</div>' : ''}
+    </div>`;
+  }
+  el.innerHTML = html;
+  // Update com dados do ops-data.json
+  fetch('/data/ops-data.json?t=' + Date.now()).then(r=>r.json()).then(ops => {
+    if (ops.sessoes) {
+      ops.sessoes.forEach(s => { sessaoDias[s.data] = true; });
+      // Re-render
+      loadWeekActivity._sessoes = sessaoDias;
+    }
+  }).catch(()=>{});
+}
+loadWeekActivity();
+
+// ═══ EMAILS RECENTES WIDGET ═══
+async function loadEmailsMini() {
+  const el = document.getElementById('emails-mini');
+  try {
+    const res = await fetch('/data/emails-recentes.json?t=' + Date.now(), { signal: AbortSignal.timeout(3000) });
+    const data = await res.json();
+    const emails = (data.emails || []).slice(0, 5);
+    if (emails.length === 0) {
+      el.innerHTML = '<div style="text-align:center;padding:16px;color:#ccc;font-size:12px;">Nenhum email recente</div>';
+      return;
+    }
+    el.innerHTML = emails.map(e => {
+      const inicial = (e.from_name || '?').charAt(0).toUpperCase();
+      const bgColor = e.unread ? '#fef2f2' : '#f8f8f8';
+      const dotColor = e.unread ? '#c41a1a' : '#ccc';
+      const subj = (e.subject || '').length > 40 ? e.subject.substring(0, 40) + '...' : e.subject;
+      const hora = (e.date || '').substring(11, 16);
+      return `<div style="display:flex;align-items:center;gap:10px;padding:8px;border-radius:6px;border:1px solid #f0f0f0;background:${bgColor};">
+        <div style="width:32px;height:32px;border-radius:50%;background:#eff6ff;color:#3b82f6;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;">${inicial}</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:12px;font-weight:600;color:#1a1a1a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${e.from_name}</div>
+          <div style="font-size:10px;color:#888;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${subj}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0;">
+          <span style="font-size:10px;color:#aaa;">${hora}</span>
+          ${e.unread ? '<span style="width:6px;height:6px;border-radius:50%;background:#c41a1a;"></span>' : ''}
+        </div>
+      </div>`;
+    }).join('');
+  } catch (e) {
+    el.innerHTML = '<div style="text-align:center;padding:16px;color:#ccc;font-size:12px;">Erro ao carregar emails</div>';
+  }
+}
+loadEmailsMini();
+setInterval(loadEmailsMini, 60000);
+
+// ═══ OPS DATA (sessoes, pendencias, aprendizados, evolucao) ═══
+async function loadOpsData() {
+  try {
+    const res = await fetch('/data/ops-data.json?t=' + Date.now());
+    const ops = await res.json();
+
+    // ─── CONQUISTAS POR SESSAO (card esquerdo) ───
+    const scEl = document.getElementById('sessoes-conquistas');
+    const scCount = document.getElementById('sessoes-count');
+    if (scEl && ops.sessoes) {
+      if (scCount) scCount.textContent = ops.sessoes.length + ' sessoes';
+      scEl.innerHTML = ops.sessoes.map(s => {
+        const conquistas = (s.conquistas || '').split(',').map(c => c.trim()).filter(Boolean);
+        return `<div style="padding:14px;border:1px solid var(--border);border-radius:10px;border-left:4px solid var(--green);background:#fafffe;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="width:36px;height:36px;border-radius:8px;background:#d1fae5;color:#059669;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;">${s.data.substring(8,10)}</div>
+              <div>
+                <div style="font-size:13px;font-weight:700;color:var(--text);">${s.resumo}</div>
+                <div style="font-size:10px;color:var(--sub);">${s.data} — ${s.horas||0}h de trabalho</div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:4px;">${conquistas.map(c =>
+            `<span style="font-size:9px;padding:3px 7px;border-radius:4px;background:#ecfdf5;color:#047857;border:1px solid #a7f3d0;">${c}</span>`
+          ).join('')}</div>
+        </div>`;
+      }).join('');
+    }
+
+    // ─── PENDENCIAS (card direito) ───
+    const pEl = document.getElementById('pendencias-list');
+    const pcEl = document.getElementById('pend-count');
+    if (pEl && ops.pendencias) {
+      const prioColors = {ALTA:'#dc2626',MEDIA:'#2563eb',BAIXA:'#6b7280'};
+      const prioIcons = {ALTA:'🔴',MEDIA:'🔵',BAIXA:'⚪'};
+      const pendentes = ops.pendencias.filter(p => p.status === 'pendente');
+      if (pcEl) pcEl.textContent = pendentes.length + ' pendentes';
+
+      // Agrupar por prioridade
+      ['ALTA','MEDIA','BAIXA'].forEach(prio => {
+        const items = pendentes.filter(p => p.prioridade === prio);
+        if (items.length === 0) return;
+        let html = `<div style="margin-bottom:4px;">
+          <div style="font-size:10px;font-weight:700;color:${prioColors[prio]};text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;display:flex;align-items:center;gap:4px;">
+            ${prioIcons[prio]} ${prio} <span style="font-weight:400;color:var(--sub);">(${items.length})</span>
+          </div>`;
+        html += items.map(p => {
+          const dt = p.criado_em ? p.criado_em.substring(5,16).replace('T',' ') : '';
+          return `<div style="display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:6px;border:1px solid var(--border);border-left:3px solid ${prioColors[prio]};margin-bottom:4px;">
+            <span style="font-size:11px;flex:1;color:var(--text);">${p.descricao}</span>
+            <span style="font-size:9px;color:var(--sub);background:var(--bg);padding:2px 6px;border-radius:3px;white-space:nowrap;">${p.area}</span>
+            ${dt ? `<span style="font-size:8px;color:#aaa;white-space:nowrap;">${dt}</span>` : ''}
+          </div>`;
+        }).join('');
+        html += '</div>';
+        pEl.innerHTML += html;
+      });
+    }
+
+    // ─── APRENDIZADOS ───
+    const aEl = document.getElementById('aprendizados-list');
+    const acEl = document.getElementById('aprend-count');
+    if (aEl && ops.aprendizados) {
+      const catColors = {infra:'#8b5cf6',whatsapp:'#22c55e',n8n:'#f59e0b',design:'#ec4899',compliance:'#0284c7',leads:'#059669'};
+      if (acEl) acEl.textContent = ops.aprendizados.length + ' registrados';
+      aEl.innerHTML = ops.aprendizados.map(a => {
+        const dt = a.criado_em ? a.criado_em.substring(5,16).replace('T',' ') : '';
+        return `<div style="display:flex;align-items:flex-start;gap:8px;padding:7px 10px;border-radius:6px;border:1px solid var(--border);">
+          <span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;background:${catColors[a.categoria]||'#666'}15;color:${catColors[a.categoria]||'#666'};min-width:60px;text-align:center;white-space:nowrap;">${a.categoria}</span>
+          <span style="font-size:11px;color:var(--sub);line-height:1.4;flex:1;">${a.descricao}</span>
+          ${dt ? `<span style="font-size:8px;color:#aaa;white-space:nowrap;min-width:65px;text-align:right;">${dt}</span>` : ''}
+        </div>`;
+      }).join('');
+    }
+
+    // ─── EVOLUCAO ───
+    const eEl = document.getElementById('evolucao-grid');
+    if (eEl && ops.evolucao) {
+      const metricLabels = {leads_captados:'Leads',mensagens_bot:'Mensagens',fluxos_whatsapp:'Fluxos WA',skills_openclaw:'Skills OC',workflows_n8n:'Workflows',paginas_site:'Paginas',arquivos_atualizados:'Arquivos'};
+      const metricIcons = {leads_captados:'👤',mensagens_bot:'💬',fluxos_whatsapp:'📱',skills_openclaw:'🧠',workflows_n8n:'⚡',paginas_site:'🌐',arquivos_atualizados:'📁'};
+      eEl.innerHTML = ops.evolucao.map(e =>
+        `<div style="text-align:center;padding:14px 8px;background:var(--bg);border-radius:10px;border:1px solid var(--border);">
+          <div style="font-size:18px;margin-bottom:4px;">${metricIcons[e.metrica]||'📊'}</div>
+          <div style="font-size:24px;font-weight:800;color:var(--red);">${Math.round(e.valor)}</div>
+          <div style="font-size:9px;color:var(--sub);text-transform:uppercase;letter-spacing:0.5px;margin-top:3px;">${metricLabels[e.metrica]||e.metrica}</div>
+        </div>`
+      ).join('');
+    }
+
+  } catch (e) { console.warn('Ops data:', e); }
+}
+
+// ─── ABA AUDITORIAS ───
+function loadAuditorias() {
+  const data = window._dashData;
+  if (!data || !data.auditorias) return;
+
+  const auds = data.auditorias;
+  const geradoEm = (data.gerado_em || '').substring(0,16).replace('T',' ');
+  const statusMap = {exec:'Em Execucao',done:'Entregue',plan:'Planejamento',prop:'Proposta'};
+  const statusColors = {exec:'#3b82f6',done:'#22c55e',plan:'#f59e0b',prop:'#8b5cf6'};
+  const statusBg = {exec:'#eff6ff',done:'#f0fdf4',plan:'#fefce8',prop:'#faf5ff'};
+
+  // KPIs
+  const el = (id) => document.getElementById(id);
+  el('ak-total').textContent = auds.length;
+  el('ak-exec').textContent = auds.filter(a=>a.status==='exec').length;
+  el('ak-plan').textContent = auds.filter(a=>a.status==='plan').length;
+  el('ak-done').textContent = auds.filter(a=>a.status==='done').length;
+  el('ak-prop').textContent = auds.filter(a=>a.status==='prop').length;
+
+  // Status por cliente (esquerda)
+  const slEl = document.getElementById('aud-status-list');
+  if (slEl) {
+    slEl.innerHTML = auds.map(a => {
+      const pctPtas = a.ptas_total > 0 ? Math.round((a.ptas_ok/a.ptas_total)*100) : 0;
+      const barColor = statusColors[a.status] || '#888';
+      return `<div style="padding:12px;border:1px solid var(--border);border-radius:10px;border-left:4px solid ${barColor};background:${statusBg[a.status]||'#fff'};">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="font-size:15px;">${a.icon||'📁'}</span>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:var(--text);">${a.label}</div>
+              <div style="font-size:10px;color:var(--sub);">${a.codigo} — Exerc. ${a.exercicio}</div>
+            </div>
+          </div>
+          <span style="font-size:9px;font-weight:700;padding:3px 8px;border-radius:4px;background:${barColor}15;color:${barColor};">${statusMap[a.status]||a.fase}</span>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center;margin-top:8px;">
+          <div style="flex:1;background:#e5e7eb;border-radius:4px;height:6px;overflow:hidden;">
+            <div style="width:${pctPtas}%;height:100%;background:${barColor};border-radius:4px;transition:width .3s;"></div>
+          </div>
+          <span style="font-size:10px;font-weight:600;color:var(--sub);min-width:70px;text-align:right;">${a.ptas_ok}/${a.ptas_total} PTAs</span>
+        </div>
+        <div style="display:flex;gap:16px;margin-top:6px;justify-content:space-between;">
+          <div style="display:flex;gap:12px;">
+            <span style="font-size:10px;color:var(--sub);">📄 ${a.docs} docs</span>
+            <span style="font-size:10px;color:var(--sub);">⚠ ${a.achados} achados</span>
+          </div>
+          <span style="font-size:8px;color:#aaa;">${geradoEm}</span>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  // Pendencias por cliente (direita)
+  const plEl = document.getElementById('aud-pendencias-list');
+  if (plEl) {
+    // Auditorias ativas (nao done) com pendencias simuladas
+    const ativas = auds.filter(a => a.status !== 'done');
+    if (ativas.length === 0) {
+      plEl.innerHTML = '<div style="text-align:center;padding:20px;color:var(--sub);font-size:12px;">Nenhuma pendencia de auditoria</div>';
+    } else {
+      plEl.innerHTML = ativas.map(a => {
+        const pendencias = [];
+        if (a.ptas_ok === 0 && a.ptas_total > 0) pendencias.push({tipo:'ptas',desc:`${a.ptas_total} PTAs pendentes`,cor:'#f59e0b'});
+        if (a.status === 'prop') pendencias.push({tipo:'proposta',desc:'Aguardando aceite da proposta',cor:'#8b5cf6'});
+        if (a.status === 'plan') pendencias.push({tipo:'planejamento',desc:'Planejamento em andamento',cor:'#f59e0b'});
+        if (a.status === 'exec') pendencias.push({tipo:'execucao',desc:'Testes substantivos pendentes',cor:'#3b82f6'});
+        if (a.achados > 0) pendencias.push({tipo:'achados',desc:`${a.achados} achados a comunicar`,cor:'#dc2626'});
+        if (a.docs < 100) pendencias.push({tipo:'docs',desc:'Documentacao incompleta (<100)',cor:'#f59e0b'});
+
+        return `<div style="padding:12px;border:1px solid var(--border);border-radius:10px;">
+          <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+            ${a.icon||'📁'} ${a.label}
+            <span style="font-size:9px;color:var(--sub);font-weight:400;">${a.codigo}</span>
+            <span style="font-size:8px;color:#aaa;margin-left:auto;">${geradoEm}</span>
+          </div>
+          ${pendencias.length > 0 ? pendencias.map(p =>
+            `<div style="display:flex;align-items:center;gap:6px;padding:4px 0;">
+              <span style="width:6px;height:6px;border-radius:50%;background:${p.cor};flex-shrink:0;"></span>
+              <span style="font-size:11px;color:var(--sub);">${p.desc}</span>
+            </div>`
+          ).join('') : '<div style="font-size:11px;color:#22c55e;padding:4px 0;">Sem pendencias criticas</div>'}
+        </div>`;
+      }).join('');
+    }
+  }
+}
+
+loadOpsData();
+
+// Carrega auditorias quando o dashboard-data ja estiver disponivel
+setTimeout(loadAuditorias, 500);
 </script>
 </body>
 </html>

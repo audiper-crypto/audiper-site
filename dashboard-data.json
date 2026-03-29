@@ -369,7 +369,21 @@
       "link_auditoria": "/auditorias/0ac38b45-7ef9-4fbb-808e-64d6d98bbc29"
     }
   ],
-  "tarefas": [],
+  "tarefas": [
+    {"titulo": "Obsidian: interligar pastas de auditoria com wikilinks", "prioridade": "alta", "prazo": "29/03/2026", "concluido": true},
+    {"titulo": "Obsidian: criar daily note com resumo sessao 28/03", "prioridade": "alta", "prazo": "29/03/2026", "concluido": true},
+    {"titulo": "Obsidian: criar 4 templates", "prioridade": "alta", "prazo": "29/03/2026", "concluido": true},
+    {"titulo": "Obsidian: frontmatter obrigatorio em toda nota", "prioridade": "alta", "prazo": "29/03/2026", "concluido": true},
+    {"titulo": "Dashboard: estilo mission control AUDIPER", "prioridade": "alta", "prazo": "30/03/2026"},
+    {"titulo": "Dashboard: animacoes em tempo real", "prioridade": "alta", "prazo": "30/03/2026"},
+    {"titulo": "Hero 3D: logo PNG transparente", "prioridade": "media", "prazo": "30/03/2026"},
+    {"titulo": "Hero 3D: integrar no site", "prioridade": "media", "prazo": "30/03/2026"},
+    {"titulo": "OpenClaw: verificar Audina estudando", "prioridade": "media", "prazo": "29/03/2026"},
+    {"titulo": "Git: push 15 commits do site", "prioridade": "media", "prazo": "29/03/2026"},
+    {"titulo": "NSSM: OpenClaw como servico Windows", "prioridade": "baixa", "prazo": "31/03/2026"},
+    {"titulo": "Tavily: configurar API key", "prioridade": "baixa", "prazo": "31/03/2026"},
+    {"titulo": "Site: criar pagina /automacao", "prioridade": "baixa", "prazo": "31/03/2026"}
+  ],
   "emails": [],
   "briefing": {
     "data": "28/03/2026",
