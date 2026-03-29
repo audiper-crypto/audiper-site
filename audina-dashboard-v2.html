@@ -194,7 +194,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .sidebar-bottom {
-  margin-top: auto;
+  margin-top: 16px;
   padding: 16px 12px 0;
   border-top: 1px solid var(--gray-200);
 }
@@ -1208,7 +1208,7 @@ html.dark .org-badge-agent { background: #334155; color: #CBD5E1; }
     <span>AUDIPER<span class="logo-dot">.</span></span>
   </div>
   <div class="sidebar-user">
-    <div class="sidebar-avatar">VE<span class="online-dot"></span></div>
+    <div class="sidebar-avatar" style="background:none;overflow:hidden;"><img src="images/team/vitor.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"><span class="online-dot"></span></div>
     <div class="sidebar-user-info">
       <div class="sidebar-user-name">Vitor Eduardo</div>
       <div class="sidebar-user-role">Gerente de Auditoria</div>
@@ -1685,7 +1685,7 @@ html.dark .org-badge-agent { background: #334155; color: #CBD5E1; }
         <div class="org-level org-level-2">
 
           <div class="org-card-agent" data-agent="audina" onclick="toggleAgentCard(this)" style="border-top-color:#E72C22;">
-            <img class="org-avatar" src="images/team/audina.png" alt="Audina" style="border-color:#E72C22;">
+            <img class="org-avatar" src="images/team/audina.png" alt="Audina" style="border-color:#E72C22;background:#f0f0f5;">
             <div class="org-name">Audina</div>
             <div class="org-role">Coordenadora</div>
             <div class="org-badge-agent">AGENTE IA</div>
@@ -1699,7 +1699,7 @@ html.dark .org-badge-agent { background: #334155; color: #CBD5E1; }
           </div>
 
           <div class="org-card-agent" data-agent="clara" onclick="toggleAgentCard(this)" style="border-top-color:#EC4899;">
-            <img class="org-avatar" src="images/team/clara.png" alt="Clara" style="border-color:#EC4899;object-fit:contain;">
+            <img class="org-avatar" src="images/team/clara.png" alt="Clara" style="border-color:#EC4899;object-fit:contain;background:#f0f0f5;">
             <div class="org-name">Clara</div>
             <div class="org-role">Redatora</div>
             <div class="org-badge-agent">AGENTE IA</div>
@@ -1713,7 +1713,7 @@ html.dark .org-badge-agent { background: #334155; color: #CBD5E1; }
           </div>
 
           <div class="org-card-agent" data-agent="qc" onclick="toggleAgentCard(this)" style="border-top-color:#22C55E;">
-            <img class="org-avatar" src="images/team/qc.png" alt="QC" style="border-color:#22C55E;">
+            <img class="org-avatar" src="images/team/qc.png" alt="QC" style="border-color:#22C55E;background:#f0f0f5;">
             <div class="org-name">QC</div>
             <div class="org-role">Revisora de Qualidade</div>
             <div class="org-badge-agent">AGENTE IA</div>
@@ -1743,7 +1743,7 @@ html.dark .org-badge-agent { background: #334155; color: #CBD5E1; }
         <div class="org-level org-level-3">
 
           <div class="org-card-agent" data-agent="helena" onclick="toggleAgentCard(this)" style="border-top-color:#8B5CF6;">
-            <img class="org-avatar" src="images/team/helena.png" alt="Helena" style="border-color:#8B5CF6;">
+            <img class="org-avatar" src="images/team/helena.png" alt="Helena" style="border-color:#8B5CF6;background:#f0f0f5;">
             <div class="org-name">Helena</div>
             <div class="org-role">Pesquisadora</div>
             <div class="org-badge-agent">AGENTE IA</div>
@@ -1757,7 +1757,7 @@ html.dark .org-badge-agent { background: #334155; color: #CBD5E1; }
           </div>
 
           <div class="org-card-agent" data-agent="marcos" onclick="toggleAgentCard(this)" style="border-top-color:#3B82F6;">
-            <img class="org-avatar" src="images/team/marcos.png" alt="Marcos" style="border-color:#3B82F6;">
+            <img class="org-avatar" src="images/team/marcos.png" alt="Marcos" style="border-color:#3B82F6;background:#f0f0f5;">
             <div class="org-name">Marcos</div>
             <div class="org-role">Analista de Dados</div>
             <div class="org-badge-agent">AGENTE IA</div>
@@ -1771,7 +1771,7 @@ html.dark .org-badge-agent { background: #334155; color: #CBD5E1; }
           </div>
 
           <div class="org-card-agent" data-agent="igor" onclick="toggleAgentCard(this)" style="border-top-color:#F59E0B;">
-            <img class="org-avatar" src="images/team/igor.png" alt="Igor" style="border-color:#F59E0B;">
+            <img class="org-avatar" src="images/team/igor.png" alt="Igor" style="border-color:#F59E0B;background:#f0f0f5;">
             <div class="org-name">Igor</div>
             <div class="org-role">Vigilante</div>
             <div class="org-badge-agent">AGENTE IA</div>
@@ -1785,7 +1785,7 @@ html.dark .org-badge-agent { background: #334155; color: #CBD5E1; }
           </div>
 
           <div class="org-card-agent" data-agent="audina-jr" onclick="toggleAgentCard(this)" style="border-top-color:#22C55E;">
-            <img class="org-avatar" src="images/team/audina-jr.png" alt="Audina Jr" style="border-color:#22C55E;">
+            <img class="org-avatar" src="images/team/audina-jr.png" alt="Audina Jr" style="border-color:#22C55E;background:#f0f0f5;">
             <div class="org-name">Audina Jr</div>
             <div class="org-role">Atendente WhatsApp</div>
             <div class="org-badge-agent">AGENTE IA</div>
@@ -2206,43 +2206,95 @@ function renderPipeline() {
 
 /* ========== CHARTS ========== */
 function renderCharts(auditorias) {
-  // Bar
-  const bc = document.getElementById('chart-progress'), bx = bc.getContext('2d');
-  bc.width = bc.parentElement.clientWidth-40; bc.height = 220;
-  const bd = auditorias.map(a=>({l:a.label.length>10?a.label.substring(0,10)+'..':a.label,p:a.ptas_total>0?(a.ptas_ok/a.ptas_total*100):0}));
-  const bw = Math.min(40,(bc.width-60)/bd.length-8), mh = 160;
-  bx.clearRect(0,0,bc.width,bc.height);
   const isDark = document.documentElement.classList.contains('dark');
-  bd.forEach((d,i) => {
-    const x=50+i*(bw+8),h=d.p/100*mh,y=10+mh-h;
-    bx.fillStyle = d.p>=100?'#22C55E':d.p>0?'#3B82F6':'#334155';
-    roundRect(bx,x,y,bw,h,4);
-    bx.fillStyle = isDark?'#94A3B8':'#64748B'; bx.font='10px Inter,sans-serif'; bx.textAlign='center';
-    bx.fillText(d.l,x+bw/2,10+mh+16);
-    bx.fillText(Math.round(d.p)+'%',x+bw/2,y-4);
+  const statusColors = {exec:'#3B82F6',done:'#22C55E',plan:'#F59E0B',prop:'#8B5CF6'};
+  const statusLabels = {exec:'Execucao',done:'Entregue',plan:'Planejamento',prop:'Proposta'};
+
+  // ---- BAR CHART: Documentos por auditoria ----
+  const bc = document.getElementById('chart-progress'), bx = bc.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const bW = bc.parentElement.clientWidth - 40, bH = 220;
+  bc.width = bW * dpr; bc.height = bH * dpr; bc.style.width = bW+'px'; bc.style.height = bH+'px';
+  bx.scale(dpr, dpr);
+  bx.clearRect(0, 0, bW, bH);
+
+  const bd = auditorias.map(a => ({
+    l: a.label.length > 12 ? a.label.substring(0, 12) + '..' : a.label,
+    v: a.docs || 0,
+    c: statusColors[a.status] || '#94A3B8'
+  }));
+  const maxVal = Math.max(...bd.map(d => d.v), 1);
+  const barPad = 50, chartTop = 20, chartH = 150;
+  const barGap = 6, barW = Math.min(42, (bW - barPad - 20) / bd.length - barGap);
+
+  // Y-axis gridlines
+  const gridSteps = 4;
+  bx.strokeStyle = isDark ? 'rgba(148,163,184,0.15)' : 'rgba(0,0,0,0.06)';
+  bx.lineWidth = 1;
+  for (let i = 0; i <= gridSteps; i++) {
+    const gy = chartTop + chartH - (i / gridSteps) * chartH;
+    bx.beginPath(); bx.moveTo(barPad - 5, gy); bx.lineTo(bW - 10, gy); bx.stroke();
+    bx.fillStyle = isDark ? '#94A3B8' : '#64748B'; bx.font = '10px Inter,sans-serif'; bx.textAlign = 'right';
+    bx.fillText(Math.round(maxVal * i / gridSteps), barPad - 8, gy + 3);
+  }
+
+  // Bars
+  bd.forEach((d, i) => {
+    const x = barPad + i * (barW + barGap);
+    const h = (d.v / maxVal) * chartH;
+    const y = chartTop + chartH - h;
+    bx.fillStyle = d.c; bx.globalAlpha = 0.9;
+    roundRect(bx, x, y, barW, h, 4);
+    bx.globalAlpha = 1;
+    // Value label on top
+    bx.fillStyle = isDark ? '#E2E8F0' : '#272527'; bx.font = '600 10px Inter,sans-serif'; bx.textAlign = 'center';
+    bx.fillText(d.v.toLocaleString('pt-BR'), x + barW / 2, y - 5);
+    // X-axis label
+    bx.fillStyle = isDark ? '#94A3B8' : '#64748B'; bx.font = '9px Inter,sans-serif';
+    bx.save(); bx.translate(x + barW / 2, chartTop + chartH + 12);
+    bx.rotate(-0.35); bx.fillText(d.l, 0, 0); bx.restore();
   });
 
-  // Donut
+  // ---- DONUT CHART: Distribuicao por status ----
   const dc = document.getElementById('chart-phases'), dx = dc.getContext('2d');
-  dc.width = dc.parentElement.clientWidth-40; dc.height = 220;
-  const phases = {}; auditorias.forEach(a=>{phases[a.fase]=(phases[a.fase]||0)+1;});
-  const pc = {'Execucao':'#3B82F6','Entregue (G)':'#22C55E','Planejamento':'#F59E0B','Inicio (A)':'#8B5CF6'};
-  const pd = Object.entries(phases), tot = pd.reduce((s,[,v])=>s+v,0);
-  const cx=dc.width/2, cy=100, r=70, ir=42;
-  let sa = -Math.PI/2;
-  pd.forEach(([l,c]) => {
-    const sl = (c/tot)*Math.PI*2;
-    dx.beginPath(); dx.arc(cx,cy,r,sa,sa+sl); dx.arc(cx,cy,ir,sa+sl,sa,true); dx.closePath();
-    dx.fillStyle = pc[l]||'#94A3B8'; dx.fill(); sa+=sl;
+  const dW = dc.parentElement.clientWidth - 40, dH = 220;
+  dc.width = dW * dpr; dc.height = dH * dpr; dc.style.width = dW+'px'; dc.style.height = dH+'px';
+  dx.scale(dpr, dpr);
+  dx.clearRect(0, 0, dW, dH);
+
+  const statusCounts = {}; auditorias.forEach(a => { statusCounts[a.status] = (statusCounts[a.status] || 0) + 1; });
+  const slices = Object.entries(statusCounts);
+  const tot = slices.reduce((s, [, v]) => s + v, 0);
+  const cx = dW / 2, cy = 90, r = 70, ir = 44;
+  let sa = -Math.PI / 2;
+
+  slices.forEach(([st, cnt]) => {
+    const sl = (cnt / tot) * Math.PI * 2;
+    dx.beginPath(); dx.arc(cx, cy, r, sa, sa + sl); dx.arc(cx, cy, ir, sa + sl, sa, true); dx.closePath();
+    dx.fillStyle = statusColors[st] || '#94A3B8'; dx.fill();
+    // Percentage on slice
+    if (sl > 0.35) {
+      const mid = sa + sl / 2, tx = cx + Math.cos(mid) * ((r + ir) / 2), ty = cy + Math.sin(mid) * ((r + ir) / 2);
+      dx.fillStyle = '#fff'; dx.font = '600 11px Inter,sans-serif'; dx.textAlign = 'center'; dx.textBaseline = 'middle';
+      dx.fillText(Math.round(cnt / tot * 100) + '%', tx, ty);
+    }
+    sa += sl;
   });
-  dx.fillStyle = isDark?'#E2E8F0':'#272527'; dx.font='600 20px Inter,sans-serif'; dx.textAlign='center'; dx.textBaseline='middle';
-  dx.fillText(tot,cx,cy-6);
-  dx.fillStyle = isDark?'#94A3B8':'#64748B'; dx.font='11px Inter,sans-serif'; dx.fillText('Total',cx,cy+12);
-  dx.textAlign='left'; let ly=190;
-  pd.forEach(([l,c],i) => {
-    const lx=10+i*(dc.width/pd.length);
-    dx.fillStyle=pc[l]||'#94A3B8'; roundRect(dx,lx,ly,10,10,2);
-    dx.fillStyle=isDark?'#94A3B8':'#64748B'; dx.font='11px Inter,sans-serif'; dx.fillText(`${l} (${c})`,lx+14,ly+9);
+
+  // Center text
+  dx.fillStyle = isDark ? '#E2E8F0' : '#272527'; dx.font = '700 22px Inter,sans-serif'; dx.textAlign = 'center'; dx.textBaseline = 'middle';
+  dx.fillText(tot, cx, cy - 7);
+  dx.fillStyle = isDark ? '#94A3B8' : '#64748B'; dx.font = '11px Inter,sans-serif';
+  dx.fillText('total', cx, cy + 11);
+
+  // Legend
+  dx.textAlign = 'left'; dx.textBaseline = 'top';
+  const legendY = 178, cols = slices.length;
+  slices.forEach(([st, cnt], i) => {
+    const lx = 10 + i * (dW / cols);
+    dx.fillStyle = statusColors[st] || '#94A3B8'; roundRect(dx, lx, legendY, 10, 10, 2);
+    dx.fillStyle = isDark ? '#CBD5E1' : '#475569'; dx.font = '11px Inter,sans-serif';
+    dx.fillText((statusLabels[st] || st) + ' (' + cnt + ')', lx + 14, legendY + 1);
   });
 }
 function roundRect(ctx,x,y,w,h,r) {
@@ -2788,49 +2840,76 @@ function toggleAudinaChat() {
   }
 }
 
-function sendAudinaMessage(text) {
+// Chat Audina — chama backend na porta 3001 (key protegida no servidor)
+const AUDINA_CHAT_HISTORY = [];
+
+async function sendAudinaMessage(text) {
   if (!text || !text.trim()) return;
   const chat = document.getElementById('audina-chat');
   if (!chat) return;
+  const input = document.getElementById('audina-input');
+  if (input) input.value = '';
+
   const userMsg = document.createElement('div');
   userMsg.style.cssText = 'background:var(--red-100);color:var(--dark);padding:8px 12px;border-radius:12px 12px 4px 12px;font-size:12px;margin:4px 0;max-width:80%;align-self:flex-end;margin-left:auto;';
   userMsg.textContent = text;
   chat.appendChild(userMsg);
   chat.scrollTop = chat.scrollHeight;
-  const response = generateAudinaResponse(text);
-  setTimeout(() => {
-    const botMsg = document.createElement('div');
-    botMsg.style.cssText = 'background:var(--gray-100);color:var(--dark);padding:8px 12px;border-radius:12px 12px 12px 4px;font-size:12px;margin:4px 0;max-width:90%;';
-    botMsg.textContent = response;
-    chat.appendChild(botMsg);
-    chat.scrollTop = chat.scrollHeight;
-    if ('speechSynthesis' in window) {
-      const utterance = new SpeechSynthesisUtterance(response);
-      utterance.lang = 'pt-BR';
-      utterance.rate = 1.0;
-      utterance.pitch = 1.0;
-      const voices = speechSynthesis.getVoices();
-      const ptVoice = voices.find(v => v.lang.startsWith('pt') && v.name.toLowerCase().includes('female')) ||
-                       voices.find(v => v.lang.startsWith('pt')) || voices[0];
-      if (ptVoice) utterance.voice = ptVoice;
-      speechSynthesis.speak(utterance);
-    }
-  }, 400);
-  const input = document.getElementById('audina-input');
-  if (input) input.value = '';
+  AUDINA_CHAT_HISTORY.push({role:'user',content:text});
+
+  const typing = document.createElement('div');
+  typing.style.cssText = 'background:var(--gray-100);color:var(--gray);padding:8px 12px;border-radius:12px;font-size:11px;margin:4px 0;max-width:60%;font-style:italic;';
+  typing.textContent = 'Audina esta pensando...';
+  chat.appendChild(typing);
+  chat.scrollTop = chat.scrollHeight;
+
+  let response;
+  try {
+    const res = await fetch('http://localhost:3001/api/chat', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({message: text, history: AUDINA_CHAT_HISTORY.slice(-6)})
+    });
+    const data = await res.json();
+    response = data.response || generateAudinaFallback(text);
+  } catch(e) {
+    console.warn('Chat API error, usando fallback:', e.message);
+    response = generateAudinaFallback(text);
+  }
+
+  chat.removeChild(typing);
+  AUDINA_CHAT_HISTORY.push({role:'assistant',content:response});
+
+  const botMsg = document.createElement('div');
+  botMsg.style.cssText = 'background:var(--gray-100);color:var(--dark);padding:8px 12px;border-radius:12px 12px 12px 4px;font-size:12px;margin:4px 0;max-width:90%;line-height:1.5;';
+  botMsg.textContent = response;
+  chat.appendChild(botMsg);
+  chat.scrollTop = chat.scrollHeight;
+
+  // TTS
+  if ('speechSynthesis' in window) {
+    const utterance = new SpeechSynthesisUtterance(response);
+    utterance.lang = 'pt-BR';
+    utterance.rate = 1.0;
+    const voices = speechSynthesis.getVoices();
+    const ptVoice = voices.find(v => v.lang.startsWith('pt') && v.name.toLowerCase().includes('female')) ||
+                     voices.find(v => v.lang.startsWith('pt')) || voices[0];
+    if (ptVoice) utterance.voice = ptVoice;
+    speechSynthesis.speak(utterance);
+  }
 }
 
-function generateAudinaResponse(text) {
+function generateAudinaFallback(text) {
   const lower = text.toLowerCase();
-  if (lower.includes('status') && lower.includes('oig')) return 'OIG Gaming esta em fase de execucao. 0 de 42 PTAs concluidos. 1.494 documentos indexados. Testes substantivos pendentes.';
+  if (lower.includes('status') && lower.includes('oig')) return 'OIG Gaming esta em fase de execucao. 0 de 42 PTAs concluidos. 1.494 documentos indexados.';
   if (lower.includes('status') && lower.includes('japan')) return 'Japan Veiculos esta entregue. 42 de 42 PTAs concluidos. Relatorio G-01 emitido.';
-  if (lower.includes('status') && lower.includes('unimed')) return 'Unimed Floriano esta em execucao. 0 de 42 PTAs concluidos. 532 documentos. Prazo de encerramento em 2 dias.';
-  if (lower.includes('achados') || lower.includes('achado')) return 'Existem 47 achados confirmados. 2 urgentes: prazo G-01 Japan (3 dias) e email OIG sem resposta (48h).';
-  if (lower.includes('lead') || lower.includes('whatsapp')) return '6 leads captados pelo WhatsApp. 1 qualificado (interesse em IA/automacao). 38 mensagens processadas.';
-  if (lower.includes('prazo') || lower.includes('vence')) return 'Proximos prazos: G-01 Japan em 3 dias, Encerramento Unimed em 2 dias, FAPEC planejamento parado ha 8 dias.';
-  if (lower.includes('equipe') || lower.includes('agente')) return 'Helena esta pesquisando NBC TA 500. Igor detectou 2 alertas. Marcos aguarda balancete OIG. Audina Jr atendeu 6 leads.';
-  if (lower.includes('boa') || lower.includes('oi') || lower.includes('ola')) return 'Boa tarde, Vitor. Voce tem 2 auditorias em execucao e 5 alertas pendentes. Posso ajudar com algo?';
-  return 'Consultando o sistema... Temos 9 auditorias ativas, 44% dos PTAs concluidos e 4 relatorios emitidos neste ciclo. Em que posso ajudar?';
+  if (lower.includes('status') && lower.includes('unimed')) return 'Unimed Floriano em execucao. 532 documentos. Prazo de encerramento em 2 dias.';
+  if (lower.includes('achados')) return '47 achados confirmados. 2 urgentes: prazo G-01 Japan (3 dias) e email OIG sem resposta (48h).';
+  if (lower.includes('lead') || lower.includes('whatsapp')) return '6 leads captados. 1 qualificado (IA/automacao). 38 mensagens processadas.';
+  if (lower.includes('prazo')) return 'Proximos prazos: G-01 Japan em 3 dias, Unimed encerramento em 2 dias, FAPEC parada ha 8 dias.';
+  if (lower.includes('equipe') || lower.includes('agente')) return 'Helena pesquisando NBC TA 500. Igor: 2 alertas. Marcos aguarda balancete OIG. Audina Jr: 6 leads.';
+  if (lower.includes('oi') || lower.includes('ola') || lower.includes('boa')) return 'Boa tarde, Vitor. 2 auditorias em execucao, 5 alertas pendentes. Em que posso ajudar?';
+  return '9 auditorias ativas, 44% PTAs concluidos, 4 relatorios emitidos. Em que posso ajudar?';
 }
 
 let voiceRecognition = null;
@@ -2914,6 +2993,76 @@ switchTab = function(tab) {
   origSwitchTabEquipe(tab);
   if (tab === 'equipe') fetchAgentStatus();
 };
+
+/* ========== ONBOARDING TOUR ========== */
+(function initTour() {
+  if (localStorage.getItem('audiper-tour-done')) return;
+  const steps = [
+    { sel: '.ns-card', title: 'North Star Metric', desc: 'Seu progresso geral em um numero. Acompanhe a evolucao dos PTAs concluidos.' },
+    { sel: '.org-level-2', title: 'Equipe de Agentes IA', desc: 'Sua equipe virtual trabalhando 24/7. Clique em cada agente para ver detalhes.' },
+    { sel: '.cmd-trigger', title: 'Command Palette', desc: 'Pressione Ctrl+K para buscar qualquer auditoria, cliente ou PTA rapidamente.' },
+    { sel: '[data-tab="mission"]', title: 'Mission Control', desc: 'Monitoramento em tempo real de todas as operacoes e metricas do escritorio.' },
+    { sel: '.audina-fab', title: 'Fale com a Audina', desc: 'Clique no microfone ou digite para conversar com a assistente virtual.' }
+  ];
+  let cur = 0;
+
+  const overlay = document.createElement('div');
+  overlay.id = 'tour-overlay';
+  overlay.innerHTML = '<div id="tour-spotlight"></div><div id="tour-tooltip"><div id="tour-step-num"></div><div id="tour-title"></div><div id="tour-desc"></div><div id="tour-btns"><button id="tour-skip">Pular tour</button><button id="tour-next">Proximo</button></div></div>';
+  const style = document.createElement('style');
+  style.textContent = `
+    #tour-overlay{position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.6);transition:opacity .3s;}
+    #tour-spotlight{position:absolute;border-radius:12px;box-shadow:0 0 0 9999px rgba(0,0,0,0.6);transition:all .4s ease;pointer-events:none;}
+    #tour-tooltip{position:absolute;background:#fff;border-radius:12px;padding:20px 24px;max-width:340px;box-shadow:0 8px 32px rgba(0,0,0,0.25);z-index:100000;transition:all .4s ease;}
+    #tour-step-num{font-size:11px;color:#94A3B8;margin-bottom:4px;font-weight:600;letter-spacing:0.5px;}
+    #tour-title{font-size:16px;font-weight:700;color:#272527;margin-bottom:6px;}
+    #tour-desc{font-size:13px;color:#64748B;line-height:1.5;margin-bottom:16px;}
+    #tour-btns{display:flex;gap:10px;justify-content:flex-end;}
+    #tour-skip{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;color:#64748B;background:#F1F5F9;border:none;cursor:pointer;}
+    #tour-skip:hover{background:#E2E8F0;}
+    #tour-next{padding:8px 20px;border-radius:8px;font-size:13px;font-weight:600;color:#fff;background:#E72C22;border:none;cursor:pointer;}
+    #tour-next:hover{background:#CB2C27;}
+  `;
+  document.head.appendChild(style);
+  document.body.appendChild(overlay);
+
+  function showStep() {
+    const s = steps[cur];
+    const el = document.querySelector(s.sel);
+    if (!el) { cur++; if (cur < steps.length) showStep(); else closeTour(); return; }
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => {
+      const rect = el.getBoundingClientRect();
+      const pad = 8;
+      const spot = document.getElementById('tour-spotlight');
+      spot.style.left = (rect.left - pad) + 'px'; spot.style.top = (rect.top - pad) + 'px';
+      spot.style.width = (rect.width + pad * 2) + 'px'; spot.style.height = (rect.height + pad * 2) + 'px';
+      const tip = document.getElementById('tour-tooltip');
+      let tipLeft = rect.left, tipTop = rect.bottom + 16;
+      if (tipTop + 180 > window.innerHeight) tipTop = rect.top - 180;
+      if (tipLeft + 340 > window.innerWidth) tipLeft = window.innerWidth - 360;
+      if (tipLeft < 10) tipLeft = 10;
+      tip.style.left = tipLeft + 'px'; tip.style.top = tipTop + 'px';
+      document.getElementById('tour-step-num').textContent = 'PASSO ' + (cur + 1) + ' DE ' + steps.length;
+      document.getElementById('tour-title').textContent = s.title;
+      document.getElementById('tour-desc').textContent = s.desc;
+      const nextBtn = document.getElementById('tour-next');
+      nextBtn.textContent = cur === steps.length - 1 ? 'Comecar!' : 'Proximo';
+    }, 350);
+  }
+
+  function closeTour() {
+    localStorage.setItem('audiper-tour-done', '1');
+    overlay.remove(); style.remove();
+  }
+
+  document.getElementById('tour-next').addEventListener('click', () => {
+    cur++; if (cur >= steps.length) closeTour(); else showStep();
+  });
+  document.getElementById('tour-skip').addEventListener('click', closeTour);
+
+  setTimeout(showStep, 1200);
+})();
 
 /* ========== INIT ========== */
 refreshAll();

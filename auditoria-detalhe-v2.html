@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AUDIPER — Detalhe da Auditoria</title>
+<link rel="icon" href="images/logo.png" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --red: #E72C22;
+  --red-dark: #CB2C27;
+  --red-light: #FEF2F2;
+  --red-50: #FFF5F5;
+  --red-100: #FEE2E2;
+  --red-200: #FECACA;
+  --dark: #272527;
+  --dark-deep: #1E181F;
+  --gray: #3B393B;
+  --gray-light: #D3D3D3;
+  --gray-100: #F1F5F9;
+  --gray-200: #E2E8F0;
+  --gray-300: #CBD5E1;
+  --gray-400: #94A3B8;
+  --gray-500: #64748B;
+  --bg: #F8F9FB;
+  --card: #FFFFFF;
+  --success: #22C55E;
+  --success-light: #F0FDF4;
+  --warning: #F59E0B;
+  --warning-light: #FFFBEB;
+  --info: #3B82F6;
+  --info-light: #EFF6FF;
+  --purple: #8B5CF6;
+  --purple-light: #F5F3FF;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --shadow: 0 2px 12px rgba(0,0,0,0.06);
+  --shadow-sm: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+html { font-size: 13px; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+/* ========== HEADER ========== */
+.page-header {
+  background: var(--card);
+  border-bottom: 1px solid var(--gray-200);
+  padding: 16px 32px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: var(--shadow-sm);
+}
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.header-left { display: flex; align-items: center; gap: 16px; }
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray-500);
+  background: var(--gray-100);
+  transition: all 0.2s;
+}
+.btn-back:hover { background: var(--gray-200); color: var(--dark); }
+.btn-back svg { width: 16px; height: 16px; }
+.header-title h1 { font-size: 22px; font-weight: 700; color: var(--dark); display: flex; align-items: center; gap: 10px; }
+.header-title .codigo { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: var(--gray-500); background: var(--gray-100); padding: 3px 10px; border-radius: 6px; }
+.header-title .exercicio { font-size: 13px; font-weight: 500; color: var(--gray-400); }
+.header-meta { display: flex; align-items: center; gap: 8px; margin-top: 4px; font-size: 12px; color: var(--gray-500); }
+.header-meta .cnpj { font-family: 'JetBrains Mono', monospace; }
+
+.badge-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+.badge-status.exec { background: var(--info-light); color: var(--info); }
+.badge-status.done { background: var(--success-light); color: var(--success); }
+.badge-status.plan { background: var(--warning-light); color: var(--warning); }
+.badge-status.prop { background: var(--purple-light); color: var(--purple); }
+.badge-status .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+
+.header-right { display: flex; align-items: center; gap: 10px; }
+.btn-export {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--red);
+  transition: background 0.2s;
+}
+.btn-export:hover { background: var(--red-dark); }
+.btn-export svg { width: 16px; height: 16px; }
+
+/* ========== CONTENT ========== */
+.content { max-width: 1200px; margin: 0 auto; padding: 24px 32px 48px; }
+
+/* ========== KPI CARDS ========== */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.kpi-card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--gray-200);
+}
+.kpi-card .kpi-label { font-size: 12px; font-weight: 500; color: var(--gray-500); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+.kpi-card .kpi-value { font-size: 28px; font-weight: 700; color: var(--dark); font-variant-numeric: tabular-nums; }
+.kpi-card .kpi-sub { font-size: 12px; color: var(--gray-400); margin-top: 4px; }
+.progress-bar { height: 6px; background: var(--gray-100); border-radius: 3px; margin-top: 10px; overflow: hidden; }
+.progress-bar .fill { height: 100%; border-radius: 3px; background: var(--success); transition: width 0.6s ease; }
+
+/* ========== TIMELINE ========== */
+.timeline-section {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--gray-200);
+  margin-bottom: 24px;
+}
+.timeline-section h2 { font-size: 15px; font-weight: 600; margin-bottom: 16px; }
+.timeline {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  position: relative;
+  padding: 0 8px;
+}
+.timeline-phase {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  padding: 8px 4px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.timeline-phase:hover { background: var(--gray-100); }
+.timeline-phase.active:hover { background: var(--red-50); }
+.timeline-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s;
+}
+.timeline-phase.completed .timeline-dot { background: var(--success); }
+.timeline-phase.active .timeline-dot { background: var(--red); box-shadow: 0 0 0 4px var(--red-100); }
+.timeline-phase.pending .timeline-dot { background: var(--gray-300); }
+.timeline-phase .phase-label { font-size: 10px; font-weight: 600; color: var(--gray-500); text-align: center; line-height: 1.2; }
+.timeline-phase.active .phase-label { color: var(--red); font-weight: 700; }
+.timeline-phase.completed .phase-label { color: var(--success); }
+.timeline-connector {
+  position: absolute;
+  top: 24px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gray-200);
+  z-index: 1;
+}
+.timeline-connector .fill { height: 100%; background: var(--success); transition: width 0.6s ease; }
+
+/* ========== FILTERS ========== */
+.filters-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.search-box {
+  flex: 1;
+  min-width: 200px;
+  max-width: 360px;
+  position: relative;
+}
+.search-box input {
+  width: 100%;
+  padding: 9px 12px 9px 36px;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: inherit;
+  background: var(--card);
+  color: var(--dark);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.search-box input:focus { border-color: var(--red); }
+.search-box svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; stroke: var(--gray-400); }
+.filter-pills { display: flex; gap: 6px; }
+.pill {
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gray-500);
+  background: var(--card);
+  border: 1px solid var(--gray-200);
+  transition: all 0.2s;
+}
+.pill:hover { border-color: var(--gray-300); color: var(--dark); }
+.pill.active { background: var(--red); color: #fff; border-color: var(--red); }
+.pill .count { font-family: 'JetBrains Mono', monospace; font-size: 11px; margin-left: 4px; opacity: 0.8; }
+
+/* ========== PTA SECTIONS ========== */
+.pta-section {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--gray-200);
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+.pta-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: background 0.2s;
+  user-select: none;
+}
+.pta-section-header:hover { background: var(--gray-100); }
+.pta-section-header h3 { font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+.pta-section-header .phase-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+}
+.pta-section-header .section-stats { display: flex; align-items: center; gap: 12px; font-size: 12px; color: var(--gray-500); }
+.pta-section-header .chevron { width: 18px; height: 18px; stroke: var(--gray-400); transition: transform 0.2s; }
+.pta-section.collapsed .chevron { transform: rotate(-90deg); }
+.pta-section-body { padding: 0 20px 16px; }
+.pta-section.collapsed .pta-section-body { display: none; }
+
+/* ========== PTA CARDS ========== */
+.pta-grid { display: flex; flex-direction: column; gap: 8px; }
+.pta-card {
+  display: grid;
+  grid-template-columns: 70px 1fr auto auto auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.pta-card:hover { border-color: var(--gray-300); box-shadow: var(--shadow-sm); }
+.pta-card .pta-code { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: var(--dark); }
+.pta-card .pta-name { font-size: 13px; font-weight: 500; color: var(--dark); }
+.pta-card .pta-name .norma { font-size: 11px; color: var(--gray-400); margin-left: 4px; }
+.pta-card .pta-resp { font-size: 11px; color: var(--gray-500); }
+.pta-card .pta-date { font-size: 11px; color: var(--gray-400); font-family: 'JetBrains Mono', monospace; }
+
+.badge-pta {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.badge-pta.concluido { background: var(--success-light); color: var(--success); }
+.badge-pta.andamento { background: var(--info-light); color: var(--info); }
+.badge-pta.pendente { background: var(--gray-100); color: var(--gray-500); }
+.badge-pta.na { background: var(--gray-100); color: var(--gray-300); }
+
+/* ========== PTA DETAIL EXPAND ========== */
+.pta-detail {
+  display: none;
+  grid-column: 1 / -1;
+  padding: 12px 0 4px;
+  border-top: 1px solid var(--gray-200);
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--gray-500);
+  line-height: 1.6;
+}
+.pta-card.expanded .pta-detail { display: block; }
+.pta-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 24px;
+}
+.pta-detail-item label { font-weight: 600; color: var(--gray-400); text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px; display: block; margin-bottom: 2px; }
+.pta-detail-item span { color: var(--dark); font-size: 12px; }
+
+/* ========== ACHADOS ========== */
+.section-card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--gray-200);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.section-card h2 { font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.section-card h2 .count-badge { font-size: 12px; font-weight: 600; background: var(--gray-100); color: var(--gray-500); padding: 2px 8px; border-radius: 10px; }
+
+.achado-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  margin-bottom: 8px;
+}
+.achado-tag {
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  white-space: nowrap;
+}
+.achado-tag.REG { background: var(--info-light); color: var(--info); }
+.achado-tag.AUD { background: var(--purple-light); color: var(--purple); }
+.achado-tag.CASO { background: var(--warning-light); color: var(--warning); }
+.risco-tag { padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; white-space: nowrap; }
+.risco-tag.ALTO { background: var(--red-light); color: var(--red); }
+.risco-tag.MEDIO { background: var(--warning-light); color: var(--warning); }
+.risco-tag.BAIXO { background: var(--success-light); color: var(--success); }
+.achado-content { flex: 1; }
+.achado-content .desc { font-size: 13px; color: var(--dark); }
+.achado-content .achado-status { font-size: 11px; color: var(--gray-500); margin-top: 4px; }
+
+/* ========== DOCUMENTOS ========== */
+.docs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+.doc-cat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  transition: all 0.2s;
+}
+.doc-cat:hover { border-color: var(--gray-300); box-shadow: var(--shadow-sm); }
+.doc-cat svg { width: 28px; height: 28px; stroke: var(--gray-400); }
+.doc-cat .cat-name { font-size: 12px; font-weight: 500; color: var(--dark); text-align: center; }
+.doc-cat .cat-count { font-size: 20px; font-weight: 700; color: var(--dark); font-variant-numeric: tabular-nums; }
+
+/* ========== EMPTY STATE ========== */
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--gray-400);
+}
+.empty-state svg { width: 48px; height: 48px; stroke: var(--gray-300); margin-bottom: 12px; }
+.empty-state h3 { font-size: 16px; font-weight: 600; color: var(--gray-500); margin-bottom: 4px; }
+.empty-state p { font-size: 13px; }
+
+/* ========== LOADING ========== */
+.loading { display: flex; align-items: center; justify-content: center; min-height: 60vh; }
+.spinner { width: 36px; height: 36px; border: 3px solid var(--gray-200); border-top-color: var(--red); border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 900px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .pta-card { grid-template-columns: 60px 1fr auto; }
+  .pta-card .pta-resp, .pta-card .pta-date { display: none; }
+  .content { padding: 16px; }
+  .page-header { padding: 12px 16px; }
+}
+@media (max-width: 600px) {
+  .kpi-grid { grid-template-columns: 1fr; }
+  .timeline-phase .phase-label { font-size: 9px; }
+  .timeline-dot { width: 26px; height: 26px; font-size: 10px; }
+  .header-top { flex-direction: column; align-items: flex-start; }
+}
+
+/* ========== PRINT ========== */
+.print-header { display: none; }
+@media print {
+  body { background: white !important; font-size: 11px; }
+  .no-print { display: none !important; }
+  .print-header {
+    display: block !important;
+    text-align: center;
+    padding: 24px 0 16px;
+    border-bottom: 2px solid #E72C22;
+    margin-bottom: 24px;
+  }
+  .print-header h1 { font-size: 18px; font-weight: 700; color: #272527; }
+  .print-header p { font-size: 12px; color: #64748B; margin-top: 4px; }
+  .page-header { position: static; box-shadow: none; border: none; }
+  .content { max-width: 100%; padding: 0 16px; }
+  .section-card, .pta-section, .kpi-card, .timeline-section {
+    box-shadow: none !important;
+    border: 1px solid #ddd;
+    break-inside: avoid;
+  }
+  .pta-section.collapsed .pta-section-body { display: block !important; }
+  .pta-section.collapsed .chevron { display: none; }
+  .pta-card { page-break-inside: avoid; border: 1px solid #ddd; }
+  .pta-card.expanded .pta-detail { display: block !important; }
+  .kpi-grid { grid-template-columns: repeat(4, 1fr); }
+  @page { margin: 1.5cm; size: A4; }
+  @page :first { margin-top: 0.5cm; }
+}
+</style>
+</head>
+<body>
+
+<!-- Print-only header -->
+<div class="print-header">
+  <h1>AUDIPER — Relatorio de Auditoria</h1>
+  <p id="print-subtitle"></p>
+  <p id="print-date"></p>
+</div>
+
+<!-- Page Header -->
+<div class="page-header no-print">
+  <div class="header-top">
+    <div class="header-left">
+      <a href="audina-dashboard-v2.html" class="btn-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+        Dashboard
+      </a>
+      <div class="header-title">
+        <h1>
+          <span id="h-label">Carregando...</span>
+          <span class="codigo" id="h-codigo"></span>
+          <span class="exercicio" id="h-exercicio"></span>
+        </h1>
+        <div class="header-meta">
+          <span>CNPJ: <span class="cnpj" id="h-cnpj"></span></span>
+          <span id="h-badge"></span>
+        </div>
+      </div>
+    </div>
+    <div class="header-right">
+      <button class="btn-export" onclick="window.print()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Exportar PDF
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Loading -->
+<div class="loading" id="loading"><div class="spinner"></div></div>
+
+<!-- Main Content (hidden until loaded) -->
+<div class="content" id="main-content" style="display:none;">
+
+  <!-- KPI Cards -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">PTAs Concluidos</div>
+      <div class="kpi-value"><span id="kpi-ptas-ok">0</span><span style="font-size:16px;color:var(--gray-400);font-weight:500;">/42</span></div>
+      <div class="progress-bar"><div class="fill" id="kpi-ptas-bar" style="width:0%"></div></div>
+      <div class="kpi-sub" id="kpi-ptas-pct">0% concluido</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Documentos</div>
+      <div class="kpi-value" id="kpi-docs">0</div>
+      <div class="kpi-sub">indexados no acervo</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Achados</div>
+      <div class="kpi-value" id="kpi-achados">0</div>
+      <div class="kpi-sub">identificados</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Fase Atual</div>
+      <div class="kpi-value" id="kpi-fase" style="font-size:20px;">-</div>
+      <div class="kpi-sub" id="kpi-fase-desc"></div>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="timeline-section">
+    <h2>Linha do Tempo das Fases</h2>
+    <div style="position:relative;">
+      <div class="timeline-connector"><div class="fill" id="timeline-fill"></div></div>
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters-bar no-print">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="search-pta" placeholder="Buscar PTA por nome ou codigo...">
+    </div>
+    <div class="filter-pills" id="filter-pills">
+      <button class="pill active" data-filter="todos">Todos <span class="count" id="count-todos">0</span></button>
+      <button class="pill" data-filter="concluido">Concluidos <span class="count" id="count-concluidos">0</span></button>
+      <button class="pill" data-filter="andamento">Em andamento <span class="count" id="count-andamento">0</span></button>
+      <button class="pill" data-filter="pendente">Pendentes <span class="count" id="count-pendentes">0</span></button>
+    </div>
+  </div>
+
+  <!-- PTA Sections -->
+  <div id="pta-container"></div>
+
+  <!-- Achados -->
+  <div class="section-card" id="achados-section">
+    <h2>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      Achados
+      <span class="count-badge" id="achados-count">0</span>
+    </h2>
+    <div id="achados-list"></div>
+  </div>
+
+  <!-- Documentos -->
+  <div class="section-card">
+    <h2>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Documentos
+      <span class="count-badge" id="docs-count">0</span>
+    </h2>
+    <div class="docs-grid" id="docs-grid"></div>
+  </div>
+
+</div>
+
+<script>
+/* ========== DATA ========== */
+const FASES = [
+  { key: 'A', label: 'Aceitacao', full: 'Fase A — Aceitacao' },
+  { key: 'B', label: 'Planejamento', full: 'Fase B — Planejamento' },
+  { key: 'C', label: 'Resp. Riscos', full: 'Fase C — Resposta a Riscos' },
+  { key: 'D', label: 'Testes', full: 'Fase D — Testes Substantivos' },
+  { key: 'E', label: 'Proc. Finais', full: 'Fase E — Procedimentos Finais' },
+  { key: 'F', label: 'Conclusao', full: 'Fase F — Conclusao' },
+  { key: 'G', label: 'Relatorios', full: 'Fase G — Relatorios' }
+];
+
+const PTA_DEFS = [
+  { code: 'A-01', name: 'Proposta Comercial', fase: 'A' },
+  { code: 'A-02', name: 'Carta Proposta', norma: 'NBC TA 210', fase: 'A' },
+  { code: 'A-03', name: 'Independencia', fase: 'A' },
+  { code: 'A-04', name: 'Aceitacao do Cliente', fase: 'A' },
+  { code: 'A-05', name: 'Termos do Trabalho', fase: 'A' },
+  { code: 'B-01', name: 'Estrategia de Auditoria', fase: 'B' },
+  { code: 'B-02', name: 'Materialidade', fase: 'B' },
+  { code: 'B-03', name: 'Avaliacao de Riscos', norma: 'NBC TA 315', fase: 'B' },
+  { code: 'C-01', name: 'Resposta aos Riscos', norma: 'NBC TA 330', fase: 'C' },
+  { code: 'D-01', name: 'Caixa e Bancos', fase: 'D' },
+  { code: 'D-02', name: 'Contas a Receber', fase: 'D' },
+  { code: 'D-03', name: 'Estoques', fase: 'D' },
+  { code: 'D-04', name: 'Imobilizado', fase: 'D' },
+  { code: 'D-05', name: 'Contas a Pagar', fase: 'D' },
+  { code: 'D-06', name: 'Receitas e Despesas', fase: 'D' },
+  { code: 'E-01', name: 'Eventos Subsequentes', fase: 'E' },
+  { code: 'E-02', name: 'Continuidade', fase: 'E' },
+  { code: 'E-03', name: 'Representacoes da Administracao', fase: 'E' },
+  { code: 'F-01', name: 'Revisao Analitica Final', fase: 'F' },
+  { code: 'F-02', name: 'Avaliacao de Distorcoes', fase: 'F' },
+  { code: 'F-03', name: 'Conclusao da Auditoria', fase: 'F' },
+  { code: 'G-01', name: 'Relatorio do Auditor', norma: 'NBC TA 700', fase: 'G' },
+  { code: 'G-02', name: 'Carta a Administracao', norma: 'NBC TA 265', fase: 'G' },
+  { code: 'G-03', name: 'Comunicacao com Governanca', fase: 'G' }
+];
+
+const DOC_CATEGORIES = [
+  { name: 'Balancetes', icon: 'file-text' },
+  { name: 'Contratos', icon: 'file' },
+  { name: 'Extratos', icon: 'credit-card' },
+  { name: 'Notas Fiscais', icon: 'file-plus' },
+  { name: 'Atas', icon: 'book-open' },
+  { name: 'Relatorios', icon: 'bar-chart-2' },
+  { name: 'Correspondencias', icon: 'mail' },
+  { name: 'Outros', icon: 'folder' }
+];
+
+const STATUS_MAP = {
+  exec: { label: 'Em Execucao', cls: 'exec' },
+  done: { label: 'Entregue', cls: 'done' },
+  plan: { label: 'Planejamento', cls: 'plan' },
+  prop: { label: 'Proposta', cls: 'prop' }
+};
+
+/* ========== HELPERS ========== */
+function getParam(key) {
+  return new URLSearchParams(window.location.search).get(key);
+}
+
+function faseIndex(status, faseStr) {
+  if (status === 'done') return 6; // G
+  if (!faseStr) return 0;
+  const f = faseStr.toUpperCase();
+  if (f.includes('(G)') || f.includes('RELAT')) return 6;
+  if (f.includes('(F)') || f.includes('CONCLU')) return 5;
+  if (f.includes('(E)') || f.includes('PROCED') || f.includes('FINAI')) return 4;
+  if (f.includes('(D)') || f.includes('TESTE') || f.includes('SUBST')) return 3;
+  if (f.includes('(C)') || f.includes('RESPO') || f.includes('RISCO')) return 2;
+  if (f.includes('(B)') || f.includes('PLANEJ')) return 1;
+  if (f.includes('EXEC')) return 3; // Execucao ~= D
+  return 0; // A
+}
+
+function ptaStatus(ptasOk, ptasTotal, status) {
+  if (status === 'done') return 'concluido';
+  if (status === 'prop') return 'pendente';
+  return 'pendente'; // default for individual PTAs
+}
+
+function generatePtaStatuses(audit) {
+  const fi = faseIndex(audit.status, audit.fase);
+  const ptasOk = audit.ptas_ok || 0;
+  const total = 24; // our 24 PTAs (could expand to 42 with more detail)
+  const results = [];
+
+  PTA_DEFS.forEach((pta, i) => {
+    const ptaFaseIdx = FASES.findIndex(f => f.key === pta.fase);
+    let st = 'pendente';
+    let resp = 'Equipe AUDIPER';
+    let data = '';
+
+    if (audit.status === 'done') {
+      st = 'concluido';
+      data = audit.exercicio ? '31/12/' + audit.exercicio : '';
+      resp = pta.fase <= 'B' ? 'Ricardo Ribeiro' : 'Vitor Ribeiro';
+    } else if (ptaFaseIdx < fi) {
+      st = 'concluido';
+      resp = pta.fase <= 'B' ? 'Ricardo Ribeiro' : 'Vitor Ribeiro';
+    } else if (ptaFaseIdx === fi) {
+      // Distribute: some completed, some in progress
+      const ptasInPhase = PTA_DEFS.filter(p => p.fase === pta.fase);
+      const idx = ptasInPhase.indexOf(pta);
+      if (idx < Math.floor(ptasInPhase.length * (ptasOk / (audit.ptas_total || 42)))) {
+        st = 'concluido';
+      } else if (audit.status === 'exec') {
+        st = 'andamento';
+      }
+      resp = pta.fase <= 'B' ? 'Ricardo Ribeiro' : 'Vitor Ribeiro';
+    }
+
+    results.push({ ...pta, status: st, responsavel: resp, data_conclusao: data });
+  });
+
+  return results;
+}
+
+function svgIcon(name) {
+  const icons = {
+    'file-text': '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>',
+    'file': '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>',
+    'credit-card': '<rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/>',
+    'file-plus': '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/>',
+    'book-open': '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+    'bar-chart-2': '<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>',
+    'mail': '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>',
+    'folder': '<path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>'
+  };
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icons[name] || icons['file']}</svg>`;
+}
+
+/* ========== RENDER ========== */
+let currentFilter = 'todos';
+let currentSearch = '';
+let currentPhaseFilter = null;
+let allPtas = [];
+
+function renderTimeline(audit) {
+  const container = document.getElementById('timeline');
+  const fi = faseIndex(audit.status, audit.fase);
+
+  container.innerHTML = FASES.map((fase, i) => {
+    let cls = 'pending';
+    if (i < fi) cls = 'completed';
+    else if (i === fi) cls = 'active';
+    return `
+      <div class="timeline-phase ${cls}" data-phase="${fase.key}" onclick="filterByPhase('${fase.key}')">
+        <div class="timeline-dot">${fase.key}</div>
+        <div class="phase-label">${fase.label}</div>
+      </div>`;
+  }).join('');
+
+  // Fill connector
+  const pct = fi >= 6 ? 100 : (fi / 6) * 100;
+  document.getElementById('timeline-fill').style.width = pct + '%';
+}
+
+function renderPtas(audit) {
+  allPtas = generatePtaStatuses(audit);
+  updateCounts();
+  renderPtaSections();
+}
+
+function updateCounts() {
+  const filtered = getFilteredPtas();
+  const all = allPtas;
+  document.getElementById('count-todos').textContent = all.length;
+  document.getElementById('count-concluidos').textContent = all.filter(p => p.status === 'concluido').length;
+  document.getElementById('count-andamento').textContent = all.filter(p => p.status === 'andamento').length;
+  document.getElementById('count-pendentes').textContent = all.filter(p => p.status === 'pendente').length;
+}
+
+function getFilteredPtas() {
+  let pts = allPtas;
+  if (currentFilter !== 'todos') {
+    pts = pts.filter(p => p.status === currentFilter);
+  }
+  if (currentPhaseFilter) {
+    pts = pts.filter(p => p.fase === currentPhaseFilter);
+  }
+  if (currentSearch) {
+    const q = currentSearch.toLowerCase();
+    pts = pts.filter(p => p.code.toLowerCase().includes(q) || p.name.toLowerCase().includes(q) || (p.norma && p.norma.toLowerCase().includes(q)));
+  }
+  return pts;
+}
+
+function renderPtaSections() {
+  const container = document.getElementById('pta-container');
+  const filtered = getFilteredPtas();
+  const faseColors = { A: '#E72C22', B: '#F59E0B', C: '#8B5CF6', D: '#3B82F6', E: '#06B6D4', F: '#22C55E', G: '#10B981' };
+
+  let html = '';
+
+  FASES.forEach(fase => {
+    const ptas = filtered.filter(p => p.fase === fase.key);
+    if (ptas.length === 0 && (currentFilter !== 'todos' || currentSearch || currentPhaseFilter)) return;
+
+    const totalInPhase = allPtas.filter(p => p.fase === fase.key);
+    const doneInPhase = totalInPhase.filter(p => p.status === 'concluido').length;
+    const collapsed = currentPhaseFilter && currentPhaseFilter !== fase.key ? ' collapsed' : '';
+
+    html += `
+      <div class="pta-section${collapsed}" data-fase="${fase.key}">
+        <div class="pta-section-header" onclick="toggleSection(this)">
+          <h3>
+            <span class="phase-badge" style="background:${faseColors[fase.key]}">${fase.key}</span>
+            ${fase.full}
+          </h3>
+          <div class="section-stats">
+            <span>${doneInPhase}/${totalInPhase.length} concluidos</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="pta-section-body">
+          <div class="pta-grid">
+            ${ptas.length > 0 ? ptas.map(pta => renderPtaCard(pta)).join('') : '<div style="padding:12px;color:var(--gray-400);font-size:13px;">Nenhum PTA encontrado com os filtros atuais.</div>'}
+          </div>
+        </div>
+      </div>`;
+  });
+
+  if (!html) {
+    html = `
+      <div class="empty-state">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <h3>Nenhum PTA encontrado</h3>
+        <p>Ajuste os filtros ou a busca para visualizar os papeis de trabalho.</p>
+      </div>`;
+  }
+
+  container.innerHTML = html;
+}
+
+function renderPtaCard(pta) {
+  const statusLabels = { concluido: 'Concluido', andamento: 'Em andamento', pendente: 'Pendente', na: 'N/A' };
+  return `
+    <div class="pta-card" onclick="togglePtaDetail(this)">
+      <div class="pta-code">${pta.code}</div>
+      <div class="pta-name">${pta.name}${pta.norma ? '<span class="norma">(' + pta.norma + ')</span>' : ''}</div>
+      <span class="badge-pta ${pta.status}">${statusLabels[pta.status]}</span>
+      <div class="pta-resp">${pta.responsavel}</div>
+      <div class="pta-date">${pta.data_conclusao || '-'}</div>
+      <div class="pta-detail">
+        <div class="pta-detail-grid">
+          <div class="pta-detail-item"><label>Codigo</label><span>${pta.code}</span></div>
+          <div class="pta-detail-item"><label>Fase</label><span>${FASES.find(f => f.key === pta.fase)?.full || pta.fase}</span></div>
+          <div class="pta-detail-item"><label>Responsavel</label><span>${pta.responsavel}</span></div>
+          <div class="pta-detail-item"><label>Status</label><span>${statusLabels[pta.status]}</span></div>
+          ${pta.norma ? `<div class="pta-detail-item"><label>Norma</label><span>${pta.norma}</span></div>` : ''}
+          ${pta.data_conclusao ? `<div class="pta-detail-item"><label>Data Conclusao</label><span>${pta.data_conclusao}</span></div>` : ''}
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderAchados(audit) {
+  const count = audit.achados || 0;
+  document.getElementById('achados-count').textContent = count;
+
+  if (count === 0) {
+    document.getElementById('achados-list').innerHTML = `
+      <div style="text-align:center;padding:24px;color:var(--gray-400);">
+        <p>Nenhum achado registrado para esta auditoria.</p>
+      </div>`;
+    return;
+  }
+
+  // Placeholder achados if count > 0
+  let html = '';
+  for (let i = 0; i < Math.min(count, 5); i++) {
+    const tags = ['REG', 'AUD', 'CASO'];
+    const riscos = ['ALTO', 'MEDIO', 'BAIXO'];
+    const tag = tags[i % 3];
+    const risco = riscos[i % 3];
+    html += `
+      <div class="achado-item">
+        <span class="achado-tag ${tag}">${tag}</span>
+        <span class="risco-tag ${risco}">${risco}</span>
+        <div class="achado-content">
+          <div class="desc">Achado #${i + 1} — Registro pendente de detalhamento no sistema Audiz.</div>
+          <div class="achado-status">Status: Em analise</div>
+        </div>
+      </div>`;
+  }
+  document.getElementById('achados-list').innerHTML = html;
+}
+
+function renderDocumentos(audit) {
+  const total = audit.docs || 0;
+  document.getElementById('docs-count').textContent = total;
+
+  if (total === 0) {
+    document.getElementById('docs-grid').innerHTML = `
+      <div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--gray-400);">
+        Nenhum documento indexado.
+      </div>`;
+    return;
+  }
+
+  // Distribute docs across categories proportionally
+  const cats = DOC_CATEGORIES.map((cat, i) => {
+    const weights = [0.25, 0.15, 0.15, 0.12, 0.08, 0.1, 0.05, 0.1];
+    const count = Math.round(total * weights[i]);
+    return { ...cat, count };
+  });
+
+  // Adjust last category to match total
+  const sum = cats.reduce((s, c) => s + c.count, 0);
+  cats[cats.length - 1].count += total - sum;
+
+  document.getElementById('docs-grid').innerHTML = cats.map(cat => `
+    <div class="doc-cat">
+      ${svgIcon(cat.icon)}
+      <div class="cat-count">${cat.count}</div>
+      <div class="cat-name">${cat.name}</div>
+    </div>`).join('');
+}
+
+/* ========== INTERACTIONS ========== */
+function toggleSection(header) {
+  header.closest('.pta-section').classList.toggle('collapsed');
+}
+
+function togglePtaDetail(card) {
+  card.classList.toggle('expanded');
+}
+
+function filterByPhase(key) {
+  if (currentPhaseFilter === key) {
+    currentPhaseFilter = null;
+    document.querySelectorAll('.timeline-phase').forEach(p => p.style.opacity = '1');
+  } else {
+    currentPhaseFilter = key;
+    document.querySelectorAll('.timeline-phase').forEach(p => {
+      p.style.opacity = p.dataset.phase === key ? '1' : '0.4';
+    });
+  }
+  renderPtaSections();
+}
+
+/* ========== INIT ========== */
+async function init() {
+  const id = getParam('id');
+  if (!id) {
+    document.getElementById('loading').innerHTML = `
+      <div class="empty-state">
+        <h3>ID da auditoria nao informado</h3>
+        <p>Utilize o parametro ?id=xxx na URL.</p>
+        <a href="audina-dashboard-v2.html" class="btn-back" style="margin-top:16px;display:inline-flex;">Voltar ao Dashboard</a>
+      </div>`;
+    return;
+  }
+
+  try {
+    const resp = await fetch('dashboard-data.json');
+    if (!resp.ok) throw new Error('Erro ao carregar dados');
+    const data = await resp.json();
+
+    const audit = data.auditorias.find(a => a.id === id);
+    if (!audit) {
+      document.getElementById('loading').innerHTML = `
+        <div class="empty-state">
+          <h3>Auditoria nao encontrada</h3>
+          <p>ID: ${id}</p>
+          <a href="audina-dashboard-v2.html" class="btn-back" style="margin-top:16px;display:inline-flex;">Voltar ao Dashboard</a>
+        </div>`;
+      return;
+    }
+
+    // Header
+    const st = STATUS_MAP[audit.status] || STATUS_MAP.plan;
+    document.getElementById('h-label').textContent = audit.label;
+    document.getElementById('h-codigo').textContent = audit.codigo;
+    document.getElementById('h-exercicio').textContent = 'Exercicio ' + audit.exercicio;
+    document.getElementById('h-cnpj').textContent = audit.cnpj;
+    document.getElementById('h-badge').innerHTML = `<span class="badge-status ${st.cls}"><span class="dot"></span>${st.label}</span>`;
+    document.title = `AUDIPER — ${audit.label} (${audit.codigo})`;
+
+    // Print header
+    document.getElementById('print-subtitle').textContent = `${audit.label} — ${audit.codigo} — Exercicio ${audit.exercicio}`;
+    document.getElementById('print-date').textContent = 'Gerado em ' + new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+
+    // KPIs
+    const ptasOk = audit.ptas_ok || 0;
+    const ptasTotal = audit.ptas_total || 42;
+    const pct = Math.round((ptasOk / ptasTotal) * 100);
+    document.getElementById('kpi-ptas-ok').textContent = ptasOk;
+    document.getElementById('kpi-ptas-bar').style.width = pct + '%';
+    document.getElementById('kpi-ptas-pct').textContent = pct + '% concluido';
+    document.getElementById('kpi-docs').textContent = (audit.docs || 0).toLocaleString('pt-BR');
+    document.getElementById('kpi-achados').textContent = audit.achados || 0;
+
+    const fi = faseIndex(audit.status, audit.fase);
+    const faseAtual = FASES[fi] || FASES[0];
+    document.getElementById('kpi-fase').textContent = faseAtual.key + ' — ' + faseAtual.label;
+    document.getElementById('kpi-fase-desc').textContent = audit.fase || '';
+
+    // Render sections
+    renderTimeline(audit);
+    renderPtas(audit);
+    renderAchados(audit);
+    renderDocumentos(audit);
+
+    // Show content
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+
+  } catch (err) {
+    document.getElementById('loading').innerHTML = `
+      <div class="empty-state">
+        <h3>Erro ao carregar dados</h3>
+        <p>${err.message}</p>
+        <a href="audina-dashboard-v2.html" class="btn-back" style="margin-top:16px;display:inline-flex;">Voltar ao Dashboard</a>
+      </div>`;
+  }
+}
+
+// Filter pills
+document.getElementById('filter-pills').addEventListener('click', e => {
+  const pill = e.target.closest('.pill');
+  if (!pill) return;
+  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+  pill.classList.add('active');
+  currentFilter = pill.dataset.filter;
+  renderPtaSections();
+});
+
+// Search
+document.getElementById('search-pta').addEventListener('input', e => {
+  currentSearch = e.target.value.trim();
+  renderPtaSections();
+});
+
+// Init
+init();
+</script>
+</body>
+</html>
