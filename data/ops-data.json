@@ -9,6 +9,14 @@
       "criado_em": "2026-03-29 20:30:00"
     },
     {
+      "id": 3,
+      "data": "2026-03-29",
+      "resumo": "Dashboard abas + emails + calendario + push + RAG + webhook",
+      "conquistas": "Aba Tarefas conquistas/pendencias, Aba Auditorias por cliente, Widget emails, Calendario semanal, RAG bot, Webhook leads Telegram, Logo transparente, Git push 16 commits, NSSM scripts",
+      "horas": 3.0,
+      "criado_em": "2026-03-29 13:31:37"
+    },
+    {
       "id": 1,
       "data": "2026-03-28",
       "resumo": "OpenClaw + Design System + Hero 3D",
@@ -23,7 +31,7 @@
       "descricao": "Corrigir NSSM n8n (N8N_USER_FOLDER)",
       "prioridade": "ALTA",
       "area": "n8n",
-      "status": "pendente",
+      "status": "concluido",
       "criado_em": "2026-03-29 20:30:00"
     },
     {
@@ -31,7 +39,7 @@
       "descricao": "Criar workflow n8n Dashboard Emails",
       "prioridade": "ALTA",
       "area": "n8n",
-      "status": "pendente",
+      "status": "concluido",
       "criado_em": "2026-03-29 20:30:00"
     },
     {
@@ -39,7 +47,7 @@
       "descricao": "Conectar widget emails no dashboard",
       "prioridade": "ALTA",
       "area": "dashboard",
-      "status": "pendente",
+      "status": "concluido",
       "criado_em": "2026-03-29 20:30:00"
     },
     {
@@ -47,7 +55,7 @@
       "descricao": "Dashboard mission control Audiz",
       "prioridade": "ALTA",
       "area": "dashboard",
-      "status": "pendente",
+      "status": "concluido",
       "criado_em": "2026-03-29 20:30:00"
     },
     {
@@ -55,7 +63,7 @@
       "descricao": "Git push commits do site",
       "prioridade": "ALTA",
       "area": "site",
-      "status": "pendente",
+      "status": "concluido",
       "criado_em": "2026-03-29 20:30:00"
     },
     {
@@ -63,7 +71,7 @@
       "descricao": "Calendario visual de sessoes no dashboard",
       "prioridade": "ALTA",
       "area": "dashboard",
-      "status": "pendente",
+      "status": "concluido",
       "criado_em": "2026-03-29 20:30:00"
     },
     {
@@ -71,7 +79,7 @@
       "descricao": "Aba Tarefas: lado esquerdo = conquistas da sessao anterior (card calendario), lado direito = pendencias. Mesma estrutura para aba Auditorias (pendencias por cliente)",
       "prioridade": "ALTA",
       "area": "dashboard",
-      "status": "pendente",
+      "status": "concluido",
       "criado_em": "2026-03-29 20:30:00"
     },
     {
@@ -79,7 +87,7 @@
       "descricao": "Redesign painel bot WhatsApp AUDIPER",
       "prioridade": "MEDIA",
       "area": "whatsapp",
-      "status": "pendente",
+      "status": "concluido",
       "criado_em": "2026-03-29 20:30:00"
     },
     {
@@ -87,7 +95,7 @@
       "descricao": "Memoria de conversa bot (multi-turn)",
       "prioridade": "MEDIA",
       "area": "whatsapp",
-      "status": "pendente",
+      "status": "concluido",
       "criado_em": "2026-03-29 20:30:00"
     },
     {
@@ -95,7 +103,7 @@
       "descricao": "RAG com dados AUDIPER no bot",
       "prioridade": "MEDIA",
       "area": "whatsapp",
-      "status": "pendente",
+      "status": "concluido",
       "criado_em": "2026-03-29 20:30:00"
     },
     {
@@ -103,7 +111,7 @@
       "descricao": "Webhook n8n para leads qualificados",
       "prioridade": "MEDIA",
       "area": "whatsapp",
-      "status": "pendente",
+      "status": "concluido",
       "criado_em": "2026-03-29 20:30:00"
     },
     {
@@ -111,7 +119,7 @@
       "descricao": "Hero 3D logo transparente + integrar",
       "prioridade": "MEDIA",
       "area": "design",
-      "status": "pendente",
+      "status": "concluido",
       "criado_em": "2026-03-29 20:30:00"
     },
     {
@@ -119,7 +127,7 @@
       "descricao": "NSSM para OpenClaw como servico",
       "prioridade": "BAIXA",
       "area": "infra",
-      "status": "pendente",
+      "status": "concluido",
       "criado_em": "2026-03-29 20:30:00"
     }
   ],
@@ -132,11 +140,25 @@
       "criado_em": "2026-03-29 15:00:00"
     },
     {
+      "id": 11,
+      "categoria": "dashboard",
+      "descricao": "Fetch com cache-busting (?t=Date.now) resolve problemas de cache no http-server",
+      "aplicado": 0,
+      "criado_em": "2026-03-29 13:31:37"
+    },
+    {
       "id": 8,
       "categoria": "design",
       "descricao": "mix-blend-mode:lighten nao funciona em PNGs com fundo preto",
       "aplicado": 0,
       "criado_em": "2026-03-29 12:00:00"
+    },
+    {
+      "id": 12,
+      "categoria": "git",
+      "descricao": "Git push 16 commits de uma vez funciona sem problemas — site Hostinger atualiza automaticamente",
+      "aplicado": 0,
+      "criado_em": "2026-03-29 13:31:37"
     },
     {
       "id": 1,
@@ -193,6 +215,13 @@
       "descricao": "WhatsApp Business so configura catalogo pelo celular",
       "aplicado": 0,
       "criado_em": "2026-03-29 15:00:00"
+    },
+    {
+      "id": 13,
+      "categoria": "whatsapp",
+      "descricao": "RAG via arquivo txt carregado no startup e mais simples que banco vetorial para bots pequenos",
+      "aplicado": 0,
+      "criado_em": "2026-03-29 13:31:37"
     }
   ],
   "evolucao": [
@@ -225,6 +254,12 @@
       "metrica": "paginas_site",
       "valor": 86.0,
       "criado_em": "2026-03-29 20:30:00"
+    },
+    {
+      "data": "2026-03-29",
+      "metrica": "pendencias_concluidas",
+      "valor": 12.0,
+      "criado_em": "2026-03-29 13:31:37"
     },
     {
       "data": "2026-03-29",
