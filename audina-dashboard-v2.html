@@ -656,12 +656,19 @@ html.dark .hm-high { background: #450a0a; color: #fca5a5; }
 .heatmap-legend span { display: flex; align-items: center; gap: 4px; }
 .heatmap-legend .hl-dot { width: 10px; height: 10px; border-radius: 3px; }
 
-/* ========== CRM PIPELINE ========== */
-.crm-col { background: var(--gray-100); border-radius: 12px; padding: 12px; min-height: 150px; }
+/* ========== CRM TAB ========== */
+.crm-kpis { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 16px; }
+.crm-kpi { background: var(--card); border-radius: var(--radius); padding: 16px; border: 1px solid var(--gray-200); text-align: center; }
+.crm-kpi-value { font-size: 28px; font-weight: 700; line-height: 1.1; }
+.crm-kpi-label { font-size: 11px; color: var(--gray-500); margin-top: 4px; }
+.crm-kpi-delta { font-size: 10px; font-weight: 600; margin-top: 4px; }
+.crm-body { display: grid; grid-template-columns: 1fr 280px; gap: 14px; }
+.crm-kanban { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.crm-col { background: var(--gray-100); border-radius: 12px; padding: 12px; min-height: 200px; }
 .crm-col-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 2px solid var(--gray-200); }
 .crm-col-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
 .crm-col-count { font-size: 10px; font-weight: 600; color: #fff; border-radius: 10px; padding: 1px 7px; min-width: 20px; text-align: center; }
-.crm-lead { background: var(--card); padding: 10px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); margin-bottom: 8px; font-size: 11px; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.crm-lead { background: var(--card); padding: 10px; border-radius: 8px; box-shadow: var(--shadow-sm); margin-bottom: 8px; font-size: 11px; transition: transform 0.15s ease, box-shadow 0.15s ease; cursor: default; }
 .crm-lead:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,0.1); }
 .crm-lead:last-child { margin-bottom: 0; }
 .crm-lead-name { font-weight: 600; color: var(--dark); margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -669,6 +676,23 @@ html.dark .hm-high { background: #450a0a; color: #fca5a5; }
 .crm-lead-footer { display: flex; align-items: center; justify-content: space-between; }
 .crm-lead-date { color: var(--gray-400); font-size: 9px; }
 .crm-lead-badge { font-size: 9px; font-weight: 600; padding: 1px 6px; border-radius: 6px; }
+.crm-sidebar-card { background: var(--card); border-radius: var(--radius); border: 1px solid var(--gray-200); padding: 16px; margin-bottom: 14px; }
+.crm-sidebar-card .card-title { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+.crm-source-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--gray-100); font-size: 12px; }
+.crm-source-row:last-child { border-bottom: none; }
+.crm-source-label { display: flex; align-items: center; gap: 8px; color: var(--dark); font-weight: 500; }
+.crm-source-dot { width: 8px; height: 8px; border-radius: 50%; }
+.crm-source-val { font-weight: 700; font-size: 14px; }
+.crm-timeline-item { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--gray-100); font-size: 11px; }
+.crm-timeline-item:last-child { border-bottom: none; }
+.crm-tl-avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--info); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.crm-tl-content { flex: 1; min-width: 0; }
+.crm-tl-name { font-weight: 600; color: var(--dark); }
+.crm-tl-msg { color: var(--gray-500); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.crm-tl-time { color: var(--gray-400); font-size: 10px; flex-shrink: 0; align-self: center; }
+@media (max-width: 1100px) { .crm-body { grid-template-columns: 1fr; } .crm-kanban { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 768px) { .crm-kpis { grid-template-columns: repeat(2, 1fr); } .crm-kanban { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .crm-kanban { grid-template-columns: 1fr; } .crm-kpis { grid-template-columns: 1fr; } }
 
 /* ========== PIPELINE ========== */
 .pipeline-bar { display: flex; height: 28px; border-radius: 8px; overflow: hidden; margin-bottom: 16px; }
@@ -1309,6 +1333,11 @@ html.dark .org-badge-agent { background: #334155; color: #CBD5E1; }
       Auditorias
       <span class="badge" id="badge-auditorias">0</span>
     </a>
+    <a class="sidebar-item" href="#" data-tab="crm">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      CRM
+      <span class="badge" id="badge-crm-leads">0</span>
+    </a>
     <a class="sidebar-item" href="#" data-tab="equipe">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
       Equipe
@@ -1449,6 +1478,7 @@ html.dark .org-badge-agent { background: #334155; color: #CBD5E1; }
     <button class="tab-btn" data-tab="calendario">Calendario</button>
     <button class="tab-btn" data-tab="tarefas">Tarefas</button>
     <button class="tab-btn" data-tab="auditorias-tab">Auditorias</button>
+    <button class="tab-btn" data-tab="crm">CRM</button>
     <button class="tab-btn" data-tab="mission">Mission Control</button>
     <button class="tab-btn" data-tab="equipe">Equipe</button>
   </div>
@@ -1653,6 +1683,75 @@ html.dark .org-badge-agent { background: #334155; color: #CBD5E1; }
         <div class="card" style="padding:16px;">
           <div class="card-header" style="margin-bottom:12px;"><div class="card-title">Todas as Auditorias</div></div>
           <div class="audit-detail-grid" id="audit-detail-grid"></div>
+        </div>
+      </div>
+
+      <!-- ===== TAB: CRM ===== -->
+      <div class="tab-pane" id="pane-crm">
+
+        <!-- CRM KPIs -->
+        <div class="crm-kpis">
+          <div class="crm-kpi">
+            <div class="crm-kpi-value" id="crm-kpi-leads" style="color:#6b7280;">0</div>
+            <div class="crm-kpi-label">Total Leads</div>
+            <div class="crm-kpi-delta" id="crm-kpi-leads-delta" style="color:#22c55e;"></div>
+          </div>
+          <div class="crm-kpi">
+            <div class="crm-kpi-value" id="crm-kpi-qualified" style="color:#3b82f6;">0</div>
+            <div class="crm-kpi-label">Qualificados</div>
+          </div>
+          <div class="crm-kpi">
+            <div class="crm-kpi-value" id="crm-kpi-proposals" style="color:#f59e0b;">0</div>
+            <div class="crm-kpi-label">Propostas Enviadas</div>
+          </div>
+          <div class="crm-kpi">
+            <div class="crm-kpi-value" id="crm-kpi-clients" style="color:#22c55e;">0</div>
+            <div class="crm-kpi-label">Clientes Ativos</div>
+          </div>
+          <div class="crm-kpi">
+            <div class="crm-kpi-value" id="crm-kpi-conversion" style="color:#8b5cf6;">--</div>
+            <div class="crm-kpi-label">Taxa Conversao</div>
+          </div>
+        </div>
+
+        <!-- CRM Body: Kanban + Sidebar -->
+        <div class="crm-body">
+          <!-- Kanban Pipeline -->
+          <div class="card" style="padding:16px;">
+            <div class="card-header" style="margin-bottom:12px;">
+              <div class="card-title">Pipeline Comercial</div>
+              <div class="card-subtitle">Gestao de leads e oportunidades</div>
+            </div>
+            <div class="crm-kanban" id="crm-kanban"></div>
+          </div>
+
+          <!-- Sidebar: Fontes + Timeline -->
+          <div>
+            <!-- Fontes de Leads -->
+            <div class="crm-sidebar-card">
+              <div class="card-title">Fontes de Leads</div>
+              <div id="crm-sources">
+                <div class="crm-source-row">
+                  <span class="crm-source-label"><span class="crm-source-dot" style="background:#25d366;"></span> WhatsApp</span>
+                  <span class="crm-source-val" id="crm-src-whatsapp">0</span>
+                </div>
+                <div class="crm-source-row">
+                  <span class="crm-source-label"><span class="crm-source-dot" style="background:#ea4335;"></span> Email</span>
+                  <span class="crm-source-val" id="crm-src-email">14</span>
+                </div>
+                <div class="crm-source-row">
+                  <span class="crm-source-label"><span class="crm-source-dot" style="background:#4285f4;"></span> Site</span>
+                  <span class="crm-source-val" id="crm-src-site">38</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ultimas Interacoes -->
+            <div class="crm-sidebar-card">
+              <div class="card-title">Ultimas Interacoes</div>
+              <div id="crm-timeline"></div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -2069,6 +2168,7 @@ function renderCmdResults(q) {
    { l: 'Ir para Calendario', d: 'G C', act: () => switchTab('calendario') },
    { l: 'Ir para Tarefas', d: 'G T', act: () => switchTab('tarefas') },
    { l: 'Ir para Auditorias', d: 'G A', act: () => switchTab('auditorias-tab') },
+   { l: 'Ir para CRM', d: 'G R', act: () => switchTab('crm') },
    { l: 'Ir para Mission Control', d: 'G M', act: () => switchTab('mission') },
    { l: 'Ir para Equipe', d: 'G E', act: () => switchTab('equipe') },
    { l: 'Alternar Dark Mode', d: '', act: () => toggleDark() }
@@ -2185,8 +2285,8 @@ function renderAll() {
   renderLeads();
   renderEmails();
   renderHeatmap(d.auditorias);
-  renderCrmPipeline();
   renderPipeline();
+  renderCRM();
   renderCharts(d.auditorias);
   renderAuditTable(d.auditorias);
   renderAchadosRecentes(d.achados_recentes);
@@ -2358,45 +2458,117 @@ function renderPipeline() {
   document.getElementById('pipeline-cards').innerHTML = stages.map(s=>`<div class="pipeline-card"><div class="pc-count" style="color:${s.color};">${s.count}</div><div class="pc-label">${s.label}</div></div>`).join('');
 }
 
-/* ========== CRM PIPELINE ========== */
-function renderCrmPipeline() {
+/* ========== CRM TAB ========== */
+function renderCRM() {
   const stages = [
-    { key: 'novo',   label: 'Novo Lead',    color: '#6b7280' },
-    { key: 'contato', label: 'Contato',     color: '#3b82f6' },
-    { key: 'proposta', label: 'Proposta',   color: '#f59e0b' },
-    { key: 'negociacao', label: 'Negociacao', color: '#8b5cf6' },
-    { key: 'cliente', label: 'Cliente',      color: '#22c55e' }
+    { key: 'novo',      label: 'Novo Lead',    color: '#6b7280' },
+    { key: 'contato',   label: 'Em Contato',   color: '#3b82f6' },
+    { key: 'proposta',  label: 'Proposta',     color: '#f59e0b' },
+    { key: 'negociacao', label: 'Negociacao',  color: '#8b5cf6' },
+    { key: 'cliente',   label: 'Cliente',      color: '#22c55e' }
   ];
-  const novos = LEADS.filter(l => !l.status || l.status === 'novo');
-  const contatos = LEADS.filter(l => l.status === 'contato' || l.status === 'respondido');
+
+  // Classificar leads
+  const novos = LEADS.filter(l => (!l.status || l.status === 'novo') && (l.message_count || 0) <= 1);
+  const contatos = LEADS.filter(l => (l.status === 'contato' || l.status === 'respondido') || ((l.message_count || 0) > 1 && (!l.status || l.status === 'novo')));
   const propostas = LEADS.filter(l => l.status === 'proposta' || l.status === 'qualificado');
+
+  // Mock negociacao
   const negociacao = [
-    { name: 'Megalink Telecom', interest: 'Auditoria 2025', date: '2026-03-15', badge: 'R$ 35k' },
-    { name: 'Promoprev Unimed', interest: 'PROMOPREV', date: '2026-03-20', badge: 'R$ 18k' }
+    { name: 'Megalink Telecom', interest: 'Auditoria Independente 2025', date: '15/03/2026', badge: 'R$ 35k' },
+    { name: 'Promoprev Unimed', interest: 'Auditoria PROMOPREV', date: '20/03/2026', badge: 'R$ 18k' },
+    { name: 'Consorcio Picos', interest: 'Consultoria LGPD', date: '22/03/2026', badge: 'R$ 12k' }
   ];
-  const clientes = (DATA?.auditorias || []).map(a => ({
+
+  // Clientes do dashboard
+  const auditorias = DATA?.auditorias || [];
+  const clientesAtivos = auditorias.filter(a => a.status === 'exec');
+  const clientes = auditorias.map(a => ({
     name: a.label, interest: a.fase, date: a.exercicio,
     badge: a.status === 'exec' ? 'Ativo' : a.status === 'done' ? 'Entregue' : a.status === 'plan' ? 'Planejando' : 'Proposta'
   }));
+
+  // KPIs
+  const totalLeads = LEADS.length;
+  const qualified = contatos.length + propostas.length;
+  const proposalCount = propostas.length + negociacao.length;
+  const activeClients = clientesAtivos.length;
+  const convRate = totalLeads > 0 ? Math.round((auditorias.length / (totalLeads + auditorias.length)) * 100) : 0;
+
+  document.getElementById('crm-kpi-leads').textContent = totalLeads;
+  document.getElementById('crm-kpi-leads-delta').textContent = totalLeads > 0 ? '+' + totalLeads + ' este mes' : '';
+  document.getElementById('crm-kpi-qualified').textContent = qualified;
+  document.getElementById('crm-kpi-proposals').textContent = proposalCount;
+  document.getElementById('crm-kpi-clients').textContent = activeClients;
+  document.getElementById('crm-kpi-conversion').textContent = convRate + '%';
+  document.getElementById('badge-crm-leads').textContent = totalLeads;
+  document.getElementById('crm-src-whatsapp').textContent = totalLeads;
+
+  // Card builder
   function crmCard(item) {
     const name = item.name || item.phone || 'Desconhecido';
     const info = item.interest || (item.message_count ? item.message_count + ' msgs' : '');
     const date = item.date || item.last_seen || '';
     const badge = item.badge || '';
-    const bc = badge === 'Ativo' ? '#dcfce7;color:#16a34a' : badge === 'Entregue' ? '#dbeafe;color:#2563eb' : badge === 'Planejando' ? '#fef9c3;color:#a16207' : badge.startsWith('R$') ? '#f5f3ff;color:#7c3aed' : badge === 'Respondido' ? '#dbeafe;color:#2563eb' : badge === 'Qualificado' ? '#fef9c3;color:#a16207' : '#f3f4f6;color:#4b5563';
-    return `<div class="crm-lead"><div class="crm-lead-name">${name}</div>${info?`<div class="crm-lead-info">${info}</div>`:''}<div class="crm-lead-footer"><span class="crm-lead-date">${date}</span>${badge?`<span class="crm-lead-badge" style="background:${bc};">${badge}</span>`:''}</div></div>`;
+    const bc = badge === 'Ativo' ? '#dcfce7;color:#16a34a'
+      : badge === 'Entregue' ? '#dbeafe;color:#2563eb'
+      : badge === 'Planejando' ? '#fef9c3;color:#a16207'
+      : badge.startsWith('R$') ? '#f5f3ff;color:#7c3aed'
+      : badge === 'Respondido' ? '#dbeafe;color:#2563eb'
+      : badge === 'Qualificado' ? '#fef9c3;color:#a16207'
+      : '#f3f4f6;color:#4b5563';
+    return `<div class="crm-lead">
+      <div class="crm-lead-name">${name}</div>
+      ${info ? `<div class="crm-lead-info">${info}</div>` : ''}
+      <div class="crm-lead-footer">
+        <span class="crm-lead-date">${date}</span>
+        ${badge ? `<span class="crm-lead-badge" style="background:${bc};">${badge}</span>` : ''}
+      </div>
+    </div>`;
   }
+
   const buckets = {
-    novo: novos.map(l => ({ name: l.name||l.phone, interest: l.interest||'', date: l.last_seen||'', badge: '' })),
-    contato: contatos.map(l => ({ name: l.name||l.phone, interest: l.interest||'', date: l.last_seen||'', badge: 'Respondido' })),
+    novo: novos.map(l => ({ name: l.name||l.phone, interest: l.interest||'', date: l.last_seen||'', badge: '', message_count: l.message_count })),
+    contato: contatos.map(l => ({ name: l.name||l.phone, interest: l.interest||'', date: l.last_seen||'', badge: 'Respondido', message_count: l.message_count })),
     proposta: propostas.map(l => ({ name: l.name||l.phone, interest: l.interest||'', date: l.last_seen||'', badge: 'Qualificado' })),
     negociacao: negociacao,
     cliente: clientes
   };
-  document.getElementById('crm-pipeline').innerHTML = stages.map(s => {
+
+  // Render Kanban
+  document.getElementById('crm-kanban').innerHTML = stages.map(s => {
     const items = buckets[s.key] || [];
-    return `<div class="crm-col"><div class="crm-col-header"><span class="crm-col-title" style="color:${s.color};">${s.label}</span><span class="crm-col-count" style="background:${s.color};">${items.length}</span></div>${items.length ? items.map(crmCard).join('') : '<div style="color:var(--gray-400);font-size:10px;text-align:center;padding:20px 0;">Nenhum item</div>'}</div>`;
+    const empty = '<div style="color:var(--gray-400);font-size:10px;text-align:center;padding:24px 0;">Nenhum item</div>';
+    return `<div class="crm-col">
+      <div class="crm-col-header">
+        <span class="crm-col-title" style="color:${s.color};">${s.label}</span>
+        <span class="crm-col-count" style="background:${s.color};">${items.length}</span>
+      </div>
+      ${items.length ? items.map(crmCard).join('') : empty}
+    </div>`;
   }).join('');
+
+  // Render Timeline
+  const colors = ['#E72C22','#3B82F6','#8B5CF6','#22C55E','#F59E0B','#6b7280'];
+  const timelineLeads = LEADS.slice(0, 8);
+  if (timelineLeads.length) {
+    document.getElementById('crm-timeline').innerHTML = timelineLeads.map((l, i) => {
+      const name = l.name || l.phone || 'Desconhecido';
+      const initial = name.charAt(0).toUpperCase();
+      const msg = l.last_message || l.interest || (l.message_count ? l.message_count + ' mensagens' : 'Nova conversa');
+      const time = l.last_seen || '';
+      return `<div class="crm-timeline-item">
+        <div class="crm-tl-avatar" style="background:${colors[i % colors.length]};">${initial}</div>
+        <div class="crm-tl-content">
+          <div class="crm-tl-name">${name}</div>
+          <div class="crm-tl-msg">${msg}</div>
+        </div>
+        <div class="crm-tl-time">${time}</div>
+      </div>`;
+    }).join('');
+  } else {
+    document.getElementById('crm-timeline').innerHTML = '<div style="color:var(--gray-400);font-size:11px;text-align:center;padding:20px 0;">Sem interacoes recentes</div>';
+  }
 }
 
 /* ========== CHARTS ========== */
@@ -2638,7 +2810,7 @@ function renderAuditCards(auditorias) {
 }
 
 /* ========== AUTO-REFRESH ========== */
-setInterval(async()=>{try{const r=await fetch('http://localhost:3000/api/leads');if(r.ok){LEADS=await r.json();renderLeads();renderCrmPipeline();}}catch{}},30000);
+setInterval(async()=>{try{const r=await fetch('http://localhost:3000/api/leads');if(r.ok){LEADS=await r.json();renderLeads();renderCRM();}}catch{}},30000);
 setInterval(async()=>{const d=await fetchJSON('/data/emails-recentes.json');if(d?.emails){EMAILS=d.emails;renderEmails();}},60000);
 // Auto-refresh KPIs da API REST a cada 30s
 setInterval(async()=>{
@@ -3221,6 +3393,7 @@ switchTab = function(tab) {
     { sel: '.ns-card', title: 'North Star Metric', desc: 'Seu progresso geral em um numero. Acompanhe a evolucao dos PTAs concluidos.' },
     { sel: '.org-level-2', title: 'Equipe de Agentes IA', desc: 'Sua equipe virtual trabalhando 24/7. Clique em cada agente para ver detalhes.' },
     { sel: '.cmd-trigger', title: 'Command Palette', desc: 'Pressione Ctrl+K para buscar qualquer auditoria, cliente ou PTA rapidamente.' },
+    { sel: '[data-tab="crm"]', title: 'CRM', desc: 'Pipeline comercial com leads do WhatsApp, propostas e clientes ativos.' },
     { sel: '[data-tab="mission"]', title: 'Mission Control', desc: 'Monitoramento em tempo real de todas as operacoes e metricas do escritorio.' },
     { sel: '.audina-fab', title: 'Fale com a Audina', desc: 'Clique no microfone ou digite para conversar com a assistente virtual.' }
   ];
