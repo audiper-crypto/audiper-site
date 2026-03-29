@@ -1480,10 +1480,16 @@ html.dark .org-badge-agent { background: #334155; color: #CBD5E1; }
         <!-- KPIs -->
         <div class="kpis-grid" id="kpis-grid" style="margin-bottom:20px;"></div>
 
-        <!-- WEEK ACTIVITY -->
+        <!-- WEEK ACTIVITY — 2 semanas -->
         <div class="card">
-          <div class="card-header"><div class="card-title">Atividade da Semana</div></div>
+          <div class="card-header">
+            <div class="card-title">Atividade — Semana Atual</div>
+          </div>
           <div class="week-grid" id="week-grid"></div>
+          <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--gray-200);">
+            <div style="font-size:11px;font-weight:600;color:var(--gray);margin-bottom:8px;">Proxima Semana — Compromissos</div>
+            <div class="week-grid" id="week-grid-next"></div>
+          </div>
         </div>
 
         <!-- LEADS + EMAILS -->
@@ -2143,19 +2149,42 @@ function renderWeek() {
   const mon = new Date(now); mon.setDate(now.getDate() - ((dow+6)%7));
   const labels = ['Seg','Ter','Qua','Qui','Sex','Sab','Dom'];
   const sessoes = OPS?.sessoes || [];
+  const events = DATA?.gcal_events || DATA?.calendario || [];
+
+  // Semana atual
   let html = '';
   for (let i = 0; i < 7; i++) {
     const d = new Date(mon); d.setDate(mon.getDate()+i);
     const isToday = d.toDateString()===now.toDateString();
     const dateStr = d.toISOString().split('T')[0];
     const has = sessoes.some(s => s.data===dateStr);
-    html += `<div class="week-day${isToday?' today':''}">
+    const dayEvents = events.filter(e => e.date === dateStr);
+    html += `<div class="week-day${isToday?' today':''}" title="${dayEvents.map(e=>e.label||e.summary||'').join(', ')||'Sem compromissos'}">
       <div class="wd-label">${labels[i]}</div>
       <div class="wd-number">${d.getDate()}</div>
-      <div class="wd-dot" style="background:${has?'var(--success)':'var(--gray-300)'};"></div>
+      <div class="wd-dot" style="background:${has?'var(--success)':dayEvents.length?'var(--info)':'var(--gray-300)'};"></div>
+      ${dayEvents.length ? `<div style="font-size:7px;color:var(--gray);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%;">${dayEvents[0].label||dayEvents[0].summary||''}</div>` : ''}
     </div>`;
   }
   document.getElementById('week-grid').innerHTML = html;
+
+  // Proxima semana
+  const nextMon = new Date(mon); nextMon.setDate(mon.getDate()+7);
+  let htmlNext = '';
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(nextMon); d.setDate(nextMon.getDate()+i);
+    const dateStr = d.toISOString().split('T')[0];
+    const dayEvents = events.filter(e => e.date === dateStr);
+    const hasEvent = dayEvents.length > 0;
+    htmlNext += `<div class="week-day${hasEvent?' has-event':''}" title="${dayEvents.map(e=>e.label||e.summary||'').join(', ')||'Sem compromissos'}" style="${hasEvent?'border-color:var(--info);background:#eff6ff;':''}">
+      <div class="wd-label">${labels[i]}</div>
+      <div class="wd-number">${d.getDate()}</div>
+      <div class="wd-dot" style="background:${hasEvent?'var(--info)':'var(--gray-300)'};"></div>
+      ${hasEvent ? `<div style="font-size:7px;color:var(--info);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%;font-weight:600;">${dayEvents[0].label||dayEvents[0].summary||''}</div>` : ''}
+    </div>`;
+  }
+  const nextEl = document.getElementById('week-grid-next');
+  if (nextEl) nextEl.innerHTML = htmlNext;
 }
 
 /* ========== LEADS ========== */
