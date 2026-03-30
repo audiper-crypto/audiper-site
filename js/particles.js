@@ -86,7 +86,7 @@
   const REPEL_FORCE = 12;
   const LINE_DIST = isMobile ? 80 : 130;
   const MOUSE_CONNECT_RADIUS = isMobile ? 160 : 280;
-  const MORPH_SPEED = 0.02;
+  const MORPH_SPEED = 0.003;
 
   function resize() {
     W = window.innerWidth; H = window.innerHeight;
@@ -283,7 +283,7 @@
       this.x = Math.random() * (W || 1400);
       this.y = Math.random() * (H || 900);
       this.vx = 0; this.vy = 0;
-      this.baseSize = 0.3 + Math.random() * 0.6;
+      this.baseSize = 0.2 + Math.random() * 0.3;
       this.phase = Math.random() * Math.PI * 2;
       this.breathAmp = 0.4 + Math.random() * 1;
       this.friction = 0.88 + Math.random() * 0.07;
@@ -297,11 +297,11 @@
 
       // Paleta VINHO + PRETO
       const r = Math.random();
-      if (r < 0.30) { this.r = 100; this.g = 5; this.b = 15; this.alpha = 0.15 + Math.random() * 0.12; }
-      else if (r < 0.55) { this.r = 140; this.g = 15; this.b = 25; this.alpha = 0.12 + Math.random() * 0.12; }
-      else if (r < 0.75) { this.r = 220; this.g = 30; this.b = 35; this.alpha = 0.12 + Math.random() * 0.15; }
-      else if (r < 0.90) { this.r = 20; this.g = 20; this.b = 20; this.alpha = 0.12 + Math.random() * 0.12; }
-      else { this.r = 60; this.g = 60; this.b = 60; this.alpha = 0.1 + Math.random() * 0.1; }
+      if (r < 0.30) { this.r = 100; this.g = 5; this.b = 15; this.alpha = 0.06 + Math.random() * 0.06; }
+      else if (r < 0.55) { this.r = 140; this.g = 15; this.b = 25; this.alpha = 0.05 + Math.random() * 0.06; }
+      else if (r < 0.75) { this.r = 220; this.g = 30; this.b = 35; this.alpha = 0.05 + Math.random() * 0.07; }
+      else if (r < 0.90) { this.r = 20; this.g = 20; this.b = 20; this.alpha = 0.05 + Math.random() * 0.06; }
+      else { this.r = 60; this.g = 60; this.b = 60; this.alpha = 0.04 + Math.random() * 0.05; }
     }
 
     update(time) {
@@ -352,8 +352,8 @@
         glow = dist < 220 ? (1 - dist / 220) : 0;
       }
 
-      const size = this.baseSize * L.sizeMulti + glow * 1.5;
-      const a = Math.min(0.4, this.alpha * L.alphaMulti + glow * 0.15);
+      const size = this.baseSize * L.sizeMulti + glow * 0.8;
+      const a = Math.min(0.2, this.alpha * L.alphaMulti + glow * 0.08);
 
       ctx.beginPath();
       ctx.arc(this.x, this.y, size, 0, Math.PI * 2);
@@ -427,7 +427,7 @@
         const dSq = dx * dx + dy * dy;
         if (dSq < LINE_DIST * LINE_DIST) {
           const d = Math.sqrt(dSq);
-          const alpha = (1 - d / LINE_DIST) * 0.7;
+          const alpha = (1 - d / LINE_DIST) * 0.15;
           const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
           const mD = Math.sqrt((mx - mouse.x) ** 2 + (my - mouse.y) ** 2);
           const prox = Math.max(0, 1 - mD / MOUSE_CONNECT_RADIUS);
