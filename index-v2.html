@@ -411,6 +411,10 @@
   </style>
  </head>
  <body>
+  <!-- ═══ Particle System (fixed, full page) ═══ -->
+  <canvas id="auroraCanvas" style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:9; pointer-events:none; will-change:transform; transform:translateZ(0);"></canvas>
+  <canvas id="particleCanvas" style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:10; pointer-events:none; will-change:transform; transform:translateZ(0);"></canvas>
+
   <!-- ═══ LOADING SCREEN ═══ -->
   <div id="page-loader" style="position:fixed;inset:0;background:#fff;z-index:99999;display:flex;align-items:center;justify-content:center;transition:opacity 0.5s;">
     <div style="text-align:center;">
@@ -418,12 +422,7 @@
       <p style="margin-top:12px;font-size:12px;color:#999;letter-spacing:2px;">AUDIPER</p>
     </div>
   </div>
-  <!-- ═══ ANNOUNCEMENT BAR ═══ -->
-  <div id="announce-bar" style="position:fixed;top:0;left:0;right:0;z-index:10001;background:linear-gradient(90deg,#E72C22,#9B1C22,#E72C22,#9B1C22);background-size:300% 100%;animation:gradShift 5s ease infinite;text-align:center;padding:10px 48px;font-size:0.8rem;font-weight:600;color:#fff;letter-spacing:0.04em;display:flex;align-items:center;justify-content:center;gap:10px;">
-    <span>Novo: Dashboard com IA para acompanhar sua auditoria em tempo real</span>
-    <a href="audina-dashboard-v2.html" style="color:#fff;text-decoration:underline;font-weight:700;">Acessar →</a>
-    <button onclick="this.parentElement.style.display='none';document.body.style.paddingTop='0'" style="position:absolute;right:16px;background:none;border:none;color:#fff;cursor:pointer;font-size:1.2rem;opacity:0.7;">×</button>
-  </div>
+  <!-- ═══ ANNOUNCEMENT BAR (oculto ate informar clientes) ═══ -->
   <div class="cursor-glow" id="cursorGlow"></div>
   <!-- Search Overlay -->
   <div id="searchOverlay" class="search-overlay" style="display:none">
@@ -3290,6 +3289,13 @@
     }).join('');
   }
   </script>
+
+  <!-- Particle System -->
+  <script src="js/particles.js"></script>
+  <!-- Wireframe 3D Shapes -->
+  <script src="js/wireframes.js"></script>
+  <!-- Nebula 3D Rotating Clouds -->
+  <script src="js/nebula.js"></script>
 
  </body>
 </html>
