@@ -366,6 +366,10 @@ class DashboardHandler(BaseHTTPRequestHandler):
                     if d.get('criado_em'): d['criado_em'] = str(d['criado_em'])
                 self.json_response(data)
 
+            elif path == '/api/chat/workflows':
+                data = query("SELECT id, nome, canal_origem, canal_destino, condicao, acao, agente_executor, ativo FROM chat_workflows ORDER BY id")
+                self.json_response(data)
+
             elif path == '/api/health':
                 self.json_response({"status": "ok", "db": "connected", "port": PORT})
 
