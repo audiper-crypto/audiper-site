@@ -3246,7 +3246,7 @@
   </script>
 
   <!-- ═══ BACK TO TOP BUTTON ═══ -->
-  <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:90px;right:24px;width:44px;height:44px;border-radius:50%;background:#E72C22;color:#fff;border:none;cursor:pointer;font-size:18px;box-shadow:0 4px 12px rgba(231,44,34,0.3);z-index:9999;opacity:0;transition:opacity 0.3s;display:flex;align-items:center;justify-content:center;">↑</button>
+  <!-- back-to-top removido (ja existe progress-wrap original) -->
 
   <!-- ═══ EXTRA FEATURES JS ═══ -->
   <script>
@@ -3260,7 +3260,7 @@
 
   /* Back to Top visibility */
   window.addEventListener('scroll', function() {
-    document.getElementById('back-to-top').style.opacity = window.scrollY > 400 ? '1' : '0';
+    /* back-to-top removido - usa progress-wrap original */
   });
 
   /* Smooth Scroll */
