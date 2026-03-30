@@ -276,12 +276,7 @@
       n.mount(statsSection);
     }
 
-    // Data Intelligence — nebula on the left
-    const dataSection = document.getElementById('data-intelligence');
-    if (dataSection) {
-      const n = new Nebula(NEBULA_CONFIGS[3]);
-      n.mount(dataSection);
-    }
+    // Data Intelligence — desligada (muito intensa sobre fundo branco)
   }
 
   if (document.readyState === 'loading') {
