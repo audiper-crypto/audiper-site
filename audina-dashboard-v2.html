@@ -3472,38 +3472,79 @@ refreshAll();
 
 <!-- Login Overlay -->
 <div id="login-overlay" style="position:fixed;inset:0;background:#0a0a0a;z-index:10000;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;">
+  <canvas id="login-particles" style="position:absolute;inset:0;z-index:0;"></canvas>
   <style>
-    .neo-container{position:relative;width:720px;height:440px;border-radius:24px;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,0.5);}
-    .neo-left{position:absolute;left:0;top:0;width:55%;height:100%;background:#f0f0f5;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;z-index:2;transition:transform 0.6s cubic-bezier(0.65,0,0.35,1);}
-    .neo-right{position:absolute;right:0;top:0;width:45%;height:100%;background:linear-gradient(135deg,#E72C22 0%,#9B1C22 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;color:white;z-index:1;}
-    .neo-input{width:100%;padding:12px 16px;border:none;border-radius:12px;font-size:13px;outline:none;background:#e0e0e8;box-shadow:inset 3px 3px 6px #bebec6,inset -3px -3px 6px #ffffff;margin-bottom:14px;color:#272527;transition:box-shadow 0.2s;}
+    .neo-container{position:relative;width:920px;height:560px;border-radius:28px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,0.6);z-index:1;}
+    .neo-left{position:absolute;left:0;top:0;width:55%;height:100%;background:#f0f0f5;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:50px;z-index:2;transition:transform 0.6s cubic-bezier(0.65,0,0.35,1);}
+    .neo-right{position:absolute;right:0;top:0;width:45%;height:100%;background:linear-gradient(135deg,#E72C22 0%,#9B1C22 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:50px;color:white;z-index:1;}
+    .neo-input{width:100%;padding:15px 20px;border:none;border-radius:14px;font-size:15px;outline:none;background:#e0e0e8;box-shadow:inset 3px 3px 6px #bebec6,inset -3px -3px 6px #ffffff;margin-bottom:16px;color:#272527;transition:box-shadow 0.2s;}
     .neo-input:focus{box-shadow:inset 1px 1px 2px #bebec6,inset -1px -1px 2px #ffffff,0 0 0 2px rgba(231,44,34,0.2);}
     .neo-input::placeholder{color:#9ca3af;}
-    .neo-btn{width:100%;padding:12px;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;letter-spacing:0.5px;}
+    .neo-btn{width:100%;padding:16px;border:none;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;transition:all 0.2s;letter-spacing:0.5px;}
     .neo-btn-primary{background:#E72C22;color:white;box-shadow:4px 4px 10px rgba(231,44,34,0.3),-2px -2px 6px rgba(255,255,255,0.1);}
     .neo-btn-primary:hover{background:#CB2C27;transform:translateY(-1px);box-shadow:6px 6px 14px rgba(231,44,34,0.4),-3px -3px 8px rgba(255,255,255,0.1);}
     .neo-btn-primary:active{transform:translateY(0);box-shadow:2px 2px 5px rgba(231,44,34,0.3);}
     .neo-btn-outline{background:transparent;color:white;border:2px solid white;border-radius:12px;}
     .neo-btn-outline:hover{background:rgba(255,255,255,0.1);}
-    .neo-logo{width:56px;height:56px;border-radius:50%;margin-bottom:16px;box-shadow:6px 6px 12px #c8c8d0,-6px -6px 12px #ffffff;padding:3px;background:#f0f0f5;}
+    .neo-logo{width:80px;height:80px;border-radius:50%;margin-bottom:20px;box-shadow:8px 8px 16px #c8c8d0,-8px -8px 16px #ffffff;padding:4px;background:#f0f0f5;}
     .neo-logo img{width:100%;height:100%;border-radius:50%;object-fit:cover;}
     .neo-divider{display:flex;align-items:center;gap:10px;width:100%;margin:12px 0;color:#9ca3af;font-size:10px;}
     .neo-divider::before,.neo-divider::after{content:'';flex:1;height:1px;background:#d1d5db;}
     .neo-error{color:#E72C22;font-size:11px;margin-top:8px;display:none;text-align:center;}
-    .neo-right h2{font-size:26px;font-weight:800;margin-bottom:8px;letter-spacing:-0.5px;}
-    .neo-right p{font-size:12px;opacity:0.85;line-height:1.6;text-align:center;margin-bottom:24px;}
+    .neo-right h2{font-size:32px;font-weight:800;margin-bottom:10px;letter-spacing:-0.5px;}
+    .neo-right p{font-size:14px;opacity:0.85;line-height:1.6;text-align:center;margin-bottom:28px;}
     .neo-features{display:flex;flex-direction:column;gap:10px;width:100%;margin-top:8px;}
-    .neo-feat{display:flex;align-items:center;gap:10px;font-size:11px;opacity:0.9;}
+    .neo-feat{display:flex;align-items:center;gap:12px;font-size:13px;opacity:0.9;}
     .neo-feat-dot{width:6px;height:6px;border-radius:50%;background:white;flex-shrink:0;opacity:0.7;}
     @keyframes neoShake{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}
     .neo-shake{animation:neoShake 0.3s ease;}
     @media(max-width:768px){.neo-container{width:90%;height:auto;flex-direction:column;}.neo-left,.neo-right{position:relative;width:100%;}.neo-right{padding:24px;border-radius:0 0 24px 24px;}}
   </style>
+  <script>
+  (function(){
+    const c=document.getElementById('login-particles');
+    if(!c)return;
+    const ctx=c.getContext('2d');
+    let w,h,particles=[];
+    function resize(){w=c.width=window.innerWidth;h=c.height=window.innerHeight;}
+    resize();window.addEventListener('resize',resize);
+    const N=60;
+    for(let i=0;i<N;i++) particles.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-0.5)*0.6,vy:(Math.random()-0.5)*0.6,r:Math.random()*2+1});
+    let mouse={x:-999,y:-999};
+    document.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;});
+    function draw(){
+      ctx.clearRect(0,0,w,h);
+      for(let i=0;i<N;i++){
+        const p=particles[i];
+        p.x+=p.vx;p.y+=p.vy;
+        if(p.x<0||p.x>w)p.vx*=-1;
+        if(p.y<0||p.y>h)p.vy*=-1;
+        // Mouse repel
+        const dx=p.x-mouse.x,dy=p.y-mouse.y,dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<120){p.x+=dx*0.02;p.y+=dy*0.02;}
+        ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle='rgba(231,44,34,0.5)';ctx.fill();
+        // Lines
+        for(let j=i+1;j<N;j++){
+          const q=particles[j];
+          const d=Math.hypot(p.x-q.x,p.y-q.y);
+          if(d<140){
+            ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);
+            ctx.strokeStyle='rgba(231,44,34,'+(0.15*(1-d/140))+')';
+            ctx.lineWidth=0.6;ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+  </script>
   <div class="neo-container">
     <div class="neo-left">
       <div class="neo-logo"><img src="images/logos/audiper-logo-principal.png" alt="AUDIPER"></div>
-      <h2 style="font-size:18px;font-weight:800;color:#272527;margin-bottom:2px;">Entrar</h2>
-      <p style="font-size:11px;color:#9ca3af;margin-bottom:20px;">Central de Auditoria AUDIPER</p>
+      <h2 style="font-size:24px;font-weight:800;color:#272527;margin-bottom:4px;">Entrar</h2>
+      <p style="font-size:13px;color:#9ca3af;margin-bottom:24px;">Central de Auditoria AUDIPER</p>
       <form onsubmit="return doLogin(event)" style="width:100%;">
         <input id="login-email" class="neo-input" type="email" placeholder="Email" required>
         <input id="login-pass" class="neo-input" type="password" placeholder="Senha" required>
