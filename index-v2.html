@@ -2307,8 +2307,42 @@
      <!-- ═══ FAQ ACCORDION ═══ -->
      <section style="padding:80px 0;background:#f8f8f8;">
        <div class="container">
-         <h2 style="text-align:center;font-size:2rem;font-weight:800;margin-bottom:40px;">Perguntas Frequentes</h2>
-         <div id="faq-list" style="max-width:700px;margin:0 auto;"></div>
+         <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;">
+           <!-- ESQUERDA: Titulo + Animacao -->
+           <div style="position:sticky;top:120px;">
+             <span style="display:inline-block;background:#fef2f2;color:#E72C22;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">FAQ</span>
+             <h2 style="font-size:2.2rem;font-weight:800;line-height:1.2;margin-bottom:12px;">Perguntas<br>Frequentes</h2>
+             <p style="font-size:14px;color:#666;line-height:1.7;margin-bottom:24px;">Tire suas duvidas sobre auditoria, pericia contabil e nossos servicos de inteligencia artificial.</p>
+             <!-- Animacao SVG -->
+             <div style="position:relative;width:100%;max-width:280px;">
+               <svg viewBox="0 0 280 280" style="width:100%;">
+                 <!-- Circulo pulsante -->
+                 <circle cx="140" cy="140" r="100" fill="none" stroke="#E72C22" stroke-width="1" opacity="0.15">
+                   <animate attributeName="r" values="80;110;80" dur="4s" repeatCount="indefinite"/>
+                   <animate attributeName="opacity" values="0.15;0.05;0.15" dur="4s" repeatCount="indefinite"/>
+                 </circle>
+                 <circle cx="140" cy="140" r="60" fill="none" stroke="#E72C22" stroke-width="1" opacity="0.1">
+                   <animate attributeName="r" values="50;75;50" dur="3s" repeatCount="indefinite"/>
+                 </circle>
+                 <!-- Icone central -->
+                 <circle cx="140" cy="140" r="40" fill="#fef2f2"/>
+                 <text x="140" y="148" text-anchor="middle" font-size="28" font-weight="800" fill="#E72C22">?</text>
+                 <!-- Dots orbitando -->
+                 <circle cx="140" cy="50" r="4" fill="#E72C22" opacity="0.6">
+                   <animateTransform attributeName="transform" type="rotate" from="0 140 140" to="360 140 140" dur="10s" repeatCount="indefinite"/>
+                 </circle>
+                 <circle cx="230" cy="140" r="3" fill="#E72C22" opacity="0.4">
+                   <animateTransform attributeName="transform" type="rotate" from="120 140 140" to="480 140 140" dur="12s" repeatCount="indefinite"/>
+                 </circle>
+                 <circle cx="140" cy="230" r="3.5" fill="#E72C22" opacity="0.5">
+                   <animateTransform attributeName="transform" type="rotate" from="240 140 140" to="600 140 140" dur="8s" repeatCount="indefinite"/>
+                 </circle>
+               </svg>
+             </div>
+           </div>
+           <!-- DIREITA: FAQ Cards em 1 coluna -->
+           <div id="faq-list"></div>
+         </div>
        </div>
      </section>
 
