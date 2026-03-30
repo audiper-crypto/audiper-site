@@ -2277,8 +2277,23 @@ async function refreshAll() {
   if (DATA) renderAll();
 }
 
+/* ========== FILTRO POR USUARIO ========== */
+function getSessionUser() {
+  try { return JSON.parse(localStorage.getItem('audiper-session') || '{}'); } catch(e) { return {}; }
+}
+function filterAuditorias(auditorias) {
+  const session = getSessionUser();
+  if (!session.email) return auditorias;
+  const user = USERS[session.email];
+  if (!user || user.admin) return auditorias; // Admin ve tudo
+  if (user.clientes) return auditorias.filter(a => user.clientes.some(c => a.label.toLowerCase().includes(c.toLowerCase())));
+  return auditorias;
+}
+
 /* ========== RENDER ALL ========== */
 function renderAll() {
+  if (!DATA._allAuditorias) DATA._allAuditorias = [...DATA.auditorias];
+  DATA.auditorias = filterAuditorias(DATA._allAuditorias);
   const d = DATA, k = d.kpis;
   const execCount = d.auditorias.filter(a => a.status === 'exec').length;
   document.getElementById('header-subtitle').textContent = `Voce tem ${execCount} auditorias em execucao e ${k.achados_confirmados} achados a confirmar`;
@@ -3601,11 +3616,13 @@ refreshAll();
 <script>
 // ========== AUTH ==========
 const USERS = {
-  'vitor@audiper.com': {pass:'audiper2026', name:'Vitor Eduardo', role:'Gerente', type:'auditor'},
-  'ricardo@audiper.com': {pass:'audiper2026', name:'Prof. Ricardo', role:'Auditor Senior', type:'auditor'},
-  'admin@audiper.com': {pass:'audiper2026', name:'Administrador', role:'Admin', type:'auditor'},
-  'audiper@audiper.com': {pass:'audiper2026', name:'AUDIPER Admin', role:'Administrador Geral', type:'auditor'},
-  'cliente@audiper.com': {pass:'audiper2026', name:'Cliente Demo', role:'Cliente', type:'cliente'},
+  // Admins — veem tudo (todas as abas, todos os clientes, todas as auditorias)
+  'vitor@audiper.com': {pass:'audiper2026', name:'Vitor Eduardo', role:'Gerente de Auditoria', type:'auditor', admin:true},
+  'audiper@audiper.com': {pass:'audiper2026', name:'AUDIPER', role:'Administrador Geral', type:'auditor', admin:true},
+  // Auditor Senior — ve apenas clientes atribuidos
+  'ricardo@audiper.com': {pass:'audiper2026', name:'Prof. Ricardo', role:'Auditor e Perito Supervisor', type:'auditor', admin:false, clientes:['OIG Gaming','Resolve','Unimed Picos','Unimed Floriano','Megalink Telecom','FAPEC']},
+  // Clientes — veem so a area do cliente (status da propria auditoria)
+  'cliente@audiper.com': {pass:'audiper2026', name:'Cliente Demo', role:'Cliente', type:'cliente', admin:false},
 };
 
 function togglePanel(tipo) {
