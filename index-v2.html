@@ -822,10 +822,26 @@
                   Conhe&ccedil;a Nossos Servi&ccedil;os &rarr;
                 </a>
               </div>
+
+              <!-- Mouse Scroll Indicator -->
+              <div style="display:flex;flex-direction:column;align-items:center;margin-top:2rem;opacity:0.6;animation:fadeInUp 1s ease 2s both;">
+                <div style="width:26px;height:42px;border:2px solid #E72C22;border-radius:13px;position:relative;display:flex;justify-content:center;">
+                  <div style="width:4px;height:8px;background:#E72C22;border-radius:2px;margin-top:6px;animation:scrollDot 1.8s ease-in-out infinite;"></div>
+                </div>
+                <span style="font-size:9px;color:#999;text-transform:uppercase;letter-spacing:2px;margin-top:6px;font-weight:600;">Role</span>
+                <svg width="12" height="8" viewBox="0 0 12 8" style="margin-top:2px;animation:scrollArrow 1.8s ease-in-out infinite;"><path d="M1 1l5 5 5-5" stroke="#E72C22" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+              </div>
+
             </div>
           </div>
         </div>
       </div>
+
+      <style>
+        @keyframes scrollDot { 0% { opacity:1; transform:translateY(0); } 50% { opacity:0.3; transform:translateY(12px); } 100% { opacity:1; transform:translateY(0); } }
+        @keyframes scrollArrow { 0%,100% { transform:translateY(0); opacity:0.5; } 50% { transform:translateY(4px); opacity:1; } }
+        @keyframes fadeInUp { from { opacity:0; transform:translateY(20px); } to { opacity:0.6; transform:translateY(0); } }
+      </style>
 
       <style>
         /* ═══ Font System (Nora/Fio inspired) ═══ */
