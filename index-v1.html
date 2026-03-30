@@ -180,16 +180,6 @@
   <link href="css/main.css?v=20260304e" rel="stylesheet"/>
   <!-- AUDÍPER overrides -->
   <style>
-    /* ═══ Particle canvas stays BEHIND all content ═══ */
-    nav, section, footer, .navbar, header, .topbar-announce,
-    [id="inicio"], [id="ia-negocios"], [id="servicos"], [id="conquistas"],
-    [id="estatisticas"], [id="data-intelligence"], [id="por-que"], [id="setores"],
-    [id="lideranca"], [id="ferramentas"], [id="pericias"], [id="depoimentos"],
-    [id="blog-preview"], [id="contato"], .footer-area {
-      position: relative;
-      z-index: 2;
-    }
-
     /* Material Symbols loaded via <link> tag above (Google Fonts API) */
 
     /* ═══ Flaticon Fallback (replace missing custom font with Material Symbols) ═══ */
@@ -384,59 +374,9 @@
     .search-tags a{display:inline-block;padding:8px 16px;border:1px solid #e5e5e5;border-radius:8px;font-family:'Inter',sans-serif;font-size:0.8rem;color:#666;text-decoration:none;transition:all 0.2s}
     .search-tags a:hover{border-color:#c41a1a;color:#c41a1a}
     .blog-card-link div:hover { transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,0.08) !important; }
-
-    /* ═══ Premium: Cursor Glow ═══ */
-    .cursor-glow { position:fixed; width:400px; height:400px; border-radius:50%; background:radial-gradient(circle, rgba(231,44,34,0.12) 0%, transparent 70%); pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:left 0.15s ease, top 0.15s ease; mix-blend-mode:screen; }
-
-    /* ═══ Premium: Noise Overlay ═══ */
-    body::after { content:''; position:fixed; inset:0; pointer-events:none; z-index:0; opacity:0.03; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size:200px 200px; }
-
-    /* ═══ Premium: Typewriter Cursor ═══ */
-    .typewriter-cursor { display:inline-block; width:2px; height:1em; background:#E72C22; margin-left:2px; animation:cursorBlink 0.8s infinite; vertical-align:text-bottom; }
-    @keyframes cursorBlink { 0%,100%{opacity:1} 50%{opacity:0} }
-
-    /* ═══ Premium: Fade-up on Scroll ═══ */
-    .fade-up { opacity:0; transform:translateY(30px); transition:opacity 0.6s ease, transform 0.6s ease; }
-    .fade-up.visible { opacity:1; transform:translateY(0); }
-    .fade-up-delay-1 { transition-delay:0.1s; }
-    .fade-up-delay-2 { transition-delay:0.2s; }
-    .fade-up-delay-3 { transition-delay:0.3s; }
-
-    /* ═══ Premium: Glassmorphism Header ═══ */
-    .navbar_four.sticky { backdrop-filter:blur(16px) saturate(1.3); -webkit-backdrop-filter:blur(16px) saturate(1.3); }
-
-    /* ═══ Premium: Custom Scrollbar ═══ */
-    ::-webkit-scrollbar { width:6px; }
-    ::-webkit-scrollbar-track { background:#1a1a1a; }
-    ::-webkit-scrollbar-thumb { background:#E72C22; border-radius:3px; }
-    ::-webkit-scrollbar-thumb:hover { background:#CB2C27; }
-    /* ═══ Announcement Bar Animation ═══ */
-    @keyframes gradShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
-    body{padding-top:40px;}
-    /* ═══ Floating Shapes ═══ */
-    .float-shape { position:absolute; opacity:0.06; animation:floatShape 8s ease-in-out infinite; pointer-events:none; }
-    @keyframes floatShape { 0%,100%{transform:translateY(0) rotate(0deg);} 50%{transform:translateY(-20px) rotate(5deg);} }
-    /* ═══ Loading Screen Pulse ═══ */
-    @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
   </style>
  </head>
  <body>
-  <!-- ═══ Particle System (fixed, full page) ═══ -->
-  <!-- Canvas de particulas/aurora desligados -->
-  <!--
-  <canvas id="auroraCanvas" style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; will-change:transform; transform:translateZ(0);"></canvas>
-  <canvas id="particleCanvas" style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none; will-change:transform; transform:translateZ(0);"></canvas>
-  -->
-
-  <!-- ═══ LOADING SCREEN ═══ -->
-  <div id="page-loader" style="position:fixed;inset:0;background:#fff;z-index:99999;display:flex;align-items:center;justify-content:center;transition:opacity 0.5s;">
-    <div style="text-align:center;">
-      <img src="images/logos/audiper-logo-principal.png" style="width:60px;border-radius:50%;animation:pulse 1.5s ease infinite;">
-      <p style="margin-top:12px;font-size:12px;color:#999;letter-spacing:2px;">AUDIPER</p>
-    </div>
-  </div>
-  <!-- ═══ ANNOUNCEMENT BAR (oculto ate informar clientes) ═══ -->
-  <div class="cursor-glow" id="cursorGlow"></div>
   <!-- Search Overlay -->
   <div id="searchOverlay" class="search-overlay" style="display:none">
    <div class="search-overlay-inner">
@@ -789,13 +729,9 @@
 =========================== -->
      <!-- ===========================
 =====>> Hero Video Section <<======= -->
-     <section id="inicio" class="position-relative overflow-hidden" style="height: 100vh; min-height: 700px; background:#fff;"></canvas>
+     <section id="inicio" class="position-relative overflow-hidden" style="height: 100vh; min-height: 700px; background:#fff;">
 
-      <!-- ═══ FLOATING SHAPES ═══ -->
-      <div class="float-shape" style="top:15%;right:10%;width:60px;height:60px;border:3px solid #E72C22;border-radius:12px;animation-delay:0s;"></div>
-      <div class="float-shape" style="top:60%;right:20%;width:40px;height:40px;border:3px solid #E72C22;border-radius:50%;animation-delay:2s;"></div>
-      <div class="float-shape" style="top:30%;left:5%;width:50px;height:50px;border:3px solid #E72C22;transform:rotate(45deg);animation-delay:4s;"></div>
-      <!-- ═══ LAYER 1: Lottie Animation ═══ -->
+      <!-- ═══ LAYER 1: Lottie Animation (full white background) ═══ -->
       <div id="hero-lottie-bg" style="
         position:absolute; inset:0; z-index:1;
         display:flex; align-items:center; justify-content:center;
@@ -844,9 +780,6 @@
                 <em class="hero-italic">seguran&ccedil;a</em><br>
                 nas decis&otilde;es financeiras
               </h1>
-              <div style="font-size:clamp(1.2rem,2.5vw,1.8rem);font-weight:800;color:#1a1a1a;margin-bottom:1rem;min-height:2.2rem;">
-                <span style="color:#1a1a1a;">AUDITORIA +</span> <span id="typewriter" style="background:linear-gradient(135deg,#E72C22,#E8B84B);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"></span><span class="typewriter-cursor"></span>
-              </div>
               <p class="hero-subtitle mb-4">
                 H&aacute; mais de <span class="hero-mono">40</span> anos, ajudamos empresas a enxergar al&eacute;m dos n&uacute;meros com auditoria independente, per&iacute;cia cont&aacute;bil e intelig&ecirc;ncia artificial aplicada.
               </p>
@@ -859,26 +792,10 @@
                   Conhe&ccedil;a Nossos Servi&ccedil;os &rarr;
                 </a>
               </div>
-
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Mouse Scroll Indicator — centralizado, fora do grid -->
-      <div style="position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;z-index:10;animation:fadeInUp 1.2s ease 2.5s both;">
-        <div style="width:30px;height:50px;border:2px solid #E72C22;border-radius:15px;position:relative;display:flex;justify-content:center;">
-          <div style="width:4px;height:10px;background:#E72C22;border-radius:2px;margin-top:8px;animation:scrollDot 1.8s ease-in-out infinite;"></div>
-        </div>
-        <span style="font-size:10px;color:#E72C22;text-transform:uppercase;letter-spacing:3px;margin-top:8px;font-weight:700;">Role</span>
-        <svg width="14" height="10" viewBox="0 0 14 10" style="margin-top:3px;animation:scrollArrow 1.8s ease-in-out infinite;"><path d="M1 1l6 7 6-7" stroke="#E72C22" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
-      </div>
-
-      <style>
-        @keyframes scrollDot { 0% { opacity:1; transform:translateY(0); } 50% { opacity:0.3; transform:translateY(12px); } 100% { opacity:1; transform:translateY(0); } }
-        @keyframes scrollArrow { 0%,100% { transform:translateY(0); opacity:0.5; } 50% { transform:translateY(4px); opacity:1; } }
-        @keyframes fadeInUp { from { opacity:0; transform:translateY(20px); } to { opacity:0.6; transform:translateY(0); } }
-      </style>
 
       <style>
         /* ═══ Font System (Nora/Fio inspired) ═══ */
@@ -1067,68 +984,6 @@
      </section>
      <!-- =====>> End Hero Section <<=====
 =========================== -->
-
-     <!-- MARQUEE — Normas, Servicos e Atualizacoes -->
-     <div style="background:#1a1a1a;border-top:1px solid #2a2a2a;border-bottom:1px solid #2a2a2a;overflow:hidden;padding:14px 0;position:relative;">
-       <div style="display:flex;animation:marqueeScroll 40s linear infinite;white-space:nowrap;">
-         <div style="display:flex;gap:40px;padding:0 20px;flex-shrink:0;">
-           <span style="color:#E72C22;font-size:12px;font-weight:700;letter-spacing:1px;">✦ NBC TA 700 — Relatorio do Auditor</span>
-           <span style="color:#888;font-size:12px;">|</span>
-           <span style="color:#ccc;font-size:12px;font-weight:500;">✦ Reforma Tributaria 2026 — IBS + CBS</span>
-           <span style="color:#888;font-size:12px;">|</span>
-           <span style="color:#E72C22;font-size:12px;font-weight:700;">✦ Auditoria Independente</span>
-           <span style="color:#888;font-size:12px;">|</span>
-           <span style="color:#ccc;font-size:12px;font-weight:500;">✦ LGPD — Lei 13.709/2018</span>
-           <span style="color:#888;font-size:12px;">|</span>
-           <span style="color:#E72C22;font-size:12px;font-weight:700;">✦ Pericia Contabil Judicial</span>
-           <span style="color:#888;font-size:12px;">|</span>
-           <span style="color:#ccc;font-size:12px;font-weight:500;">✦ Split Payment 2026</span>
-           <span style="color:#888;font-size:12px;">|</span>
-           <span style="color:#E72C22;font-size:12px;font-weight:700;">✦ Data Analytics & IA</span>
-           <span style="color:#888;font-size:12px;">|</span>
-           <span style="color:#ccc;font-size:12px;font-weight:500;">✦ ISO 27001 — Seguranca da Informacao</span>
-           <span style="color:#888;font-size:12px;">|</span>
-           <span style="color:#E72C22;font-size:12px;font-weight:700;">✦ NBC PA 01 — Controle Qualidade</span>
-           <span style="color:#888;font-size:12px;">|</span>
-           <span style="color:#ccc;font-size:12px;font-weight:500;">✦ CPC 25 — Provisoes e Contingencias</span>
-           <span style="color:#888;font-size:12px;">|</span>
-           <span style="color:#E72C22;font-size:12px;font-weight:700;">✦ ECD / ECF 2026</span>
-           <span style="color:#888;font-size:12px;">|</span>
-           <span style="color:#ccc;font-size:12px;font-weight:500;">✦ Auditoria de Sistemas e TI</span>
-           <span style="color:#888;font-size:12px;">|</span>
-           <span style="color:#E72C22;font-size:12px;font-weight:700;">✦ 40 Anos de Experiencia</span>
-         </div>
-         <div style="display:flex;gap:40px;padding:0 20px;flex-shrink:0;" aria-hidden="true">
-           <span style="color:#E72C22;font-size:12px;font-weight:700;letter-spacing:1px;">✦ NBC TA 700 — Relatorio do Auditor</span>
-           <span style="color:#888;font-size:12px;">|</span>
-           <span style="color:#ccc;font-size:12px;font-weight:500;">✦ Reforma Tributaria 2026 — IBS + CBS</span>
-           <span style="color:#888;font-size:12px;">|</span>
-           <span style="color:#E72C22;font-size:12px;font-weight:700;">✦ Auditoria Independente</span>
-           <span style="color:#888;font-size:12px;">|</span>
-           <span style="color:#ccc;font-size:12px;font-weight:500;">✦ LGPD — Lei 13.709/2018</span>
-           <span style="color:#888;font-size:12px;">|</span>
-           <span style="color:#E72C22;font-size:12px;font-weight:700;">✦ Pericia Contabil Judicial</span>
-           <span style="color:#888;font-size:12px;">|</span>
-           <span style="color:#ccc;font-size:12px;font-weight:500;">✦ Split Payment 2026</span>
-           <span style="color:#888;font-size:12px;">|</span>
-           <span style="color:#E72C22;font-size:12px;font-weight:700;">✦ Data Analytics & IA</span>
-           <span style="color:#888;font-size:12px;">|</span>
-           <span style="color:#ccc;font-size:12px;font-weight:500;">✦ ISO 27001 — Seguranca da Informacao</span>
-           <span style="color:#888;font-size:12px;">|</span>
-           <span style="color:#E72C22;font-size:12px;font-weight:700;">✦ NBC PA 01 — Controle Qualidade</span>
-           <span style="color:#888;font-size:12px;">|</span>
-           <span style="color:#ccc;font-size:12px;font-weight:500;">✦ CPC 25 — Provisoes e Contingencias</span>
-           <span style="color:#888;font-size:12px;">|</span>
-           <span style="color:#E72C22;font-size:12px;font-weight:700;">✦ ECD / ECF 2026</span>
-           <span style="color:#888;font-size:12px;">|</span>
-           <span style="color:#ccc;font-size:12px;font-weight:500;">✦ Auditoria de Sistemas e TI</span>
-           <span style="color:#888;font-size:12px;">|</span>
-           <span style="color:#E72C22;font-size:12px;font-weight:700;">✦ 40 Anos de Experiencia</span>
-         </div>
-       </div>
-       <style>@keyframes marqueeScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}</style>
-     </div>
-
      <!-- ===========================
 =====>> About-four (IA para Negocios) <<======= -->
      <section id="ia-negocios" class="about-four-section py-120 gs-network-wrap">
@@ -2316,48 +2171,6 @@
       </div>
      </section>
 
-     <!-- ═══ FAQ ACCORDION ═══ -->
-     <section style="padding:80px 0;background:#f8f8f8;">
-       <div class="container">
-         <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;">
-           <!-- ESQUERDA: Titulo + Animacao -->
-           <div style="position:sticky;top:120px;">
-             <span style="display:inline-block;background:#fef2f2;color:#E72C22;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">FAQ</span>
-             <h2 style="font-size:2.2rem;font-weight:800;line-height:1.2;margin-bottom:12px;">Perguntas<br>Frequentes</h2>
-             <p style="font-size:14px;color:#666;line-height:1.7;margin-bottom:24px;">Tire suas duvidas sobre auditoria, pericia contabil e nossos servicos de inteligencia artificial.</p>
-             <!-- Animacao SVG -->
-             <div style="position:relative;width:100%;max-width:280px;">
-               <svg viewBox="0 0 280 280" style="width:100%;">
-                 <!-- Circulo pulsante -->
-                 <circle cx="140" cy="140" r="100" fill="none" stroke="#E72C22" stroke-width="1" opacity="0.15">
-                   <animate attributeName="r" values="80;110;80" dur="4s" repeatCount="indefinite"/>
-                   <animate attributeName="opacity" values="0.15;0.05;0.15" dur="4s" repeatCount="indefinite"/>
-                 </circle>
-                 <circle cx="140" cy="140" r="60" fill="none" stroke="#E72C22" stroke-width="1" opacity="0.1">
-                   <animate attributeName="r" values="50;75;50" dur="3s" repeatCount="indefinite"/>
-                 </circle>
-                 <!-- Icone central -->
-                 <circle cx="140" cy="140" r="40" fill="#fef2f2"/>
-                 <text x="140" y="148" text-anchor="middle" font-size="28" font-weight="800" fill="#E72C22">?</text>
-                 <!-- Dots orbitando -->
-                 <circle cx="140" cy="50" r="4" fill="#E72C22" opacity="0.6">
-                   <animateTransform attributeName="transform" type="rotate" from="0 140 140" to="360 140 140" dur="10s" repeatCount="indefinite"/>
-                 </circle>
-                 <circle cx="230" cy="140" r="3" fill="#E72C22" opacity="0.4">
-                   <animateTransform attributeName="transform" type="rotate" from="120 140 140" to="480 140 140" dur="12s" repeatCount="indefinite"/>
-                 </circle>
-                 <circle cx="140" cy="230" r="3.5" fill="#E72C22" opacity="0.5">
-                   <animateTransform attributeName="transform" type="rotate" from="240 140 140" to="600 140 140" dur="8s" repeatCount="indefinite"/>
-                 </circle>
-               </svg>
-             </div>
-           </div>
-           <!-- DIREITA: FAQ Cards em 1 coluna -->
-           <div id="faq-list"></div>
-         </div>
-       </div>
-     </section>
-
      <!-- ===========================
 =====>> footer <<===== -->
      <footer class="footer-area footer-two">
@@ -3196,119 +3009,6 @@
   function performSearch(q){var r=document.getElementById('searchResults'),ql=document.getElementById('searchQuickLinks');if(!q||q.length<2){r.innerHTML='';ql.style.display='block';return}ql.style.display='none';var s=q.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');var m=searchIndex.filter(function(i){var t=i.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');var d=i.desc.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');return t.indexOf(s)!==-1||d.indexOf(s)!==-1});if(m.length===0){r.innerHTML='<div class="search-no-results"><span class="material-symbols-outlined" style="font-size:32px;display:block;margin-bottom:8px">search_off</span>Nenhum resultado para &ldquo;'+q+'&rdquo;</div>';ql.style.display='block';return}var h='';m.slice(0,8).forEach(function(i){h+='<a href="'+i.url+'" class="search-result-item"><span class="search-result-tag">'+i.tag+'</span><h4>'+i.title+'</h4><p>'+i.desc+'</p></a>'});r.innerHTML=h}
   document.addEventListener('keydown',function(e){if(e.key==='Escape'){var o=document.getElementById('searchOverlay');if(o&&o.style.display==='block')toggleSearch()}if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();toggleSearch()}});
   </script>
-
-  <!-- ═══ Premium Effects JS ═══ -->
-  <script>
-  /* Cursor Glow */
-  document.addEventListener('mousemove', function(e) {
-    var g = document.getElementById('cursorGlow');
-    if (g) { g.style.left = e.clientX + 'px'; g.style.top = e.clientY + 'px'; }
-  });
-
-  /* Typewriter */
-  (function(){
-    var words = ['Tecnologia','Inovacao','Inteligencia Artificial','Data Analytics','Automacao','Pericia Contabil','Compliance'];
-    var wi = 0, ci = 0, del = false;
-    var el = document.getElementById('typewriter');
-    if (!el) return;
-    function type() {
-      if (!del) {
-        el.textContent = words[wi].substring(0, ci + 1);
-        ci++;
-        if (ci === words[wi].length) { setTimeout(function(){ del = true; type(); }, 2000); return; }
-      } else {
-        el.textContent = words[wi].substring(0, ci - 1);
-        ci--;
-        if (ci === 0) { del = false; wi = (wi + 1) % words.length; }
-      }
-      setTimeout(type, del ? 40 : 80);
-    }
-    type();
-  })();
-
-  /* Fade-up: aplica classe automaticamente nos elementos-alvo */
-  (function(){
-    var selectors = [
-      '.we-do-box',
-      '.blog-four__item',
-      '.case-four-section__item',
-      '.main-goal-section__text .list-item',
-      '.call-to-action-four-section .container',
-      '.choose-four-section__content',
-      '.team-four-item',
-      '.feedback-slide__item'
-    ];
-    var delays = ['fade-up-delay-1','fade-up-delay-2','fade-up-delay-3'];
-    selectors.forEach(function(sel){
-      var els = document.querySelectorAll(sel);
-      els.forEach(function(el, i){
-        el.classList.add('fade-up');
-        if (i > 0 && i <= 3) el.classList.add(delays[i - 1]);
-      });
-    });
-
-    /* IntersectionObserver para fade-up */
-    var observer = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if (e.isIntersecting) e.target.classList.add('visible');
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-up').forEach(function(el){ observer.observe(el); });
-  })();
-  </script>
-
-  <!-- ═══ BACK TO TOP BUTTON ═══ -->
-  <!-- back-to-top removido (ja existe progress-wrap original) -->
-
-  <!-- ═══ EXTRA FEATURES JS ═══ -->
-  <script>
-  /* Loading Screen */
-  window.addEventListener('load', function() {
-    setTimeout(function() {
-      var loader = document.getElementById('page-loader');
-      if (loader) { loader.style.opacity = '0'; setTimeout(function() { loader.remove(); }, 500); }
-    }, 800);
-  });
-
-  /* Back to Top visibility */
-  window.addEventListener('scroll', function() {
-    /* back-to-top removido - usa progress-wrap original */
-  });
-
-  /* Smooth Scroll */
-  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
-    a.addEventListener('click', function(e) {
-      var target = document.querySelector(this.getAttribute('href'));
-      if (target) { e.preventDefault(); target.scrollIntoView({behavior:'smooth',block:'start'}); }
-    });
-  });
-
-  /* FAQ Accordion */
-  var faqs = [
-    {q:'A auditoria independente \u00e9 obrigat\u00f3ria?', a:'Depende. Empresas de capital aberto, operadoras de sa\u00fade (ANS) e outras reguladas t\u00eam obrigatoriedade. Para demais, \u00e9 uma boa pr\u00e1tica de governan\u00e7a.'},
-    {q:'Qual a diferen\u00e7a entre auditoria e per\u00edcia?', a:'Auditoria examina demonstra\u00e7\u00f5es cont\u00e1beis para dar opini\u00e3o sobre conformidade. Per\u00edcia produz laudo t\u00e9cnico para subsidiar decis\u00f5es judiciais.'},
-    {q:'Quanto tempo leva uma auditoria?', a:'De 30 a 90 dias dependendo do porte da empresa. Per\u00edcias levam de 15 a 60 dias.'},
-    {q:'Voc\u00eas atendem fora do Piau\u00ed?', a:'Sim. Atendemos PI, MA, CE e demais estados conforme demanda, presencial e remotamente.'},
-    {q:'Como a IA \u00e9 usada na auditoria?', a:'Utilizamos intelig\u00eancia artificial para an\u00e1lise de dados em escala, detec\u00e7\u00e3o de anomalias, cruzamento automatizado de balancetes e monitoramento em tempo real.'},
-    {q:'Como solicitar uma proposta?', a:'Entre em contato pelo WhatsApp (86) 98125-1918 ou email audiper@audiper.com informando nome da empresa, CNPJ e servi\u00e7o desejado.'}
-  ];
-  var faqEl = document.getElementById('faq-list');
-  if (faqEl) {
-    faqEl.innerHTML = faqs.map(function(f) {
-      return '<div style="border:1px solid #e5e5e5;border-radius:12px;margin-bottom:10px;overflow:hidden;background:#fff;">' +
-        '<button onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display===\'block\'?\'none\':\'block\';this.querySelector(\'span\').textContent=this.nextElementSibling.style.display===\'block\'?\'\u2212\':\'+\'" style="width:100%;padding:16px 20px;border:none;background:none;text-align:left;font-size:15px;font-weight:600;color:#1a1a1a;cursor:pointer;display:flex;justify-content:space-between;align-items:center;">' +
-        f.q + ' <span style="color:#E72C22;font-size:20px;font-weight:700;">+</span></button>' +
-        '<div style="display:none;padding:0 20px 16px;font-size:14px;color:#555;line-height:1.7;">' + f.a + '</div></div>';
-    }).join('');
-  }
-  </script>
-
-  <!-- Particle System (desligado) -->
-  <!-- <script src="js/particles.js"></script> -->
-  <!-- Wireframe 3D Shapes -->
-  <script src="js/wireframes.js"></script>
-  <!-- Nebula 3D Rotating Clouds -->
-  <script src="js/nebula.js"></script>
 
  </body>
 </html>
