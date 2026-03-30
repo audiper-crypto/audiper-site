@@ -929,6 +929,7 @@ html.dark .hm-high { background: #450a0a; color: #fca5a5; }
   padding: 24px 28px;
   min-height: calc(100vh - var(--header-h) - 46px);
   color: #e5e7eb;
+  position: relative;
 }
 #pane-mission .mc-header {
   display: flex;
@@ -1108,6 +1109,7 @@ html.dark .hm-high { background: #450a0a; color: #fca5a5; }
   text-overflow: ellipsis;
 }
 @keyframes mc-slideIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes loaderPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.08); opacity: 0.7; } }
 .mc-feed-entry .mc-ts { color: #4b5563; }
 .mc-feed-entry .mc-tag-info { color: #22c55e; }
 .mc-feed-entry .mc-tag-sys { color: #3b82f6; }
@@ -1345,6 +1347,13 @@ html.dark .org-badge-agent { background: #334155; color: #CBD5E1; }
 <script src="http://localhost:3000/socket.io/socket.io.js"></script>
 </head>
 <body>
+
+<div id="dash-loader" style="position:fixed;inset:0;background:#fff;z-index:100001;display:flex;align-items:center;justify-content:center;transition:opacity 0.5s ease;">
+  <div style="text-align:center;">
+    <img src="images/logos/audiper-logo-principal.png" style="width:64px;border-radius:50%;animation:loaderPulse 1.5s ease infinite;">
+    <p style="margin-top:12px;font-size:11px;color:#999;letter-spacing:3px;text-transform:uppercase;">Carregando...</p>
+  </div>
+</div>
 
 <!-- ===== COMMAND PALETTE ===== -->
 <div class="cmd-overlay" id="cmd-overlay">
@@ -1961,6 +1970,7 @@ html.dark .org-badge-agent { background: #334155; color: #CBD5E1; }
 
       <!-- ===== TAB: MISSION CONTROL ===== -->
       <div class="tab-pane" id="pane-mission">
+        <canvas id="mc-particles" style="position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0.4;"></canvas>
 
         <!-- MC Header -->
         <div class="mc-header">
@@ -1968,9 +1978,12 @@ html.dark .org-badge-agent { background: #334155; color: #CBD5E1; }
             AUDIPER Mission Control
             <span class="mc-badge-active"><span class="mc-live-dot"></span>SISTEMA ATIVO</span>
           </div>
-          <div style="text-align:right;">
-            <div class="mc-clock" id="mc-clock">--:--:--</div>
-            <div class="mc-date" id="mc-date">--</div>
+          <div style="text-align:right;display:flex;align-items:center;gap:16px;">
+            <span id="mc-session-timer" style="font-family:'JetBrains Mono';font-size:11px;color:#4b5563;">SESSION: 00:00:00</span>
+            <div>
+              <div class="mc-clock" id="mc-clock">--:--:--</div>
+              <div class="mc-date" id="mc-date">--</div>
+            </div>
           </div>
         </div>
 
@@ -2430,6 +2443,8 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     if (cmdOpen) { closeCmdPalette(); e.preventDefault(); return; }
     document.getElementById('notif-dropdown').classList.remove('open');
+    const so = document.getElementById('shortcuts-overlay');
+    if (so) so.style.display = 'none';
     return;
   }
 
@@ -2441,6 +2456,12 @@ document.addEventListener('keydown', e => {
   if (cmdOpen && e.key === 'Enter') {
     const sel = document.querySelector('.cmd-item.selected') || document.querySelector('.cmd-item');
     if (sel) { cmdSelect(sel); e.preventDefault(); }
+    return;
+  }
+
+  // ? opens shortcuts overlay
+  if (e.key === '?' && !isInput && !cmdOpen && !e.ctrlKey) {
+    document.getElementById('shortcuts-overlay').style.display = 'flex';
     return;
   }
 
@@ -3200,11 +3221,49 @@ switchTab = function(tab) {
   if (mcActive) { mcStart(); } else { mcStop(); }
 };
 
+const sessionStart = Date.now();
+setInterval(() => {
+  const el = document.getElementById('mc-session-timer');
+  if (!el) return;
+  const s = Math.floor((Date.now()-sessionStart)/1000);
+  const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=s%60;
+  el.textContent = 'SESSION: '+String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0');
+}, 1000);
+
+function initMCParticles() {
+  const c = document.getElementById('mc-particles');
+  if (!c || c._init) return;
+  c._init = true;
+  const ctx = c.getContext('2d');
+  const rect = c.parentElement.getBoundingClientRect();
+  c.width = rect.width; c.height = rect.height;
+  const N = 40, pts = [];
+  for (let i=0;i<N;i++) pts.push({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-0.5)*0.4,vy:(Math.random()-0.5)*0.4});
+  function draw() {
+    ctx.clearRect(0,0,c.width,c.height);
+    for(let i=0;i<N;i++){
+      const p=pts[i]; p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0||p.x>c.width)p.vx*=-1;
+      if(p.y<0||p.y>c.height)p.vy*=-1;
+      ctx.beginPath();ctx.arc(p.x,p.y,1.5,0,Math.PI*2);
+      ctx.fillStyle='rgba(231,44,34,0.5)';ctx.fill();
+      for(let j=i+1;j<N;j++){
+        const q=pts[j],d=Math.hypot(p.x-q.x,p.y-q.y);
+        if(d<120){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);
+        ctx.strokeStyle='rgba(231,44,34,'+(0.12*(1-d/120))+')';ctx.lineWidth=0.5;ctx.stroke();}
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
 function mcStart() {
   mcRenderAll();
   mcStartClock();
   mcStartFeed();
   loadCerebroColetivo();
+  initMCParticles();
   mcKpisInterval = setInterval(mcRefreshKPIs, 30000);
   mcLeadsInterval = setInterval(mcRefreshLeads, 15000);
   mcEmailsInterval = setInterval(mcRefreshEmails, 30000);
@@ -4027,7 +4086,31 @@ function doLogout() {
   location.reload();
 }
 
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const l = document.getElementById('dash-loader');
+    if (l) { l.style.opacity = '0'; setTimeout(() => l.remove(), 500); }
+  }, 600);
+});
+
 checkAuth();
 </script>
+<div id="shortcuts-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:99999;align-items:center;justify-content:center;" onclick="this.style.display='none'">
+  <div style="background:#fff;border-radius:16px;padding:32px;max-width:500px;width:90%;" onclick="event.stopPropagation()">
+    <h3 style="margin-bottom:16px;font-size:18px;font-weight:700;">Atalhos de Teclado</h3>
+    <div style="display:grid;grid-template-columns:100px 1fr;gap:8px;font-size:13px;">
+      <kbd style="background:#f0f0f0;padding:4px 8px;border-radius:4px;font-family:monospace;text-align:center;">Ctrl+K</kbd><span>Busca rapida</span>
+      <kbd style="background:#f0f0f0;padding:4px 8px;border-radius:4px;font-family:monospace;text-align:center;">G D</kbd><span>Dashboard</span>
+      <kbd style="background:#f0f0f0;padding:4px 8px;border-radius:4px;font-family:monospace;text-align:center;">G A</kbd><span>Auditorias</span>
+      <kbd style="background:#f0f0f0;padding:4px 8px;border-radius:4px;font-family:monospace;text-align:center;">G T</kbd><span>Tarefas</span>
+      <kbd style="background:#f0f0f0;padding:4px 8px;border-radius:4px;font-family:monospace;text-align:center;">G R</kbd><span>CRM</span>
+      <kbd style="background:#f0f0f0;padding:4px 8px;border-radius:4px;font-family:monospace;text-align:center;">G H</kbd><span>Chat</span>
+      <kbd style="background:#f0f0f0;padding:4px 8px;border-radius:4px;font-family:monospace;text-align:center;">G M</kbd><span>Mission Control</span>
+      <kbd style="background:#f0f0f0;padding:4px 8px;border-radius:4px;font-family:monospace;text-align:center;">G E</kbd><span>Equipe</span>
+      <kbd style="background:#f0f0f0;padding:4px 8px;border-radius:4px;font-family:monospace;text-align:center;">?</kbd><span>Este painel</span>
+      <kbd style="background:#f0f0f0;padding:4px 8px;border-radius:4px;font-family:monospace;text-align:center;">Esc</kbd><span>Fechar modais</span>
+    </div>
+  </div>
+</div>
 </body>
 </html>
