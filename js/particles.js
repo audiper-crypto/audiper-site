@@ -81,7 +81,7 @@
   // Smooth mouse for cursor glow trail
   let smoothMouse = { x: -9999, y: -9999 };
 
-  const PARTICLE_COUNT = isMobile ? 500 : 1000;
+  const PARTICLE_COUNT = isMobile ? 200 : 400;
   const REPEL_RADIUS = isMobile ? 100 : 180;
   const REPEL_FORCE = 12;
   const LINE_DIST = isMobile ? 80 : 130;
@@ -255,7 +255,7 @@
 
   function getShapeTarget(i, N, time) {
     const cx = W / 2, cy = H / 2;
-    const r = Math.max(W, H) * (isMobile ? 0.5 : 0.55);
+    const r = Math.max(W, H) * (isMobile ? 0.6 : 0.75);
     switch (currentShape) {
       case 'sphere': return shapeSphere(i, N, cx, cy, r, time);
       case 'wave': return shapeWave(i, N, cx, cy, r, time);
@@ -399,7 +399,7 @@
               const dSq = dx * dx + dy * dy;
               if (dSq < LINE_DIST * LINE_DIST) {
                 const d = Math.sqrt(dSq);
-                const alpha = (1 - d / LINE_DIST) * 0.22 * LAYERS[a.layer].alphaMulti;
+                const alpha = (1 - d / LINE_DIST) * 0.08 * LAYERS[a.layer].alphaMulti;
                 ctx.beginPath();
                 ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
                 ctx.strokeStyle = `rgba(120,10,20,${alpha})`;
