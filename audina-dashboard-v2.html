@@ -535,8 +535,11 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   background: var(--card);
   border: 1px solid var(--gray-200);
   border-radius: var(--radius);
-  padding: 16px;
+  padding: 14px 16px;
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   transition: box-shadow 0.2s ease, border-color 0.2s ease, background 0.3s ease;
 }
 .agent-card:hover { box-shadow: var(--shadow); }
@@ -548,6 +551,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   height: 3px;
   border-radius: 0 0 3px 3px;
 }
+.agent-card .agent-info { flex: 1; min-width: 0; }
 .agent-card .agent-icon-wrap {
   width: 36px;
   height: 36px;
@@ -555,11 +559,20 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 .agent-card .agent-icon-wrap svg { width: 18px; height: 18px; }
+.agent-card .agent-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid var(--gray-200);
+}
 .agent-card .agent-name { font-size: 13px; font-weight: 600; color: var(--dark); }
 .agent-card .agent-role { font-size: 11px; color: var(--gray-500); margin-top: 1px; }
+.agent-card .agent-specialty { font-size: 10px; color: var(--gray-400); margin-top: 3px; font-style: italic; }
 .agent-card .agent-status {
   display: flex;
   align-items: center;
@@ -1629,39 +1642,55 @@ html.dark .org-badge-agent { background: #334155; color: #CBD5E1; }
           <div class="agents-grid">
             <div class="agent-card" data-agent="Helena">
               <div class="agent-border-top" style="background:var(--purple);"></div>
-              <div class="agent-icon-wrap" style="background:var(--purple-light);">
-                <svg viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <div class="agent-info">
+                <div class="agent-icon-wrap" style="background:var(--purple-light);">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                </div>
+                <div class="agent-name">Helena</div>
+                <div class="agent-role">Pesquisadora</div>
+                <div class="agent-specialty">Normas NBC TA, CPC, IFRS</div>
+                <div class="agent-status"><span class="agent-dot online pulse"></span>Pesquisando NBC TA 500</div>
               </div>
-              <div class="agent-name">Helena</div>
-              <div class="agent-role">Pesquisadora</div>
-              <div class="agent-status"><span class="agent-dot online pulse"></span>Pesquisando NBC TA 500</div>
+              <img class="agent-avatar" src="images/team/helena.png" alt="Helena" onerror="this.style.display='none'">
             </div>
             <div class="agent-card" data-agent="Marcos">
               <div class="agent-border-top" style="background:var(--info);"></div>
-              <div class="agent-icon-wrap" style="background:var(--info-light);">
-                <svg viewBox="0 0 24 24" fill="none" stroke="var(--info)" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+              <div class="agent-info">
+                <div class="agent-icon-wrap" style="background:var(--info-light);">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="var(--info)" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+                </div>
+                <div class="agent-name">Marcos</div>
+                <div class="agent-role">Analista</div>
+                <div class="agent-specialty">Balancetes, DRE, Benford, Ratios</div>
+                <div class="agent-status"><span class="agent-dot idle"></span>Aguardando dados</div>
               </div>
-              <div class="agent-name">Marcos</div>
-              <div class="agent-role">Analista</div>
-              <div class="agent-status"><span class="agent-dot idle"></span>Aguardando dados</div>
+              <img class="agent-avatar" src="images/team/marcos.png" alt="Marcos" onerror="this.style.display='none'">
             </div>
             <div class="agent-card" data-agent="Igor">
               <div class="agent-border-top" style="background:var(--warning);"></div>
-              <div class="agent-icon-wrap" style="background:var(--warning-light);">
-                <svg viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              <div class="agent-info">
+                <div class="agent-icon-wrap" style="background:var(--warning-light);">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </div>
+                <div class="agent-name">Igor</div>
+                <div class="agent-role">Vigilante</div>
+                <div class="agent-specialty">Prazos, LGPD, Regulacoes, Alertas</div>
+                <div class="agent-status"><span class="agent-dot online pulse"></span>2 alertas pendentes</div>
               </div>
-              <div class="agent-name">Igor</div>
-              <div class="agent-role">Vigilante</div>
-              <div class="agent-status"><span class="agent-dot online pulse"></span>2 alertas pendentes</div>
+              <img class="agent-avatar" src="images/team/igor.png" alt="Igor" onerror="this.style.display='none'">
             </div>
             <div class="agent-card" data-agent="Audina Jr">
               <div class="agent-border-top" style="background:var(--success);"></div>
-              <div class="agent-icon-wrap" style="background:var(--success-light);">
-                <svg viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <div class="agent-info">
+                <div class="agent-icon-wrap" style="background:var(--success-light);">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </div>
+                <div class="agent-name">Audina Jr</div>
+                <div class="agent-role">Atendente</div>
+                <div class="agent-specialty">WhatsApp, Leads, Qualificacao</div>
+                <div class="agent-status"><span class="agent-dot online"></span>6 leads, 0 hoje</div>
               </div>
-              <div class="agent-name">Audina Jr</div>
-              <div class="agent-role">Atendente</div>
-              <div class="agent-status"><span class="agent-dot online"></span>6 leads, 0 hoje</div>
+              <img class="agent-avatar" src="images/team/audina-jr.png" alt="Audina Jr" onerror="this.style.display='none'">
             </div>
           </div>
         </div>
