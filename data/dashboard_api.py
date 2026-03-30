@@ -95,6 +95,29 @@ class DashboardHandler(BaseHTTPRequestHandler):
                 answer = self._fallback_response(message, context)
                 self.json_response({"response": answer, "source": "fallback"})
 
+        elif path == '/api/chat/send':
+            length = int(self.headers.get('Content-Length', 0))
+            body = json.loads(self.rfile.read(length)) if length else {}
+            canal = body.get('canal', 'geral')
+            autor = body.get('autor', 'Anonimo')
+            mensagem = body.get('mensagem', '')
+            tipo = body.get('tipo', 'humano')
+            if mensagem.strip():
+                with get_conn() as conn:
+                    with conn.cursor() as cur:
+                        cur.execute("INSERT INTO chat_mensagens (canal, autor, tipo, mensagem) VALUES (%s,%s,%s,%s) RETURNING id, criado_em", (canal, autor, tipo, mensagem))
+                        row = cur.fetchone()
+                        self.json_response({"ok": True, "id": row[0], "criado_em": str(row[1])})
+            else:
+                self.json_response({"ok": False, "error": "mensagem vazia"})
+
+        else:
+            self.send_response(404)
+            self.send_header('Content-Type','application/json')
+            self.send_header('Access-Control-Allow-Origin','*')
+            self.end_headers()
+            self.wfile.write(json.dumps({"error":"not found"}).encode())
+
     def _fallback_response(self, text, context):
         """Resposta inteligente sem Claude, usando dados do banco."""
         lower = text.lower()
@@ -187,6 +210,17 @@ class DashboardHandler(BaseHTTPRequestHandler):
                 """)
                 for d in data:
                     if d.get('criado_em'): d['criado_em'] = str(d['criado_em'])
+                self.json_response(data)
+
+            elif path == '/api/chat/channels':
+                data = query("SELECT DISTINCT ON (canal) canal, autor, mensagem, criado_em FROM chat_mensagens ORDER BY canal, criado_em DESC")
+                for d in data: d['criado_em'] = str(d.get('criado_em',''))
+                self.json_response(data)
+
+            elif path.startswith('/api/chat/messages/'):
+                canal = path.split('/')[-1]
+                data = query("SELECT id, canal, autor, tipo, mensagem, criado_em FROM chat_mensagens WHERE canal = %s ORDER BY criado_em ASC LIMIT 50", (canal,))
+                for d in data: d['criado_em'] = str(d.get('criado_em',''))
                 self.json_response(data)
 
             elif path == '/api/health':
