@@ -3017,7 +3017,8 @@ function renderCRM() {
     { key: 'cliente',   label: 'Cliente',      color: '#22c55e' }
   ];
 
-  // Classificar leads
+  // Classificar leads (guard: LEADS pode nao ser array)
+  if (!Array.isArray(LEADS)) LEADS = [];
   const novos = LEADS.filter(l => (!l.status || l.status === 'novo') && (l.message_count || 0) <= 1);
   const contatos = LEADS.filter(l => (l.status === 'contato' || l.status === 'respondido') || ((l.message_count || 0) > 1 && (!l.status || l.status === 'novo')));
   const propostas = LEADS.filter(l => l.status === 'proposta' || l.status === 'qualificado');
