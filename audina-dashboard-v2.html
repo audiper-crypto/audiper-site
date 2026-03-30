@@ -3475,8 +3475,21 @@ refreshAll();
   <canvas id="login-particles" style="position:absolute;inset:0;z-index:0;"></canvas>
   <style>
     .neo-container{position:relative;width:920px;height:560px;border-radius:28px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,0.6);z-index:1;}
-    .neo-left{position:absolute;left:0;top:0;width:55%;height:100%;background:#f0f0f5;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:50px;z-index:2;transition:transform 0.6s cubic-bezier(0.65,0,0.35,1);}
-    .neo-right{position:absolute;right:0;top:0;width:45%;height:100%;background:linear-gradient(135deg,#E72C22 0%,#9B1C22 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:50px;color:white;z-index:1;}
+    /* Form panels (behind overlay) */
+    .neo-form-panel{position:absolute;top:0;width:50%;height:100%;background:#f0f0f5;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;transition:transform 0.7s cubic-bezier(0.65,0,0.35,1),opacity 0.5s;}
+    .neo-form-left{left:0;}
+    .neo-form-right{right:0;opacity:0;pointer-events:none;}
+    /* Red overlay that slides */
+    .neo-overlay{position:absolute;top:0;left:50%;width:50%;height:100%;z-index:10;overflow:hidden;transition:transform 0.7s cubic-bezier(0.65,0,0.35,1);border-radius:0 28px 28px 0;}
+    .neo-overlay-panel{position:absolute;top:0;width:100%;height:100%;background:linear-gradient(135deg,#E72C22 0%,#9B1C22 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;color:white;transition:transform 0.7s cubic-bezier(0.65,0,0.35,1);}
+    .neo-overlay-left{transform:translateX(-100%);}
+    .neo-overlay-right{transform:translateX(0);}
+    /* ACTIVE STATE: overlay slides to left */
+    .neo-container.panel-left .neo-overlay{transform:translateX(-100%);border-radius:28px 0 0 28px;}
+    .neo-container.panel-left .neo-overlay-left{transform:translateX(0);}
+    .neo-container.panel-left .neo-overlay-right{transform:translateX(100%);}
+    .neo-container.panel-left .neo-form-left{opacity:0;pointer-events:none;transform:translateX(-20%);}
+    .neo-container.panel-left .neo-form-right{opacity:1;pointer-events:all;transform:translateX(0);}
     .neo-input{width:100%;padding:15px 20px;border:none;border-radius:14px;font-size:15px;outline:none;background:#e0e0e8;box-shadow:inset 3px 3px 6px #bebec6,inset -3px -3px 6px #ffffff;margin-bottom:16px;color:#272527;transition:box-shadow 0.2s;}
     .neo-input:focus{box-shadow:inset 1px 1px 2px #bebec6,inset -1px -1px 2px #ffffff,0 0 0 2px rgba(231,44,34,0.2);}
     .neo-input::placeholder{color:#9ca3af;}
@@ -3540,30 +3553,47 @@ refreshAll();
     draw();
   })();
   </script>
-  <div class="neo-container">
-    <div class="neo-left">
+  <div class="neo-container" id="neo-container">
+    <!-- PAINEL VERMELHO DESLIZANTE (overlay) -->
+    <div class="neo-overlay" id="neo-overlay">
+      <div class="neo-overlay-panel neo-overlay-left" id="overlay-left">
+        <h2 style="font-size:28px;font-weight:800;margin-bottom:8px;">Bem-vindo!</h2>
+        <p style="font-size:13px;opacity:0.9;line-height:1.6;text-align:center;margin-bottom:20px;">Acesse o painel de auditoria com seus dados de auditor.</p>
+        <button class="neo-btn neo-btn-outline" onclick="togglePanel('auditor')" style="padding:12px 32px;width:auto;">SOU AUDITOR</button>
+      </div>
+      <div class="neo-overlay-panel neo-overlay-right" id="overlay-right">
+        <h2 style="font-size:28px;font-weight:800;margin-bottom:8px;">Ola, Cliente!</h2>
+        <p style="font-size:13px;opacity:0.9;line-height:1.6;text-align:center;margin-bottom:20px;">Acompanhe o andamento da sua auditoria em tempo real.</p>
+        <button class="neo-btn neo-btn-outline" onclick="togglePanel('cliente')" style="padding:12px 32px;width:auto;">AREA DO CLIENTE</button>
+      </div>
+    </div>
+
+    <!-- FORM AUDITORES (esquerda) -->
+    <div class="neo-form-panel neo-form-left" id="form-auditor">
       <div class="neo-logo"><img src="images/logos/audiper-logo-principal.png" alt="AUDIPER"></div>
-      <h2 style="font-size:24px;font-weight:800;color:#272527;margin-bottom:4px;">Entrar</h2>
-      <p style="font-size:13px;color:#9ca3af;margin-bottom:24px;">Central de Auditoria AUDIPER</p>
-      <form onsubmit="return doLogin(event)" style="width:100%;">
-        <input id="login-email" class="neo-input" type="email" placeholder="Email" required>
+      <h2 style="font-size:22px;font-weight:800;color:#272527;margin-bottom:4px;">Painel do Auditor</h2>
+      <p style="font-size:12px;color:#9ca3af;margin-bottom:20px;">Central de Auditoria AUDIPER</p>
+      <form onsubmit="return doLogin(event,'auditor')" style="width:100%;">
+        <input id="login-email" class="neo-input" type="email" placeholder="Email do auditor" required>
         <input id="login-pass" class="neo-input" type="password" placeholder="Senha" required>
         <button type="submit" class="neo-btn neo-btn-primary">ENTRAR</button>
       </form>
       <p id="login-error" class="neo-error">Email ou senha incorretos</p>
       <div class="neo-divider">auditoria inteligente</div>
-      <p style="font-size:9px;color:#9ca3af;margin-top:4px;">40 anos de tradicao aliada a inovacao</p>
     </div>
-    <div class="neo-right">
-      <h2>Ola, Auditor!</h2>
-      <p>Acesse o painel de controle com dados em tempo real, agentes IA e monitoramento completo.</p>
-      <div class="neo-features">
-        <div class="neo-feat"><span class="neo-feat-dot"></span>7 agentes IA trabalhando 24/7</div>
-        <div class="neo-feat"><span class="neo-feat-dot"></span>9 auditorias em andamento</div>
-        <div class="neo-feat"><span class="neo-feat-dot"></span>Mission Control em tempo real</div>
-        <div class="neo-feat"><span class="neo-feat-dot"></span>CRM e leads WhatsApp</div>
-        <div class="neo-feat"><span class="neo-feat-dot"></span>Dashboard mobile responsivo</div>
-      </div>
+
+    <!-- FORM CLIENTES (direita) -->
+    <div class="neo-form-panel neo-form-right" id="form-cliente">
+      <div class="neo-logo"><img src="images/logos/audiper-logo-principal.png" alt="AUDIPER"></div>
+      <h2 style="font-size:22px;font-weight:800;color:#272527;margin-bottom:4px;">Area do Cliente</h2>
+      <p style="font-size:12px;color:#9ca3af;margin-bottom:20px;">Acompanhe sua auditoria</p>
+      <form onsubmit="return doLogin(event,'cliente')" style="width:100%;">
+        <input id="login-email-cliente" class="neo-input" type="email" placeholder="Email corporativo" required>
+        <input id="login-pass-cliente" class="neo-input" type="password" placeholder="Codigo de acesso" required>
+        <button type="submit" class="neo-btn neo-btn-primary">ACESSAR</button>
+      </form>
+      <p id="login-error-cliente" class="neo-error">Credenciais invalidas</p>
+      <div class="neo-divider">acesso seguro</div>
     </div>
   </div>
 </div>
@@ -3571,10 +3601,21 @@ refreshAll();
 <script>
 // ========== AUTH ==========
 const USERS = {
-  'vitor@audiper.com': {pass:'audiper2026', name:'Vitor Eduardo', role:'Gerente'},
-  'ricardo@audiper.com': {pass:'audiper2026', name:'Prof. Ricardo', role:'Auditor Senior'},
-  'admin@audiper.com': {pass:'audiper2026', name:'Administrador', role:'Admin'},
+  'vitor@audiper.com': {pass:'audiper2026', name:'Vitor Eduardo', role:'Gerente', type:'auditor'},
+  'ricardo@audiper.com': {pass:'audiper2026', name:'Prof. Ricardo', role:'Auditor Senior', type:'auditor'},
+  'admin@audiper.com': {pass:'audiper2026', name:'Administrador', role:'Admin', type:'auditor'},
+  'audiper@audiper.com': {pass:'audiper2026', name:'AUDIPER Admin', role:'Administrador Geral', type:'auditor'},
+  'cliente@audiper.com': {pass:'audiper2026', name:'Cliente Demo', role:'Cliente', type:'cliente'},
 };
+
+function togglePanel(tipo) {
+  const container = document.getElementById('neo-container');
+  if (tipo === 'cliente') {
+    container.classList.add('panel-left');
+  } else {
+    container.classList.remove('panel-left');
+  }
+}
 
 function checkAuth() {
   const session = localStorage.getItem('audiper-session');
@@ -3603,10 +3644,11 @@ function checkAuth() {
   return false;
 }
 
-function doLogin(e) {
+function doLogin(e, tipo) {
   e.preventDefault();
-  const email = document.getElementById('login-email').value.toLowerCase();
-  const pass = document.getElementById('login-pass').value;
+  const isCliente = tipo === 'cliente';
+  const email = document.getElementById(isCliente ? 'login-email-cliente' : 'login-email').value.toLowerCase();
+  const pass = document.getElementById(isCliente ? 'login-pass-cliente' : 'login-pass').value;
   const user = USERS[email];
   if (user && user.pass === pass) {
     localStorage.setItem('audiper-session', JSON.stringify({
@@ -3629,9 +3671,10 @@ function doLogin(e) {
     }
     return false;
   }
-  document.getElementById('login-error').style.display = 'block';
-  const left = document.querySelector('.neo-left');
-  if (left) { left.classList.add('neo-shake'); setTimeout(() => left.classList.remove('neo-shake'), 400); }
+  const errEl = document.getElementById(isCliente ? 'login-error-cliente' : 'login-error');
+  if (errEl) errEl.style.display = 'block';
+  const panel = document.getElementById(isCliente ? 'form-cliente' : 'form-auditor');
+  if (panel) { panel.classList.add('neo-shake'); setTimeout(() => panel.classList.remove('neo-shake'), 400); }
   return false;
 }
 
