@@ -17,6 +17,14 @@
       "criado_em": "2026-03-29 13:31:37"
     },
     {
+      "id": 4,
+      "data": "2026-03-29",
+      "resumo": "Dashboard v2 premium + API + WebSocket + Voz + Agentes",
+      "conquistas": "Dashboard v2 5 abas, Mission Control integrado, API PostgreSQL 7 endpoints, WebSocket ao vivo, Voice Web Speech API, 7 agentes definidos, Logo circular, Command Palette, Dark Mode, North Star Metric, Heatmap risco, Pipeline achados, Skeleton loading, Tooltips, Quick Actions, Centro Notificacoes, Keyboard Shortcuts, Tabelas series temporais, Organograma equipe",
+      "horas": 5.0,
+      "criado_em": "2026-03-29 14:24:37"
+    },
+    {
       "id": 1,
       "data": "2026-03-28",
       "resumo": "OpenClaw + Design System + Hero 3D",
@@ -83,6 +91,62 @@
       "criado_em": "2026-03-29 20:30:00"
     },
     {
+      "id": 15,
+      "descricao": "Conectar chat Audina ao Claude API (respostas reais)",
+      "prioridade": "ALTA",
+      "area": "dashboard",
+      "status": "concluido",
+      "criado_em": "2026-03-29 14:24:37"
+    },
+    {
+      "id": 17,
+      "descricao": "Pagina detalhe auditoria (click no card abre)",
+      "prioridade": "ALTA",
+      "area": "dashboard",
+      "status": "concluido",
+      "criado_em": "2026-03-29 14:24:37"
+    },
+    {
+      "id": 20,
+      "descricao": "Painel individual de auditoria com PTAs visiveis + export PDF",
+      "prioridade": "ALTA",
+      "area": "dashboard",
+      "status": "concluido",
+      "criado_em": "2026-03-29 14:26:57"
+    },
+    {
+      "id": 22,
+      "descricao": "Configurar webhook GitHub -> Hostinger (deploy automatico)",
+      "prioridade": "ALTA",
+      "area": "infra",
+      "status": "pendente",
+      "criado_em": "2026-03-29 15:29:50"
+    },
+    {
+      "id": 26,
+      "descricao": "API key Anthropic nova para chat Audina real",
+      "prioridade": "ALTA",
+      "area": "dashboard",
+      "status": "pendente",
+      "criado_em": "2026-03-29 15:29:50"
+    },
+    {
+      "id": 27,
+      "descricao": "Pipeline pesquisa noturna -> artigos blog: briefings importantes viram posts SEO",
+      "prioridade": "ALTA",
+      "area": "seo",
+      "status": "pendente",
+      "criado_em": "2026-03-29 15:31:29"
+    },
+    {
+      "id": 28,
+      "descricao": "Instalar Google Analytics GA4 em todas as 86 paginas",
+      "prioridade": "ALTA",
+      "area": "seo",
+      "status": "pendente",
+      "criado_em": "2026-03-29 15:48:52"
+    },
+    {
       "id": 4,
       "descricao": "Redesign painel bot WhatsApp AUDIPER",
       "prioridade": "MEDIA",
@@ -123,12 +187,76 @@
       "criado_em": "2026-03-29 20:30:00"
     },
     {
+      "id": 14,
+      "descricao": "Gerar caricaturas dos 7 agentes no Stitch/Leonardo",
+      "prioridade": "MEDIA",
+      "area": "design",
+      "status": "concluido",
+      "criado_em": "2026-03-29 14:24:37"
+    },
+    {
+      "id": 16,
+      "descricao": "Graficos Canvas bar+donut funcionais no v2",
+      "prioridade": "MEDIA",
+      "area": "dashboard",
+      "status": "concluido",
+      "criado_em": "2026-03-29 14:24:37"
+    },
+    {
+      "id": 21,
+      "descricao": "Criar tarefa agendada de auditoria SEO semanal",
+      "prioridade": "MEDIA",
+      "area": "seo",
+      "status": "pendente",
+      "criado_em": "2026-03-29 15:29:50"
+    },
+    {
+      "id": 23,
+      "descricao": "Professora Nasare no organograma",
+      "prioridade": "MEDIA",
+      "area": "equipe",
+      "status": "pendente",
+      "criado_em": "2026-03-29 15:29:50"
+    },
+    {
       "id": 11,
       "descricao": "NSSM para OpenClaw como servico",
       "prioridade": "BAIXA",
       "area": "infra",
       "status": "concluido",
       "criado_em": "2026-03-29 20:30:00"
+    },
+    {
+      "id": 18,
+      "descricao": "Export PDF/PNG do dashboard",
+      "prioridade": "BAIXA",
+      "area": "dashboard",
+      "status": "concluido",
+      "criado_em": "2026-03-29 14:24:37"
+    },
+    {
+      "id": 19,
+      "descricao": "Onboarding tour para primeira visita",
+      "prioridade": "BAIXA",
+      "area": "dashboard",
+      "status": "concluido",
+      "criado_em": "2026-03-29 14:24:37"
+    },
+    {
+      "id": 24,
+      "descricao": "OpenAI Realtime API para voz natural Audina",
+      "prioridade": "BAIXA",
+      "area": "dashboard",
+      "status": "pendente",
+      "criado_em": "2026-03-29 15:29:50"
+    },
+    {
+      "id": 25,
+      "descricao": "Animacoes VEXIS no Mission Control",
+      "prioridade": "BAIXA",
+      "area": "design",
+      "status": "pendente",
+      "criado_em": "2026-03-29 15:29:50"
     }
   ],
   "aprendizados": [
