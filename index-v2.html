@@ -376,7 +376,7 @@
     .blog-card-link div:hover { transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,0.08) !important; }
 
     /* ═══ Premium: Cursor Glow ═══ */
-    .cursor-glow { position:fixed; width:340px; height:340px; border-radius:50%; background:radial-gradient(circle, rgba(231,44,34,0.06) 0%, transparent 70%); pointer-events:none; z-index:0; transform:translate(-50%,-50%); transition:left 0.12s ease, top 0.12s ease; }
+    .cursor-glow { position:fixed; width:400px; height:400px; border-radius:50%; background:radial-gradient(circle, rgba(231,44,34,0.12) 0%, transparent 70%); pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:left 0.15s ease, top 0.15s ease; mix-blend-mode:screen; }
 
     /* ═══ Premium: Noise Overlay ═══ */
     body::after { content:''; position:fixed; inset:0; pointer-events:none; z-index:0; opacity:0.03; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size:200px 200px; }
@@ -805,11 +805,8 @@
                 Sua empresa merece<br>
                 <span class="hero-accent">clareza</span> e
                 <em class="hero-italic">seguran&ccedil;a</em><br>
-                nas decis&otilde;es financeiras
+                nas <span id="typewriter" style="color:#E72C22;"></span><span class="typewriter-cursor"></span>
               </h1>
-              <p style="font-family:'JetBrains Mono',monospace; font-size:0.85rem; letter-spacing:0.08em; color:rgba(255,255,255,0.55); margin-bottom:0.5rem; text-transform:uppercase;">
-                <span id="typewriter"></span><span class="typewriter-cursor"></span>
-              </p>
               <p class="hero-subtitle mb-4">
                 H&aacute; mais de <span class="hero-mono">40</span> anos, ajudamos empresas a enxergar al&eacute;m dos n&uacute;meros com auditoria independente, per&iacute;cia cont&aacute;bil e intelig&ecirc;ncia artificial aplicada.
               </p>
@@ -3112,7 +3109,7 @@
 
   /* Typewriter */
   (function(){
-    var words = ['Tecnologia','Inovacao','Inteligencia Artificial','Data Analytics','Automacao'];
+    var words = ['decisoes financeiras','auditorias inteligentes','pericias contabeis','analises de dados','conformidades regulatorias'];
     var wi = 0, ci = 0, del = false;
     var el = document.getElementById('typewriter');
     if (!el) return;
