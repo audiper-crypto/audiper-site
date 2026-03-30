@@ -2798,7 +2798,7 @@ async function refreshAll() {
   OPS = await fetchJSON('/data/ops-data.json');
   const emailData = await fetchJSON('/data/emails-recentes.json');
   EMAILS = emailData?.emails || [];
-  try { const lr = await fetch('http://localhost:3000/api/leads'); if (lr.ok) LEADS = await lr.json(); } catch { LEADS = []; }
+  try { const lr = await fetch('http://localhost:3000/api/leads'); if (lr.ok) { const ld = await lr.json(); LEADS = Array.isArray(ld) ? ld : (ld.leads || []); } } catch { LEADS = []; }
   if (DATA) renderAll();
 }
 
