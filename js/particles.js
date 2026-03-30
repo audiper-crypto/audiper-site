@@ -283,7 +283,7 @@
       this.x = Math.random() * (W || 1400);
       this.y = Math.random() * (H || 900);
       this.vx = 0; this.vy = 0;
-      this.baseSize = 3 + Math.random() * 5;
+      this.baseSize = 1 + Math.random() * 2.5;
       this.phase = Math.random() * Math.PI * 2;
       this.breathAmp = 0.4 + Math.random() * 1;
       this.friction = 0.88 + Math.random() * 0.07;
@@ -297,11 +297,11 @@
 
       // Paleta VINHO + PRETO
       const r = Math.random();
-      if (r < 0.30) { this.r = 100; this.g = 5; this.b = 15; this.alpha = 0.85 + Math.random() * 0.15; }
-      else if (r < 0.55) { this.r = 140; this.g = 15; this.b = 25; this.alpha = 0.8 + Math.random() * 0.2; }
-      else if (r < 0.75) { this.r = 220; this.g = 30; this.b = 35; this.alpha = 0.75 + Math.random() * 0.25; }
-      else if (r < 0.90) { this.r = 20; this.g = 20; this.b = 20; this.alpha = 0.8 + Math.random() * 0.2; }
-      else { this.r = 60; this.g = 60; this.b = 60; this.alpha = 0.6 + Math.random() * 0.3; }
+      if (r < 0.30) { this.r = 100; this.g = 5; this.b = 15; this.alpha = 0.35 + Math.random() * 0.25; }
+      else if (r < 0.55) { this.r = 140; this.g = 15; this.b = 25; this.alpha = 0.3 + Math.random() * 0.25; }
+      else if (r < 0.75) { this.r = 220; this.g = 30; this.b = 35; this.alpha = 0.3 + Math.random() * 0.3; }
+      else if (r < 0.90) { this.r = 20; this.g = 20; this.b = 20; this.alpha = 0.3 + Math.random() * 0.25; }
+      else { this.r = 60; this.g = 60; this.b = 60; this.alpha = 0.25 + Math.random() * 0.2; }
     }
 
     update(time) {
@@ -352,8 +352,8 @@
         glow = dist < 220 ? (1 - dist / 220) : 0;
       }
 
-      const size = this.baseSize * L.sizeMulti + glow * 6;
-      const a = Math.min(1, this.alpha * L.alphaMulti + glow * 0.4);
+      const size = this.baseSize * L.sizeMulti + glow * 3;
+      const a = Math.min(0.8, this.alpha * L.alphaMulti + glow * 0.3);
 
       ctx.beginPath();
       ctx.arc(this.x, this.y, size, 0, Math.PI * 2);
