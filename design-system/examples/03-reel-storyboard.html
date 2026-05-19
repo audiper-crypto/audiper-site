@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>AUDIPER - Reel Storyboard 1080x1920 (pattern audix-reel-informativo)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0a0608; font-family: 'Inter', sans-serif; color: #fff; padding: 40px 20px; min-height: 100vh; }
+  .header { max-width: 1200px; margin: 0 auto 40px; text-align: center; }
+  .header h1 { font-family: 'Outfit'; font-weight: 800; font-size: 32px; color: #c9a962; letter-spacing: .04em; }
+  .header p { color: #94a3b8; margin-top: 8px; font-size: 14px; }
+  .grid { display: grid; grid-template-columns: repeat(4, 270px); gap: 24px; justify-content: center; max-width: 1200px; margin: 0 auto; }
+  .beat {
+    width: 270px; height: 480px; /* 1080x1920 escala 1:4 */
+    background: linear-gradient(135deg, #0a0608 0%, #2d0a14 35%, #5c0d18 65%, #7a1220 100%);
+    border-radius: 18px; overflow: hidden; position: relative;
+    box-shadow: 0 12px 32px rgba(122,18,32,.35), 0 0 0 1px rgba(201,169,98,.25);
+  }
+  .beat::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 20% 30%, rgba(201,169,98,.18) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(185,28,28,.14) 0%, transparent 50%);
+  }
+  .beat-num {
+    position: absolute; top: 14px; left: 14px;
+    background: rgba(201,169,98,.85); color: #5c0d18;
+    font-family: 'Outfit'; font-weight: 900; font-size: 11px;
+    padding: 4px 10px; border-radius: 12px; letter-spacing: .12em;
+  }
+  .beat-time {
+    position: absolute; top: 14px; right: 14px;
+    background: rgba(0,0,0,.5); color: #fff;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    padding: 4px 8px; border-radius: 6px;
+  }
+  .beat-body { position: absolute; inset: 60px 18px 80px 18px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .beat-headline {
+    font-family: 'Outfit'; font-weight: 800; color: #fff;
+    font-size: 22px; line-height: 1.1; letter-spacing: -.01em;
+    text-shadow: 0 2px 12px rgba(0,0,0,.4);
+  }
+  .beat-sub { color: #c9a962; margin-top: 14px; font-size: 12px; letter-spacing: .15em; text-transform: uppercase; font-weight: 700; }
+  .beat-counter {
+    font-family: 'JetBrains Mono'; font-weight: 700;
+    font-size: 42px; color: #fff; margin-top: 10px;
+    text-shadow: 0 4px 18px rgba(185,28,28,.45);
+  }
+  .beat-cta {
+    background: #c9a962; color: #5c0d18;
+    font-family: 'Outfit'; font-weight: 800; font-size: 13px;
+    padding: 8px 18px; border-radius: 22px; margin-top: 14px;
+    display: inline-block;
+  }
+  .beat-logo { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(201,169,98,.55); margin-bottom: 12px; }
+  .beat-footer {
+    position: absolute; bottom: 14px; left: 14px; right: 14px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 9px; color: rgba(255,255,255,.7);
+  }
+  .voice-tag {
+    background: rgba(0,0,0,.5); padding: 3px 8px; border-radius: 4px;
+    font-family: 'JetBrains Mono'; letter-spacing: .04em;
+  }
+  .specs { max-width: 1200px; margin: 40px auto 0; background: #14181f; border: 1px solid #2a2f3a; border-radius: 14px; padding: 24px 28px; }
+  .specs h2 { font-family: 'Outfit'; color: #c9a962; font-size: 16px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 12px; }
+  .specs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; font-size: 12px; }
+  .specs-grid div strong { color: #fff; display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: #94a3b8; margin-bottom: 4px; }
+  .specs-grid div span { color: #e2e8f0; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Reel AUDIPER &middot; Pattern audix-reel-informativo</h1>
+  <p>Storyboard canonico 4-beat &middot; 1080x1920 vertical &middot; 82s &middot; Algenib + violin -14dB &middot; Atmo claret</p>
+</div>
+
+<div class="grid">
+
+  <!-- BEAT 1 - GANCHO -->
+  <div class="beat">
+    <span class="beat-num">BEAT 1</span>
+    <span class="beat-time">00:00 - 00:08</span>
+    <div class="beat-body">
+      <div class="beat-sub">Gancho</div>
+      <div class="beat-headline" style="margin-top:16px">Sua empresa<br>tem 60 dias.</div>
+      <div style="color:#c9a962;font-size:11px;margin-top:18px;font-weight:600">[ pulso claret ao fundo ]</div>
+    </div>
+    <div class="beat-footer">
+      <span class="voice-tag">Algenib &middot; grave</span>
+      <span>BGM: -inf &rarr; -14dB</span>
+    </div>
+  </div>
+
+  <!-- BEAT 2 - DADOS -->
+  <div class="beat">
+    <span class="beat-num">BEAT 2</span>
+    <span class="beat-time">00:08 - 00:25</span>
+    <div class="beat-body">
+      <div class="beat-sub">Dados / Obrigacao</div>
+      <div class="beat-headline" style="font-size:18px;margin-top:8px">NBC TA 230 exige<br>formalizacao do<br>papel de trabalho.</div>
+      <div style="color:#fff;font-size:11px;margin-top:14px;font-family:'JetBrains Mono';letter-spacing:.05em">&sect; art. 14, 15 e 16</div>
+      <div style="color:#c9a962;font-size:10px;margin-top:6px;letter-spacing:.1em">[ KPIs piscando ]</div>
+    </div>
+    <div class="beat-footer">
+      <span class="voice-tag">Algenib &middot; ~2 pal/s</span>
+      <span>BGM: -14dB</span>
+    </div>
+  </div>
+
+  <!-- BEAT 3 - MULTA -->
+  <div class="beat">
+    <span class="beat-num">BEAT 3</span>
+    <span class="beat-time">00:25 - 00:50</span>
+    <div class="beat-body">
+      <div class="beat-sub">Consequencia</div>
+      <div class="beat-counter">R$ 0<br><span style="font-size:14px;color:#c9a962">&rarr; R$ 247k</span></div>
+      <div style="font-size:11px;color:#fff;margin-top:14px;line-height:1.4">Custo de uma<br>auditoria sem PTA<br>vs. com PTA</div>
+    </div>
+    <div class="beat-footer">
+      <span class="voice-tag">Algenib &middot; pausa</span>
+      <span>SFX: tick counter</span>
+    </div>
+  </div>
+
+  <!-- BEAT 4 - CTA -->
+  <div class="beat">
+    <span class="beat-num">BEAT 4</span>
+    <span class="beat-time">00:50 - 01:22</span>
+    <div class="beat-body">
+      <img src="../assets/logo-radar-loop.gif" alt="AUDIPER" class="beat-logo"/>
+      <div class="beat-headline" style="font-size:18px">Auditoria Preventiva.<br>Risco Mapeado,<br>Risco Controlado.</div>
+      <div class="beat-cta">Fale com peritos &middot; AUDIPER</div>
+      <div style="color:#c9a962;font-size:10px;margin-top:10px;letter-spacing:.1em">audiper.com &middot; 40 anos</div>
+    </div>
+    <div class="beat-footer">
+      <span class="voice-tag">Algenib + radar</span>
+      <span>fade: BGM &rarr; 0</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="specs">
+  <h2>Especificacoes tecnicas</h2>
+  <div class="specs-grid">
+    <div><strong>Formato</strong><span>1080 x 1920 (9:16) &middot; H.264 &middot; 30 fps</span></div>
+    <div><strong>Duracao</strong><span>82s padrao (60s-90s) &middot; loop opcional 40s widget</span></div>
+    <div><strong>Voz</strong><span>Algenib (Gemini 3.1 Flash TTS) &middot; gravelly grave rouca</span></div>
+    <div><strong>BGM</strong><span>violin instrumental &middot; biblioteca AUDIPER &middot; -14dB sob voz 0dB</span></div>
+    <div><strong>Atmo</strong><span>cyberpunk com tint claret claro (sem saturar)</span></div>
+    <div><strong>Stack</strong><span>HyperFrames CLI 0.4.45 + Veo 3.1 + Nano Banana 2 + ffmpeg</span></div>
+    <div><strong>Logo</strong><span>radar loop 4s aro dourado &middot; aspect 1:1 sempre</span></div>
+    <div><strong>Bumper</strong><span>fechamento radar + audiper.com &middot; WA (86) 9 9401-0525</span></div>
+  </div>
+</div>
+
+</body>
+</html>

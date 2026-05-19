@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>AUDIPER &middot; Componentes shadcn premium + glassmorphism + skeumorphism + lucide SVG</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --claret:#7a1220; --claret-dark:#5c0d18; --claret-light:#B91C1C;
+  --gold:#c9a962; --gold-deep:#a16207;
+  --graphite:#334155; --dark:#1e293b; --darker:#0f172a;
+  --paper:#fff; --paper-bg:#F6F4F1; --stone:#EDE8DC;
+  --rule:#E2E8F0; --muted:#64748b; --faint:#94a3b8;
+  --green:#047857; --info:#1a5276; --amber:#d9a441;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;color:var(--graphite);background:var(--paper-bg);padding:40px 24px;font-size:14px;line-height:1.5}
+
+/* ====== HERO ====== */
+.hero{max-width:1280px;margin:0 auto 28px;background:linear-gradient(135deg,var(--darker) 0%,var(--claret-dark) 60%,var(--claret) 100%);color:#fff;border-radius:20px;padding:36px 44px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 30%,rgba(201,169,98,.2) 0%,transparent 50%),radial-gradient(circle at 80% 70%,rgba(185,28,28,.15) 0%,transparent 50%)}
+.hero-inner{position:relative;z-index:1}
+.hero h1{font-family:'Outfit';font-size:32px;font-weight:900;letter-spacing:-.01em;line-height:1.05}
+.hero h1 sup{color:var(--gold);font-size:16px;vertical-align:super}
+.hero .kicker{color:var(--gold);font-size:11px;letter-spacing:.25em;text-transform:uppercase;font-weight:700;margin-bottom:8px}
+.hero p{color:#cbd5e1;margin-top:12px;max-width:720px;font-size:14px;line-height:1.65}
+
+/* ====== SECTION HEAD ====== */
+.section{max-width:1280px;margin:0 auto;padding:32px 0 8px}
+.section-title{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.section-title .num{font-family:'JetBrains Mono';font-size:11px;font-weight:700;color:var(--gold);background:var(--dark);padding:5px 10px;border-radius:8px;letter-spacing:.1em}
+.section-title h2{font-family:'Outfit';font-size:18px;font-weight:800;color:var(--claret);text-transform:uppercase;letter-spacing:.15em}
+.section-title .desc{margin-left:auto;font-size:12px;color:var(--muted);max-width:480px;text-align:right}
+
+/* ====== BUTTONS (shadcn estilizados AUDIPER) ====== */
+.btn-row{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;letter-spacing:.01em;border:none;cursor:pointer;transition:all .18s ease;font-family:'Inter'}
+.btn svg{width:16px;height:16px}
+.btn-primary{background:var(--claret);color:#fff;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.btn-primary:hover{background:var(--claret-dark)}
+.btn-gold{background:var(--gold);color:var(--claret-dark);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.btn-gold:hover{background:var(--gold-deep);color:#fff}
+.btn-outline{background:transparent;color:var(--claret);border:1.5px solid var(--claret)}
+.btn-outline:hover{background:var(--claret);color:#fff}
+.btn-ghost{background:transparent;color:var(--graphite)}
+.btn-ghost:hover{background:var(--rule)}
+.btn-destructive{background:#fff;color:var(--claret-light);border:1.5px solid var(--claret-light)}
+.btn-destructive:hover{background:var(--claret-light);color:#fff}
+
+/* ====== CARDS ====== */
+.grid{display:grid;gap:18px}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+
+.card-shadcn{background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:20px 22px;box-shadow:0 1px 2px rgba(0,0,0,.04);transition:all .2s ease}
+.card-shadcn:hover{box-shadow:0 4px 12px rgba(0,0,0,.08);transform:translateY(-2px)}
+.card-shadcn .icon-wrap{width:44px;height:44px;border-radius:10px;background:var(--paper-bg);display:flex;align-items:center;justify-content:center;color:var(--claret);margin-bottom:14px}
+.card-shadcn .icon-wrap svg{width:22px;height:22px}
+.card-shadcn h3{font-family:'Outfit';font-size:16px;font-weight:700;color:var(--dark);margin-bottom:4px}
+.card-shadcn p{font-size:13px;color:var(--muted);line-height:1.55}
+.card-shadcn .meta{display:flex;align-items:center;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--rule);font-size:11px;color:var(--faint);font-family:'JetBrains Mono'}
+
+/* GLASSMORPHISM */
+.glass-stage{background:linear-gradient(135deg,var(--darker) 0%,var(--claret-dark) 60%,var(--claret) 100%);padding:32px;border-radius:18px;position:relative;overflow:hidden}
+.glass-stage::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 30%,rgba(201,169,98,.2) 0%,transparent 50%),radial-gradient(circle at 80% 70%,rgba(185,28,28,.15) 0%,transparent 50%)}
+.glass-stage > *{position:relative;z-index:1}
+.card-glass{background:rgba(255,255,255,.7);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.4);border-radius:14px;padding:22px 24px;box-shadow:0 12px 40px rgba(0,0,0,.18)}
+.card-glass .icon-wrap{background:rgba(122,18,32,.1)}
+.card-glass-dark{background:rgba(30,41,59,.45);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(201,169,98,.4);color:#fff;border-radius:14px;padding:22px 24px;box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.card-glass-dark .icon-wrap{background:rgba(201,169,98,.2);color:var(--gold)}
+.card-glass-dark h3{color:#fff}
+.card-glass-dark p{color:#cbd5e1}
+
+/* SKEUMORPHISM (subtle, profissional) */
+.skeu-stage{background:linear-gradient(180deg,#f4eee3,#e8dfcc);padding:36px;border-radius:18px;border:1px solid #d4c4a3;box-shadow:inset 0 1px 0 rgba(255,255,255,.6)}
+.card-skeu{background:linear-gradient(180deg,#fdfbf6 0%,#f0e9d8 100%);border:1px solid #cfbf9a;border-radius:14px;padding:22px 24px;box-shadow:0 2px 0 rgba(255,255,255,.7) inset, 0 8px 18px rgba(122,18,32,.12), 0 1px 3px rgba(0,0,0,.08)}
+.card-skeu .icon-wrap{background:linear-gradient(180deg,#fff 0%,#e8dfcc 100%);border:1px solid #cfbf9a;box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 2px 4px rgba(122,18,32,.1);color:var(--claret-dark)}
+.card-skeu h3{color:var(--claret-dark)}
+.card-skeu p{color:#6b5a3e}
+
+.btn-skeu{background:linear-gradient(180deg,#a51d2d,#7a1220);color:#fff;border:1px solid #5c0d18;box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 2px 0 #3b070d,0 4px 8px rgba(0,0,0,.18);text-shadow:0 -1px 0 rgba(0,0,0,.3);padding:10px 22px;border-radius:8px;font-weight:700;font-size:13px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-family:'Inter'}
+.btn-skeu:active{box-shadow:inset 0 1px 3px rgba(0,0,0,.3),0 1px 0 #3b070d;transform:translateY(1px)}
+.btn-skeu-gold{background:linear-gradient(180deg,#e3c478,#c9a962 50%,#a16207);color:var(--claret-dark);border:1px solid #8a5512;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 2px 0 #6b3f0a,0 4px 8px rgba(0,0,0,.18);text-shadow:0 1px 0 rgba(255,255,255,.3);padding:10px 22px;border-radius:8px;font-weight:700;font-size:13px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-family:'Inter'}
+
+/* ====== BADGES (shadcn estilo) ====== */
+.badge{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:14px;font-size:11px;font-weight:600;letter-spacing:.01em;border:1px solid}
+.badge svg{width:11px;height:11px}
+.badge-claret{background:#fef2f2;color:var(--claret);border-color:#fecaca}
+.badge-gold{background:#fffbeb;color:var(--gold-deep);border-color:#fde68a}
+.badge-info{background:#eff6ff;color:var(--info);border-color:#bfdbfe}
+.badge-ok{background:#f0fdf4;color:var(--green);border-color:#bbf7d0}
+.badge-dark{background:var(--dark);color:#fff;border-color:var(--dark)}
+.badge-outline{background:transparent;color:var(--graphite);border-color:var(--rule)}
+
+/* ====== INPUTS ====== */
+.input-group{display:flex;flex-direction:column;gap:6px;max-width:340px}
+.input-group label{font-size:12px;font-weight:600;color:var(--dark);font-family:'Inter'}
+.input{padding:9px 13px;border:1.5px solid var(--rule);border-radius:8px;background:#fff;font-size:13px;font-family:'Inter';color:var(--graphite);transition:border-color .15s ease}
+.input:focus{outline:none;border-color:var(--claret);box-shadow:0 0 0 3px rgba(122,18,32,.12)}
+.input-with-icon{position:relative}
+.input-with-icon svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--faint);pointer-events:none}
+.input-with-icon .input{padding-left:36px}
+
+/* ====== TABLE ====== */
+.table-wrap{background:#fff;border:1px solid var(--rule);border-radius:12px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead{background:var(--paper-bg)}
+th{text-align:left;padding:11px 16px;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--rule)}
+td{padding:13px 16px;border-bottom:1px solid var(--rule);color:var(--graphite)}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:var(--paper-bg)}
+
+/* ====== ICON SHOWCASE (lucide SVG) ====== */
+.icon-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:12px}
+.icon-tile{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:14px;display:flex;flex-direction:column;align-items:center;gap:6px;transition:all .15s ease}
+.icon-tile:hover{border-color:var(--claret);transform:translateY(-2px);box-shadow:0 4px 12px rgba(122,18,32,.08)}
+.icon-tile svg{width:22px;height:22px;color:var(--claret);stroke-width:1.5}
+.icon-tile span{font-family:'JetBrains Mono';font-size:9.5px;color:var(--muted);font-weight:600}
+
+/* ====== NOTE ====== */
+.note{background:#fff;border-left:4px solid var(--gold);padding:14px 20px;border-radius:0 10px 10px 0;font-size:13px;color:var(--graphite);margin-top:14px}
+.note strong{color:var(--claret-dark);font-family:'Outfit'}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="kicker">Component Library &middot; v1.0 &middot; shadcn premium</div>
+    <h1>AUDIPER<sup>&reg;</sup> &middot; Componentes shadcn + glass + skeumorphism</h1>
+    <p>Componentes shadcn-style hidratados com a paleta AUDIPER + ícones lucide profissionais (inline SVG, sem dependência de Font Awesome ou CDN externo). Três tratamentos visuais: <strong style="color:#fff">shadcn flat</strong> (default), <strong style="color:#fff">glassmorphism</strong> (hero / overlay / capa) e <strong style="color:#fff">skeumorphism</strong> (botões físicos, premium, paper warm). Pronto pra Claude Design recombinar.</p>
+  </div>
+</div>
+
+<!-- ===== BUTTONS ===== -->
+<div class="section">
+  <div class="section-title">
+    <span class="num">01</span>
+    <h2>Buttons &middot; shadcn variantes</h2>
+    <span class="desc">5 variantes flat + 2 skeumorphism. Tamanhos: sm 32px / md 36px (default) / lg 40px.</span>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-primary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      Aprovar PTA
+    </button>
+    <button class="btn btn-gold">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/><polyline points="12 6 12 12 16 14"/></svg>
+      Agendar revisão
+    </button>
+    <button class="btn btn-outline">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"/></svg>
+      Exportar PDF
+    </button>
+    <button class="btn btn-ghost">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+      Descartar
+    </button>
+    <button class="btn btn-destructive">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+      Reverter
+    </button>
+  </div>
+
+  <div class="skeu-stage" style="margin-top:18px">
+    <p style="font-size:11px;font-weight:700;color:var(--claret-dark);letter-spacing:.15em;text-transform:uppercase;margin-bottom:14px">Skeumorphism &middot; premium / paper warm</p>
+    <div class="btn-row">
+      <button class="btn-skeu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+        Assinar parecer
+      </button>
+      <button class="btn-skeu-gold">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 15.09 8.26 22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        Emitir relatório premium
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CARDS shadcn ===== -->
+<div class="section">
+  <div class="section-title">
+    <span class="num">02</span>
+    <h2>Cards &middot; shadcn flat</h2>
+    <span class="desc">Layout default. Ícones lucide stroke-width 1.5. Container paper-bg neutro.</span>
+  </div>
+  <div class="grid grid-4">
+    <div class="card-shadcn">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2Z"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <h3>Auditoria preventiva</h3>
+      <p>Identificação de risco antes do parecer formal. ISO 27001 + NBC TA 315.</p>
+      <div class="meta">NBC-TA-315 &middot; ATIVO</div>
+    </div>
+    <div class="card-shadcn">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+      </div>
+      <h3>PTAs formalizados</h3>
+      <p>NBC TA 230 &le; 60d. Cadeia evidencial cruzada com qmd 8.176 chunks.</p>
+      <div class="meta">142 / 142 &middot; 100% ON-TIME</div>
+    </div>
+    <div class="card-shadcn">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+      </div>
+      <h3>AV/AH automática</h3>
+      <p>Análise vertical e horizontal cruzando balancete &rarr; BP &rarr; DRE &rarr; DFC.</p>
+      <div class="meta">PIPELINE: opendataloader-pdf</div>
+    </div>
+    <div class="card-shadcn">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <h3>Mapa de Reflexos</h3>
+      <p>5 anéis concêntricos sobre OSM NE. Materialidade qualitativa NBC TA 320.</p>
+      <div class="meta">PATTERN: BADESPI v7</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CARDS GLASSMORPHISM ===== -->
+<div class="section">
+  <div class="section-title">
+    <span class="num">03</span>
+    <h2>Cards &middot; Glassmorphism</h2>
+    <span class="desc">backdrop-filter 18px sobre gradiente claret. Fallback @media print obrigatório.</span>
+  </div>
+  <div class="glass-stage">
+    <div class="grid grid-3">
+      <div class="card-glass">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/><circle cx="12" cy="12" r="4"/></svg>
+        </div>
+        <h3 style="color:var(--dark)">Radar regulatório</h3>
+        <p>Monitor de obrigações ANS, CVM, SUSEP, BACEN com janela de 60d.</p>
+      </div>
+      <div class="card-glass-dark">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
+        </div>
+        <h3>ISO 27001 ativo</h3>
+        <p>Controle de acesso + criptografia em repouso + cadeia OTS de evidências.</p>
+      </div>
+      <div class="card-glass">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <h3 style="color:var(--dark)">Cronograma A &rarr; G</h3>
+        <p>Fases NBC TA com Timeline Visual Law + status pill por milestone.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CARDS SKEUMORPHISM ===== -->
+<div class="section">
+  <div class="section-title">
+    <span class="num">04</span>
+    <h2>Cards &middot; Skeumorphism premium</h2>
+    <span class="desc">Paper warm + sombras suaves. Uso restrito: capa de proposta premium, certificado, selo.</span>
+  </div>
+  <div class="skeu-stage">
+    <div class="grid grid-3">
+      <div class="card-skeu">
+        <div class="icon-wrap" style="border-radius:50%;width:54px;height:54px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <h3>Certificado de 40 anos</h3>
+        <p>CRC/PI 000023/O. Fundada em 1985. Selo institucional renderizado em paper warm.</p>
+      </div>
+      <div class="card-skeu">
+        <div class="icon-wrap" style="border-radius:50%;width:54px;height:54px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="14 2 14 8 20 8"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/><rect x="4" y="2" width="16" height="20" rx="2"/></svg>
+        </div>
+        <h3>Parecer NBC TA 700</h3>
+        <p>Capa skeumorphism para entrega física. Rubricas manuscritas escaneadas. Selo dourado.</p>
+      </div>
+      <div class="card-skeu">
+        <div class="icon-wrap" style="border-radius:50%;width:54px;height:54px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m21 16-4 4-4-4"/><path d="M17 20V4"/><path d="m3 8 4-4 4 4"/><path d="M7 4v16"/></svg>
+        </div>
+        <h3>Cronômetro de prazos</h3>
+        <p>Reel Cronômetro: contagem regressiva de obrigação regulatória em paper warm.</p>
+      </div>
+    </div>
+  </div>
+  <div class="note"><strong>Quando usar skeumorphism:</strong> capas físicas que serão impressas ou foliadas, certificados, selos, materiais comemorativos (40 anos). <strong>Não usar</strong> em dashboards, emails ou Reels — só estraga o tom moderno da entrega.</div>
+</div>
+
+<!-- ===== BADGES ===== -->
+<div class="section">
+  <div class="section-title">
+    <span class="num">05</span>
+    <h2>Badges &middot; shadcn pills</h2>
+    <span class="desc">Tamanho fixo. Usar em tabelas, callouts e cards de status.</span>
+  </div>
+  <div class="btn-row">
+    <span class="badge badge-claret"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Ponto de atenção</span>
+    <span class="badge badge-gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Premium</span>
+    <span class="badge badge-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>Informação</span>
+    <span class="badge badge-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Conformidade</span>
+    <span class="badge badge-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>40 anos</span>
+    <span class="badge badge-outline">v1.0 / 2026-05-19</span>
+  </div>
+</div>
+
+<!-- ===== INPUTS ===== -->
+<div class="section">
+  <div class="section-title">
+    <span class="num">06</span>
+    <h2>Inputs &middot; shadcn form fields</h2>
+    <span class="desc">Border-radius 8px. Focus ring claret 12% opacity. Label Inter 600.</span>
+  </div>
+  <div class="grid grid-3">
+    <div class="input-group">
+      <label>CNPJ do cliente</label>
+      <input class="input" placeholder="00.000.000/0001-00" type="text"/>
+    </div>
+    <div class="input-group">
+      <label>Buscar PTA</label>
+      <div class="input-with-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input class="input" placeholder="ref / cliente / fase…" type="text"/>
+      </div>
+    </div>
+    <div class="input-group">
+      <label>Materialidade global (R$)</label>
+      <input class="input" placeholder="2% ROL" type="text"/>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TABLE ===== -->
+<div class="section">
+  <div class="section-title">
+    <span class="num">07</span>
+    <h2>Table &middot; auditorias ativas</h2>
+    <span class="desc">Hover row paper-bg. Header uppercase 11px. Border-bottom rule.</span>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Cliente</th><th>Fase NBC TA</th><th>PTAs</th><th>Status</th><th>Achados</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Unimed Picos</strong></td>
+          <td>Execução (C/D)</td>
+          <td>28 / 28</td>
+          <td><span class="badge badge-info">PPA 1T 15/05 OK</span></td>
+          <td><span class="badge badge-claret">3 RELEVANTE</span></td>
+        </tr>
+        <tr>
+          <td><strong>Unimed Floriano</strong></td>
+          <td>Execução (C/D)</td>
+          <td>32 / 32</td>
+          <td><span class="badge badge-ok">DIOPS enviado</span></td>
+          <td><span class="badge badge-gold">9 PARCIAL</span></td>
+        </tr>
+        <tr>
+          <td><strong>Megalink</strong></td>
+          <td>Execução (C/D)</td>
+          <td>38 / 42</td>
+          <td><span class="badge badge-info">P-02/2026 em curso</span></td>
+          <td><span class="badge badge-claret">2 [REG]</span></td>
+        </tr>
+        <tr>
+          <td><strong>OIG Gaming</strong></td>
+          <td>Execução (C/D)</td>
+          <td>14 / 18</td>
+          <td><span class="badge badge-gold">GOV-007 enviado</span></td>
+          <td><span class="badge badge-ok">7 [AUD] OK</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== LUCIDE ICON LIBRARY ===== -->
+<div class="section">
+  <div class="section-title">
+    <span class="num">08</span>
+    <h2>Ícones lucide &middot; biblioteca canônica</h2>
+    <span class="desc">SVG inline (sem CDN). stroke-width 1.5 padrão, 2 em pills. cor herdada de currentColor.</span>
+  </div>
+  <div class="icon-grid">
+    <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2Z"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>shield</span></div>
+    <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span>file</span></div>
+    <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg><span>chart</span></div>
+    <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>map-pin</span></div>
+    <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>clock</span></div>
+    <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 8-9.04 9.06a2.82 2.82 0 1 0 3.98 3.98L16 12"/><path d="m6 18-2 2"/><circle cx="17" cy="7" r="5"/></svg><span>gavel</span></div>
+    <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>star</span></div>
+    <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>users</span></div>
+    <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>message</span></div>
+    <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>check-circle</span></div>
+    <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>alert</span></div>
+    <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 8 4-4 4 4"/><path d="M7 4v16"/><path d="m21 16-4 4-4-4"/><path d="M17 20V4"/></svg><span>swap</span></div>
+    <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 7 4v6c0 5.5-3.5 10-7 12-3.5-2-7-6.5-7-12V6l7-4Z"/><path d="M9 12l2 2 4-4"/></svg><span>verified</span></div>
+    <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span>search</span></div>
+    <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><span>help</span></div>
+    <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><span>monitor</span></div>
+  </div>
+  <div class="note"><strong>Por que lucide (não Font Awesome):</strong> SVG inline (zero requests externos, funciona offline e em PDF), stroke-width customizável, mesma família de ~1.400 ícones, MIT license. Font Awesome continua válido só onde já está embedado (relatórios A4 que já usam o CDN).</div>
+</div>
+
+<!-- ===== CRONOMETRO showcase ===== -->
+<div class="section">
+  <div class="section-title">
+    <span class="num">09</span>
+    <h2>Cronômetro &middot; asset oficial</h2>
+    <span class="desc">Componente Reel Cronômetro (Remotion) com poster PNG em 3 formatos.</span>
+  </div>
+  <div class="grid grid-3">
+    <div class="card-shadcn" style="padding:14px;text-align:center">
+      <img src="../assets/cronometro-1x1.png" alt="Cronômetro 1x1" style="width:100%;border-radius:10px;display:block;margin-bottom:12px"/>
+      <h3 style="font-size:14px">cronometro-1x1.png</h3>
+      <p style="font-size:11px">1080×1080 &middot; quadrado Instagram feed</p>
+    </div>
+    <div class="card-shadcn" style="padding:14px;text-align:center">
+      <img src="../assets/cronometro-9x16.png" alt="Cronômetro 9x16" style="width:60%;border-radius:10px;display:block;margin:0 auto 12px"/>
+      <h3 style="font-size:14px">cronometro-9x16.png</h3>
+      <p style="font-size:11px">1080×1920 &middot; Reels / Stories</p>
+    </div>
+    <div class="card-shadcn" style="padding:14px;text-align:center">
+      <img src="../assets/cronometro-1x1-midloop.png" alt="Cronômetro mid loop" style="width:100%;border-radius:10px;display:block;margin-bottom:12px"/>
+      <h3 style="font-size:14px">cronometro-1x1-midloop.png</h3>
+      <p style="font-size:11px">Frame intermediário do loop animado</p>
+    </div>
+  </div>
+  <div class="note"><strong>Componente Remotion:</strong> <code style="background:#f4f4f5;padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono';font-size:12px">_AUDIX/_components/reel-cronometro/</code> — TSX parametrizado (Series + Bookend) para gerar contagem regressiva de obrigações regulatórias com BGM violin e voz Algenib.</div>
+</div>
+
+<div style="max-width:1280px;margin:40px auto 0;font-size:11px;color:var(--faint);text-align:center;line-height:1.6;padding-top:20px;border-top:1px solid var(--rule)">
+  <strong style="color:var(--gold-deep)">AUDIPER Design System v1.0</strong> &middot; shadcn premium + glassmorphism + skeumorphism + lucide SVG<br>
+  Auditoria Preventiva &middot; Risco Mapeado, Risco Controlado &middot; ISO 27001 &middot; audiper.com
+</div>
+
+</body>
+</html>

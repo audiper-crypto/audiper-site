@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>AUDIPER &middot; Componente KPI Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+  body{background:#F6F4F1;font-family:'Inter',sans-serif;color:#334155;padding:40px;font-size:10pt}
+  h1{font-family:'Outfit';font-size:22px;color:#7a1220;font-weight:800;margin-bottom:24px}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:980px}
+  .dcard{background:#FFF;border-radius:14px;padding:12px 14px;border:1px solid #EDE8DC;box-shadow:0 1px 3px rgba(0,0,0,.03)}
+  .dcard-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+  .dcard-title h3{font-size:8pt;color:#64748b;font-weight:600;display:flex;align-items:center;gap:4px}
+  .dcard-title h3 i{color:#94a3b8;font-size:7pt}
+  .period-chip{background:#F4F0EA;color:#64748b;font-size:7pt;padding:2px 7px;border-radius:6px;font-weight:600}
+  .kpi-big{font-family:'Outfit';font-size:20pt;font-weight:800;color:#1e293b;line-height:1}
+  .kpi-claret{color:#7a1220}
+  .kpi-delta-pos{background:#DCFCE7;color:#15803D;font-size:7pt;font-weight:700;padding:1px 6px;border-radius:7px;display:inline-flex;align-items:center;gap:2px;border:1px solid #BBF7D0}
+  .mini-bars{display:flex;align-items:flex-end;gap:2px;height:34px}
+  .mini-bars div{flex:1;border-radius:2px 2px 0 0;background:linear-gradient(180deg,#c9a962,#7a1220)}
+  .donut-mini{transform:rotate(-90deg)}
+  .donut-mini .bg{fill:none;stroke:#F4F0EA;stroke-width:7}
+  .donut-mini .seg{fill:none;stroke-width:7;stroke-linecap:round;stroke:#7a1220}
+</style>
+</head>
+<body>
+
+<h1>KPI Card &middot; 3 variantes canonicas</h1>
+
+<div class="grid">
+
+  <!-- Variante 1: KPI puro -->
+  <div class="dcard">
+    <div class="dcard-title">
+      <h3>PTAs assinados <i class="fas fa-info-circle"></i></h3>
+      <span class="period-chip">2026 YTD</span>
+    </div>
+    <p class="kpi-big kpi-claret">142</p>
+    <p style="font-size:7pt;color:#64748b;margin-top:3px">NBC TA 230 &middot; &le; 60 dias <span class="kpi-delta-pos">+38% a/a</span></p>
+  </div>
+
+  <!-- Variante 2: KPI + mini-bars -->
+  <div class="dcard">
+    <div class="dcard-title">
+      <h3>ICMS incremental Y5 <i class="fas fa-info-circle"></i></h3>
+    </div>
+    <div style="display:flex;align-items:flex-end;justify-content:space-between">
+      <div>
+        <p class="kpi-big">R$ 4,08<span style="font-size:11pt;color:#94a3b8;font-weight:400"> MM</span></p>
+        <p style="font-size:7pt;color:#64748b;margin-top:2px">PI: R$ 1,35MM</p>
+      </div>
+      <div class="mini-bars" style="width:62px">
+        <div style="height:14%"></div><div style="height:32%"></div><div style="height:48%"></div><div style="height:62%"></div><div style="height:88%"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Variante 3: KPI + donut -->
+  <div class="dcard">
+    <div class="dcard-title">
+      <h3>Cobertura NBC TA <i class="fas fa-info-circle"></i></h3>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <p class="kpi-big">29<span style="font-size:11pt;color:#94a3b8;font-weight:400">/29</span></p>
+        <p style="font-size:7pt;color:#64748b;margin-top:2px">qmd 8.176 chunks <span class="kpi-delta-pos">100%</span></p>
+      </div>
+      <svg viewBox="0 0 60 60" width="50" height="50" class="donut-mini">
+        <circle cx="30" cy="30" r="22" class="bg"/>
+        <circle cx="30" cy="30" r="22" class="seg" stroke-dasharray="138 138"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Variante 4: KPI status pill -->
+  <div class="dcard">
+    <div class="dcard-title">
+      <h3>Achados criticos abertos <i class="fas fa-info-circle"></i></h3>
+    </div>
+    <p class="kpi-big" style="color:#B91C1C">3</p>
+    <p style="font-size:7pt;color:#64748b;margin-top:3px">3 RELEVANTE &middot; 0 CRITICO</p>
+    <div style="display:flex;gap:4px;margin-top:8px">
+      <span style="background:#FEE2E2;color:#B91C1C;font-size:7pt;font-weight:600;padding:2px 8px;border-radius:9px">Em revisao</span>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

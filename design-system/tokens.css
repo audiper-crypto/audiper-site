@@ -1,0 +1,190 @@
+/* ========================================================================
+   AUDIPER — Design Tokens canonicos
+   Fonte de verdade: Pleito BADESPI Inovacao v7 (2026-05-18)
+   Aplicavel a relatorios A4 (HTML->PDF), dashboards, propostas, dossies.
+   Emails Gmail-safe usam inline-styles equivalentes (ver examples/02).
+   ======================================================================== */
+
+:root {
+  /* ---- PALETA PRIMARIA (claret + dourado) ---- */
+  --audiper-claret-dark:   #5c0d18;  /* claret profundo — gradientes, footer */
+  --audiper-claret:        #7a1220;  /* PRIMARY — header, sec-title, callout */
+  --audiper-claret-light:  #B91C1C;  /* claret claro — gradientes capa */
+  --audiper-gold:          #c9a962;  /* dourado — accent premium, badges */
+  --audiper-gold-deep:     #a16207;  /* dourado profundo — texto sobre gold */
+
+  /* ---- PALETA SECUNDARIA (status) ---- */
+  --audiper-graphite:      #334155;  /* corpo de texto principal */
+  --audiper-dark:          #1e293b;  /* metadata bar, rodape escuro */
+  --audiper-darker:        #0F172A;  /* gradientes escuros */
+  --audiper-blue-info:     #1a5276;  /* info (cards azuis, callouts) */
+  --audiper-green-ok:      #047857;  /* ok / positivo */
+  --audiper-amber-warn:    #d9a441;  /* atencao / observacao */
+  --audiper-red-alert:     #B91C1C;  /* alerta forte */
+
+  /* ---- NEUTROS ---- */
+  --paper:                 #FFFFFF;
+  --paper-bg:              #F6F4F1;  /* fundo de dashboard (paper warm) */
+  --paper-stone:           #EDE8DC;  /* borda warm em dcards */
+  --paper-cool:            #F8FAFC;  /* fundo alt rows */
+  --paper-rule:            #E2E8F0;  /* divisor padrao */
+  --ink-muted:             #64748B;  /* labels, captions */
+  --ink-faint:             #94a3b8;  /* placeholders */
+
+  /* ---- TIPOGRAFIA ---- */
+  --font-sans:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Outfit', 'Inter', sans-serif;      /* H1-H6, KPI big */
+  --font-serif:   'Merriweather', Georgia, serif;     /* citacoes regulatorias */
+  --font-mono:    'JetBrains Mono', 'SF Mono', monospace; /* refs, codigos */
+
+  /* ---- ESCALA (otimizada para A4 + tela) ---- */
+  --text-xs:    7pt;
+  --text-sm:    8.5pt;
+  --text-base:  10pt;
+  --text-md:    11pt;
+  --text-lg:    14pt;
+  --text-xl:    18pt;   /* KPI big */
+  --text-2xl:   24pt;   /* H2 capa */
+  --text-3xl:   36pt;   /* H1 capa */
+
+  /* ---- RADIUS ---- */
+  --radius-sm:   6px;
+  --radius:      10px;
+  --radius-lg:   14px;
+  --radius-pill: 20px;
+  --radius-full: 9999px;
+
+  /* ---- ELEVATION ---- */
+  --shadow-card:    0 1px 3px rgba(0,0,0,.04), 0 4px 16px rgba(0,0,0,.06);
+  --shadow-glass:   0 8px 32px rgba(0,0,0,.08);
+  --shadow-emboss:  inset 0 1px 0 rgba(255,255,255,.3);
+
+  /* ---- MOTION ---- */
+  --pulse-duration: 3s;     /* radar — aneis concentricos do mapa */
+  --radar-spin:     4s;     /* logo radar — varredura completa */
+}
+
+/* ========================================================================
+   COMPONENTES BASE
+   ======================================================================== */
+
+/* Capa de relatorio (PDF A4) */
+.audiper-capa {
+  background: linear-gradient(135deg, #0a0608 0%, var(--audiper-claret-dark) 35%, var(--audiper-claret) 65%, var(--audiper-claret-light) 100%);
+  color: var(--paper);
+}
+
+/* Letterhead header (4px gradiente claret no topo) */
+.lh-header {
+  background: linear-gradient(180deg, #FFF 0%, #F9FAFB 100%);
+  border-bottom: 1px solid var(--paper-rule);
+  padding: 7px 18px;
+  position: relative;
+  height: 42px;
+}
+.lh-header::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--audiper-claret-dark), var(--audiper-claret), var(--audiper-claret-light));
+}
+
+/* Section title */
+.sec-t {
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--audiper-claret);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid var(--audiper-claret);
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+/* Glass card canonico */
+.glass {
+  background: rgba(255,255,255,.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-glass);
+}
+.glass-dark {
+  background: rgba(30,41,59,.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: var(--radius);
+}
+
+/* Dashboard card (paper warm, sem blur — PDF-safe) */
+.dcard {
+  background: var(--paper);
+  border-radius: var(--radius-lg);
+  padding: 9px 12px;
+  border: 1px solid var(--paper-stone);
+  box-shadow: 0 1px 3px rgba(0,0,0,.03);
+}
+
+/* KPI canonico */
+.kpi-big {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 800;
+  color: var(--audiper-claret);
+  line-height: 1;
+}
+.kpi-label {
+  font-size: var(--text-xs);
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 3px;
+}
+
+/* Pills de status (mesma DNA dos achados) */
+.pill { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: var(--text-xs); font-weight: 600; }
+.pill-danger { background: #FEE2E2; color: #B91C1C; }
+.pill-warn   { background: #FEF3C7; color: #A16207; }
+.pill-info   { background: #DBEAFE; color: #1E40AF; }
+.pill-ok     { background: #DCFCE7; color: #15803D; }
+
+/* Logo radar — REGRA: nunca esticar. SEMPRE aspect-ratio 1:1. */
+.logo-radar {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;     /* nunca contain com fundo (sem letterbox) */
+  border-radius: 50%;
+  border: 3px solid rgba(201,169,98,.5);
+}
+.logo-radar--sm { width: 28px;  height: 28px; }
+.logo-radar--md { width: 64px;  height: 64px; }
+.logo-radar--lg { width: 96px;  height: 96px; }
+.logo-radar--hero { width: 160px; height: 160px; }
+
+/* Print fallback — backdrop-filter nao funciona em Chromium PDF */
+@media print {
+  @page { size: A4; margin: 0; }
+  .glass {
+    background: rgba(255,255,255,.85) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .glass-dark {
+    background: rgba(15,23,42,.85) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: 1px solid rgba(201,169,98,.35) !important;
+  }
+}
+
+/* Marca dagua CONFIDENCIAL — sempre presente ate aprovacao final */
+.watermark::after {
+  content: 'CONFIDENCIAL';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  font-family: var(--font-display);
+  font-size: 96pt; font-weight: 900;
+  color: #000; opacity: 0.04;
+  letter-spacing: 8px;
+  white-space: nowrap; pointer-events: none; z-index: 9999;
+}

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AUDIPER · Dossie Visual Law · Exemplo canonico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Merriweather:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<script>
+tailwind.config = { theme: { extend: {
+  colors: { audiper: { red:'#7a1220', darkred:'#5c0d18', light:'#B91C1C', gold:'#c9a962', dark:'#1e293b', graphite:'#334155' } },
+  fontFamily: { sans:['Inter','sans-serif'], display:['Outfit','sans-serif'], serif:['Merriweather','serif'], mono:['JetBrains Mono','monospace'] }
+}}}
+</script>
+<style>
+*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;margin:0;padding:0;box-sizing:border-box}
+body{background:#E5E7EB;font-family:'Inter',sans-serif;color:#334155;font-size:10pt;line-height:1.45}
+h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
+.a4-page{width:210mm;height:297mm;margin:10px auto;background:white;box-shadow:0 4px 20px rgba(0,0,0,.15);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.page-wrapper{width:100%;height:297mm;display:flex;flex-direction:column}
+.page-content{flex:1;padding:14px 20px;overflow:hidden}
+@media print{
+  @page{size:A4;margin:0}
+  html,body{width:210mm;margin:0;padding:0;background:white}
+  .a4-page{margin:0;box-shadow:none;page-break-after:always}
+  .a4-page:last-child{page-break-after:auto}
+  .glass-dark{background:rgba(15,23,42,.85)!important;backdrop-filter:none!important;border:1px solid rgba(201,169,98,.35)!important}
+}
+.lh-header{background:linear-gradient(180deg,#FFF,#F9FAFB);border-bottom:1px solid #E5E7EB;padding:7px 18px;position:relative;height:42px}
+.lh-header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#5c0d18,#7a1220,#B91C1C)}
+.lh-footer{background:linear-gradient(135deg,#1E293B,#0F172A);color:white;padding:7px 18px;position:relative;height:36px}
+.lh-footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#5c0d18,#7a1220,#B91C1C)}
+.pg-num{display:inline-flex;align-items:center;gap:4px;background:linear-gradient(135deg,#7a1220,#5c0d18);padding:3px 10px;border-radius:12px;color:white;font-weight:700;font-size:9pt}
+.glass-dark{background:rgba(30,41,59,.4);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.15);border-radius:12px}
+.dcard{background:#fff;border-radius:14px;padding:9px 12px;border:1px solid #EDE8DC;box-shadow:0 1px 3px rgba(0,0,0,.03)}
+.dcard-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
+.dcard-title h3{font-size:7.5pt;color:#64748b;font-weight:600;display:flex;align-items:center;gap:4px}
+.kpi-big{font-family:'Outfit';font-size:18pt;font-weight:800;color:#1e293b;line-height:1}
+.kpi-claret{color:#7a1220}
+.kpi-delta-pos{background:#DCFCE7;color:#15803D;font-size:6pt;font-weight:700;padding:1px 5px;border-radius:7px;border:1px solid #BBF7D0}
+.ring-chip{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:9px;font-size:6.5pt;font-weight:700;color:white}
+.rc-1{background:linear-gradient(135deg,#7a1220,#5c0d18)}
+.rc-2{background:linear-gradient(135deg,#B91C1C,#7a1220)}
+.rc-3{background:linear-gradient(135deg,#c9a962,#a16207)}
+.rc-4{background:linear-gradient(135deg,#1a5276,#0e3a52)}
+.rc-5{background:linear-gradient(135deg,#059669,#047857)}
+.map-wrap{position:relative;width:100%;height:320px;border-radius:10px;overflow:hidden;background:#e7eef0;border:1px solid #EDE8DC}
+.map-wrap img{width:100%;height:100%;object-fit:cover}
+.map-wrap svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.pulse-r{animation:pulse 3s ease-in-out infinite}
+.pulse-r.d2{animation-delay:.4s}.pulse-r.d3{animation-delay:.8s}.pulse-r.d4{animation-delay:1.2s}.pulse-r.d5{animation-delay:1.6s}
+@keyframes pulse{0%,100%{opacity:.95}50%{opacity:.55}}
+.badge-40{background:linear-gradient(135deg,#F59E0B,#D97706);color:white;padding:3px 10px;border-radius:15px;font-size:7pt;font-weight:700}
+.badge-vl{background:linear-gradient(135deg,#8B5CF6,#7C3AED);color:white;padding:3px 10px;border-radius:15px;font-size:7pt;font-weight:700}
+.badge-iso{background:linear-gradient(135deg,#059669,#047857);color:white;padding:3px 10px;border-radius:15px;font-size:7pt;font-weight:700}
+.a4-page::after{content:'CONFIDENCIAL';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-45deg);font-size:96pt;font-weight:900;color:#000;opacity:.04;letter-spacing:8px;font-family:'Outfit';pointer-events:none;z-index:9999;white-space:nowrap}
+/* logo radar: nunca esticar */
+.logo-radar{aspect-ratio:1/1;object-fit:cover;border-radius:50%}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     PAGINA 1 - CAPA (pattern canonico Pleito BADESPI v7)
+     ============================================================ -->
+<div class="a4-page">
+<div class="page-wrapper" style="padding:0">
+<div class="relative w-full h-full" style="background:linear-gradient(135deg,#0a0608 0%,#2d0a14 35%,#5c0d18 65%,#7a1220 100%)">
+  <div class="absolute inset-0" style="background-image:url('../assets/contabil_1240_600.png');background-size:cover;background-position:center;opacity:.95;mix-blend-mode:multiply"></div>
+  <div class="absolute inset-0" style="background:linear-gradient(180deg,rgba(10,6,8,.55) 0%,rgba(92,13,24,.4) 35%,rgba(122,18,32,.5) 70%,rgba(10,6,8,.7) 100%)"></div>
+  <div class="absolute inset-0" style="background-image:radial-gradient(circle at 20% 30%,rgba(201,169,98,.22) 0%,transparent 50%),radial-gradient(circle at 80% 70%,rgba(185,28,28,.18) 0%,transparent 50%)"></div>
+
+  <div class="relative z-10 h-full flex flex-col justify-between p-9">
+    <div class="flex items-start justify-between">
+      <div class="flex items-center gap-4">
+        <img src="../assets/logo-radar-loop.gif" alt="AUDIPER" class="logo-radar" style="width:80px;height:80px;border:3px solid rgba(201,169,98,.5)">
+        <div>
+          <h1 class="text-3xl font-bold text-white font-display tracking-wide">AUDIPER<span class="text-audiper-gold">&reg;</span></h1>
+          <p class="text-white/70 text-sm uppercase tracking-widest">Auditores e Peritos Independentes</p>
+          <p class="text-white/50 text-xs mt-1">CRC/PI 000023/O &middot; CNAI 4.711 &middot; Desde 1985</p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-2 items-end">
+        <span class="badge-40"><i class="fas fa-award mr-1"></i>40 ANOS</span>
+        <span class="badge-vl"><i class="fas fa-eye mr-1"></i>VISUAL LAW</span>
+        <span class="badge-iso"><i class="fas fa-shield-alt mr-1"></i>ISO 27001</span>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <p class="text-audiper-gold text-xs uppercase tracking-[0.3em] mb-3 font-semibold">Dossie de Auditoria &middot; Exemplo canonico Visual Law</p>
+      <h2 class="text-4xl font-bold text-white font-display mb-2 leading-tight">EXERCICIO 2025<br>RELATORIO INTEGRADO</h2>
+      <p class="text-base text-white/85 mt-3">Balanco, DRE, DFC cruzados &middot; Mapa de Reflexos Regionais &middot; AV/AH &middot; PAA &middot; Parecer NBC TA 700</p>
+      <p class="text-[11px] text-audiper-gold uppercase tracking-[0.25em] font-bold mt-3"><i class="fas fa-shield-halved mr-1"></i>Auditoria Preventiva &middot; Risco Mapeado, Risco Controlado</p>
+      <div class="w-32 h-0.5 bg-gradient-to-r from-transparent via-audiper-gold to-transparent mx-auto my-5"></div>
+
+      <div class="glass-dark p-5 max-w-2xl mx-auto">
+        <p class="text-audiper-gold text-[10px] uppercase tracking-widest mb-2 font-semibold">Entidade Auditada</p>
+        <h3 class="text-xl font-bold text-white font-mono mb-2">[CLIENTE FICTICIO LTDA]</h3>
+        <p class="text-white/80 text-sm">CNPJ 00.000.000/0001-00 &middot; Setor [---] &middot; Data-base 31/12/2025</p>
+      </div>
+    </div>
+
+    <div class="flex items-end justify-between border-t border-white/10 pt-4">
+      <div>
+        <p class="text-audiper-gold/70 text-[9px] uppercase tracking-wider">Referencia AUDIPER</p>
+        <p class="text-white font-bold text-base font-mono">REL-EXEMPLO-2026/01</p>
+      </div>
+      <div class="text-center">
+        <p class="text-audiper-gold/70 text-[9px] uppercase tracking-wider">Emissao</p>
+        <p class="text-white font-bold text-base">19 de maio de 2026</p>
+      </div>
+      <div class="text-right">
+        <p class="text-audiper-gold/70 text-[9px] uppercase tracking-wider mb-1">Norma base</p>
+        <span style="background:linear-gradient(135deg,#B91C1C,#7F1D1D);color:white;padding:4px 12px;border-radius:20px;font-size:8pt;font-weight:700"><i class="fas fa-book mr-1"></i>NBC TA 700 / CPC 26</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ============================================================
+     PAGINA 2 - MAPA DE REFLEXOS REGIONAIS + 3 KPIs (pattern Rocha Filho pg.2)
+     ============================================================ -->
+<div class="a4-page">
+<div class="page-wrapper">
+  <header class="lh-header"><div class="flex items-center justify-between h-full">
+    <div class="flex items-center gap-2">
+      <img src="../assets/logo-radar-loop.gif" alt="AUDIPER" class="logo-radar" style="width:28px;height:28px">
+      <div><h1 class="text-xs font-bold font-display text-gray-800">AUDIPER<span class="text-audiper-red">&reg;</span></h1><p class="text-[9px] text-gray-500">Dossie Visual Law &middot; Exemplo</p></div>
+    </div>
+    <div class="text-center"><p class="text-[9px] text-gray-400 uppercase">Mapa de Reflexos Regionais</p><p class="text-xs font-bold text-audiper-red font-mono">REL-EXEMPLO-2026/01</p></div>
+    <div class="text-right text-[9px] text-gray-400"><p>Cliente: <strong class="text-gray-700 font-mono">[CLIENTE]</strong></p><p>Emissao: <strong class="text-gray-700">19/05/2026</strong></p></div>
+  </div></header>
+
+  <div class="page-content" style="padding:10px 14px;background:#F6F4F1">
+
+    <div class="flex items-end justify-between mb-2 pb-1" style="border-bottom:1px solid #EDE8DC">
+      <div>
+        <h2 style="font-family:'Outfit';font-size:18pt;font-weight:800;color:#1e293b;line-height:1">Mapa de Reflexos Regionais</h2>
+        <p style="font-size:8pt;color:#64748b;margin-top:2px">Cinco aneis concentricos &middot; Nucleo AUDIPER &rarr; Capital &rarr; Entorno &rarr; Estado &rarr; Nordeste &middot; base OpenStreetMap</p>
+      </div>
+    </div>
+
+    <!-- 3 KPI CARDS -->
+    <div class="grid grid-cols-3 gap-2 mb-2">
+      <div class="dcard">
+        <div class="dcard-title"><h3>Clientes ativos NE <i class="fas fa-info-circle"></i></h3></div>
+        <p class="kpi-big">13<span style="font-size:10pt;color:#94a3b8;font-weight:400"> auditorias</span></p>
+        <p style="font-size:6.5pt;color:#64748b;margin-top:2px">2 LIVE TG &middot; 11 em on-boarding <span class="kpi-delta-pos">+38% a/a</span></p>
+        <div class="flex gap-1 mt-2">
+          <span class="ring-chip rc-1"><i class="fas fa-circle" style="font-size:5pt"></i>PI 8</span>
+          <span class="ring-chip rc-3"><i class="fas fa-circle" style="font-size:5pt"></i>NE 5</span>
+        </div>
+      </div>
+      <div class="dcard">
+        <div class="dcard-title"><h3>PTAs assinados 2026 <i class="fas fa-info-circle"></i></h3></div>
+        <p class="kpi-big kpi-claret">142</p>
+        <p style="font-size:6.5pt;color:#64748b;margin-top:2px">NBC TA 230 &middot; formalizacao &le; 60d <span class="kpi-delta-pos">100% on-time</span></p>
+      </div>
+      <div class="dcard">
+        <div class="dcard-title"><h3>Cobertura normativa <i class="fas fa-info-circle"></i></h3></div>
+        <p class="kpi-big">29<span style="font-size:10pt;color:#94a3b8;font-weight:400"> NBC TA</span></p>
+        <p style="font-size:6.5pt;color:#64748b;margin-top:2px">8.176 chunks &middot; qmd indexado &middot; auditor-evidence cruzando</p>
+      </div>
+    </div>
+
+    <!-- MAPA + LEGENDA -->
+    <div class="grid grid-cols-3 gap-2 mb-2">
+      <div class="col-span-2 dcard" style="padding:8px 9px">
+        <div class="dcard-title"><h3><i class="fas fa-map-location-dot" style="color:#7a1220"></i> Mapa de irradiacao &middot; OSM Nordeste</h3></div>
+        <div class="map-wrap">
+          <img src="../assets/mapa_ne_cropped.png" alt="Mapa Nordeste"/>
+          <svg viewBox="0 0 310 340" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <radialGradient id="g5" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#059669" stop-opacity=".22"/><stop offset="100%" stop-color="#059669" stop-opacity="0"/></radialGradient>
+              <radialGradient id="g4" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#1a5276" stop-opacity=".25"/><stop offset="100%" stop-color="#1a5276" stop-opacity="0"/></radialGradient>
+              <radialGradient id="g3" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#c9a962" stop-opacity=".32"/><stop offset="100%" stop-color="#c9a962" stop-opacity="0"/></radialGradient>
+              <radialGradient id="g2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#B91C1C" stop-opacity=".38"/><stop offset="100%" stop-color="#B91C1C" stop-opacity="0"/></radialGradient>
+              <radialGradient id="g1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#7a1220" stop-opacity="1"/><stop offset="100%" stop-color="#5c0d18" stop-opacity="1"/></radialGradient>
+            </defs>
+            <circle cx="106" cy="114" r="230" fill="url(#g5)" stroke="#059669" stroke-opacity=".45" stroke-width=".8" stroke-dasharray="3 2" class="pulse-r d5"/>
+            <circle cx="106" cy="114" r="140" fill="url(#g4)" stroke="#1a5276" stroke-opacity=".55" stroke-width=".8" stroke-dasharray="3 2" class="pulse-r d4"/>
+            <circle cx="106" cy="114" r="80"  fill="url(#g3)" stroke="#c9a962" stroke-opacity=".7"  stroke-width="1"   stroke-dasharray="3 2" class="pulse-r d3"/>
+            <circle cx="106" cy="114" r="38"  fill="url(#g2)" stroke="#B91C1C" stroke-opacity=".8"  stroke-width="1.2" stroke-dasharray="2 2" class="pulse-r d2"/>
+            <circle cx="106" cy="114" r="10"  fill="url(#g1)" stroke="#fff" stroke-width="1.5" class="pulse-r"/>
+            <g font-family="Inter" font-weight="700">
+              <text x="118" y="111" font-size="6" fill="#7a1220">AUDIPER</text>
+              <text x="118" y="118" font-size="5.5" fill="#5c0d18">Teresina/PI</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="dcard">
+        <div class="dcard-title"><h3>Legenda dos aneis</h3></div>
+        <div class="space-y-2 mt-2 text-[7.5pt]">
+          <div class="flex items-center gap-2"><span class="ring-chip rc-1">1</span><div><strong>Nucleo</strong><br><span style="color:#64748b">Sede AUDIPER (Centro/Teresina)</span></div></div>
+          <div class="flex items-center gap-2"><span class="ring-chip rc-2">2</span><div><strong>Capital</strong><br><span style="color:#64748b">Teresina + Timon (RM)</span></div></div>
+          <div class="flex items-center gap-2"><span class="ring-chip rc-3">3</span><div><strong>Entorno</strong><br><span style="color:#64748b">Floriano, Picos, Parnaiba</span></div></div>
+          <div class="flex items-center gap-2"><span class="ring-chip rc-4">4</span><div><strong>Estado</strong><br><span style="color:#64748b">Piaui inteiro</span></div></div>
+          <div class="flex items-center gap-2"><span class="ring-chip rc-5">5</span><div><strong>Nordeste</strong><br><span style="color:#64748b">9 estados &middot; capilaridade prevista</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CALLOUT INFERIOR -->
+    <div style="padding:10px 14px;border-radius:10px;border-left:4px solid #7a1220;background:#FEF2F2;font-size:9pt;line-height:1.5;margin-top:6px">
+      <strong style="font-family:'Outfit';color:#7a1220">Observacao tecnica.</strong> O mapa de reflexos integra o capitulo de <strong>materialidade qualitativa</strong> (NBC TA 320). Cada anel pondera o peso de impacto regional do achado para fins de juizo do auditor sobre relevancia. <em>Pattern canonico replicavel em pareceres, propostas e dossies.</em>
+    </div>
+
+  </div>
+
+  <footer class="lh-footer"><div class="flex items-center justify-between h-full">
+    <div class="flex items-center gap-2"><img src="../assets/logo-radar-loop.gif" alt="AUDIPER" class="logo-radar" style="width:18px;height:18px"><span class="text-[8pt] font-bold font-mono">AUDIPER &middot; CRC/PI 000023/O</span></div>
+    <div class="text-[8pt] text-white/70">Dossie Visual Law &middot; Exemplo canonico &middot; Design System v1.0</div>
+    <div class="pg-num">2 <span style="color:rgba(255,255,255,.5);font-size:7pt">/</span> 2</div>
+  </div></footer>
+</div>
+</div>
+
+</body>
+</html>

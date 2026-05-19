@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>AUDIPER &middot; Timeline Visual Law</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+  body{background:#F6F4F1;color:#334155;font-family:'Inter';padding:40px;font-size:10pt}
+  h1{font-family:'Outfit';font-size:22pt;font-weight:800;color:#1e293b;margin-bottom:6px}
+  .sub{color:#64748b;margin-bottom:24px}
+  .frame{max-width:680px;background:#fff;border:1px solid #EDE8DC;border-radius:14px;padding:24px 30px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+  .tl-item{position:relative;padding-left:38px;padding-bottom:18px}
+  .tl-item::before{content:'';position:absolute;left:13px;top:28px;bottom:0;width:2px;background:linear-gradient(180deg,#7a1220,#E2E8F0)}
+  .tl-item:last-child::before{display:none}
+  .tl-dot{position:absolute;left:0;top:4px;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11pt;font-family:'Outfit';color:white}
+  .d-claret{background:linear-gradient(135deg,#7a1220,#5c0d18)}
+  .d-blue{background:linear-gradient(135deg,#1a5276,#0e3a52)}
+  .d-gold{background:linear-gradient(135deg,#c9a962,#a16207)}
+  .d-green{background:linear-gradient(135deg,#059669,#047857)}
+  .tl-date{font-size:8.5pt;color:#64748b;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+  .tl-title{font-family:'Outfit';font-size:12pt;font-weight:800;color:#1e293b;margin-top:2px;margin-bottom:4px}
+  .tl-desc{font-size:9.5pt;color:#475569;line-height:1.55}
+  .tl-pill{display:inline-block;padding:2px 8px;border-radius:10px;font-size:7.5pt;font-weight:700;margin-top:5px}
+  .pill-ok{background:#DCFCE7;color:#15803D;border:1px solid #BBF7D0}
+  .pill-info{background:#DBEAFE;color:#1E40AF;border:1px solid #BFDBFE}
+  .pill-warn{background:#FEF3C7;color:#A16207;border:1px solid #FDE68A}
+</style>
+</head>
+<body>
+
+<h1>Timeline Visual Law</h1>
+<p class="sub">Pattern canonico para cronogramas, fases NBC TA (A &rarr; G), planos de acao e historico de comunicacoes.</p>
+
+<div class="frame">
+
+  <div class="tl-item">
+    <div class="tl-dot d-claret">A</div>
+    <div class="tl-date">21/01/2026 &middot; Aceitacao &middot; NBC TA 210</div>
+    <div class="tl-title">Proposta assinada e termos de engajamento</div>
+    <div class="tl-desc">PROP-CLIENTE-2026/01 aceita pela diretoria. Carta de independencia (NBC TA 200) e termos formalizados.</div>
+    <span class="tl-pill pill-ok"><i class="fas fa-check"></i> Concluido</span>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-dot d-blue">B</div>
+    <div class="tl-date">15/02/2026 &middot; Planejamento &middot; NBC TA 300/315/320</div>
+    <div class="tl-title">Materialidade e mapa de riscos</div>
+    <div class="tl-desc">Materialidade global 2% ROL, execucao 75%, trivial 5%. 9 riscos significativos mapeados, 3 com resposta detalhada (NBC TA 330).</div>
+    <span class="tl-pill pill-ok"><i class="fas fa-check"></i> Concluido</span>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-dot d-gold">C/D</div>
+    <div class="tl-date">18/03/2026 &middot; Execucao &middot; NBC TA 500/530</div>
+    <div class="tl-title">Testes substantivos e PTAs assinados</div>
+    <div class="tl-desc">28 PTAs formalizados em &le; 60 dias (NBC TA 230). 5 achados [REG], 3 [AUD], 1 [CASO]. Mapa de Reflexos atualizado.</div>
+    <span class="tl-pill pill-info"><i class="fas fa-spinner"></i> Em curso (76%)</span>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-dot d-claret">E</div>
+    <div class="tl-date">02/06/2026 &middot; Revisao &middot; NBC TA 220</div>
+    <div class="tl-title">Revisao do socio responsavel</div>
+    <div class="tl-desc">Cross-check de evidencias, validacao de juizo profissional, revisao de cadeia (pta-reviewer subagent).</div>
+    <span class="tl-pill pill-warn"><i class="fas fa-clock"></i> Programado</span>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-dot d-green">F/G</div>
+    <div class="tl-date">20/06/2026 &middot; Conclusao &middot; NBC TA 700/705/706</div>
+    <div class="tl-title">Parecer emitido + Carta ao Administracao</div>
+    <div class="tl-desc">Relatorio Visual Law A4 + parecer NBC TA 700 + carta NBC TA 260. Entrega via Gmail + Telegram do cliente.</div>
+    <span class="tl-pill pill-warn"><i class="fas fa-clock"></i> Programado</span>
+  </div>
+
+</div>
+
+</body>
+</html>

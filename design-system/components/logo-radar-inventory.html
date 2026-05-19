@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>AUDIPER &middot; Inventario oficial dos logos radar</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#F6F4F1;color:#334155;font-family:'Inter';padding:40px;font-size:10pt;line-height:1.5}
+  .hero{max-width:1200px;margin:0 auto 28px;background:linear-gradient(135deg,#0a0608 0%,#5c0d18 60%,#7a1220 100%);color:#fff;border-radius:18px;padding:32px 40px;display:flex;align-items:center;gap:28px}
+  .hero img{width:96px;height:96px;border-radius:50%;border:3px solid rgba(201,169,98,.55);object-fit:cover}
+  .hero h1{font-family:'Outfit';font-size:24pt;font-weight:900;letter-spacing:-.01em}
+  .hero p{color:#cbd5e1;margin-top:8px;max-width:680px;font-size:11pt}
+  .hero .tag{display:inline-block;margin-top:10px;background:rgba(201,169,98,.18);border:1px solid rgba(201,169,98,.5);color:#c9a962;font-size:10pt;padding:4px 12px;border-radius:12px;font-weight:700}
+
+  h2{color:#7a1220;font-family:'Outfit';font-size:14pt;font-weight:800;letter-spacing:.15em;text-transform:uppercase;margin:32px auto 14px;max-width:1200px}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1200px;margin:0 auto}
+  .card{background:#fff;border:1px solid #EDE8DC;border-radius:14px;padding:20px 22px;box-shadow:0 1px 3px rgba(0,0,0,.04),0 4px 16px rgba(0,0,0,.06)}
+  .card.dark{background:linear-gradient(135deg,#1e293b,#0F172A);color:#fff;border:1px solid rgba(201,169,98,.35)}
+  .card.dark h3,.card.dark .filename{color:#fff}
+  .card.dark .meta{color:#cbd5e1}
+  .card .preview{display:flex;align-items:center;justify-content:center;height:140px;border-radius:10px;background:#F4F0EA;margin-bottom:14px;overflow:hidden}
+  .card.dark .preview{background:rgba(0,0,0,.3)}
+  .card .preview img{object-fit:contain;max-width:100%;max-height:100%}
+  .card h3{font-family:'Outfit';font-size:13pt;font-weight:800;color:#1e293b}
+  .card .filename{font-family:'JetBrains Mono';font-size:9pt;color:#7a1220;background:#FEF2F2;padding:3px 8px;border-radius:6px;display:inline-block;margin-top:3px;font-weight:600}
+  .card .meta{font-size:9pt;color:#64748b;margin-top:10px;line-height:1.55}
+  .card .use{margin-top:10px;background:#F8FAFC;border-left:3px solid #c9a962;padding:8px 12px;font-size:9pt;border-radius:0 6px 6px 0}
+  .card .use strong{color:#7a1220;display:block;font-size:8pt;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
+
+  .rules{max-width:1200px;margin:32px auto 0;background:#fff;border:2px solid #7a1220;border-radius:14px;padding:24px 28px}
+  .rules h2{margin:0 0 14px;color:#7a1220}
+  .rules ol{padding-left:24px;font-size:10.5pt;line-height:1.7}
+  .rules ol li{margin-bottom:6px}
+  .rules code{background:#F4F0EA;padding:2px 7px;border-radius:4px;font-family:'JetBrains Mono';font-size:9.5pt;color:#5c0d18}
+
+  .dont{background:#FEF2F2;border-left:4px solid #B91C1C;padding:14px 18px;border-radius:6px;margin-top:14px}
+  .dont strong{color:#B91C1C;text-transform:uppercase;font-size:9pt;letter-spacing:.1em}
+  .dont p{margin-top:4px;font-size:10pt;color:#7a1220}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <img src="../assets/radar-500-transparent.gif" alt="AUDIPER radar"/>
+  <div>
+    <h1>Logo Radar &middot; Inventario oficial</h1>
+    <p>Nove variantes canonicas do logo radar AUDIPER. Cada formato tem um uso preferencial baseado em peso, fundo (transparente vs solido) e contexto (impresso, email, web, video).</p>
+    <span class="tag"><strong>Regra inegociavel:</strong> sempre aspect-ratio 1:1 &middot; nunca esticar</span>
+  </div>
+</div>
+
+<h2>Variantes animadas (GIF)</h2>
+<div class="grid">
+
+  <div class="card">
+    <div class="preview"><img src="../assets/radar-avatar.gif" alt="" style="width:96px;height:96px;border-radius:50%"/></div>
+    <h3>radar-avatar.gif</h3>
+    <span class="filename">32 KB &middot; pequeno</span>
+    <p class="meta">Versao otimizada para icones &middot; redondo &middot; fundo solido escuro. Loop 4s da varredura.</p>
+    <div class="use"><strong>Uso preferencial</strong>Headers/footers de email + letterhead PDF (18-40px) &middot; avatar Telegram/IG &middot; favicon @192</div>
+  </div>
+
+  <div class="card dark">
+    <div class="preview"><img src="../assets/radar-500-transparent.gif" alt="" style="width:140px;height:140px"/></div>
+    <h3>radar-500-transparent.gif</h3>
+    <span class="filename">94 KB &middot; medio &middot; transparente</span>
+    <p class="meta">Versao TRANSPARENTE 500x500 &middot; aro dourado &middot; perfeita para sobrepor em qualquer fundo (claret, gradiente, foto).</p>
+    <div class="use"><strong>Uso preferencial</strong>Hero de landing/proposta &middot; capa de relatorio sobre gradiente claret &middot; storyboard de Reel beat 4 (CTA)</div>
+  </div>
+
+  <div class="card">
+    <div class="preview"><img src="../assets/radar-500.gif" alt="" style="width:140px;height:140px;border-radius:50%"/></div>
+    <h3>radar-500.gif</h3>
+    <span class="filename">108 KB &middot; medio &middot; opaco</span>
+    <p class="meta">Versao 500x500 com fundo solido escuro embutido &middot; nao requer container colorido.</p>
+    <div class="use"><strong>Uso preferencial</strong>Dashboard interno &middot; thumbnail de PDF preview &middot; quando o container nao tem cor de marca</div>
+  </div>
+
+  <div class="card">
+    <div class="preview"><img src="../assets/radar-1080.gif" alt="" style="width:140px;height:140px;border-radius:50%"/></div>
+    <h3>radar-1080.gif</h3>
+    <span class="filename">364 KB &middot; hi-res</span>
+    <p class="meta">Versao 1080x1080 alta resolucao &middot; loop 4s &middot; ideal para midias visuais grandes.</p>
+    <div class="use"><strong>Uso preferencial</strong>Capa de carrossel Instagram &middot; thumbnail YouTube &middot; banner LinkedIn &middot; hero shot Reel</div>
+  </div>
+
+  <div class="card">
+    <div class="preview"><img src="../assets/logo-radar-loop.gif" alt="" style="width:140px;height:140px;border-radius:50%"/></div>
+    <h3>logo-radar-loop.gif</h3>
+    <span class="filename">286 KB &middot; loop oficial</span>
+    <p class="meta">Loop oficial canonico (em uso desde 05/2026) &middot; varredura suave &middot; sem texto.</p>
+    <div class="use"><strong>Uso preferencial</strong>GitHub raw publico para emails HTML hospedados (Gmail-safe) &middot; sticker Telegram &middot; ja referenciado em <code>raw.githubusercontent.com/audiper-crypto/audiper-site</code></div>
+  </div>
+
+  <div class="card">
+    <div class="preview"><img src="../assets/radar-scan-200.gif" alt="" style="width:140px;height:140px"/></div>
+    <h3>radar-scan-200.gif</h3>
+    <span class="filename">280 KB &middot; com efeito scan</span>
+    <p class="meta">Variante com efeito de scan/varredura mais agressivo &middot; tom ciberseguranca.</p>
+    <div class="use"><strong>Uso preferencial</strong>Materiais ISO 27001 / ciberseguranca &middot; auditoria de sistemas (Audix) &middot; Reels de seguranca</div>
+  </div>
+
+</div>
+
+<h2>Variantes estaticas e video</h2>
+<div class="grid">
+
+  <div class="card">
+    <div class="preview"><img src="../assets/logo-radar.png" alt="" style="width:140px;height:140px;border-radius:50%"/></div>
+    <h3>logo-radar.png</h3>
+    <span class="filename">476 KB &middot; PNG estatico</span>
+    <p class="meta">Frame estatico do radar &middot; fundo solido &middot; para mediums que nao suportam animacao.</p>
+    <div class="use"><strong>Uso preferencial</strong>PDF final (Chromium nao anima GIF em print) &middot; Word / Excel &middot; PowerPoint &middot; impressao</div>
+  </div>
+
+  <div class="card">
+    <div class="preview"><img src="../assets/logo-audiper.png" alt="" style="max-width:160px;max-height:80px"/></div>
+    <h3>logo-audiper.png</h3>
+    <span class="filename">horizontal</span>
+    <p class="meta">Assinatura horizontal AUDIPER + texto &middot; usar quando o layout exige logo extenso (ex: rodape email Gmail-safe).</p>
+    <div class="use"><strong>Uso preferencial</strong>Rodape de email institucional &middot; cabecalho de planilhas PTA &middot; lista de patrocinadores</div>
+  </div>
+
+  <div class="card dark">
+    <div class="preview"><video src="../assets/radar-loop.mp4" autoplay muted loop playsinline style="width:140px;height:140px;border-radius:50%;object-fit:cover"></video></div>
+    <h3>radar-loop.mp4</h3>
+    <span class="filename">202 KB &middot; MP4 H.264</span>
+    <p class="meta">Versao em video MP4 do loop &middot; melhor compressao que GIF &middot; suporta transparencia parcial.</p>
+    <div class="use"><strong>Uso preferencial</strong>Reels (Higgsfield/Veo bumper) &middot; OBS overlay &middot; HyperFrames composition &middot; transicoes de video</div>
+  </div>
+
+</div>
+
+<div class="rules">
+  <h2>Regras de uso obrigatorias</h2>
+  <ol>
+    <li><strong>Aspect-ratio sempre 1:1.</strong> Quadrado puro ou circular (border-radius 50%). Usar <code>object-fit: cover</code> se precisar enquadrar. <strong>Nunca</strong> <code>object-fit: fill</code> nem dimensoes desiguais.</li>
+    <li><strong>Aro dourado opcional</strong> em fundos claret: <code>border: 3px solid rgba(201,169,98,.55)</code>. Tamanho do aro proporcional (2px ate 40px, 3px de 64-160px).</li>
+    <li><strong>Tamanhos pre-aprovados:</strong> 18px (footer), 28px (header letterhead), 40px (email header), 64px (capa secundaria), 96px (capa principal), 160px (hero Reel).</li>
+    <li><strong>Email Gmail-safe:</strong> usar <code>radar-avatar.gif</code> (32KB) para header de 40px. Hospedar em <code>raw.githubusercontent.com/audiper-crypto/audiper-site</code> se o GIF local nao for embedavel.</li>
+    <li><strong>PDF impresso:</strong> usar <code>logo-radar.png</code> (estatico), pois Chromium nao anima GIF no <code>page.pdf()</code>.</li>
+    <li><strong>Reels e video:</strong> usar <code>radar-loop.mp4</code> (melhor compressao) ou <code>radar-500-transparent.gif</code> para overlay com fundo dinamico.</li>
+  </ol>
+
+  <div class="dont">
+    <strong>Nao usar</strong>
+    <p>&middot; Logo radar deformado / esticado (altura != largura). &middot; PNG estatico em hero animado (perde a sensacao "radar varrendo"). &middot; GIF em PDF final (nao anima no print). &middot; Versao escan/scan-200 fora de contexto de ciberseguranca.</p>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>AUDIPER &middot; Mapa de Reflexos Regionais</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  body{background:#F6F4F1;color:#334155;font-family:'Inter';padding:40px;font-size:10pt}
+  h1{font-family:'Outfit';font-size:22pt;font-weight:800;color:#1e293b;margin-bottom:6px}
+  .sub{color:#64748b;margin-bottom:24px}
+  .frame{max-width:760px;background:#fff;border:1px solid #EDE8DC;border-radius:14px;padding:18px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+  .map-wrap{position:relative;width:100%;height:480px;border-radius:10px;overflow:hidden;background:#e7eef0;border:1px solid #EDE8DC}
+  .map-wrap img{width:100%;height:100%;object-fit:cover}
+  .map-wrap svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  .pulse-r{animation:pulse 3s ease-in-out infinite}
+  .pulse-r.d2{animation-delay:.4s}.pulse-r.d3{animation-delay:.8s}.pulse-r.d4{animation-delay:1.2s}.pulse-r.d5{animation-delay:1.6s}
+  @keyframes pulse{0%,100%{opacity:.95}50%{opacity:.55}}
+  .legend{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px}
+  .ring-chip{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:10px;font-size:9pt;font-weight:700;color:white;width:fit-content;margin-bottom:4px}
+  .rc-1{background:linear-gradient(135deg,#7a1220,#5c0d18)}
+  .rc-2{background:linear-gradient(135deg,#B91C1C,#7a1220)}
+  .rc-3{background:linear-gradient(135deg,#c9a962,#a16207)}
+  .rc-4{background:linear-gradient(135deg,#1a5276,#0e3a52)}
+  .rc-5{background:linear-gradient(135deg,#059669,#047857)}
+  .legend-item p{font-size:8.5pt;color:#64748b;margin-top:2px}
+</style>
+</head>
+<body>
+
+<h1>Mapa de Reflexos Regionais</h1>
+<p class="sub">Pattern canonico AUDIPER &middot; 5 aneis concentricos sobre base OpenStreetMap &middot; usado em pareceres, propostas, dossies.</p>
+
+<div class="frame">
+  <div class="map-wrap">
+    <img src="../assets/mapa_ne_cropped.png" alt="Mapa Nordeste"/>
+    <svg viewBox="0 0 310 340" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="g5" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#059669" stop-opacity=".22"/><stop offset="100%" stop-color="#059669" stop-opacity="0"/></radialGradient>
+        <radialGradient id="g4" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#1a5276" stop-opacity=".25"/><stop offset="100%" stop-color="#1a5276" stop-opacity="0"/></radialGradient>
+        <radialGradient id="g3" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#c9a962" stop-opacity=".32"/><stop offset="100%" stop-color="#c9a962" stop-opacity="0"/></radialGradient>
+        <radialGradient id="g2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#B91C1C" stop-opacity=".38"/><stop offset="100%" stop-color="#B91C1C" stop-opacity="0"/></radialGradient>
+        <radialGradient id="g1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#7a1220" stop-opacity="1"/><stop offset="100%" stop-color="#5c0d18" stop-opacity="1"/></radialGradient>
+      </defs>
+      <circle cx="106" cy="114" r="230" fill="url(#g5)" stroke="#059669" stroke-opacity=".45" stroke-width=".8" stroke-dasharray="3 2" class="pulse-r d5"/>
+      <circle cx="106" cy="114" r="140" fill="url(#g4)" stroke="#1a5276" stroke-opacity=".55" stroke-width=".8" stroke-dasharray="3 2" class="pulse-r d4"/>
+      <circle cx="106" cy="114" r="80"  fill="url(#g3)" stroke="#c9a962" stroke-opacity=".7"  stroke-width="1"   stroke-dasharray="3 2" class="pulse-r d3"/>
+      <circle cx="106" cy="114" r="38"  fill="url(#g2)" stroke="#B91C1C" stroke-opacity=".8"  stroke-width="1.2" stroke-dasharray="2 2" class="pulse-r d2"/>
+      <circle cx="106" cy="114" r="10"  fill="url(#g1)" stroke="#fff" stroke-width="1.5" class="pulse-r"/>
+      <g font-family="Inter" font-weight="700">
+        <text x="118" y="111" font-size="6" fill="#7a1220">AUDIPER</text>
+        <text x="118" y="118" font-size="5.5" fill="#5c0d18">Teresina/PI</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><span class="ring-chip rc-1">1 Nucleo</span><p>Sede AUDIPER &middot; Centro</p></div>
+    <div class="legend-item"><span class="ring-chip rc-2">2 Capital</span><p>Teresina + Timon</p></div>
+    <div class="legend-item"><span class="ring-chip rc-3">3 Entorno</span><p>Floriano, Picos, Parnaiba</p></div>
+    <div class="legend-item"><span class="ring-chip rc-4">4 Estado</span><p>Piaui inteiro</p></div>
+    <div class="legend-item"><span class="ring-chip rc-5">5 NE</span><p>9 estados &middot; capilaridade</p></div>
+  </div>
+</div>
+
+</body>
+</html>

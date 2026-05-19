@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>AUDIPER &middot; Glassmorphism Cards</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  body{background:linear-gradient(135deg,#0a0608 0%,#2d0a14 35%,#5c0d18 65%,#7a1220 100%);color:#fff;font-family:'Inter',sans-serif;min-height:100vh;padding:48px 32px;position:relative}
+  body::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 30%,rgba(201,169,98,.22) 0%,transparent 50%),radial-gradient(circle at 80% 70%,rgba(185,28,28,.18) 0%,transparent 50%);pointer-events:none}
+  h1{font-family:'Outfit';font-size:24pt;font-weight:800;color:#fff;letter-spacing:-.01em;margin-bottom:6px;position:relative}
+  .sub{color:#c9a962;font-size:11pt;letter-spacing:.2em;text-transform:uppercase;margin-bottom:24px;position:relative}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;position:relative}
+  .glass{background:rgba(255,255,255,.6);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.3);border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,.08);padding:18px 20px;color:#1e293b}
+  .glass-dark{background:rgba(30,41,59,.4);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(201,169,98,.35);border-radius:14px;padding:18px 20px;color:#fff}
+  .glass-accent{background:linear-gradient(135deg,rgba(122,18,32,.18),rgba(122,18,32,.04));border:1px solid rgba(122,18,32,.4);border-radius:14px;padding:18px 20px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#fff}
+  .label{font-size:9pt;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#c9a962;margin-bottom:6px}
+  .glass .label{color:#7a1220}
+  h3{font-family:'Outfit';font-size:14pt;font-weight:800;margin-bottom:8px}
+  p{font-size:10.5pt;line-height:1.6;opacity:.9}
+</style>
+</head>
+<body>
+
+<h1>Glass Cards</h1>
+<div class="sub">3 variantes canonicas &middot; sobre fundo claret</div>
+
+<div class="grid">
+
+  <div class="glass">
+    <div class="label">Glass claro</div>
+    <h3>Dashboard / overlay claro</h3>
+    <p>Cards sobre fundo escuro institucional. Backdrop-filter 16px sobre branco 60%. Aplicar tipografia em graphite #334155 para contraste WCAG AA.</p>
+    <p style="margin-top:8px;font-size:9pt;color:#7a1220;font-weight:600">Uso: capa de dossie, hero de proposta, modal sobre Reel.</p>
+  </div>
+
+  <div class="glass-dark">
+    <div class="label">Glass escuro</div>
+    <h3>Card de identidade institucional</h3>
+    <p>Pattern oficial da capa &mdash; "Entidade Auditada / Pleiteante / Contratante". Borda dourada a 35% define area protocolar.</p>
+    <p style="margin-top:8px;font-size:9pt;color:#c9a962;font-weight:600">Uso: capa de relatorio, sumario de cliente, ficha tecnica.</p>
+  </div>
+
+  <div class="glass-accent">
+    <div class="label">Glass accent claret</div>
+    <h3>Realce de alerta tecnico</h3>
+    <p>Variante avermelhada para callouts de "ponto de atencao" ou "observacao" (nunca "ressalva" &mdash; reservado a NBC TA 705). Borda 40% define gravidade.</p>
+    <p style="margin-top:8px;font-size:9pt;color:#c9a962;font-weight:600">Uso: card de achado, banner regulatorio, alerta de prazo.</p>
+  </div>
+
+</div>
+
+<div style="position:relative;margin-top:30px;background:rgba(0,0,0,.5);padding:14px 18px;border-radius:10px;font-size:10pt;color:#c9a962;max-width:1100px">
+  <strong style="color:#fff">Fallback obrigatorio @media print:</strong> <code style="background:rgba(255,255,255,.1);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono'">background: rgba(255,255,255,.85) !important; backdrop-filter: none !important;</code> &mdash; Chromium nao renderiza backdrop-filter em PDF.
+</div>
+
+</body>
+</html>
