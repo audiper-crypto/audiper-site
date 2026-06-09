@@ -52,7 +52,31 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
 .footnote{font-size:7.5pt;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:7px;margin-top:auto}
 .cover-bg{background:linear-gradient(135deg,#0a0608 0%,#2d0a14 35%,#5c0d18 65%,#7a1220 100%)}
 .cover-grid{background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h60v60H0z' fill='none'/%3E%3Cpath d='M30 0v60M0 30h60' stroke='%23ffffff' stroke-width='.3' opacity='.06'/%3E%3C/svg%3E")}
-</style></head><body>
+
+    .svc-topbar{position:sticky;top:0;z-index:60;background:linear-gradient(135deg,#1E293B,#0F172A);border-bottom:2px solid #7a1220;padding:9px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .svc-topbar a{text-decoration:none}
+    .stb-left{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .stb-home{display:flex;align-items:center;gap:8px}
+    .stb-home img{width:30px;height:30px;border-radius:50%;border:1px solid rgba(201,169,98,.4)}
+    .stb-home b{font-family:'Outfit';font-weight:800;letter-spacing:1.5px;font-size:11pt;color:#fff}
+    .stb-link{font-size:8.5pt;font-weight:600;color:#c9a962;border:1px solid rgba(201,169,98,.35);padding:6px 13px;border-radius:99px;display:inline-flex;align-items:center;gap:6px}
+    .stb-link:hover{background:rgba(201,169,98,.12)}
+    .stb-nav{display:flex;align-items:center;gap:8px}
+    .stb-arrow{display:inline-flex;align-items:center;gap:6px;font-size:8.5pt;font-weight:600;color:#cbd5e1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);padding:6px 12px;border-radius:99px;max-width:190px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+    .stb-arrow:hover{border-color:#c9a962;color:#fff}
+    .stb-arrow.disabled{opacity:.3;pointer-events:none}
+    .svc-botnav{max-width:210mm;margin:14px auto 30px;padding:0 10px;display:flex;gap:12px;align-items:stretch}
+    .sbn{flex:1;background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:12px 16px;box-shadow:0 2px 10px rgba(0,0,0,.06);display:flex;flex-direction:column;gap:3px;justify-content:center;transition:border-color .15s,transform .15s}
+    .sbn:hover{border-color:#c9a962;transform:translateY(-2px)}
+    .sbn .d{font-size:7.5pt;text-transform:uppercase;letter-spacing:.5px;color:#94a3b8;font-weight:700}
+    .sbn .t{font-family:'Outfit';font-weight:700;font-size:10pt;color:#7a1220;line-height:1.2}
+    .sbn.next{text-align:right;align-items:flex-end}
+    .sbn.empty{visibility:hidden}
+    .sbn-all{flex:0 0 200px;align-items:center;justify-content:center;text-align:center;background:linear-gradient(135deg,#7a1220,#5c0d18);border:none}
+    .sbn-all .d{color:rgba(255,255,255,.7)}.sbn-all .t{color:#fff}
+    @media print{.svc-topbar,.svc-botnav{display:none!important}}
+    @media(max-width:600px){.stb-arrow{max-width:96px}.sbn-all{flex-basis:120px}.stb-home b{font-size:10pt}}
+    </style></head><body><div class="svc-topbar no-print"><div class="stb-left"><a class="stb-home" href="../index.html"><img src="../assets/radar-web.gif" alt=""><b>AUDIPER</b></a><a class="stb-link" href="../index.html"><i class="fas fa-diagram-project"></i> Hub</a><a class="stb-link" href="../catalogo.html"><i class="fas fa-grip"></i> Cat&aacute;logo</a></div><div class="stb-nav"><a class="stb-arrow" href="TRIB-04.html" title="Due Diligence Fiscal"><i class="fas fa-arrow-left"></i> Due Diligence Fiscal</a><a class="stb-arrow" href="TRIB-06.html" title="Planej. Tribut&aacute;rio">Planej. Tribut&aacute;rio <i class="fas fa-arrow-right"></i></a></div></div>
 <div class="a4-page"><div class="page-wrapper">
   <header class="page-header lh-header">
     <div class="flex items-center justify-between h-full">
@@ -116,4 +140,4 @@ h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
       <div class="pg-num"><span class="c">TRIB-05</span></div>
     </div>
   </footer>
-</div></div></body></html>
+</div></div><div class="svc-botnav no-print"><a class="sbn prev" href="TRIB-04.html"><span class="d"><i class="fas fa-arrow-left"></i> Anterior</span><span class="t">Due Diligence Fiscal</span></a><a class="sbn sbn-all" href="../catalogo.html"><span class="d">Ver</span><span class="t"><i class="fas fa-grip"></i> Todos os servi&ccedil;os</span></a><a class="sbn next" href="TRIB-06.html"><span class="d">Pr&oacute;ximo <i class="fas fa-arrow-right"></i></span><span class="t">Planej. Tribut&aacute;rio</span></a></div></body></html>
