@@ -1,0 +1,276 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>AUDIPER · Rol de Serviços</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;margin:0;padding:0;box-sizing:border-box}
+body{background:#E5E7EB;font-family:'Inter',sans-serif;color:#334155;font-size:10pt;line-height:1.5}
+h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
+.a4-page{width:210mm;height:297mm;margin:10px auto;background:white;box-shadow:0 4px 20px rgba(0,0,0,.15);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.page-wrapper{width:100%;height:297mm;display:flex;flex-direction:column}
+.page-header{flex-shrink:0}.page-content{flex:1;padding:14px 24px;overflow:hidden}.page-footer{flex-shrink:0}
+@media print{@page{size:A4;margin:0}html,body{width:210mm;margin:0;padding:0;background:white}
+.a4-page{margin:0;box-shadow:none;page-break-after:always}.a4-page:last-child{page-break-after:auto}.no-print{display:none!important}
+.glass-dark{background:rgba(15,23,42,.9)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border:1px solid rgba(201,169,98,.35)!important}
+.glass-claret{background:rgba(92,13,24,.92)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}}
+.lh-header{background:linear-gradient(180deg,#FFF,#F9FAFB);border-bottom:1px solid #E5E7EB;padding:7px 18px;position:relative;height:42px}
+.lh-header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#5c0d18,#7a1220,#B91C1C)}
+.lh-footer{background:linear-gradient(135deg,#1E293B,#0F172A);color:white;padding:7px 18px;position:relative;height:36px}
+.lh-footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#5c0d18,#7a1220,#B91C1C)}
+.pg-num{display:inline-flex;align-items:center;gap:4px;background:linear-gradient(135deg,#7a1220,#5c0d18);padding:3px 10px;border-radius:12px}
+.pg-num .c{font-weight:700;color:white;font-size:9pt}.pg-num .t{color:rgba(255,255,255,.8);font-size:8pt}
+.sec-banner{position:relative;min-height:78px;background:linear-gradient(135deg,#5c0d18,#7a1220,#991B1B);border-radius:0 0 12px 12px;overflow:hidden;margin-bottom:14px}
+.sec-banner::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h40v40H0z' fill='none'/%3E%3Cpath d='M20 0v40M0 20h40' stroke='%23ffffff' stroke-width='.3' opacity='.08'/%3E%3C/svg%3E")}
+.sec-banner-inner{position:relative;z-index:10;padding:13px 20px;display:flex;align-items:center;gap:15px}
+.sec-banner-icon{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.badge-area{font-size:7.5pt;font-weight:700;padding:3px 10px;border-radius:99px;letter-spacing:.05em;text-transform:uppercase;background:linear-gradient(135deg,#c9a962,#a16207);color:#3a2a04}
+.badge-norma{font-size:7.5pt;font-weight:700;padding:3px 10px;border-radius:99px;letter-spacing:.05em;text-transform:uppercase;background:linear-gradient(135deg,#1E293B,#0F172A);color:#c9a962;display:inline-block}
+.badge-new{font-size:7pt;font-weight:700;padding:2px 8px;border-radius:99px;letter-spacing:.05em;text-transform:uppercase;background:linear-gradient(135deg,#047857,#065f46);color:white}
+.sec-heading{color:#7a1220;font-family:'Outfit';font-weight:700;font-size:11pt;margin-top:14px;margin-bottom:7px;padding-bottom:4px;border-bottom:1px solid rgba(201,169,98,.3)}
+.lead{font-size:10pt;line-height:1.6;color:#334155}
+.pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px}
+.pillar{background:linear-gradient(180deg,#fff,#f8fafc);border:1px solid rgba(201,169,98,.3);border-radius:10px;padding:12px;position:relative;overflow:hidden}
+.pillar::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#7a1220,#c9a962,#7a1220)}
+.pillar .p-num{font-family:'Outfit';font-weight:800;font-size:10pt;color:#fff;background:linear-gradient(135deg,#7a1220,#5c0d18);width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.pillar .p-title{font-family:'Outfit';font-weight:700;font-size:9.5pt;color:#7a1220;margin-top:7px}
+.pillar .p-body{font-size:8.5pt;color:#475569;line-height:1.5;margin-top:5px}
+.deliv-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;margin-top:6px}
+.deliv{display:flex;gap:8px;align-items:flex-start;font-size:9pt;color:#334155}
+.deliv i{color:#7a1220;margin-top:3px;flex-shrink:0}
+.callout-nbc{border-left:4px solid #7a1220;background:rgba(122,18,32,.05);padding:11px 15px;border-radius:0 8px 8px 0;margin:10px 0}
+.callout-nbc .ct{font-family:'Outfit';font-weight:700;font-size:9pt;color:#7a1220;margin-bottom:3px}
+.callout-nbc .cb{font-size:9pt;color:#475569;line-height:1.55}
+.opn-card{background:linear-gradient(135deg,#047857,#065f46);color:white;padding:14px 18px;border-radius:12px;border-left:5px solid #c9a962;box-shadow:0 6px 22px rgba(4,120,87,.22);margin:12px 0;position:relative;overflow:hidden}
+.opn-card::before{content:'';position:absolute;top:-30%;right:-15%;width:200px;height:200px;background:radial-gradient(circle,rgba(255,255,255,.1),transparent 65%)}
+.opn-card .marker{font-size:7.8pt;color:#a7f3d0;letter-spacing:1.5px;text-transform:uppercase;font-weight:800;position:relative;z-index:2}
+.opn-card .opn{font-family:'Outfit';font-weight:600;font-size:11pt;margin-top:5px;line-height:1.4;position:relative;z-index:2}
+.info-card{background:linear-gradient(135deg,#1E293B,#0F172A);color:white;padding:13px 18px;border-radius:12px;border-left:5px solid #c9a962;margin:12px 0;position:relative;overflow:hidden}
+.info-card .marker{font-size:7.8pt;color:#c9a962;letter-spacing:1.5px;text-transform:uppercase;font-weight:800}
+.info-card .text{font-size:9.5pt;margin-top:4px;line-height:1.5;color:rgba(255,255,255,.92)}
+.publico{display:inline-block;font-size:8.5pt;background:rgba(201,169,98,.12);border:1px solid rgba(201,169,98,.3);color:#7a1220;padding:3px 10px;border-radius:99px;margin:3px 4px 0 0}
+.divider-gold{width:100%;height:1px;background:linear-gradient(90deg,transparent,#c9a962,transparent);margin:12px 0}
+.footnote{font-size:7.5pt;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:7px;margin-top:auto}
+.cover-bg{background:linear-gradient(135deg,#0a0608 0%,#2d0a14 35%,#5c0d18 65%,#7a1220 100%)}
+.cover-grid{background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h60v60H0z' fill='none'/%3E%3Cpath d='M30 0v60M0 30h60' stroke='%23ffffff' stroke-width='.3' opacity='.06'/%3E%3C/svg%3E")}
+
+    body{background:#0f1115}
+    .cat-hero{position:relative;overflow:hidden;border-radius:0 0 24px 24px}
+    .cat-wrap{max-width:1100px;margin:0 auto;padding:0 24px 60px}
+    .area-title{font-family:'Outfit';font-weight:800;font-size:17pt;color:#fff;margin:34px 0 4px;display:flex;align-items:center;gap:12px}
+    .area-title .ai{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,#7a1220,#5c0d18);display:flex;align-items:center;justify-content:center;color:#c9a962}
+    .area-sub{color:#94a3b8;font-size:9.5pt;margin-bottom:14px;padding-left:52px}
+    .card-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .scard{background:linear-gradient(180deg,#161a22,#11141a);border:1px solid rgba(201,169,98,.18);border-radius:14px;padding:18px 20px;position:relative;overflow:hidden;text-decoration:none;display:block;transition:transform .15s,border-color .15s}
+    .scard::before{content:'';position:absolute;top:0;left:0;bottom:0;width:4px;background:linear-gradient(180deg,#7a1220,#c9a962)}
+    .scard:hover{transform:translateY(-3px);border-color:rgba(201,169,98,.45)}
+    .scard .sc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+    .scard .sc-icon{width:36px;height:36px;border-radius:10px;background:rgba(122,18,32,.35);border:1px solid rgba(201,169,98,.25);display:flex;align-items:center;justify-content:center;color:#c9a962;flex-shrink:0}
+    .scard .sc-cod{font-family:'JetBrains Mono';font-size:7.5pt;color:#7a8499;letter-spacing:.5px}
+    .scard .sc-title{font-family:'Outfit';font-weight:700;font-size:11pt;color:#f1f5f9;margin-top:10px;line-height:1.25}
+    .scard .sc-sub{font-size:8.5pt;color:#94a3b8;margin-top:5px;line-height:1.45}
+    .scard .sc-foot{display:flex;align-items:center;gap:8px;margin-top:12px}
+    .scard .sc-norma{font-size:7pt;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#c9a962;background:rgba(201,169,98,.1);border:1px solid rgba(201,169,98,.25);padding:2px 8px;border-radius:99px}
+    .scard .sc-new{font-size:6.8pt;font-weight:700;text-transform:uppercase;color:#fff;background:linear-gradient(135deg,#047857,#065f46);padding:2px 7px;border-radius:99px}
+    .scard .sc-arrow{margin-left:auto;color:#7a1220}
+    .scard:hover .sc-arrow{color:#c9a962}
+    </style></head><body>
+    <div class="cat-hero cover-bg" style="padding:48px 24px 40px">
+      <div class="absolute inset-0 cover-grid"></div>
+      <div style="position:relative;z-index:2;max-width:1100px;margin:0 auto">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-audiper-red to-audiper-darkred flex items-center justify-center text-white font-display font-bold text-lg border-2 border-audiper-gold/40">A</div>
+            <div><p class="text-white font-display font-bold text-lg tracking-wider">AUDIPER</p>
+            <p class="text-white/50 text-xs">CRC/PI 000023/O &middot; CVM 5290 &middot; Desde 1985</p></div>
+          </div>
+          <div class="flex gap-2">
+            <span class="badge-area"><i class="fas fa-award mr-1"></i>40 ANOS</span>
+            <span class="badge-norma"><i class="fas fa-shield-alt mr-1"></i>ISO 27001</span>
+          </div>
+        </div>
+        <div style="margin-top:34px;max-width:720px">
+          <p class="text-audiper-gold text-xs uppercase tracking-[0.3em] font-semibold mb-3">Rol de Servi&ccedil;os</p>
+          <h1 class="text-white font-display font-extrabold" style="font-size:34pt;line-height:1.1">Solu&ccedil;&otilde;es de auditoria,<br>tributo, governan&ccedil;a e finan&ccedil;as</h1>
+          <p class="text-white/80 mt-4" style="font-size:11pt;line-height:1.6">Um ecossistema completo conduzido por auditores independentes habilitados na CVM. Da norma internacional ao laudo pericial &mdash; com a profundidade t&eacute;cnica e a seguran&ccedil;a da informa&ccedil;&atilde;o que distinguem a AUDIPER.</p>
+          <p class="text-[11px] text-audiper-gold uppercase tracking-[0.25em] font-bold mt-5"><i class="fas fa-shield-halved mr-1"></i>Auditoria Preventiva. Risco Mapeado, Risco Controlado. ISO 27001</p>
+        </div>
+        <div class="flex gap-3 mt-7 flex-wrap">
+          <div class="glass-dark" style="padding:12px 18px;border-radius:12px"><p class="text-white font-display font-extrabold text-2xl">26</p><p class="text-white/60 text-[8pt] uppercase tracking-wider">Servi&ccedil;os</p></div>
+          <div class="glass-dark" style="padding:12px 18px;border-radius:12px"><p class="text-white font-display font-extrabold text-2xl">5</p><p class="text-white/60 text-[8pt] uppercase tracking-wider">&Aacute;reas</p></div>
+          <div class="glass-dark" style="padding:12px 18px;border-radius:12px"><p class="text-white font-display font-extrabold text-2xl">22</p><p class="text-white/60 text-[8pt] uppercase tracking-wider">Lan&ccedil;amentos 2026</p></div>
+          <div class="glass-dark" style="padding:12px 18px;border-radius:12px"><p class="text-white font-display font-extrabold text-2xl">40</p><p class="text-white/60 text-[8pt] uppercase tracking-wider">Anos</p></div>
+        </div>
+      </div>
+    </div><div class="cat-wrap"><div class="area-title"><span class="ai"><i class="fas fa-magnifying-glass-chart"></i></span>Auditoria & Normas Internacionais</div>
+          <p class="area-sub">Demonstra&ccedil;&otilde;es, normas internacionais (IFRS/CPC), laudos e asseguran&ccedil;a independente.</p>
+          <div class="card-grid"><a class="scard" href="cpc51-ifrs18/SERVICO_CPC51_IFRS18_AUDIPER.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-scale-balanced"></i></div>
+                <span class="sc-cod">AUD-08</span></div>
+              <p class="sc-title">CPC 51 / IFRS 18 &mdash; Apresenta&ccedil;&atilde;o das Demonstra&ccedil;&otilde;es</p>
+              <p class="sc-sub">Nova estrutura da DRE, subtotais obrigat&oacute;rios e governan&ccedil;a de MPMs</p>
+              <div class="sc-foot"><span class="sc-norma">CPC 51 / IFRS 18</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a><a class="scard" href="paginas/AUD-01.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-file-contract"></i></div>
+                <span class="sc-cod">AUD-01</span></div>
+              <p class="sc-title">IFRS 16 / CPC 06 &mdash; Arrendamento Mercantil (Leasing)</p>
+              <p class="sc-sub">Reconhecimento do direito de uso e do passivo de arrendamento</p>
+              <div class="sc-foot"><span class="sc-norma">CPC 06 (R2) / IFRS 16</span><span class="sc-new">Novo</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a><a class="scard" href="paginas/AUD-02.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-arrow-trend-down"></i></div>
+                <span class="sc-cod">AUD-02</span></div>
+              <p class="sc-title">Teste de Impairment &mdash; Redu&ccedil;&atilde;o ao Valor Recuper&aacute;vel</p>
+              <p class="sc-sub">Avalia&ccedil;&atilde;o da recuperabilidade de ativos e unidades geradoras de caixa</p>
+              <div class="sc-foot"><span class="sc-norma">CPC 01 (R1) / IAS 36</span><span class="sc-new">Novo</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a><a class="scard" href="paginas/AUD-03.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-leaf"></i></div>
+                <span class="sc-cod">AUD-03</span></div>
+              <p class="sc-title">Auditoria de Relat&oacute;rio de Sustentabilidade (ESG)</p>
+              <p class="sc-sub">Asseguran&ccedil;a de informa&ccedil;&otilde;es financeiras relacionadas &agrave; sustentabilidade</p>
+              <div class="sc-foot"><span class="sc-norma">IFRS S1/S2 &middot; CVM 193/2023</span><span class="sc-new">Novo</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a><a class="scard" href="paginas/AUD-04.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-handshake"></i></div>
+                <span class="sc-cod">AUD-04</span></div>
+              <p class="sc-title">Laudo PPA &mdash; Aloca&ccedil;&atilde;o do Pre&ccedil;o de Compra</p>
+              <p class="sc-sub">Mensura&ccedil;&atilde;o de ativos, passivos e &aacute;gio em combina&ccedil;&otilde;es de neg&oacute;cios</p>
+              <div class="sc-foot"><span class="sc-norma">CPC 15 (R1) / IFRS 3</span><span class="sc-new">Novo</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a><a class="scard" href="paginas/AUD-05.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-microchip"></i></div>
+                <span class="sc-cod">AUD-05</span></div>
+              <p class="sc-title">Auditoria Independente da Lei de Inform&aacute;tica</p>
+              <p class="sc-sub">Conformidade dos investimentos em P&amp;D dos benefici&aacute;rios de incentivos</p>
+              <div class="sc-foot"><span class="sc-norma">Lei 8.248/1991 &middot; Lei 13.969/2019</span><span class="sc-new">Novo</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a><a class="scard" href="paginas/AUD-06.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-vault"></i></div>
+                <span class="sc-cod">AUD-06</span></div>
+              <p class="sc-title">Auditoria de Patrim&ocirc;nios Separados</p>
+              <p class="sc-sub">Securitiza&ccedil;&atilde;o, regime fiduci&aacute;rio e patrim&ocirc;nios segregados</p>
+              <div class="sc-foot"><span class="sc-norma">Lei 14.430/2022 &middot; CPC aplic&aacute;veis</span><span class="sc-new">Novo</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a><a class="scard" href="paginas/AUD-07.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-balance-scale-left"></i></div>
+                <span class="sc-cod">AUD-07</span></div>
+              <p class="sc-title">Laudo de Avalia&ccedil;&atilde;o do Patrim&ocirc;nio L&iacute;quido Cont&aacute;bil</p>
+              <p class="sc-sub">Avalia&ccedil;&atilde;o de PL para reorganiza&ccedil;&otilde;es, ingresso e retirada de s&oacute;cios</p>
+              <div class="sc-foot"><span class="sc-norma">Lei 6.404/1976 &middot; CPC 15</span><span class="sc-new">Novo</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a></div><div class="area-title"><span class="ai"><i class="fas fa-file-invoice-dollar"></i></span>Consultoria Tribut&aacute;ria</div>
+          <p class="area-sub">Recupera&ccedil;&atilde;o de cr&eacute;ditos, pre&ccedil;os de transfer&ecirc;ncia, incentivos e defesa fiscal.</p>
+          <div class="card-grid"><a class="scard" href="paginas/TRIB-01.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-globe"></i></div>
+                <span class="sc-cod">TRIB-01</span></div>
+              <p class="sc-title">Pre&ccedil;o de Transfer&ecirc;ncia (Transfer Pricing)</p>
+              <p class="sc-sub">Novas regras brasileiras alinhadas ao padr&atilde;o OCDE (arm's length)</p>
+              <div class="sc-foot"><span class="sc-norma">Lei 14.596/2023</span><span class="sc-new">Novo</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a><a class="scard" href="paginas/TRIB-02.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-flask"></i></div>
+                <span class="sc-cod">TRIB-02</span></div>
+              <p class="sc-title">Consultoria Lei do Bem &mdash; Incentivos &agrave; Inova&ccedil;&atilde;o</p>
+              <p class="sc-sub">Aproveitamento de incentivos fiscais para pesquisa e desenvolvimento</p>
+              <div class="sc-foot"><span class="sc-norma">Lei 11.196/2005 (Cap. III)</span><span class="sc-new">Novo</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a><a class="scard" href="paginas/TRIB-03.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-rotate-left"></i></div>
+                <span class="sc-cod">TRIB-03</span></div>
+              <p class="sc-title">Recupera&ccedil;&atilde;o de Cr&eacute;ditos de ICMS</p>
+              <p class="sc-sub">Cr&eacute;ditos acumulados, substitui&ccedil;&atilde;o tribut&aacute;ria e cr&eacute;ditos extempor&acirc;neos</p>
+              <div class="sc-foot"><span class="sc-norma">RICMS-PI &middot; LC 87/1996</span><span class="sc-new">Novo</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a><a class="scard" href="paginas/TRIB-04.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-folder-tree"></i></div>
+                <span class="sc-cod">TRIB-04</span></div>
+              <p class="sc-title">Due Diligence Tribut&aacute;ria &amp; Vendor</p>
+              <p class="sc-sub">Diagn&oacute;stico de conting&ecirc;ncias fiscais em opera&ccedil;&otilde;es e capta&ccedil;&otilde;es</p>
+              <div class="sc-foot"><span class="sc-norma">CTN &middot; Legisla&ccedil;&atilde;o fiscal</span><span class="sc-new">Novo</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a><a class="scard" href="paginas/TRIB-05.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-gavel"></i></div>
+                <span class="sc-cod">TRIB-05</span></div>
+              <p class="sc-title">Contencioso Administrativo Tribut&aacute;rio</p>
+              <p class="sc-sub">Defesa t&eacute;cnica em autua&ccedil;&otilde;es e processos administrativos</p>
+              <div class="sc-foot"><span class="sc-norma">PAF &middot; Legisla&ccedil;&atilde;o processual fiscal</span><span class="sc-new">Novo</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a><a class="scard" href="paginas/TRIB-06.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-shield-halved"></i></div>
+                <span class="sc-cod">TRIB-06</span></div>
+              <p class="sc-title">Revis&atilde;o Preventiva &amp; Planejamento Tribut&aacute;rio</p>
+              <p class="sc-sub">Revis&atilde;o dos &uacute;ltimos 5 anos e desenho da carga futura</p>
+              <div class="sc-foot"><span class="sc-norma">CTN &middot; Regimes de apura&ccedil;&atilde;o</span><span class="sc-new">Novo</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a></div><div class="area-title"><span class="ai"><i class="fas fa-sitemap"></i></span>Societ&aacute;ria & Patrimonial</div>
+          <p class="area-sub">Reorganiza&ccedil;&atilde;o, holding, sucess&atilde;o, governan&ccedil;a e prote&ccedil;&atilde;o patrimonial.</p>
+          <div class="card-grid"><a class="scard" href="paginas/SOC-01.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-code-merge"></i></div>
+                <span class="sc-cod">SOC-01</span></div>
+              <p class="sc-title">Reorganiza&ccedil;&atilde;o Societ&aacute;ria &mdash; Fus&atilde;o, Cis&atilde;o e Holding</p>
+              <p class="sc-sub">Estudo de conveniência e estrutura&ccedil;&atilde;o de reorganiza&ccedil;&otilde;es</p>
+              <div class="sc-foot"><span class="sc-norma">Lei 6.404/1976 &middot; Lei 9.249/1995</span><span class="sc-new">Novo</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a><a class="scard" href="paginas/SOC-02.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-people-roof"></i></div>
+                <span class="sc-cod">SOC-02</span></div>
+              <p class="sc-title">Planejamento Sucess&oacute;rio Familiar</p>
+              <p class="sc-sub">Transfer&ecirc;ncia organizada de patrim&ocirc;nio entre gera&ccedil;&otilde;es</p>
+              <div class="sc-foot"><span class="sc-norma">C&oacute;digo Civil &middot; Lei 6.404/1976</span><span class="sc-new">Novo</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a><a class="scard" href="paginas/SOC-03.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-shield"></i></div>
+                <span class="sc-cod">SOC-03</span></div>
+              <p class="sc-title">Prote&ccedil;&atilde;o Patrimonial</p>
+              <p class="sc-sub">Segrega&ccedil;&atilde;o e blindagem l&iacute;cita de ativos pessoais e empresariais</p>
+              <div class="sc-foot"><span class="sc-norma">C&oacute;digo Civil &middot; Lei 6.404/1976</span><span class="sc-new">Novo</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a><a class="scard" href="paginas/SOC-04.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-file-signature"></i></div>
+                <span class="sc-cod">SOC-04</span></div>
+              <p class="sc-title">Acordo de S&oacute;cios ou Acionistas</p>
+              <p class="sc-sub">Formaliza&ccedil;&atilde;o de direitos, deveres e regras de convivência societ&aacute;ria</p>
+              <div class="sc-foot"><span class="sc-norma">Lei 6.404/1976 &middot; C&oacute;digo Civil</span><span class="sc-new">Novo</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a><a class="scard" href="paginas/SOC-05.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-building-columns"></i></div>
+                <span class="sc-cod">SOC-05</span></div>
+              <p class="sc-title">Estrutura&ccedil;&atilde;o de Governan&ccedil;a Corporativa</p>
+              <p class="sc-sub">Implementa&ccedil;&atilde;o de pr&aacute;ticas de governan&ccedil;a e controles</p>
+              <div class="sc-foot"><span class="sc-norma">C&oacute;digo IBGC &middot; Lei 6.404/1976</span><span class="sc-new">Novo</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a><a class="scard" href="paginas/SOC-06.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-clipboard-list"></i></div>
+                <span class="sc-cod">SOC-06</span></div>
+              <p class="sc-title">Due Diligence Legal &amp; Cont&aacute;bil</p>
+              <p class="sc-sub">Diligência integrada para transa&ccedil;&otilde;es e capta&ccedil;&otilde;es</p>
+              <div class="sc-foot"><span class="sc-norma">Boas pr&aacute;ticas &middot; CPCs aplic&aacute;veis</span><span class="sc-new">Novo</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a></div><div class="area-title"><span class="ai"><i class="fas fa-chart-line"></i></span>Finan&ccedil;as & M&amp;A</div>
+          <p class="area-sub">Valuation, M&amp;A, diligência financeira e capta&ccedil;&atilde;o de recursos.</p>
+          <div class="card-grid"><a class="scard" href="paginas/FIN-01.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-magnifying-glass-dollar"></i></div>
+                <span class="sc-cod">FIN-01</span></div>
+              <p class="sc-title">Valuation &mdash; Avalia&ccedil;&atilde;o Econ&ocirc;mica da Empresa</p>
+              <p class="sc-sub">Determina&ccedil;&atilde;o do valor econ&ocirc;mico para transa&ccedil;&otilde;es e decis&otilde;es</p>
+              <div class="sc-foot"><span class="sc-norma">CPC 46 &middot; Fluxo de caixa descontado</span><span class="sc-new">Novo</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a><a class="scard" href="paginas/FIN-02.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-handshake-simple"></i></div>
+                <span class="sc-cod">FIN-02</span></div>
+              <p class="sc-title">Assessoria em M&amp;A &mdash; Compra e Venda de Empresas</p>
+              <p class="sc-sub">Suporte t&eacute;cnico nas etapas de aquisi&ccedil;&atilde;o e desinvestimento</p>
+              <div class="sc-foot"><span class="sc-norma">CPC 15 &middot; Boas pr&aacute;ticas</span><span class="sc-new">Novo</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a><a class="scard" href="paginas/FIN-03.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-money-bill-trend-up"></i></div>
+                <span class="sc-cod">FIN-03</span></div>
+              <p class="sc-title">Estrutura&ccedil;&atilde;o de D&iacute;vida &amp; Capta&ccedil;&atilde;o de Recursos</p>
+              <p class="sc-sub">Organiza&ccedil;&atilde;o financeira para acesso a cr&eacute;dito e investidores</p>
+              <div class="sc-foot"><span class="sc-norma">CPC 48 &middot; Boas pr&aacute;ticas</span><span class="sc-new">Novo</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a></div><div class="area-title"><span class="ai"><i class="fas fa-shield-halved"></i></span>Tecnologia, Seguran&ccedil;a & Per&iacute;cia</div>
+          <p class="area-sub">Auditoria de TI, ISO 27001, LGPD e per&iacute;cia cont&aacute;bil &mdash; diferenciais pr&oacute;prios da AUDIPER.</p>
+          <div class="card-grid"><a class="scard" href="paginas/TEC-01.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-lock"></i></div>
+                <span class="sc-cod">TEC-01</span></div>
+              <p class="sc-title">Auditoria de TI &amp; Seguran&ccedil;a da Informa&ccedil;&atilde;o (ISO 27001)</p>
+              <p class="sc-sub">Avalia&ccedil;&atilde;o de controles de tecnologia e seguran&ccedil;a</p>
+              <div class="sc-foot"><span class="sc-norma">NBC TA 315 &middot; ISO/IEC 27001</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a><a class="scard" href="paginas/TEC-02.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-user-shield"></i></div>
+                <span class="sc-cod">TEC-02</span></div>
+              <p class="sc-title">Conformidade LGPD</p>
+              <p class="sc-sub">Adequa&ccedil;&atilde;o &agrave; Lei Geral de Prote&ccedil;&atilde;o de Dados</p>
+              <div class="sc-foot"><span class="sc-norma">Lei 13.709/2018</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a><a class="scard" href="paginas/PER-01.html">
+              <div class="sc-top"><div class="sc-icon"><i class="fas fa-scale-unbalanced"></i></div>
+                <span class="sc-cod">PER-01</span></div>
+              <p class="sc-title">Per&iacute;cia Cont&aacute;bil &amp; Judicial</p>
+              <p class="sc-sub">Trabalho pericial em demandas judiciais e arbitrais</p>
+              <div class="sc-foot"><span class="sc-norma">NBC TP 01 &middot; NBC PP 01</span>
+                <i class="fas fa-arrow-right sc-arrow"></i></div></a></div></div><div style="background:linear-gradient(135deg,#1E293B,#0F172A);margin-top:50px;padding:26px 24px;border-top:3px solid #7a1220">
+      <div style="max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;align-items:center">
+        <div><p class="text-white font-display font-bold">AUDIPER Auditores Independentes</p>
+        <p class="text-white/50 text-[8.5pt] mt-1">CRC/PI 000023/O &middot; CVM 5290 &middot; CNPJ 23.626.575/0001-10 &middot; Rua Arlindo Nogueira, 614 &middot; Teresina/PI</p></div>
+        <div class="text-right"><p class="text-audiper-gold font-semibold text-sm"><i class="fab fa-whatsapp mr-1"></i>(86) 9 9401-0525</p>
+        <p class="text-white/60 text-[8.5pt] mt-1">audiper@audiper.com &middot; audiper.com</p></div>
+      </div></div></body></html>

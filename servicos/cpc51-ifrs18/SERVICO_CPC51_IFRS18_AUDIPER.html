@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>AUDIPER · Serviço CPC 51 / IFRS 18 — Apresentação e Divulgação das Demonstrações Contábeis</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Merriweather:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<script>
+tailwind.config = { theme: { extend: {
+    colors: {
+        audiper: {
+            red: '#7a1220', darkred: '#5c0d18', light: '#B91C1C',
+            gold: '#c9a962', dark: '#1e293b', graphite: '#334155',
+            emerald: '#047857', 'emerald-deep': '#065f46'
+        }
+    },
+    fontFamily: {
+        sans: ['Inter','sans-serif'], display: ['Outfit','sans-serif'],
+        serif: ['Merriweather','Georgia','serif'], mono: ['JetBrains Mono','monospace']
+    }
+}}}
+</script>
+<style>
+*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;margin:0;padding:0;box-sizing:border-box}
+body{background:#E5E7EB;font-family:'Inter',sans-serif;color:#334155;font-size:10pt;line-height:1.5}
+h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
+.a4-page{width:210mm;height:297mm;margin:10px auto;background:white;box-shadow:0 4px 20px rgba(0,0,0,0.15);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.page-wrapper{width:100%;height:297mm;display:flex;flex-direction:column}
+.page-header{flex-shrink:0}
+.page-content{flex:1;padding:14px 22px;font-size:10pt;overflow:hidden}
+.page-footer{flex-shrink:0}
+@media print{
+@page{size:A4;margin:0}
+html,body{width:210mm;margin:0;padding:0;background:white}
+.a4-page{margin:0;box-shadow:none;page-break-after:always}
+.a4-page:last-child{page-break-after:auto}
+.no-print{display:none!important}
+.glass{background:rgba(255,255,255,0.85)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.glass-dark{background:rgba(15,23,42,0.85)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border:1px solid rgba(201,169,98,0.35)!important}
+.glass-claret{background:rgba(92,13,24,0.90)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+}
+.lh-header{background:linear-gradient(180deg,#FFF,#F9FAFB);border-bottom:1px solid #E5E7EB;padding:7px 18px;position:relative;height:42px}
+.lh-header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#5c0d18,#7a1220,#B91C1C)}
+.lh-footer{background:linear-gradient(135deg,#1E293B,#0F172A);color:white;padding:7px 18px;position:relative;height:36px}
+.lh-footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#5c0d18,#7a1220,#B91C1C)}
+.pg-num{display:inline-flex;align-items:center;gap:4px;background:linear-gradient(135deg,#7a1220,#5c0d18);padding:3px 10px;border-radius:12px}
+.pg-num .c{font-weight:700;color:white;font-size:9pt}
+.pg-num .s{color:rgba(255,255,255,0.5);font-size:7pt}
+.pg-num .t{color:rgba(255,255,255,0.8);font-size:8pt}
+.sec-banner{position:relative;height:60px;background:linear-gradient(135deg,#5c0d18,#7a1220,#991B1B);border-radius:0 0 12px 12px;overflow:hidden;margin-bottom:12px}
+.sec-banner::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h40v40H0z' fill='none'/%3E%3Cpath d='M20 0v40M0 20h40' stroke='%23ffffff' stroke-width='.3' opacity='.08'/%3E%3C/svg%3E")}
+.sec-banner-inner{position:relative;z-index:10;padding:11px 18px;height:100%;display:flex;align-items:center;gap:14px}
+.sec-banner-icon{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.18);display:flex;align-items:center;justify-content:center}
+.glass{background:rgba(255,255,255,0.6);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.3);border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.08)}
+.glass-dark{background:rgba(30,41,59,0.4);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.15);border-radius:12px}
+.glass-claret{background:rgba(122,18,32,0.3);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(201,169,98,0.25);border-radius:12px}
+.glass-emerald{background:rgba(4,120,87,0.3);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(167,243,208,0.2);border-radius:12px}
+.badge-40{font-size:7.5pt;font-weight:700;padding:3px 9px;border-radius:99px;letter-spacing:0.05em;text-transform:uppercase;background:linear-gradient(135deg,#c9a962,#a16207);color:#3a2a04}
+.badge-vl{font-size:7.5pt;font-weight:700;padding:3px 9px;border-radius:99px;letter-spacing:0.05em;text-transform:uppercase;background:linear-gradient(135deg,#1a5276,#0c4a6e);color:white}
+.badge-pj{font-size:7.5pt;font-weight:700;padding:3px 9px;border-radius:99px;letter-spacing:0.05em;text-transform:uppercase;background:linear-gradient(135deg,#7a1220,#5c0d18);color:white}
+.badge-iso{font-size:7.5pt;font-weight:700;padding:3px 9px;border-radius:99px;letter-spacing:0.05em;text-transform:uppercase;background:linear-gradient(135deg,#047857,#065f46);color:white}
+.badge-nbc{font-size:7.5pt;font-weight:700;padding:3px 9px;border-radius:99px;letter-spacing:0.05em;text-transform:uppercase;background:linear-gradient(135deg,#1E293B,#0F172A);color:#c9a962}
+.opn-card{background:linear-gradient(135deg,#047857,#065f46);color:white;padding:14px 18px;border-radius:12px;border-left:5px solid #c9a962;box-shadow:0 6px 22px rgba(4,120,87,.25);margin:10px 0;position:relative;overflow:hidden}
+.opn-card::before{content:'';position:absolute;top:-30%;right:-15%;width:200px;height:200px;background:radial-gradient(circle,rgba(255,255,255,0.10),transparent 65%);pointer-events:none}
+.opn-card .marker{font-size:7.8pt;color:#a7f3d0;letter-spacing:1.5px;text-transform:uppercase;font-weight:800;position:relative;z-index:2}
+.opn-card .opn{font-family:'Outfit';font-weight:700;font-size:13pt;margin-top:5px;line-height:1.35;position:relative;z-index:2}
+.emphasis-card{background:linear-gradient(135deg,#d97706,#92400e);color:white;padding:14px 18px;border-radius:12px;border-left:5px solid #c9a962;box-shadow:0 6px 22px rgba(217,119,6,.25);margin:10px 0;position:relative;overflow:hidden}
+.emphasis-card::before{content:'';position:absolute;top:-30%;right:-15%;width:200px;height:200px;background:radial-gradient(circle,rgba(255,255,255,0.10),transparent 65%);pointer-events:none}
+.emphasis-card .marker{font-size:7.8pt;color:#fef3c7;letter-spacing:1.5px;text-transform:uppercase;font-weight:800;position:relative;z-index:2}
+.emphasis-card .text{font-family:'Inter';font-weight:500;font-size:10pt;margin-top:5px;line-height:1.45;position:relative;z-index:2}
+.info-card{background:linear-gradient(135deg,#1E293B,#0F172A);color:white;padding:14px 18px;border-radius:12px;border-left:5px solid #c9a962;box-shadow:0 6px 22px rgba(30,41,59,.25);margin:10px 0;position:relative;overflow:hidden}
+.info-card::before{content:'';position:absolute;top:-30%;right:-15%;width:200px;height:200px;background:radial-gradient(circle,rgba(255,255,255,0.06),transparent 65%);pointer-events:none}
+.info-card .marker{font-size:7.8pt;color:#c9a962;letter-spacing:1.5px;text-transform:uppercase;font-weight:800;position:relative;z-index:2}
+.info-card .text{font-family:'Inter';font-weight:400;font-size:10pt;margin-top:5px;line-height:1.45;position:relative;z-index:2;color:rgba(255,255,255,0.9)}
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0}
+.kpi-card{background:linear-gradient(180deg,#fff,#f8fafc);border:1px solid rgba(201,169,98,0.3);border-radius:10px;padding:10px 12px;text-align:center;position:relative;overflow:hidden}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#7a1220,#c9a962)}
+.kpi-card .kpi-label{font-size:7.5pt;color:#64748b;text-transform:uppercase;letter-spacing:0.8px;font-weight:600}
+.kpi-card .kpi-value{font-family:'Outfit';font-size:18pt;font-weight:800;color:#7a1220;line-height:1.2;margin:4px 0}
+.kpi-card .kpi-sub{font-size:7.5pt;color:#475569}
+.kpi-card-dark{background:linear-gradient(135deg,#1E293B,#0F172A);border:1px solid rgba(201,169,98,0.2);border-radius:10px;padding:10px 12px;text-align:center;position:relative;overflow:hidden;color:white}
+.kpi-card-dark::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#c9a962,#7a1220)}
+.kpi-card-dark .kpi-label{font-size:7.5pt;color:#94a3b8;text-transform:uppercase;letter-spacing:0.8px;font-weight:600}
+.kpi-card-dark .kpi-value{font-family:'Outfit';font-size:18pt;font-weight:800;color:#c9a962;line-height:1.2;margin:4px 0}
+.kpi-card-dark .kpi-sub{font-size:7.5pt;color:#cbd5e1}
+.sec-heading{color:#7a1220;font-family:'Outfit';font-weight:700;font-size:11pt;margin-top:12px;margin-bottom:6px;padding-bottom:4px;border-bottom:1px solid rgba(201,169,98,0.3)}
+.data-table{width:100%;border-collapse:collapse;font-size:8.5pt;margin:8px 0}
+.data-table thead th{background:linear-gradient(135deg,#5c0d18,#7a1220);color:white;padding:6px 8px;text-align:left;font-weight:600;font-size:7.5pt;text-transform:uppercase;letter-spacing:0.5px}
+.data-table thead th:first-child{border-radius:8px 0 0 0}
+.data-table thead th:last-child{border-radius:0 8px 0 0}
+.data-table tbody td{padding:5px 8px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.data-table tbody tr:nth-child(even){background:#f8fafc}
+.data-table .mono{font-family:'JetBrains Mono';font-size:8pt}
+.data-table .bold{font-weight:700}
+.timeline{position:relative;margin:12px 0;padding-left:24px}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,#7a1220,#c9a962,#047857)}
+.timeline-item{position:relative;margin-bottom:11px;padding-left:14px}
+.timeline-item::before{content:'';position:absolute;left:-20px;top:4px;width:10px;height:10px;border-radius:50%;background:#7a1220;border:2px solid #c9a962;box-shadow:0 0 0 3px rgba(201,169,98,0.15)}
+.timeline-item.done::before{background:#047857}
+.timeline-item.pending::before{background:#d97706}
+.timeline-item .tl-date{font-family:'JetBrains Mono';font-size:7.5pt;color:#7a1220;font-weight:700}
+.timeline-item .tl-text{font-size:9pt;color:#334155;margin-top:2px}
+.divider-gold{width:100%;height:1px;background:linear-gradient(90deg,transparent,#c9a962,transparent);margin:10px 0}
+.divider-claret{width:100%;height:2px;background:linear-gradient(90deg,#5c0d18,#7a1220,#5c0d18);margin:10px 0}
+.callout{border-left:4px solid #c9a962;background:rgba(201,169,98,0.08);padding:10px 14px;border-radius:0 8px 8px 0;margin:8px 0}
+.callout-nbc{border-left:4px solid #7a1220;background:rgba(122,18,32,0.05);padding:10px 14px;border-radius:0 8px 8px 0;margin:8px 0}
+.callout .callout-title{font-family:'Outfit';font-weight:700;font-size:9pt;color:#7a1220;margin-bottom:4px}
+.callout .callout-body{font-size:9pt;color:#475569;line-height:1.5}
+.svc-card{background:linear-gradient(180deg,#fff,#f8fafc);border:1px solid rgba(201,169,98,0.35);border-radius:11px;padding:11px 13px;position:relative;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.05)}
+.svc-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:4px;background:linear-gradient(180deg,#7a1220,#c9a962)}
+.svc-card .svc-n{position:absolute;top:8px;right:10px;font-family:'Outfit';font-weight:800;font-size:20pt;color:rgba(122,18,32,0.08);line-height:1}
+.svc-card .svc-icon{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#7a1220,#5c0d18);display:flex;align-items:center;justify-content:center;color:#c9a962;margin-bottom:6px}
+.svc-card .svc-title{font-family:'Outfit';font-weight:700;font-size:9.5pt;color:#7a1220;line-height:1.2}
+.svc-card .svc-fase{font-size:6.8pt;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#a16207;margin-top:2px}
+.svc-card .svc-body{font-size:8pt;color:#475569;line-height:1.4;margin-top:5px}
+.svc-card .svc-deliv{font-size:7.5pt;color:#7a1220;font-weight:600;margin-top:5px}
+.pillar{background:linear-gradient(180deg,#fff,#f8fafc);border:1px solid rgba(201,169,98,0.3);border-radius:10px;padding:11px;position:relative;overflow:hidden}
+.pillar::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#7a1220,#c9a962,#7a1220)}
+.pillar .p-num{font-family:'Outfit';font-weight:800;font-size:10pt;color:#fff;background:linear-gradient(135deg,#7a1220,#5c0d18);width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.pillar .p-title{font-family:'Outfit';font-weight:700;font-size:9.5pt;color:#7a1220;margin-top:6px}
+.pillar .p-body{font-size:8pt;color:#475569;line-height:1.45;margin-top:4px}
+.sign-card{background:linear-gradient(180deg,#fff,#fafafa);border:1px solid rgba(201,169,98,0.35);border-radius:11px;padding:13px;text-align:center;box-shadow:0 5px 16px rgba(0,0,0,.08);position:relative;overflow:hidden}
+.sign-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#7a1220,#c9a962,#7a1220)}
+.sign-card .nome{font-family:'Outfit';font-weight:800;color:#0f0606;font-size:9.5pt;line-height:1.2}
+.sign-card .cargo{font-size:8pt;color:#475569;margin-top:3px;font-style:italic}
+.sign-card .reg{font-family:'JetBrains Mono';font-size:8pt;color:#7a1220;font-weight:700;margin-top:4px}
+.cover-bg{background:linear-gradient(135deg,#0a0608 0%,#2d0a14 35%,#5c0d18 65%,#7a1220 100%)}
+.cover-grid{background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h60v60H0z' fill='none'/%3E%3Cpath d='M30 0v60M0 30h60' stroke='%23ffffff' stroke-width='.3' opacity='.06'/%3E%3C/svg%3E")}
+.footnote{font-size:7.5pt;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:6px;margin-top:auto}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ PÁGINA 1 — CAPA ═══════════ -->
+<div class="a4-page">
+<div class="page-wrapper" style="padding:0;">
+<div class="relative w-full h-full cover-bg">
+    <div class="absolute inset-0 cover-grid"></div>
+    <div class="relative z-10 flex flex-col h-full p-8 justify-between">
+        <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-audiper-red to-audiper-darkred flex items-center justify-center text-white font-display font-bold text-lg border-2 border-audiper-gold/40">A</div>
+                <div>
+                    <p class="text-white font-display font-bold text-base tracking-wider">AUDIPER</p>
+                    <p class="text-white/50 text-xs mt-1">CRC/PI 000023/O &middot; CVM 5290 &middot; Desde 1985</p>
+                </div>
+            </div>
+            <div class="flex flex-col gap-2 items-end">
+                <span class="badge-40"><i class="fas fa-award mr-1"></i>40 ANOS</span>
+                <span class="badge-vl"><i class="fas fa-eye mr-1"></i>VISUAL LAW</span>
+                <span class="badge-pj"><i class="fas fa-balance-scale mr-1"></i>AUDITORIA INDEPENDENTE</span>
+                <span class="badge-iso"><i class="fas fa-shield-alt mr-1"></i>ISO 27001</span>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <p class="text-audiper-gold text-xs uppercase tracking-[0.3em] mb-3 font-semibold">Linha de Servi&ccedil;o &middot; Normas Internacionais</p>
+            <div class="inline-block glass-claret px-5 py-2 rounded-full mb-4">
+                <span class="text-white font-mono font-bold tracking-wider text-sm">CPC 51 &nbsp;&middot;&nbsp; IFRS 18</span>
+            </div>
+            <h2 class="text-4xl font-bold text-white font-display mb-3 leading-tight tracking-wide">APRESENTA&Ccedil;&Atilde;O E DIVULGA&Ccedil;&Atilde;O<br>DAS DEMONSTRA&Ccedil;&Otilde;ES CONT&Aacute;BEIS</h2>
+            <p class="text-base text-white/85 font-light mt-3">Diagn&oacute;stico de impacto, remapeamento da DRE, governan&ccedil;a de MPMs e asseguran&ccedil;a independente</p>
+            <p class="text-sm text-white/65 italic mt-1">IFRS 18 (IASB, abr/2024) &middot; CPC 51 &middot; Resolu&ccedil;&atilde;o CVM n&ordm; 237/2025 &middot; Vig&ecirc;ncia 1&ordm;/01/2027</p>
+            <p class="text-[11px] text-audiper-gold uppercase tracking-[0.25em] font-bold mt-4"><i class="fas fa-shield-halved mr-1"></i>Auditoria Preventiva. Risco Mapeado, Risco Controlado. ISO 27001</p>
+            <div class="w-32 h-0.5 bg-gradient-to-r from-transparent via-audiper-gold to-transparent mx-auto my-5"></div>
+
+            <div class="glass-dark p-5 max-w-2xl mx-auto">
+                <p class="text-audiper-gold/70 text-[10px] uppercase tracking-widest mb-2 font-semibold">A janela de prepara&ccedil;&atilde;o &eacute; agora</p>
+                <h3 class="text-lg font-bold text-white font-display mb-1">O exerc&iacute;cio de 2026 j&aacute; &eacute; o comparativo</h3>
+                <p class="text-white/80 text-sm">Quem n&atilde;o iniciar o diagn&oacute;stico em 2026 chega a 2027 sem a base reclassificada exigida pela norma.</p>
+            </div>
+        </div>
+
+        <div class="flex items-end justify-between border-t border-white/10 pt-4">
+            <div>
+                <p class="text-audiper-gold/70 text-[9px] uppercase tracking-wider">Documento</p>
+                <p class="text-white font-bold text-base font-mono">SVC-CPC51-IFRS18</p>
+            </div>
+            <div class="text-center">
+                <p class="text-audiper-gold/70 text-[9px] uppercase tracking-wider">Emiss&atilde;o</p>
+                <p class="text-white font-bold text-base">Junho/2026</p>
+            </div>
+            <div class="text-right">
+                <p class="text-audiper-gold/70 text-[9px] uppercase tracking-wider mb-1">Norma</p>
+                <span class="badge-nbc"><i class="fas fa-bookmark mr-1"></i>CPC 51 / IFRS 18</span>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+<!-- ═══════════ PÁGINA 2 — O QUE É + 3 PILARES + DATAS ═══════════ -->
+<div class="a4-page">
+<div class="page-wrapper">
+    <header class="page-header lh-header">
+        <div class="flex items-center justify-between h-full">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6 rounded-full bg-gradient-to-br from-audiper-red to-audiper-darkred flex items-center justify-center text-white text-[7pt] font-bold">A</div>
+                <span class="text-[8pt] font-display font-semibold text-audiper-red tracking-wider">AUDIPER</span>
+                <span class="text-[7pt] text-slate-400 ml-1">Servi&ccedil;o CPC 51 / IFRS 18</span>
+            </div>
+            <span class="text-[7pt] text-slate-400 font-mono">SVC-CPC51-IFRS18 &middot; Jun/2026</span>
+        </div>
+    </header>
+    <div class="sec-banner">
+        <div class="sec-banner-inner">
+            <div class="sec-banner-icon"><i class="fas fa-circle-info text-white text-sm"></i></div>
+            <div>
+                <p class="text-white/60 text-[7pt] uppercase tracking-wider font-semibold">Se&ccedil;&atilde;o 1</p>
+                <h2 class="text-white font-display font-bold text-lg tracking-wide">O que muda &mdash; e por que importa</h2>
+            </div>
+        </div>
+    </div>
+    <div class="page-content">
+        <p class="text-[9.5pt] leading-relaxed text-slate-700">A <b>IFRS 18 &mdash; Presentation and Disclosure in Financial Statements</b>, emitida pelo IASB em abril de 2024, substitui a IAS 1 e redefine a forma como a Demonstra&ccedil;&atilde;o do Resultado &eacute; apresentada. Seu correlato brasileiro &eacute; o <b>Pronunciamento T&eacute;cnico CPC 51</b>, que <b>substitui o CPC 26 (R1)</b>. A norma alcan&ccedil;a todas as entidades que adotam os CPCs &mdash; companhias abertas e fechadas de grande porte (Lei 11.638/2007).</p>
+
+        <h3 class="sec-heading"><i class="fas fa-layer-group mr-1.5"></i>Os tr&ecirc;s pilares da norma</h3>
+        <div class="grid grid-cols-3 gap-3">
+            <div class="pillar">
+                <span class="p-num">1</span>
+                <p class="p-title">Nova estrutura da DRE</p>
+                <p class="p-body">Receitas e despesas passam a ser classificadas em categorias &mdash; <b>operacional, investimento e financiamento</b> &mdash; com dois subtotais obrigat&oacute;rios: <b>resultado operacional</b> e <b>resultado antes de financiamento e tributos</b>.</p>
+            </div>
+            <div class="pillar">
+                <span class="p-num">2</span>
+                <p class="p-title">MPMs &mdash; medidas da administra&ccedil;&atilde;o</p>
+                <p class="p-body">Subtotais n&atilde;o definidos pela norma usados em comunica&ccedil;&otilde;es externas (ex.: EBITDA ajustado, lucro recorrente) passam a exigir <b>divulga&ccedil;&atilde;o em nota com reconcilia&ccedil;&atilde;o audit&aacute;vel</b> ao subtotal IFRS mais pr&oacute;ximo.</p>
+            </div>
+            <div class="pillar">
+                <span class="p-num">3</span>
+                <p class="p-title">Agrega&ccedil;&atilde;o e desagrega&ccedil;&atilde;o</p>
+                <p class="p-body">Novos princ&iacute;pios sobre como agrupar e detalhar itens nas demonstra&ccedil;&otilde;es e notas, com base em caracter&iacute;sticas compartilhadas &mdash; reduzindo a linha gen&eacute;rica &ldquo;outros&rdquo; e elevando a granularidade &uacute;til.</p>
+            </div>
+        </div>
+
+        <h3 class="sec-heading"><i class="fas fa-calendar-check mr-1.5"></i>Datas-chave</h3>
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <p class="kpi-label">Vig&ecirc;ncia obrigat&oacute;ria</p>
+                <p class="kpi-value">1&ordm;/01/2027</p>
+                <p class="kpi-sub">Ado&ccedil;&atilde;o antecipada permitida</p>
+            </div>
+            <div class="kpi-card">
+                <p class="kpi-label">Exerc&iacute;cio comparativo</p>
+                <p class="kpi-value">2026</p>
+                <p class="kpi-sub">Balan&ccedil;o de abertura 31/12/2025</p>
+            </div>
+            <div class="kpi-card-dark">
+                <p class="kpi-label">Marco regulat&oacute;rio</p>
+                <p class="kpi-value">CVM 237</p>
+                <p class="kpi-sub">Resolu&ccedil;&atilde;o de 24/12/2025</p>
+            </div>
+        </div>
+
+        <div class="callout-nbc">
+            <div class="callout-title"><i class="fas fa-scale-balanced mr-1"></i>Base normativa precisa</div>
+            <div class="callout-body">IFRS 18 <b>substitui a IAS 1</b>; CPC 51 <b>substitui o CPC 26 (R1)</b>. A <b>Revis&atilde;o de Pronunciamentos T&eacute;cnicos n&ordm; 28</b> ajusta os demais CPCs afetados. Para companhias abertas, a obrigatoriedade foi estabelecida pela <b>Resolu&ccedil;&atilde;o CVM n&ordm; 237/2025</b>, que revogou as Resolu&ccedil;&otilde;es CVM 106 e 156.</div>
+        </div>
+
+        <div class="footnote">Fontes: IFRS Foundation (norma e effect analysis, abr/2024) &middot; CFC/CPC (minuta CPC 51 e Revis&atilde;o n&ordm; 28) &middot; CVM (Resolu&ccedil;&atilde;o n&ordm; 237/2025 e Of&iacute;cio Circular Anual 2026).</div>
+    </div>
+    <footer class="page-footer lh-footer">
+        <div class="flex items-center justify-between h-full">
+            <span class="text-[7pt] text-white/50">AUDIPER Auditores Independentes &middot; CRC/PI 000023/O</span>
+            <span class="text-[7pt] text-white/40">Auditoria Preventiva. Risco Mapeado, Risco Controlado. ISO 27001</span>
+            <div class="pg-num"><span class="c">2</span><span class="s">/</span><span class="t">5</span></div>
+        </div>
+    </footer>
+</div>
+</div>
+
+
+<!-- ═══════════ PÁGINA 3 — CRONOGRAMA + IMPACTOS ═══════════ -->
+<div class="a4-page">
+<div class="page-wrapper">
+    <header class="page-header lh-header">
+        <div class="flex items-center justify-between h-full">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6 rounded-full bg-gradient-to-br from-audiper-red to-audiper-darkred flex items-center justify-center text-white text-[7pt] font-bold">A</div>
+                <span class="text-[8pt] font-display font-semibold text-audiper-red tracking-wider">AUDIPER</span>
+            </div>
+            <span class="text-[7pt] text-slate-400 font-mono">SVC-CPC51-IFRS18</span>
+        </div>
+    </header>
+    <div class="sec-banner">
+        <div class="sec-banner-inner">
+            <div class="sec-banner-icon"><i class="fas fa-timeline text-white text-sm"></i></div>
+            <div>
+                <p class="text-white/60 text-[7pt] uppercase tracking-wider font-semibold">Se&ccedil;&atilde;o 2</p>
+                <h2 class="text-white font-display font-bold text-lg tracking-wide">Linha do tempo regulat&oacute;ria &amp; impactos pr&aacute;ticos</h2>
+            </div>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <h3 class="sec-heading"><i class="fas fa-flag-checkered mr-1.5"></i>Cronograma de ado&ccedil;&atilde;o no Brasil</h3>
+                <div class="timeline">
+                    <div class="timeline-item done">
+                        <p class="tl-date">ABR/2024</p>
+                        <p class="tl-text">IASB emite a IFRS 18, substituindo a IAS 1.</p>
+                    </div>
+                    <div class="timeline-item done">
+                        <p class="tl-date">AGO&ndash;SET/2025</p>
+                        <p class="tl-text">Audi&ecirc;ncias p&uacute;blicas CPC/CFC/CVM da minuta CPC 51 e da Revis&atilde;o n&ordm; 28.</p>
+                    </div>
+                    <div class="timeline-item done">
+                        <p class="tl-date">24/12/2025</p>
+                        <p class="tl-text"><b>Resolu&ccedil;&atilde;o CVM n&ordm; 237</b> torna o CPC 51 obrigat&oacute;rio para companhias abertas.</p>
+                    </div>
+                    <div class="timeline-item pending">
+                        <p class="tl-date">2026 &mdash; AGORA</p>
+                        <p class="tl-text"><b>Ano comparativo.</b> Janela de diagn&oacute;stico, parallel run e captura dos n&uacute;meros j&aacute; reclassificados.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <p class="tl-date">1&ordm;/01/2027</p>
+                        <p class="tl-text"><b>Vig&ecirc;ncia efetiva.</b> DFs de 2027 trazem 2026 reclassificado.</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3 class="sec-heading"><i class="fas fa-gears mr-1.5"></i>O que muda na pr&aacute;tica</h3>
+                <table class="data-table">
+                    <thead><tr><th>Frente</th><th>Impacto</th></tr></thead>
+                    <tbody>
+                        <tr><td class="bold">Plano de contas</td><td>Bloco central: cada conta canalizada nas categorias operacional / investimento / financiamento.</td></tr>
+                        <tr><td class="bold">ERP / consolida&ccedil;&atilde;o</td><td>Reconfigura&ccedil;&atilde;o de mapeamentos, novos subtotais, fechamentos-teste (parallel run em 2026).</td></tr>
+                        <tr><td class="bold">Controladoria / FP&amp;A</td><td>Or&ccedil;amento, forecast e KPIs atrelados a EBIT recalibrados &agrave;s novas categorias.</td></tr>
+                        <tr><td class="bold">Divulga&ccedil;&atilde;o</td><td>Nova nota de MPMs com reconcilia&ccedil;&atilde;o; maior desagrega&ccedil;&atilde;o; revis&atilde;o da arquitetura das notas.</td></tr>
+                        <tr><td class="bold">Governan&ccedil;a</td><td>M&eacute;tricas externas passam a objeto de pol&iacute;tica e trilha audit&aacute;vel.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="emphasis-card">
+            <p class="marker"><i class="fas fa-triangle-exclamation mr-1"></i>Pressão de cronograma</p>
+            <p class="text">2025&ndash;2027 disputam as mesmas pessoas, o mesmo or&ccedil;amento de TI e a mesma janela de projeto. Grupos com consolida&ccedil;&atilde;o multi-ERP s&atilde;o os mais expostos. Antecipar o diagn&oacute;stico transforma um risco de conformidade em projeto controlado.</p>
+        </div>
+
+        <h3 class="sec-heading"><i class="fas fa-users-viewfinder mr-1.5"></i>Quem precisa se preparar</h3>
+        <div class="grid grid-cols-3 gap-3">
+            <div class="callout"><div class="callout-body"><b>Companhias abertas</b> &mdash; obrigatoriedade pela Resolu&ccedil;&atilde;o CVM 237.</div></div>
+            <div class="callout"><div class="callout-body"><b>Grandes empresas Lei 11.638/2007</b> &mdash; via CFC/NBC.</div></div>
+            <div class="callout"><div class="callout-body"><b>Entidades auditadas</b> que reportam em CPC/IFRS, incluindo fechadas.</div></div>
+        </div>
+    </div>
+    <footer class="page-footer lh-footer">
+        <div class="flex items-center justify-between h-full">
+            <span class="text-[7pt] text-white/50">AUDIPER Auditores Independentes &middot; CRC/PI 000023/O</span>
+            <span class="text-[7pt] text-white/40">Auditoria Preventiva. Risco Mapeado, Risco Controlado. ISO 27001</span>
+            <div class="pg-num"><span class="c">3</span><span class="s">/</span><span class="t">5</span></div>
+        </div>
+    </footer>
+</div>
+</div>
+
+
+<!-- ═══════════ PÁGINA 4 — ROL DE SERVIÇOS AUDIPER ═══════════ -->
+<div class="a4-page">
+<div class="page-wrapper">
+    <header class="page-header lh-header">
+        <div class="flex items-center justify-between h-full">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6 rounded-full bg-gradient-to-br from-audiper-red to-audiper-darkred flex items-center justify-center text-white text-[7pt] font-bold">A</div>
+                <span class="text-[8pt] font-display font-semibold text-audiper-red tracking-wider">AUDIPER</span>
+            </div>
+            <span class="text-[7pt] text-slate-400 font-mono">SVC-CPC51-IFRS18</span>
+        </div>
+    </header>
+    <div class="sec-banner">
+        <div class="sec-banner-inner">
+            <div class="sec-banner-icon"><i class="fas fa-list-check text-white text-sm"></i></div>
+            <div>
+                <p class="text-white/60 text-[7pt] uppercase tracking-wider font-semibold">Se&ccedil;&atilde;o 3</p>
+                <h2 class="text-white font-display font-bold text-lg tracking-wide">O que a AUDIPER entrega</h2>
+            </div>
+        </div>
+    </div>
+    <div class="page-content">
+        <p class="text-[9pt] text-slate-600 mb-2">Abordagem em tr&ecirc;s fases &mdash; <b>diagn&oacute;stico (2026)</b> &rarr; <b>implanta&ccedil;&atilde;o (2026/27)</b> &rarr; <b>estabiliza&ccedil;&atilde;o (2027)</b>. Seis frentes mod&uacute;lares, contratadas em conjunto ou isoladamente.</p>
+        <div class="grid grid-cols-2 gap-3">
+            <div class="svc-card"><span class="svc-n">01</span>
+                <div class="svc-icon"><i class="fas fa-magnifying-glass-chart text-[10pt]"></i></div>
+                <p class="svc-title">Diagn&oacute;stico de gap CPC 26 &rarr; CPC 51</p>
+                <p class="svc-fase">Fase 1 &middot; Diagn&oacute;stico</p>
+                <p class="svc-body">Mapa linha-a-linha da DRE e classifica&ccedil;&atilde;o operacional / investimento / financiamento por natureza do neg&oacute;cio, com avalia&ccedil;&atilde;o de materialidade.</p>
+                <p class="svc-deliv"><i class="fas fa-file-lines mr-1"></i>Relat&oacute;rio de gap audit&aacute;vel</p>
+            </div>
+            <div class="svc-card"><span class="svc-n">02</span>
+                <div class="svc-icon"><i class="fas fa-sitemap text-[10pt]"></i></div>
+                <p class="svc-title">Remapeamento da DRE e do plano de contas</p>
+                <p class="svc-fase">Fase 2 &middot; Implanta&ccedil;&atilde;o</p>
+                <p class="svc-body">Desenho dos novos subtotais e da estrutura de categorias; reconcilia&ccedil;&atilde;o do plano de contas e dos mapeamentos de consolida&ccedil;&atilde;o.</p>
+                <p class="svc-deliv"><i class="fas fa-file-lines mr-1"></i>Novo plano de contas + de-para</p>
+            </div>
+            <div class="svc-card"><span class="svc-n">03</span>
+                <div class="svc-icon"><i class="fas fa-ruler-combined text-[10pt]"></i></div>
+                <p class="svc-title">Defini&ccedil;&atilde;o e governan&ccedil;a de MPMs</p>
+                <p class="svc-fase">Fase 2 &middot; Implanta&ccedil;&atilde;o</p>
+                <p class="svc-body">Identifica&ccedil;&atilde;o das m&eacute;tricas usadas externamente, montagem das reconcilia&ccedil;&otilde;es audit&aacute;veis e pol&iacute;tica de divulga&ccedil;&atilde;o.</p>
+                <p class="svc-deliv"><i class="fas fa-file-lines mr-1"></i>Pol&iacute;tica de MPM + reconcilia&ccedil;&otilde;es</p>
+            </div>
+            <div class="svc-card"><span class="svc-n">04</span>
+                <div class="svc-icon"><i class="fas fa-server text-[10pt]"></i></div>
+                <p class="svc-title">Ajuste de ERP e parallel run 2026</p>
+                <p class="svc-fase">Fase 2&ndash;3 &middot; Implanta&ccedil;&atilde;o</p>
+                <p class="svc-body">Revis&atilde;o de mapeamentos, fechamentos-teste sobre o comparativo 2026 e valida&ccedil;&atilde;o dos novos subtotais no sistema.</p>
+                <p class="svc-deliv"><i class="fas fa-file-lines mr-1"></i>Fechamento-teste validado</p>
+            </div>
+            <div class="svc-card"><span class="svc-n">05</span>
+                <div class="svc-icon"><i class="fas fa-chalkboard-user text-[10pt]"></i></div>
+                <p class="svc-title">Treinamento de controladoria e FP&amp;A</p>
+                <p class="svc-fase">Fase 2&ndash;3 &middot; Capacita&ccedil;&atilde;o</p>
+                <p class="svc-body">Nova l&oacute;gica de categorias, restatements, impacto em KPIs e or&ccedil;amento &mdash; turma in-company conduzida pela equipe t&eacute;cnica.</p>
+                <p class="svc-deliv"><i class="fas fa-file-lines mr-1"></i>Workshop + material</p>
+            </div>
+            <div class="svc-card"><span class="svc-n">06</span>
+                <div class="svc-icon"><i class="fas fa-stamp text-[10pt]"></i></div>
+                <p class="svc-title">Asseguran&ccedil;a / parecer independente</p>
+                <p class="svc-fase">Fase 3 &middot; Estabiliza&ccedil;&atilde;o</p>
+                <p class="svc-body">Revis&atilde;o independente da reclassifica&ccedil;&atilde;o e do balan&ccedil;o de abertura 01/01/2026; opini&atilde;o sobre conformidade ao CPC 51.</p>
+                <p class="svc-deliv"><i class="fas fa-file-lines mr-1"></i>Parecer assinado (CVM 5290)</p>
+            </div>
+        </div>
+
+        <div class="opn-card">
+            <p class="marker"><i class="fas fa-shield-halved mr-1"></i>Diferencial AUDIPER</p>
+            <p class="opn">Registro CVM n&ordm; 5290 ativo &mdash; entregamos <span style="color:#fef9c3">asseguran&ccedil;a e parecer assinado</span>, n&atilde;o apenas consultoria. Dado cont&aacute;bil processado sob controles ISO 27001, sem sair do ambiente da firma.</p>
+        </div>
+    </div>
+    <footer class="page-footer lh-footer">
+        <div class="flex items-center justify-between h-full">
+            <span class="text-[7pt] text-white/50">AUDIPER Auditores Independentes &middot; CRC/PI 000023/O &middot; CVM 5290</span>
+            <span class="text-[7pt] text-white/40">Auditoria Preventiva. Risco Mapeado, Risco Controlado. ISO 27001</span>
+            <div class="pg-num"><span class="c">4</span><span class="s">/</span><span class="t">5</span></div>
+        </div>
+    </footer>
+</div>
+</div>
+
+
+<!-- ═══════════ PÁGINA 5 — POR QUE AUDIPER + CTA + ASSINATURAS ═══════════ -->
+<div class="a4-page">
+<div class="page-wrapper">
+    <header class="page-header lh-header">
+        <div class="flex items-center justify-between h-full">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6 rounded-full bg-gradient-to-br from-audiper-red to-audiper-darkred flex items-center justify-center text-white text-[7pt] font-bold">A</div>
+                <span class="text-[8pt] font-display font-semibold text-audiper-red tracking-wider">AUDIPER</span>
+            </div>
+            <span class="text-[7pt] text-slate-400 font-mono">SVC-CPC51-IFRS18</span>
+        </div>
+    </header>
+    <div class="sec-banner">
+        <div class="sec-banner-inner">
+            <div class="sec-banner-icon"><i class="fas fa-handshake-angle text-white text-sm"></i></div>
+            <div>
+                <p class="text-white/60 text-[7pt] uppercase tracking-wider font-semibold">Se&ccedil;&atilde;o 4</p>
+                <h2 class="text-white font-display font-bold text-lg tracking-wide">Por que a AUDIPER &amp; pr&oacute;ximo passo</h2>
+            </div>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="kpi-grid">
+            <div class="kpi-card"><p class="kpi-label">Experi&ecirc;ncia</p><p class="kpi-value">40 anos</p><p class="kpi-sub">Auditoria independente desde 1985</p></div>
+            <div class="kpi-card-dark"><p class="kpi-label">Habilita&ccedil;&atilde;o</p><p class="kpi-value">CVM 5290</p><p class="kpi-sub">Registro ativo desde 1991</p></div>
+            <div class="kpi-card"><p class="kpi-label">Seguran&ccedil;a</p><p class="kpi-value">ISO 27001</p><p class="kpi-sub">Dado fiscal n&atilde;o sai do host</p></div>
+        </div>
+
+        <h3 class="sec-heading"><i class="fas fa-star mr-1.5"></i>Quatro raz&otilde;es para antecipar com a AUDIPER</h3>
+        <div class="grid grid-cols-2 gap-3">
+            <div class="callout"><div class="callout-title"><i class="fas fa-stamp mr-1"></i>Parecer, n&atilde;o s&oacute; consultoria</div><div class="callout-body">Registro CVM 5290 permite emitir opini&atilde;o de asseguran&ccedil;a sobre a reclassifica&ccedil;&atilde;o &mdash; encerrando o projeto com conforto regulat&oacute;rio formal.</div></div>
+            <div class="callout"><div class="callout-title"><i class="fas fa-eye mr-1"></i>Entreg&aacute;veis Visual Law</div><div class="callout-body">Diagn&oacute;sticos e mapas de impacto em dossi&ecirc; premium &mdash; leitura executiva, n&atilde;o planilha crua.</div></div>
+            <div class="callout"><div class="callout-title"><i class="fas fa-shield-halved mr-1"></i>ISO 27001 &amp; LGPD</div><div class="callout-body">Processamento do dado cont&aacute;bil em ambiente controlado, sem expor a base a terceiros.</div></div>
+            <div class="callout"><div class="callout-title"><i class="fas fa-clock-rotate-left mr-1"></i>Auditoria preventiva</div><div class="callout-body">2026 &eacute; o comparativo. Come&ccedil;ar agora &eacute; a diferen&ccedil;a entre projeto controlado e corrida em 2027.</div></div>
+        </div>
+
+        <div class="info-card">
+            <p class="marker"><i class="fas fa-envelope-open-text mr-1"></i>Fale com nossos peritos</p>
+            <p class="text">Agende um diagn&oacute;stico preliminar de impacto CPC 51 / IFRS 18 para a sua estrutura. Equipe consolidada, 40 anos de auditoria independente.</p>
+            <p class="text" style="margin-top:8px;font-weight:600;color:#c9a962">
+                <i class="fab fa-whatsapp mr-1"></i>(86) 9 9401-0525 &nbsp;&middot;&nbsp;
+                <i class="fas fa-envelope mr-1"></i>audiper@audiper.com &nbsp;&middot;&nbsp;
+                <i class="fas fa-globe mr-1"></i>audiper.com
+            </p>
+        </div>
+
+        <div class="divider-gold"></div>
+
+        <div class="grid grid-cols-3 gap-3">
+            <div class="sign-card">
+                <p class="nome">Vitor Eduardo dos S. Ribeiro</p>
+                <p class="cargo">Gerente de Auditoria</p>
+                <p class="reg">CRC/PI 007.929/O &middot; CNAI 4711</p>
+            </div>
+            <div class="sign-card">
+                <p class="nome">Prof. Ricardo A. dos S. Ribeiro</p>
+                <p class="cargo">Auditor Supervisor</p>
+                <p class="reg">CRC/PI 5374/O &middot; Mestre UnB &middot; Perito Federal</p>
+            </div>
+            <div class="sign-card">
+                <p class="nome">Profa. Maria de Nasar&eacute; S. Ribeiro</p>
+                <p class="cargo">Respons&aacute;vel T&eacute;cnica</p>
+                <p class="reg">CRC/PI 2629 &middot; CNAI 1468</p>
+            </div>
+        </div>
+
+        <div class="footnote">AUDIPER Auditoria Independente S/S &middot; CRC/PI 000023/O &middot; CVM 5290 &middot; CNPJ 23.626.575/0001-10 &middot; Rua Arlindo Nogueira, 614 &middot; Centro &middot; Teresina/PI. Material institucional; n&atilde;o constitui opini&atilde;o de auditoria. Base normativa: IFRS 18 (IASB) &middot; CPC 51 &middot; Resolu&ccedil;&atilde;o CVM n&ordm; 237/2025.</div>
+    </div>
+    <footer class="page-footer lh-footer">
+        <div class="flex items-center justify-between h-full">
+            <span class="text-[7pt] text-white/50">AUDIPER Auditores Independentes &middot; CRC/PI 000023/O &middot; CVM 5290</span>
+            <span class="text-[7pt] text-white/40">Auditoria Preventiva. Risco Mapeado, Risco Controlado. ISO 27001</span>
+            <div class="pg-num"><span class="c">5</span><span class="s">/</span><span class="t">5</span></div>
+        </div>
+    </footer>
+</div>
+</div>
+
+</body>
+</html>
