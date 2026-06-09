@@ -32,10 +32,13 @@ jobs:
             set ftp:ssl-force true;
             set ftp:ssl-protect-data true;
             set ssl:verify-certificate no;
-            set net:max-retries 2;
-            set net:timeout 20;
+            set ftp:passive-mode true;
+            set ftp:prefer-epsv no;
+            set net:max-retries 4;
+            set net:timeout 30;
+            set net:reconnect-interval-base 5;
             open -u \"$FTP_USER\",\"$FTP_PASS\" -p \"$FTP_PORT\" \"$FTP_HOST\";
-            mirror -R --verbose --parallel=4 \
+            mirror -R --verbose --parallel=1 \
               --exclude-glob .git/ \
               --exclude-glob .github/ \
               --exclude-glob .claude/ \
