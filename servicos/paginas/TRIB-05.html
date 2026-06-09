@@ -1,0 +1,119 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>AUDIPER · TRIB-05 · Contencioso Administrativo Tribut&aacute;rio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;margin:0;padding:0;box-sizing:border-box}
+body{background:#E5E7EB;font-family:'Inter',sans-serif;color:#334155;font-size:10pt;line-height:1.5}
+h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
+.a4-page{width:210mm;height:297mm;margin:10px auto;background:white;box-shadow:0 4px 20px rgba(0,0,0,.15);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.page-wrapper{width:100%;height:297mm;display:flex;flex-direction:column}
+.page-header{flex-shrink:0}.page-content{flex:1;padding:14px 24px;overflow:hidden}.page-footer{flex-shrink:0}
+@media print{@page{size:A4;margin:0}html,body{width:210mm;margin:0;padding:0;background:white}
+.a4-page{margin:0;box-shadow:none;page-break-after:always}.a4-page:last-child{page-break-after:auto}.no-print{display:none!important}
+.glass-dark{background:rgba(15,23,42,.9)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border:1px solid rgba(201,169,98,.35)!important}
+.glass-claret{background:rgba(92,13,24,.92)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}}
+.lh-header{background:linear-gradient(180deg,#FFF,#F9FAFB);border-bottom:1px solid #E5E7EB;padding:7px 18px;position:relative;height:42px}
+.lh-header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#5c0d18,#7a1220,#B91C1C)}
+.lh-footer{background:linear-gradient(135deg,#1E293B,#0F172A);color:white;padding:7px 18px;position:relative;height:36px}
+.lh-footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#5c0d18,#7a1220,#B91C1C)}
+.pg-num{display:inline-flex;align-items:center;gap:4px;background:linear-gradient(135deg,#7a1220,#5c0d18);padding:3px 10px;border-radius:12px}
+.pg-num .c{font-weight:700;color:white;font-size:9pt}.pg-num .t{color:rgba(255,255,255,.8);font-size:8pt}
+.sec-banner{position:relative;min-height:78px;background:linear-gradient(135deg,#5c0d18,#7a1220,#991B1B);border-radius:0 0 12px 12px;overflow:hidden;margin-bottom:14px}
+.sec-banner::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h40v40H0z' fill='none'/%3E%3Cpath d='M20 0v40M0 20h40' stroke='%23ffffff' stroke-width='.3' opacity='.08'/%3E%3C/svg%3E")}
+.sec-banner-inner{position:relative;z-index:10;padding:13px 20px;display:flex;align-items:center;gap:15px}
+.sec-banner-icon{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.badge-area{font-size:7.5pt;font-weight:700;padding:3px 10px;border-radius:99px;letter-spacing:.05em;text-transform:uppercase;background:linear-gradient(135deg,#c9a962,#a16207);color:#3a2a04}
+.badge-norma{font-size:7.5pt;font-weight:700;padding:3px 10px;border-radius:99px;letter-spacing:.05em;text-transform:uppercase;background:linear-gradient(135deg,#1E293B,#0F172A);color:#c9a962;display:inline-block}
+.badge-new{font-size:7pt;font-weight:700;padding:2px 8px;border-radius:99px;letter-spacing:.05em;text-transform:uppercase;background:linear-gradient(135deg,#047857,#065f46);color:white}
+.sec-heading{color:#7a1220;font-family:'Outfit';font-weight:700;font-size:11pt;margin-top:14px;margin-bottom:7px;padding-bottom:4px;border-bottom:1px solid rgba(201,169,98,.3)}
+.lead{font-size:10pt;line-height:1.6;color:#334155}
+.pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px}
+.pillar{background:linear-gradient(180deg,#fff,#f8fafc);border:1px solid rgba(201,169,98,.3);border-radius:10px;padding:12px;position:relative;overflow:hidden}
+.pillar::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#7a1220,#c9a962,#7a1220)}
+.pillar .p-num{font-family:'Outfit';font-weight:800;font-size:10pt;color:#fff;background:linear-gradient(135deg,#7a1220,#5c0d18);width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.pillar .p-title{font-family:'Outfit';font-weight:700;font-size:9.5pt;color:#7a1220;margin-top:7px}
+.pillar .p-body{font-size:8.5pt;color:#475569;line-height:1.5;margin-top:5px}
+.deliv-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;margin-top:6px}
+.deliv{display:flex;gap:8px;align-items:flex-start;font-size:9pt;color:#334155}
+.deliv i{color:#7a1220;margin-top:3px;flex-shrink:0}
+.callout-nbc{border-left:4px solid #7a1220;background:rgba(122,18,32,.05);padding:11px 15px;border-radius:0 8px 8px 0;margin:10px 0}
+.callout-nbc .ct{font-family:'Outfit';font-weight:700;font-size:9pt;color:#7a1220;margin-bottom:3px}
+.callout-nbc .cb{font-size:9pt;color:#475569;line-height:1.55}
+.opn-card{background:linear-gradient(135deg,#047857,#065f46);color:white;padding:14px 18px;border-radius:12px;border-left:5px solid #c9a962;box-shadow:0 6px 22px rgba(4,120,87,.22);margin:12px 0;position:relative;overflow:hidden}
+.opn-card::before{content:'';position:absolute;top:-30%;right:-15%;width:200px;height:200px;background:radial-gradient(circle,rgba(255,255,255,.1),transparent 65%)}
+.opn-card .marker{font-size:7.8pt;color:#a7f3d0;letter-spacing:1.5px;text-transform:uppercase;font-weight:800;position:relative;z-index:2}
+.opn-card .opn{font-family:'Outfit';font-weight:600;font-size:11pt;margin-top:5px;line-height:1.4;position:relative;z-index:2}
+.info-card{background:linear-gradient(135deg,#1E293B,#0F172A);color:white;padding:13px 18px;border-radius:12px;border-left:5px solid #c9a962;margin:12px 0;position:relative;overflow:hidden}
+.info-card .marker{font-size:7.8pt;color:#c9a962;letter-spacing:1.5px;text-transform:uppercase;font-weight:800}
+.info-card .text{font-size:9.5pt;margin-top:4px;line-height:1.5;color:rgba(255,255,255,.92)}
+.publico{display:inline-block;font-size:8.5pt;background:rgba(201,169,98,.12);border:1px solid rgba(201,169,98,.3);color:#7a1220;padding:3px 10px;border-radius:99px;margin:3px 4px 0 0}
+.divider-gold{width:100%;height:1px;background:linear-gradient(90deg,transparent,#c9a962,transparent);margin:12px 0}
+.footnote{font-size:7.5pt;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:7px;margin-top:auto}
+.cover-bg{background:linear-gradient(135deg,#0a0608 0%,#2d0a14 35%,#5c0d18 65%,#7a1220 100%)}
+.cover-grid{background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h60v60H0z' fill='none'/%3E%3Cpath d='M30 0v60M0 30h60' stroke='%23ffffff' stroke-width='.3' opacity='.06'/%3E%3C/svg%3E")}
+</style></head><body>
+<div class="a4-page"><div class="page-wrapper">
+  <header class="page-header lh-header">
+    <div class="flex items-center justify-between h-full">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 rounded-full bg-gradient-to-br from-audiper-red to-audiper-darkred flex items-center justify-center text-white text-[7pt] font-bold">A</div>
+        <span class="text-[8pt] font-display font-semibold text-audiper-red tracking-wider">AUDIPER</span>
+        <span class="text-[7pt] text-slate-400 ml-1">Linha de Servi&ccedil;o</span>
+      </div>
+      <span class="text-[7pt] text-slate-400 font-mono">TRIB-05 &middot; Consultoria Tribut&aacute;ria</span>
+    </div>
+  </header>
+
+  <div class="sec-banner"><div class="sec-banner-inner">
+    <div class="sec-banner-icon"><i class="fas fa-gavel text-white text-lg"></i></div>
+    <div style="flex:1">
+      <div class="flex items-center gap-2 mb-1">
+        <span class="badge-area">Consultoria Tribut&aacute;ria</span>
+        <span class="badge-new"><i class="fas fa-star mr-1"></i>Novo</span>
+      </div>
+      <h1 class="text-white font-display font-bold text-xl tracking-wide leading-tight">Contencioso Administrativo Tribut&aacute;rio</h1>
+      <p class="text-white/70 text-[9pt] mt-1">Defesa t&eacute;cnica em autua&ccedil;&otilde;es e processos administrativos</p>
+    </div>
+  </div></div>
+
+  <div class="page-content">
+    <div class="flex items-center justify-between mb-2">
+      <span class="badge-norma"><i class="fas fa-bookmark mr-1"></i>PAF &middot; Legisla&ccedil;&atilde;o processual fiscal</span>
+      <span class="text-[8pt] text-slate-400 italic">Auditoria Preventiva. Risco Mapeado, Risco Controlado. ISO 27001</span>
+    </div>
+
+    <p class="lead">Diante de autua&ccedil;&otilde;es e lan&ccedil;amentos, a defesa administrativa bem fundamentada &mdash; com suporte cont&aacute;bil e pericial &mdash; &eacute; a oportunidade de reverter exig&ecirc;ncias antes da fase judicial, com economia de tempo e custo.</p>
+
+    <h3 class="sec-heading"><i class="fas fa-layer-group mr-1.5"></i>Como atuamos</h3>
+    <div class="pillar-grid"><div class="pillar"><span class="p-num">1</span><p class="p-title">An&aacute;lise do auto de infra&ccedil;&atilde;o</p><p class="p-body">Exame da acusa&ccedil;&atilde;o fiscal e da base de c&aacute;lculo apontada.</p></div><div class="pillar"><span class="p-num">2</span><p class="p-title">Fundamenta&ccedil;&atilde;o cont&aacute;bil</p><p class="p-body">Constru&ccedil;&atilde;o da defesa com evidência cont&aacute;bil e pericial.</p></div><div class="pillar"><span class="p-num">3</span><p class="p-title">Acompanhamento at&eacute; decis&atilde;o</p><p class="p-body">Sustenta&ccedil;&atilde;o nas instâncias administrativas competentes.</p></div></div>
+
+    <h3 class="sec-heading"><i class="fas fa-box-open mr-1.5"></i>O que voc&ecirc; recebe</h3>
+    <div class="deliv-grid"><div class="deliv"><i class="fas fa-circle-check"></i><span>Parecer sobre o auto de infra&ccedil;&atilde;o</span></div><div class="deliv"><i class="fas fa-circle-check"></i><span>Memorial de defesa com base cont&aacute;bil</span></div><div class="deliv"><i class="fas fa-circle-check"></i><span>C&aacute;lculos e demonstrativos de suporte</span></div><div class="deliv"><i class="fas fa-circle-check"></i><span>Acompanhamento processual administrativo</span></div></div>
+
+    <div class="opn-card"><p class="marker"><i class="fas fa-shield-halved mr-1"></i>Abordagem AUDIPER</p><p class="opn">A perspectiva do auditor e do perito refor&ccedil;a a consistência t&eacute;cnica da defesa.</p></div>
+
+    <h3 class="sec-heading"><i class="fas fa-users-viewfinder mr-1.5"></i>Para quem &eacute;</h3>
+    <div><span class="publico">Empresas autuadas</span><span class="publico">Discuss&otilde;es de ICMS, ISS, IRPJ/CSLL e contribui&ccedil;&otilde;es</span></div>
+
+    <div class="divider-gold"></div>
+    <div class="info-card">
+      <p class="marker"><i class="fas fa-comments mr-1"></i>Fale com nossos peritos</p>
+      <p class="text">Equipe consolidada, 40 anos de auditoria independente. Agende uma conversa preliminar sobre TRIB-05.</p>
+      <p class="text" style="margin-top:7px;font-weight:600;color:#c9a962">
+        <i class="fab fa-whatsapp mr-1"></i>(86) 9 9401-0525 &nbsp;&middot;&nbsp;
+        <i class="fas fa-envelope mr-1"></i>audiper@audiper.com &nbsp;&middot;&nbsp;
+        <i class="fas fa-globe mr-1"></i>audiper.com</p>
+    </div>
+
+    <div class="footnote">AUDIPER Auditoria Independente S/S &middot; CRC/PI 000023/O &middot; CVM 5290 &middot; CNPJ 23.626.575/0001-10 &middot; Teresina/PI. Material institucional; n&atilde;o constitui opini&atilde;o de auditoria. Refer&ecirc;ncia normativa: PAF &middot; Legisla&ccedil;&atilde;o processual fiscal.</div>
+  </div>
+
+  <footer class="page-footer lh-footer">
+    <div class="flex items-center justify-between h-full">
+      <span class="text-[7pt] text-white/50">AUDIPER Auditores Independentes &middot; CRC/PI 000023/O &middot; CVM 5290</span>
+      <span class="text-[7pt] text-white/40">Consultoria Tribut&aacute;ria</span>
+      <div class="pg-num"><span class="c">TRIB-05</span></div>
+    </div>
+  </footer>
+</div></div></body></html>
