@@ -1,0 +1,45 @@
+name: Deploy to Hostinger (FTPS)
+
+# Manual-only enquanto valida. Depois de 1 deploy OK, descomentar o bloco `push`
+# abaixo para publicar automaticamente a cada push na master.
+on:
+  workflow_dispatch:
+  # push:
+  #   branches: [ master ]
+
+concurrency:
+  group: deploy-hostinger
+  cancel-in-progress: true
+
+jobs:
+  ftp-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Deploy via FTPS (mirror, sem delete)
+        env:
+          FTP_HOST: ${{ secrets.FTP_SERVER }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+          FTP_USER: ${{ secrets.FTP_USERNAME }}
+          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          lftp -c "
+            set ftp:ssl-force true;
+            set ftp:ssl-protect-data true;
+            set ssl:verify-certificate no;
+            set net:max-retries 2;
+            set net:timeout 20;
+            open -u \"$FTP_USER\",\"$FTP_PASS\" -p \"$FTP_PORT\" \"$FTP_HOST\";
+            mirror -R --verbose --parallel=4 \
+              --exclude-glob .git/ \
+              --exclude-glob .github/ \
+              --exclude-glob .claude/ \
+              --exclude-glob node_modules/ \
+              --exclude .gitignore \
+              ./ / ;
+          "
