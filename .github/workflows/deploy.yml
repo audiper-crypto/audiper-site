@@ -49,6 +49,15 @@ jobs:
               --exclude-glob webhook-deploy.php \
               --exclude-glob README.md \
               --exclude-glob ROTEIRO-REELS.md \
+              --exclude-glob *.md \
+              --exclude-glob diagnosticos/ \
+              --exclude-glob portal/ \
+              --exclude-glob data/ \
+              --exclude-glob dashboard-data.json \
+              --exclude-glob leads.html \
+              --exclude-glob mission-control.html \
+              --exclude-glob *-dashboard*.html \
+              --exclude-glob auditoria-detalhe*.html \
               --exclude .gitignore \
               ./ /public_html/ ;
           "

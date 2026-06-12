@@ -12,3 +12,13 @@ Disallow: /js/
 Disallow: /css/
 Disallow: /animations/
 Disallow: /.claude/
+Disallow: /diagnosticos/
+Disallow: /portal/
+Disallow: /data/
+Disallow: /leads.html
+Disallow: /mission-control.html
+Disallow: /audina-dashboard.html
+Disallow: /audina-dashboard-v2.html
+Disallow: /auditoria-detalhe.html
+Disallow: /auditoria-detalhe-v2.html
+Disallow: /dashboard-data.json

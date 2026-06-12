@@ -2,13 +2,14 @@
 seed_clientes.py — Popula PostgreSQL com todos os clientes e auditorias AUDIPER.
 Executar: python D:/Site/audiper/seed_clientes.py
 """
+import os
 import psycopg2
 from psycopg2.extras import RealDictCursor
 import json
 import uuid
 from datetime import date
 
-DB_URL = "postgresql://postgres:audiper2026@localhost:5432/audiper"
+DB_URL = os.environ.get("AUDIPER_DB_URL", "postgresql://postgres@localhost:5432/audiper")
 
 CLIENTES = [
     {

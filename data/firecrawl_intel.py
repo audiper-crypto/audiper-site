@@ -5,7 +5,7 @@ Analisa concorrentes, extrai padroes e gera relatorio.
 import json, os, sys
 from firecrawl import FirecrawlApp
 
-API_KEY = os.environ.get('FIRECRAWL_API_KEY', 'fc-75d5eafd88de40c8ab24484b99f76cce')
+API_KEY = os.environ.get('FIRECRAWL_API_KEY', '')
 app = FirecrawlApp(api_key=API_KEY)
 
 def scrape_site(url):

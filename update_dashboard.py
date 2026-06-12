@@ -8,12 +8,13 @@ Cada item do JSON inclui links para modulos:
   - cliente_id: link para /clientes/{id}
   - tipo: classifica para roteamento no frontend (prazo, achado, email, tarefa)
 """
+import os
 import json
 from datetime import datetime
 from pathlib import Path
 
 AUDIT_ROOT = Path("D:/AUDITORIAS")
-DB_URL = "postgresql://postgres:audiper2026@localhost:5432/audiper"
+DB_URL = os.environ.get("AUDIPER_DB_URL", "postgresql://postgres@localhost:5432/audiper")
 OUT = Path(__file__).parent / "dashboard-data.json"
 
 # Mapeamento pasta filesystem -> codigo auditoria
