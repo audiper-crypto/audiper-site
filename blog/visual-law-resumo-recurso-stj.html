@@ -218,6 +218,39 @@
     .laudo-concl p b{color:#c41a1a}
     @media(max-width:575px){.laudo-apur{grid-template-columns:1fr}}
     @media(max-width:767px){.ba-wrap{grid-template-columns:1fr}.ba-mid{transform:rotate(90deg);padding:10px 0}}
+    /* Resumo card (forma adequada REsp) */
+    .rcard{width:100%;background:#fff;border:1px solid #eaeaee;border-radius:16px;overflow:hidden;box-shadow:0 22px 50px -28px rgba(0,0,0,.3);margin:18px 0 0}
+    .rcard .hd{background:linear-gradient(135deg,#7a1220,#c41a1a);padding:18px 22px;color:#fff}
+    .rcard .hd .k{font-family:'JetBrains Mono',monospace;font-size:0.7rem;font-weight:700;letter-spacing:2px;color:#ffd9b0;text-transform:uppercase}
+    .rcard .hd h4{font-family:'Figtree',sans-serif;font-weight:800;font-size:1.35rem;color:#fff;margin:2px 0 0}
+    .rcard .hd .rmeta{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:rgba(255,255,255,.82);margin-top:6px}
+    .rcard .bd{padding:20px 22px}
+    .rcard .sl{font-family:'JetBrains Mono',monospace;font-size:0.68rem;font-weight:700;color:#c41a1a;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:7px}
+    .rcard .sl .material-symbols-outlined{font-size:16px}
+    .rtl{display:flex;margin-bottom:20px}
+    .rtl .nd{flex:1;text-align:center;position:relative}
+    .rtl .nd .dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 7px;position:relative;z-index:2}
+    .rtl .nd .dot .material-symbols-outlined{font-size:18px;color:#fff}
+    .rtl .nd.ok .dot{background:#4a8a5a}.rtl .nd.no .dot{background:#c41a1a}.rtl .nd.now .dot{background:#7a1220}
+    .rtl .nd .t{font-family:'Figtree',sans-serif;font-weight:700;font-size:0.85rem;color:#1a1a1a}
+    .rtl .nd .s{font-family:'Inter',sans-serif;font-size:0.72rem;color:#8a8a90;line-height:1.3;margin-top:2px}
+    .rtl .nd::after{content:'';position:absolute;top:16px;left:50%;width:100%;height:3px;background:#e2e2e6;z-index:1}
+    .rtl .nd:last-child::after{display:none}
+    .rcab{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
+    .rcab .p{font-family:'Inter',sans-serif;font-size:0.8rem;font-weight:600;color:#2a6a3a;background:#eaf5ee;border:1px solid #cfe8d7;border-radius:20px;padding:5px 12px;display:inline-flex;align-items:center;gap:5px}
+    .rcab .p .material-symbols-outlined{font-size:14px}
+    .rfund{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:18px}
+    .rfund .b{background:#faf9fa;border:1px solid #eee;border-radius:10px;padding:12px 14px;border-left:4px solid #c41a1a}
+    .rfund .b .t{font-family:'Figtree',sans-serif;font-weight:800;font-size:0.78rem;color:#c41a1a;text-transform:uppercase;margin-bottom:4px}
+    .rfund .b p{font-family:'Inter',sans-serif;font-size:0.82rem;color:#333;line-height:1.5;margin:0}
+    .rdisp{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
+    .rdisp .tg{font-family:'JetBrains Mono',monospace;font-size:0.75rem;font-weight:600;color:#7a1220;background:#f7ecef;border:1px solid #e4cdd4;border-radius:8px;padding:6px 12px}
+    .rped{background:linear-gradient(135deg,#c41a1a,#7a1220);border-radius:12px;padding:15px 18px;display:flex;align-items:center;gap:12px}
+    .rped .material-symbols-outlined{font-size:24px;color:#ffd9b0;flex:0 0 24px}
+    .rped .pt{font-family:'JetBrains Mono',monospace;font-size:0.62rem;font-weight:700;color:#ffd9b0;letter-spacing:1.5px;text-transform:uppercase}
+    .rped p{font-family:'Figtree',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;line-height:1.4;margin:2px 0 0}
+    .rdiv{height:1px;background:#eee;margin-bottom:16px}
+    @media(max-width:575px){.rfund{grid-template-columns:1fr}}
 
     /* ===== AUTORIDADE / EQUIPE ===== */
     .team-section{background:#faf9fa;padding:70px 0;border-top:1px solid #f0f0f0}
@@ -392,24 +425,53 @@
           </div>
 
           <h2>Nossa solu&ccedil;&atilde;o: o resumo executivo em Visual Law</h2>
-          <p>N&atilde;o substitu&iacute;mos a estrat&eacute;gia do advogado &mdash; <strong>damos forma</strong> a ela. Pegamos a pe&ccedil;a e a condensamos nos cinco elementos que o pr&oacute;prio art. 343-A pede, cada um em um bloco claro e hierarquizado:</p>
+          <p>N&atilde;o substitu&iacute;mos a estrat&eacute;gia do advogado &mdash; <strong>damos forma</strong> a ela. Um trecho de recurso em texto corrido&hellip;</p>
 
-          <div class="ba-wrap">
-            <div class="ba-col ba-before">
-              <span class="ba-tag">Antes &middot; texto corrido</span>
-              <p class="ba-text">Trata-se de Recurso Especial interposto em face do ac&oacute;rd&atilde;o do Tribunal de origem que, reformando a senten&ccedil;a, julgou improcedente o pedido de repeti&ccedil;&atilde;o de ind&eacute;bito, ao fundamento de que a cobran&ccedil;a da tarifa seria leg&iacute;tima; ocorre que o ac&oacute;rd&atilde;o recorrido <span class="hl">violou o art. 42, par&aacute;grafo &uacute;nico, do CDC</span> e divergiu do entendimento firmado no <span class="hl">Tema 929/STJ</span>, na medida em que reconheceu a cobran&ccedil;a indevida sem determinar a restitui&ccedil;&atilde;o em dobro, raz&atilde;o pela qual se requer o conhecimento e provimento do recurso&hellip;</p>
+          <blockquote>
+            <p>&ldquo;Trata-se de Recurso Especial interposto em face do ac&oacute;rd&atilde;o que, reformando a senten&ccedil;a, julgou improcedente a repeti&ccedil;&atilde;o de ind&eacute;bito; ocorre que o ac&oacute;rd&atilde;o recorrido violou o art. 42, par&aacute;grafo &uacute;nico, do CDC e divergiu do Tema 929/STJ, ao reconhecer a cobran&ccedil;a indevida sem determinar a restitui&ccedil;&atilde;o em dobro&hellip;&rdquo;</p>
+          </blockquote>
+
+          <p>&hellip;vira um <strong>resumo executivo</strong> no formato que o art. 343-A pede &mdash; decis&otilde;es impugnadas, cabimento, fundamentos, dispositivos e pedido, cada elemento no seu lugar:</p>
+
+          <div class="rcard">
+            <div class="hd">
+              <div class="k">Resumo Executivo &middot; Art. 343-A</div>
+              <h4>Recurso Especial</h4>
+              <div class="rmeta">Proc. n&ordm; 0000000-00.2026.8.00.0000 &middot; Recorrente &times; Recorrida &middot; 3&ordf; Turma</div>
             </div>
-            <div class="ba-mid"><span class="material-symbols-outlined">arrow_forward</span></div>
-            <div class="ba-col ba-after">
-              <span class="ba-tag">Depois &middot; Visual Law</span>
-              <div class="ba-block"><span class="bi"><span class="material-symbols-outlined">gavel</span></span><span class="bb"><b>Fato</b><span>Tarifa cobrada foi reconhecida indevida; o TJ negou a restitui&ccedil;&atilde;o.</span></span></div>
-              <div class="ba-block"><span class="bi"><span class="material-symbols-outlined">balance</span></span><span class="bb"><b>Direito</b><span>Viola&ccedil;&atilde;o ao art. 42, &sect; &uacute;nico, do CDC &mdash; devolu&ccedil;&atilde;o em dobro.</span></span></div>
-              <div class="ba-block"><span class="bi"><span class="material-symbols-outlined">task_alt</span></span><span class="bb"><b>Pedido</b><span>Conhecer e prover o REsp; condenar &agrave; devolu&ccedil;&atilde;o em dobro.</span></span></div>
-              <div class="ba-block"><span class="bi"><span class="material-symbols-outlined">description</span></span><span class="bb"><b>Decis&atilde;o impugnada</b><span>Ac&oacute;rd&atilde;o do TJ que julgou improcedente a repeti&ccedil;&atilde;o.</span></span></div>
-              <div class="ba-block"><span class="bi"><span class="material-symbols-outlined">menu_book</span></span><span class="bb"><b>Dispositivos</b><span>CDC, art. 42, &sect; &uacute;nico &middot; Tema 929/STJ.</span></span></div>
+            <div class="bd">
+              <div class="sl"><span class="material-symbols-outlined">timeline</span> Decis&otilde;es impugnadas &middot; linha do tempo</div>
+              <div class="rtl">
+                <div class="nd ok"><div class="dot"><span class="material-symbols-outlined">check</span></div><div class="t">Senten&ccedil;a</div><div class="s">Procedente</div></div>
+                <div class="nd no"><div class="dot"><span class="material-symbols-outlined">close</span></div><div class="t">Ac&oacute;rd&atilde;o TJ</div><div class="s">Reformou &middot; improcedente</div></div>
+                <div class="nd now"><div class="dot"><span class="material-symbols-outlined">gavel</span></div><div class="t">STJ</div><div class="s">REsp interposto</div></div>
+              </div>
+              <div class="rdiv"></div>
+              <div class="sl"><span class="material-symbols-outlined">rule</span> Cabimento &middot; admissibilidade</div>
+              <div class="rcab">
+                <span class="p"><span class="material-symbols-outlined">check_circle</span> Prequestionado</span>
+                <span class="p"><span class="material-symbols-outlined">check_circle</span> Art. 105, III, &ldquo;a&rdquo;, CF</span>
+                <span class="p"><span class="material-symbols-outlined">check_circle</span> Viola&ccedil;&atilde;o a lei federal</span>
+                <span class="p"><span class="material-symbols-outlined">check_circle</span> Tempestivo</span>
+              </div>
+              <div class="sl"><span class="material-symbols-outlined">article</span> Fundamentos de fato e de direito</div>
+              <div class="rfund">
+                <div class="b"><div class="t">Fato</div><p>Tarifa reconhecida indevida; o TJ negou a restitui&ccedil;&atilde;o em dobro.</p></div>
+                <div class="b"><div class="t">Direito</div><p>Viola&ccedil;&atilde;o ao art. 42, &sect; &uacute;nico, do CDC e diverg&ecirc;ncia do Tema 929/STJ.</p></div>
+              </div>
+              <div class="sl"><span class="material-symbols-outlined">menu_book</span> Dispositivos invocados</div>
+              <div class="rdisp">
+                <span class="tg">CDC, art. 42, &sect; &uacute;nico</span>
+                <span class="tg">CF, art. 105, III, &ldquo;a&rdquo;</span>
+                <span class="tg">Tema 929/STJ</span>
+              </div>
+              <div class="rped">
+                <span class="material-symbols-outlined">flag</span>
+                <div><div class="pt">Pedido</div><p>Conhecer e prover o REsp &middot; reformar o ac&oacute;rd&atilde;o &middot; condenar &agrave; devolu&ccedil;&atilde;o em dobro.</p></div>
+              </div>
             </div>
           </div>
-          <p class="ba-note">Exemplo ilustrativo &middot; conte&uacute;do fict&iacute;cio para fins did&aacute;ticos</p>
+          <p class="ba-note">Modelo ilustrativo &middot; conte&uacute;do fict&iacute;cio &middot; sem dados de clientes</p>
 
           <p>O relator percorre a s&iacute;ntese em segundos, entende a tese e localiza cada fundamento. O conte&uacute;do &eacute; o mesmo &mdash; muda a <strong>forma como ele &eacute; lido</strong>.</p>
 
