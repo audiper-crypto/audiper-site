@@ -1,0 +1,50 @@
+{
+  "sector": "marketing",
+  "topic": "reels-instagram",
+  "generated_at": "2026-07-09T19:16:00.335167+00:00",
+  "total_benchmarks": 1,
+  "capture_method": {
+    "problem": "ambiente web com egress em allowlist bloqueia instagram.com (403)",
+    "solution": "GitHub Actions como braco (push-trigger .github/reel-trigger) -> yt-dlp+ffmpeg+whisper large-v3 -> commit de volta",
+    "skill": ".claude/skills/baixar-analisar-reel/SKILL.md",
+    "local_fallback": "tools/baixar_reel.py"
+  },
+  "reel_formula": [
+    "gancho: personagem em 1a pessoa com dor imediata (0-3s)",
+    "escalada: 3-4 personagens, cada um uma dor + a correcao certa",
+    "punchline: reframe da solucao (ex.: 'nao e escrever mais, e facilitar a analise')",
+    "cta_conversao: 'Comenta X' -> funil comentario->DM"
+  ],
+  "benchmarks": [
+    {
+      "fonte": "https://www.instagram.com/reel/Dai-28hJEWi/",
+      "autora": "Ianna Cabanelas (@iannacabanelas)",
+      "nicho": "Visual Law / IA juridica",
+      "duracao_s": 42,
+      "tecnica": "animacao 3D generativa (Veo/Kling-like)",
+      "cta": "Comenta 'imersao'",
+      "hashtags": [
+        "#inteligenciaartificial",
+        "#legaldesign",
+        "#visuallaw",
+        "#judiciario",
+        "#advocacia"
+      ]
+    }
+  ],
+  "gaps_audiper": [
+    "usamos slideshow institucional CSS em vez de storytelling em video 3D",
+    "CTA passivo (link) em vez de conversao (comentario->DM)",
+    "tentamos dizer tudo em 20s em vez de 1 ideia por reel"
+  ],
+  "ideias": [
+    "Eu sou o SPED (auditoria fiscal preventiva) -> heroi Auditor do Futuro",
+    "Eu sou o laudo pericial que ninguem le -> heroi laudo em Visual Law",
+    "Eu sou o estoque que ninguem contou -> drone + agentes de IA"
+  ],
+  "refs": [
+    "docs/analise-reel-referencia.md",
+    "obsidian/Análise — Reel Recursos Infalíveis (Ianna Cabanelas).md",
+    "ROTEIRO-REELS.md"
+  ]
+}
