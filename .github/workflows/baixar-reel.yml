@@ -62,16 +62,26 @@ jobs:
           ffmpeg -i reel.mp4 -vf "fps=1,scale=540:-1" -q:v 3 frame_%03d.jpg -hide_banner -loglevel error || true
           ffmpeg -i reel.mp4 -vn -acodec libmp3lame -q:a 4 audio.mp3 -hide_banner -loglevel error || true
 
-      - name: Transcrever audio (Whisper)
+      - name: Transcrever audio (Whisper large-v3)
         if: env.DOWNLOAD_OK == '1'
         run: |
           cd reels_baixados/out
           python - <<'PY'
           import whisper
-          m = whisper.load_model("base")
-          r = m.transcribe("audio.mp3", language="pt")
+          # large-v3: melhor precisao. initial_prompt injeta vocabulario de dominio
+          # (juridico + IA) para reduzir erros como "aiada" -> "a IA da".
+          prompt = (
+              "Transcricao de reel sobre Visual Law e IA no Judiciario. "
+              "Termos: IA da 2a instancia, IA do gabinete, IA dos tribunais superiores, "
+              "PJE, peticao, jurisprudencia, prova-chave, argumento decisivo, recurso prolixo, "
+              "violacao especifica, precedente aplicavel, requisito de admissibilidade, tese, "
+              "recursos infaliveis, legal design, persuasao."
+          )
+          m = whisper.load_model("large-v3")
+          r = m.transcribe("audio.mp3", language="pt", initial_prompt=prompt,
+                           temperature=0.0, beam_size=5)
           open("transcricao.txt", "w", encoding="utf-8").write(r["text"].strip())
-          print("Transcricao OK")
+          print("Transcricao large-v3 OK")
           PY
 
       - name: Resumir metadados
