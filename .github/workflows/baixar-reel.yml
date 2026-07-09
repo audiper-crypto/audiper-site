@@ -1,0 +1,105 @@
+name: Baixar e Analisar Reel
+
+# Manual (workflow_dispatch). Roda no runner do GitHub, que tem internet aberta,
+# para baixar um Reel do Instagram, extrair quadros, transcrever o audio e
+# commitar os resultados de volta no branch para analise.
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "URL do reel do Instagram"
+        required: true
+        default: "https://www.instagram.com/reel/Dai-28hJEWi/"
+
+permissions:
+  contents: write
+
+jobs:
+  baixar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: claude/instagram-reel-review-aprox4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar ferramentas
+        run: |
+          sudo apt-get update && sudo apt-get install -y ffmpeg
+          pip install -U yt-dlp openai-whisper
+
+      - name: Baixar reel
+        run: |
+          set -o pipefail
+          mkdir -p reels_baixados/out
+          rm -f reels_baixados/out/* || true
+          if yt-dlp -f "bv*+ba/b" --merge-output-format mp4 --write-info-json \
+               --no-playlist -o "reels_baixados/out/reel.%(ext)s" \
+               "${{ github.event.inputs.url }}" 2>&1 | tee reels_baixados/out/ytdlp.log; then
+            echo "DOWNLOAD_OK=1" >> "$GITHUB_ENV"
+          else
+            echo "DOWNLOAD_OK=0" >> "$GITHUB_ENV"
+            echo "::warning::Download falhou — provavelmente login/rate-limit. Ver ytdlp.log."
+          fi
+
+      - name: Extrair quadros + audio
+        if: env.DOWNLOAD_OK == '1'
+        run: |
+          cd reels_baixados/out
+          ffmpeg -i reel.mp4 -vf "fps=1,scale=540:-1" -q:v 3 frame_%03d.jpg -hide_banner -loglevel error || true
+          ffmpeg -i reel.mp4 -vn -acodec libmp3lame -q:a 4 audio.mp3 -hide_banner -loglevel error || true
+
+      - name: Transcrever audio (Whisper)
+        if: env.DOWNLOAD_OK == '1'
+        run: |
+          cd reels_baixados/out
+          python - <<'PY'
+          import whisper
+          m = whisper.load_model("base")
+          r = m.transcribe("audio.mp3", language="pt")
+          open("transcricao.txt", "w", encoding="utf-8").write(r["text"].strip())
+          print("Transcricao OK")
+          PY
+
+      - name: Resumir metadados
+        if: env.DOWNLOAD_OK == '1'
+        run: |
+          cd reels_baixados/out
+          python - <<'PY'
+          import json, glob, re
+          fs = glob.glob("*.info.json")
+          if fs:
+              d = json.load(open(fs[0], encoding="utf-8"))
+              desc = (d.get("description") or "").strip()
+              tags = re.findall(r"#\w+", desc)
+              open("metadados.txt", "w", encoding="utf-8").write(
+                  f"URL......: {d.get('webpage_url')}\n"
+                  f"Autor....: {d.get('uploader')} (@{d.get('uploader_id')})\n"
+                  f"Duracao..: {d.get('duration')} s\n"
+                  f"Likes....: {d.get('like_count')}\n"
+                  f"Views....: {d.get('view_count')}\n"
+                  f"Data.....: {d.get('upload_date')}\n\n"
+                  f"LEGENDA:\n{desc or '(sem legenda)'}\n\n"
+                  f"HASHTAGS:\n{' '.join(tags) if tags else '(nenhuma)'}\n"
+              )
+              print("Metadados OK")
+          PY
+
+      - name: Commitar resultados de volta
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # nao versionar o mp4 pesado nem o audio; guardar quadros + textos + log
+          rm -f reels_baixados/out/reel.mp4 reels_baixados/out/audio.mp3 || true
+          git add -f reels_baixados/
+          git commit -m "chore(reel): resultado do download/analise via CI [skip ci]" || echo "nada a commitar"
+          for i in 1 2 3 4; do
+            git push origin HEAD:claude/instagram-reel-review-aprox4 && break
+            git pull --rebase origin claude/instagram-reel-review-aprox4 || true
+            sleep $((2**i))
+          done
