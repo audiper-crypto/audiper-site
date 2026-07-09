@@ -1,0 +1,13 @@
+[Instagram] Setting up session
+[Instagram] Extracting URL: https://www.instagram.com/reel/Dai-28hJEWi/
+[Instagram] Dai-28hJEWi: Checking post accessibility
+[Instagram] Dai-28hJEWi: Downloading webpage
+[info] Dai-28hJEWi: Downloading 1 format(s): dash-1111127471586929v+dash-1110989864934023a
+[info] Writing video metadata as JSON to: reels_baixados/out/reel.info.json
+[download] Destination: reels_baixados/out/reel.fdash-1111127471586929v.mp4
+[download]   0.0% of    8.94MiB at  257.59KiB/s ETA 00:35[download]   0.0% of    8.94MiB at  660.83KiB/s ETA 00:13[download]   0.1% of    8.94MiB at    1.32MiB/s ETA 00:06[download]   0.2% of    8.94MiB at    2.61MiB/s ETA 00:03[download]   0.3% of    8.94MiB at    3.09MiB/s ETA 00:02[download]   0.7% of    8.94MiB at    4.54MiB/s ETA 00:01[download]   1.4% of    8.94MiB at    7.08MiB/s ETA 00:01[download]   2.8% of    8.94MiB at    9.39MiB/s ETA 00:00[download]   5.6% of    8.94MiB at   13.72MiB/s ETA 00:00[download]  11.2% of    8.94MiB at   20.66MiB/s ETA 00:00[download]  22.4% of    8.94MiB at   33.02MiB/s ETA 00:00[download]  44.7% of    8.94MiB at   52.59MiB/s ETA 00:00[download]  89.5% of    8.94MiB at   28.97MiB/s ETA 00:00[download] 100.0% of    8.94MiB at   31.59MiB/s ETA 00:00[download] 100% of    8.94MiB in 00:00:00 at 23.98MiB/s  
+[download] Destination: reels_baixados/out/reel.fdash-1110989864934023a.m4a
+[download]   0.3% of  320.59KiB at  574.72KiB/s ETA 00:00[download]   0.9% of  320.59KiB at    1.13MiB/s ETA 00:00[download]   2.2% of  320.59KiB at    2.27MiB/s ETA 00:00[download]   4.7% of  320.59KiB at    4.25MiB/s ETA 00:00[download]   9.7% of  320.59KiB at    7.75MiB/s ETA 00:00[download]  19.7% of  320.59KiB at   13.88MiB/s ETA 00:00[download]  39.6% of  320.59KiB at   23.86MiB/s ETA 00:00[download]  79.5% of  320.59KiB at   37.69MiB/s ETA 00:00[download] 100.0% of  320.59KiB at   41.79MiB/s ETA 00:00[download] 100% of  320.59KiB in 00:00:00 at 6.36MiB/s   
+[Merger] Merging formats into "reels_baixados/out/reel.mp4"
+Deleting original file reels_baixados/out/reel.fdash-1111127471586929v.mp4 (pass -k to keep)
+Deleting original file reels_baixados/out/reel.fdash-1110989864934023a.m4a (pass -k to keep)
