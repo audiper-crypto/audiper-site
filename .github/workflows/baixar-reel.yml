@@ -10,6 +10,9 @@ on:
         description: "URL do reel do Instagram"
         required: true
         default: "https://www.instagram.com/reel/Dai-28hJEWi/"
+  push:
+    branches: [claude/instagram-reel-review-aprox4]
+    paths: [".github/reel-trigger"]
 
 permissions:
   contents: write
@@ -38,9 +41,14 @@ jobs:
           set -o pipefail
           mkdir -p reels_baixados/out
           rm -f reels_baixados/out/* || true
+          URL="${{ github.event.inputs.url }}"
+          if [ -z "$URL" ] && [ -f .github/reel-trigger ]; then
+            URL="$(head -n1 .github/reel-trigger | tr -d '[:space:]')"
+          fi
+          echo "URL alvo: $URL"
           if yt-dlp -f "bv*+ba/b" --merge-output-format mp4 --write-info-json \
                --no-playlist -o "reels_baixados/out/reel.%(ext)s" \
-               "${{ github.event.inputs.url }}" 2>&1 | tee reels_baixados/out/ytdlp.log; then
+               "$URL" 2>&1 | tee reels_baixados/out/ytdlp.log; then
             echo "DOWNLOAD_OK=1" >> "$GITHUB_ENV"
           else
             echo "DOWNLOAD_OK=0" >> "$GITHUB_ENV"
