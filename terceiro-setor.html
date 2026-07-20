@@ -219,14 +219,30 @@
   .outc p{margin:0;font-size:13.5px;color:var(--body);line-height:1.5}
 
   /* crew */
-  .crew-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:26px 0}
+  .crew{margin:26px 0}
+  .crew-feat{display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,4vw,36px);align-items:center;background:linear-gradient(160deg,var(--card),#0a0708);border:1px solid var(--line);border-radius:20px;padding:clamp(22px,4vw,34px);box-shadow:inset 0 1px 0 rgba(224,169,74,.07);margin-bottom:14px}
+  .crew-feat .av{position:relative;width:132px;height:132px;flex-shrink:0}
+  .crew-feat .av::before{content:"";position:absolute;inset:-6px;border-radius:50%;background:conic-gradient(from 0deg,transparent 0deg,rgba(201,123,0,.06) 210deg,rgba(224,169,74,.5) 330deg,rgba(227,93,74,.85) 356deg,transparent 360deg);-webkit-mask:radial-gradient(circle,transparent 58px,#000 59px);mask:radial-gradient(circle,transparent 58px,#000 59px)}
+  .crew-feat .av img{width:116px;height:116px;border-radius:50%;object-fit:cover;border:2px solid rgba(224,169,74,.35);position:relative;z-index:1;margin:8px}
+  .crew-feat .role{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-soft);margin-bottom:7px}
+  .crew-feat h3{font-family:var(--serif);font-size:clamp(21px,2.5vw,27px);color:var(--paper);margin:0 0 4px}
+  .crew-feat .cargo{color:var(--body);font-size:15px;margin-bottom:12px}
+  .crew-feat .creds{display:flex;flex-wrap:wrap;gap:8px}
+  .crew-feat .creds span,.crew-feat .creds a{font-family:var(--mono);font-size:10.5px;letter-spacing:.5px;color:var(--gold-soft);border:1px solid var(--line);border-radius:999px;padding:5px 11px;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+  .crew-feat .creds a{background:rgba(201,123,0,.08);transition:border-color .18s,background .18s}
+  .crew-feat .creds a:hover{border-color:var(--gold-soft);background:rgba(201,123,0,.16)}
+  .crew-feat .creds a::after{content:"\2197";font-size:11px;opacity:.7}
+  .crew-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0}
   .crew-card{background:var(--card);border:1px solid var(--line-2);border-radius:14px;padding:22px;border-top:3px solid var(--gold)}
   .crew-card .role{font-family:var(--mono);font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-soft);margin-bottom:7px}
   .crew-card h4{font-family:var(--serif);font-size:19px;color:var(--paper);margin:0 0 3px}
   .crew-card .cargo{color:var(--body);font-size:14px;margin-bottom:12px}
   .crew-card .creds{display:flex;flex-wrap:wrap;gap:7px}
   .crew-card .creds span{font-family:var(--mono);font-size:10px;color:var(--gold-soft);border:1px solid var(--line);border-radius:999px;padding:4px 10px}
-  @media(max-width:700px){.crew-row{grid-template-columns:1fr}}
+  .crew-card .top{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+  .crew-card .top img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid rgba(227,93,74,.4);flex-shrink:0;box-shadow:0 0 0 3px rgba(122,18,32,.25)}
+  .crew-card .top h4{margin:0}
+  @media(max-width:700px){.crew-feat{grid-template-columns:1fr;text-align:center}.crew-feat .av{margin:0 auto}.crew-feat .creds{justify-content:center}.crew-row{grid-template-columns:1fr}}
 
   .sitemap{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:20px 26px;margin:28px 0;background:var(--ink-2);border:1px solid var(--line-2);border-radius:16px;padding:28px}
   .smcol h4{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#e35d4a;margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line-2)}
@@ -484,24 +500,34 @@
    </div>
 
    <h2 class="rv"><span class="n"><svg class="ic ic-sm"><use href="#i-team"/></svg>QUEM ASSINA</span>Síntese curricular</h2>
-   <div class="crew-row rv">
-     <div class="crew-card">
-       <div class="role">Sócio-Diretor</div>
-       <h4>Ricardo</h4>
-       <div class="cargo">Direção técnica de auditoria e perícia · 40 anos de atuação.</div>
-       <div class="creds"><span>CRC/PI 000023/O</span><span>CVM 5290</span><span>Perícia Contábil</span></div>
+   <div class="narrow"><p class="rv">Experiência e inovação caminham juntas. A direção técnica assina os trabalhos e mantém a firma atualizada com as normas e a tecnologia da profissão.</p></div>
+   <div class="crew rv">
+     <div class="crew-feat">
+       <div class="av"><img src="https://audiper.com/images/team/ricardo.png" alt="Prof. Ricardo Augusto dos Santos Ribeiro"></div>
+       <div>
+         <div class="role">Responsável Técnico · Auditor Supervisor</div>
+         <h3>Prof. Ricardo Augusto dos Santos Ribeiro</h3>
+         <p class="cargo">Coordenador técnico da AUDÍPER. Conduz os trabalhos de auditoria e perícia, com atuação acadêmica e ênfase na leitura reversa da escrituração como fonte de prevenção de risco.</p>
+         <div class="creds">
+           <span>CRC/PI 5374/O</span>
+           <span>Mestre em Contabilidade · UnB</span>
+           <span>Perito Federal</span>
+           <span>Gestão de SI · BS 7799</span>
+           <a href="http://lattes.cnpq.br/1609497761853808" target="_blank" rel="noopener">Currículo Lattes</a>
+         </div>
+       </div>
      </div>
-     <div class="crew-card">
-       <div class="role">Auditoria &amp; Perícia</div>
-       <h4>Nasaré</h4>
-       <div class="cargo">Contabilidade societária e das entidades sem fins lucrativos.</div>
-       <div class="creds"><span>Contadora</span><span>ITG 2002</span><span>Terceiro Setor</span></div>
-     </div>
-     <div class="crew-card">
-       <div class="role">Gerente de Auditoria</div>
-       <h4>Vitor</h4>
-       <div class="cargo">Auditoria independente, CEBAS e tecnologia aplicada à asseguração.</div>
-       <div class="creds"><span>CNAI 4711</span><span>NBC TA</span><span>ISO 27001 · LGPD</span></div>
+     <div class="crew-row">
+       <div class="crew-card">
+         <div class="top"><img src="https://audiper.com/images/team/nasare.jpg" alt="Profa. Nasaré"><div><div class="role">Sócia · Auditoria &amp; Perícia</div><h4>Profa. Maria de Nasaré dos Santos Ribeiro</h4></div></div>
+         <p class="cargo">Responsável técnica da firma, com longa trajetória em auditoria independente.</p>
+         <div class="creds"><span>CRC/PI 2629</span><span>CNAI 1468</span></div>
+       </div>
+       <div class="crew-card">
+         <div class="top"><img src="https://audiper.com/images/team/vitor.jpg" alt="Vitor Eduardo"><div><div class="role">Gerente de Auditoria &amp; Tecnologia</div><h4>Vitor Eduardo dos Santos Ribeiro</h4></div></div>
+         <p class="cargo">Gerência de auditoria e da frente de tecnologia. Dupla formação: auditor e desenvolvedor, com aplicação de IA à auditoria.</p>
+         <div class="creds"><span>CRC/PI 007.929/O</span><span>CNAI 4711</span><span>ISO 27001 Lead Auditor</span><span>EXIN ISFS</span></div>
+       </div>
      </div>
    </div>
 
