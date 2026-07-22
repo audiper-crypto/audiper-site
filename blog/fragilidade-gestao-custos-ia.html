@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>A conta da IA que ninguém orçou: a fragilidade da gestão de custos de Inteligência Artificial nas empresas | AUDÍPER</title>
+  <meta name="description" content="O preço do token caiu cerca de 80% entre 2025 e 2026 e, ainda assim, a conta de IA das empresas subiu. Por que o gasto com Inteligência Artificial é um problema de governança — não de preço — e como auditá-lo."/>
+  <meta name="author" content="AUDÍPER — Auditores Independentes"/>
+  <meta name="robots" content="index, follow"/>
+  <meta name="theme-color" content="#7a1220"/>
+  <meta name="keywords" content="governança de IA, gestão de custos de IA, TokenOps, FinOps, custo de token, shadow AI, ISO/IEC 42001, ISO 27001, LGPD, auditoria de sistemas, AUDÍPER"/>
+  <link rel="icon" href="../images/logo-audiper-red.png"/>
+  <link rel="apple-touch-icon" href="../images/logo-audiper-red.png"/>
+  <link rel="canonical" href="https://audiper.com/blog/fragilidade-gestao-custos-ia.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:locale" content="pt_BR"/>
+  <meta property="og:site_name" content="AUDÍPER — Auditores Independentes"/>
+  <meta property="og:title" content="A conta da IA que ninguém orçou: a fragilidade da gestão de custos de IA nas empresas"/>
+  <meta property="og:description" content="O preço do token caiu ~80% e a conta de IA subiu. Por que o gasto com IA é um problema de governança — não de preço — e como auditá-lo."/>
+  <meta property="og:url" content="https://audiper.com/blog/fragilidade-gestao-custos-ia.html"/>
+  <meta property="og:image" content="https://audiper.com/images/og-fragilidade-custos-ia.png"/>
+  <meta property="og:image:secure_url" content="https://audiper.com/images/og-fragilidade-custos-ia.png"/>
+  <meta property="og:image:type" content="image/png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:alt" content="AUDÍPER — A conta da IA que ninguém orçou: fragilidade da gestão de custos de IA"/>
+  <meta property="article:published_time" content="2026-07-22"/>
+  <meta property="article:author" content="AUDÍPER — Auditores Independentes"/>
+  <meta property="article:section" content="Governança de IA"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:image" content="https://audiper.com/images/og-fragilidade-custos-ia.png"/>
+  <meta name="twitter:title" content="A conta da IA que ninguém orçou"/>
+  <meta name="twitter:description" content="O preço do token caiu ~80% e a conta de IA subiu. Governança, não preço — e como auditá-lo."/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "A conta da IA que ninguém orçou: a fragilidade da gestão de custos de IA nas empresas",
+    "description": "O preço do token caiu cerca de 80% entre 2025 e 2026 e a conta de IA das empresas subiu. Por que o gasto com IA é um problema de governança e como auditá-lo.",
+    "datePublished": "2026-07-22",
+    "dateModified": "2026-07-22",
+    "author": { "@type": "Organization", "name": "AUDÍPER — Auditores Independentes" },
+    "publisher": { "@type": "Organization", "name": "AUDÍPER — Auditores Independentes" },
+    "about": ["Governança de IA","TokenOps","FinOps","ISO/IEC 42001","Auditoria de sistemas"]
+  }
+  </script>
+  <style>
+  :root{
+    --claret:#7a1220; --claret-2:#5a0d18; --claret-lite:#b91c1c;
+    --gold:#c97b00; --gold-soft:#e0a94a;
+    --ink:#0c0a0b; --ink-2:#141011; --card:#171213; --paper:#f2ece5; --body:#cabfb6; --muted:#8f847c;
+    --green:#34d399; --red:#e35d4a; --cyan:#38bdf8;
+    --line:rgba(201,123,0,.20); --line-2:rgba(242,236,229,.08);
+    --serif:'Fraunces',Georgia,serif;
+    --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    --sans:'Inter',system-ui,-apple-system,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--ink);color:var(--body);font-family:var(--sans);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:820px;margin:0 auto;padding:0 clamp(20px,5vw,40px)}
+  .wrap-wide{max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,40px)}
+  a{color:var(--gold-soft)}
+  strong{color:var(--paper);font-weight:600}
+
+  /* ---- reveal animation ---- */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+  /* hero rises on load (never gated by scroll) */
+  @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+  .rise{opacity:0;animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
+  .rise.r1{animation-delay:.1s}.rise.r2{animation-delay:.22s}.rise.r3{animation-delay:.34s}.rise.r4{animation-delay:.46s}
+  @media(prefers-reduced-motion:reduce){.reveal,.rise{opacity:1;transform:none;transition:none;animation:none}}
+
+  /* ---- brand nav (inside hero) ---- */
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+  .brand img{height:46px;width:46px;border-radius:50%;filter:drop-shadow(0 3px 12px rgba(122,18,32,.6))}
+  .brand .wm b{font-family:var(--serif);font-weight:900;font-size:20px;color:var(--paper);letter-spacing:.3px;line-height:1;display:block}
+  .brand .wm b span{color:var(--gold)}
+  .brand .wm em{color:var(--muted);font-family:var(--mono);font-size:9px;letter-spacing:2.4px;text-transform:uppercase;font-style:normal}
+  .hnav{display:flex;align-items:center;justify-content:space-between;padding-top:22px}
+  .wa{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--paper);font-weight:700;font-size:13px}
+  .wa .circ{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 50% 38%,var(--claret-lite),var(--claret-2));border:2px solid var(--gold);display:grid;place-items:center;color:#fff;font-size:19px;box-shadow:0 4px 14px -4px rgba(122,18,32,.7);transition:transform .25s}
+  .wa:hover .circ{transform:scale(1.08)}
+  @media(max-width:620px){.wa span.txt{display:none}}
+  /* floating whatsapp */
+  .wafloat{position:fixed;right:22px;bottom:22px;z-index:80;width:60px;height:60px;border-radius:50%;background:#25D366;display:grid;place-items:center;color:#fff;font-size:30px;text-decoration:none;box-shadow:0 12px 30px -8px rgba(37,211,102,.6);animation:wapulse 2.4s ease-in-out infinite}
+  .wafloat:hover{transform:scale(1.06)}
+  @keyframes wapulse{0%,100%{box-shadow:0 12px 30px -8px rgba(37,211,102,.6),0 0 0 0 rgba(37,211,102,.5)}50%{box-shadow:0 12px 30px -8px rgba(37,211,102,.6),0 0 0 14px rgba(37,211,102,0)}}
+  @media(prefers-reduced-motion:reduce){.wafloat{animation:none}}
+
+  /* ---- hero (full-bleed) ---- */
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line-2);
+    background:radial-gradient(90% 120% at 88% -20%,rgba(122,18,32,.55),transparent 60%),radial-gradient(70% 90% at 0% 120%,rgba(201,123,0,.14),transparent 55%),var(--ink)}
+  .herogrid{display:grid;grid-template-columns:minmax(0,1fr) clamp(220px,30vw,360px);gap:clamp(20px,4vw,46px);align-items:center;margin-top:clamp(30px,5vw,54px)}
+  .herovis{display:flex;justify-content:center}
+  .herovis img{width:100%;max-width:360px;border-radius:50%;
+    filter:drop-shadow(0 0 40px rgba(122,18,32,.5));
+    -webkit-mask:radial-gradient(circle at 50% 50%,#000 60%,rgba(0,0,0,.5) 68%,transparent 74%);
+    mask:radial-gradient(circle at 50% 50%,#000 60%,rgba(0,0,0,.5) 68%,transparent 74%)}
+  @media(max-width:760px){.herogrid{grid-template-columns:1fr}.herovis{margin-top:8px}.herovis img{max-width:240px}}
+  .hero .in{position:relative;z-index:1;padding:clamp(56px,9vw,110px) 0 clamp(40px,6vw,64px)}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-soft);margin-bottom:18px;display:flex;align-items:center;gap:10px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--gold)}
+  h1.title{font-family:var(--serif);color:var(--paper);font-size:clamp(32px,6.4vw,62px);line-height:1.03;font-weight:900;letter-spacing:-1px;max-width:14ch}
+  h1.title b{color:var(--gold)}
+  .hero .sub{margin-top:22px;font-size:clamp(15px,1.9vw,19px);max-width:620px;color:var(--body)}
+  .hero .meta{margin-top:28px;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.5px;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+  .hero .meta .dot{width:4px;height:4px;border-radius:50%;background:var(--gold)}
+
+  /* ---- article body ---- */
+  article section{padding:clamp(34px,5vw,58px) 0;border-top:1px solid var(--line-2)}
+  article section:first-child{border-top:0}
+  h2{font-family:var(--serif);color:var(--paper);font-size:clamp(23px,3.4vw,34px);line-height:1.13;font-weight:700;margin-bottom:8px;letter-spacing:-.4px}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+  .rule{height:3px;width:56px;background:linear-gradient(90deg,var(--claret-lite),var(--gold));border-radius:3px;margin:16px 0 26px}
+  h3{font-family:var(--serif);color:var(--paper);font-size:20px;margin:28px 0 10px;font-weight:700}
+  p{margin-bottom:16px;font-size:16.5px}
+  .lead{font-size:18.5px;color:var(--paper)}
+  sup a{color:var(--gold-soft);text-decoration:none;font-size:11px;font-weight:600;padding:0 1px}
+  blockquote{border-left:3px solid var(--gold);padding:6px 0 6px 22px;margin:24px 0;font-family:var(--serif);font-size:22px;color:var(--paper);line-height:1.35;font-weight:600}
+
+  ul.clean{list-style:none;display:grid;gap:12px;margin:6px 0 20px}
+  ul.clean li{padding-left:24px;position:relative;font-size:16px}
+  ul.clean li::before{content:"";position:absolute;left:2px;top:11px;width:7px;height:7px;border-radius:2px;background:var(--gold);transform:rotate(45deg)}
+
+  /* ---- datastrip (glass KPIs) ---- */
+  .datastrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:26px 0}
+  .d{background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.01));border:1px solid var(--line-2);border-radius:14px;padding:20px;backdrop-filter:blur(6px);transition:transform .3s,border-color .3s}
+  .d:hover{transform:translateY(-4px);border-color:var(--line)}
+  .d .n{font-family:var(--serif);font-size:30px;color:var(--paper);font-weight:900;line-height:1}
+  .d .n.red{color:var(--red)}
+  .d .l{margin-top:8px;font-size:12.5px;color:var(--body)}
+
+  /* ---- NEWS TERMINALS (glassmorphism) ---- */
+  .terminals{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin:8px 0 6px}
+  .term{position:relative;border-radius:16px;overflow:hidden;border:1px solid rgba(227,93,74,.28);
+    background:linear-gradient(165deg,rgba(40,17,21,.72),rgba(20,16,17,.55));
+    backdrop-filter:blur(16px) saturate(150%);-webkit-backdrop-filter:blur(16px) saturate(150%);
+    box-shadow:0 24px 60px -34px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.05);transition:transform .35s,box-shadow .35s,border-color .35s}
+  .term:hover{transform:translateY(-6px);border-color:rgba(227,93,74,.55);box-shadow:0 34px 70px -30px rgba(122,18,32,.55)}
+  .term .bar{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03)}
+  .term .bar i{width:11px;height:11px;border-radius:50%;display:inline-block}
+  .term .bar .r{background:#ff5f57}.term .bar .y{background:#febc2e}.term .bar .g{background:#28c840}
+  .term .bar .fn{margin-left:6px;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.3px}
+  .term .body{padding:20px}
+  .term .cmd{font-family:var(--mono);font-size:11.5px;color:var(--gold-soft);margin-bottom:12px}
+  .term .cmd::before{content:"$ ";color:var(--muted)}
+  .term .big{font-family:var(--serif);font-weight:900;font-size:34px;color:#fff;line-height:1;letter-spacing:-.5px}
+  .term .big .cur{display:inline-block;width:11px;height:28px;background:var(--red);margin-left:4px;vertical-align:-3px;animation:blink 1.1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .term .desc{margin-top:12px;font-size:13.5px;color:var(--body);line-height:1.55}
+  .term .src{margin-top:14px;font-family:var(--mono);font-size:10px;letter-spacing:.5px;color:var(--muted);text-transform:uppercase}
+
+  /* ---- callout ---- */
+  .callout{background:linear-gradient(135deg,rgba(122,18,32,.30),rgba(12,10,11,.1));border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:14px;padding:22px 26px;margin:26px 0;backdrop-filter:blur(6px)}
+  .callout .h{font-family:var(--mono);font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-soft);margin-bottom:8px}
+  .callout p{margin:0;font-size:15.5px}
+
+  /* ---- CTA ---- */
+  .ctaband{background:linear-gradient(135deg,var(--claret),var(--claret-2));position:relative;overflow:hidden}
+  .ctaband::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 120% at 85% 10%,rgba(201,123,0,.30),transparent 60%)}
+  .ctaband .in{position:relative;z-index:1;padding:clamp(44px,6vw,72px) 0;text-align:center}
+  .ctaband h2{color:#fff;font-size:clamp(24px,3.6vw,38px);max-width:20ch;margin:0 auto 12px}
+  .ctaband p{color:rgba(255,255,255,.86);max-width:640px;margin:0 auto 8px;font-size:16px}
+  .btn{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:#241000;font-weight:800;text-decoration:none;padding:15px 28px;border-radius:12px;font-size:16px;margin-top:20px;box-shadow:0 16px 34px -16px rgba(201,123,0,.6);transition:transform .25s}
+  .btn:hover{transform:translateY(-3px)}
+
+  /* ---- SIGNATURES ---- */
+  .sign{border-top:1px solid var(--line)}
+  .sign .in{padding:clamp(38px,5vw,58px) 0}
+  .sign .k{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:22px}
+  .sigs{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .sig{display:flex;gap:16px;align-items:center;background:linear-gradient(160deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border:1px solid var(--line-2);border-radius:16px;padding:18px 20px}
+  .sig img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);flex:none;filter:grayscale(.15)}
+  .sig .nm{font-family:var(--serif);font-weight:700;color:var(--paper);font-size:17px;line-height:1.2}
+  .sig .ro{font-size:12.5px;color:var(--gold-soft);margin:2px 0 6px;font-weight:600}
+  .sig .cr{font-family:var(--mono);font-size:10.5px;color:var(--muted);line-height:1.5}
+  .icp{margin-top:16px;display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;color:var(--body);background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.25);border-radius:10px;padding:10px 16px;width:fit-content}
+  .icp i{color:var(--green)}
+  @media(max-width:640px){.sigs{grid-template-columns:1fr}}
+
+  /* ---- refs + footer ---- */
+  .refs{border-top:1px solid var(--line)}
+  .refs .in{padding:clamp(34px,5vw,52px) 0}
+  .refs h2{font-size:20px;margin-bottom:18px}
+  .refs ol{counter-reset:r;list-style:none;display:grid;gap:10px}
+  .refs li{counter-increment:r;position:relative;padding-left:34px;font-size:12.5px;color:var(--body);line-height:1.5}
+  .refs li::before{content:counter(r);position:absolute;left:0;top:0;font-family:var(--mono);font-size:11px;color:#1a0f00;background:var(--gold-soft);width:21px;height:21px;border-radius:6px;display:grid;place-items:center;font-weight:700}
+  footer.foot{background:#0a0708;border-top:1px solid var(--line-2);padding:30px 0 48px}
+  .disc{font-size:11px;color:var(--muted);line-height:1.6}
+  .disc b{color:var(--body)}
+  </style>
+</head>
+<body>
+
+  <!-- HERO (full-bleed) — brand nav dentro do hero -->
+  <header class="hero">
+    <div class="wrap in">
+      <div class="hnav rise">
+        <a class="brand" href="/">
+          <img src="../images/logo-audiper-red.png" alt="AUDÍPER"/>
+          <span class="wm"><b>AUDÍ<span>PER</span></b><em>Auditores Independentes</em></span>
+        </a>
+        <a class="wa" href="https://wa.me/5586994010525?text=Ol%C3%A1%2C%20quero%20falar%20sobre%20Governan%C3%A7a%20de%20IA%20e%20auditoria%20de%20custos%20com%20IA" target="_blank" rel="noopener">
+          <span class="txt">Falar no WhatsApp</span>
+          <span class="circ"><i class="fab fa-whatsapp"></i></span>
+        </a>
+      </div>
+      <div class="herogrid">
+        <div class="herotext">
+          <div class="eyebrow rise r1">Governança de IA · TokenOps · Custo</div>
+          <h1 class="title rise r2">A conta da IA que <b>ninguém orçou</b></h1>
+          <p class="sub rise r3">O preço unitário do token caiu cerca de 80% entre 2025 e 2026. Ainda assim, a conta de Inteligência Artificial das empresas subiu. A explicação não está no preço — está na ausência de governança.</p>
+          <div class="meta rise r4">
+            <span>AUDÍPER · desde 1985</span><span class="dot"></span>
+            <span>22 de julho de 2026</span><span class="dot"></span>
+            <span>Leitura · 7 min</span>
+          </div>
+        </div>
+        <div class="herovis rise r3"><img src="../images/audiper-radar-loop.gif" alt=""/></div>
+      </div>
+    </div>
+  </header>
+
+  <article>
+    <div class="wrap">
+
+      <section>
+        <p class="lead reveal">Poucas despesas nasceram tão depressa quanto o custo de Inteligência Artificial. Em pouco mais de um ano, a IA deixou de ser experimento de área técnica e passou a consumir orçamento real, mês a mês, em escritórios contábeis, bancas de advocacia, consultorias, agências, contact centers, clínicas e instituições financeiras. O problema é que a linha de custo apareceu no extrato antes de aparecer no orçamento — e, na maioria das organizações de médio porte, ninguém ficou responsável por olhá-la.</p>
+        <p class="reveal">A tese deste artigo é simples e incômoda: <strong>o gasto com IA já é um problema de governança, não de preço</strong>. Enquanto for tratado como conta de fornecedor a ser paga, e não como recurso a ser auditado, seguirá frágil, imprevisível e exposto a desvio.</p>
+      </section>
+
+      <section>
+        <div class="kicker reveal">01 · O paradoxo</div>
+        <h2 class="reveal">O preço caiu. A conta subiu.</h2>
+        <div class="rule reveal"></div>
+        <p class="reveal">Entre 2025 e 2026, o preço por token dos principais modelos recuou na ordem de 80%. A intuição diz que contas menores deveriam se seguir. Aconteceu o contrário. Analistas de FinOps classificam o fenômeno diretamente como <strong>problema de governança, não de preço</strong>: os modelos agênticos — que executam tarefas em várias etapas — consomem de 5 a 30 vezes mais tokens por tarefa, e, sem controle de execução, o gasto se multiplica silenciosamente.<sup><a href="#r7">7</a><a href="#r8">8</a></sup></p>
+        <div class="datastrip">
+          <div class="d reveal"><div class="n">~80%</div><div class="l">queda no preço do token entre 2025 e 2026 — e ainda assim as contas subiram<sup><a href="#r7">7</a></sup></div></div>
+          <div class="d reveal d1"><div class="n red">73%</div><div class="l">das empresas tiveram custo de IA acima do projetado<sup><a href="#r6">6</a></sup></div></div>
+          <div class="d reveal d2"><div class="n red">85%</div><div class="l">erram a estimativa de gasto com IA em 10% ou mais<sup><a href="#r6">6</a></sup></div></div>
+          <div class="d reveal d3"><div class="n">5–30×</div><div class="l">mais tokens por tarefa em fluxos agênticos sem controle<sup><a href="#r8">8</a></sup></div></div>
+        </div>
+        <p class="reveal">Quando 85% das organizações erram a própria estimativa por margem larga, o que se mede não é volatilidade de mercado — é <strong>ausência de instrumentação</strong>. Falta atribuir custo a quem o gera. Sem isso, a fatura é um número agregado, sem dono, sem setor e sem cliente por trás.</p>
+      </section>
+
+      <section>
+        <div class="kicker reveal">02 · Os alertas</div>
+        <h2 class="reveal">Quando o custo sai do controle</h2>
+        <div class="rule reveal"></div>
+        <p class="reveal">Não é risco de laboratório. Três episódios públicos de 2026 desenharam o tamanho do problema:</p>
+        <div class="terminals">
+          <div class="term reveal">
+            <div class="bar"><i class="r"></i><i class="y"></i><i class="g"></i><span class="fn">slash_fintech.log</span></div>
+            <div class="body">
+              <div class="cmd">ai --usage --user=exec --day</div>
+              <div class="big">US$ 81 mil<span class="cur"></span></div>
+              <div class="desc">Queimados por um executivo <strong>em um único dia</strong>, construindo um jogo meme, depois que a empresa incentivou IA sem limite configurado.</div>
+              <div class="src">Fonte · IBTimes / ExplainX <sup><a href="#r1">1</a><a href="#r2">2</a></sup></div>
+            </div>
+          </div>
+          <div class="term reveal d1">
+            <div class="bar"><i class="r"></i><i class="y"></i><i class="g"></i><span class="fn">billing_month.log</span></div>
+            <div class="body">
+              <div class="cmd">ai --invoice --period=month</div>
+              <div class="big">US$ 500 mi<span class="cur"></span></div>
+              <div class="desc">Cobrados de uma organização em <strong>um único mês</strong> por uso de IA sem teto — sem que ninguém percebesse a tempo.</div>
+              <div class="src">Fonte · Cybernews <sup><a href="#r3">3</a></sup></div>
+            </div>
+          </div>
+          <div class="term reveal d2">
+            <div class="bar"><i class="r"></i><i class="y"></i><i class="g"></i><span class="fn">uber_budget.log</span></div>
+            <div class="body">
+              <div class="cmd">ai --budget --year=2026 --status</div>
+              <div class="big">4 meses<span class="cur"></span></div>
+              <div class="desc">Para a Uber <strong>esgotar</strong> o orçamento de IA do ano. Coinbase, Walmart e Microsoft também impuseram tetos.</div>
+              <div class="src">Fonte · Cybernews <sup><a href="#r3">3</a></sup></div>
+            </div>
+          </div>
+        </div>
+        <blockquote class="reveal">Troque o acidente de boa fé pelo colaborador insatisfeito, e o mesmo mecanismo produz dano intencional e silencioso.</blockquote>
+        <p class="reveal">Controle de recurso de IA deixou de ser refinamento — virou necessidade operacional. A maioria das empresas de serviço de médio porte, porém, ainda não o adotou.</p>
+      </section>
+
+      <section>
+        <div class="kicker reveal">03 · Medir ≠ auditar</div>
+        <h2 class="reveal">Por que o painel do fornecedor não resolve</h2>
+        <div class="rule reveal"></div>
+        <p class="reveal">A primeira reação costuma ser instalar um dashboard de consumo. É útil, mas insuficiente. Um painel mostra quanto foi gasto; não diz <strong>se aquele gasto era legítimo</strong>. Não distingue o token aplicado no cliente da carteira daquele queimado num projeto pessoal. Não produz papel de trabalho, não gera evidência oponível a terceiros e não constrói a base legal que transforma monitoramento em prova válida.</p>
+        <p class="reveal">É a diferença entre <strong>medir</strong> e <strong>auditar</strong>. Medir é função de software. Auditar é aplicar critério, colher evidência rastreável e concluir de forma fundamentada — inclusive reconhecendo quando a evidência não existe, caso em que o resultado é indeterminado, nunca "conforme".</p>
+        <div class="callout reveal">
+          <div class="h">O ponto cego</div>
+          <p>Segundo a Gartner, cerca de 69% das organizações suspeitam de uso de IA não autorizada internamente, mas apenas 37% possuem política de governança para isso. E 71% dos usuários de <em>shadow AI</em> já inseriram dado sensível em contas pessoais de IA.<sup><a href="#r5">5</a><a href="#r4">4</a></sup></p>
+        </div>
+      </section>
+
+      <section>
+        <div class="kicker reveal">04 · TokenOps</div>
+        <h2 class="reveal">Tratar o token como ativo</h2>
+        <div class="rule reveal"></div>
+        <p class="reveal">A disciplina que aplica os princípios de FinOps ao consumo de tokens já tem nome: <strong>TokenOps</strong>.<sup><a href="#r9">9</a></sup> A virada conceitual é reconhecer que cada interação com um modelo de IA consome tokens, que se convertem em custo financeiro e <strong>deixam trilha</strong> — log atribuível a um usuário, setor ou cliente. Diferentemente do tempo difuso perdido no passado, o consumo de IA é quantificável em reais e passível de auditoria objetiva.</p>
+        <p class="reveal">Dessa objetividade nasce uma consequência clara: a empresa investe em IA para que essa capacidade seja aplicada nos clientes da sua carteira. Todo desvio — uso pessoal, trabalho externo, projeto paralelo — representa <strong>apropriação indevida de um ativo produtivo</strong>, agora mensurável.</p>
+        <ul class="clean">
+          <li class="reveal"><strong>Custo-para-servir por cliente:</strong> quanto de IA, energia e licença cada conta da carteira efetivamente consome.</li>
+          <li class="reveal d1"><strong>Atribuição por setor e usuário:</strong> o gasto deixa de ser número agregado e passa a ter dono.</li>
+          <li class="reveal d2"><strong>Detecção de desvio:</strong> shadow AI, uso fora de expediente e destino externo identificados por metadado.</li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="kicker reveal">05 · O gêmeo jurídico</div>
+        <h2 class="reveal">Fragilidade financeira e jurídica são o mesmo problema</h2>
+        <div class="rule reveal"></div>
+        <p class="reveal">O descontrole de custo tem um gêmeo jurídico. A Justiça do Trabalho brasileira já trata a base de clientes e o banco de dados da empresa como bem incorpóreo e sigiloso — ativo protegido cuja apropriação indevida gera consequências trabalhistas, civis e criminais. O uso de recursos da empresa para fim próprio ou externo enquadra-se em justa causa (CLT, art. 482).<sup><a href="#r10">10</a></sup></p>
+        <p class="reveal">Mas o risco tem dois lados. Sob a LGPD, a própria organização responde pela guarda dos dados que trata; sem governança, deixa de ser vítima do desvio e passa a figurar como ré por tratamento inadequado. O monitoramento de ferramentas corporativas é lícito — desde que ancorado em política clara e ciência prévia do colaborador. É essa política que fecha os dois flancos ao mesmo tempo: barra o desvio e legaliza a supervisão.</p>
+      </section>
+
+      <section>
+        <div class="kicker reveal">06 · Conformidade</div>
+        <h2 class="reveal">De diferencial a requisito</h2>
+        <div class="rule reveal"></div>
+        <p class="reveal">A governança de IA saiu da esfera das boas práticas e entrou na de conformidade. A <strong>ISO/IEC 42001</strong>, primeira norma mundial de sistema de gestão de IA, vem migrando de diferencial para requisito de base: áreas de compras já passam a exigir evidência de gestão formal de IA como condição de contratação.<sup><a href="#r11">11</a></sup> As quatro grandes firmas de auditoria validaram o nicho — a KPMG foi uma das primeiras Big 4 nos EUA a obter a certificação ISO/IEC 42001; EY, Deloitte e PwC desenvolvem serviços de <em>AI assurance</em>.<sup><a href="#r11">11</a></sup></p>
+        <p class="reveal">O movimento confirma a demanda e, ao mesmo tempo, delimita o espaço desatendido: abaixo da grande corporação há uma faixa inteira de empresas de serviço de médio porte que precisa de prontidão, política e auditoria de recurso — com o dado permanecendo em casa.</p>
+      </section>
+
+      <section>
+        <div class="kicker reveal">07 · Diagnóstico</div>
+        <h2 class="reveal">O que fazer agora</h2>
+        <div class="rule reveal"></div>
+        <p class="reveal">Antes de contratar mais licença ou instalar mais software, três perguntas revelam o tamanho da fragilidade:</p>
+        <ul class="clean">
+          <li class="reveal">Você sabe <strong>quanto</strong> de IA cada setor e cada cliente consomem — em reais?</li>
+          <li class="reveal d1">Existe <strong>política de uso aceitável</strong> de IA assinada, com ciência do colaborador, que sustente uma consequência válida?</li>
+          <li class="reveal d2">Se um colaborador desviasse recurso ou dado hoje, você teria <strong>evidência rastreável</strong> para agir?</li>
+        </ul>
+        <p class="reveal">Se alguma resposta for "não", o gasto com IA já é um risco não controlado — financeiro e jurídico.</p>
+      </section>
+
+    </div>
+  </article>
+
+  <!-- CTA BAND (full-bleed) -->
+  <section class="ctaband">
+    <div class="wrap in">
+      <h2 class="reveal">Diagnóstico de Governança de IA e Recursos Digitais</h2>
+      <p class="reveal d1">A AUDÍPER aplica 40 anos de prática em auditoria de sistemas e normas ISO ao recurso de IA: auditoria de apropriação (TokenOps), Política de Uso Aceitável de IA e Ativos, e prontidão ISO/IEC 42001 e 27001 — com análise <strong style="color:#fff">on-host, zero-egress</strong>: o dado não sai da sua rede.</p>
+      <a class="btn reveal d2" href="./governanca-ia.html"><i class="fas fa-arrow-right-long"></i> Conhecer o serviço</a>
+    </div>
+  </section>
+
+  <!-- SIGNATURES (full-bleed) -->
+  <div class="sign">
+    <div class="wrap in">
+      <div class="k reveal">Elaboração técnica</div>
+      <div class="sigs">
+        <div class="sig reveal">
+          <img src="../images/team-ricardo.png" alt="Ricardo Augusto dos Santos Ribeiro"/>
+          <div>
+            <div class="nm">Prof. Ricardo A. dos S. Ribeiro</div>
+            <div class="ro">Auditor Supervisor / Coordenador</div>
+            <div class="cr">CRC/PI 5374/O · Mestre em Contabilidade (UnB) · Perito Federal</div>
+          </div>
+        </div>
+        <div class="sig reveal d1">
+          <img src="../images/team-vitor.jpg" alt="Vitor Eduardo dos Santos Ribeiro"/>
+          <div>
+            <div class="nm">Vitor Eduardo dos S. Ribeiro</div>
+            <div class="ro">Gerente de Auditoria</div>
+            <div class="cr">CRC/PI 007.929/O · CNAI 4711</div>
+          </div>
+        </div>
+      </div>
+      <div class="icp reveal d2"><i class="fas fa-shield-halved"></i> Certificação Digital ICP-Brasil · e-CPF A3 · válido até 15/03/2028</div>
+    </div>
+  </div>
+
+  <!-- REFERENCES -->
+  <div class="refs">
+    <div class="wrap in" id="fontes">
+      <h2>Fontes</h2>
+      <ol>
+        <li id="r1">IBTimes UK — "Developer Accidentally Burned $81,000 in AI Tokens While Building a Meme Game". ibtimes.co.uk</li>
+        <li id="r2">ExplainX — "Slash fintech $80k AI bill: Claude token cost control (2026)". explainx.ai</li>
+        <li id="r3">Cybernews — "Runaway Claude AI usage led to $500 million monthly bill". cybernews.com</li>
+        <li id="r4">WatchGuard / GlobeNewswire — "Employees Drive Rising Cybersecurity Risk As Shadow AI Surge" (2026). globenewswire.com</li>
+        <li id="r5">The Hacker News — "5 Steps to Managing Shadow AI Tools Without Slowing Down Employees" (dados Gartner). thehackernews.com</li>
+        <li id="r6">Cadena — "AI Cost Governance: The Definitive Guide to Governing Enterprise AI Spend". cadena.co</li>
+        <li id="r7">Finout — "FinOps for AI Tokens: Why the Rules Changed". finout.io</li>
+        <li id="r8">Solo.io — "Runaway Tokens Are a Governance Problem". solo.io</li>
+        <li id="r9">FinOps Foundation — "Token Economics / TokenOps (working group)". finops.org</li>
+        <li id="r10">Conjur / TST — "Vazamento de dados: quando a justa causa se sustenta?" (TST, 4ª Turma). conjur.com.br</li>
+        <li id="r11">Consultancy.uk — "Big Four weighing up new AI audit offerings"; KPMG — certificação ISO/IEC 42001. consultancy.uk · kpmg.com</li>
+      </ol>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <div class="wrap" style="text-align:center">
+      <img src="../images/logo-audiper-red.png" alt="AUDÍPER" style="width:58px;height:58px;margin-bottom:14px;filter:drop-shadow(0 4px 14px rgba(122,18,32,.5))"/>
+      <p class="disc"><b>AUDÍPER — Auditores Independentes S/S</b> · CRC/PI 000023/O · CNPJ 23.626.575/0001-10 · desde 1985 · Teresina/PI · audiper.com<br/><br/>
+      Artigo de caráter informativo. As referências a normas (ISO/IEC 42001, ISO/IEC 27001, LGPD, CLT) e a decisões judiciais têm finalidade de contextualização e não constituem parecer jurídico ou garantia de resultado. Dados percentuais e casos citados provêm de fontes públicas identificadas na seção Fontes, com coleta em 2026; recomenda-se verificar a versão vigente antes de uso em peça vinculante. · Risco Mapeado, Risco Controlado. ISO 27001.</p>
+    </div>
+  </footer>
+
+  <!-- floating WhatsApp -->
+  <a class="wafloat" href="https://wa.me/5586994010525?text=Ol%C3%A1%2C%20quero%20falar%20sobre%20Governan%C3%A7a%20de%20IA%20e%20auditoria%20de%20custos%20com%20IA" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><i class="fab fa-whatsapp"></i></a>
+
+  <script>
+    (function(){
+      var els=document.querySelectorAll('.reveal');
+      function showAll(){els.forEach(function(e){e.classList.add('in');});}
+      if(!('IntersectionObserver' in window)){showAll();return;}
+      var io=new IntersectionObserver(function(entries){
+        entries.forEach(function(en){ if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);} });
+      },{threshold:0.08,rootMargin:'0px 0px -6% 0px'});
+      els.forEach(function(e){io.observe(e);});
+      // fallback: nada fica invisível se o observer falhar
+      setTimeout(showAll,2600);
+      window.addEventListener('load',function(){setTimeout(showAll,1200);});
+    })();
+  </script>
+
+</body>
+</html>
