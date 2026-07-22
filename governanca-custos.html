@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Governança de Custos — seus custos estão medidos e mapeados? | AUDÍPER</title>
+  <meta name="description" content="Todo custo tem um processo por trás. Se o processo não está mapeado, o custo não tem dono — e o desperdício não aparece. A AUDÍPER mapeia processos e subprocessos, dá número a cada etapa e transforma custo em decisão."/>
+  <meta name="author" content="AUDÍPER — Auditores Independentes"/>
+  <meta name="robots" content="index, follow"/>
+  <meta name="theme-color" content="#7a1220"/>
+  <meta name="keywords" content="governança de custos, mapeamento de processos, custo por processo, custo para servir, auditoria de custos, controles internos, ISO, LGPD, AUDÍPER"/>
+  <link rel="icon" href="images/logo-audiper-red.png"/>
+  <link rel="canonical" href="https://audiper.com/governanca-custos.html"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:locale" content="pt_BR"/>
+  <meta property="og:site_name" content="AUDÍPER — Auditores Independentes"/>
+  <meta property="og:title" content="Governança de Custos | AUDÍPER"/>
+  <meta property="og:description" content="Seus custos estão medidos e mapeados? Mapeamos processos e subprocessos, damos dono a cada custo e transformamos gasto em decisão."/>
+  <meta property="og:url" content="https://audiper.com/governanca-custos.html"/>
+  <meta property="og:image" content="https://audiper.com/images/og-governanca-custos.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+  <style>
+  :root{
+    --claret:#7a1220; --claret-2:#5a0d18; --claret-lite:#b91c1c;
+    --gold:#c97b00; --gold-soft:#e0a94a;
+    --ink:#0c0a0b; --ink-2:#141011; --card:#171213; --paper:#f2ece5; --body:#cabfb6; --muted:#8f847c;
+    --green:#34d399; --red:#e35d4a;
+    --line:rgba(201,123,0,.20); --line-2:rgba(242,236,229,.08);
+    --serif:'Fraunces',Georgia,serif; --mono:'JetBrains Mono',ui-monospace,monospace; --sans:'Inter',system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--ink);color:var(--body);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,44px)}
+  a{color:var(--gold-soft);text-decoration:none}
+  strong{color:var(--paper);font-weight:600}
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+  @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+  .rise{opacity:0;animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
+  .rise.r1{animation-delay:.1s}.rise.r2{animation-delay:.22s}.rise.r3{animation-delay:.34s}.rise.r4{animation-delay:.46s}
+  @media(prefers-reduced-motion:reduce){.reveal,.rise{opacity:1;transform:none;transition:none;animation:none}}
+
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand img{height:46px;width:46px;border-radius:50%;filter:drop-shadow(0 3px 12px rgba(122,18,32,.6))}
+  .brand .wm b{font-family:var(--serif);font-weight:900;font-size:20px;color:var(--paper);letter-spacing:.3px;line-height:1;display:block}
+  .brand .wm em{color:var(--muted);font-family:var(--mono);font-size:9px;letter-spacing:2.4px;text-transform:uppercase;font-style:normal}
+  .hnav{display:flex;align-items:center;justify-content:space-between;padding-top:22px}
+  .wa{display:inline-flex;align-items:center;gap:10px;color:var(--paper);font-weight:700;font-size:13px}
+  .wa .circ{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 50% 38%,var(--claret-lite),var(--claret-2));border:2px solid var(--gold);display:grid;place-items:center;color:#fff;font-size:19px;box-shadow:0 4px 14px -4px rgba(122,18,32,.7);transition:transform .25s}
+  .wa:hover .circ{transform:scale(1.08)}
+  @media(max-width:620px){.wa span.txt{display:none}}
+  .wafloat{position:fixed;right:22px;bottom:22px;z-index:80;width:60px;height:60px;border-radius:50%;background:#25D366;display:grid;place-items:center;color:#fff;font-size:30px;box-shadow:0 12px 30px -8px rgba(37,211,102,.6);animation:wapulse 2.4s ease-in-out infinite}
+  .wafloat:hover{transform:scale(1.06)}
+  @keyframes wapulse{0%,100%{box-shadow:0 12px 30px -8px rgba(37,211,102,.6),0 0 0 0 rgba(37,211,102,.5)}50%{box-shadow:0 12px 30px -8px rgba(37,211,102,.6),0 0 0 14px rgba(37,211,102,0)}}
+  @media(prefers-reduced-motion:reduce){.wafloat{animation:none}}
+
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line-2);
+    background:radial-gradient(90% 120% at 88% -20%,rgba(122,18,32,.55),transparent 60%),radial-gradient(70% 90% at 0% 120%,rgba(201,123,0,.14),transparent 55%),var(--ink)}
+  .herogrid{display:grid;grid-template-columns:minmax(0,1fr) clamp(200px,26vw,320px);gap:clamp(20px,4vw,46px);align-items:center;margin-top:clamp(30px,5vw,54px);padding-bottom:clamp(40px,6vw,64px)}
+  .herovis{display:flex;justify-content:center}
+  .herovis img{width:100%;max-width:320px;border-radius:50%;filter:drop-shadow(0 0 40px rgba(122,18,32,.5));
+    -webkit-mask:radial-gradient(circle at 50% 50%,#000 60%,rgba(0,0,0,.5) 68%,transparent 74%);
+    mask:radial-gradient(circle at 50% 50%,#000 60%,rgba(0,0,0,.5) 68%,transparent 74%)}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-soft);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--gold)}
+  h1.title{font-family:var(--serif);color:var(--paper);font-size:clamp(34px,5.6vw,60px);line-height:1.02;font-weight:900;letter-spacing:-1px}
+  h1.title b{color:var(--gold)}
+  .hero .sub{margin-top:20px;font-size:clamp(15px,1.8vw,19px);max-width:640px;color:var(--body)}
+  .ctarow{margin-top:28px;display:flex;flex-wrap:wrap;gap:14px}
+  .btn{display:inline-flex;align-items:center;gap:10px;font-weight:800;text-decoration:none;padding:15px 26px;border-radius:12px;font-size:15px;transition:transform .25s}
+  .btn.p{background:var(--gold);color:#241000;box-shadow:0 16px 34px -16px rgba(201,123,0,.6)}
+  .btn.s{background:rgba(255,255,255,.06);color:var(--paper);border:1px solid var(--line)}
+  .btn:hover{transform:translateY(-3px)}
+  .hbadges{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px}
+  .hbadges span{font-family:var(--mono);font-size:11px;color:var(--gold-soft);border:1px solid var(--line);border-radius:100px;padding:7px 14px}
+
+  section{padding:clamp(44px,6vw,72px) 0;border-top:1px solid var(--line-2)}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+  h2{font-family:var(--serif);color:var(--paper);font-size:clamp(26px,3.6vw,40px);line-height:1.1;font-weight:700;letter-spacing:-.5px;max-width:22ch}
+  .rule{height:3px;width:56px;background:linear-gradient(90deg,var(--claret-lite),var(--gold));border-radius:3px;margin:16px 0 26px}
+  .stext{font-size:16.5px;max-width:780px;color:var(--body)}
+  .stext b{color:var(--paper)}
+
+  /* process map — processo → subprocesso → custo */
+  .map{margin-top:14px;border:1px solid var(--line-2);border-radius:18px;overflow:hidden;background:linear-gradient(160deg,rgba(255,255,255,.04),rgba(255,255,255,.01))}
+  .maprow{display:grid;grid-template-columns:190px 1fr 130px;align-items:stretch;border-bottom:1px solid var(--line-2)}
+  .maprow:last-child{border-bottom:0}
+  .maprow .p{padding:18px 20px;font-family:var(--serif);font-weight:700;color:var(--paper);font-size:17px;background:rgba(122,18,32,.22);border-right:1px solid var(--line-2);display:flex;align-items:center;gap:10px}
+  .maprow .p i{color:var(--gold-soft);font-size:13px}
+  .maprow .subs{padding:16px 18px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .sub-chip{font-size:13px;color:var(--body);background:rgba(0,0,0,.35);border:1px solid var(--line-2);border-radius:8px;padding:7px 12px}
+  .maprow .cost{padding:16px 18px;display:flex;flex-direction:column;justify-content:center;align-items:flex-end;border-left:1px solid var(--line-2);background:rgba(0,0,0,.25)}
+  .maprow .cost .v{font-family:var(--serif);font-weight:900;color:#fff;font-size:22px;line-height:1}
+  .maprow .cost .v.warn{color:var(--red)}
+  .maprow .cost .l{font-family:var(--mono);font-size:9px;letter-spacing:.5px;color:var(--muted);text-transform:uppercase;margin-top:4px}
+  .maphead{display:grid;grid-template-columns:190px 1fr 130px;font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-soft);background:rgba(0,0,0,.4)}
+  .maphead div{padding:12px 20px}
+  @media(max-width:640px){.maprow,.maphead{grid-template-columns:1fr}.maprow .p,.maprow .cost{border:0}.maphead{display:none}}
+
+  /* steps how it works */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:10px}
+  .step{background:var(--card);border:1px solid var(--line-2);border-radius:16px;padding:24px;position:relative}
+  .step .n{font-family:var(--serif);font-size:40px;font-weight:900;color:var(--claret-lite);line-height:1;margin-bottom:10px}
+  .step h3{font-family:var(--serif);font-size:19px;color:var(--paper);font-weight:700;margin-bottom:6px}
+  .step p{font-size:14px;color:var(--body);line-height:1.5}
+  .pull{margin:30px 0 0;font-family:var(--serif);font-size:clamp(20px,2.6vw,28px);color:var(--paper);font-weight:600;line-height:1.3;border-left:3px solid var(--gold);padding-left:24px}
+  .pull span{color:var(--gold)}
+
+  /* módulos / aplicações */
+  .mods{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:10px}
+  .mod{background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.01));border:1px solid var(--line-2);border-radius:16px;padding:22px;transition:transform .3s,border-color .3s}
+  .mod:hover{transform:translateY(-4px);border-color:var(--line)}
+  .mod .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:19px;margin-bottom:12px;color:#fff;background:linear-gradient(135deg,var(--claret-lite),var(--claret))}
+  .mod h3{font-family:var(--serif);font-size:18px;color:var(--paper);font-weight:700;margin-bottom:6px}
+  .mod p{font-size:13.5px;color:var(--body);line-height:1.45}
+  .mod.feat{border:1px solid var(--gold);background:linear-gradient(160deg,rgba(201,123,0,.14),rgba(122,18,32,.14))}
+  .mod.feat .ic{background:linear-gradient(135deg,var(--gold),#a85f00)}
+  .mod .tagf{display:inline-block;margin-top:12px;font-family:var(--mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;font-weight:700;color:#241000;background:var(--gold-soft);border-radius:5px;padding:4px 10px}
+  .mod a.more{display:inline-block;margin-top:12px;font-family:var(--mono);font-size:11px;font-weight:700;color:var(--gold-soft)}
+
+  /* fases */
+  .ladder{display:grid;gap:16px;margin-top:8px}
+  .phase{display:flex;gap:22px;background:var(--card);border:1px solid var(--line-2);border-radius:18px;padding:26px 28px;position:relative;overflow:hidden;transition:border-color .3s}
+  .phase:hover{border-color:var(--line)}
+  .phase::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--claret-lite),var(--gold))}
+  .phase .n{font-family:var(--serif);font-size:56px;font-weight:900;color:var(--claret-lite);line-height:.85;min-width:80px}
+  .phase .n small{display:block;font-family:var(--mono);font-size:9px;letter-spacing:1.5px;color:var(--gold-soft);font-weight:700;margin-top:8px}
+  .phase h3{font-family:var(--serif);font-size:22px;color:var(--paper);font-weight:700;margin-bottom:4px}
+  .phase .obj{font-size:14px;color:var(--muted);margin-bottom:14px}
+  .phase ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 20px}
+  .phase li{font-size:14px;color:var(--body);padding-left:16px;position:relative;line-height:1.4}
+  .phase li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;background:var(--gold);border-radius:1px;transform:rotate(45deg)}
+  .ptag{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;font-weight:700;color:#0c0a0b;background:var(--gold-soft);border-radius:5px;padding:5px 12px}
+  .ptag.soft{background:rgba(255,255,255,.12);color:var(--body)}
+  @media(max-width:640px){.phase{flex-direction:column;gap:12px}.phase ul{grid-template-columns:1fr}}
+
+  .diff{background:linear-gradient(135deg,rgba(122,18,32,.4),rgba(12,10,11,.2));border:1px solid var(--line);border-radius:18px;padding:34px 36px;backdrop-filter:blur(6px)}
+  .diff .h{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-soft);margin-bottom:12px}
+  .diff .big{font-family:var(--serif);font-size:clamp(24px,3.2vw,34px);color:var(--paper);font-weight:700;line-height:1.2;margin-bottom:14px}
+  .diff .big span{color:var(--gold)}
+  .diff p{font-size:15.5px;color:var(--body);line-height:1.6;max-width:820px}
+
+  .ctaband{background:linear-gradient(135deg,var(--claret),var(--claret-2));position:relative;overflow:hidden}
+  .ctaband::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 120% at 85% 10%,rgba(201,123,0,.30),transparent 60%)}
+  .ctaband .in{position:relative;z-index:1;padding:clamp(48px,7vw,80px) 0;text-align:center}
+  .ctaband h2{color:#fff;margin:0 auto 12px;max-width:24ch}
+  .ctaband p{color:rgba(255,255,255,.88);max-width:640px;margin:0 auto;font-size:16px}
+  .ctaband .btn.p{margin-top:22px}
+  .ctaband .site{margin-top:16px;font-family:var(--mono);font-size:13px;color:rgba(255,255,255,.85);letter-spacing:1px}
+
+  footer.foot{background:#0a0708;border-top:1px solid var(--line-2);padding:34px 0 46px}
+  .foot .top{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+  .foot .top img{width:44px;height:44px}
+  .foot .top b{font-family:var(--serif);color:var(--paper);font-size:18px}
+  .disc{font-size:11px;color:var(--muted);line-height:1.6}
+  .disc b{color:var(--body)}
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="hnav rise">
+        <a class="brand" href="/">
+          <img src="images/logo-audiper-red.png" alt="AUDÍPER"/>
+          <span class="wm"><b>AUDÍPER</b><em>Auditores Independentes</em></span>
+        </a>
+        <a class="wa" href="https://wa.me/5586981251918?text=Ol%C3%A1%2C%20quero%20o%20Diagn%C3%B3stico%20de%20Governan%C3%A7a%20de%20Custos" target="_blank" rel="noopener">
+          <span class="txt">Falar no WhatsApp</span><span class="circ"><i class="fab fa-whatsapp"></i></span>
+        </a>
+      </div>
+      <div class="herogrid">
+        <div>
+          <div class="eyebrow rise r1">Governança de Custos · Mapeamento de Processos</div>
+          <h1 class="title rise r2">Seus custos estão medidos e <b>mapeados?</b></h1>
+          <p class="sub rise r3">Todo custo tem um processo por trás. Se o processo não está mapeado, o custo não tem dono — e o desperdício não aparece. A AUDÍPER mapeia <strong>processos e subprocessos</strong>, dá número a cada etapa e transforma custo em decisão.</p>
+          <div class="ctarow rise r4">
+            <a class="btn p" href="https://wa.me/5586981251918?text=Ol%C3%A1%2C%20quero%20o%20Diagn%C3%B3stico%20de%20Governan%C3%A7a%20de%20Custos" target="_blank" rel="noopener"><i class="fas fa-magnifying-glass-chart"></i> Solicitar o Diagnóstico</a>
+            <a class="btn s" href="#metodo"><i class="fas fa-diagram-project"></i> Ver como funciona</a>
+          </div>
+          <div class="hbadges rise r4">
+            <span>Mapeamento de processos</span><span>Custo-para-servir</span><span>Controles internos</span><span>40 anos · desde 1985</span>
+          </div>
+        </div>
+        <div class="herovis rise r3"><img src="images/audiper-radar-loop.gif" alt=""/></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PROBLEMA -->
+  <section>
+    <div class="wrap">
+      <div class="kicker reveal">O problema</div>
+      <h2 class="reveal">O custo que você não mede, você não controla.</h2>
+      <div class="rule reveal"></div>
+      <p class="stext reveal">A maioria das empresas conhece o total da despesa — mas não sabe <strong>por qual processo</strong> cada real passou, nem <strong>em qual etapa</strong> ele foi consumido. Sem esse mapa, o custo vira um número agregado, sem dono e sem responsável. O desperdício se esconde exatamente onde ninguém está olhando: no subprocesso.</p>
+      <div class="pull reveal">Não se corta o que não se enxerga. E não se enxerga o custo <span>sem mapear o processo que o gera.</span></div>
+    </div>
+  </section>
+
+  <!-- MÉTODO: mapa processo→subprocesso→custo -->
+  <section id="metodo">
+    <div class="wrap">
+      <div class="kicker reveal">O método</div>
+      <h2 class="reveal">Mapeamos o processo. Damos número a cada subprocesso.</h2>
+      <div class="rule reveal"></div>
+      <p class="stext reveal">Cada macroprocesso é aberto em subprocessos e atividades. A cada etapa atribuímos <strong>custo, dono e indicador</strong> — e aí o desperdício aparece, medido, no ponto exato onde ele ocorre.</p>
+      <div class="map reveal d1">
+        <div class="maphead"><div>Processo</div><div>Subprocessos mapeados</div><div>Custo / etapa</div></div>
+        <div class="maprow">
+          <div class="p"><i class="fas fa-cart-flatbed"></i> Suprimentos</div>
+          <div class="subs"><span class="sub-chip">Cotação</span><span class="sub-chip">Aprovação</span><span class="sub-chip">Recebimento</span><span class="sub-chip">Estoque</span></div>
+          <div class="cost"><div class="v warn">gargalo</div><div class="l">aprovação lenta</div></div>
+        </div>
+        <div class="maprow">
+          <div class="p"><i class="fas fa-headset"></i> Atendimento</div>
+          <div class="subs"><span class="sub-chip">Triagem</span><span class="sub-chip">Execução</span><span class="sub-chip">Retrabalho</span><span class="sub-chip">Pós-venda</span></div>
+          <div class="cost"><div class="v warn">retrabalho</div><div class="l">custo sem valor</div></div>
+        </div>
+        <div class="maprow">
+          <div class="p"><i class="fas fa-robot"></i> Uso de IA</div>
+          <div class="subs"><span class="sub-chip">Ferramentas</span><span class="sub-chip">Tokens</span><span class="sub-chip">Licenças</span><span class="sub-chip">Shadow AI</span></div>
+          <div class="cost"><div class="v">R$/cliente</div><div class="l">custo-para-servir</div></div>
+        </div>
+        <div class="maprow">
+          <div class="p"><i class="fas fa-file-invoice-dollar"></i> Fiscal</div>
+          <div class="subs"><span class="sub-chip">Apuração</span><span class="sub-chip">Créditos</span><span class="sub-chip">Obrigações</span><span class="sub-chip">Recuperação</span></div>
+          <div class="cost"><div class="v warn">crédito perdido</div><div class="l">tributo a maior</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA (steps) -->
+  <section>
+    <div class="wrap">
+      <div class="kicker reveal">Do mapa à decisão</div>
+      <h2 class="reveal">Quatro movimentos.</h2>
+      <div class="rule reveal"></div>
+      <div class="steps">
+        <div class="step reveal"><div class="n">1</div><h3>Mapear</h3><p>Processos e subprocessos desenhados como são de verdade — não como o organograma diz.</p></div>
+        <div class="step reveal d1"><div class="n">2</div><h3>Medir</h3><p>Custo, dono e indicador por etapa. Custo-para-servir por cliente, produto ou área.</p></div>
+        <div class="step reveal d2"><div class="n">3</div><h3>Expor</h3><p>Onde o dinheiro vaza: atividade sem valor, retrabalho, gargalo, capacidade ociosa.</p></div>
+        <div class="step reveal d3"><div class="n">4</div><h3>Governar</h3><p>Política, controle e trilha auditável — o custo passa a ter regra, não só relatório.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MÓDULOS / aplicações — destaque IA -->
+  <section>
+    <div class="wrap">
+      <div class="kicker reveal">Onde aplicamos</div>
+      <h2 class="reveal">Um método. Vários custos.</h2>
+      <div class="rule reveal"></div>
+      <div class="mods">
+        <div class="mod feat reveal">
+          <div class="ic"><i class="fas fa-robot"></i></div>
+          <h3>Governança de Custos de IA</h3>
+          <p>O custo mais novo e menos controlado. Consumo de tokens, licenças e shadow AI por área — com prontidão ISO/IEC 42001 e 27001.</p>
+          <span class="tagf">Em destaque · 2026</span><br/>
+          <a class="more" href="governanca-custos-ia.html">Ver a página dedicada →</a>
+        </div>
+        <div class="mod reveal d1"><div class="ic"><i class="fas fa-users-gear"></i></div><h3>Custo-para-servir</h3><p>Quanto cada cliente, produto ou contrato realmente custa para ser atendido — e qual dá prejuízo.</p></div>
+        <div class="mod reveal d2"><div class="ic"><i class="fas fa-file-invoice-dollar"></i></div><h3>Custo tributário</h3><p>Créditos não aproveitados e tributo pago a maior — inventário fiscal e prontidão à Reforma.</p></div>
+        <div class="mod reveal d3"><div class="ic"><i class="fas fa-sitemap"></i></div><h3>Estrutura e processos</h3><p>Retrabalho, gargalos e atividades sem valor no fluxo operacional — controles internos (NBC TA 315).</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 FASES -->
+  <section id="fases">
+    <div class="wrap">
+      <div class="kicker reveal">A oferta</div>
+      <h2 class="reveal">Uma escada de 3 fases — cada degrau entrega valor sozinho.</h2>
+      <div class="rule reveal"></div>
+      <div class="ladder">
+        <div class="phase reveal">
+          <div class="n">01<small>ENTRADA</small></div>
+          <div>
+            <h3>Diagnóstico de Governança de Custos</h3>
+            <div class="obj">Mapa dos processos-chave, custo por etapa e onde está o desperdício.</div>
+            <ul>
+              <li>Mapeamento de processos e subprocessos críticos</li>
+              <li>Custo e dono por etapa</li>
+              <li>Custo-para-servir por cliente/produto</li>
+              <li>Pontos de desperdício e economia</li>
+              <li>Riscos de controle interno e compliance</li>
+              <li>Relatório executivo + plano de ação 90 dias</li>
+            </ul>
+            <span class="ptag">Comece por aqui · produto de entrada</span>
+          </div>
+        </div>
+        <div class="phase reveal d1">
+          <div class="n">02<small>IMPLANTA</small></div>
+          <div>
+            <h3>Implementação da Governança</h3>
+            <div class="obj">Instalar os controles que mantêm o custo sob regra no dia a dia.</div>
+            <ul>
+              <li>Políticas e centros de custo por processo/área</li>
+              <li>Indicadores e metas por subprocesso</li>
+              <li>Dashboards de custo e desempenho</li>
+              <li>Alertas de orçamento e desvio</li>
+              <li>Redesenho de processos com desperdício</li>
+              <li>Rotina de revisão e melhoria contínua</li>
+            </ul>
+            <span class="ptag soft">Retenção · recorrência</span>
+          </div>
+        </div>
+        <div class="phase reveal d2">
+          <div class="n">03<small>ESCALA</small></div>
+          <div>
+            <h3>Monitoramento contínuo AUDÍPER</h3>
+            <div class="obj">A camada de evidência e trilha auditável que sustenta o parecer.</div>
+            <ul>
+              <li>Painel executivo de custos por processo</li>
+              <li>Economia gerada e ROI</li>
+              <li>Alertas automáticos de desvio</li>
+              <li>Relatórios de auditoria</li>
+              <li>Histórico e rastreabilidade para compliance</li>
+              <li>Trilha probatória oponível a terceiros</li>
+            </ul>
+            <span class="ptag soft">Após validar demanda</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFERENCIAL -->
+  <section>
+    <div class="wrap">
+      <div class="diff reveal">
+        <div class="h">O que nos separa de um relatório de custos</div>
+        <div class="big">Planilha <span>mostra</span> o número. Auditoria independente <span>comprova</span> a causa.</div>
+        <p>Qualquer relatório diz quanto se gastou. Só o mapeamento de processos diz <strong>onde</strong> e <strong>por quê</strong> — e só a auditoria independente transforma isso em evidência oponível, papel de trabalho e parecer. São 40 anos de auditoria e controles internos aplicados ao seu custo — com metodologia NBC TA e, quando o dado for sensível, análise <strong>on-host</strong>: ele não sai da sua rede.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="ctaband">
+    <div class="wrap in">
+      <div class="kicker reveal" style="color:var(--gold-soft)">Comece pela Fase 1</div>
+      <h2 class="reveal">Governança de Custos? Comece sabendo onde o dinheiro está.</h2>
+      <p class="reveal d1">Fale com nossos consultores. Mapeamos seus processos, medimos o custo de cada etapa e mostramos a economia possível — com plano de ação em 90 dias.</p>
+      <a class="btn p reveal d2" href="https://wa.me/5586981251918?text=Ol%C3%A1%2C%20quero%20o%20Diagn%C3%B3stico%20de%20Governan%C3%A7a%20de%20Custos" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Falar com nossos consultores</a>
+      <div class="site reveal d2">audiper.com · Risco Mapeado, Risco Controlado · ISO 27001</div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div class="top"><img src="images/logo-audiper-red.png" alt="AUDÍPER"/><b>AUDÍPER — Auditores Independentes</b></div>
+      <p class="disc"><b>AUDÍPER Auditoria Independente S/S</b> · CRC/PI 000023/O · CNPJ 23.626.575/0001-10 · desde 1985 · Teresina/PI · audiper.com<br/><br/>
+      Página informativa e comercial. As metodologias citadas (mapeamento de processos, custo-para-servir, controles internos NBC TA 315) e as referências a normas têm finalidade de contextualização e não constituem garantia de resultado. · Risco Mapeado, Risco Controlado. ISO 27001.</p>
+    </div>
+  </footer>
+
+  <a class="wafloat" href="https://wa.me/5586981251918?text=Ol%C3%A1%2C%20quero%20o%20Diagn%C3%B3stico%20de%20Governan%C3%A7a%20de%20Custos" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+
+  <script>
+    (function(){
+      var els=document.querySelectorAll('.reveal');
+      function showAll(){els.forEach(function(e){e.classList.add('in');});}
+      if(!('IntersectionObserver' in window)){showAll();return;}
+      var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.08,rootMargin:'0px 0px -6% 0px'});
+      els.forEach(function(e){io.observe(e);});
+      setTimeout(showAll,2600);
+    })();
+  </script>
+</body>
+</html>
