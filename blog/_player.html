@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Preview · Hero MP4 Visual Law STJ</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{min-height:100vh;background:#141013;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;font-family:system-ui,sans-serif;padding:24px}
+  h1{color:#fff;font-size:16px;font-weight:600;letter-spacing:.5px;opacity:.85}
+  .wrap{position:relative}
+  video{height:82vh;max-height:900px;width:auto;border-radius:22px;box-shadow:0 30px 80px -20px rgba(0,0,0,.7);background:#000;display:block}
+  .bar{display:flex;gap:12px;align-items:center}
+  button,a.dl{font-family:system-ui;font-size:14px;font-weight:600;color:#141013;background:#fff;border:0;border-radius:10px;padding:11px 20px;cursor:pointer;text-decoration:none}
+  .meta{color:#8a8a92;font-family:monospace;font-size:12px;letter-spacing:.5px}
+</style></head>
+<body>
+  <h1>Hero · Visual Law &middot; art. 343-A STJ</h1>
+  <div class="wrap">
+    <video id="v" src="_preview_video.mp4?v=1" autoplay loop muted controls playsinline></video>
+  </div>
+  <div class="bar">
+    <button onclick="var v=document.getElementById('v');v.currentTime=0;v.play()">&#9654; Repetir</button>
+    <a class="dl" href="_preview_video.mp4" download="audiper_visual_law_stj.mp4">&#8681; Baixar MP4</a>
+  </div>
+  <div class="meta">1080&times;1920 &middot; 9:16 &middot; 10s &middot; H264 &middot; ~592KB</div>
+</body></html>

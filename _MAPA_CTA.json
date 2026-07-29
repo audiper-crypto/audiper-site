@@ -1,0 +1,49 @@
+{
+  "conversao_cta_direto_sem_widget": {
+    "diagnostico-vazamento-lucro.html": "vazamento",
+    "revisao-bancaria.html": "bancario",
+    "terceiro-setor.html": "terceiro-setor",
+    "valuation.html": "valuation",
+    "governanca-custos-ia.html": "governanca-ia",
+    "simulador-ibs-cbs/index.html": "simulador-ibscbs",
+    "simulador-reforma/index.html": "simulador-reforma",
+    "simples-nacional-setembro/index.html": "simples-nacional",
+    "contato.html": "contato"
+  },
+  "servico_widget_ativo": {
+    "index.html": "home",
+    "auditorias.html": "auditorias",
+    "pericias.html": "pericias",
+    "ia-negocios.html": "ia-negocios",
+    "inteligencia-dados.html": "dados",
+    "auditoria-preventiva.html": "preventiva",
+    "agentes.html": "agentes",
+    "auditor-do-futuro.html": "auditor-futuro",
+    "blog.html": "blog",
+    "lucro-que-vaza-pelo-sped.html": "artigo-sped",
+    "auditoria-inventario-drone-agentes.html": "artigo-drone",
+    "carreiras.html": "carreiras",
+    "casos-sucesso.html": "casos",
+    "eventos.html": "eventos"
+  },
+  "internas_nada": [
+    "leads.html",
+    "mission-control.html",
+    "og-generator.html",
+    "og-data-intelligence-gen.html",
+    "audina-dashboard.html",
+    "audina-dashboard-v2.html",
+    "auditoria-detalhe.html",
+    "auditoria-detalhe-v2.html",
+    "index-v1.html",
+    "index-v2.html",
+    "assinatura-email.html",
+    "assinatura-gmail.html",
+    "email-banner-data-intelligence.html",
+    "reels-animacao.html",
+    "inteligencia-dados-v2.html",
+    "governanca-custos.html",
+    "design-system/index.html",
+    "portal/index.html"
+  ]
+}

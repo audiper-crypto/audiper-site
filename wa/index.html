@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Abrindo o WhatsApp — AUDÍPER</title>
+
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BEXZQB303W"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BEXZQB303W');
+</script>
+
+<style>
+  :root{--claret:#7a1220;--gold:#c97b00;--ink:#1e293b;--n400:#94a3b8}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{min-height:100vh;display:grid;place-items:center;background:#0b0d12;color:#f8fafc;
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    text-align:center;padding:24px;line-height:1.6}
+  .ring{width:46px;height:46px;border:3px solid rgba(255,255,255,.14);border-top-color:var(--gold);
+    border-radius:50%;margin:0 auto 22px;animation:spin .9s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  h1{font-family:"Outfit","Inter",sans-serif;font-size:1.28rem;font-weight:700;letter-spacing:-.01em}
+  p{color:var(--n400);font-size:.92rem;margin-top:8px}
+  a.manual{display:inline-block;margin-top:22px;color:#fff;background:var(--claret);
+    text-decoration:none;font-weight:650;padding:12px 26px;border-radius:8px;font-size:.94rem}
+  small{display:block;margin-top:26px;color:#475569;font-size:.72rem}
+  @media (prefers-reduced-motion: reduce){.ring{animation:none;border-top-color:rgba(255,255,255,.14)}}
+</style>
+</head>
+<body>
+  <main>
+    <div class="ring" aria-hidden="true"></div>
+    <h1>Abrindo o WhatsApp da AUDÍPER…</h1>
+    <p>Se não abrir sozinho em alguns segundos, use o botão abaixo.</p>
+    <a class="manual" id="fallback" href="https://wa.me/5586994010525">Abrir conversa no WhatsApp</a>
+    <small>AUDÍPER Auditores Independentes · CRC/PI 000023/O</small>
+  </main>
+
+<script>
+(function(){
+  "use strict";
+  var NUM = "5586994010525";
+  var q = new URLSearchParams(location.search);
+
+  // ?o= origem do material (ig, reel, landing, proposta, qr, linkedin...)
+  // ?t= texto pré-preenchido custom, se quiser sobrescrever
+  var origem = (q.get("o") || "site").toLowerCase().replace(/[^a-z0-9_-]/g, "").slice(0, 24);
+
+  var PREFILL = {
+    site:      "Olá! Vim pelo site da AUDÍPER e gostaria de falar com vocês.",
+    vazamento: "Olá! Vim pela página de Diagnóstico de Vazamento de Lucro.",
+    simulador: "Olá! Usei o simulador de IBS/CBS no site e queria entender o impacto no meu caso.",
+    ig:        "Olá! Vim pelo Instagram da AUDÍPER.",
+    reel:      "Olá! Vim por um Reel da AUDÍPER.",
+    linkedin:  "Olá! Vim pelo LinkedIn da AUDÍPER.",
+    proposta:  "Olá! Estou com uma proposta da AUDÍPER em mãos e queria falar sobre ela.",
+    qr:        "Olá! Li o QR Code de um material da AUDÍPER."
+  };
+
+  var texto = q.get("t") || PREFILL[origem] || PREFILL.site;
+  var destino = "https://wa.me/" + NUM + "?text=" + encodeURIComponent(texto);
+
+  document.getElementById("fallback").href = destino;
+
+  // evento GA4 — é isto que hoje não existe e impede medir o funil
+  try {
+    gtag("event", "whatsapp_click", {
+      origem: origem,
+      destino_numero: NUM,
+      referrer: document.referrer || "(direto)",
+      transport_type: "beacon"
+    });
+  } catch (e) { /* nunca bloquear o redirect por causa de analytics */ }
+
+  // pequeno atraso para o beacon sair antes da navegação
+  setTimeout(function(){ location.replace(destino); }, 350);
+})();
+</script>
+</body>
+</html>

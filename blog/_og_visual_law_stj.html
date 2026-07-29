@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@600;700;800;900&family=Fraunces:ital,opsz,wght@1,9..144,600&family=JetBrains+Mono:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{width:1200px;height:630px;overflow:hidden;font-family:'Inter',sans-serif;background:#fff}
+  .og{width:1200px;height:630px;position:relative;display:flex;background:linear-gradient(135deg,#c41a1a 0%,#8a1420 55%,#5e0f18 100%);overflow:hidden}
+  .og::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 82% 22%,rgba(255,255,255,.10),transparent 42%);pointer-events:none}
+  .left{width:660px;padding:64px 50px 54px 66px;display:flex;flex-direction:column;justify-content:space-between;position:relative;z-index:2}
+  .badge{font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:700;color:#ffd9b0;letter-spacing:4px;text-transform:uppercase;display:flex;align-items:center;gap:12px}
+  .badge::before{content:'';width:40px;height:3px;background:#ffb877}
+  h1{font-family:'Figtree',sans-serif;font-weight:900;font-size:62px;line-height:1.05;color:#fff;margin-top:26px;letter-spacing:-1px}
+  h1 em{font-family:'Fraunces',serif;font-style:italic;font-weight:600;color:#ffd9b0}
+  .sub{font-size:24px;color:rgba(255,255,255,.9);line-height:1.45;margin-top:22px;max-width:540px;font-weight:400}
+  .sub b{color:#fff;font-weight:600}
+  .foot{display:flex;align-items:center;gap:16px;margin-top:20px}
+  .foot .logo{width:60px;height:60px;border-radius:50%;background:#fff;padding:5px}
+  .foot .logo img{width:100%;height:100%;object-fit:contain;border-radius:50%}
+  .foot .fx{font-family:'Figtree',sans-serif;font-weight:800;font-size:24px;color:#fff;letter-spacing:.5px}
+  .foot .fx small{display:block;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;color:rgba(255,255,255,.7);letter-spacing:2px;margin-top:2px}
+  .right{width:540px;position:relative;display:flex;align-items:center;justify-content:center;z-index:2}
+  .card{width:360px;background:#fff;border-radius:22px;box-shadow:0 40px 80px -20px rgba(0,0,0,.5);overflow:hidden;transform:rotate(2.5deg)}
+  .card .top{height:46px;background:#111;display:flex;align-items:center;gap:8px;padding:0 18px}
+  .card .top i{width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.5)}
+  .card .top span{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#fff;letter-spacing:1.5px}
+  .card .body{padding:20px}
+  .vb{display:flex;align-items:center;gap:12px;padding:11px 13px;border-radius:11px;background:#faf9fa;border-left:5px solid;margin-bottom:10px;box-shadow:0 3px 10px -6px rgba(0,0,0,.15)}
+  .vb:last-child{margin-bottom:0}
+  .vb .ic{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex:0 0 30px}
+  .vb .ic .material-symbols-outlined{font-size:19px;color:#fff}
+  .vb b{font-family:'Figtree',sans-serif;font-size:16px;color:#1a1a1a;letter-spacing:.3px}
+  .b1{border-color:#c41a1a}.b1 .ic{background:#c41a1a}
+  .b2{border-color:#a5153f}.b2 .ic{background:#a5153f}
+  .b3{border-color:#7a1220}.b3 .ic{background:#7a1220}
+  .b4{border-color:#b8892a}.b4 .ic{background:#b8892a}
+  .b5{border-color:#4a4a52}.b5 .ic{background:#4a4a52}
+</style></head>
+<body>
+<div class="og">
+  <div class="left">
+    <div class="badge">Art. 343-A &middot; STJ</div>
+    <div>
+      <h1>O STJ agora exige <em>resumo</em> no recurso.</h1>
+      <div class="sub">N&oacute;s transformamos esse resumo em <b>Visual Law</b> &mdash; condensando sem perder a ess&ecirc;ncia.</div>
+    </div>
+    <div class="foot">
+      <div class="logo"><img src="../images/logo.png" alt="AUDIPER"/></div>
+      <div class="fx">AUD&Iacute;PER<small>AUDITORES &amp; PERITOS</small></div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="card">
+      <div class="top"><i></i><i></i><i></i><span>PETI&Ccedil;&Atilde;O &rarr; RESUMO</span></div>
+      <div class="body">
+        <div class="vb b1"><span class="ic"><span class="material-symbols-outlined">gavel</span></span><b>Fato</b></div>
+        <div class="vb b2"><span class="ic"><span class="material-symbols-outlined">balance</span></span><b>Direito</b></div>
+        <div class="vb b3"><span class="ic"><span class="material-symbols-outlined">task_alt</span></span><b>Pedido</b></div>
+        <div class="vb b4"><span class="ic"><span class="material-symbols-outlined">description</span></span><b>Decis&atilde;o impugnada</b></div>
+        <div class="vb b5"><span class="ic"><span class="material-symbols-outlined">menu_book</span></span><b>Dispositivos</b></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>

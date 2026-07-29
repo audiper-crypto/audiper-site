@@ -23,12 +23,24 @@
         start: "top+=2 top",
         endTrigger: "body",
         end: "bottom 0",
-        pin: true,
+        pin: false,
         pinSpacing: false,
-        toggleClass: { targets: ".navbar", className: "sticky" }, 
+        toggleClass: { targets: ".navbar", className: "sticky" },
       },
     });
   }
+
+  /* ========================================
+     Dropdown: fecha no mouseleave (mata .show grudado do Bootstrap no desktop)
+   ======================================== */
+  document.querySelectorAll('.nav-item.dropdown').forEach(function(item){
+    item.addEventListener('mouseleave', function(){
+      var menu = item.querySelector('.dropdown-menu');
+      if(menu){ menu.classList.remove('show'); menu.style.display=''; }
+      var tog = item.querySelector('.dropdown-toggle');
+      if(tog){ tog.setAttribute('aria-expanded','false'); tog.classList.remove('show'); }
+    });
+  });
 
   /* ========================================
      Navbar Links Active  Js

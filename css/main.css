@@ -14637,12 +14637,20 @@ input:-internal-autofill-selected {
 }
 
 .navbar_four {
-    position: relative;
-    z-index: 22;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000 !important;
 }
 
 .navbar_four.sticky {
     background: hsl(var(--white));
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
 .navbar_four.sticky .btn-four:hover span {
@@ -15716,3 +15724,9 @@ input:-internal-autofill-selected {
 }
 /* ================================= preload Css End ===========================  */
 /*# sourceMappingURL=main.css.map */
+
+/* radar logo circular */
+img[src*="audiper-radar-loop"]{border-radius:50%;}
+
+/* footer radar mascara circular homogenea */
+.footer-logo img[src*="audiper-radar-loop"]{width:220px;height:220px;object-fit:cover;border-radius:50%;}
