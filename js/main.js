@@ -862,9 +862,22 @@
 
   /* ========================================
       Preloader Js
+
+      O preloader NÃO pode depender do evento 'load': ele só dispara quando
+      TODO recurso terminou, inclusive scripts de terceiros injetados em
+      runtime (chat) e CDNs. Um host externo que pendura (sem responder e sem
+      dar erro) mantinha a tela de loading no ar por minutos — página em
+      branco para o visitante. Por isso o 'load' virou apenas um dos gatilhos,
+      e existe um teto de tempo absoluto contado do DOM pronto.
   ======================================== */
-  window.addEventListener('load', () => {
+  const LIMITE_PRELOADER = 3000; // teto: passou disso, libera a página
+
+  let preloaderEncerrado = false;
+  function esconderPreloader() {
+    if (preloaderEncerrado) return;
     const preloader = document.getElementById('preloader');
+    if (!preloader) return;
+    preloaderEncerrado = true;
     preloader.style.transition = 'height 0.5s, opacity 1s';
     preloader.style.opacity = '0';
     preloader.style.height = '0';
@@ -873,7 +886,10 @@
     setTimeout(() => {
       preloader.style.display = 'none';
     }, 500);
-  });
+  }
+
+  window.addEventListener('load', esconderPreloader);
+  setTimeout(esconderPreloader, LIMITE_PRELOADER);
 
 })(jQuery);
 

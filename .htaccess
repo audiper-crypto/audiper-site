@@ -1,0 +1,47 @@
+# AUDÍPER — controle de acesso do docroot.
+#
+# Por que existe: até 29/07/2026 o docroot servia dado interno com HTTP 200 —
+# carteira de clientes com CNPJ, tarefas, e-mails da equipe, painéis internos.
+# robots.txt NÃO protege nada: é um pedido a crawlers educados, não uma trava.
+#
+# Devolve 404 (não 403) de propósito: 403 confirma que o arquivo existe.
+# Só mod_alias — sem dependência de mod_authz_core — para não arriscar 500 no
+# LiteSpeed da Hostinger.
+#
+# NADA aqui é consumido por página pública: os JSONs bloqueados são lidos
+# apenas pelos painéis internos, que também estão bloqueados (conferido por
+# grep em todo o docroot em 29/07/2026). Ao publicar página nova que precise
+# de um destes caminhos, remova a linha correspondente — não duplique o dado.
+
+# ---- dado interno (raiz) ----
+RedirectMatch 404 ^/dashboard-data\.json$
+RedirectMatch 404 ^/_MAPA_CTA\.json$
+
+# ---- diretórios de trabalho (dados, diagnósticos de CNPJ, automações, código) ----
+RedirectMatch 404 ^/data/
+RedirectMatch 404 ^/diagnosticos/
+RedirectMatch 404 ^/workflows/
+RedirectMatch 404 ^/scripts/
+RedirectMatch 404 ^/tools/
+RedirectMatch 404 ^/agents/.*\.json$
+
+# ---- painéis internos ----
+RedirectMatch 404 ^/leads\.html$
+RedirectMatch 404 ^/mission-control\.html$
+RedirectMatch 404 ^/audina-dashboard(-v2)?\.html$
+RedirectMatch 404 ^/auditoria-detalhe(-v2)?\.html$
+
+# ---- artefatos de desenvolvimento ----
+# .github e .gitignore já vinham 403 por padrão do LiteSpeed; ficam aqui para o
+# caso de a configuração do servidor mudar. .claude/ vinha 200.
+RedirectMatch 404 ^/\.claude/
+RedirectMatch 404 ^/\.git
+RedirectMatch 404 ^/\.github/
+RedirectMatch 404 \.(py|env|log|bak|sql|sops\.ya?ml)$
+
+# ---- endurecimento de cabeçalhos (não muda layout) ----
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+</IfModule>

@@ -150,9 +150,15 @@
       });
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", iniciar);
-  } else {
+  // Só depois do 'load' da página. Um <script> injetado ANTES do load atrasa o
+  // próprio evento 'load' enquanto baixa — e se o host do chat pendurar (sem
+  // resposta e sem erro), o 'load' não chega. O sdkTimeout daqui rejeita a
+  // Promise, mas NÃO cancela o download já em curso, então nada disso salvava a
+  // página: quem espera o 'load' (o preloader do site) ficava preso. Subindo o
+  // chat depois do load, a página nunca é hostage do chat.
+  if (document.readyState === "complete") {
     iniciar();
+  } else {
+    window.addEventListener("load", iniciar);
   }
 })();
