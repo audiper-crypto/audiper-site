@@ -432,6 +432,30 @@
       <p style="margin-top:12px;font-size:12px;color:#999;letter-spacing:2px;">AUDIPER</p>
     </div>
   </div>
+  <script>
+  /* Remove o #page-loader acima. Fica JUNTO do div de propósito: o bloco que
+     fazia isso vivia no fim da página e foi apagado por acidente no deploy de
+     29/07/2026 (commit fa8fce7) — o div ficou, o script sumiu, e a home passou a
+     servir um overlay branco z-index 99999 por cima de tudo. Aqui embaixo do
+     próprio elemento, qualquer erro de JS mais adiante não impede a saída.
+
+     Sai no 'load' OU no teto de 2s, o que vier primeiro. O teto não é enfeite:
+     'load' espera TODO recurso da página (7,3 MB, 42 requisições) e em 4G ruim
+     só chega perto dos 27s — e se algum host de terceiro pendurar, nunca chega. */
+  (function () {
+    var saiu = false;
+    function sair() {
+      if (saiu) return;
+      saiu = true;
+      var l = document.getElementById('page-loader');
+      if (!l) return;
+      l.style.opacity = '0';
+      setTimeout(function () { if (l.parentNode) l.remove(); }, 500);
+    }
+    window.addEventListener('load', function () { setTimeout(sair, 300); });
+    setTimeout(sair, 2000);
+  })();
+  </script>
   <!-- ═══ ANNOUNCEMENT BAR (oculto ate informar clientes) ═══ -->
   <div class="cursor-glow" id="cursorGlow"></div>
   <!-- Search Overlay -->
