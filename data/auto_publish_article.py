@@ -228,7 +228,7 @@ def generate_article_body(tema, context, palavras_chave):
           independente e pericia contabil, nossa equipe esta preparada para atender
           empresas de todos os portes no Nordeste.</p>
           <p><strong>Fale com um auditor:</strong> entre em contato pelo WhatsApp
-          <a href="https://wa.me/5586981251918">(86) 98125-1918</a> ou envie um
+          <a href="https://wa.me/5586994010525">(86) 99401-0525</a> ou envie um
           e-mail para <a href="mailto:audiper@audiper.com">audiper@audiper.com</a>.</p>""")
 
     return "\n".join(html_parts)
