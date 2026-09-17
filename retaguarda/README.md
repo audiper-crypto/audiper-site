@@ -5,15 +5,22 @@ de referência: **07/2026**.
 
 ## Não é material público
 
-Este diretório está bloqueado no servidor:
+Este diretório não vai para o servidor, e é bloqueado se chegar lá:
 
-- `.htaccess` — `RedirectMatch 404 ^/retaguarda/`
-- `robots.txt` — `Disallow: /retaguarda/`
-- cada página traz `<meta name="robots" content="noindex, nofollow">`
+1. **O deploy não sobe o diretório** — `--exclude-glob retaguarda/` em
+   `.github/workflows/deploy.yml`, junto com `leads.html`, `mission-control.html`
+   e `data/`. Esta é a trava que importa: o arquivo nunca chega ao Hostinger.
+2. **`.htaccess`** — `RedirectMatch 404 ^/retaguarda/`, para o caso de o arquivo
+   chegar por FTP manual ou de o exclude ser removido sem querer.
+3. **`robots.txt`** — `Disallow: /retaguarda/`.
+4. Cada página traz `<meta name="robots" content="noindex, nofollow">`.
 
-Devolve 404 e não 403 de propósito: 403 confirmaria que o arquivo existe. Para
-usar, abra o arquivo local no navegador ou remova a linha do `.htaccess` pelo
-tempo do acesso — e recoloque depois.
+Devolve 404 e não 403 de propósito: 403 confirmaria que o arquivo existe.
+
+Para usar, **abra o arquivo local no navegador** — `retaguarda/index.html`. Não
+existe URL pública, por escolha. Se um dia precisar servir pela web, mexa nas
+duas pontas de propósito (exclude do deploy e regra do `.htaccess`), nunca só
+numa delas.
 
 O motivo é o conteúdo: CNPJ, saldos bancários conta a conta, nomes de sócios,
 distribuição de lucros e passivo tributário de clientes. Não linkar a partir de

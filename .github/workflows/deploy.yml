@@ -56,6 +56,7 @@ jobs:
               --exclude-glob dashboard-data.json \
               --exclude-glob leads.html \
               --exclude-glob mission-control.html \
+              --exclude-glob retaguarda/ \
               --exclude-glob *-dashboard*.html \
               --exclude-glob auditoria-detalhe*.html \
               --exclude .gitignore \
