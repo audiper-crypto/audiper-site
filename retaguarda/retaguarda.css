@@ -12,6 +12,8 @@
   --pend:#9aa4b0; --pend-tint:#f0eeea;
 
   --shadow:0 1px 2px rgba(0,0,0,.04), 0 3px 12px rgba(0,0,0,.05);
+  --shadow-lift:0 2px 4px rgba(0,0,0,.05), 0 12px 28px rgba(0,0,0,.10);
+  --crit-wash:#fbf2f2; --warn-wash:#fbf6ec;
   --f-display:'Outfit','Inter',system-ui,sans-serif;
   --f-body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   --f-mono:'JetBrains Mono','SF Mono',ui-monospace,monospace;
@@ -27,6 +29,10 @@
     --crit:#e0564f; --crit-tint:#3a1b1b;
     --pend:#5e6a78; --pend-tint:#1d242e;
     --shadow:0 1px 2px rgba(0,0,0,.3), 0 3px 12px rgba(0,0,0,.35);
+    --shadow-lift:0 2px 6px rgba(0,0,0,.4), 0 14px 32px rgba(0,0,0,.5);
+    --crit-wash:#231519; --warn-wash:#201c14;
+    --shadow-lift:0 2px 6px rgba(0,0,0,.4), 0 14px 32px rgba(0,0,0,.5);
+    --crit-wash:#231519; --warn-wash:#201c14;
   }
 }
 :root[data-theme="dark"]{
@@ -160,13 +166,16 @@ h1{font-family:var(--f-display); font-weight:700; font-size:clamp(22px,3.6vw,30p
 .btn-fim:hover{color:var(--ink-strong); border-color:var(--ink-faint)}
 .btn-fim[aria-pressed="true"]{background:var(--ok-tint); color:var(--ok); border-color:var(--ok)}
 
-.mgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(252px,1fr)); gap:1px; background:var(--rule)}
-.mc{background:var(--card); padding:14px 16px 13px; display:block; text-align:left; width:100%; align-self:start;
-    border:none; border-left:3px solid transparent; cursor:pointer; font-family:inherit}
-.mc:hover{background:var(--card-alt)}
-.mc:focus-visible{outline:2px solid var(--accent); outline-offset:-2px}
-.mc.s-ok{border-left-color:var(--ok)} .mc.s-crit{border-left-color:var(--crit)}
-.mc.s-warn{border-left-color:var(--warn)} .mc.s-pend{border-left-color:var(--pend)}
+.mgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(228px,1fr)); gap:11px; padding:16px; background:none}
+.mc{background:var(--card); padding:14px 16px 13px; display:block; text-align:left; width:100%; align-self:stretch;
+    border:1px solid var(--rule); border-radius:11px; box-shadow:var(--shadow); cursor:pointer; font-family:inherit;
+    transition:transform .2s cubic-bezier(.22,1,.36,1), box-shadow .2s ease, border-color .2s ease;
+    animation:mcIn .45s cubic-bezier(.22,1,.36,1) backwards; animation-delay:calc(var(--i,0) * 45ms)}
+@keyframes mcIn{from{opacity:0; transform:translateY(9px)} to{opacity:1; transform:none}}
+.mc:hover{transform:translateY(-2px); box-shadow:var(--shadow-lift); border-color:var(--ink-faint)}
+.mc:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.mc.s-crit{background:linear-gradient(180deg,var(--crit-wash) 0%, var(--card) 58%)}
+.mc.s-warn{background:linear-gradient(180deg,var(--warn-wash) 0%, var(--card) 58%)}
 .mc-h{display:flex; align-items:center; gap:8px}
 .mc-i{width:17px; height:17px; flex:none}
 .mc-i svg{width:17px; height:17px}
@@ -191,7 +200,8 @@ h1{font-family:var(--f-display); font-weight:700; font-size:clamp(22px,3.6vw,30p
 .selo b{font-family:var(--f-display); font-size:16px; color:var(--ok); display:block}
 .selo span{font-size:13px; color:var(--ink); line-height:1.4}
 body.fim .selo{display:flex}
-body.fim .mc{border-left-color:var(--ok) !important}
+body.fim .mc{border-color:var(--ok)}
+body.fim .mc.s-crit, body.fim .mc.s-warn{background:linear-gradient(180deg,var(--ok-tint) 0%, var(--card) 58%)}
 body.fim .mc-i{color:var(--ok) !important}
 body.fim .mc-c{color:var(--ok)}
 body.fim .mc-l{display:none}
@@ -245,7 +255,7 @@ body.fim .mapa-h .tot b{color:var(--ok)}
   .fi{grid-template-columns:22px 1fr}
   .fi-w{grid-column:2; justify-self:start; margin-top:6px}
 }
-@media (prefers-reduced-motion: reduce){*{transition:none !important}}
+@media (prefers-reduced-motion: reduce){*{transition:none !important; animation:none !important} .mc:hover{transform:none}}
 
 
 /* ---------- seletor de empresa ---------- */
@@ -297,6 +307,8 @@ body.fim .mapa-h .tot b{color:var(--ok)}
 .ic-ok, .cnt-fim, .fim-only{display:none}
 body.fim .ic-real, body.fim .cnt-real, body.fim .real-only{display:none}
 body.fim .ic-ok, body.fim .cnt-fim, body.fim .fim-only{display:inline}
-.mc-i > span{display:block; width:17px; height:17px}
+.mc-i > span{width:17px; height:17px}
+.mc-i > span svg{display:block; width:17px; height:17px}
+body.fim .mc-i .ic-ok{display:block}
 @media (max-width:620px){ .lad-r{grid-template-columns:16px 1fr; row-gap:2px} .lad-v{grid-column:2; text-align:left} }
 

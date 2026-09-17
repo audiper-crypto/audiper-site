@@ -282,7 +282,7 @@ function troca(cod){
     const falta = g.itens.filter(i => i.st !== "ok" && i.f);
     const ok = g.itens.filter(i => i.st === "ok").length;
     const st = pior(g.itens);
-    return `<button class="mc s-${st}" data-g="${gi}">
+    return `<button class="mc s-${st}" data-g="${gi}" style="--i:${gi}">
       <div class="mc-h"><span class="mc-i"><span class="ic-real">${I[st==='crit'?'fail':st]}</span><span class="ic-ok">${I.ok}</span></span>
         <span class="mc-t">${g.nome}</span>
         <span class="mc-c"><span class="cnt-real">${ok}/${g.itens.length}</span><span class="cnt-fim">${g.itens.length}/${g.itens.length}</span></span></div>
