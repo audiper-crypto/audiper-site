@@ -31,6 +31,18 @@ RedirectMatch 404 ^/mission-control\.html$
 RedirectMatch 404 ^/audina-dashboard(-v2)?\.html$
 RedirectMatch 404 ^/auditoria-detalhe(-v2)?\.html$
 
+# ---- retaguarda contabil (carteira Consult) ----
+# Fichas de fechamento das oito empresas em escrituracao: CNPJ, saldos
+# bancarios, nomes de socios e passivo tributario. Nao e material publico e
+# nao deve ser linkado de pagina publica.
+#
+# Sao DUAS travas, como em leads.html e mission-control.html: o deploy nao
+# sobe o diretorio (--exclude-glob retaguarda/ em .github/workflows/deploy.yml)
+# e esta regra cobre o caso de o arquivo chegar ao servidor por outro caminho.
+# Para usar, abra o arquivo local no navegador. Se um dia precisar servir pela
+# web, mexer nas duas pontas de proposito, nunca so nesta.
+RedirectMatch 404 ^/retaguarda/
+
 # ---- artefatos de desenvolvimento ----
 # .github e .gitignore já vinham 403 por padrão do LiteSpeed; ficam aqui para o
 # caso de a configuração do servidor mudar. .claude/ vinha 200.
