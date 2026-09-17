@@ -22,3 +22,4 @@ Disallow: /audina-dashboard-v2.html
 Disallow: /auditoria-detalhe.html
 Disallow: /auditoria-detalhe-v2.html
 Disallow: /dashboard-data.json
+Disallow: /retaguarda/

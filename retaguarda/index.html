@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Retaguarda contábil — carteira Consult</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="retaguarda.css">
+<style>
+.hero{padding:34px 0 8px}
+.hero h1{font-family:var(--f-display); font-weight:700; font-size:clamp(24px,4vw,34px); color:#fff; margin:0 0 8px; letter-spacing:-.02em}
+.hero p{color:#9db1c7; font-size:14.5px; margin:0; max-width:62ch; line-height:1.55}
+.kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1px; background:var(--rule);
+      border:1px solid var(--rule); border-radius:12px; overflow:hidden; box-shadow:var(--shadow); margin-bottom:34px}
+.kp{background:var(--card); padding:15px 18px}
+.kp-k{font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-faint); font-weight:600}
+.kp-v{font-family:var(--f-mono); font-weight:700; font-size:24px; color:var(--ink-strong); margin-top:4px; line-height:1}
+.kp-v i{font-style:normal; font-size:15px; color:var(--ink-faint)}
+.kp-n{font-size:12px; color:var(--ink-muted); margin-top:4px; line-height:1.4}
+.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(330px,1fr)); gap:14px}
+.ec{display:block; text-decoration:none; color:inherit; background:var(--card); border:1px solid var(--rule);
+    border-left:3px solid var(--rule); border-radius:12px; box-shadow:var(--shadow); padding:16px 18px 14px; transition:border-color .15s, transform .15s}
+.ec:hover{transform:translateY(-1px); border-color:var(--ink-faint)}
+.ec.s-ok{border-left-color:var(--ok)} .ec.s-warn{border-left-color:var(--warn)}
+.ec.s-crit{border-left-color:var(--crit)} .ec.s-pend{border-left-color:var(--pend)}
+.ec-h{display:flex; align-items:baseline; gap:10px}
+.ec-n{font-family:var(--f-display); font-size:15.5px; font-weight:600; color:var(--ink-strong); line-height:1.25}
+.ec-c{margin-left:auto; font-family:var(--f-mono); font-size:11px; color:var(--ink-faint); flex:none}
+.ec-head{font-size:12.8px; color:var(--ink-muted); line-height:1.45; margin:7px 0 13px; min-height:2.9em}
+.ec-m{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:11px}
+.ec-m div{min-width:0}
+.ec-k{display:block; font-size:9.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-faint); font-weight:600}
+.ec-v{display:block; font-family:var(--f-mono); font-weight:700; font-size:13.5px; color:var(--ink-strong); margin-top:2px;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.ec-v.bad{color:var(--crit)} .ec-v.z{color:var(--ok)}
+.ec-v.s-ok{color:var(--ok)} .ec-v.s-warn{color:var(--warn)} .ec-v.s-crit{color:var(--crit)} .ec-v.s-pend{color:var(--pend)}
+.ec-bar{height:4px; border-radius:3px; background:var(--rule); overflow:hidden}
+.ec-bar i{display:block; height:100%; border-radius:3px}
+.ec-ago{display:flex; align-items:center; gap:10px; margin-top:11px}
+.ec-chip{font-family:var(--f-mono); font-size:10px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+         padding:3px 8px; border-radius:5px; border:1px solid; white-space:nowrap}
+.c-ok{color:var(--ok); border-color:var(--ok); background:var(--ok-tint)}
+.c-warn{color:var(--warn); border-color:var(--warn); background:var(--warn-tint)}
+.c-crit{color:var(--crit); border-color:var(--crit); background:var(--crit-tint)}
+.c-pend{color:var(--pend); border-color:var(--pend); background:var(--pend-tint)}
+.ec-go{margin-left:auto; font-size:11.5px; color:var(--ink-faint); font-weight:600; white-space:nowrap}
+.ec:hover .ec-go{color:var(--accent)}
+.ec-bar .b-ok{background:var(--ok)} .ec-bar .b-warn{background:var(--warn)}
+.ec-bar .b-crit{background:var(--crit)} .ec-bar .b-pend{background:var(--pend)}
+.nota{background:var(--card-alt); border:1px solid var(--rule-soft); border-radius:11px; padding:15px 18px;
+      font-size:12.8px; color:var(--ink-muted); line-height:1.6}
+.nota h3{font-family:var(--f-display); font-size:13px; font-weight:600; color:var(--ink-strong); margin:0 0 8px}
+.nota p{margin:0 0 9px} .nota p:last-child{margin:0}
+.nota b{color:var(--ink-strong)}
+.trava{border-left:3px solid var(--warn); background:var(--warn-tint); padding:10px 13px; border-radius:0 6px 6px 0; color:var(--ink)}
+.trava b{color:var(--warn)}
+@media (max-width:520px){ .ec-m{grid-template-columns:repeat(3,1fr); gap:8px} .ec-head{min-height:0} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in hero">
+    <p class="eyebrow">Retaguarda contábil</p>
+    <h1>Carteira Consult — fechamento de 07/2026</h1>
+    <p>Oito empresas em escrituração. Cada cartão abre a ficha completa da empresa: mapa do fechamento, caminho do documento, vínculos que têm de fechar, as cinco peças da competência e a ponte da DRE.</p>
+  </div>
+</header>
+
+<div class="wrap" style="padding-top:30px">
+
+  <section>
+    <div class="kpis">
+      <div class="kp"><div class="kp-k">Itens conferidos</div><div class="kp-v">193<i>/367</i></div>
+        <div class="kp-n">em toda a carteira</div></div>
+      <div class="kp"><div class="kp-k">Pendências</div><div class="kp-v">53</div>
+        <div class="kp-n">34 nossas · 19 do cliente</div></div>
+      <div class="kp"><div class="kp-k">DRE conforme</div><div class="kp-v">4<i>/8</i></div>
+        <div class="kp-n">sem conta fora da demonstração</div></div>
+      <div class="kp"><div class="kp-k">Contábil de agosto</div><div class="kp-v">6<i>/8</i></div>
+        <div class="kp-n">paradas ou quase paradas</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>As oito empresas</h2>
+    <p class="sub">Ordenadas por volume de escrituração. A barra é a fração de itens conferidos da competência.</p>
+    <div class="grid">
+    <a class="ec s-crit" href="ficha.html#7184">
+      <div class="ec-h"><span class="ec-n">Construtora Andrade Junior</span><span class="ec-c">7184</span></div>
+      <p class="ec-head">R$ 5.110.426,18 de resultado fora da DRE, em 86 contas sem grupo.</p>
+      <div class="ec-m">
+        <div><span class="ec-k">conferido</span><span class="ec-v">20<i>/52</i></span></div>
+        <div><span class="ec-k">pendências</span><span class="ec-v">9</span></div>
+        <div><span class="ec-k">fora da DRE</span><span class="ec-v bad">5,11 mi</span></div>
+      </div>
+      <div class="ec-bar"><i class="b-crit" style="width:38%"></i></div>
+      <div class="ec-ago"><span class="ec-chip c-crit">agosto · contábil parada</span><span class="ec-go">abrir a ficha →</span></div>
+    </a>
+    <a class="ec s-crit" href="ficha.html#7282">
+      <div class="ec-h"><span class="ec-n">Cerrado Engenharia Incorpora</span><span class="ec-c">7282</span></div>
+      <p class="ec-head">R$ 22.227.883,14 em Caixa Geral e R$ 621.521,42 parados a identificar.</p>
+      <div class="ec-m">
+        <div><span class="ec-k">conferido</span><span class="ec-v">26<i>/49</i></span></div>
+        <div><span class="ec-k">pendências</span><span class="ec-v">7</span></div>
+        <div><span class="ec-k">fora da DRE</span><span class="ec-v bad">1,66</span></div>
+      </div>
+      <div class="ec-bar"><i class="b-crit" style="width:53%"></i></div>
+      <div class="ec-ago"><span class="ec-chip c-crit">agosto · contábil zerada</span><span class="ec-go">abrir a ficha →</span></div>
+    </a>
+    <a class="ec s-crit" href="ficha.html#763">
+      <div class="ec-h"><span class="ec-n">F & I Indústria e Comércio de Produtos de Limpeza</span><span class="ec-c">763</span></div>
+      <p class="ec-head">Duas contas de custo fora da DRE — R$ 271.402,98. O resto do caminho funciona.</p>
+      <div class="ec-m">
+        <div><span class="ec-k">conferido</span><span class="ec-v">30<i>/43</i></span></div>
+        <div><span class="ec-k">pendências</span><span class="ec-v">5</span></div>
+        <div><span class="ec-k">fora da DRE</span><span class="ec-v bad">271.402,98</span></div>
+      </div>
+      <div class="ec-bar"><i class="b-crit" style="width:70%"></i></div>
+      <div class="ec-ago"><span class="ec-chip c-warn">agosto · abaixo da média</span><span class="ec-go">abrir a ficha →</span></div>
+    </a>
+    <a class="ec s-crit" href="ficha.html#18">
+      <div class="ec-h"><span class="ec-n">Khrys Tec</span><span class="ec-c">18</span></div>
+      <p class="ec-head">A única DRE inteira da carteira. Mas o faturamento parou em agosto.</p>
+      <div class="ec-m">
+        <div><span class="ec-k">conferido</span><span class="ec-v">28<i>/48</i></span></div>
+        <div><span class="ec-k">pendências</span><span class="ec-v">8</span></div>
+        <div><span class="ec-k">fora da DRE</span><span class="ec-v z">0,00</span></div>
+      </div>
+      <div class="ec-bar"><i class="b-crit" style="width:58%"></i></div>
+      <div class="ec-ago"><span class="ec-chip c-crit">agosto · contábil quase parada</span><span class="ec-go">abrir a ficha →</span></div>
+    </a>
+    <a class="ec s-crit" href="ficha.html#311">
+      <div class="ec-h"><span class="ec-n">Fox Inline Serviços de TI</span><span class="ec-c">311</span></div>
+      <p class="ec-head">A receita de R$ 275.349,18 está escriturada. Falta confirmar com a Consult.</p>
+      <div class="ec-m">
+        <div><span class="ec-k">conferido</span><span class="ec-v">31<i>/46</i></span></div>
+        <div><span class="ec-k">pendências</span><span class="ec-v">6</span></div>
+        <div><span class="ec-k">fora da DRE</span><span class="ec-v z">0,00</span></div>
+      </div>
+      <div class="ec-bar"><i class="b-crit" style="width:67%"></i></div>
+      <div class="ec-ago"><span class="ec-chip c-warn">agosto · em curso</span><span class="ec-go">abrir a ficha →</span></div>
+    </a>
+    <a class="ec s-crit" href="ficha.html#310">
+      <div class="ec-h"><span class="ec-n">Fox Inline Technologies</span><span class="ec-c">310</span></div>
+      <p class="ec-head">Julho conferido de ponta a ponta. Agosto com dois lançamentos contra média de 897.</p>
+      <div class="ec-m">
+        <div><span class="ec-k">conferido</span><span class="ec-v">22<i>/36</i></span></div>
+        <div><span class="ec-k">pendências</span><span class="ec-v">3</span></div>
+        <div><span class="ec-k">fora da DRE</span><span class="ec-v z">0,00</span></div>
+      </div>
+      <div class="ec-bar"><i class="b-crit" style="width:61%"></i></div>
+      <div class="ec-ago"><span class="ec-chip c-crit">agosto · contábil parada</span><span class="ec-go">abrir a ficha →</span></div>
+    </a>
+    <a class="ec s-crit" href="ficha.html#5009">
+      <div class="ec-h"><span class="ec-n">Smart Engenharia</span><span class="ec-c">5009</span></div>
+      <p class="ec-head">A DRE mostra a receita bruta como se fosse o lucro — R$ 1.001.517,60 fora.</p>
+      <div class="ec-m">
+        <div><span class="ec-k">conferido</span><span class="ec-v">14<i>/45</i></span></div>
+        <div><span class="ec-k">pendências</span><span class="ec-v">7</span></div>
+        <div><span class="ec-k">fora da DRE</span><span class="ec-v bad">1,00 mi</span></div>
+      </div>
+      <div class="ec-bar"><i class="b-crit" style="width:31%"></i></div>
+      <div class="ec-ago"><span class="ec-chip c-crit">agosto · contábil zerada</span><span class="ec-go">abrir a ficha →</span></div>
+    </a>
+    <a class="ec s-crit" href="ficha.html#5033">
+      <div class="ec-h"><span class="ec-n">A S P Comércio e Serviços</span><span class="ec-c">5033</span></div>
+      <p class="ec-head">R$ 4.220.279,43 em caixa e bancos sem um lançamento desde janeiro.</p>
+      <div class="ec-m">
+        <div><span class="ec-k">conferido</span><span class="ec-v">22<i>/48</i></span></div>
+        <div><span class="ec-k">pendências</span><span class="ec-v">8</span></div>
+        <div><span class="ec-k">fora da DRE</span><span class="ec-v z">0,00</span></div>
+      </div>
+      <div class="ec-bar"><i class="b-crit" style="width:46%"></i></div>
+      <div class="ec-ago"><span class="ec-chip c-crit">agosto · contábil parada</span><span class="ec-go">abrir a ficha →</span></div>
+    </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="nota">
+      <h3>Como ler estes números</h3>
+      <p><b>De quando são:</b> carga do conector em 17/09/2026 08:20, sobre o snapshot de 16/09, 28.167 linhas. O conector lê um <b>backup restaurado</b>, não o sistema ao vivo — há sempre defasagem, e ela precisa ser conhecida antes de tratar divergência como achado.</p>
+      <p><b>DRE conforme não é fechamento.</b> Duas empresas desta carteira têm zero conta fora da demonstração e mesmo assim não estão fechadas: a estrutura está cadastrada, o que falta é escrituração. O cartão mostra as duas coisas em separado de propósito.</p>
+      <p><b>Contagem de lançamento não sai daqui para cliente.</b> O <span class="num">ledgerEntries</span> do conector não bate com a contagem do razão: o dinheiro bate, a contagem não. Serve como ritmo de escrituração, nunca como fato em peça.</p>
+      <p><b>Escopo contratual não confirmado.</b> A pasta 00_CONTRATO_ESCOPO/ estava vazia em 11/09. Tudo aqui é estado técnico da escrituração, nunca estado contratual.</p>
+      <div class="trava"><b>Página de trabalho interna.</b> Este diretório está bloqueado no servidor (404) junto com os demais painéis internos e marcado como <span class="num">noindex</span>. Traz CNPJ, saldos bancários, nomes de sócios e passivo tributário de clientes — não deve ser aberto na web nem linkado a partir de página pública.</div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
