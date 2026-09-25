@@ -224,7 +224,7 @@ def generate_article_body(tema, context, palavras_chave):
     html_parts.append("""
           <h2>Proximo passo</h2>
           <p>Se a sua empresa precisa de orientacao especializada sobre esse tema,
-          a AUDIPER pode ajudar. Com mais de 40 anos de experiencia em auditoria
+          a AUDIPER pode ajudar. Com 37 anos de experiencia em auditoria
           independente e pericia contabil, nossa equipe esta preparada para atender
           empresas de todos os portes no Nordeste.</p>
           <p><strong>Fale com um auditor:</strong> entre em contato pelo WhatsApp

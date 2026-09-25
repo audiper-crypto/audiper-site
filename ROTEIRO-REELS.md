@@ -43,11 +43,11 @@
 
 ---
 
-### SLIDE 2 — 40 Anos (4s a 8s)
+### SLIDE 2 — 37 Anos (4s a 8s)
 **Visual:** Fundo escuro com "40" gigante em vermelho
 - [4.4s] Numero "40" aparece com efeito pop (grande → tamanho normal)
 - [5.0s] "ANOS DE EXCELENCIA" em monospace
-- [5.5s] "1986 — 2026" em italico elegante
+- [5.5s] "1989 — 2026" em italico elegante
 - [5.8s] Estatisticas aparecem: 500+ Clientes | 3000+ Projetos | 8 Estados
 
 **Texto overlay sugerido:**
@@ -77,7 +77,7 @@
 **Visual:** Fundo escuro, badge "INOVACAO" com ponto pulsante
 - [12.8s] Badge com indicador vermelho pulsando
 - [13.1s] "Auditoria potencializada por *IA*" — titulo grande
-- [13.5s] Descricao: "40 anos + inteligencia artificial"
+- [13.5s] Descricao: "37 anos + inteligencia artificial"
 - [13.9s] 3 cards: Analise Preditiva | Deteccao de Fraudes | Visual Law
 
 **Texto overlay sugerido:**
@@ -131,13 +131,13 @@
 ```
 Nosso novo site esta no ar!
 
-40 anos de experiencia em auditoria e pericia, agora com um visual a altura da nossa historia.
+37 anos de experiencia em auditoria e pericia, agora com um visual a altura da nossa historia.
 
 Navegue por nossos servicos, conheca nossa equipe e descubra como a Inteligencia Artificial esta transformando a auditoria.
 
 www.audiper.com
 
-#audiper #auditoria #pericia #compliance #IA #inteligenciaartificial #contabilidade #40anos #novosite #piauí #maranhao #teresina
+#audiper #auditoria #pericia #compliance #IA #inteligenciaartificial #contabilidade #37anos #novosite #piauí #maranhao #teresina
 ```
 
 ---
@@ -157,7 +157,7 @@ www.audiper.com
 #IA #inteligenciaartificial #tecnologia #inovacao #transformacaodigital
 
 **Alcance:**
-#empreendedorismo #negocios #empresa #gestao #contabilidade #40anos
+#empreendedorismo #negocios #empresa #gestao #contabilidade #37anos
 
 ---
 

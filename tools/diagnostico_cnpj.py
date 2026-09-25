@@ -1137,8 +1137,8 @@ def gerar_proposta_html(diag: dict) -> str:
                 <i class="fas fa-landmark text-xs"></i> QUEM SOMOS
             </h3>
             <p class="text-[9pt] text-gray-600 mb-3 leading-relaxed">
-                Fundada em <strong>1986</strong> em Teresina/PI, a <strong>AUDIPER - Auditores Independentes</strong> atua ha mais de
-                <strong>40 anos</strong> oferecendo servicos de auditoria, pericia contabil e consultoria com excelencia tecnica,
+                Fundada em <strong>1989</strong> em Teresina/PI, a <strong>AUDIPER - Auditores Independentes</strong> atua ha
+                <strong>37 anos</strong> oferecendo servicos de auditoria, pericia contabil e consultoria com excelencia tecnica,
                 etica e inovacao. Somos referencia no Nordeste brasileiro, com atuacao nos estados do Piaui e Maranhao.
             </p>
 
@@ -1273,7 +1273,7 @@ def gerar_proposta_html(diag: dict) -> str:
 
         <!-- Footer -->
         <div class="page-footer">
-            <span>AUDIPER - Auditores Independentes S/S | CRC/PI 000023/O | Desde 1986</span>
+            <span>AUDIPER - Auditores Independentes S/S | CRC/PI 000023/O | Desde 1989</span>
             <span>Proposta Comercial | {data_hoje}</span>
         </div>
     </div>

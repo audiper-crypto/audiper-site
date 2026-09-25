@@ -8,7 +8,7 @@ O Claude Design (claude.ai/design) pede 3 coisas neste formulario. Use os textos
 
 **AUDIPER -- Auditores e Peritos Independentes**
 
-Firma de auditoria independente de Teresina/PI, registrada no CRC/PI 000023/O desde 1985 (40 anos). Atende auditoria contabil sob NBC TA 200-810, pericia, ICMS, ISO 27001, LGPD e setores ANS/iGaming/concessionarias/terceiro setor. Nosso diferencial e entrega Visual Law: relatorios HTML -> PDF com glassmorphism, dashboards de KPIs, Mapa de Reflexos Regionais em OpenStreetMap, e cronogramas Visual Law. Tambem produzimos Reels institucionais 1080x1920 (HyperFrames + Gemini 3.1 Flash TTS) e propostas comerciais com card dourado de honorarios. Posicionamento canonico: "Auditoria Preventiva. Risco Mapeado, Risco Controlado." -- auditoria como libertacao do gestor, nunca como acusacao.
+Firma de auditoria independente de Teresina/PI, registrada no CRC/PI 000023/O desde 1989 (37 anos). Atende auditoria contabil sob NBC TA 200-810, pericia, ICMS, ISO 27001, LGPD e setores ANS/iGaming/concessionarias/terceiro setor. Nosso diferencial e entrega Visual Law: relatorios HTML -> PDF com glassmorphism, dashboards de KPIs, Mapa de Reflexos Regionais em OpenStreetMap, e cronogramas Visual Law. Tambem produzimos Reels institucionais 1080x1920 (HyperFrames + Gemini 3.1 Flash TTS) e propostas comerciais com card dourado de honorarios. Posicionamento canonico: "Auditoria Preventiva. Risco Mapeado, Risco Controlado." -- auditoria como libertacao do gestor, nunca como acusacao.
 
 ---
 
@@ -102,7 +102,7 @@ Tres patterns canonicos replicaveis:
 Tres tratamentos visuais (ver `components/shadcn-premium.html`):
 1. **shadcn flat** -- default em dashboards, formularios, tabelas, propostas. Border-radius 12px, shadow 0 1px 2px rgba(0,0,0,.04), hover transform translateY(-2px).
 2. **Glassmorphism** -- hero, capa, overlay sobre gradiente claret. backdrop-filter blur(18px). Fallback @media print rgba(255,255,255,.85) solido obrigatorio.
-3. **Skeumorphism** -- USO RESTRITO a capas fisicas, certificados, selos, materiais comemorativos (40 anos), Reel Cronometro. Paper warm + sombra suave + texturas. Nao usar em dashboards/emails/Reels normais.
+3. **Skeumorphism** -- USO RESTRITO a capas fisicas, certificados, selos, materiais comemorativos (37 anos), Reel Cronometro. Paper warm + sombra suave + texturas. Nao usar em dashboards/emails/Reels normais.
 
 Iconografia profissional:
 - **Padrao novo: lucide SVG inline** (componentes shadcn-premium). stroke-width 1.5 default. cor herdada via currentColor. Zero CDN, funciona offline e em PDF. 16 icones canonicos pre-incluidos (shield, file, chart, map-pin, clock, gavel, star, users, message, check-circle, alert, swap, verified, search, help, monitor).

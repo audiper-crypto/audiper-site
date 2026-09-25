@@ -2,7 +2,7 @@
 
 ## Marca
 
-**AUDIPER — Auditores e Peritos Independentes** | CRC/PI 000023/O | CNPJ 23.626.575/0001-10 | Teresina/PI | Desde 1985 (40 anos).
+**AUDIPER — Auditores e Peritos Independentes** | CRC/PI 000023/O | CNPJ 23.626.575/0001-10 | Teresina/PI | Desde 1989 (37 anos).
 
 Dois bracos:
 - **AUDIPER Auditoria** — auditoria independente, pericia, consultoria contabil/fiscal (core).
@@ -58,7 +58,7 @@ O auditor **nao julga, nao acusa, nao confronta**. Apresenta fatos, comunica obs
 
 Tagline oficial: **"Auditoria Preventiva. Risco Mapeado, Risco Controlado. ISO 27001."**
 
-Posicionamento: auditoria como **libertacao do gestor**, nunca como acusacao. AUDIPER vem para "fale com peritos" + "40 anos" + antecipacao regulatoria.
+Posicionamento: auditoria como **libertacao do gestor**, nunca como acusacao. AUDIPER vem para "fale com peritos" + "37 anos" + antecipacao regulatoria.
 
 ### Anti-IA (obrigatorio em qualquer copy gerada)
 - Variar tamanho de frases e paragrafos.

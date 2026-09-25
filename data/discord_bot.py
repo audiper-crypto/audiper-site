@@ -102,7 +102,7 @@ async def setup_server(guild):
                        "Mensagens sao sincronizadas com o Dashboard AUDIPER.",
             color=0xE72C22
         )
-        embed.set_footer(text="AUDIPER — 40 anos de tradicao aliada a inovacao")
+        embed.set_footer(text="AUDIPER — 37 anos de tradicao aliada a inovacao")
         await geral_ch.send(embed=embed)
 
 @client.event
