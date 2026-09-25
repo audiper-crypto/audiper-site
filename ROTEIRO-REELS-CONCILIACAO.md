@@ -20,8 +20,9 @@ Conciliação bancária não carrega essa restrição, e a natureza do trabalho 
 de lançamentos, cada um exigindo um veredito de "casa ou não casa" — é o caso de uso
 mais direto que existe para decisão tipada.
 
-**Condição para publicar:** só grave este reel se a conciliação com apoio automatizado
-já for um serviço que a AUDIPER de fato presta. Reel não é lançamento de produto.
+**Condição para publicar — atendida (25/09/2026).** Confirmado que a AUDIPER já presta
+conciliação com triagem automatizada; a operação roda na máquina do Prof. Ricardo. O reel
+descreve serviço existente, não lançamento.
 
 ---
 
@@ -143,8 +144,11 @@ audiper.com/auditorias
 
 ## CONFERIR ANTES DE GRAVAR
 
-- [ ] A AUDIPER já presta conciliação com triagem automatizada? Se não, o reel espera.
+- [x] A AUDIPER já presta conciliação com triagem automatizada — confirmado em 25/09/2026
 - [ ] Vitor ou Prof. Ricardo validaram o Slide 3 e o Slide 4
 - [ ] O nome Jev aparece só no rodapé do Slide 4 e em nenhum momento da locução
+- [ ] **Confirmar que a triagem que roda na máquina do Prof. Ricardo usa mesmo o Jev.**
+      Se o motor for outro, ou local, o crédito do Slide 4 precisa mudar ou sair — creditar
+      ferramenta que não é a usada seria afirmação falsa num material comercial.
 - [ ] Nenhum número de acurácia ou economia foi inventado — o reel não promete métrica
 - [ ] Logo radar em 1:1
