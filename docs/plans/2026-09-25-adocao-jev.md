@@ -158,6 +158,13 @@ relevância editorial sobre o tema pesquisado resolve, e passa a ordenar a fila 
 
 Um único wrapper, `data/jev.py`, que todo chamador usa. Nada de `TypeSafeClient()` espalhado.
 
+**Regra de modelagem, antes do wrapper:** todas as perguntas de uma mesma chamada
+enxergam o mesmo estado e são respondidas em paralelo, numa única passada. Uma
+resposta nunca vira contexto de outra. Logo, as perguntas de um mapa precisam ser
+independentes entre si — se a decisão B depende do resultado de A, são duas chamadas,
+não duas entradas no mesmo mapa. As três perguntas do exemplo de qualificação de lead
+(§2.2) satisfazem isso; qualquer mapa novo precisa ser conferido contra essa regra.
+
 Responsabilidades do wrapper:
 
 1. **Ler a chave de `TYPESAFE_API_KEY`** — nunca hardcoded. (Ver §5.)
@@ -167,6 +174,13 @@ Responsabilidades do wrapper:
    regra. A plataforma está em beta e não tem SLA — o fallback não é refinamento, é requisito.
 4. **Porta de confiança.** `confidence` abaixo do limiar (sugiro 0,7) não vira decisão
    automática: cai para o caminho humano ou para a regra antiga.
+
+   O limiar só faz sentido porque o Jev é treinado por RLCD — Reinforcement Learning
+   for Calibrated Decisions —, método cujo objetivo é alinhar probabilidade a acerto:
+   entre as respostas dadas com 90% de probabilidade, cerca de 90% devem estar certas.
+   Num modelo não calibrado, cortar por confiança seria arbitrário. Aqui vira escolha
+   de risco mensurável — e o modo sombra da Fase 1 serve justamente para verificar se
+   a calibração se sustenta nos nossos dados antes de confiarmos nela.
 5. **Log de toda decisão** no Postgres: estado resumido, resposta, probabilidades, confiança,
    tokens, latência, e o que a regra antiga teria decidido. É esse log que permite medir.
 
@@ -203,6 +217,14 @@ que já existe é trocar um erro conhecido por um desconhecido.
 ---
 
 ## 5. Riscos e restrições
+
+**Auditoria de inventário está fora do escopo de adoção.** A página
+`auditoria-inventario-drone-agentes.html` vende, em destaque, "100% on-host · zero dado
+à nuvem · o dado do cliente nunca sai do ambiente". Integrar ali um motor de decisão
+hospedado em API de terceiro contradiz a promessa comercial que a própria página usa
+como diferencial. Não é uma questão de configuração: é o argumento de venda. Se um dia
+fizer sentido levar decisão tipada para o inventário, o caminho é modelo local, não o
+Jev — e a página teria de ser reescrita antes, não depois.
 
 **LGPD.** Mensagem de WhatsApp, nome, CNPJ e dado de cliente passando para uma API de terceiro
 é tratamento de dados com novo subprocessador. Antes da Fase 2, isso precisa constar no aviso
