@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=1080, initial-scale=1.0"/>
+<title>AUD&Iacute;PER — Reels: cena de contexto</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --red: #c41a1a; --dark: #141416; --light: #f8f8f8; --red-glow: rgba(196,26,26,.30); }
+  body { width:1080px; height:1920px; overflow:hidden; background:var(--dark);
+         font-family:'Inter',system-ui,sans-serif; color:#fff; position:relative; }
+
+  .slide { position:absolute; inset:0; display:flex; flex-direction:column;
+           align-items:center; justify-content:center; padding:0 90px; opacity:0;
+           animation-fill-mode:forwards; animation-timing-function:cubic-bezier(.16,1,.3,1); }
+  @keyframes show {
+    0%{opacity:0;transform:scale(1.04)} 6%{opacity:1;transform:scale(1)}
+    92%{opacity:1;transform:scale(1)} 100%{opacity:0;transform:scale(.99)}
+  }
+  #c1 { animation: show 6.0s 0.0s  forwards; }
+  #c2 { animation: show 8.0s 6.0s  forwards; background: var(--light); color:#17171a; }
+  #c3 { animation: show 6.0s 14.0s forwards; }
+
+  @keyframes rise { from{opacity:0;transform:translateY(36px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes pop  { from{opacity:0;transform:scale(1.35)}      to{opacity:1;transform:scale(1)} }
+  @keyframes grow { from{transform:scaleX(0)} to{transform:scaleX(1)} }
+  @keyframes drop { from{opacity:0;transform:translateY(-28px)} to{opacity:1;transform:translateY(0)} }
+  .anim { opacity:0; animation-fill-mode:forwards; animation-timing-function:cubic-bezier(.16,1,.3,1); }
+
+  /* ── CENA 1: a cadeia sequencial ── */
+  .kicker { font-family:'JetBrains Mono',monospace; font-size:34px; font-weight:700;
+            letter-spacing:.24em; color:var(--red); }
+  .c1-title { font-family:'Figtree',sans-serif; font-size:82px; font-weight:800;
+              text-align:center; line-height:1.14; margin-top:34px; }
+  .chain { margin-top:90px; width:100%; display:flex; flex-direction:column; align-items:center; gap:18px; }
+  .node { width:100%; background:rgba(255,255,255,.055); border:2px solid rgba(255,255,255,.12);
+          border-radius:20px; padding:34px 0; text-align:center;
+          font-family:'JetBrains Mono',monospace; font-size:44px; font-weight:600; }
+  .arrow { font-size:42px; color:rgba(255,255,255,.35); }
+  .chain > *:nth-child(1){ animation: drop .5s 1.0s forwards; }
+  .chain > *:nth-child(2){ animation: drop .4s 1.4s forwards; }
+  .chain > *:nth-child(3){ animation: drop .5s 1.7s forwards; }
+  .chain > *:nth-child(4){ animation: drop .4s 2.1s forwards; }
+  .chain > *:nth-child(5){ animation: drop .5s 2.4s forwards; }
+  .chain > *:nth-child(6){ animation: drop .4s 2.8s forwards; }
+  .chain > *:nth-child(7){ animation: drop .5s 3.1s forwards; }
+  .c1-note { margin-top:64px; font-size:40px; color:rgba(255,255,255,.60);
+             text-align:center; animation: rise .7s 4.0s forwards; }
+
+  /* ── CENA 2: estado + perguntas em paralelo ── */
+  .c2-kicker { font-family:'JetBrains Mono',monospace; font-size:34px; font-weight:700;
+               letter-spacing:.24em; color:var(--red); animation: rise .6s 6.3s forwards; }
+  .c2-title { font-family:'Figtree',sans-serif; font-size:76px; font-weight:800;
+              text-align:center; margin-top:28px; animation: rise .7s 6.7s forwards; }
+  .state { margin-top:56px; width:100%; background:#17171a; color:#fff; border-radius:22px;
+           padding:38px 40px; font-family:'JetBrains Mono',monospace; font-size:38px;
+           animation: rise .7s 7.3s forwards; }
+  .state b { color:#ff6b6b; font-weight:600; }
+  .fan { margin-top:26px; width:100%; display:flex; align-items:center; justify-content:center;
+         gap:14px; animation: rise .6s 8.2s forwards; }
+  .fan span { height:3px; flex:1; background:#c9c9cf; transform-origin:left; }
+  .qs { margin-top:26px; width:100%; display:flex; flex-direction:column; gap:20px; }
+  .q { display:flex; align-items:center; gap:22px; background:#fff; border:2px solid #e3e3e7;
+       border-radius:18px; padding:30px 32px; }
+  .q .lbl { font-family:'JetBrains Mono',monospace; font-size:34px; font-weight:600; flex:1; }
+  .q .ans { font-family:'Figtree',sans-serif; font-size:38px; font-weight:800; }
+  .q .prob { font-family:'JetBrains Mono',monospace; font-size:30px; color:#6d6d75; min-width:110px; text-align:right; }
+  .qs > *:nth-child(1){ animation: rise .55s 8.8s forwards; }
+  .qs > *:nth-child(2){ animation: rise .55s 9.3s forwards; }
+  .qs > *:nth-child(3){ animation: rise .55s 9.8s forwards; }
+  .c2-note { margin-top:52px; font-size:42px; text-align:center; font-weight:600;
+             animation: rise .7s 10.8s forwards; }
+  .c2-note u { text-decoration:none; color:var(--red); }
+  .c2-time { margin-top:20px; font-family:'JetBrains Mono',monospace; font-size:34px;
+             color:#6d6d75; animation: rise .6s 11.6s forwards; }
+
+  /* ── CENA 3: os três destinos ── */
+  .c3-title { font-family:'Figtree',sans-serif; font-size:84px; font-weight:800;
+              text-align:center; line-height:1.14; animation: rise .7s 14.3s forwards; }
+  .lanes { margin-top:80px; width:100%; display:flex; flex-direction:column; gap:36px; }
+  .lane b { font-family:'Figtree',sans-serif; font-size:50px; font-weight:800; }
+  .lane .track { margin-top:18px; height:22px; background:rgba(255,255,255,.10);
+                 border-radius:11px; overflow:hidden; }
+  .lane .track i { display:block; height:100%; width:0; border-radius:11px; }
+  .lanes > *:nth-child(1){ animation: rise .6s 14.9s forwards; }
+  .lanes > *:nth-child(2){ animation: rise .6s 15.6s forwards; }
+  .lanes > *:nth-child(3){ animation: rise .6s 16.3s forwards; }
+  @keyframes fill { from{width:0} to{width:var(--w)} }
+  .lane.ok    .track i { --w:86%; background:#8d8d95; animation: fill .8s 15.2s forwards; }
+  .lane.no    .track i { --w:9%;  background:var(--red); animation: fill .8s 15.9s forwards; }
+  .lane.human .track i { --w:22%; background:transparent; border:3px dashed var(--red);
+                         animation: fill .8s 16.6s forwards; }
+  .lane .tag { font-family:'JetBrains Mono',monospace; font-size:30px;
+               color:rgba(255,255,255,.55); margin-top:12px; display:block; }
+  .c3-punch { margin-top:76px; font-family:'Figtree',sans-serif; font-size:64px;
+              font-weight:800; text-align:center; line-height:1.2;
+              animation: rise .7s 17.4s forwards; }
+  .c3-punch u { text-decoration:none; color:var(--red); }
+  .credit { position:absolute; bottom:120px; left:0; right:0; text-align:center;
+            font-family:'JetBrains Mono',monospace; font-size:28px;
+            color:rgba(255,255,255,.55); animation: rise .8s 18.4s forwards; }
+
+  .progress { position:absolute; bottom:0; left:0; height:10px; background:var(--red);
+              width:0; animation: grow20 20s linear forwards; }
+  @keyframes grow20 { from{width:0} to{width:1080px} }
+</style>
+</head>
+<body>
+
+<!-- CENA 1 — a cadeia sequencial -->
+<section class="slide" id="c1">
+  <div class="kicker anim" style="animation: rise .6s .3s forwards">COMO COSTUMA FUNCIONAR</div>
+  <div class="c1-title anim" style="animation: rise .7s .6s forwards">Uma decis&atilde;o por vez,<br/>uma espera por vez</div>
+  <div class="chain">
+    <div class="node anim">agente</div>
+    <div class="arrow anim">&darr;</div>
+    <div class="node anim">prompt</div>
+    <div class="arrow anim">&darr;</div>
+    <div class="node anim">ferramenta</div>
+    <div class="arrow anim">&darr;</div>
+    <div class="node anim">sa&iacute;da</div>
+  </div>
+  <div class="c1-note anim">Cada passo espera o anterior. O custo cresce com a fila.</div>
+</section>
+
+<!-- CENA 2 — estado compartilhado, perguntas em paralelo -->
+<section class="slide" id="c2">
+  <div class="c2-kicker anim">A VIRADA</div>
+  <div class="c2-title anim">Um estado.<br/>V&aacute;rias perguntas. Uma passada.</div>
+
+  <div class="state anim">
+    estado: <b>lan&ccedil;amento #3.184</b><br/>
+    R$ 12.480,00 &middot; 14/09 &middot; TED &middot; sem doc.
+  </div>
+
+  <div class="fan anim"><span></span><span></span><span></span></div>
+
+  <div class="qs">
+    <div class="q anim"><span class="lbl">casa com o raz&atilde;o?</span><span class="ans">n&atilde;o</span><span class="prob">0.94</span></div>
+    <div class="q anim"><span class="lbl">tipo de diverg&ecirc;ncia</span><span class="ans">doc.</span><span class="prob">0.81</span></div>
+    <div class="q anim"><span class="lbl">precisa de auditor?</span><span class="ans">sim</span><span class="prob">0.88</span></div>
+  </div>
+
+  <div class="c2-note anim">Nenhuma resposta vira contexto da outra.<br/><u>Todas saem juntas.</u></div>
+  <div class="c2-time anim">resposta tipada &middot; confian&ccedil;a calibrada</div>
+</section>
+
+<!-- CENA 3 — os três destinos -->
+<section class="slide" id="c3">
+  <div class="c3-title anim">Tr&ecirc;s destinos,<br/>n&atilde;o dois</div>
+  <div class="lanes">
+    <div class="lane ok anim"><b>Casa</b><div class="track"><i></i></div><span class="tag">segue sem interven&ccedil;&atilde;o</span></div>
+    <div class="lane no anim"><b>N&atilde;o casa</b><div class="track"><i></i></div><span class="tag">diverg&ecirc;ncia apontada com evid&ecirc;ncia</span></div>
+    <div class="lane human anim"><b>Confian&ccedil;a insuficiente</b><div class="track"><i></i></div><span class="tag">vai para o auditor</span></div>
+  </div>
+  <div class="c3-punch anim">O sistema admite<br/><u>quando n&atilde;o sabe.</u></div>
+  <div class="credit anim">motor de decis&atilde;o: Jev &middot; decis&atilde;o tipada com confian&ccedil;a calibrada</div>
+</section>
+
+<div class="progress"></div>
+</body>
+</html>

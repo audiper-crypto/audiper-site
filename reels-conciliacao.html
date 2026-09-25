@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=1080, initial-scale=1.0"/>
+<title>AUD&Iacute;PER — Reels: onde a concilia&ccedil;&atilde;o trava</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root { --red:#c41a1a; --dark:#141416; --light:#f8f8f8; --red-glow:rgba(196,26,26,.30); }
+  body { width:1080px; height:1920px; overflow:hidden; background:var(--dark);
+         font-family:'Inter',system-ui,sans-serif; color:#fff; position:relative; }
+
+  .slide { position:absolute; inset:0; display:flex; flex-direction:column;
+           align-items:center; justify-content:center; padding:0 90px; opacity:0;
+           animation-fill-mode:forwards; animation-timing-function:cubic-bezier(.16,1,.3,1); }
+  @keyframes show {
+    0%{opacity:0;transform:scale(1.04)} 7%{opacity:1;transform:scale(1)}
+    92%{opacity:1;transform:scale(1)} 100%{opacity:0;transform:scale(.99)}
+  }
+  #k1 { animation: show 3.5s 0.0s  forwards; }
+  #k2 { animation: show 4.5s 3.5s  forwards; }
+  #k3 { animation: show 5.0s 8.0s  forwards; background:var(--light); color:#17171a; }
+  #k4 { animation: show 4.0s 13.0s forwards; }
+  #k5 { animation: show 3.0s 17.0s forwards; }
+
+  @keyframes rise { from{opacity:0;transform:translateY(36px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes pop  { from{opacity:0;transform:scale(1.3)}      to{opacity:1;transform:scale(1)} }
+  @keyframes fill { from{width:0} to{width:var(--w)} }
+  @keyframes scrollUp { from{transform:translateY(0)} to{transform:translateY(-545px)} }
+  .anim { opacity:0; animation-fill-mode:forwards; animation-timing-function:cubic-bezier(.16,1,.3,1); }
+
+  /* ── S1 — extrato ── */
+  .ledger { width:100%; height:980px; overflow:hidden; position:relative;
+            -webkit-mask-image:linear-gradient(180deg,transparent,#000 18%,#000 82%,transparent);
+                    mask-image:linear-gradient(180deg,transparent,#000 18%,#000 82%,transparent); }
+  .ledger-inner { animation: scrollUp 1.5s cubic-bezier(.22,1,.36,1) .15s forwards; }
+  .row { display:flex; justify-content:space-between; padding:24px 30px;
+         font-family:'JetBrains Mono',monospace; font-size:34px;
+         color:rgba(255,255,255,.34); border-bottom:1px solid rgba(255,255,255,.07); }
+  .row.hit { color:#fff; border:3px solid var(--red); border-radius:14px;
+             background:rgba(196,26,26,.10); }
+  .s1-tag { margin-top:46px; font-family:'JetBrains Mono',monospace; font-size:48px;
+            font-weight:700; color:var(--red); animation: pop .6s 2.1s forwards; }
+  .s1-line { margin-top:20px; font-family:'Figtree',sans-serif; font-size:72px;
+             font-weight:800; animation: rise .6s 2.4s forwards; }
+
+  /* ── S2 — a conta do tempo ── */
+  .effort { width:100%; display:flex; flex-direction:column; gap:60px; }
+  .effort .item b { font-family:'Figtree',sans-serif; font-size:56px; font-weight:800; }
+  .effort .item .track { margin-top:22px; height:26px; background:rgba(255,255,255,.10);
+                         border-radius:13px; overflow:hidden; }
+  .effort .item .track i { display:block; height:100%; width:0; border-radius:13px; background:var(--red); }
+  .effort .item:nth-child(1) { animation: rise .6s 3.8s forwards; }
+  .effort .item:nth-child(2) { animation: rise .6s 5.4s forwards; }
+  .effort .item:nth-child(1) .track i { --w:100%; background:#8d8d95; animation: fill .9s 4.2s forwards; }
+  .effort .item:nth-child(2) .track i { --w:18%;  animation: fill .9s 5.8s forwards; }
+  .effort .item span { display:block; margin-top:14px; font-family:'JetBrains Mono',monospace;
+                       font-size:30px; color:rgba(255,255,255,.55); }
+  .s2-punch { margin-top:86px; font-family:'Figtree',sans-serif; font-size:68px; font-weight:800;
+              text-align:center; line-height:1.2; animation: rise .7s 6.8s forwards; }
+  .s2-punch u { text-decoration:none; color:var(--red); }
+
+  /* ── S3 — três destinos ── */
+  .k3-kicker { font-family:'JetBrains Mono',monospace; font-size:34px; font-weight:700;
+               letter-spacing:.22em; color:var(--red); animation: rise .6s 8.4s forwards; }
+  .piles { margin-top:74px; width:100%; display:flex; flex-direction:column; gap:44px; }
+  .pile b { font-family:'Figtree',sans-serif; font-size:54px; font-weight:800; }
+  .pile .track { margin-top:18px; height:24px; background:rgba(0,0,0,.08);
+                 border-radius:12px; overflow:hidden; }
+  .pile .track i { display:block; height:100%; width:0; border-radius:12px; }
+  .pile span { display:block; margin-top:12px; font-family:'JetBrains Mono',monospace;
+               font-size:30px; color:#6d6d75; }
+  .piles > *:nth-child(1){ animation: rise .55s 8.8s forwards; }
+  .piles > *:nth-child(2){ animation: rise .55s 9.5s forwards; }
+  .piles > *:nth-child(3){ animation: rise .55s 10.2s forwards; }
+  .pile.a .track i { --w:88%; background:#8d8d95; animation: fill .8s 9.1s forwards; }
+  .pile.b .track i { --w:10%; background:var(--red); animation: fill .8s 9.8s forwards; }
+  .pile.c .track i { --w:24%; background:transparent; border:3px dashed var(--red);
+                     animation: fill .8s 10.5s forwards; }
+  .k3-punch { margin-top:72px; font-family:'Figtree',sans-serif; font-size:64px; font-weight:800;
+              text-align:center; line-height:1.2; animation: rise .7s 11.2s forwards; }
+  .k3-punch u { text-decoration:none; color:var(--red); }
+
+  /* ── S4 — a assinatura ── */
+  .seal { width:190px; height:190px; border-radius:50%; border:6px solid var(--red);
+          display:flex; align-items:center; justify-content:center;
+          font-family:'JetBrains Mono',monospace; font-size:40px; font-weight:700;
+          color:var(--red); animation: pop .6s 13.2s forwards; }
+  .k4-title { margin-top:52px; font-family:'Figtree',sans-serif; font-size:82px; font-weight:800;
+              text-align:center; line-height:1.16; animation: rise .7s 13.5s forwards; }
+  .k4-sub { margin-top:34px; font-family:'JetBrains Mono',monospace; font-size:38px;
+            color:rgba(255,255,255,.70); text-align:center; letter-spacing:.04em;
+            animation: rise .7s 14.6s forwards; }
+  .k4-credit { position:absolute; bottom:130px; left:0; right:0; text-align:center;
+               font-family:'JetBrains Mono',monospace; font-size:28px;
+               color:rgba(255,255,255,.55); animation: rise .8s 15.8s forwards; }
+
+  /* ── S5 — CTA ── */
+  .glow { position:absolute; top:50%; left:50%; width:900px; height:900px;
+          transform:translate(-50%,-50%);
+          background:radial-gradient(circle,var(--red-glow) 0%,transparent 62%); }
+  .radar { width:200px; height:200px; border-radius:50%; background:var(--red);
+           display:flex; align-items:center; justify-content:center;
+           font-family:'JetBrains Mono',monospace; font-size:66px; font-weight:700;
+           animation: pop .6s 17.2s forwards; }
+  .cta-title { font-family:'Figtree',sans-serif; font-size:76px; font-weight:800;
+               margin-top:46px; text-align:center; animation: rise .6s 17.5s forwards; }
+  .cta-url { font-family:'JetBrains Mono',monospace; font-size:44px; font-weight:600;
+             color:var(--red); margin-top:28px; animation: rise .6s 17.9s forwards; }
+  .cta-tag { font-size:34px; color:rgba(255,255,255,.62); margin-top:30px; text-align:center;
+             line-height:1.45; animation: rise .6s 18.4s forwards; }
+
+  .progress { position:absolute; bottom:0; left:0; height:10px; background:var(--red);
+              width:0; animation: grow20 20s linear forwards; }
+  @keyframes grow20 { from{width:0} to{width:1080px} }
+</style>
+</head>
+<body>
+
+<!-- S1 — o extrato -->
+<section class="slide" id="k1">
+  <div class="ledger">
+    <div class="ledger-inner">
+      <div class="row"><span>01/09 &middot; PIX</span><span>980,00</span></div>
+      <div class="row"><span>02/09 &middot; BOLETO</span><span>2.310,75</span></div>
+      <div class="row"><span>02/09 &middot; TAR</span><span>42,00</span></div>
+      <div class="row"><span>03/09 &middot; TED</span><span>15.720,00</span></div>
+      <div class="row"><span>03/09 &middot; PIX</span><span>1.240,00</span></div>
+      <div class="row"><span>05/09 &middot; TED</span><span>8.900,00</span></div>
+      <div class="row"><span>07/09 &middot; BOLETO</span><span>432,10</span></div>
+      <div class="row"><span>09/09 &middot; PIX</span><span>2.755,00</span></div>
+      <div class="row"><span>11/09 &middot; TAR</span><span>89,90</span></div>
+      <div class="row"><span>12/09 &middot; PIX</span><span>640,00</span></div>
+      <div class="row hit"><span>14/09 &middot; TED</span><span>12.480,00</span></div>
+      <div class="row"><span>16/09 &middot; BOLETO</span><span>1.018,44</span></div>
+      <div class="row"><span>18/09 &middot; PIX</span><span>377,20</span></div>
+      <div class="row"><span>20/09 &middot; TED</span><span>5.300,00</span></div>
+    </div>
+  </div>
+  <div class="s1-tag anim">1 de 4.000</div>
+  <div class="s1-line anim">Uma linha n&atilde;o fecha.</div>
+</section>
+
+<!-- S2 — a conta do tempo -->
+<section class="slide" id="k2">
+  <div class="effort">
+    <div class="item anim">
+      <b>Confer&ecirc;ncia linha a linha</b>
+      <div class="track"><i></i></div>
+      <span>trabalho mec&acirc;nico</span>
+    </div>
+    <div class="item anim">
+      <b>An&aacute;lise do que sobrou</b>
+      <div class="track"><i></i></div>
+      <span>trabalho de auditor</span>
+    </div>
+  </div>
+  <div class="s2-punch anim">O gargalo n&atilde;o &eacute; o julgamento.<br/><u>&Eacute; a triagem.</u></div>
+</section>
+
+<!-- S3 — três destinos -->
+<section class="slide" id="k3">
+  <div class="k3-kicker anim">O QUE A TRIAGEM SEPARA</div>
+  <div class="piles">
+    <div class="pile a anim"><b>Casa</b><div class="track"><i></i></div><span>segue sem interven&ccedil;&atilde;o</span></div>
+    <div class="pile b anim"><b>N&atilde;o casa</b><div class="track"><i></i></div><span>diverg&ecirc;ncia com evid&ecirc;ncia</span></div>
+    <div class="pile c anim"><b>Confian&ccedil;a insuficiente</b><div class="track"><i></i></div><span>vai para o auditor</span></div>
+  </div>
+  <div class="k3-punch anim">Tr&ecirc;s destinos,<br/><u>n&atilde;o dois.</u></div>
+</section>
+
+<!-- S4 — a assinatura -->
+<section class="slide" id="k4">
+  <div class="seal anim">CRC</div>
+  <div class="k4-title anim">O parecer<br/>n&atilde;o &eacute; da m&aacute;quina.</div>
+  <div class="k4-sub anim">NBC TA &middot; responsabilidade nominal</div>
+  <div class="k4-credit anim">triagem: Jev &middot; decis&atilde;o tipada com confian&ccedil;a calibrada</div>
+</section>
+
+<!-- S5 — CTA -->
+<section class="slide" id="k5">
+  <div class="glow"></div>
+  <div class="radar anim">&lt;/&gt;</div>
+  <div class="cta-title anim">Concilia&ccedil;&atilde;o que<br/>chega ao parecer</div>
+  <div class="cta-url anim">audiper.com/auditorias</div>
+  <div class="cta-tag anim">Auditoria Preventiva.<br/>Risco Mapeado, Risco Controlado.</div>
+</section>
+
+<div class="progress"></div>
+</body>
+</html>
