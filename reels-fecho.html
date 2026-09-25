@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=1080, initial-scale=1.0"/>
+<title>AUD&Iacute;PER — Reels: fecho</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root { --red:#c41a1a; --dark:#141416; --red-glow:rgba(196,26,26,.30); }
+  body { width:1080px; height:1920px; overflow:hidden; background:var(--dark);
+         font-family:'Inter',system-ui,sans-serif; color:#fff; position:relative;
+         display:flex; flex-direction:column; align-items:center; justify-content:center;
+         padding:0 90px; }
+
+  @keyframes rise { from{opacity:0;transform:translateY(34px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes pop  { from{opacity:0;transform:scale(1.3)}      to{opacity:1;transform:scale(1)} }
+  @keyframes fadeOut { to { opacity:0; transform:scale(.99); } }
+  .anim { opacity:0; animation-fill-mode:forwards; animation-timing-function:cubic-bezier(.16,1,.3,1); }
+
+  .glow { position:absolute; top:50%; left:50%; width:1000px; height:1000px;
+          transform:translate(-50%,-50%);
+          background:radial-gradient(circle,var(--red-glow) 0%,transparent 62%); }
+
+  /* recapitulação das três cenas */
+  .recap { width:100%; display:flex; flex-direction:column; gap:22px; }
+  .step { display:flex; align-items:center; gap:26px; background:rgba(255,255,255,.05);
+          border-left:8px solid var(--red); border-radius:18px; padding:32px 34px; }
+  .step .n { font-family:'JetBrains Mono',monospace; font-size:32px; color:var(--red);
+             font-weight:700; min-width:48px; }
+  .step .t { font-family:'Figtree',sans-serif; font-size:46px; font-weight:700; }
+  .recap > *:nth-child(1){ animation: rise .55s .25s forwards; }
+  .recap > *:nth-child(2){ animation: rise .55s .75s forwards; }
+  .recap > *:nth-child(3){ animation: rise .55s 1.25s forwards; }
+
+  .punch { margin-top:76px; font-family:'Figtree',sans-serif; font-size:74px; font-weight:800;
+           text-align:center; line-height:1.18; animation: rise .7s 2.0s forwards; }
+  .punch u { text-decoration:none; color:var(--red); }
+
+  .radar { margin-top:78px; width:190px; height:190px; border-radius:50%; background:var(--red);
+           display:flex; align-items:center; justify-content:center;
+           font-family:'JetBrains Mono',monospace; font-size:62px; font-weight:700;
+           animation: pop .6s 3.0s forwards; }
+  .url { margin-top:36px; font-family:'JetBrains Mono',monospace; font-size:44px;
+         font-weight:600; color:var(--red); animation: rise .6s 3.4s forwards; }
+  .tag { margin-top:28px; font-size:34px; color:rgba(255,255,255,.62); text-align:center;
+         line-height:1.45; animation: rise .6s 3.8s forwards; }
+
+  .wrap { width:100%; display:flex; flex-direction:column; align-items:center;
+          animation: fadeOut .5s 6.5s forwards; }
+</style>
+</head>
+<body>
+<div class="glow"></div>
+<div class="wrap">
+
+  <div class="recap">
+    <div class="step anim"><span class="n">01</span><span class="t">Um estado, perguntas tipadas</span></div>
+    <div class="step anim"><span class="n">02</span><span class="t">Triagem isola a exce&ccedil;&atilde;o</span></div>
+    <div class="step anim"><span class="n">03</span><span class="t">Auditor conclui e assina</span></div>
+  </div>
+
+  <div class="punch anim">A m&aacute;quina separa.<br/><u>O auditor assina.</u></div>
+
+  <div class="radar anim">&lt;/&gt;</div>
+  <div class="url anim">audiper.com</div>
+  <div class="tag anim">Auditoria Preventiva.<br/>Risco Mapeado, Risco Controlado.</div>
+
+</div>
+</body>
+</html>
