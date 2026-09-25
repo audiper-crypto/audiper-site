@@ -35,17 +35,12 @@ citadas na página do site.
 
 ## COMO GRAVAR
 
-Este reel não tem animação HTML pronta (diferente do "Nosso Novo Site", que usa
-`reels-animacao.html`). Dois caminhos:
+A animação já existe: `reels-simples-setembro.html`, neste repositório, e o vídeo de
+20s já foi gerado a partir dela (1080x1920, H.264). Para regravar noutro dia, abra o
+HTML e capture — a contagem regressiva se ajusta sozinha pela data da máquina.
 
-**Opção A — CapCut ou Canva, formato 9:16 (1080x1920)**
-Slides estáticos com as transições descritas abaixo. É o caminho mais rápido: o
-roteiro foi escrito para funcionar sem movimento complexo.
-
-**Opção B — animação HTML**
-Se preferir o mesmo padrão visual do reel institucional, dá para construir um
-`reels-simples-setembro.html` nos moldes do existente e gravar com OBS a
-1080x1920. Custa mais tempo e entrega acabamento superior.
+Se preferir refazer fora do HTML, o storyboard abaixo funciona em CapCut ou Canva no
+formato 9:16 (1080x1920); nesse caminho o número da contagem é manual.
 
 ---
 
