@@ -5,9 +5,12 @@
 **Destino do CTA:** audiper.com/simples-nacional-setembro
 **Validade:** o reel perde função em 01/10/2026. Publicar entre 25 e 29/09.
 
-> **Ajuste obrigatório antes de publicar:** o número do Slide 1 é uma contagem
-> regressiva. Em 25/09 são 5 dias; em 26/09 são 4; e assim por diante. Confira o
-> número no dia da publicação. Se publicar em 30/09, troque por "Hoje".
+> **Contagem regressiva:** o número do Slide 1 muda a cada dia. Em 25/09 são 5 dias;
+> em 26/09 são 4; e assim por diante.
+>
+> Em `reels-simples-setembro.html` o número se calcula sozinho a partir da data da
+> máquina — basta regravar no dia. Se produzir por CapCut ou Canva, o ajuste é manual
+> e obrigatório: confira antes de publicar. Em 30/09 o número vira "Hoje".
 
 ---
 

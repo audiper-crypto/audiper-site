@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=1080, initial-scale=1.0"/>
+<title>AUD&Iacute;PER — Reels: A decis&atilde;o de setembro</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --red: #c41a1a;
+    --dark: #141416;
+    --light: #f8f8f8;
+    --red-glow: rgba(196, 26, 26, 0.30);
+  }
+
+  body {
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    background: var(--dark);
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #fff;
+    position: relative;
+  }
+
+  .slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 1080px;
+    height: 1920px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 90px;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* cada slide: entra, segura, sai */
+  @keyframes show {
+    0%   { opacity: 0; transform: scale(1.04); }
+    6%   { opacity: 1; transform: scale(1); }
+    92%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.99); }
+  }
+
+  #s1 { animation: show 3.0s 0.0s  forwards; }
+  #s2 { animation: show 5.0s 3.0s  forwards; }
+  #s3 { animation: show 6.0s 8.0s  forwards; background: var(--light); color: #17171a; }
+  #s4 { animation: show 3.5s 14.0s forwards; }
+  #s5 { animation: show 2.5s 17.5s forwards; }
+
+  /* ─── elementos ─── */
+  @keyframes pop {
+    0%   { opacity: 0; transform: scale(1.6); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes rise {
+    0%   { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes grow {
+    0%   { transform: scaleX(0); }
+    100% { transform: scaleX(1); }
+  }
+  @keyframes drawArrow {
+    0%   { width: 0; }
+    100% { width: var(--w); }
+  }
+  @keyframes fillBar {
+    0%   { width: 0; }
+    100% { width: var(--w); }
+  }
+
+  .anim { opacity: 0; animation-fill-mode: forwards; animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); }
+
+  /* ─── partículas ─── */
+  .particles { position: absolute; inset: 0; overflow: hidden; }
+  .particle {
+    position: absolute;
+    width: 6px; height: 6px;
+    background: var(--red);
+    border-radius: 50%;
+    opacity: 0.35;
+    animation: float 9s infinite ease-in-out;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0); opacity: 0.20; }
+    50%      { transform: translateY(-70px) translateX(24px); opacity: 0.55; }
+  }
+  .particle:nth-child(1) { top: 14%; left: 12%; animation-delay: 0s; }
+  .particle:nth-child(2) { top: 26%; left: 78%; animation-delay: 1.1s; }
+  .particle:nth-child(3) { top: 48%; left: 22%; animation-delay: 2.3s; }
+  .particle:nth-child(4) { top: 63%; left: 68%; animation-delay: 0.7s; }
+  .particle:nth-child(5) { top: 77%; left: 36%; animation-delay: 3.1s; }
+  .particle:nth-child(6) { top: 88%; left: 82%; animation-delay: 1.8s; }
+  .particle:nth-child(7) { top: 35%; left: 52%; animation-delay: 2.7s; }
+  .particle:nth-child(8) { top: 8%;  left: 60%; animation-delay: 4.0s; }
+
+  /* ─── SLIDE 1 — contagem ─── */
+  .count {
+    font-family: 'Figtree', sans-serif;
+    font-size: 620px;
+    font-weight: 900;
+    line-height: 0.85;
+    color: var(--red);
+    text-shadow: 0 0 120px var(--red-glow);
+    animation: pop 0.8s 0.1s forwards;
+  }
+  .count-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 72px;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    margin-top: 28px;
+    animation: rise 0.7s 0.85s forwards;
+  }
+  .rule {
+    width: 320px; height: 6px;
+    background: var(--red);
+    margin-top: 52px;
+    transform-origin: left center;
+    opacity: 1;
+    animation: grow 0.8s 1.6s backwards;
+  }
+
+  /* ─── SLIDE 2 — a decisão ─── */
+  .date-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 58px;
+    font-weight: 700;
+    color: var(--red);
+    letter-spacing: 0.12em;
+    animation: rise 0.7s 3.2s forwards;
+  }
+  .s2-title {
+    font-family: 'Figtree', sans-serif;
+    font-size: 96px;
+    font-weight: 800;
+    line-height: 1.12;
+    text-align: center;
+    margin-top: 40px;
+    animation: rise 0.8s 4.0s forwards;
+  }
+  .cards { display: flex; gap: 34px; margin-top: 76px; width: 100%; }
+  .card {
+    flex: 1;
+    background: rgba(255,255,255,0.05);
+    border: 2px solid rgba(255,255,255,0.12);
+    border-radius: 28px;
+    padding: 52px 40px;
+    text-align: center;
+  }
+  .card:nth-child(1) { animation: rise 0.7s 4.8s forwards; }
+  .card:nth-child(2) { animation: rise 0.7s 5.3s forwards; }
+  .card b { display: block; font-family: 'Figtree', sans-serif; font-size: 62px; font-weight: 800; }
+  .card span { display: block; margin-top: 18px; font-size: 38px; color: rgba(255,255,255,0.66); line-height: 1.35; }
+  .legal {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 30px;
+    color: rgba(255,255,255,0.40);
+    margin-top: 70px;
+    letter-spacing: 0.06em;
+    animation: rise 0.6s 6.5s forwards;
+  }
+
+  /* ─── SLIDE 3 — o crédito ─── */
+  .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--red);
+    letter-spacing: 0.24em;
+    animation: rise 0.6s 8.3s forwards;
+  }
+  .flow { width: 100%; margin-top: 80px; }
+  .flow-row { margin-bottom: 76px; }
+  .flow-row:nth-child(1) { animation: rise 0.7s 8.8s forwards; }
+  .flow-row:nth-child(2) { animation: rise 0.7s 10.5s forwards; }
+  .flow-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: 'Figtree', sans-serif; font-size: 46px; font-weight: 700;
+  }
+  .flow-head em { font-style: normal; font-size: 36px; font-weight: 600; }
+  .track { position: relative; height: 18px; margin-top: 26px; background: rgba(0,0,0,0.07); border-radius: 9px; overflow: hidden; }
+  .fill { position: absolute; inset: 0 auto 0 0; height: 100%; border-radius: 9px; }
+  .fill.partial {
+    --w: 42%;
+    background: #8d8d95;
+    width: 42%;
+    animation: drawArrow 1.1s 9.1s backwards;
+  }
+  .fill.full {
+    --w: 100%;
+    background: var(--red);
+    width: 100%;
+    animation: drawArrow 1.1s 10.8s backwards;
+  }
+  .s3-punch {
+    font-family: 'Figtree', sans-serif;
+    font-size: 78px; font-weight: 800; line-height: 1.16;
+    text-align: center; margin-top: 30px;
+    animation: rise 0.8s 12.0s forwards;
+  }
+  .s3-punch u { text-decoration: none; color: var(--red); }
+
+  /* ─── SLIDE 4 — quem faz a conta ─── */
+  .blocks { width: 100%; display: flex; flex-direction: column; gap: 46px; }
+  .block {
+    background: rgba(255,255,255,0.05);
+    border-left: 10px solid var(--red);
+    border-radius: 22px;
+    padding: 50px 46px;
+  }
+  .block:nth-child(1) { animation: rise 0.7s 14.2s forwards; }
+  .block:nth-child(2) { animation: rise 0.7s 15.8s forwards; border-left-color: rgba(255,255,255,0.35); }
+  .block b { font-family: 'Figtree', sans-serif; font-size: 62px; font-weight: 800; }
+  .block p { font-size: 36px; color: rgba(255,255,255,0.62); margin-top: 14px; }
+  .meter { display: flex; align-items: center; gap: 22px; margin-top: 30px; }
+  .meter .emoji { font-size: 48px; }
+  .meter .bar { flex: 1; height: 20px; background: rgba(255,255,255,0.10); border-radius: 10px; overflow: hidden; }
+  .meter .bar i { display: block; height: 100%; border-radius: 10px; background: var(--red); width: 0; }
+  .block:nth-child(1) .bar i { --w: 100%; animation: fillBar 0.9s 14.8s forwards; }
+  .block:nth-child(2) .bar i { --w: 42%; background: rgba(255,255,255,0.45); animation: fillBar 0.9s 16.4s forwards; }
+  .meter .tag { font-family: 'JetBrains Mono', monospace; font-size: 32px; color: rgba(255,255,255,0.78); }
+
+  /* ─── SLIDE 5 — CTA ─── */
+  .glow {
+    position: absolute; top: 50%; left: 50%;
+    width: 900px; height: 900px; transform: translate(-50%, -50%);
+    background: radial-gradient(circle, var(--red-glow) 0%, transparent 62%);
+  }
+  .radar {
+    width: 210px; height: 210px; border-radius: 50%;
+    background: var(--red);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 70px; font-weight: 700;
+    animation: pop 0.7s 17.6s forwards;
+  }
+  .cta-title {
+    font-family: 'Figtree', sans-serif; font-size: 86px; font-weight: 800;
+    margin-top: 48px; animation: rise 0.7s 17.9s forwards;
+  }
+  .cta-url {
+    font-family: 'JetBrains Mono', monospace; font-size: 44px; font-weight: 600;
+    color: var(--red); margin-top: 30px; animation: rise 0.7s 18.3s forwards;
+  }
+  .cta-tag {
+    font-size: 36px; color: rgba(255,255,255,0.62); margin-top: 34px;
+    text-align: center; line-height: 1.45; animation: rise 0.7s 18.8s forwards;
+  }
+
+  /* ─── barra de progresso global ─── */
+  .progress {
+    position: absolute; bottom: 0; left: 0; height: 10px;
+    background: var(--red); width: 0;
+    animation: grow20 20s linear forwards;
+    transform-origin: left center;
+  }
+  @keyframes grow20 { from { width: 0; } to { width: 1080px; } }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1 — contagem -->
+<section class="slide" id="s1">
+  <div class="particles">
+    <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+  </div>
+  <div class="count anim" id="countdown">5</div>
+  <div class="count-label anim">DIAS</div>
+  <div class="rule"></div>
+</section>
+
+<!-- SLIDE 2 — a decisão -->
+<section class="slide" id="s2">
+  <div class="date-tag anim">30 DE SETEMBRO</div>
+  <div class="s2-title anim">Empresa do Simples<br/>escolhe como recolher<br/>IBS e CBS</div>
+  <div class="cards">
+    <div class="card anim"><b>Dentro do DAS</b><span>a guia unificada de sempre</span></div>
+    <div class="card anim"><b>Por fora</b><span>regime h&iacute;brido</span></div>
+  </div>
+  <div class="legal anim">LC 214/2025 &middot; LC 227/2026 &middot; Decreto 12.955/2026</div>
+</section>
+
+<!-- SLIDE 3 — o crédito -->
+<section class="slide" id="s3">
+  <div class="kicker anim">O QUE EST&Aacute; EM JOGO</div>
+  <div class="flow">
+    <div class="flow-row anim">
+      <div class="flow-head"><span>Dentro do DAS</span><em>cr&eacute;dito parcial ao cliente</em></div>
+      <div class="track"><div class="fill partial"></div></div>
+    </div>
+    <div class="flow-row anim">
+      <div class="flow-head"><span>Regime h&iacute;brido</span><em>cr&eacute;dito integral ao cliente</em></div>
+      <div class="track"><div class="fill full"></div></div>
+    </div>
+  </div>
+  <div class="s3-punch anim">Mesmo pre&ccedil;o.<br/><u>Conta final diferente.</u></div>
+</section>
+
+<!-- SLIDE 4 — quem faz a conta -->
+<section class="slide" id="s4">
+  <div class="blocks">
+    <div class="block anim">
+      <b>Vende para empresas</b>
+      <p>ind&uacute;stria, distribuidor, ag&ecirc;ncia, software house</p>
+      <div class="meter"><span class="emoji">&#128681;</span><span class="bar"><i></i></span><span class="tag">avaliar o h&iacute;brido</span></div>
+    </div>
+    <div class="block anim">
+      <b>Vende para o consumidor final</b>
+      <p>com&eacute;rcio de bairro, servi&ccedil;o a pessoa f&iacute;sica, MEI</p>
+      <div class="meter"><span class="emoji">&#128176;</span><span class="bar"><i></i></span><span class="tag">em geral, manter o DAS</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 5 — CTA -->
+<section class="slide" id="s5">
+  <div class="glow"></div>
+  <div class="radar anim">&lt;/&gt;</div>
+  <div class="cta-title anim">Simule os dois cen&aacute;rios</div>
+  <div class="cta-url anim">audiper.com/simples-nacional-setembro</div>
+  <div class="cta-tag anim">Auditoria Preventiva.<br/>Risco Mapeado, Risco Controlado.</div>
+</section>
+
+<div class="progress"></div>
+
+<script>
+  // A contagem do slide 1 e a data do slide 2 se ajustam sozinhas ate 30/09/2026.
+  // Depois do prazo, o reel perde funcao — por isso o fallback mostra "HOJE".
+  (function () {
+    var prazo = new Date(2026, 8, 30); // 30/09/2026
+    var hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+    var dias = Math.round((prazo - hoje) / 86400000);
+    var el = document.getElementById('countdown');
+    if (dias > 0 && dias < 100) { el.textContent = String(dias); }
+    else if (dias === 0) {
+      el.textContent = 'HOJE';
+      el.style.fontSize = '300px';
+      document.querySelector('.count-label').style.display = 'none';
+    }
+  })();
+</script>
+
+</body>
+</html>
