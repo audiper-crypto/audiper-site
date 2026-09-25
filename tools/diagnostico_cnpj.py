@@ -739,6 +739,14 @@ def gerar_mensagem_telegram(diag: dict) -> str:
     return "\n".join(lines)
 
 
+def _mes_extenso(dt) -> str:
+    """Mes por extenso em portugues. strftime('%B') depende do locale do sistema,
+    que no Windows e no container de build sai em ingles."""
+    meses = ["janeiro", "fevereiro", "marco", "abril", "maio", "junho",
+             "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"]
+    return f"{meses[dt.month - 1].capitalize()} de {dt.year}"
+
+
 def _html_escape(text: str) -> str:
     """Escape HTML special chars for Telegram."""
     return str(text).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
@@ -923,7 +931,7 @@ def gerar_proposta_html(diag: dict) -> str:
             <div class="text-center pb-4">
                 <div class="divider-gold w-32 mx-auto mb-4"></div>
                 <p class="text-sm text-gray-600 font-serif">Teresina &mdash; Piaui</p>
-                <p class="text-sm text-gray-500 font-serif">{datetime.now().strftime("%B de %Y").title()}</p>
+                <p class="text-sm text-gray-500 font-serif">{_mes_extenso(datetime.now())}</p>
             </div>
         </div>
         <div class="gradient-bar"></div>
