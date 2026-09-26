@@ -1,0 +1,36 @@
+{
+  "_leia_primeiro": "Este e o unico lugar onde a escolha de modelo e feita. Os agentes em agents/sectors/*.json declaram um model_tier (papel), nunca um modelo. Trocar de geracao e editar este arquivo; nenhum outro.",
+  "atualizado_em": "2026-09-26",
+  "tiers": {
+    "orquestrador": {
+      "modelo": "claude-opus-5",
+      "quem": "Coordena fases, roteia trabalho, decide o que vai para quem.",
+      "por_que": "A decisao de roteamento define o custo de tudo que vem depois. Errar aqui e caro mesmo com trabalhador barato."
+    },
+    "julgamento": {
+      "modelo": "claude-opus-5",
+      "quem": "Aceitacao e continuidade, planejamento e risco, avaliacao de evidencia, going concern, achados NBC TA 265, EQCR, parecer e conformidade final.",
+      "por_que": "E o que o cliente compra e o que leva assinatura com CRC. O erro de julgamento aqui nao aparece na revisao: aparece depois do parecer emitido. Economia neste nivel nao se paga."
+    },
+    "execucao": {
+      "modelo": "claude-sonnet-5",
+      "quem": "Execucao de procedimentos, documentacao, validacao de consistencia, exportacao de dossie, SGQ, assistente de normas, copiloto em tempo real.",
+      "por_que": "Volume com criterio estreito: ler, conferir, organizar, extrair. O auditor decide depois. E aqui que a troca de modelo se paga."
+    }
+  },
+  "degrau_abaixo": {
+    "modelo": "claude-haiku-4-5",
+    "quando": "So depois de medir. Cabe na leitura mais estreita (varredura, extracao de campo, conferencia de formato), nao em tarefa que exija criterio. Mover um agente de execucao para ca e decisao medida, nunca padrao.",
+    "observacao": "No material de referencia que motivou esta mudanca, dez dos onze subagentes rodavam no modelo intermediario e apenas um no mais barato. A fala vendia o mais barato; a configuracao usava o do meio."
+  },
+  "precos_por_milhao_de_tokens": {
+    "_fonte": "tabela da referencia oficial da API, cache de 2026-06-24 — reconferir antes de usar em orcamento",
+    "claude-opus-5": { "entrada": 5.0, "saida": 25.0 },
+    "claude-sonnet-5": { "entrada": 2.0, "saida": 10.0 },
+    "claude-haiku-4-5": { "entrada": 1.0, "saida": 5.0 }
+  },
+  "antes_de_montar_cascata": [
+    "Medir o modelo capaz com esforco menor nas mesmas tarefas. Cache e por modelo: uma cascata perde reuso de cache entre os modelos dela, e esse custo as vezes come a economia.",
+    "Julgar custo por tarefa concluida, nao por requisicao. Trabalhador barato que precisa de tres rodadas para acertar nao saiu barato."
+  ]
+}

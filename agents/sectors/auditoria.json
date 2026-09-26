@@ -7,7 +7,16 @@
       "id": "audiz-transversal",
       "name": "Audiz Transversal",
       "role": "Agente central que coordena todas as fases do processo de auditoria no sistema Audiz",
-      "skills": ["NBC TA", "PTA", "Python", "FastAPI", "SQLAlchemy", "Claude tool_use", "Auditoria"],
+      "model_tier": "orquestrador",
+      "skills": [
+        "NBC TA",
+        "PTA",
+        "Python",
+        "FastAPI",
+        "SQLAlchemy",
+        "Claude tool_use",
+        "Auditoria"
+      ],
       "workflows": [
         {
           "trigger": "inicio_auditoria",
@@ -23,12 +32,28 @@
         },
         {
           "trigger": "consulta_status_auditoria",
-          "steps": ["buscar_auditoria_db", "verificar_fases_concluidas", "calcular_percentual", "retornar_resumo"],
+          "steps": [
+            "buscar_auditoria_db",
+            "verificar_fases_concluidas",
+            "calcular_percentual",
+            "retornar_resumo"
+          ],
           "output": "Relatório de status com percentual de conclusão por fase"
         }
       ],
-      "capabilities": ["audit-coordination", "workflow-orchestration", "phase-management", "nbc-ta-compliance"],
-      "memory_tags": ["auditoria", "audiz", "nbc-ta", "coordenacao", "fases"],
+      "capabilities": [
+        "audit-coordination",
+        "workflow-orchestration",
+        "phase-management",
+        "nbc-ta-compliance"
+      ],
+      "memory_tags": [
+        "auditoria",
+        "audiz",
+        "nbc-ta",
+        "coordenacao",
+        "fases"
+      ],
       "status": "active",
       "task_count": 0,
       "performance_score": 96
@@ -37,7 +62,15 @@
       "id": "fase-a-aceitacao",
       "name": "Fase A - Aceitação",
       "role": "Procedimentos de aceitação e continuidade do cliente — NBC TA 220",
-      "skills": ["NBC TA 220", "KYC", "Due Diligence", "PTA-A", "Ética", "Independência"],
+      "model_tier": "julgamento",
+      "skills": [
+        "NBC TA 220",
+        "KYC",
+        "Due Diligence",
+        "PTA-A",
+        "Ética",
+        "Independência"
+      ],
       "workflows": [
         {
           "trigger": "novo_cliente_aceitacao",
@@ -62,8 +95,19 @@
           "output": "PTA de continuidade assinado"
         }
       ],
-      "capabilities": ["client-acceptance", "independence-check", "due-diligence", "nbc-ta-220"],
-      "memory_tags": ["aceitacao", "nbc-ta-220", "cliente", "independencia", "pta-a"],
+      "capabilities": [
+        "client-acceptance",
+        "independence-check",
+        "due-diligence",
+        "nbc-ta-220"
+      ],
+      "memory_tags": [
+        "aceitacao",
+        "nbc-ta-220",
+        "cliente",
+        "independencia",
+        "pta-a"
+      ],
       "status": "active",
       "task_count": 0,
       "performance_score": 94
@@ -72,7 +116,15 @@
       "id": "fase-b-planejamento",
       "name": "Fase B - Planejamento",
       "role": "Planejamento da auditoria, avaliação de riscos e materialidade — NBC TA 300, 315, 320",
-      "skills": ["NBC TA 300", "NBC TA 315", "NBC TA 320", "Materialidade", "Avaliação de Risco", "PTA-B"],
+      "model_tier": "julgamento",
+      "skills": [
+        "NBC TA 300",
+        "NBC TA 315",
+        "NBC TA 320",
+        "Materialidade",
+        "Avaliação de Risco",
+        "PTA-B"
+      ],
       "workflows": [
         {
           "trigger": "iniciar_planejamento",
@@ -89,12 +141,29 @@
         },
         {
           "trigger": "atualizar_planejamento",
-          "steps": ["identificar_mudancas", "revisar_riscos", "atualizar_pta_b", "comunicar_equipe"],
+          "steps": [
+            "identificar_mudancas",
+            "revisar_riscos",
+            "atualizar_pta_b",
+            "comunicar_equipe"
+          ],
           "output": "Plano de auditoria revisado"
         }
       ],
-      "capabilities": ["audit-planning", "risk-assessment", "materiality-calculation", "nbc-ta-300", "nbc-ta-315"],
-      "memory_tags": ["planejamento", "materialidade", "risco", "nbc-ta-300", "nbc-ta-315"],
+      "capabilities": [
+        "audit-planning",
+        "risk-assessment",
+        "materiality-calculation",
+        "nbc-ta-300",
+        "nbc-ta-315"
+      ],
+      "memory_tags": [
+        "planejamento",
+        "materialidade",
+        "risco",
+        "nbc-ta-300",
+        "nbc-ta-315"
+      ],
       "status": "active",
       "task_count": 0,
       "performance_score": 95
@@ -103,7 +172,16 @@
       "id": "fase-cd-execucao",
       "name": "Fase C/D - Execução",
       "role": "Execução dos procedimentos de auditoria — testes de controles e procedimentos substantivos",
-      "skills": ["NBC TA 330", "NBC TA 500", "Testes de Controles", "Procedimentos Substantivos", "Amostragem", "PTA-C", "PTA-D"],
+      "model_tier": "execucao",
+      "skills": [
+        "NBC TA 330",
+        "NBC TA 500",
+        "Testes de Controles",
+        "Procedimentos Substantivos",
+        "Amostragem",
+        "PTA-C",
+        "PTA-D"
+      ],
       "workflows": [
         {
           "trigger": "executar_testes_controle",
@@ -128,8 +206,19 @@
           "output": "PTA-D com procedimentos substantivos documentados"
         }
       ],
-      "capabilities": ["control-testing", "substantive-procedures", "sampling", "evidence-gathering"],
-      "memory_tags": ["execucao", "testes", "controles", "substantivo", "nbc-ta-330"],
+      "capabilities": [
+        "control-testing",
+        "substantive-procedures",
+        "sampling",
+        "evidence-gathering"
+      ],
+      "memory_tags": [
+        "execucao",
+        "testes",
+        "controles",
+        "substantivo",
+        "nbc-ta-330"
+      ],
       "status": "active",
       "task_count": 0,
       "performance_score": 93
@@ -138,7 +227,15 @@
       "id": "fase-e-evidencias",
       "name": "Fase E - Evidências",
       "role": "Gestão e avaliação de evidências de auditoria — NBC TA 500 a 580",
-      "skills": ["NBC TA 500", "NBC TA 505", "NBC TA 520", "NBC TA 580", "Confirmações Externas", "Estimativas"],
+      "model_tier": "julgamento",
+      "skills": [
+        "NBC TA 500",
+        "NBC TA 505",
+        "NBC TA 520",
+        "NBC TA 580",
+        "Confirmações Externas",
+        "Estimativas"
+      ],
       "workflows": [
         {
           "trigger": "coletar_evidencias",
@@ -163,8 +260,19 @@
           "output": "PTA de confirmações externas completo"
         }
       ],
-      "capabilities": ["evidence-management", "external-confirmations", "evidence-evaluation", "nbc-ta-500"],
-      "memory_tags": ["evidencias", "confirmacoes", "nbc-ta-500", "suficiencia", "adequacao"],
+      "capabilities": [
+        "evidence-management",
+        "external-confirmations",
+        "evidence-evaluation",
+        "nbc-ta-500"
+      ],
+      "memory_tags": [
+        "evidencias",
+        "confirmacoes",
+        "nbc-ta-500",
+        "suficiencia",
+        "adequacao"
+      ],
       "status": "active",
       "task_count": 0,
       "performance_score": 94
@@ -173,7 +281,15 @@
       "id": "fase-f-conclusao",
       "name": "Fase F - Conclusão",
       "role": "Revisão final, going concern, eventos subsequentes e carta de representação — NBC TA 560, 570, 580",
-      "skills": ["NBC TA 560", "NBC TA 570", "NBC TA 580", "Going Concern", "Eventos Subsequentes", "Carta Representacao"],
+      "model_tier": "julgamento",
+      "skills": [
+        "NBC TA 560",
+        "NBC TA 570",
+        "NBC TA 580",
+        "Going Concern",
+        "Eventos Subsequentes",
+        "Carta Representacao"
+      ],
       "workflows": [
         {
           "trigger": "encerrar_auditoria",
@@ -189,12 +305,28 @@
         },
         {
           "trigger": "avaliar_going_concern",
-          "steps": ["coletar_indicadores", "avaliar_planos_gestao", "concluir_capacidade_continuidade", "documentar"],
+          "steps": [
+            "coletar_indicadores",
+            "avaliar_planos_gestao",
+            "concluir_capacidade_continuidade",
+            "documentar"
+          ],
           "output": "Avaliação de going concern documentada"
         }
       ],
-      "capabilities": ["going-concern", "subsequent-events", "management-representation", "dossier-approval"],
-      "memory_tags": ["conclusao", "going-concern", "eventos-subsequentes", "nbc-ta-560", "nbc-ta-570"],
+      "capabilities": [
+        "going-concern",
+        "subsequent-events",
+        "management-representation",
+        "dossier-approval"
+      ],
+      "memory_tags": [
+        "conclusao",
+        "going-concern",
+        "eventos-subsequentes",
+        "nbc-ta-560",
+        "nbc-ta-570"
+      ],
       "status": "active",
       "task_count": 0,
       "performance_score": 95
@@ -203,7 +335,15 @@
       "id": "fase-g-relatorios",
       "name": "Fase G - Relatórios",
       "role": "Emissão de relatórios e pareceres — NBC TA 700, 705, 706, 720",
-      "skills": ["NBC TA 700", "NBC TA 705", "NBC TA 706", "NBC TA 720", "Parecer Auditoria", "Modificacoes"],
+      "model_tier": "julgamento",
+      "skills": [
+        "NBC TA 700",
+        "NBC TA 705",
+        "NBC TA 706",
+        "NBC TA 720",
+        "Parecer Auditoria",
+        "Modificacoes"
+      ],
       "workflows": [
         {
           "trigger": "emitir_relatorio",
@@ -227,8 +367,19 @@
           "output": "Relatório com opinião modificada (ressalva/adversa/abstenção)"
         }
       ],
-      "capabilities": ["audit-report", "opinion-formulation", "nbc-ta-700", "modified-opinion"],
-      "memory_tags": ["relatorio", "parecer", "opiniao", "nbc-ta-700", "nbc-ta-705"],
+      "capabilities": [
+        "audit-report",
+        "opinion-formulation",
+        "nbc-ta-700",
+        "modified-opinion"
+      ],
+      "memory_tags": [
+        "relatorio",
+        "parecer",
+        "opiniao",
+        "nbc-ta-700",
+        "nbc-ta-705"
+      ],
       "status": "active",
       "task_count": 0,
       "performance_score": 96
@@ -237,7 +388,13 @@
       "id": "achados-nbc-ta-265",
       "name": "Achados NBC TA 265",
       "role": "Identificação e comunicação de deficiências nos controles internos — NBC TA 265",
-      "skills": ["NBC TA 265", "Controles Internos", "Deficiencias Significativas", "Comunicacao Gestao"],
+      "model_tier": "julgamento",
+      "skills": [
+        "NBC TA 265",
+        "Controles Internos",
+        "Deficiencias Significativas",
+        "Comunicacao Gestao"
+      ],
       "workflows": [
         {
           "trigger": "identificar_deficiencia",
@@ -252,12 +409,26 @@
         },
         {
           "trigger": "acompanhar_remediacoes",
-          "steps": ["revisar_plano_acao", "verificar_implementacao", "atualizar_registro", "documentar"],
+          "steps": [
+            "revisar_plano_acao",
+            "verificar_implementacao",
+            "atualizar_registro",
+            "documentar"
+          ],
           "output": "Status de remediação atualizado"
         }
       ],
-      "capabilities": ["internal-control-assessment", "deficiency-classification", "management-communication"],
-      "memory_tags": ["controles-internos", "deficiencias", "nbc-ta-265", "comunicacao"],
+      "capabilities": [
+        "internal-control-assessment",
+        "deficiency-classification",
+        "management-communication"
+      ],
+      "memory_tags": [
+        "controles-internos",
+        "deficiencias",
+        "nbc-ta-265",
+        "comunicacao"
+      ],
       "status": "active",
       "task_count": 0,
       "performance_score": 92
@@ -266,7 +437,14 @@
       "id": "documentacao-230",
       "name": "Documentação 230",
       "role": "Gestão e revisão da documentação de auditoria — NBC TA 230",
-      "skills": ["NBC TA 230", "Papeis de Trabalho", "Dossie", "Arquivamento", "Revisao"],
+      "model_tier": "execucao",
+      "skills": [
+        "NBC TA 230",
+        "Papeis de Trabalho",
+        "Dossie",
+        "Arquivamento",
+        "Revisao"
+      ],
       "workflows": [
         {
           "trigger": "organizar_dossie",
@@ -281,12 +459,27 @@
         },
         {
           "trigger": "revisao_documentacao",
-          "steps": ["selecionar_papeis_revisar", "checar_conformidade", "identificar_lacunas", "solicitar_complementos"],
+          "steps": [
+            "selecionar_papeis_revisar",
+            "checar_conformidade",
+            "identificar_lacunas",
+            "solicitar_complementos"
+          ],
           "output": "Checklist de revisão de documentação completo"
         }
       ],
-      "capabilities": ["workpaper-management", "documentation-review", "cross-referencing", "archiving"],
-      "memory_tags": ["documentacao", "papeis-trabalho", "dossie", "nbc-ta-230"],
+      "capabilities": [
+        "workpaper-management",
+        "documentation-review",
+        "cross-referencing",
+        "archiving"
+      ],
+      "memory_tags": [
+        "documentacao",
+        "papeis-trabalho",
+        "dossie",
+        "nbc-ta-230"
+      ],
       "status": "active",
       "task_count": 0,
       "performance_score": 91
@@ -295,7 +488,16 @@
       "id": "engine-validacao",
       "name": "Engine Validação",
       "role": "Motor de validação automática de dados e consistência nos PTAs",
-      "skills": ["Python", "SQLAlchemy", "Validação", "Regex", "Business Rules", "FastAPI", "Data Quality"],
+      "model_tier": "execucao",
+      "skills": [
+        "Python",
+        "SQLAlchemy",
+        "Validação",
+        "Regex",
+        "Business Rules",
+        "FastAPI",
+        "Data Quality"
+      ],
       "workflows": [
         {
           "trigger": "validar_pta",
@@ -310,12 +512,29 @@
         },
         {
           "trigger": "validar_sped_ecd",
-          "steps": ["parsear_arquivo", "checar_estrutura", "validar_saldos", "verificar_consistencia", "emitir_diagnostico"],
+          "steps": [
+            "parsear_arquivo",
+            "checar_estrutura",
+            "validar_saldos",
+            "verificar_consistencia",
+            "emitir_diagnostico"
+          ],
           "output": "Diagnóstico de conformidade do arquivo SPED ECD"
         }
       ],
-      "capabilities": ["data-validation", "rule-engine", "consistency-check", "sped-validation"],
-      "memory_tags": ["validacao", "engine", "sped", "regras-negocio", "qualidade-dados"],
+      "capabilities": [
+        "data-validation",
+        "rule-engine",
+        "consistency-check",
+        "sped-validation"
+      ],
+      "memory_tags": [
+        "validacao",
+        "engine",
+        "sped",
+        "regras-negocio",
+        "qualidade-dados"
+      ],
       "status": "active",
       "task_count": 0,
       "performance_score": 95
@@ -324,7 +543,14 @@
       "id": "gates-eqcr",
       "name": "Gates EQCR",
       "role": "Revisão de controle de qualidade do trabalho (EQCR) — NBC TA 220",
-      "skills": ["NBC TA 220", "EQCR", "Quality Review", "Independencia", "Ceticismo"],
+      "model_tier": "julgamento",
+      "skills": [
+        "NBC TA 220",
+        "EQCR",
+        "Quality Review",
+        "Independencia",
+        "Ceticismo"
+      ],
       "workflows": [
         {
           "trigger": "revisao_eqcr",
@@ -339,12 +565,27 @@
         },
         {
           "trigger": "gate_qualidade",
-          "steps": ["verificar_criterios_gate", "avaliar_documentacao", "confirmar_aprovacao_fase"],
+          "steps": [
+            "verificar_criterios_gate",
+            "avaliar_documentacao",
+            "confirmar_aprovacao_fase"
+          ],
           "output": "Gate de qualidade liberado para próxima fase"
         }
       ],
-      "capabilities": ["quality-review", "eqcr", "independence-verification", "nbc-ta-220"],
-      "memory_tags": ["eqcr", "qualidade", "revisao", "independencia", "gate"],
+      "capabilities": [
+        "quality-review",
+        "eqcr",
+        "independence-verification",
+        "nbc-ta-220"
+      ],
+      "memory_tags": [
+        "eqcr",
+        "qualidade",
+        "revisao",
+        "independencia",
+        "gate"
+      ],
       "status": "active",
       "task_count": 0,
       "performance_score": 97
@@ -353,7 +594,17 @@
       "id": "export-dossie-cre",
       "name": "Export Dossiê CRE",
       "role": "Geração e exportação de dossiês para o CRE (Conselho Regional de Economia) e órgãos reguladores",
-      "skills": ["PDF", "Python", "Jinja2", "HTML", "WeasyPrint", "CRE", "CFC", "Normas"],
+      "model_tier": "execucao",
+      "skills": [
+        "PDF",
+        "Python",
+        "Jinja2",
+        "HTML",
+        "WeasyPrint",
+        "CRE",
+        "CFC",
+        "Normas"
+      ],
       "workflows": [
         {
           "trigger": "exportar_dossie",
@@ -368,12 +619,28 @@
         },
         {
           "trigger": "gerar_relatorio_cre",
-          "steps": ["selecionar_template_cre", "preencher_dados", "revisar", "exportar"],
+          "steps": [
+            "selecionar_template_cre",
+            "preencher_dados",
+            "revisar",
+            "exportar"
+          ],
           "output": "Relatório formatado conforme padrão CRE"
         }
       ],
-      "capabilities": ["pdf-generation", "dossier-export", "digital-signature", "regulatory-reports"],
-      "memory_tags": ["export", "dossie", "cre", "pdf", "relatorio"],
+      "capabilities": [
+        "pdf-generation",
+        "dossier-export",
+        "digital-signature",
+        "regulatory-reports"
+      ],
+      "memory_tags": [
+        "export",
+        "dossie",
+        "cre",
+        "pdf",
+        "relatorio"
+      ],
       "status": "active",
       "task_count": 0,
       "performance_score": 90
@@ -382,7 +649,16 @@
       "id": "sgq-nbc-pa-01",
       "name": "SGQ NBC PA 01",
       "role": "Sistema de Gestão de Qualidade conforme NBC PA 01 — políticas e procedimentos do escritório",
-      "skills": ["NBC PA 01", "SGQ", "Politicas", "Procedimentos", "Treinamento", "Monitoramento", "ISQC1"],
+      "model_tier": "execucao",
+      "skills": [
+        "NBC PA 01",
+        "SGQ",
+        "Politicas",
+        "Procedimentos",
+        "Treinamento",
+        "Monitoramento",
+        "ISQC1"
+      ],
       "workflows": [
         {
           "trigger": "revisao_sgq",
@@ -397,12 +673,28 @@
         },
         {
           "trigger": "monitoramento_qualidade",
-          "steps": ["selecionar_trabalhos_amostra", "aplicar_checklist_qualidade", "consolidar_resultados", "plano_acao"],
+          "steps": [
+            "selecionar_trabalhos_amostra",
+            "aplicar_checklist_qualidade",
+            "consolidar_resultados",
+            "plano_acao"
+          ],
           "output": "Relatório de monitoramento de qualidade anual"
         }
       ],
-      "capabilities": ["quality-management-system", "nbc-pa-01", "policy-management", "quality-monitoring"],
-      "memory_tags": ["sgq", "qualidade", "nbc-pa-01", "politicas", "monitoramento"],
+      "capabilities": [
+        "quality-management-system",
+        "nbc-pa-01",
+        "policy-management",
+        "quality-monitoring"
+      ],
+      "memory_tags": [
+        "sgq",
+        "qualidade",
+        "nbc-pa-01",
+        "politicas",
+        "monitoramento"
+      ],
       "status": "active",
       "task_count": 0,
       "performance_score": 93
@@ -411,7 +703,15 @@
       "id": "chat-assistente",
       "name": "Chat Assistente",
       "role": "Assistente conversacional para dúvidas de auditoria, normas NBC TA e orientação de procedimentos",
-      "skills": ["Claude API", "NBC TA", "NBC PA", "RAG", "Obsidian", "Semantic Search"],
+      "model_tier": "execucao",
+      "skills": [
+        "Claude API",
+        "NBC TA",
+        "NBC PA",
+        "RAG",
+        "Obsidian",
+        "Semantic Search"
+      ],
       "workflows": [
         {
           "trigger": "duvida_norma",
@@ -426,12 +726,28 @@
         },
         {
           "trigger": "orientar_procedimento",
-          "steps": ["entender_contexto", "mapear_pta_relevante", "explicar_passos", "sugerir_documentacao"],
+          "steps": [
+            "entender_contexto",
+            "mapear_pta_relevante",
+            "explicar_passos",
+            "sugerir_documentacao"
+          ],
           "output": "Orientação passo a passo com PTAs recomendados"
         }
       ],
-      "capabilities": ["conversational-ai", "nbc-ta-knowledge", "audit-guidance", "rag-search"],
-      "memory_tags": ["chat", "assistente", "nbc-ta", "orientacao", "normas"],
+      "capabilities": [
+        "conversational-ai",
+        "nbc-ta-knowledge",
+        "audit-guidance",
+        "rag-search"
+      ],
+      "memory_tags": [
+        "chat",
+        "assistente",
+        "nbc-ta",
+        "orientacao",
+        "normas"
+      ],
       "status": "active",
       "task_count": 0,
       "performance_score": 94
@@ -440,7 +756,14 @@
       "id": "copiloto-auditoria",
       "name": "Copiloto Auditoria",
       "role": "Suporte em tempo real ao auditor durante execução — sugestões inteligentes e alertas de risco",
-      "skills": ["Claude API", "Real-time Analysis", "Risk Alerts", "NBC TA", "Ceticismo Profissional"],
+      "model_tier": "execucao",
+      "skills": [
+        "Claude API",
+        "Real-time Analysis",
+        "Risk Alerts",
+        "NBC TA",
+        "Ceticismo Profissional"
+      ],
       "workflows": [
         {
           "trigger": "revisao_em_tempo_real",
@@ -455,12 +778,28 @@
         },
         {
           "trigger": "analise_analitica",
-          "steps": ["calcular_indicadores", "comparar_periodo_anterior", "identificar_variacoes_inusuais", "recomendar_investigacao"],
+          "steps": [
+            "calcular_indicadores",
+            "comparar_periodo_anterior",
+            "identificar_variacoes_inusuais",
+            "recomendar_investigacao"
+          ],
           "output": "Análise analítica com variações sinalizadas"
         }
       ],
-      "capabilities": ["real-time-support", "analytical-procedures", "risk-alerting", "professional-skepticism"],
-      "memory_tags": ["copiloto", "tempo-real", "alerta", "risco", "analitica"],
+      "capabilities": [
+        "real-time-support",
+        "analytical-procedures",
+        "risk-alerting",
+        "professional-skepticism"
+      ],
+      "memory_tags": [
+        "copiloto",
+        "tempo-real",
+        "alerta",
+        "risco",
+        "analitica"
+      ],
       "status": "active",
       "task_count": 0,
       "performance_score": 95
@@ -469,7 +808,14 @@
       "id": "audiz-check",
       "name": "Audiz Check",
       "role": "Verificação final de conformidade e completude do processo antes da emissão do relatório",
-      "skills": ["Checklist", "NBC TA", "Conformidade", "Python", "Validação Final"],
+      "model_tier": "julgamento",
+      "skills": [
+        "Checklist",
+        "NBC TA",
+        "Conformidade",
+        "Python",
+        "Validação Final"
+      ],
       "workflows": [
         {
           "trigger": "check_pre_emissao",
@@ -484,12 +830,27 @@
         },
         {
           "trigger": "auditoria_qualidade_final",
-          "steps": ["selecionar_itens_checklist", "verificar_cada_item", "documentar_evidencias", "emitir_parecer_qualidade"],
+          "steps": [
+            "selecionar_itens_checklist",
+            "verificar_cada_item",
+            "documentar_evidencias",
+            "emitir_parecer_qualidade"
+          ],
           "output": "Relatório de qualidade final do processo"
         }
       ],
-      "capabilities": ["final-compliance-check", "pre-issuance-review", "completeness-verification"],
-      "memory_tags": ["check", "conformidade", "pre-emissao", "completude", "qualidade"],
+      "capabilities": [
+        "final-compliance-check",
+        "pre-issuance-review",
+        "completeness-verification"
+      ],
+      "memory_tags": [
+        "check",
+        "conformidade",
+        "pre-emissao",
+        "completude",
+        "qualidade"
+      ],
       "status": "active",
       "task_count": 0,
       "performance_score": 96

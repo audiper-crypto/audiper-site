@@ -3,7 +3,15 @@
   "title": "Agent Definition",
   "description": "Schema de definição de agente do ecossistema Audiper",
   "type": "object",
-  "required": ["id", "name", "sector", "role", "skills", "workflows", "capabilities"],
+  "required": [
+    "id",
+    "name",
+    "sector",
+    "role",
+    "skills",
+    "workflows",
+    "capabilities"
+  ],
   "properties": {
     "id": {
       "type": "string",
@@ -16,22 +24,50 @@
     "sector": {
       "type": "string",
       "description": "Setor ao qual o agente pertence",
-      "enum": ["engineering", "marketing", "design", "sales", "auditoria", "specialized", "testing", "product", "projectmgmt", "support", "strategy", "orchestration"]
+      "enum": [
+        "engineering",
+        "marketing",
+        "design",
+        "sales",
+        "auditoria",
+        "specialized",
+        "testing",
+        "product",
+        "projectmgmt",
+        "support",
+        "strategy",
+        "orchestration"
+      ]
     },
     "role": {
       "type": "string",
       "description": "Descrição curta do papel do agente"
     },
+    "model_tier": {
+      "type": "string",
+      "enum": [
+        "orquestrador",
+        "julgamento",
+        "execucao"
+      ],
+      "description": "Papel do agente na escolha de modelo. O modelo de cada tier vive em agents/model-tiers.json — nunca fixe um modelo aqui."
+    },
     "skills": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "description": "Lista de tecnologias, frameworks e habilidades"
     },
     "workflows": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["trigger", "steps", "output"],
+        "required": [
+          "trigger",
+          "steps",
+          "output"
+        ],
         "properties": {
           "trigger": {
             "type": "string",
@@ -39,7 +75,9 @@
           },
           "steps": {
             "type": "array",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "description": "Passos do workflow em ordem"
           },
           "output": {
@@ -51,17 +89,25 @@
     },
     "capabilities": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "description": "Capacidades e competências do agente"
     },
     "memory_tags": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "description": "Tags para indexação na memória semântica"
     },
     "status": {
       "type": "string",
-      "enum": ["active", "inactive", "development"],
+      "enum": [
+        "active",
+        "inactive",
+        "development"
+      ],
       "description": "Estado operacional do agente"
     },
     "last_task": {
