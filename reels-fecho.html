@@ -48,6 +48,12 @@
 
   .wrap { width:100%; display:flex; flex-direction:column; align-items:center;
           animation: fadeOut .5s 6.5s forwards; }
+
+  /* Prende as animacoes ate a pagina estar pintada. Sem isso, os primeiros
+     quadros da gravacao capturam o branco padrao do navegador. */
+  body:not(.go) *, body:not(.go)::before, body:not(.go)::after {
+    animation-play-state: paused !important;
+  }
 </style>
 </head>
 <body>
@@ -67,5 +73,15 @@
   <div class="tag anim">Auditoria Preventiva.<br/>Risco Mapeado, Risco Controlado.</div>
 
 </div>
+<script>
+  // Solta as animacoes so depois do primeiro paint + fontes carregadas.
+  (function () {
+    var soltar = function () { requestAnimationFrame(function () {
+      setTimeout(function () { document.body.classList.add('go'); }, 900);
+    }); };
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(soltar); }
+    else { window.addEventListener('load', soltar); }
+  })();
+</script>
 </body>
 </html>

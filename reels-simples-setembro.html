@@ -262,6 +262,12 @@
     transform-origin: left center;
   }
   @keyframes grow20 { from { width: 0; } to { width: 1080px; } }
+
+  /* Prende as animacoes ate a pagina estar pintada. Sem isso, os primeiros
+     quadros da gravacao capturam o branco padrao do navegador. */
+  body:not(.go) *, body:not(.go)::before, body:not(.go)::after {
+    animation-play-state: paused !important;
+  }
 </style>
 </head>
 <body>
@@ -348,5 +354,15 @@
   })();
 </script>
 
+<script>
+  // Solta as animacoes so depois do primeiro paint + fontes carregadas.
+  (function () {
+    var soltar = function () { requestAnimationFrame(function () {
+      setTimeout(function () { document.body.classList.add('go'); }, 900);
+    }); };
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(soltar); }
+    else { window.addEventListener('load', soltar); }
+  })();
+</script>
 </body>
 </html>
