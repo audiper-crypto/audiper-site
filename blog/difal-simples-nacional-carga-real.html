@@ -244,8 +244,9 @@
         font-size:13.5px;color:#8a8f98;line-height:1.7}
 .lqd .fig{margin:30px 0;text-align:center}.lqd .fig img{width:100%;max-width:420px;height:auto;border-radius:14px;border:1px solid var(--borda);box-shadow:0 10px 30px rgba(122,18,32,.08)}
 .lqd .fig figcaption{font-size:14px;color:var(--cinza);margin-top:10px;line-height:1.55}
-.lqd .duas{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:26px 0}.lqd .duas .fig{margin:0}
-@media(max-width:640px){.lqd .duas{grid-template-columns:1fr}}
+.lqd .duas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:26px 0}.lqd .duas .fig{margin:0;min-width:0}
+.lqd .fig{min-width:0}.lqd .fig img{max-width:min(420px,100%)}.lqd{min-width:0;overflow-wrap:anywhere}
+@media(max-width:640px){.lqd .duas{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
 <body>
