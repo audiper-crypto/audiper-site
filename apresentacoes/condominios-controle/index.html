@@ -257,6 +257,53 @@ h2{font-size:clamp(28px,3.2vw,48px);margin-top:12px}
 .equipe.compacta .pessoa span{font-size:12px}
 
 .cartao.comfoto-fim{background:linear-gradient(180deg,rgba(13,11,14,.86) 0%,rgba(13,11,14,.93) 55%,rgba(13,11,14,.97) 100%),linear-gradient(90deg,rgba(90,13,24,.35),transparent 60%),url(assets/contabil.jpg) center 30%/cover no-repeat}
+
+.vitrine{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(12px,1.6vw,22px);margin-top:clamp(12px,1.6vw,20px);min-height:0;flex:1 1 auto}
+.video-card{position:relative;border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.14);min-height:200px;background:#000}
+.video-card video,.video-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.video-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(13,11,14,.85))}
+.video-card .rot{position:absolute;left:16px;bottom:14px;z-index:2;color:#fff;font-size:14px;font-weight:700}
+.video-card .rot small{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ouro-t);font-weight:600;margin-bottom:3px}
+.video-card .ilu{position:absolute;right:12px;top:12px;z-index:2;font-size:10px;letter-spacing:.08em;color:#e9d9d6;background:rgba(13,11,14,.55);border:1px solid rgba(255,255,255,.18);padding:4px 8px;border-radius:999px}
+.kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:clamp(10px,1.2vw,16px)}
+.kpi{display:flex;flex-direction:column;justify-content:center}
+.kpi{position:relative;border-radius:18px;padding:18px 20px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);overflow:hidden}
+.kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(var(--claret-v),var(--ouro-t))}
+.kpi strong{display:block;font-size:clamp(34px,3.6vw,58px);line-height:1;color:#fff;letter-spacing:-.03em;font-weight:900}
+.kpi strong .u{display:inline;font-size:.4em;color:var(--ouro-t);margin-left:6px;letter-spacing:0;margin-top:0}
+.kpi span{display:block;margin-top:8px;font-size:13px;color:var(--texto-2);line-height:1.4}
+@media (max-width:900px){.vitrine{grid-template-columns:minmax(0,1fr)}.video-card{aspect-ratio:16/9}}
+
+@media (max-height:860px) and (min-width:901px){.notap{display:none}.kpi{padding:12px 16px}.kpi strong{font-size:clamp(28px,2.8vw,44px)}.kpi span{margin-top:4px;font-size:12px}.meses i{padding:7px 0}.meses{margin-top:14px}.meses .anual{padding-top:5px;margin-top:5px}.leve{margin-top:8px}}
+
+/* calendario */
+.cal{margin-top:clamp(12px,1.6vw,20px);flex:1;min-height:0;display:flex;flex-direction:column}
+.semana,.grade{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.semana span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--texto-2);padding:0 6px 6px}
+.grade{position:relative;flex:1;grid-auto-rows:1fr}
+.cel{position:relative;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);padding:6px 7px;min-height:44px;overflow:hidden}
+.cel:first-child{grid-column-start:3}
+.cel .dia{font:600 12px "JetBrains Mono",monospace;color:var(--texto-2)}
+.cel .ev{position:absolute;left:5px;right:5px;bottom:5px;border-radius:8px;padding:5px 26px 5px 7px;background:rgba(4,120,87,.22);border:1px solid #3ecf8e66;opacity:0;transform:translateY(8px)}
+.cel .ev.al{background:rgba(194,40,58,.28);border-color:#ff8a96}
+.cel .ev b{display:block;color:#fff;font-size:11px;line-height:1.15}
+.cel .ev small{display:block;color:#cfc6c3;font-size:9.5px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cel .ev i{position:absolute;right:5px;top:50%;margin-top:-9px;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:11px;font-weight:800;color:#fff;background:#047857}
+.cel .ev.al i{background:#c2283a}
+.hoje{position:absolute;inset:auto;pointer-events:none;border:2px solid var(--ouro-t);border-radius:10px;box-shadow:0 0 0 4px rgba(240,181,74,.18),0 0 24px rgba(240,181,74,.4);opacity:0}
+/* gantt */
+.gantt{position:relative;margin-top:22px;padding:16px 18px 12px;border-radius:18px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08)}
+.g-esc{display:grid;grid-template-columns:110px repeat(12,minmax(0,1fr));gap:0;font-size:10px;color:var(--texto-2);letter-spacing:.06em}
+.g-esc::before{content:""}
+.g-esc span{text-align:center}
+.g-lin{display:grid;grid-template-columns:110px minmax(0,1fr);align-items:center;margin-top:10px}
+.g-lin b{color:#fff;font-size:13px}
+.g-trilho{position:relative;height:16px;border-radius:8px;background:rgba(255,255,255,.06)}
+.g-trilho i{position:absolute;top:0;bottom:0;left:calc(var(--ini)/12*100%);width:0;border-radius:8px;background:linear-gradient(90deg,#c2283a,#f0b54a)}
+.g-trilho i.aberta{background:repeating-linear-gradient(45deg,#c2283a 0 8px,#f0b54a 8px 16px)}
+.g-hoje{position:absolute;top:10px;bottom:30px;left:calc(18px + 110px);width:2px;background:#3ecf8e;box-shadow:0 0 12px #3ecf8e}
+@media (max-width:900px){.cel .ev small{display:none}.g-esc span:nth-child(even){visibility:hidden}}
+
 .sem-js{overflow:auto}
 .sem-js .slide{position:relative;inset:auto;display:block;margin:70px 84px;height:calc(100vh - 140px)}
 .sem-js .seta,.sem-js .rodape{display:none}
@@ -295,7 +342,16 @@ h2{font-size:clamp(28px,3.2vw,48px);margin-top:12px}
   <h2 class="anim">O ano tem <em>doze</em> fechamentos. A auditoria anual olha o conjunto.</h2>
   <p class="leve anim">A auditoria independente examina as demonstrações do exercício e conclui sobre elas. O que acontece entre um fechamento e outro (um pagamento repetido, uma cobrança sem baixa, um reajuste esquecido) costuma aparecer meses depois, quando corrigir já custa mais.</p>
   <div class="meses anim" aria-hidden="true"><i style="--m:0">jan</i><i style="--m:1">fev</i><i style="--m:2">mar</i><i style="--m:3">abr</i><i style="--m:4">mai</i><i style="--m:5">jun</i><i style="--m:6">jul</i><i style="--m:7">ago</i><i style="--m:8">set</i><i style="--m:9">out</i><i style="--m:10">nov</i><i style="--m:11">dez</i><span class="anual">auditoria do exercício: uma opinião sobre o conjunto</span></div>
-  <div class="corpo"><div class="nota anim">A proposta é somar as duas coisas: a <b>opinião independente</b> sobre o exercício e um <b>acompanhamento contínuo</b> dos processos financeiros, feito por quem conhece controle.</div></div>
+  <div class="vitrine">
+    <div class="video-card anim"><img src="assets/equipe_monitores.jpg" alt=""><video muted loop playsinline autoplay preload="metadata" src="assets/equipe_monitores.mp4" poster="assets/equipe_monitores.jpg"></video><span class="ilu">imagem ilustrativa</span><span class="rot"><small>Revisão contínua</small>O olhar do auditor, todos os meses</span></div>
+    <div class="kpis">
+      <div class="kpi anim"><strong><b class="num" data-to="12">12</b></strong><span>fechamentos no ano, cada um com suas conciliações</span></div>
+      <div class="kpi anim"><strong><b class="num" data-to="1">1</b></strong><span>opinião do auditor sobre o exercício inteiro</span></div>
+      <div class="kpi anim"><strong><b class="num" data-to="6">6</b></strong><span>processos que pedem olhar diário</span></div>
+      <div class="kpi anim"><strong><b class="num" data-to="37">37</b><span class="u">anos</span></strong><span>de auditoria independente, desde 1989</span></div>
+    </div>
+  </div>
+  <div class="corpo notap" style="flex:0 0 auto;margin-top:clamp(10px,1.4vw,16px)"><div class="nota anim">A proposta é somar as duas coisas: a <b>opinião independente</b> sobre o exercício e um <b>acompanhamento contínuo</b> dos processos financeiros, feito por quem conhece controle.</div></div>
 </div></section>
 
 <section class="slide" data-t="Onde o risco mora"><div class="cartao">
@@ -393,6 +449,14 @@ h2{font-size:clamp(28px,3.2vw,48px);margin-top:12px}
   </div>
 </div></section>
 
+<section class="slide" data-t="Calendário do mês"><div class="cartao">
+  <div class="sobre anim">Calendário financeiro</div>
+  <h2 class="anim">O mês do condomínio, <em>acompanhado</em> dia a dia.</h2>
+  <p class="leve anim">Cada compromisso entra no calendário. O agente confere na data e avisa quando algo não fecha.</p>
+  <div class="cal anim"><div class="semana"><span>dom</span><span>seg</span><span>ter</span><span>qua</span><span>qui</span><span>sex</span><span>sáb</span></div><div class="grade"><div class="cel" style="--d:1"><span class="dia">1</span></div><div class="cel" style="--d:2"><span class="dia">2</span></div><div class="cel" style="--d:3"><span class="dia">3</span></div><div class="cel" style="--d:4"><span class="dia">4</span></div><div class="cel tem" style="--d:5"><span class="dia">5</span><span class="ev" style="--d:5"><b>Fornecedores</b><small>vencimentos da semana</small><i>✓</i></span></div><div class="cel" style="--d:6"><span class="dia">6</span></div><div class="cel" style="--d:7"><span class="dia">7</span></div><div class="cel" style="--d:8"><span class="dia">8</span></div><div class="cel" style="--d:9"><span class="dia">9</span></div><div class="cel tem" style="--d:10"><span class="dia">10</span><span class="ev" style="--d:10"><b>Boletos</b><small>vencimento dos condôminos</small><i>✓</i></span></div><div class="cel" style="--d:11"><span class="dia">11</span></div><div class="cel tem" style="--d:12"><span class="dia">12</span><span class="ev al" style="--d:12"><b>Conciliação</b><small>extrato × razão</small><i>!</i></span></div><div class="cel" style="--d:13"><span class="dia">13</span></div><div class="cel" style="--d:14"><span class="dia">14</span></div><div class="cel tem" style="--d:15"><span class="dia">15</span><span class="ev" style="--d:15"><b>Obrigações</b><small>eSocial · EFD-Reinf</small><i>✓</i></span></div><div class="cel" style="--d:16"><span class="dia">16</span></div><div class="cel" style="--d:17"><span class="dia">17</span></div><div class="cel" style="--d:18"><span class="dia">18</span></div><div class="cel" style="--d:19"><span class="dia">19</span></div><div class="cel tem" style="--d:20"><span class="dia">20</span><span class="ev" style="--d:20"><b>Folha e encargos</b><small>conferência das retenções</small><i>✓</i></span></div><div class="cel" style="--d:21"><span class="dia">21</span></div><div class="cel" style="--d:22"><span class="dia">22</span></div><div class="cel" style="--d:23"><span class="dia">23</span></div><div class="cel" style="--d:24"><span class="dia">24</span></div><div class="cel tem" style="--d:25"><span class="dia">25</span><span class="ev al" style="--d:25"><b>Contratos</b><small>reajuste previsto</small><i>!</i></span></div><div class="cel" style="--d:26"><span class="dia">26</span></div><div class="cel" style="--d:27"><span class="dia">27</span></div><div class="cel" style="--d:28"><span class="dia">28</span></div><div class="cel" style="--d:29"><span class="dia">29</span></div><div class="cel tem" style="--d:30"><span class="dia">30</span><span class="ev" style="--d:30"><b>Fechamento</b><small>balancete do mês</small><i>✓</i></span></div><div class="hoje"></div></div></div>
+  <p class="fonte anim">Calendário ilustrativo. Datas variam conforme contratos, convenção e legislação vigente.</p>
+</div></section>
+
 <section class="slide" data-t="Como o alerta chega"><div class="cartao"><div class="duas">
   <div>
     <div class="sobre anim">Como o alerta chega</div>
@@ -422,7 +486,14 @@ h2{font-size:clamp(28px,3.2vw,48px);margin-top:12px}
 <section class="slide" data-t="Como começa"><div class="cartao">
   <div class="sobre anim">Sem projeto grande na largada</div>
   <h2 class="anim">Um processo primeiro. Os outros <em>depois</em>.</h2>
-  <div class="etapas anim" aria-hidden="true" style="margin-top:22px"><b><span style="--k:0"></span></b><b><span style="--k:1"></span></b><b><span style="--k:2"></span></b></div>
+  <div class="gantt anim" aria-hidden="true">
+    <div class="g-esc"><span>sem 1</span><span>sem 2</span><span>sem 3</span><span>sem 4</span><span>sem 5</span><span>sem 6</span><span>sem 7</span><span>sem 8</span><span>sem 9</span><span>sem 10</span><span>sem 11</span><span>sem 12</span></div>
+    <div class="g-lin"><b>Diagnóstico</b><div class="g-trilho"><i style="--ini:0;--dur:2"></i></div></div>
+    <div class="g-lin"><b>Piloto</b><div class="g-trilho"><i style="--ini:2;--dur:6"></i></div></div>
+    <div class="g-lin"><b>Expansão</b><div class="g-trilho"><i style="--ini:8;--dur:4" class="aberta"></i></div></div>
+    <div class="g-hoje"></div>
+    <p class="fonte">Cronograma de referência, ajustado ao processo escolhido.</p>
+  </div>
   <div class="corpo g3">
     <div class="peca anim"><div class="ic"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M192,112a80,80,0,1,1-80-80A80,80,0,0,1,192,112Z" opacity="0.2"/><path d="M229.66,218.34,179.6,168.28a88.21,88.21,0,1,0-11.32,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg></div><div class="n">etapa 1</div><h3>Diagnóstico</h3><p>Mapeamos o processo escolhido, as regras que a gestão já tem e os dados disponíveis.</p></div>
     <div class="peca anim"><div class="ic"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M208,192H48a8,8,0,0,1-6.88-12C47.71,168.6,56,147.81,56,112a72,72,0,0,1,144,0c0,35.82,8.3,56.6,14.9,68A8,8,0,0,1,208,192Z" opacity="0.2"/><path d="M224,71.1a8,8,0,0,1-10.78-3.42,94.13,94.13,0,0,0-33.46-36.91,8,8,0,1,1,8.54-13.54,111.46,111.46,0,0,1,39.12,43.09A8,8,0,0,1,224,71.1ZM35.71,72a8,8,0,0,0,7.1-4.32A94.13,94.13,0,0,1,76.27,30.77a8,8,0,1,0-8.54-13.54A111.46,111.46,0,0,0,28.61,60.32,8,8,0,0,0,35.71,72Zm186.1,103.94A16,16,0,0,1,208,200H167.2a40,40,0,0,1-78.4,0H48a16,16,0,0,1-13.79-24.06C43.22,160.39,48,138.28,48,112a80,80,0,0,1,160,0C208,138.27,212.78,160.38,221.81,175.94ZM150.62,200H105.38a24,24,0,0,0,45.24,0ZM208,184c-10.64-18.27-16-42.49-16-72a64,64,0,0,0-128,0c0,29.52-5.38,53.74-16,72Z"/></svg></div><div class="n">etapa 2</div><h3>Piloto</h3><p>Um agente em um processo, com alertas reais para a área responsável e ajustes semanais.</p></div>
@@ -479,6 +550,7 @@ h2{font-size:clamp(28px,3.2vw,48px);margin-top:12px}
     if (!window.gsap || reduz) return;
     gsap.fromTo(s.querySelectorAll('.anim'),{y:24,opacity:0},{y:0,opacity:1,duration:.75,ease:'power3.out',stagger:.07,clearProps:'transform,opacity'});
     var L = s.querySelectorAll('.layer'); if (L.length) gsap.fromTo(L,{'--z':'0px',opacity:0},{'--z':function(k){return (k*44)+'px';},opacity:1,duration:1.1,ease:'power3.out',stagger:.12,delay:.25});
+    s.querySelectorAll('.num').forEach(function(n){ var o={v:0}; gsap.to(o,{v:+n.dataset.to,duration:1.6,ease:'power2.out',delay:.5,onUpdate:function(){ n.textContent=Math.round(o.v); }}); });
     var F = s.querySelector('.linha span'); if (F) gsap.fromTo(F,{scaleX:0},{scaleX:1,duration:1.4,ease:'power2.inOut',delay:.3});
   }
   function ir(n){
@@ -515,6 +587,26 @@ h2{font-size:clamp(28px,3.2vw,48px);margin-top:12px}
   function diag(s){
     limpaD();
     if (!window.gsap || reduz) return;
+
+    // calendario: "hoje" percorre os dias e os eventos surgem
+    var cel = s.querySelectorAll('.cel'); var hoje = s.querySelector('.hoje');
+    if (cel.length && hoje){
+      var tc = gsap.timeline({repeat:-1,repeatDelay:1.2,delay:.6}); tlD.push(tc);
+      tc.set(s.querySelectorAll('.cel .ev'),{opacity:0,y:8});
+      cel.forEach(function(c,k){
+        tc.add(function(){ var r=c.getBoundingClientRect(), g=hoje.parentNode.getBoundingClientRect(); gsap.set(hoje,{left:r.left-g.left,top:r.top-g.top,width:r.width,height:r.height,opacity:1}); }, k*0.22);
+        var e=c.querySelector('.ev'); if (e) tc.to(e,{opacity:1,y:0,duration:.35,ease:'back.out(2)'}, k*0.22+.05);
+      });
+      tc.to(hoje,{opacity:0,duration:.4}, cel.length*0.22+.6);
+    }
+    // gantt: barras enchem e o marcador anda
+    var gb = s.querySelectorAll('.g-trilho i'); var gh = s.querySelector('.g-hoje');
+    if (gb.length){
+      var tg = gsap.timeline({repeat:-1,repeatDelay:1.5,delay:.5}); tlD.push(tg);
+      tg.set(gb,{width:0}); if (gh) tg.set(gh,{left:'calc(18px + 110px)'});
+      gb.forEach(function(b,k){ tg.to(b,{width:function(){ return (getComputedStyle(b).getPropertyValue('--dur')/12*100)+'%'; },duration:1.1,ease:'power2.inOut'}, k*1.0); });
+      if (gh) tg.to(gh,{left:'calc(18px + 110px + (100% - 146px) * .98)',duration:3.6,ease:'none'},0);
+    }
     var svg = s.querySelector('.dg'); if (!svg) return;
     var tl = gsap.timeline(); tlD.push(tl);
     var fls = svg.querySelectorAll('.fl');
