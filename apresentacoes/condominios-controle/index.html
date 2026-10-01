@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Controle Financeiro Contínuo · AUDÍPER</title>
+<meta name="description" content="Apresentação: controle financeiro contínuo e compliance para condomínios de shopping e entidades com gestão profissional. AUDÍPER Auditores Independentes e AUDIX.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0d0b0e">
+<link rel="icon" href="../../images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fundo:#0d0b0e; --claret:#7a1220; --claret-v:#c2283a; --rosa:#f2a7b0; --ouro:#c97b00; --ouro-t:#f0b54a;
+  --branco:#f5f2ef; --texto:#d4cdca; --texto-2:#9a908d;
+  --vidro:rgba(255,255,255,.055); --vidro-borda:rgba(255,255,255,.12); --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:Figtree,system-ui,Arial,sans-serif;color:var(--texto);background:var(--fundo);-webkit-font-smoothing:antialiased;overflow:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ouro-t);outline-offset:3px}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+em{font-family:Fraunces,serif;font-style:italic;font-weight:600;color:var(--rosa)}
+
+.aurora{position:fixed;inset:-20%;z-index:0;pointer-events:none;filter:blur(80px);opacity:.6}
+.aurora i{position:absolute;border-radius:50%}
+.aurora i:nth-child(1){width:46vw;height:46vw;left:2%;top:6%;background:#7a122088}
+.aurora i:nth-child(2){width:40vw;height:40vw;right:4%;top:20%;background:#c97b0040}
+.aurora i:nth-child(3){width:34vw;height:34vw;left:38%;bottom:-6%;background:#3b2a3366}
+@media (prefers-reduced-motion:no-preference){
+  .aurora i:nth-child(1){animation:flutuar 26s ease-in-out infinite alternate}
+  .aurora i:nth-child(2){animation:flutuar 32s ease-in-out -8s infinite alternate-reverse}
+  .aurora i:nth-child(3){animation:flutuar 38s ease-in-out -4s infinite alternate}
+}
+@keyframes flutuar{to{transform:translate(8vw,-6vh) scale(1.15)}}
+.grao{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.05;background-image:radial-gradient(rgba(255,255,255,.7) 1px,transparent 1px);background-size:3px 3px}
+
+.cromo{position:fixed;left:0;right:0;top:0;z-index:20;display:flex;align-items:center;gap:14px;padding:12px 22px}
+.cromo__marcas{display:flex;align-items:center;gap:12px}
+.cromo__marcas img{height:30px;width:auto}
+.cromo__marcas .x{width:1px;height:20px;background:rgba(255,255,255,.2)}
+.cromo__selo{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--texto-2)}
+.cromo__acoes{margin-left:auto;display:flex;gap:8px}
+.bt{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid var(--vidro-borda);background:var(--vidro);backdrop-filter:blur(12px);cursor:pointer;font-size:13px;text-decoration:none}
+.bt:hover{border-color:#c2283a99;color:var(--branco)}
+.seta{position:fixed;top:50%;z-index:20;width:48px;height:48px;margin-top:-24px;border-radius:50%;border:1px solid var(--vidro-borda);background:var(--vidro);backdrop-filter:blur(12px);cursor:pointer;display:grid;place-items:center;transition:.25s var(--ease)}
+.seta:hover{background:var(--claret);border-color:var(--claret);color:#fff}
+.seta--esq{left:18px}.seta--dir{right:18px}
+.seta svg{width:20px;height:20px}
+.rodape{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;align-items:center;gap:16px;padding:10px 22px 14px}
+.contador{font-size:13px;color:var(--texto-2);min-width:64px}
+.contador b{color:var(--ouro-t);font-weight:700}
+.progresso{flex:1;display:flex;gap:6px}
+.progresso button{flex:1;height:16px;border:0;background:none;cursor:pointer;position:relative}
+.progresso button::before{content:"";position:absolute;left:0;right:0;top:7px;height:2px;border-radius:2px;background:rgba(255,255,255,.14);transition:background .3s}
+.progresso button[aria-current="true"]::before,.progresso button.feito::before{background:var(--claret-v)}
+.dica{font-size:11px;color:var(--texto-2);letter-spacing:.06em}
+
+.palco{position:relative;z-index:5;height:100%}
+.slide{position:absolute;inset:62px 84px 56px;display:none}
+.slide.ativo{display:block}
+.cartao{position:relative;height:100%;border-radius:28px;padding:clamp(26px,3.2vw,50px);background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.022));border:1px solid var(--vidro-borda);backdrop-filter:blur(18px);display:flex;flex-direction:column;overflow:hidden}
+.cartao::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(600px circle at var(--mx,70%) var(--my,0%),rgba(255,255,255,.07),transparent 45%)}
+.sobre{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ouro-t);display:flex;align-items:center;gap:10px}
+.sobre::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--claret-v);box-shadow:0 0 0 4px rgba(194,40,58,.22)}
+h1,h2{color:var(--branco);font-weight:800;letter-spacing:-.02em;line-height:1.05}
+h1{font-size:clamp(36px,4.6vw,70px);margin-top:16px}
+h2{font-size:clamp(28px,3.2vw,48px);margin-top:12px}
+.leve{color:var(--texto-2);font-size:clamp(14px,1.15vw,18px);margin-top:12px;max-width:66ch;line-height:1.55}
+.corpo{flex:1;min-height:0;display:grid;gap:clamp(12px,1.6vw,22px);margin-top:clamp(16px,2.2vw,30px);align-content:start}
+.fonte{margin-top:12px;font-size:11px;color:var(--texto-2);letter-spacing:.04em}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+.peca{padding:18px 20px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);min-width:0;transition:border-color .3s,transform .3s var(--ease)}
+.peca:hover{border-color:rgba(194,40,58,.55);transform:translateY(-2px)}
+.peca h3{color:var(--branco);font-size:clamp(15px,1.25vw,19px);font-weight:700;margin:10px 0 6px}
+.peca p{font-size:clamp(13px,1vw,15px);line-height:1.5;color:var(--texto)}
+.ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#7a1220,#4a0b14);color:#ffd9a3;border:1px solid #c2283a55}
+.ic svg{width:22px;height:22px}
+.n{font-size:11px;color:var(--texto-2);letter-spacing:.12em;text-transform:uppercase;margin-top:12px}
+.decide{background:linear-gradient(145deg,#7a1220,#4a0b14);border-color:#c2283a}
+.decide p{color:#f6d3d8}
+.linha{height:2px;border-radius:2px;background:rgba(255,255,255,.1);overflow:hidden;margin-bottom:-6px}
+.linha span{display:block;height:100%;background:linear-gradient(90deg,var(--claret-v),var(--ouro-t));transform-origin:left}
+
+.capa{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;height:100%}
+.capa__txt{min-width:0}
+.stack{position:relative;height:100%;min-height:320px;perspective:1400px}
+.layer{--z:calc(var(--i)*44px);position:absolute;left:50%;top:60%;width:clamp(200px,22vw,320px);aspect-ratio:16/10;transform:translate(-50%,-50%) rotateX(58deg) rotateZ(-38deg) translateZ(var(--z));border-radius:18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(6px);display:flex;align-items:flex-end;padding:12px 14px;box-shadow:0 20px 50px -24px #000}
+.layer span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#e9d9d6}
+.layer.top{background:linear-gradient(135deg,#c2283a,#7a1220);border-color:#e0465a;box-shadow:0 30px 70px -20px #c2283a99}
+.layer.top span{color:#ffe1b3}
+
+.duas{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(18px,3vw,48px);align-items:center;flex:1;min-height:0}
+.fone{width:min(330px,100%);margin:0 auto;background:#141016;border:1px solid rgba(255,255,255,.12);border-radius:34px;padding:16px 12px;box-shadow:0 40px 80px -30px #000}
+.fone .barra{height:6px;width:70px;border-radius:9px;background:#2b2530;margin:0 auto 14px}
+.aviso{background:#1d181f;border:1px solid #302833;border-radius:14px;padding:12px 14px;margin-bottom:10px}
+.aviso .t{font-size:10px;letter-spacing:.12em;color:var(--rosa);text-transform:uppercase}
+.aviso b{display:block;color:var(--branco);font-size:13.5px;margin:3px 0}
+.aviso span{font-size:12.5px;color:#b5aaa7;line-height:1.45;display:block}
+
+.reels{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(10px,1.2vw,16px);flex:1;min-height:0;align-items:start}
+.reel{position:relative;display:block;border-radius:16px;overflow:hidden;aspect-ratio:9/16;max-height:100%;border:1px solid rgba(255,255,255,.14);background:#000;text-decoration:none;transition:transform .35s var(--ease),border-color .3s,box-shadow .35s}
+.reel img,.reel video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.reel video{opacity:0;transition:opacity .4s}
+.reel.tocando video{opacity:1}
+.reel:hover,.reel:focus-visible{transform:translateY(-6px) scale(1.03);border-color:var(--claret-v);box-shadow:0 24px 50px -20px #c2283a88;z-index:2}
+.reel .play{position:absolute;right:10px;top:10px;width:30px;height:30px;border-radius:50%;background:rgba(13,11,14,.6);backdrop-filter:blur(6px);display:grid;place-items:center;border:1px solid rgba(255,255,255,.25);color:#fff}
+.reel .play svg{width:13px;height:13px}
+.reel .leg{position:absolute;left:0;right:0;bottom:0;padding:26px 10px 10px;background:linear-gradient(transparent,rgba(13,11,14,.92));font-size:12px;line-height:1.3;color:#fff}
+.reel .leg small{display:block;font-size:10px;color:var(--ouro-t);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
+
+.casa{border-radius:20px;padding:20px 22px;min-width:0}
+.casa.a{background:linear-gradient(145deg,#7a1220,#4a0b14);border:1px solid #c2283a}
+.casa.x{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14)}
+.casa .topo{display:flex;align-items:center;gap:12px}
+.casa .topo img{width:44px;height:44px;border-radius:50%}
+.casa h3{color:#fff;font-size:22px;font-weight:800}
+.casa ul{list-style:none;display:grid;gap:8px;margin-top:14px;font-size:14.5px;line-height:1.4}
+.casa li::before{content:"— ";color:var(--ouro-t)}
+.nota{border-left:3px solid var(--ouro-t);background:rgba(255,255,255,.04);border-radius:0 14px 14px 0;padding:14px 16px;font-size:14px;line-height:1.55;color:var(--texto)}
+.nota b{color:#fff}
+
+.equipe{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(16px,3vw,48px);align-items:center;margin-top:clamp(14px,2vw,28px)}
+.pessoa{text-align:center}
+.pessoa img{width:clamp(110px,11vw,150px);height:clamp(110px,11vw,150px);border-radius:50%;object-fit:cover;margin:0 auto 12px;border:4px solid var(--claret-v);box-shadow:0 0 0 6px rgba(194,40,58,.15)}
+.pessoa b{display:block;color:#fff;font-size:clamp(15px,1.3vw,19px)}
+.pessoa span{display:block;font-size:13px;color:var(--texto-2);margin-top:4px;line-height:1.45}
+.meio{text-align:center;padding:0 clamp(10px,2vw,30px);border-left:1px solid rgba(255,255,255,.12);border-right:1px solid rgba(255,255,255,.12)}
+.meio img{width:clamp(90px,8vw,120px);margin:0 auto 10px}
+.meio b{display:block;color:#fff;letter-spacing:.14em;font-size:15px}
+.meio span{display:block;color:var(--ouro-t);font-size:13px;margin-top:3px}
+.contato{margin-top:auto;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--texto-2)}
+
+@media (max-width:1100px){.reels{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){
+  body{overflow:auto}
+  .slide{position:relative;inset:auto;display:block;margin:64px 12px 16px;min-height:80vh}
+  .cartao{height:auto;min-height:80vh}
+  .seta{display:none}
+  .capa,.duas{grid-template-columns:minmax(0,1fr)}
+  .stack{height:300px;min-height:300px}
+  .g3,.g2{grid-template-columns:minmax(0,1fr)}
+  .reels{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .equipe{grid-template-columns:minmax(0,1fr)}
+  .meio{border:0;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);padding:16px 0}
+  .cromo__selo,.dica{display:none}
+}
+.sem-js{overflow:auto}
+.sem-js .slide{position:relative;inset:auto;display:block;margin:70px 84px;height:calc(100vh - 140px)}
+.sem-js .seta,.sem-js .rodape{display:none}
+@media print{body{overflow:visible}.seta,.rodape,.cromo,.aurora,.grao{display:none!important}.slide{position:relative;inset:auto;display:block!important;height:100vh;padding:24px;page-break-after:always}}
+</style>
+</head>
+<body class="sem-js">
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="grao" aria-hidden="true"></div>
+
+<header class="cromo">
+  <div class="cromo__marcas"><img src="assets/radar.gif" alt="AUDÍPER"><span class="x"></span><img src="assets/audix-emblema.png" alt="AUDIX"></div>
+  <span class="cromo__selo">AUDÍPER · AUDIX · Controle financeiro contínuo</span>
+  <div class="cromo__acoes"><button class="bt" id="tela" type="button">Tela cheia</button></div>
+</header>
+
+<button class="seta seta--esq" id="ant" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+<button class="seta seta--dir" id="prox" aria-label="Próximo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+
+<main class="palco" id="palco">
+
+<section class="slide" data-t="Capa"><div class="cartao"><div class="capa">
+  <div class="capa__txt">
+    <div class="sobre anim">Condomínios de shopping · entidades com gestão profissional</div>
+    <h1 class="anim">Controle financeiro que <em>não espera</em> o fim do exercício.</h1>
+    <p class="leve anim">Auditoria independente para dar segurança às demonstrações. Agentes de controle para acompanhar o dia a dia, com cada decisão nas mãos da administração.</p>
+    <p class="fonte anim">AUDÍPER Auditores Independentes · CRC/PI 000023/O · desde 1989 · 37 anos</p>
+  </div>
+  <div class="stack" aria-hidden="true">
+    <div class="layer" style="--i:0"><span>Dados pessoais</span></div><div class="layer" style="--i:1"><span>Obrigações acessórias</span></div><div class="layer" style="--i:2"><span>Contratos</span></div><div class="layer" style="--i:3"><span>Cobrança</span></div><div class="layer" style="--i:4"><span>Conciliação bancária</span></div><div class="layer" style="--i:5"><span>Contas a pagar</span></div><div class="layer top" style="--i:6"><span>Controle contínuo</span></div>
+  </div>
+</div></div></section>
+
+<section class="slide" data-t="O ponto de partida"><div class="cartao">
+  <div class="sobre anim">O ponto de partida</div>
+  <h2 class="anim">O ano tem <em>doze</em> fechamentos. A auditoria anual olha o conjunto.</h2>
+  <p class="leve anim">A auditoria independente examina as demonstrações do exercício e conclui sobre elas. O que acontece entre um fechamento e outro (um pagamento repetido, uma cobrança sem baixa, um reajuste esquecido) costuma aparecer meses depois, quando corrigir já custa mais.</p>
+  <div class="corpo"><div class="nota anim">A proposta é somar as duas coisas: a <b>opinião independente</b> sobre o exercício e um <b>acompanhamento contínuo</b> dos processos financeiros, feito por quem conhece controle.</div></div>
+</div></section>
+
+<section class="slide" data-t="Onde o risco mora"><div class="cartao">
+  <div class="sobre anim">Onde os desvios costumam surgir</div>
+  <h2 class="anim">Seis pontos que merecem <em>olhar diário</em>.</h2>
+  <div class="corpo g3">
+    <div class="peca anim"><div class="ic"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M224,56V208l-32-16-32,16-32-16L96,208,64,192,32,208V56a8,8,0,0,1,8-8H216A8,8,0,0,1,224,56Z" opacity="0.2"/><path d="M72,104a8,8,0,0,1,8-8h96a8,8,0,0,1,0,16H80A8,8,0,0,1,72,104Zm8,40h96a8,8,0,0,0,0-16H80a8,8,0,0,0,0,16ZM232,56V208a8,8,0,0,1-11.58,7.15L192,200.94l-28.42,14.21a8,8,0,0,1-7.16,0L128,200.94,99.58,215.15a8,8,0,0,1-7.16,0L64,200.94,35.58,215.15A8,8,0,0,1,24,208V56A16,16,0,0,1,40,40H216A16,16,0,0,1,232,56Zm-16,0H40V195.06l20.42-10.22a8,8,0,0,1,7.16,0L96,199.06l28.42-14.22a8,8,0,0,1,7.16,0L160,199.06l28.42-14.22a8,8,0,0,1,7.16,0L216,195.06Z"/></svg></div><h3>Contas a pagar</h3><p>Pagamento em duplicidade, fornecedor sem cadastro completo, valor acima da alçada aprovada.</p></div>
+    <div class="peca anim"><div class="ic"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M232,96H24L128,32Z" opacity="0.2"/><path d="M24,104H48v64H32a8,8,0,0,0,0,16H224a8,8,0,0,0,0-16H208V104h24a8,8,0,0,0,4.19-14.81l-104-64a8,8,0,0,0-8.38,0l-104,64A8,8,0,0,0,24,104Zm40,0H96v64H64Zm80,0v64H112V104Zm48,64H160V104h32ZM128,41.39,203.74,88H52.26ZM248,208a8,8,0,0,1-8,8H16a8,8,0,0,1,0-16H240A8,8,0,0,1,248,208Z"/></svg></div><h3>Conciliação bancária</h3><p>Créditos sem identificação, tarifas fora do contrato, saldos que não fecham com o razão.</p></div>
+    <div class="peca anim"><div class="ic"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M16,152H48v56H16a8,8,0,0,1-8-8V160A8,8,0,0,1,16,152ZM204,56a28,28,0,0,0-12,2.71h0A28,28,0,1,0,176,85.29h0A28,28,0,1,0,204,56Z" opacity="0.2"/><path d="M230.33,141.06a24.43,24.43,0,0,0-21.24-4.23l-41.84,9.62A28,28,0,0,0,140,112H89.94a31.82,31.82,0,0,0-22.63,9.37L44.69,144H16A16,16,0,0,0,0,160v40a16,16,0,0,0,16,16H120a7.93,7.93,0,0,0,1.94-.24l64-16a6.94,6.94,0,0,0,1.19-.4L226,182.82l.44-.2a24.6,24.6,0,0,0,3.93-41.56ZM16,160H40v40H16Zm203.43,8.21-38,16.18L119,200H56V155.31l22.63-22.62A15.86,15.86,0,0,1,89.94,128H140a12,12,0,0,1,0,24H112a8,8,0,0,0,0,16h32a8.32,8.32,0,0,0,1.79-.2l67-15.41.31-.08a8.6,8.6,0,0,1,6.3,15.9ZM164,96a36,36,0,0,0,5.9-.48,36,36,0,1,0,28.22-47A36,36,0,1,0,164,96Zm60-12a20,20,0,1,1-20-20A20,20,0,0,1,224,84ZM164,40a20,20,0,0,1,19.25,14.61,36,36,0,0,0-15,24.93A20.42,20.42,0,0,1,164,80a20,20,0,0,1,0-40Z"/></svg></div><h3>Cobrança e inadimplência</h3><p>Boletos sem baixa, acordos vencidos, rateios e fundos com saldo divergente do previsto.</p></div>
+    <div class="peca anim"><div class="ic"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M208,88H152V32Z" opacity="0.2"/><path d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Zm-32-80a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,136Zm0,32a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,168Z"/></svg></div><h3>Contratos</h3><p>Vencimentos, reajustes por índice, garantias e serviços de manutenção sem medição.</p></div>
+    <div class="peca anim"><div class="ic"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M216,48V88H40V48a8,8,0,0,1,8-8H208A8,8,0,0,1,216,48Z" opacity="0.2"/><path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Zm-38.34-85.66a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L116,164.69l42.34-42.35A8,8,0,0,1,169.66,122.34Z"/></svg></div><h3>Obrigações acessórias</h3><p>Prazos de eSocial, EFD-Reinf e DCTFWeb, e retenções na fonte informadas de forma coerente.</p></div>
+    <div class="peca anim"><div class="ic"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M216,56v56c0,96-88,120-88,120S40,208,40,112V56a8,8,0,0,1,8-8H208A8,8,0,0,1,216,56Z" opacity="0.2"/><path d="M208,40H48A16,16,0,0,0,32,56v56c0,52.72,25.52,84.67,46.93,102.19,23.06,18.86,46,25.26,47,25.53a8,8,0,0,0,4.2,0c1-.27,23.91-6.67,47-25.53C198.48,196.67,224,164.72,224,112V56A16,16,0,0,0,208,40Zm0,72c0,37.07-13.66,67.16-40.6,89.42A129.3,129.3,0,0,1,128,223.62a128.25,128.25,0,0,1-38.92-21.81C61.82,179.51,48,149.3,48,112l0-56,160,0ZM82.34,141.66a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32l-56,56a8,8,0,0,1-11.32,0Z"/></svg></div><h3>Dados pessoais</h3><p>Cadastros de lojistas, imagens e estacionamento tratados conforme a LGPD, com registro de acesso.</p></div>
+  </div>
+</div></section>
+
+<section class="slide" data-t="Como funciona"><div class="cartao">
+  <div class="sobre anim">AUDIX · agentes de controle</div>
+  <h2 class="anim">O agente <em>sinaliza</em>. O gestor decide.</h2>
+  <div class="corpo">
+    <div class="linha"><span></span></div>
+    <div class="g4" style="display:grid;gap:clamp(12px,1.4vw,18px)">
+      <div class="peca anim"><div class="ic"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M216,80c0,26.51-39.4,48-88,48S40,106.51,40,80s39.4-48,88-48S216,53.49,216,80Z" opacity="0.2"/><path d="M128,24C74.17,24,32,48.6,32,80v96c0,31.4,42.17,56,96,56s96-24.6,96-56V80C224,48.6,181.83,24,128,24Zm80,104c0,9.62-7.88,19.43-21.61,26.92C170.93,163.35,150.19,168,128,168s-42.93-4.65-58.39-13.08C55.88,147.43,48,137.62,48,128V111.36c17.06,15,46.23,24.64,80,24.64s62.94-9.68,80-24.64ZM69.61,53.08C85.07,44.65,105.81,40,128,40s42.93,4.65,58.39,13.08C200.12,60.57,208,70.38,208,80s-7.88,19.43-21.61,26.92C170.93,115.35,150.19,120,128,120s-42.93-4.65-58.39-13.08C55.88,99.43,48,89.62,48,80S55.88,60.57,69.61,53.08ZM186.39,202.92C170.93,211.35,150.19,216,128,216s-42.93-4.65-58.39-13.08C55.88,195.43,48,185.62,48,176V159.36c17.06,15,46.23,24.64,80,24.64s62.94-9.68,80-24.64V176C208,185.62,200.12,195.43,186.39,202.92Z"/></svg></div><div class="n">01 · dados</div><h3>Lê o que já existe</h3><p>Extratos, contas a pagar, cobrança e contratos, nos sistemas que a administração já usa.</p></div>
+      <div class="peca anim"><div class="ic"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M232,128c0,12.51-17.82,21.95-22.68,33.69-4.68,11.32,1.42,30.65-7.78,39.85s-28.53,3.1-39.85,7.78C150,214.18,140.5,232,128,232s-22-17.82-33.69-22.68c-11.32-4.68-30.65,1.42-39.85-7.78s-3.1-28.53-7.78-39.85C41.82,150,24,140.5,24,128s17.82-22,22.68-33.69C51.36,83,45.26,63.66,54.46,54.46S83,51.36,94.31,46.68C106.05,41.82,115.5,24,128,24S150,41.82,161.69,46.68c11.32,4.68,30.65-1.42,39.85,7.78s3.1,28.53,7.78,39.85C214.18,106.05,232,115.5,232,128Z" opacity="0.2"/><path d="M225.86,102.82c-3.77-3.94-7.67-8-9.14-11.57-1.36-3.27-1.44-8.69-1.52-13.94-.15-9.76-.31-20.82-8-28.51s-18.75-7.85-28.51-8c-5.25-.08-10.67-.16-13.94-1.52-3.56-1.47-7.63-5.37-11.57-9.14C146.28,23.51,138.44,16,128,16s-18.27,7.51-25.18,14.14c-3.94,3.77-8,7.67-11.57,9.14C88,40.64,82.56,40.72,77.31,40.8c-9.76.15-20.82.31-28.51,8S41,67.55,40.8,77.31c-.08,5.25-.16,10.67-1.52,13.94-1.47,3.56-5.37,7.63-9.14,11.57C23.51,109.72,16,117.56,16,128s7.51,18.27,14.14,25.18c3.77,3.94,7.67,8,9.14,11.57,1.36,3.27,1.44,8.69,1.52,13.94.15,9.76.31,20.82,8,28.51s18.75,7.85,28.51,8c5.25.08,10.67.16,13.94,1.52,3.56,1.47,7.63,5.37,11.57,9.14C109.72,232.49,117.56,240,128,240s18.27-7.51,25.18-14.14c3.94-3.77,8-7.67,11.57-9.14,3.27-1.36,8.69-1.44,13.94-1.52,9.76-.15,20.82-.31,28.51-8s7.85-18.75,8-28.51c.08-5.25.16-10.67,1.52-13.94,1.47-3.56,5.37-7.63,9.14-11.57C232.49,146.28,240,138.44,240,128S232.49,109.73,225.86,102.82Zm-11.55,39.29c-4.79,5-9.75,10.17-12.38,16.52-2.52,6.1-2.63,13.07-2.73,19.82-.1,7-.21,14.33-3.32,17.43s-10.39,3.22-17.43,3.32c-6.75.1-13.72.21-19.82,2.73-6.35,2.63-11.52,7.59-16.52,12.38S132,224,128,224s-9.15-4.92-14.11-9.69-10.17-9.75-16.52-12.38c-6.1-2.52-13.07-2.63-19.82-2.73-7-.1-14.33-.21-17.43-3.32s-3.22-10.39-3.32-17.43c-.1-6.75-.21-13.72-2.73-19.82-2.63-6.35-7.59-11.52-12.38-16.52S32,132,32,128s4.92-9.15,9.69-14.11,9.75-10.17,12.38-16.52c2.52-6.1,2.63-13.07,2.73-19.82.1-7,.21-14.33,3.32-17.43S70.51,56.9,77.55,56.8c6.75-.1,13.72-.21,19.82-2.73,6.35-2.63,11.52-7.59,16.52-12.38S124,32,128,32s9.15,4.92,14.11,9.69,10.17,9.75,16.52,12.38c6.1,2.52,13.07,2.63,19.82,2.73,7,.1,14.33.21,17.43,3.32s3.22,10.39,3.32,17.43c.1,6.75.21,13.72,2.73,19.82,2.63,6.35,7.59,11.52,12.38,16.52S224,124,224,128,219.08,137.15,214.31,142.11ZM173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34Z"/></svg></div><div class="n">02 · regra</div><h3>Compara com a política</h3><p>Alçadas, prazos e limites definidos pela própria gestão, escritos em regra verificável.</p></div>
+      <div class="peca anim"><div class="ic"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M208,192H48a8,8,0,0,1-6.88-12C47.71,168.6,56,147.81,56,112a72,72,0,0,1,144,0c0,35.82,8.3,56.6,14.9,68A8,8,0,0,1,208,192Z" opacity="0.2"/><path d="M224,71.1a8,8,0,0,1-10.78-3.42,94.13,94.13,0,0,0-33.46-36.91,8,8,0,1,1,8.54-13.54,111.46,111.46,0,0,1,39.12,43.09A8,8,0,0,1,224,71.1ZM35.71,72a8,8,0,0,0,7.1-4.32A94.13,94.13,0,0,1,76.27,30.77a8,8,0,1,0-8.54-13.54A111.46,111.46,0,0,0,28.61,60.32,8,8,0,0,0,35.71,72Zm186.1,103.94A16,16,0,0,1,208,200H167.2a40,40,0,0,1-78.4,0H48a16,16,0,0,1-13.79-24.06C43.22,160.39,48,138.28,48,112a80,80,0,0,1,160,0C208,138.27,212.78,160.38,221.81,175.94ZM150.62,200H105.38a24,24,0,0,0,45.24,0ZM208,184c-10.64-18.27-16-42.49-16-72a64,64,0,0,0-128,0c0,29.52-5.38,53.74-16,72Z"/></svg></div><div class="n">03 · alerta</div><h3>Avisa quem responde</h3><p>E-mail ou mensagem ao responsável da área, com o documento de origem anexado.</p></div>
+      <div class="peca decide anim"><div class="ic"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M168,100a60,60,0,1,1-60-60A60,60,0,0,1,168,100Z" opacity="0.2"/><path d="M144,157.68a68,68,0,1,0-71.9,0c-20.65,6.76-39.23,19.39-54.17,37.17a8,8,0,0,0,12.25,10.3C50.25,181.19,77.91,168,108,168s57.75,13.19,77.87,37.15a8,8,0,0,0,12.25-10.3C183.18,177.07,164.6,164.44,144,157.68ZM56,100a52,52,0,1,1,52,52A52.06,52.06,0,0,1,56,100Zm197.66,33.66-32,32a8,8,0,0,1-11.32,0l-16-16a8,8,0,0,1,11.32-11.32L216,148.69l26.34-26.35a8,8,0,0,1,11.32,11.32Z"/></svg></div><div class="n" style="color:#f6d3d8">04 · decisão</div><h3>A administração decide</h3><p>Corrigir, justificar ou aceitar. Tudo fica registrado como evidência do controle.</p></div>
+    </div>
+    <p class="fonte anim">Agentes desenvolvidos e calibrados com os setores, sobre regras que a administração aprova. Não substituem a revisão humana nem a contabilidade.</p>
+  </div>
+</div></section>
+
+<section class="slide" data-t="Como o alerta chega"><div class="cartao"><div class="duas">
+  <div>
+    <div class="sobre anim">Como o alerta chega</div>
+    <h2 class="anim">Curto, com o <em>documento</em> junto.</h2>
+    <p class="leve anim">Cada aviso diz o que foi visto, onde está a prova e quem precisa olhar. Sem painel para decifrar.</p>
+    <p class="fonte anim">Exemplos ilustrativos de método. Não se referem a nenhuma entidade.</p>
+  </div>
+  <div class="fone anim">
+    <div class="barra"></div>
+    <div class="aviso"><div class="t mono">Contas a pagar</div><b>Possível pagamento em duplicidade</b><span>Mesma nota, mesmo fornecedor, duas remessas em 48 h. Comprovantes anexados.</span></div>
+    <div class="aviso"><div class="t mono">Conciliação</div><b>Crédito sem identificação</b><span>Entrada no extrato sem cobrança correspondente. Aguardando classificação.</span></div>
+    <div class="aviso"><div class="t mono">Contratos</div><b>Reajuste anual não aplicado</b><span>Contrato de manutenção completou 12 meses; índice previsto em cláusula.</span></div>
+  </div>
+</div></div></section>
+
+<section class="slide" data-t="Em movimento"><div class="cartao">
+  <div class="sobre anim">Do nosso Instagram · @audiper</div>
+  <h2 class="anim">O método <em>em movimento</em>.</h2>
+  <p class="leve anim">Os vídeos rodam aqui, sem som. Clique em qualquer um para assistir completo no Instagram.</p>
+  <div class="corpo reels">
+    <a class="reel anim" href="https://www.instagram.com/audiper/reel/Ddycje0TX9q/" target="_blank" rel="noopener"><img src="assets/reels/Ddycje0TX9q.jpg" alt=""><video muted loop playsinline preload="metadata" src="assets/reels/Ddycje0TX9q.mp4"></video><span class="play">&#9654;</span><span class="leg"><small>Agentes</small>O que fica fora da amostra</span></a>
+    <a class="reel anim" href="https://www.instagram.com/audiper/reel/DdkSxn1suUk/" target="_blank" rel="noopener"><img src="assets/reels/DdkSxn1suUk.jpg" alt=""><video muted loop playsinline preload="metadata" src="assets/reels/DdkSxn1suUk.mp4"></video><span class="play">&#9654;</span><span class="leg"><small>Trilha</small>Processo verificado</span></a>
+    <a class="reel anim" href="https://www.instagram.com/audiper/reel/Dci_tqQRRte/" target="_blank" rel="noopener"><img src="assets/reels/Dci_tqQRRte.jpg" alt=""><video muted loop playsinline preload="metadata" src="assets/reels/Dci_tqQRRte.mp4"></video><span class="play">&#9654;</span><span class="leg"><small>Transparência</small>Painel de auditoria</span></a>
+    <a class="reel anim" href="https://www.instagram.com/audiper/reel/DctCe2RubBC/" target="_blank" rel="noopener"><img src="assets/reels/DctCe2RubBC.jpg" alt=""><video muted loop playsinline preload="metadata" src="assets/reels/DctCe2RubBC.mp4"></video><span class="play">&#9654;</span><span class="leg"><small>Sistemas</small>Auditoria de sistemas</span></a>
+    <a class="reel anim" href="https://www.instagram.com/audiper/reel/DdjKr3LM5E3/" target="_blank" rel="noopener"><img src="assets/reels/DdjKr3LM5E3.jpg" alt=""><video muted loop playsinline preload="metadata" src="assets/reels/DdjKr3LM5E3.mp4"></video><span class="play">&#9654;</span><span class="leg"><small>LGPD · ISO</small>Política que protege de verdade</span></a>
+    <a class="reel anim" href="https://www.instagram.com/audiper/reel/Dd8wnX3BXtc/" target="_blank" rel="noopener"><img src="assets/reels/Dd8wnX3BXtc.jpg" alt=""><video muted loop playsinline preload="metadata" src="assets/reels/Dd8wnX3BXtc.mp4"></video><span class="play">&#9654;</span><span class="leg"><small>Reforma</small>A CBS em 2027</span></a>
+  </div>
+</div></section>
+
+<section class="slide" data-t="Duas frentes"><div class="cartao">
+  <div class="sobre anim">Duas empresas, papéis separados</div>
+  <h2 class="anim">Quem audita <em>não implanta</em>.</h2>
+  <div class="corpo g2">
+    <div class="casa a anim"><div class="topo"><img src="assets/radar.gif" alt=""><h3>AUDÍPER</h3></div><ul><li>Auditoria independente das demonstrações</li><li>Auditoria preventiva e fiscal, Reforma Tributária</li><li>Perícia e assistência técnica contábil</li><li>Procedimentos previamente acordados</li></ul></div>
+    <div class="casa x anim"><div class="topo"><img src="assets/audix-emblema.png" alt=""><h3>AUDIX</h3></div><ul><li>Agentes de controle para processos financeiros</li><li>Adequação à LGPD e segurança da informação</li><li>Sistemas, automações e integrações</li><li>Sites e aplicativos</li></ul></div>
+  </div>
+  <div class="nota anim" style="margin-top:16px">Quando a AUDÍPER é a auditora da entidade, a implantação de controles fica com a AUDIX e só é contratada depois da avaliação de independência exigida pela <b>NBC PA 400</b>. As decisões e a operação dos controles continuam com a administração.</div>
+</div></section>
+
+<section class="slide" data-t="Como começa"><div class="cartao">
+  <div class="sobre anim">Sem projeto grande na largada</div>
+  <h2 class="anim">Um processo primeiro. Os outros <em>depois</em>.</h2>
+  <div class="corpo g3">
+    <div class="peca anim"><div class="ic"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M192,112a80,80,0,1,1-80-80A80,80,0,0,1,192,112Z" opacity="0.2"/><path d="M229.66,218.34,179.6,168.28a88.21,88.21,0,1,0-11.32,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg></div><div class="n">etapa 1</div><h3>Diagnóstico</h3><p>Mapeamos o processo escolhido, as regras que a gestão já tem e os dados disponíveis.</p></div>
+    <div class="peca anim"><div class="ic"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M208,192H48a8,8,0,0,1-6.88-12C47.71,168.6,56,147.81,56,112a72,72,0,0,1,144,0c0,35.82,8.3,56.6,14.9,68A8,8,0,0,1,208,192Z" opacity="0.2"/><path d="M224,71.1a8,8,0,0,1-10.78-3.42,94.13,94.13,0,0,0-33.46-36.91,8,8,0,1,1,8.54-13.54,111.46,111.46,0,0,1,39.12,43.09A8,8,0,0,1,224,71.1ZM35.71,72a8,8,0,0,0,7.1-4.32A94.13,94.13,0,0,1,76.27,30.77a8,8,0,1,0-8.54-13.54A111.46,111.46,0,0,0,28.61,60.32,8,8,0,0,0,35.71,72Zm186.1,103.94A16,16,0,0,1,208,200H167.2a40,40,0,0,1-78.4,0H48a16,16,0,0,1-13.79-24.06C43.22,160.39,48,138.28,48,112a80,80,0,0,1,160,0C208,138.27,212.78,160.38,221.81,175.94ZM150.62,200H105.38a24,24,0,0,0,45.24,0ZM208,184c-10.64-18.27-16-42.49-16-72a64,64,0,0,0-128,0c0,29.52-5.38,53.74-16,72Z"/></svg></div><div class="n">etapa 2</div><h3>Piloto</h3><p>Um agente em um processo, com alertas reais para a área responsável e ajustes semanais.</p></div>
+    <div class="peca anim"><div class="ic"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M80,176a32,32,0,1,1-32-32A32,32,0,0,1,80,176Z" opacity="0.2"/><path d="M245.66,74.34l-32-32a8,8,0,0,0-11.32,11.32L220.69,72H208c-49.33,0-61.05,28.12-71.38,52.92-9.38,22.51-16.92,40.59-49.48,42.84a40,40,0,1,0,.1,16c43.26-2.65,54.34-29.15,64.14-52.69C161.41,107,169.33,88,208,88h12.69l-18.35,18.34a8,8,0,0,0,11.32,11.32l32-32A8,8,0,0,0,245.66,74.34ZM48,200a24,24,0,1,1,24-24A24,24,0,0,1,48,200Z"/></svg></div><div class="n">etapa 3</div><h3>Expansão</h3><p>Com o piloto aprovado pela administração, os demais processos entram um a um.</p></div>
+  </div>
+</div></section>
+
+<section class="slide" data-t="Equipe"><div class="cartao">
+  <div class="sobre anim">Quem responde pelo trabalho</div>
+  <h2 class="anim">Controle é rotina. <em>Não é susto.</em></h2>
+  <div class="equipe">
+    <div class="pessoa anim"><img src="../../images/team-ricardo-sq.jpg" alt="Prof. Ricardo Augusto dos Santos Ribeiro"><b>Prof. Ricardo Augusto dos Santos Ribeiro</b><span>Auditor Supervisor · CRC/PI 5.374/O<br>Mestre em Contabilidade (UnB) · Perito Federal</span></div>
+    <div class="meio anim"><img src="assets/radar.gif" alt="AUDÍPER"><b>AUDÍPER</b><span>Auditoria Preventiva</span></div>
+    <div class="pessoa anim"><img src="../../images/team-vitor-sq.jpg" alt="Vitor Eduardo dos S. Ribeiro"><b>Vitor Eduardo dos S. Ribeiro</b><span>Gerente de Auditoria · CRC/PI 007.929/O<br>CNAI 4711</span></div>
+  </div>
+  <div class="contato anim"><span>AUDÍPER Auditores Independentes S/S · CRC/PI 000023/O · CNPJ 23.626.575/0001-10 · desde 1989 · 37 anos</span><span>audiper@audiper.com</span><span>Rua Arlindo Nogueira, 614, Centro, Teresina/PI</span><span>AUDIX: desenvolvimento em TI do grupo AUDÍPER</span></div>
+</div></section>
+
+</main>
+
+<footer class="rodape">
+  <span class="contador mono"><b id="atual">1</b> / <span id="total">9</span></span>
+  <div class="progresso" id="progresso" aria-label="Telas"></div>
+  <span class="dica">← → · espaço · toque · F tela cheia</span>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+(function(){
+  document.body.classList.remove('sem-js');
+  var reduz = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var estreito = function(){ return window.innerWidth <= 900; };
+  var S = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var prog = document.getElementById('progresso'), atual = document.getElementById('atual');
+  document.getElementById('total').textContent = S.length;
+  S.forEach(function(s,k){ var b=document.createElement('button'); b.type='button'; b.setAttribute('aria-label','Ir para '+(k+1)+': '+s.dataset.t); b.onclick=function(){ ir(k); }; prog.appendChild(b); });
+  var i = 0; var h = parseInt((location.hash||'').replace('#',''),10); if (h>=1 && h<=S.length) i = h-1;
+
+  // videos: rodam sozinhos quando a tela deles esta aberta
+  function tocar(s){ if (reduz) return; Array.prototype.forEach.call(s.querySelectorAll('.reel'), function(a,k){ var v=a.querySelector('video'); setTimeout(function(){ var p=v.play(); if(p&&p.then) p.then(function(){ a.classList.add('tocando'); }).catch(function(){}); else a.classList.add('tocando'); }, 250 + k*180); }); }
+  function parar(s){ Array.prototype.forEach.call(s.querySelectorAll('.reel'), function(a){ a.classList.remove('tocando'); a.querySelector('video').pause(); }); }
+
+  function anima(s){
+    if (!window.gsap || reduz) return;
+    gsap.fromTo(s.querySelectorAll('.anim'),{y:24,opacity:0},{y:0,opacity:1,duration:.75,ease:'power3.out',stagger:.07,clearProps:'transform,opacity'});
+    var L = s.querySelectorAll('.layer'); if (L.length) gsap.fromTo(L,{'--z':'0px',opacity:0},{'--z':function(k){return (k*44)+'px';},opacity:1,duration:1.1,ease:'power3.out',stagger:.12,delay:.25});
+    var F = s.querySelector('.linha span'); if (F) gsap.fromTo(F,{scaleX:0},{scaleX:1,duration:1.4,ease:'power2.inOut',delay:.3});
+  }
+  function ir(n){
+    n = Math.max(0, Math.min(S.length-1, n));
+    if (estreito()){ S[n].scrollIntoView({behavior:reduz?'auto':'smooth'}); i=n; marca(); return; }
+    if (S[i]) parar(S[i]);
+    S.forEach(function(s,k){ s.classList.toggle('ativo', k===n); });
+    i = n; marca(); anima(S[n]); tocar(S[n]);
+    try { history.replaceState(null,'','#'+(n+1)); } catch(e){}
+  }
+  function marca(){
+    atual.textContent = i+1;
+    Array.prototype.forEach.call(prog.children,function(b,k){ b.setAttribute('aria-current', k===i?'true':'false'); b.classList.toggle('feito', k<i); });
+  }
+  document.getElementById('prox').onclick = function(){ ir(i+1); };
+  document.getElementById('ant').onclick = function(){ ir(i-1); };
+  document.addEventListener('keydown', function(e){
+    if (['ArrowRight','PageDown',' '].indexOf(e.key)>-1){ e.preventDefault(); ir(i+1); }
+    if (['ArrowLeft','PageUp'].indexOf(e.key)>-1){ e.preventDefault(); ir(i-1); }
+    if (e.key==='Home') ir(0); if (e.key==='End') ir(S.length-1);
+    if (e.key==='f' || e.key==='F') tela();
+  });
+  var x0=null;
+  document.addEventListener('touchstart',function(e){ x0=e.touches[0].clientX; },{passive:true});
+  document.addEventListener('touchend',function(e){ if(x0===null||estreito())return; var dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>50) ir(i+(dx<0?1:-1)); x0=null; });
+  function tela(){ if (!document.fullscreenElement){ if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen(); } else if (document.exitFullscreen) document.exitFullscreen(); }
+  document.getElementById('tela').onclick = tela;
+  document.addEventListener('pointermove', function(e){ var c=document.querySelector('.slide.ativo .cartao'); if(!c) return; var r=c.getBoundingClientRect(); c.style.setProperty('--mx',(e.clientX-r.left)+'px'); c.style.setProperty('--my',(e.clientY-r.top)+'px'); });
+
+  if (estreito()){
+    S.forEach(function(s){ s.classList.add('ativo'); }); marca();
+    if ('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(es){ es.forEach(function(en){ if (en.isIntersecting) tocar(en.target); else parar(en.target); }); },{threshold:.35});
+      S.forEach(function(s){ if (s.querySelector('.reel')) io.observe(s); });
+    }
+  } else ir(i);
+  window.addEventListener('resize', function(){ if (estreito()) S.forEach(function(s){ s.classList.add('ativo'); }); });
+})();
+</script>
+</body>
+</html>
